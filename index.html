@@ -1,7 +1,46 @@
-
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#14252a"><link rel="manifest" href="manifest.webmanifest"><title>EZPZ Trainer V2</title><style>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1211"><link rel="manifest" href="manifest.webmanifest"><title>EZPZ Trainer 3.0</title><style>
 :root{font-family:system-ui,Arial;background:#10191c;color:#f3f7f6}*{box-sizing:border-box}body{margin:0 auto;max-width:760px}header{background:#14252a;padding:16px;position:sticky;top:0;z-index:3;border-bottom:1px solid #355057}h1{font-size:20px;margin:0}small,.muted{color:#a6bbb8}nav{display:flex;gap:5px;margin-top:12px;overflow-x:auto}button,select,input,textarea{font:inherit;border-radius:10px;border:1px solid #45605f;padding:11px;background:#1e3033;color:white;min-width:0}button{cursor:pointer;min-height:43px}button.primary{background:#7fe0c0;color:#09251e;border:0;font-weight:750}nav button{flex:1;padding:8px;font-size:13px;white-space:nowrap}main{padding:14px}section{border:1px solid #355057;border-radius:14px;padding:14px;margin:12px 0;background:#172529}.row{display:flex;align-items:center;gap:8px}.row>*{flex:1;min-width:0}.stack{display:grid;gap:10px}label{display:grid;gap:5px;font-size:13px;color:#c4d6d2}input,select,textarea{width:100%;font-size:16px}.ex{border-top:1px solid #345054;padding:14px 0}.ex:first-child{border:0}.pill{font-size:12px;color:#8de0c2}.tiny{font-size:12px}.danger{color:#ffaaaa}.toolbar{display:flex;gap:7px;flex-wrap:wrap}.toolbar button{flex:1}.badge{background:#284741;border-radius:9px;padding:4px 8px;font-size:12px}footer{padding:15px;text-align:center;font-size:12px;color:#8da5a0}h2{font-size:21px}h3{font-size:17px;margin:4px 0 10px}button:disabled{opacity:.45} .notice{background:#283b3d;border-left:3px solid #7fe0c0;padding:10px;border-radius:5px} .grid2{display:grid;grid-template-columns:1fr 1fr;gap:9px}@media(max-width:380px){nav button{font-size:11px;padding:7px 5px}.toolbar button{font-size:13px}}
-</style></head><body><header><h1>🏋️ EZPZ Trainer <span class="badge">V2</span></h1><small>Personal workout builder · offline-first</small><nav><button data-nav="clients">Clients</button><button data-nav="train">Train</button><button data-nav="builder">Builder</button><button data-nav="history">History</button><button data-nav="backup">Backup</button></nav></header><main id="app"></main><footer>Local-only prototype. Use client codes; do not enter identifying or sensitive client information.</footer><script>
+
+/* EZPZ Trainer 3.0 — Premium Dark visual upgrade.
+   Paste these rules at the END of the existing <style> block in index.html.
+   This stylesheet does not change saved records or workout logic. */
+:root{font-family:Inter,system-ui,-apple-system,'Segoe UI',Arial,sans-serif!important;background:#0b1211!important;color:#eef8f3!important;color-scheme:dark}
+html{background:#0b1211;scroll-behavior:smooth}
+body{background:#0b1211!important;max-width:760px;min-height:100dvh;padding-bottom:calc(85px + env(safe-area-inset-bottom))}
+header{background:rgba(15,26,23,.96)!important;border-bottom:1px solid #283d35!important;padding:18px 18px 15px!important;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+header h1{font-size:23px!important;font-weight:850;letter-spacing:-.7px;line-height:1.2}
+header small{display:block;margin-top:6px;font-size:12px;letter-spacing:.15px;color:#8da99d!important}
+header .badge{background:#284638;color:#b6f4d4;border:1px solid #416451;border-radius:30px;padding:4px 9px;vertical-align:middle;font-size:10px;letter-spacing:1px}
+main{padding:14px 16px 24px!important}
+section{background:linear-gradient(150deg,#192923,#14211d)!important;border:1px solid #2d473b!important;border-radius:19px!important;padding:17px!important;margin:14px 0!important;box-shadow:0 8px 28px rgba(0,0,0,.12)}
+section section{background:#1b3027!important;box-shadow:none}
+h2{font-size:22px!important;font-weight:800;letter-spacing:-.5px;margin:8px 0 14px}
+h3{font-size:18px!important;font-weight:750;letter-spacing:-.25px}
+small,.muted{color:#98afa4!important}
+label{color:#c9dfd4!important;font-weight:600;letter-spacing:.1px}
+button,select,input,textarea{border-radius:12px!important;border:1px solid #395648!important;background:#20332a!important;color:#f2fcf6!important;min-height:46px;transition:background .15s ease,border-color .15s ease,transform .15s ease}
+input,select,textarea{font-size:16px!important;padding:12px!important}
+input:focus,select:focus,textarea:focus{outline:2px solid #9cecc5;outline-offset:1px;border-color:#9cecc5!important}
+button{font-weight:650;padding:11px 13px}
+button:active{transform:scale(.985)}
+button.primary{background:#b4f5d8!important;color:#10251b!important;border:1px solid #b4f5d8!important;font-weight:800!important;box-shadow:0 4px 18px rgba(180,245,216,.12)}
+button.primary:active{background:#90e9c0!important}
+button:disabled{opacity:.4}
+nav{position:fixed;z-index:10;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:760px;display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px!important;margin:0!important;padding:10px 7px calc(10px + env(safe-area-inset-bottom))!important;overflow:visible!important;background:rgba(13,23,19,.97)!important;border-top:1px solid #314c3d;box-shadow:0 -10px 30px rgba(0,0,0,.25);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px)}
+nav button{min-width:0!important;min-height:51px!important;border:0!important;background:transparent!important;color:#9bb6a8!important;border-radius:12px!important;font-size:11px!important;font-weight:700!important;padding:9px 2px!important;white-space:nowrap!important}
+nav button[aria-current='page'],nav button.active,nav button[aria-selected='true']{background:#29493a!important;color:#c3ffdf!important}
+.ex{border-color:#314d40!important;padding:16px 0!important}
+.pill{color:#aaf0ce!important;font-weight:700}
+.badge{background:#2a493b;color:#c4f7d9;border-radius:100px;padding:5px 9px}
+.notice{background:#263f32!important;border-left:3px solid #b4f5d8!important;border-radius:10px!important;padding:13px!important}
+.danger{color:#ffb3ad!important}
+.toolbar{gap:9px!important}
+.grid2{gap:12px!important}
+footer{color:#82998c!important;font-size:11px!important;padding:15px 16px 30px!important}
+@media(max-width:390px){main{padding:12px!important}section{padding:14px!important}nav button{font-size:10px!important}header{padding:15px!important}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+</style></head><body><header><h1>🏋️ EZPZ Trainer <span class="badge">3.0</span></h1><small>Personal workout builder · offline-first</small><nav><button data-nav="clients">Clients</button><button data-nav="train">Train</button><button data-nav="builder">Builder</button><button data-nav="history">History</button><button data-nav="backup">Backup</button></nav></header><main id="app"></main><footer>Local-only prototype. Use client codes; do not enter identifying or sensitive client information.</footer><script>
 'use strict';
 const seed={Beginner:{A:[['Box Squat',2,'10'],['Seated Cable Row',2,'12'],['Machine Chest Press',2,'10'],['Step-up',2,'8/side'],['Farmer Carry',2,'30 sec']],B:[['Leg Press',2,'12'],['Lat Pulldown',2,'10'],['DB Romanian Deadlift',2,'10'],['Pallof Press',2,'10/side'],['Tandem Balance',2,'30 sec']]},Intermediate:{A:[['Goblet Squat',3,'10'],['Cable Row',3,'10'],['DB Chest Press',3,'10'],['Reverse Lunge',3,'8/side'],['Farmer Carry',3,'40 sec']],B:[['DB Romanian Deadlift',3,'10'],['Lat Pulldown',3,'10'],['Incline DB Press',3,'10'],['Step-up',3,'10/side'],['Pallof Press',3,'12/side']]},Advanced:{A:[['Trap Bar Deadlift',4,'6'],['Weighted Pull-up',4,'6'],['DB Bench Press',4,'8'],['Bulgarian Split Squat',3,'8/side'],['Heavy Carry',3,'40 sec']],B:[['Front Squat',4,'6'],['Chest Supported Row',4,'8'],['DB Shoulder Press',3,'8'],['Hip Thrust',3,'10'],['Hanging Knee Raise',3,'12']]}};
 const uid=()=>crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const $=id=>document.getElementById(id);const clone=x=>JSON.parse(JSON.stringify(x));const key='ezpz-v2';let db;
