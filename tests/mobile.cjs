@@ -14,7 +14,7 @@ try{
   await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});
   if(expectUpgrade)await context.route('**/exercise-catalog.json',async route=>{await new Promise(r=>setTimeout(r,700));await route.continue()});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());
-  const checkLayout=async(label)=>{assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Horizontal overflow: '+width+' '+label)};
+  const checkLayout=async(label)=>{assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'Horizontal overflow: '+width+' '+label)};
   const capture=async(name)=>{await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(out,name+'-'+width+'.jpg'),type:'jpeg',quality:80});if(width===390)captures.push({name,src:'data:image/jpeg;base64,'+fs.readFileSync(path.join(out,name+'-'+width+'.jpg')).toString('base64')})};
   await page.goto(base+'/fitness.html');await page.locator('[data-tab="home"]').waitFor();await checkLayout('Home');await capture('Home');
   await page.locator('[data-tab="eat"]').click();assert.equal(await page.locator('[data-recipe-card]').count(),49);assert.equal(await page.locator('[data-recipe-card] img').count(),49);
@@ -27,7 +27,7 @@ try{
   const coverSources=await page.locator('#workout-chooser img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
   assert.equal(new Set(coverSources).size,11);for(const src of coverSources){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Workout photo '+src)}
   await page.locator('#workout-chooser').evaluate(async dialog=>{for(const img of dialog.querySelectorAll('img')){img.loading='eager';await img.decode()}dialog.scrollTop=0});
-  await checkLayout('Workout chooser');assert(await page.locator('#workout-chooser').evaluate(x=>x.scrollWidth<=x.clientWidth+1),'Chooser horizontal overflow');
+  await checkLayout('Workout chooser');assert(await page.locator('#workout-chooser').evaluate(x=>x.scrollWidth<=x.clientWidth+1&&x.getBoundingClientRect().left>=-1&&x.getBoundingClientRect().right<=document.documentElement.clientWidth+1),'Chooser fits phone viewport');
   if(width===390){const buffer=await page.screenshot({path:path.join(out,'Workout-chooser-390.jpg'),type:'jpeg',quality:85});captures.push({name:'Workout chooser',src:'data:image/jpeg;base64,'+buffer.toString('base64')})}
   await page.locator('[data-action="close-workouts"]').click();
   if(expectUpgrade){await page.locator('[data-set-reps="0-0"]').fill('7');await page.waitForFunction(()=>Array.isArray(exerciseCatalog));assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'7','Catalogue refresh discarded unblurred input');await page.locator('[data-set-reps="0-0"]').fill('')}
