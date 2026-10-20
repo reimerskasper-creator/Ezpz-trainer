@@ -22,6 +22,15 @@ try{
   await checkLayout('Food');await capture('Food');
   await page.locator('#recipe-search').fill('Chicken potato plate');await page.locator('[data-open-meal="6"]').click();await page.locator('[data-serving="6"]').selectOption('2');assert((await page.locator('[data-ingredients="6"]').innerText()).includes('320 g'));await page.locator('[data-log-food="6"]').click();
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).foodLog.length,key),2);
+  await page.locator('[data-home-diary]').evaluate(x=>x.open=true);
+  await checkLayout('Logged food');
+  assert(await page.locator('.food-diary progress').evaluate(x=>Math.abs(x.getBoundingClientRect().width-x.parentElement.clientWidth)<2),'Food progress fills diary');
+  for(const entry of await page.locator('.food-log-entry').all()){
+   assert(await entry.evaluate(x=>{const name=x.querySelector('span'),detail=name.querySelector('small'),button=x.querySelector('button'),a=name.getBoundingClientRect(),b=button.getBoundingClientRect();return getComputedStyle(detail).display==='block'&&a.right<=b.left&&b.height>=44}),'Meal details separated and Remove button aligned');
+  }
+  await page.locator('[data-home-diary]').scrollIntoViewIfNeeded();
+  await page.screenshot({path:path.join(out,'Logged-food-'+width+'.jpg'),type:'jpeg',quality:85});
+
   await page.locator('[data-tab="train"]').click();
   await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),11);
   const coverSources=await page.locator('#workout-chooser img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
