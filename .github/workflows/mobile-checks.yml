@@ -2,7 +2,7 @@ name: Mobile app checks
 on:
   push:
     branches: [main]
-    paths: ['fitness.html', 'exercise-catalog.json', 'meal-images/**', 'tests/**', '.github/workflows/mobile-checks.yml']
+    paths: ['fitness.html', 'exercise-catalog.json', 'meal-images/**', 'workout-images/**', 'tests/**', '.github/workflows/mobile-checks.yml']
   workflow_dispatch:
   pull_request:
     branches: [main]
@@ -28,6 +28,7 @@ jobs:
           node tests/home.cjs
           node tests/recipes.cjs
           node tests/app-review.cjs
+          node tests/workout-photos.cjs
           node tests/mobile.cjs
       - name: Save mobile screenshots and results
         uses: actions/upload-artifact@v4
