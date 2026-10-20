@@ -7,6 +7,20 @@ const server=http.createServer((req,res)=>{const pathname=decodeURIComponent(new
 const key='ezpz-fitness-pilot-1',errors=[],captures=[];
 const today=new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});
 const fixture={profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:Array.from({length:24},(_,i)=>({date:new Date(Date.now()-(24-i)*86400000).toISOString(),workoutId:'push-a',title:'Push Day A',type:'home',setting:'Gym',variant:'A',exercises:[{name:'Barbell Bench Press',unit:'reps',sets:[{reps:'8',kg:'18',done:true}]}]})),weights:[{date:new Date(Date.now()-86400000*7).toISOString(),kg:81},{date:new Date().toISOString(),kg:80}],shopping:['Tomatoes (raw) — 100 g'],checkedShopping:{'Tomatoes (raw)':true},foodLog:[{id:'existing-meal',date:today,name:'Chicken rice bowl',servings:1,macros:[622,55,62,17]}],mealPlan:{[today]:{lunch:1,lunchPortion:1.5,dinner:48,dinnerPortion:1}},mealPlanOffset:0,selectedWorkout:'push-a',workoutDrafts:{'glutes-foundation':{'sr0-0':'12','sd0-0':true},'pull-a':{'sr0-0':'9','sw0-0':'15','sd0-0':true}},draft:{variant:'A',equipment:'home','sr0-0':'8','sd0-0':true},workoutLayoutVersion:2};
+
+async function choosePlannedWorkout(page,id){
+ await page.locator('#planned-workout').click();await page.locator('#planner-picker').waitFor({state:'visible'});
+ if(id==='rest'||id===''){await page.locator('[data-plan-picker-action="'+(id==='rest'?'rest':'clear')+'"]').click();return}
+ await page.locator('#planner-picker-search').fill(id);await page.locator('[data-plan-pick-workout="'+id+'"]').click();
+ await page.locator('#planner-picker').waitFor({state:'hidden'});
+}
+async function choosePlannedMeal(page,slot,index){
+ await page.locator('[data-open-meal-picker="'+slot+'"]').click();await page.locator('#planner-picker').waitFor({state:'visible'});
+ if(index===null){await page.locator('[data-plan-picker-action="clear"]').click();return}
+ await page.locator('[data-plan-picker-filter="all"]').click();await page.locator('[data-plan-pick-meal="'+index+'"]').click();
+ await page.locator('#planner-picker').waitFor({state:'hidden'});
+}
+
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port;const browser=await chromium.launch();
 try{
  for(const width of [320,390,430]){
@@ -94,14 +108,14 @@ try{
    await checkLayout('Planner '+span);
   }
   await page.locator('#planner-start').fill(today);await page.locator('#planner-start').dispatchEvent('change');
-  await page.locator('#planned-workout').selectOption('full-body-home');
+  await choosePlannedWorkout(page,'full-body-home');
   assert((await page.locator('.planned-workout-preview').innerText()).includes('Beginner'));
-  await page.locator('[data-schedule-meal="breakfast"]').selectOption('0');
+  await choosePlannedMeal(page,'breakfast',0);
   await page.locator('[data-schedule-portion="breakfast"]').selectOption('1.5');
-  await page.locator('[data-schedule-meal="lunch"]').selectOption('48');
+  await choosePlannedMeal(page,'lunch',48);
   await page.locator('[data-schedule-portion="lunch"]').selectOption('2');
   const originalLogCount=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).foodLog.length,key);
-  await page.locator('[data-planner-offset="1"]').click();await page.locator('#planned-workout').selectOption('rest');
+  await page.locator('[data-planner-offset="1"]').click();await choosePlannedWorkout(page,'rest');
   await page.locator('[data-plan-week="3"]').click();assert.equal(await page.locator('[data-planner-offset="21"]').getAttribute('aria-pressed'),'true');
   await page.locator('[data-action="repeat-plan-week"]').click();
   assert(await page.evaluate(({key,today})=>{const s=JSON.parse(localStorage.getItem(key));return [7,14,21].every(i=>s.workoutSchedule[datePlus(today,i)]==='full-body-home'&&s.workoutSchedule[datePlus(today,i+1)]==='rest'&&s.mealPlan[datePlus(today,i)].breakfastPortion===1.5)},{key,today}));
@@ -125,7 +139,7 @@ try{
   await page.locator('#workout-builder button.primary').click();
   const custom=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).customWorkouts.at(-1),key);
   assert(custom.id.startsWith('custom-'));assert.equal(custom.exercises.length,2);
-  assert.equal(await page.locator('#planned-workout').inputValue(),custom.id);
+  assert.equal(await page.locator('#planned-workout').getAttribute('data-selected-workout'),custom.id);
   await page.locator('[data-tab="home"]').click();
   assert((await page.locator('.home-next').innerText()).includes("Kasper's strength & balance"));
   assert.equal(await page.locator('.home-shortcuts').count(),0);
@@ -218,6 +232,75 @@ try{
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer,key),null);
   await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'','A new session starts at the first exercise');
 
+
+  // Planner photo pickers replace the long native workout/recipe lists.
+  await page.locator('[data-tab="more"]').click();await page.locator('[data-go="planner"]').click();
+  await page.locator('#planner-start').fill(today);await page.locator('#planner-start').dispatchEvent('change');
+  if(await page.locator('[data-plan-week="0"]').count())await page.locator('[data-plan-week="0"]').click();
+  await page.locator('[data-planner-offset="3"]').click();
+  const pickerBefore=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  assert.equal(await page.locator('select#planned-workout').count(),0);
+  assert.equal(await page.locator('select[data-schedule-meal]').count(),0);
+  await page.locator('#planned-workout').click();await page.locator('#planner-picker').waitFor({state:'visible'});
+  assert.equal(await page.locator('.plan-picker-categories img').count(),11);
+  assert.notEqual(await page.evaluate(()=>document.activeElement.id),'planner-picker-search','Opening should not summon the keyboard');
+  await checkLayout('Workout photo picker');
+  assert(await page.locator('#planner-picker').evaluate(x=>{const r=x.getBoundingClientRect();return r.left>=0&&r.right<=document.documentElement.clientWidth+1&&r.bottom<=innerHeight+1&&x.scrollWidth<=x.clientWidth+1}),'Picker fits screen');
+  await page.locator('.plan-picker-categories img').evaluateAll(async imgs=>{for(const x of imgs){x.loading='eager';await x.decode()}});
+  const categoryPickerJpg=await page.screenshot({path:path.join(out,'Planner-workout-categories-'+width+'.jpg'),type:'jpeg',quality:85});
+  if(width===390)captures.push({name:'Planner workout categories',src:'data:image/jpeg;base64,'+categoryPickerJpg.toString('base64')});
+  await page.keyboard.press('Escape');assert.equal(await page.locator('#planner-picker').getAttribute('open'),null);
+  assert.equal(await page.evaluate(()=>document.activeElement.id),'planned-workout');
+  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key),pickerBefore,'Cancel leaves saved plan unchanged');
+  await page.locator('#planned-workout').click();
+  await page.locator('[data-plan-picker-category="Full Body"]').click();
+  assert.equal(await page.locator('[data-plan-pick-workout]').count(),6,'Five built-ins plus the saved custom session');
+  await page.locator('[data-plan-picker-level="Beginner"]').click();
+  assert.equal(await page.locator('[data-plan-pick-workout]').count(),3,'Beginner filter includes the saved custom session');
+  await page.locator('.picker-exercises>summary').first().click();
+  assert.equal(await page.locator('.picker-exercises').first().locator('li').count(),6);
+  await checkLayout('Filtered workout choices');
+  const sessionPickerJpg=await page.screenshot({path:path.join(out,'Planner-workout-choices-'+width+'.jpg'),type:'jpeg',quality:85});
+  if(width===390)captures.push({name:'Planner workout choices',src:'data:image/jpeg;base64,'+sessionPickerJpg.toString('base64')});
+  await page.locator('[data-plan-pick-workout="full-body-home"]').click();
+  const pickerDate=await page.evaluate(()=>planSettings().date);
+  const afterWorkoutPick=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  assert.equal(afterWorkoutPick.workoutSchedule[pickerDate],'full-body-home');
+  assert.equal(afterWorkoutPick.selectedWorkout,pickerBefore.selectedWorkout);
+  assert.deepEqual(afterWorkoutPick.workoutDrafts,pickerBefore.workoutDrafts);
+  assert.equal(await page.locator('#planned-workout img').getAttribute('src'),'./meal-images/workout-hero.jpg');
+  await page.locator('[data-open-meal-picker="breakfast"]').click();
+  await page.locator('[data-plan-picker-filter="all"]').click();
+  assert.equal(await page.locator('[data-plan-pick-meal]').count(),49);
+  assert.equal(await page.locator('[data-plan-pick-meal] img').count(),49);
+  await checkLayout('Recipe photo picker');
+  const mealPickerJpg=await page.screenshot({path:path.join(out,'Planner-meal-picker-'+width+'.jpg'),type:'jpeg',quality:85});
+  if(width===390)captures.push({name:'Planner meal picker',src:'data:image/jpeg;base64,'+mealPickerJpg.toString('base64')});
+  await page.locator('#planner-picker-search').fill('zzzz-no-recipe');
+  assert.equal(await page.locator('[data-plan-pick-meal]').count(),0);assert((await page.locator('.picker-empty').innerText()).includes('No recipes'));
+  await page.locator('[data-plan-picker-action="reset"]').click();assert.equal(await page.locator('[data-plan-pick-meal]').count(),49);
+  await page.locator('#planner-picker-search').fill('Greek yogurt berry bowl');
+  assert.equal(await page.locator('[data-plan-pick-meal]').count(),1);
+  await page.locator('[data-plan-pick-meal="0"]').click();
+  await page.locator('[data-schedule-portion="breakfast"]').selectOption('1.5');
+  await page.locator('[data-open-meal-picker="breakfast"]').click();
+  assert((await page.locator('[data-plan-pick-meal="0"]').innerText()).includes('1.5 × serving'));
+  await page.locator('[data-plan-pick-meal="0"]').click();
+  assert.equal(await page.locator('[data-schedule-portion="breakfast"]').inputValue(),'1.5','Reselecting preserves portion');
+  await choosePlannedMeal(page,'lunch',48);await page.locator('[data-schedule-portion="lunch"]').selectOption('2');
+  await choosePlannedMeal(page,'breakfast',null);
+  const afterMealPick=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  assert.equal(afterMealPick.mealPlan[pickerDate].breakfast,undefined);assert.equal(afterMealPick.mealPlan[pickerDate].lunch,48);assert.equal(afterMealPick.mealPlan[pickerDate].lunchPortion,2);
+  assert.deepEqual(afterMealPick.foodLog,pickerBefore.foodLog,'Planning must not change eaten-food log');
+  await choosePlannedWorkout(page,'rest');assert((await page.locator('#planned-workout').innerText()).includes('Rest / recovery'));
+  await choosePlannedWorkout(page,'');assert.equal(await page.locator('#planned-workout').getAttribute('data-selected-workout'),'');
+  assert.deepEqual(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).workoutSchedule,key),pickerBefore.workoutSchedule,'Clearing preserves all other dates');
+  await page.locator('#planned-workout').click();await page.mouse.click(5,5);
+  await page.locator('#planner-picker').waitFor({state:'hidden'});
+  await page.locator('#planned-workout').click();await page.locator('[data-plan-picker-action="build"]').click();
+  await page.locator('#workout-builder').waitFor();await page.locator('[data-action="cancel-builder"]').click();
+  await checkLayout('Photo-based planner');
+
   await context.close();
  }
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
@@ -228,6 +311,10 @@ try{
 
  const trainingCaptures=captures.filter(x=>['Upcoming workouts','Train overview','Focused training'].includes(x.name));
  if(trainingCaptures.length){const sheet=await browser.newPage({viewport:{width:1200,height:920},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif">'+trainingCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'training-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_TRAIN_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_TRAIN_DATA '+b.slice(i,i+4000));console.log('EZPZ_TRAIN_END')}}
+
+
+ const pickerCaptures=captures.filter(x=>['Planner workout categories','Planner workout choices','Planner meal picker'].includes(x.name));
+ if(pickerCaptures.length){const sheet=await browser.newPage({viewport:{width:1200,height:920},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif">'+pickerCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'planner-picker-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_PICKER_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_PICKER_DATA '+b.slice(i,i+4000));console.log('EZPZ_PICKER_END')}}
 
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:49,workoutPrograms:55,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 49 recipe photos; 55 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
