@@ -576,7 +576,81 @@ body[data-view=home] .home-next h3{font-size:16px}
 body[data-view=home] .upcoming-row>img{width:48px;height:60px}
 }
 </style>
-</head><body>
+
+<style id="home-photo-backgrounds">
+/* Relevant decorative photographs; text remains above strong contrast gradients. */
+body[data-view=home] .home-nutrition{
+background-color:#102d20;
+background-image:linear-gradient(90deg,#0c281ded 0%,#0c281dd6 44%,#0c281d91 100%),url('./home-images/nutrition.jpg');
+background-size:cover;background-position:center,right center;border-color:#234c35}
+body[data-view=home] .home-nutrition h3,
+body[data-view=home] .home-calorie-line>strong,
+body[data-view=home] .home-energy-ring strong{color:#f4fff7}
+body[data-view=home] .home-nutrition h3>svg{background:#ffffff18;color:#a8ecc5}
+body[data-view=home] .home-calorie-line>strong>small{color:#c4d9cd}
+body[data-view=home] .home-calorie-line>span{color:#dfefe4;background:#ffffff14;border:1px solid #ffffff0f}
+body[data-view=home] .home-energy-ring>span>small{color:#d0e1d7}
+body[data-view=home] .energy-ring-track{stroke:#ffffff26}
+body[data-view=home] .energy-ring-fill{stroke:#68e5a2}
+body[data-view=home] .home-nutrition .home-text-link{color:#b4f0cd}
+body[data-view=home] .home-nutrition-bottom{border-color:#ffffff20}
+body[data-view=home] .home-nutrition-bottom>small{color:#d3e4d9}
+body[data-view=home] .home-macro-row>div{--macro-fill:#6be0a3;background-color:#163f2b;background-image:linear-gradient(135deg,#103724e8,#103724b0),url('./meal-images/recipe-33.jpg');background-size:cover;background-position:center;border-color:#c2ebd32b;box-shadow:inset 0 1px 0 #ffffff0b}
+body[data-view=home] .home-macro-row>div:nth-child(2){--macro-fill:#edce7d;background-color:#453a20;background-image:linear-gradient(135deg,#3d321be8,#3d321bb0),url('./meal-images/recipe-24.jpg');border-color:#f5e5b62b}
+body[data-view=home] .home-macro-row>div:nth-child(3){--macro-fill:#acd8ff;background-color:#213d52;background-image:linear-gradient(135deg,#19394de8,#19394db0),url('./meal-images/recipe-44.jpg');border-color:#d2e8ff2b}
+body[data-view=home] .home-macro-row>div>span{color:#c8efd9;text-shadow:0 1px 6px #0003}
+body[data-view=home] .home-macro-row>div:nth-child(2)>span{color:#f5e4b3}
+body[data-view=home] .home-macro-row>div:nth-child(3)>span{color:#d4e9fc}
+body[data-view=home] .home-macro-row strong{color:#c8ffdf;text-shadow:0 1px 6px #0003}
+body[data-view=home] .home-macro-row>div:nth-child(2) strong{color:#fff0bd}
+body[data-view=home] .home-macro-row>div:nth-child(3) strong{color:#e4f3ff}
+body[data-view=home] .home-macro-row strong small,
+body[data-view=home] .home-macro-row>div:nth-child(2) strong small,
+body[data-view=home] .home-macro-row>div:nth-child(3) strong small{color:#f0f5f1bd}
+body[data-view=home] .home-macro-row progress,
+body[data-view=home] .home-macro-row progress::-webkit-progress-bar{background:#ffffff29}
+body[data-view=home] .home-week-card{background-color:#153b2a;background-image:linear-gradient(90deg,#0d2c1fe8,#0d2c1fbf 55%,#0d2c1f85),url('./home-images/consistency.jpg');background-size:cover;background-position:center,right 48%;border-color:#345d42}
+body[data-view=home] .home-week-eyebrow{color:#b7dbc5}
+body[data-view=home] .home-week-card .row>strong{color:#a4f6c7}
+body[data-view=home] .home-week-card .row>strong>small,
+body[data-view=home] .home-week-footer>small{color:#c8dfd1}
+body[data-view=home] .home-week-meter{background:#ffffff2b}
+body[data-view=home] .home-week-days>div>span{background:#06190e38;border-color:#d6efdf26;color:#d4e9dc}
+body[data-view=home] .home-week-days>div>span.is-today{background:#112e2166;border-color:#b6f0cd;color:#f1fff6}
+body[data-view=home] .home-week-days>div>span.is-done{background:#79e5ab;border-color:#79e5ab;color:#103a23}
+body[data-view=home] .home-week-days small{color:#c4ddcf}
+body[data-view=home] .home-week-footer{border-color:#ffffff26}
+body[data-view=home] .home-week-footer>span{color:#e0ffea}
+body[data-view=home] .home-next{background-color:#132c21;background-image:linear-gradient(90deg,#10271eed,#10271ed6 55%,#10271e66),url('./home-images/planning.jpg');background-size:cover;background-position:center,right center;border-color:#2c4c39}
+body[data-view=home] .home-next h3{color:#effcf3}
+body[data-view=home] .home-next .home-text-link{color:#b1ecc9}
+body[data-view=home] .upcoming-tabs{background:#ffffff13;border:1px solid #ffffff12}
+body[data-view=home] .upcoming-tabs button{color:#cbdfd2}
+body[data-view=home] .upcoming-tabs button[aria-pressed=true]{background:#edf8f0;color:#245338;box-shadow:0 2px 8px #0002}
+body[data-view=home] .upcoming-row,body[data-view=home] .upcoming-day{border-color:#ffffff1b}
+body[data-view=home] .upcoming-row>img{border:1px solid #ffffff30;box-shadow:0 2px 6px #0002}
+body[data-view=home] .upcoming-row strong,body[data-view=home] .upcoming-day strong{color:#f3fff6}
+body[data-view=home] .upcoming-row small,body[data-view=home] .upcoming-day small{color:#c0d3c6}
+body[data-view=home] .upcoming-row small:first-child{color:#a8ddbb}
+body[data-view=home] .upcoming-row>b,body[data-view=home] .upcoming-day>b,body[data-view=home] .upcoming-empty>b{color:#cae2d1}
+body[data-view=home] .upcoming-empty{background:#ffffff09;border-color:#d6efdf3d;color:#d4e9dc}
+body[data-view=home] .upcoming-empty>span:first-child,
+body[data-view=home] .upcoming-day>span:first-child{background:#ffffff13;color:#c3e8d1}
+body[data-view=home] .home-next>.note{color:#c1d8c8}
+body[data-view=home] .home-weight-row{background-color:#183627;background-image:linear-gradient(90deg,#102e20f0,#102e20cc 55%,#102e207a),url('./home-images/weight.jpg');background-size:cover;background-position:center,right 55%;border-color:#31553d;min-height:90px}
+body[data-view=home] .home-weight-row strong{color:#f0fff5}
+body[data-view=home] .home-weight-row small{color:#c1daca}
+body[data-view=home] .home-weight-row>svg:first-child{background:#ffffff17;color:#c3edcf}
+body[data-view=home] .home-weight-row>svg:last-child{color:#bfe9cf}
+</style>
+<style id="home-photo-readability">
+body[data-view=home] .home-nutrition>.row,body[data-view=home] .home-next>.row{background:linear-gradient(90deg,transparent,#09271977);border-radius:9px}
+body[data-view=home] .home-nutrition-bottom{background:linear-gradient(90deg,transparent,#09271977);border-radius:0 0 9px 9px}
+body[data-view=home] .home-energy-ring{background:#0927176b;border-radius:50%}
+body[data-view=home] .home-week-card .row>strong{background:#08251666;border-radius:10px;padding:5px 8px}
+body[data-view=home] .home-nutrition .home-text-link,body[data-view=home] .home-next .home-text-link{color:#d6ffe7}
+body[data-view=home] .home-week-card .row>strong>small{color:#ecfff2}
+</style></head><body>
 <header class="row"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div><a class="link" href="./index.html">Trainer ↗</a></header>
 <main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg><span>Home</span></button><button data-tab="train"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="5" width="10" height="14" rx="1"/><path d="M3 9v6m18-6v6M5 7v10m14-10v10"/></svg><span>Train</span></button><button data-tab="eat"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg><span>Eat</span></button><button data-tab="progress"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18 10 12l4 3 6-9"/><path d="M15 6h5v5"/></svg><span>Progress</span></button><button data-tab="more"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14M5 10h14M5 15h14M5 20h14"/><path d="M2 5h.01M2 10h.01M2 15h.01M2 20h.01"/></svg><span>More</span></button></nav>
 <script>

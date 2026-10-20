@@ -145,3 +145,10 @@ Home unit checks passed for empty, populated, over-goal and resumed/completed st
 
 ## Verified Home visual refresh
 App code 020e5c26e8b98377db6b6c67eee88b5a0035f4e1; final screenshot-test commit 5841fe8fe91515eabc8e5632a47dd98e4eb6caae. Final mobile workflow 39509492631 (job 118926666854) and Pages deployment 39509491902 succeeded. All eight unit suites and Chromium at 320/390/430px passed. Unobstructed Home top/nutrition/week/upcoming screenshot sheet visually reviewed from EZPZ_HOME_DATA. The test capture scroll alignment was adjusted to keep fixed navigation out of component crops; app behavior was unchanged by that follow-up. All 157 recipes, workout definitions, scheduling and saved-data behavior remain intact. No known release blocker.
+
+## Relevant photo backgrounds across Home — October 20
+User requested photos behind every Home card, like the selected-workout hero, with relevant and different subjects. Added four new built-in-generated background assets: home-images/nutrition.jpg (healthy food spread), consistency.jpg (coastal walking), planning.jpg (gym equipment) and weight.jpg (blank-display scale). 960px JPEGs, approximately 494 KB total. Each was visually reviewed before commit. Source prompts and asset paths: docs/home-photo-backgrounds-2026-10.json.
+
+The three macro tiles also use different existing relevant food photos: chicken quinoa (protein), overnight oats (carbs), salmon/olive oil (fat). Dark directional overlays, localized contrast surfaces, bright numbers and retained green/gold/blue macro cues preserve legibility. These are decorative illustrations, not photographs of the user's actual logged meal, weight, or session.
+
+Implementation is Home-scoped CSS only; all markup, data readers, navigation, scheduling, food recipes and storage are unchanged. The existing workout hero and matching upcoming thumbnails remain. Added actual background URL/HTTP checks and weight-card screenshot to the mobile Home review sheet. Unit Home checks pass. Confirm Actions and inspect EZPZ_HOME_DATA before declaring verified.

@@ -1,0 +1,21 @@
+{
+  "tool": "Built-in image generation",
+  "assets": [
+    {
+      "path": "home-images/nutrition.jpg",
+      "prompt": "Photorealistic overhead editorial photograph of a thoughtfully prepared everyday fitness meal on a pale stone counter: a warm ivory ceramic plate of cooked sliced chicken breast, white rice, avocado and colorful vegetables, with a bowl of Greek yogurt and blueberries nearby. Natural daylight, realistic food textures, restrained styling, no labels or text. Wide landscape 3:2 composition, food grouped toward the right half, room on the left for interface text. For a fitness nutrition dashboard background; it is illustrative photography, not a specific tracked meal."
+    },
+    {
+      "path": "home-images/consistency.jpg",
+      "prompt": "Photorealistic calm fitness lifestyle photograph of one adult in simple dark athletic clothes walking briskly away from camera on a quiet coastal path at soft sunrise. Natural stride, realistic proportions, small person toward the right side, softly lit trees and coastline, no other people. Wide landscape 3:2 editorial composition. Premium deep natural green tones, soft daylight, no text, logos, graphics or exaggerated athletic pose. This will be a weekly consistency card backdrop with interface text over it."
+    },
+    {
+      "path": "home-images/planning.jpg",
+      "prompt": "Photorealistic premium gym still life: a pair of realistic black dumbbells, a rolled dark green exercise mat and a clear water bottle on a clean rubber gym floor, soft window light, a softly blurred strength rack in the background. Wide landscape 3:2 composition, equipment mainly toward the right, calm darker negative space on left for UI. Natural deep green and charcoal palette. No person, text, logos or labels. For a fitness workout-planning card backdrop."
+    },
+    {
+      "path": "home-images/weight.jpg",
+      "prompt": "Photorealistic editorial fitness still life of a simple modern dark digital bathroom scale on a pale stone floor beside a softly folded dark green towel. Scale display blank and unlit, no visible numbers or text, no people or body parts. Soft natural window light, premium realistic materials, wide landscape 3:2 composition with scale mainly on right side and clean darker negative space on left for UI. No logos, graphics or extra props. For a weight-trend dashboard card backdrop."
+    }
+  ]
+}
