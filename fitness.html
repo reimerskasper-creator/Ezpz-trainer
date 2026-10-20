@@ -12,8 +12,8 @@ window.addEventListener('unhandledrejection',function(e){const el=document.getEl
 'use strict';
 const KEY='ezpz-fitness-pilot-1',screen=document.getElementById('screen');
 const programs={
-home:[['Chair Squat','3 × 10'],['Incline Push-up','3 × 8'],['Backpack Row','3 × 12'],['Glute Bridge','3 × 12'],['Dead Bug','3 × 8 / side']],
-gym:[['Goblet Squat','3 × 10'],['Machine Chest Press','3 × 10'],['Seated Cable Row','3 × 12'],['DB Romanian Deadlift','3 × 10'],['Farmer Carry','3 × 30 sec']]
+home:[['Chair Squat','3 × 10'],['Incline Push-up','3 × 8'],['Backpack Row','3 × 12'],['Glute Bridge','3 × 12'],['Dead Bug','3 × 8 / side'],['Standing Calf Raise','3 × 15']],
+gym:[['Goblet Squat','3 × 10'],['Machine Chest Press','3 × 10'],['Seated Cable Row','3 × 12'],['DB Romanian Deadlift','3 × 10'],['Farmer Carry','3 × 30 sec'],['Dumbbell Lateral Raise','3 × 12']]
 };
 // Reference nutrition per 100 g edible portion: [kcal, protein g, carbohydrate g, fat g].
 // Generic food-composition estimates; branded products and cooking losses vary.
@@ -71,11 +71,13 @@ let tab='home',mealFilter='all';
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));return true}catch(e){alert('Unable to save on this device. Check storage settings.');return false}}
 function safe(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','&#39;':'&#39;'}[c]))}
 function target(){const p=state.profile;const activity=p.days>=4?1.5:1.35;const bmr=10*p.weight+6.25*p.height-5*p.age+(p.sex==='male'?5:-161);const calories=Math.max(1400,Math.round((bmr*activity+(p.goal==='lose'?-350:p.goal==='gain'?200:0))/50)*50);const protein=Math.round(p.weight*1.6),fat=Math.round(p.weight*.8),carbs=Math.max(0,Math.round((calories-protein*4-fat*9)/4));return {calories,protein,fat,carbs}}
+function migrateWorkoutDrafts(){if(Number(state.workoutLayoutVersion)>=2)return false;for(const id of ['cardio-a','cardio-b','hiit-a','hiit-b']){const draft=state.workoutDrafts?.[id];if(!draft||typeof draft!=='object')continue;const mapped={};for(const [key,value] of Object.entries(draft)){const m=key.match(/^(sr|sw|sd)2-(\d+)$/);mapped[m?m[1]+'7-'+m[2]:key]=value}state.workoutDrafts[id]=mapped}state.workoutLayoutVersion=2;return true}
+if(migrateWorkoutDrafts()&&state.profile)save();
 function onboarding(){screen.innerHTML='<section class="card hero"><h2>Make it yours</h2><p>Five quick steps to choose your starting plan. You can change this later.</p><form id="setup"><label>Primary goal</label><select name="goal"><option value="lose">Lose fat</option><option value="maintain">Get fitter / maintain</option><option value="gain">Build muscle</option></select><label>Training experience</label><select name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><label>Where do you train?</label><select name="equipment"><option value="home">At home</option><option value="gym">At a gym</option></select><label>Workout days per week</label><select name="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select><div class="grid"><div><label>Age (years)</label><input name="age" type="number" min="18" max="100" required placeholder="35"></div><div><label>Weight (kg)</label><input name="weight" type="number" min="30" max="350" step=".1" required placeholder="80"></div><div><label>Height (cm)</label><input name="height" type="number" min="120" max="230" required placeholder="180"></div><div><label>For calorie estimate</label><select name="sex"><option value="male">Male formula</option><option value="female">Female formula</option></select></div></div><button class="primary" style="margin-top:20px">Create my plan →</button></form><p class="note">Estimates are general starting points for adults, not medical advice. Data stays in this browser during the pilot.</p></section>'}
 function home(){const t=target(),done=state.logs.length,p=state.profile,plan=workoutPlan(),today=new Date().toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}),now=new Date(),monday=new Date(now);monday.setDate(now.getDate()-(now.getDay()+6)%7);monday.setHours(0,0,0,0);const days=Array.from({length:7},(_,i)=>{const day=new Date(monday);day.setDate(monday.getDate()+i);return {label:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'][i],done:state.logs.some(x=>{const d=new Date(x.date);return d.toDateString()===day.toDateString()}),today:day.toDateString()===now.toDateString()}});const weekly=state.logs.filter(x=>new Date(x.date)>=monday).length;screen.innerHTML='<div class="row home-heading"><div><span class="home-eyebrow">YOUR DASHBOARD</span><h2>Today</h2><p>'+safe(today)+'</p></div><span class="week-badge">Week '+plan.week+' of 12</span></div><section class="week-dots">'+days.map(d=>'<div class="week-day"><span class="'+(d.done?'done':d.today?'today':'')+'">'+(d.done?'✓':d.today?'•':'')+'</span><small>'+d.label+'</small></div>').join('')+'</section><section class="workout-feature"><img src="./meal-images/workout-hero.jpg" alt="Woman training with dumbbells" onerror="this.style.display=\'none\'"><div class="workout-feature-shade"><span class="tag">TODAY’S WORKOUT</span><h2>'+safe(workoutTitle(plan))+'</h2><p>'+plan.exercises.length+' exercises · '+safe(plan.equipment|| (p.equipment==='home'?'Home':'Gym'))+(plan.recovery?' · Recovery':'')+'</p><button class="primary" data-go="train">Start workout →</button></div></section><div class="grid"><section class="card stat-card"><small>Nutrition</small><div class="metric">'+t.calories+' <span>kcal</span></div><small>P '+t.protein+'g · C '+t.carbs+'g · F '+t.fat+'g</small></section><section class="card stat-card"><small>Weight</small><div class="metric">'+(state.weights.length?safe(state.weights[state.weights.length-1].kg):'—')+' <span>kg</span></div><small>'+done+' total workouts</small></section></div><section class="card"><div class="row"><h3>This week</h3><small>'+weekly+' of '+p.days+' planned</small></div><div class="weekly-bars">'+Array.from({length:p.days},(_,i)=>'<span class="'+(i<weekly?'filled':'')+'"></span>').join('')+'</div></section><section class="card home-quick"><h3>Quick actions</h3><div class="grid quick-actions"><button data-go="eat">🍽 <span>View recipes</span></button><button data-go="progress">📈 <span>My progress</span></button><button data-go="shopping">🛒 <span>Shopping list</span></button><button data-go="train">🏋️ <span>My workout</span></button></div></section><button data-action="reset" class="subtle-action">Change my plan</button>'}
 const alternate={
-home:[['Reverse Lunge','3 × 8 / side'],['Floor Press','3 × 10'],['Resistance Band Row','3 × 12'],['Hip Hinge','3 × 12'],['Side Plank','3 × 25 sec']],
-gym:[['Leg Press','3 × 10'],['Lat Pulldown','3 × 10'],['DB Shoulder Press','3 × 10'],['Hip Thrust','3 × 12'],['Pallof Press','3 × 12 / side']]
+home:[['Reverse Lunge','3 × 8 / side'],['Floor Press','3 × 10'],['Resistance Band Row','3 × 12'],['Hip Hinge','3 × 12'],['Side Plank','3 × 25 sec'],['Glute Activation Clamshell','3 × 12 / side']],
+gym:[['Leg Press','3 × 10'],['Lat Pulldown','3 × 10'],['DB Shoulder Press','3 × 10'],['Hip Thrust','3 × 12'],['Pallof Press','3 × 12 / side'],['Seated Calf Raise','3 × 15']]
 };
 // Original EZPZ sessions informed by ACSM, ACE and AHA guidance; not verbatim third-party programs.
 const workoutTemplates=[
@@ -85,7 +87,7 @@ const workoutTemplates=[
     "variant": "A",
     "title": "Push Day A",
     "equipment": "Gym · bench, dumbbells, cable",
-    "minutes": "40–50",
+    "minutes": "45–55",
     "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
     "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -129,6 +131,14 @@ const workoutTemplates=[
         "unit": "reps",
         "rest": 60,
         "side": false
+      },
+      {
+        "name": "Cable Chest Fly",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
       }
     ]
   },
@@ -138,7 +148,7 @@ const workoutTemplates=[
     "variant": "B",
     "title": "Push Day B",
     "equipment": "Gym · dumbbells, machines, cable",
-    "minutes": "40–50",
+    "minutes": "45–55",
     "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
     "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -182,6 +192,14 @@ const workoutTemplates=[
         "unit": "reps",
         "rest": 60,
         "side": false
+      },
+      {
+        "name": "Close-Grip Push-up",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
       }
     ]
   },
@@ -191,7 +209,7 @@ const workoutTemplates=[
     "variant": "A",
     "title": "Pull Day A",
     "equipment": "Gym · cable, bench, dumbbells",
-    "minutes": "40–50",
+    "minutes": "45–55",
     "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
     "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -235,6 +253,14 @@ const workoutTemplates=[
         "unit": "reps",
         "rest": 60,
         "side": false
+      },
+      {
+        "name": "Face Pull",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
       }
     ]
   },
@@ -244,7 +270,7 @@ const workoutTemplates=[
     "variant": "B",
     "title": "Pull Day B",
     "equipment": "Gym · assisted pull-up, cable, dumbbells",
-    "minutes": "40–50",
+    "minutes": "45–55",
     "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. For assisted pull-ups, reduce assistance instead. Start with 2 sets if new to lifting.",
     "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -288,6 +314,14 @@ const workoutTemplates=[
         "unit": "reps",
         "rest": 60,
         "side": false
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
       }
     ]
   },
@@ -297,7 +331,7 @@ const workoutTemplates=[
     "variant": "A",
     "title": "Leg Day A",
     "equipment": "Gym · dumbbells, leg-curl machine",
-    "minutes": "45–55",
+    "minutes": "50–60",
     "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
     "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -341,6 +375,14 @@ const workoutTemplates=[
         "unit": "reps",
         "rest": 60,
         "side": false
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": true
       }
     ]
   },
@@ -350,7 +392,7 @@ const workoutTemplates=[
     "variant": "B",
     "title": "Leg Day B",
     "equipment": "Gym · leg press, bench, machines",
-    "minutes": "45–55",
+    "minutes": "50–60",
     "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
     "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -394,6 +436,14 @@ const workoutTemplates=[
         "unit": "reps",
         "rest": 60,
         "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
       }
     ]
   },
@@ -403,7 +453,7 @@ const workoutTemplates=[
     "variant": "A",
     "title": "Core Day A",
     "equipment": "Mat + band or cable",
-    "minutes": "15–20",
+    "minutes": "25–30",
     "guide": "Work slowly and breathe throughout. Rest 30–45 sec between sets. For each-side movements, do both sides before checking a set; enter reps or seconds for one side. Choose a range you can control without back or hip discomfort.",
     "warmup": "3–5 min easy walking, then a few gentle pelvic tilts.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -439,6 +489,22 @@ const workoutTemplates=[
         "unit": "reps",
         "rest": 30,
         "side": true
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Hollow Hold",
+        "sets": 2,
+        "reps": "15–20",
+        "unit": "sec",
+        "rest": 30,
+        "side": false
       }
     ]
   },
@@ -448,7 +514,7 @@ const workoutTemplates=[
     "variant": "B",
     "title": "Core Day B",
     "equipment": "Mat + pull-up station + dumbbell",
-    "minutes": "20–25",
+    "minutes": "25–30",
     "guide": "Work slowly and breathe throughout. Rest 30–45 sec between sets. For each-side movements, do both sides before checking a set; enter reps or seconds for one side. Choose a range you can control without back or hip discomfort.",
     "warmup": "3–5 min easy walking, then a few controlled bodyweight hinges.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -484,6 +550,22 @@ const workoutTemplates=[
         "unit": "sec",
         "rest": 45,
         "side": true
+      },
+      {
+        "name": "Bicycle Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Lying Leg Raise",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
       }
     ]
   },
@@ -493,7 +575,7 @@ const workoutTemplates=[
     "variant": "A",
     "title": "Mobility Day A",
     "equipment": "Mat + wall",
-    "minutes": "15–20",
+    "minutes": "20–25",
     "guide": "Move slowly through comfortable ranges. Do both sides before checking a set; enter the amount for one side. Rest about 15 sec as needed. Do not force end range. Begin holds at 10 sec if needed, building toward the listed target.",
     "warmup": "3–5 min easy walking or marching.",
     "cooldown": "1–2 min relaxed breathing; finish feeling comfortable.",
@@ -537,6 +619,14 @@ const workoutTemplates=[
         "unit": "sec",
         "rest": 15,
         "side": true
+      },
+      {
+        "name": "Thoracic Open Book",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
       }
     ]
   },
@@ -546,7 +636,7 @@ const workoutTemplates=[
     "variant": "B",
     "title": "Mobility Day B",
     "equipment": "Mat + wall",
-    "minutes": "15–20",
+    "minutes": "20–25",
     "guide": "Move slowly through comfortable ranges. Do both sides before checking a set; enter the amount for one side. Rest about 15 sec as needed. Do not force end range. Begin holds at 10 sec if needed, building toward the listed target.",
     "warmup": "3–5 min easy walking or marching.",
     "cooldown": "1–2 min relaxed breathing; finish feeling comfortable.",
@@ -600,6 +690,14 @@ const workoutTemplates=[
           "Keep the back heel down and lean forward gently.",
           "Hold without bouncing; switch legs."
         ]
+      },
+      {
+        "name": "Hip Hinge Drill",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
       }
     ]
   },
@@ -609,7 +707,7 @@ const workoutTemplates=[
     "variant": "A",
     "title": "Stability Day A",
     "equipment": "Mat + wall or chair + band",
-    "minutes": "20–25",
+    "minutes": "25–30",
     "guide": "Quality before load. Use a wall or sturdy support when balance is challenging. Rest 30–45 sec. Do both sides before checking each set; log one side. Stop the set when posture or control breaks down.",
     "warmup": "3–5 min easy walking and gentle ankle movements.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -663,6 +761,14 @@ const workoutTemplates=[
           "Place each heel just ahead of the toes of the other foot.",
           "Take slow small steps while looking ahead."
         ]
+      },
+      {
+        "name": "Wall Slide",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
       }
     ]
   },
@@ -672,7 +778,7 @@ const workoutTemplates=[
     "variant": "B",
     "title": "Stability Day B",
     "equipment": "Mat + low step + light dumbbell",
-    "minutes": "20–25",
+    "minutes": "25–30",
     "guide": "Quality before load. Use a wall or sturdy support when balance is challenging. Rest 30–45 sec. Do both sides before checking each set; log one side. Stop the set when posture or control breaks down.",
     "warmup": "3–5 min easy walking and controlled bodyweight hinges.",
     "cooldown": "3–5 min easy walking and relaxed breathing.",
@@ -726,6 +832,14 @@ const workoutTemplates=[
           "Move one leg a little out to the side without leaning.",
           "Return slowly; keep toes facing forward."
         ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
       }
     ]
   },
@@ -734,11 +848,11 @@ const workoutTemplates=[
     "category": "Cardio",
     "variant": "A",
     "title": "Cardio Day A",
-    "equipment": "Walking route or treadmill",
-    "minutes": "30",
-    "guide": "Steady aerobic session. Use a moderate pace around 4–6 out of 10 effort: breathing faster but still able to speak in sentences. If 20 min is too much, begin with 10 and build gradually.",
+    "equipment": "Walking space + low stable step",
+    "minutes": "30–35",
+    "guide": "Six different main movements, excluding warm-up and cooldown. Do the 5 min opening movement, then 3 min at each of the next five stations, in the listed order. Keep effort moderate, around 4–6/10, and be able to speak in full sentences. Take extra transition time as needed; start with shorter blocks if needed.",
     "warmup": "First block includes a 5 min warm-up.",
-    "cooldown": "Final block includes a 5 min cooldown.",
+    "cooldown": "20 min of main work plus 5 min warm-up and 5 min cooldown; allow time to change stations.",
     "exercises": [
       {
         "name": "Easy Walking Warm-up",
@@ -755,13 +869,73 @@ const workoutTemplates=[
       {
         "name": "Brisk Walking",
         "sets": 1,
-        "reps": "20",
+        "reps": "5",
         "unit": "min",
         "rest": 0,
         "side": false,
         "cues": [
           "Walk at a steady purposeful pace.",
           "Stay tall with relaxed shoulders; use the talk test."
+        ]
+      },
+      {
+        "name": "Steady Marching",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "March in place with relaxed arm swings.",
+          "Keep an even pace that still allows full sentences."
+        ]
+      },
+      {
+        "name": "Step Touch",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Step sideways and bring the other foot toward it.",
+          "Repeat in both directions with soft knees and relaxed shoulders."
+        ]
+      },
+      {
+        "name": "Heel Digs",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Alternate tapping each heel forward.",
+          "Keep the supporting knee soft and swing arms gently."
+        ]
+      },
+      {
+        "name": "Standing Knee Lifts",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Stand tall and alternate lifting one knee at a time.",
+          "Stay controlled; use a sturdy support if needed."
+        ]
+      },
+      {
+        "name": "Low Step-ups",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Use a low, stable step and place the whole foot on it.",
+          "Step up and down at a steady pace, changing the lead leg halfway."
         ]
       },
       {
@@ -783,11 +957,11 @@ const workoutTemplates=[
     "category": "Cardio",
     "variant": "B",
     "title": "Cardio Day B",
-    "equipment": "Stationary bike",
-    "minutes": "30",
-    "guide": "Steady aerobic session. Use a moderate pace around 4–6 out of 10 effort: breathing faster but still able to speak in sentences. If 20 min is too much, begin with 10 and build gradually.",
+    "equipment": "Gym · bike, rower, elliptical, treadmill, stairs, ski erg",
+    "minutes": "30–35",
+    "guide": "Six different main movements, excluding warm-up and cooldown. Do the 5 min opening movement, then 3 min at each of the next five stations, in the listed order. Keep effort moderate, around 4–6/10, and be able to speak in full sentences. Take extra transition time as needed; start with shorter blocks if needed.",
     "warmup": "First block includes a 5 min warm-up.",
-    "cooldown": "Final block includes a 5 min cooldown.",
+    "cooldown": "20 min of main work plus 5 min warm-up and 5 min cooldown; allow time to change stations.",
     "exercises": [
       {
         "name": "Easy Cycling Warm-up",
@@ -804,13 +978,73 @@ const workoutTemplates=[
       {
         "name": "Steady Cycling",
         "sets": 1,
-        "reps": "20",
+        "reps": "5",
         "unit": "min",
         "rest": 0,
         "side": false,
         "cues": [
           "Maintain a comfortable steady cadence.",
           "Use moderate resistance and a pace that allows full sentences."
+        ]
+      },
+      {
+        "name": "Steady Rowing",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Set a light-to-moderate rowing resistance.",
+          "Drive through legs, then lean slightly and pull; reverse that order to return."
+        ]
+      },
+      {
+        "name": "Elliptical Training",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Stand upright with feet supported on the pedals.",
+          "Use smooth strides at a comfortable moderate effort."
+        ]
+      },
+      {
+        "name": "Incline Walking",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Choose a manageable treadmill incline and natural walking pace.",
+          "Use the safety clip and avoid hanging on the handrails."
+        ]
+      },
+      {
+        "name": "Stair Machine",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Start at a low speed and keep feet well supported on each step.",
+          "Stand tall; use the rails only for light balance support."
+        ]
+      },
+      {
+        "name": "Ski Erg",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Stand with soft knees and a light resistance setting.",
+          "Hinge gently and pull handles down; return smoothly without jerking."
         ]
       },
       {
@@ -832,11 +1066,11 @@ const workoutTemplates=[
     "category": "HIIT",
     "variant": "A",
     "title": "HIIT Day A",
-    "equipment": "Stationary bike",
-    "minutes": "22",
-    "guide": "For people already comfortable with moderate cardio. Six intervals: work hard at about 8/10 effort, not an all-out sprint, then take the full easy recovery. Start with 4 intervals if needed. Do only 1–2 HIIT sessions per week on non-consecutive days. Log work seconds only; complete recovery before checking the interval.",
+    "equipment": "Gym · bike, elliptical, low stable step",
+    "minutes": "32–37",
+    "guide": "Six different work exercises, excluding warm-up and cooldown. After warming up, finish the six intervals at the first station; then do one interval at each of the five additional stations. Work at a controlled hard effort around 8/10, never an all-out sprint. Take the full 90 sec easy recovery after every work interval, including when changing stations. Reduce interval count or shorten work periods when starting. Use 1–2 non-consecutive HIIT days per week. Log work seconds only and check an interval after recovery.",
     "warmup": "Warm-up and cooldown are included as logged blocks.",
-    "cooldown": "6 × (30 sec hard + 90 sec easy) = 12 min, plus 10 min warm-up/cooldown.",
+    "cooldown": "11 × (30 sec hard + 90 sec easy) = 22 min, plus 10 min warm-up/cooldown. Allow extra time to change stations.",
     "exercises": [
       {
         "name": "Easy Cycling Warm-up",
@@ -864,6 +1098,66 @@ const workoutTemplates=[
         ]
       },
       {
+        "name": "Fast Marching",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "March briskly with quick, controlled arm swings.",
+          "Keep steps light; avoid leaning back as knees lift."
+        ]
+      },
+      {
+        "name": "Step Jacks",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Step one foot sideways as arms move outward, then return.",
+          "Alternate feet briskly without jumping; keep shoulders in a comfortable range."
+        ]
+      },
+      {
+        "name": "Shadow Boxing",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Keep a soft stance and punch the air without weights.",
+          "Alternate controlled punches without snapping elbows straight or twisting knees."
+        ]
+      },
+      {
+        "name": "Fast Low Step-ups",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Use a low stable step, placing the whole foot on it.",
+          "Choose quick but controlled steps and switch the lead leg halfway."
+        ]
+      },
+      {
+        "name": "Elliptical Intervals",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Increase cadence or resistance for the work period while staying upright.",
+          "Then lower the effort for the full recovery period."
+        ]
+      },
+      {
         "name": "Easy Cycling Cooldown",
         "sets": 1,
         "reps": "5",
@@ -882,11 +1176,11 @@ const workoutTemplates=[
     "category": "HIIT",
     "variant": "B",
     "title": "HIIT Day B",
-    "equipment": "Treadmill with adjustable incline",
-    "minutes": "22",
-    "guide": "For people already comfortable with moderate cardio. Six intervals: work hard at about 8/10 effort, not an all-out sprint, then take the full easy recovery. Start with 4 intervals if needed. Do only 1–2 HIIT sessions per week on non-consecutive days. Log work seconds only; complete recovery before checking the interval.",
+    "equipment": "Gym · treadmill, rower, air bike, ski erg, ropes",
+    "minutes": "32–37",
+    "guide": "Six different work exercises, excluding warm-up and cooldown. After warming up, finish the six intervals at the first station; then do one interval at each of the five additional stations. Work at a controlled hard effort around 8/10, never an all-out sprint. Take the full 75 sec easy recovery after every work interval, including when changing stations. Reduce interval count or shorten work periods when starting. Use 1–2 non-consecutive HIIT days per week. Log work seconds only and check an interval after recovery.",
     "warmup": "Warm-up and cooldown are included as logged blocks.",
-    "cooldown": "6 × (45 sec hard + 75 sec easy) = 12 min, plus 10 min warm-up/cooldown; allow extra time for treadmill adjustments.",
+    "cooldown": "11 × (45 sec hard + 75 sec easy) = 22 min, plus 10 min warm-up/cooldown. Allow extra time to change stations.",
     "exercises": [
       {
         "name": "Easy Walking Warm-up",
@@ -911,6 +1205,66 @@ const workoutTemplates=[
           "Raise incline to reach a controlled hard walking effort for 45 sec.",
           "Reduce incline and walk easily for 75 sec. Allow time for belt adjustments.",
           "Keep a natural stride; lower the incline if you need to hang on the rails."
+        ]
+      },
+      {
+        "name": "Rowing Intervals",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Row strongly with legs first, torso next and arms last.",
+          "Keep technique smooth rather than chasing the highest stroke rate."
+        ]
+      },
+      {
+        "name": "Air Bike Intervals",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Set the seat for a slightly bent knee at the bottom.",
+          "Use coordinated arm and leg action for a controlled hard effort."
+        ]
+      },
+      {
+        "name": "Ski Erg Intervals",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Use a light enough setting to keep the stroke smooth.",
+          "Drive handles down with a small hinge and soft knees; avoid jerking your back."
+        ]
+      },
+      {
+        "name": "Lateral Shuffle",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Use a clear non-slip space and start in a soft athletic stance.",
+          "Take short side steps without crossing feet; slow before changing direction."
+        ]
+      },
+      {
+        "name": "Battle Rope Waves",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Keep a stable stance with soft knees and relaxed shoulders.",
+          "Make small alternating waves without shrugging or leaning back."
         ]
       },
       {
@@ -997,6 +1351,6 @@ function render(){document.body.dataset.view=!state.profile&&tab!=='library'?'se
 document.addEventListener('submit',e=>{if(e.target.id==='setup'){e.preventDefault();const f=new FormData(e.target);const p={goal:f.get('goal'),level:f.get('level'),equipment:f.get('equipment'),days:Number(f.get('days')),age:Number(f.get('age')),weight:Number(f.get('weight')),height:Number(f.get('height')),sex:f.get('sex')};if(![p.days,p.age,p.weight,p.height].every(Number.isFinite)||p.days<2||p.days>5||p.age<18||p.age>100||p.weight<30||p.weight>350||p.height<120||p.height>230)return;state.profile=p;save();tab='home';render()}if(e.target.id==='weightform'){e.preventDefault();const kg=Number(new FormData(e.target).get('kg'));if(!Number.isFinite(kg)||kg<30||kg>350)return;state.weights.push({date:new Date().toISOString(),kg});save();render()}});
 document.addEventListener('input',e=>{if(e.target.id==='recipe-search'){const q=e.target.value.toLowerCase().trim();document.querySelectorAll('[data-recipe-card]').forEach(card=>{card.hidden=!card.textContent.toLowerCase().includes(q)})}});
 document.addEventListener('input',e=>{if(e.target.id==='library-search'){librarySearch=e.target.value;const caret=e.target.selectionStart;exerciseLibrary();const input=document.getElementById('library-search');if(input){input.focus();input.setSelectionRange(caret,caret)}}});document.addEventListener('change',e=>{if(e.target.id==='workout-select'){const id=e.target.value;if(id==='full-body'||workoutTemplates.some(w=>w.id===id)){state.selectedWorkout=id;save();render()}return}if(e.target.dataset.planDay!==undefined){const offset=Number(e.target.value);if(Number.isInteger(offset)&&offset>=0&&offset<=6){state.mealPlanOffset=offset;save();eat()}return}if(e.target.dataset.planPortion){const slot=e.target.dataset.planPortion,v=Number(e.target.value);if(['breakfast','lunch','dinner'].includes(slot)&&[.5,1,1.5,2,2.5,3].includes(v)){state.mealPlan=plannedMeals();const day=mealPlanDay();state.mealPlan[day]=state.mealPlan[day]||{};state.mealPlan[day][slot+'Portion']=v;save();eat()}return}if(e.target.dataset.planSlot){const slot=e.target.dataset.planSlot;if(!['breakfast','lunch','dinner'].includes(slot))return;state.mealPlan=plannedMeals();const day=mealPlanDay();state.mealPlan[day]=state.mealPlan[day]||{};const index=e.target.value===''?null:Number(e.target.value);if(index===null){delete state.mealPlan[day][slot];delete state.mealPlan[day][slot+'Portion']}else if(Number.isInteger(index)&&index>=0&&index<recipes.length){state.mealPlan[day][slot]=index;state.mealPlan[day][slot+'Portion']=1;}save();eat();return}if(e.target.id==='library-category'){libraryCategory=e.target.value;exerciseLibrary();return}if(e.target.id==='library-equipment'){libraryEquipment=e.target.value;exerciseLibrary();return}if(e.target.dataset.shopName!==undefined){state.checkedShopping=state.checkedShopping||{};state.checkedShopping[e.target.dataset.shopName]=e.target.checked;save();return}if(e.target.dataset.serving!==undefined){updateRecipe(Number(e.target.dataset.serving));return}const d=e.target.dataset;let k=null,value=e.target.value;if(d.setReps!==undefined)k='sr'+d.setReps;else if(d.setWeight!==undefined)k='sw'+d.setWeight;else if(d.setDone!==undefined){k='sd'+d.setDone;value=e.target.checked}else if(d.reps!==undefined)k='r'+d.reps;else if(d.load!==undefined)k='w'+d.load;if(k&&state.profile){const plan=workoutPlan();if(plan.id==='full-body'){state.draft={variant:plan.variant,equipment:state.profile.equipment,...workoutDraft(plan)};state.draft[k]=value}else{state.workoutDrafts=state.workoutDrafts||{};state.workoutDrafts[plan.id]={...workoutDraft(plan),[k]:value}};save();if(d.setDone!==undefined)updateWorkoutProgress()}});
-document.addEventListener('click',e=>{const addPlan=e.target.closest('[data-action="plan-to-shopping"],[data-action="week-to-shopping"]');if(addPlan){const all=addPlan.dataset.action==='week-to-shopping',dates=all?Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return d.toLocaleDateString('en-CA')}):[mealPlanDay()];const selected=dates.flatMap(date=>{const day=plannedMeals()[date]||{};return ['breakfast','lunch','dinner'].map(slot=>({i:day[slot],scale:planPortion(day,slot)})).filter(x=>Number.isInteger(x.i)&&recipes[x.i])});if(!selected.length){alert('Choose at least one meal first.');return}state.shopping=Array.isArray(state.shopping)?state.shopping:[];for(const {i,scale} of selected)for(const [name,g] of recipes[i].ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render();return}const remove=e.target.closest('[data-remove-food]');if(remove){state.foodLog=foodEntries().filter(x=>x.id!==remove.dataset.removeFood);save();eat();return}const logFood=e.target.closest('[data-log-food]');if(logFood){const i=Number(logFood.dataset.logFood),r=recipes[i],scale=Number(document.querySelector('[data-serving="'+i+'"]')?.value||1);if(r&&[.5,1,1.5,2].includes(scale)){state.foodLog=foodEntries();state.foodLog.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,7),date:foodDate(),name:r.name,servings:scale,macros:nutrition(r.ingredients,scale)});save();tab='eat';eat()}return}const lib=e.target.closest('[data-library-id]');if(lib){librarySelected=lib.dataset.libraryId;exerciseLibrary();window.scrollTo(0,0);return}const guide=e.target.closest('[data-open-exercise]');if(guide){const name=guide.dataset.openExercise;const aliases={'DB Romanian Deadlift':'Dumbbell Romanian Deadlift','Floor Press':'Dumbbell Floor Press','Hip Hinge':'Hip Hinge Drill','DB Shoulder Press':'Seated Dumbbell Shoulder Press'};librarySelected=(aliases[name]||name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');tab='library';render();window.scrollTo(0,0);return}const nav=e.target.closest('[data-tab]');if(nav){tab=nav.dataset.tab;render();window.scrollTo(0,0);return}const go=e.target.closest('[data-go]');if(go){tab=go.dataset.go;render();window.scrollTo(0,0);return}const meal=e.target.closest('[data-open-meal]');if(meal){tab='meal';document.body.dataset.view='meal';document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-current',b.dataset.tab==='eat'?'page':'false'));mealDetail(Number(meal.dataset.openMeal));window.scrollTo(0,0);return}const filter=e.target.closest('[data-meal-filter]');if(filter){mealFilter=filter.dataset.mealFilter;document.querySelectorAll('[data-meal-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===filter)));document.querySelectorAll('[data-meal-category]').forEach(el=>el.hidden=mealFilter!=='all'&&el.dataset.mealCategory!==mealFilter);return}const step=e.target.closest('[data-photo-step]');if(step){const frame=step.closest('.exercise-photo-frame'),img=frame?.querySelector('img');if(img){const next=step.dataset.photoStep==='1'?2:1;img.src=next===1?img.dataset.approvedStart:img.dataset.approvedFinish;img.alt=img.alt.replace(/starting position|next position/,next===1?'starting position':'next position');step.dataset.photoStep=String(next);step.textContent='Position '+next+' / 2 ↔';step.setAttribute('aria-label','Show '+(next===1?'next':'starting')+' position')}return}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='library-back'){librarySelected=null;exerciseLibrary();return}if(action==='reload-library'){exerciseCatalog=null;libraryLoading=false;exerciseLibrary();return}if(action==='finish'){const exercises=workoutPlan().exercises.map((x,i)=>{const sets=Array.from({length:x.sets},(_,j)=>({reps:document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg:document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done:!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked}));return {name:x.name,unit:x.unit||'reps',prescription:x.sets+' × '+x.reps+(x.unit&&x.unit!=='reps'?' '+x.unit:'')+(x.side?' / side':''),sets:sets.map(z=>z.done?z:{reps:'',kg:'',done:false}),reps:sets.filter(z=>z.done&&z.reps).map(z=>z.reps).join(', '),kg:sets.find(z=>z.done&&z.kg)?.kg||''}});const completedSets=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&z.reps!==''&&Number(z.reps)>0).length,0);if(!completedSets){alert('Enter a positive rep count or duration and check off at least one completed set before saving.');return}const incomplete=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&(z.reps===''||Number(z.reps)<=0)).length,0);if(incomplete){alert('Some checked sets have no valid rep count or duration. Add a value or uncheck those sets.');return}const unchecked=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.reps!==''&&!z.done).length,0);if(unchecked&&!confirm(unchecked+' entered set(s) are not checked complete. Save only the checked sets?'))return;const plan=workoutPlan();state.logs.push({date:new Date().toISOString(),type:state.profile.equipment,variant:plan.variant,workoutId:plan.id,title:workoutTitle(plan),setting:plan.equipment||state.profile.equipment,exercises});if(plan.id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[plan.id];if(save()){tab='progress';render()}}if(action==='clear-draft'&&confirm('Clear your unfinished workout entries?')){const id=activeWorkoutId();if(id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[id];save();render()}if(action==='reset'&&confirm('Change your plan? Your workout and weight history will be kept.')){state.profile=null;state.draft={};save();render()}if(action==='clear-completed'){const checked=state.checkedShopping||{};state.shopping=(state.shopping||[]).filter(x=>!checked[String(x).split(' — ')[0]]);state.checkedShopping={};save();render();return}if(action==='clear-shopping'&&confirm('Clear your entire shopping list?')){state.shopping=[];state.checkedShopping={};save();render()}const recipe=e.target.closest('[data-recipe]');if(recipe){const r=recipes[Number(recipe.dataset.recipe)];if(r){state.shopping=Array.isArray(state.shopping)?state.shopping:[];const scale=Number(document.querySelector('[data-serving="'+recipe.dataset.recipe+'"]')?.value||1);for(const [name,g] of r.ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render()}}if(action==='restore'){const file=document.getElementById('restore-file')?.files?.[0];if(!file){alert('Choose a backup JSON file first.');return}if(file.size>2000000){alert('Backup exceeds 2 MB.');return}file.text().then(raw=>{let data;try{data=JSON.parse(raw)}catch(e){throw Error('Invalid JSON backup')}if(!data||typeof data!=='object'||!Array.isArray(data.logs)||!Array.isArray(data.weights)||data.logs.length>10000||data.weights.length>10000||data.profile!==null&&typeof data.profile!=='object')throw Error('Not an EZPZ Fitness backup');if(data.profile){const p=data.profile;if(!['home','gym'].includes(p.equipment)||!['Beginner','Intermediate','Advanced'].includes(p.level)||!Number.isFinite(p.weight)||!Number.isFinite(p.height)||!Number.isFinite(p.age)||!Number.isFinite(p.days)||p.weight<30||p.weight>350||p.height<120||p.height>230||p.age<18||p.age>100||p.days<2||p.days>5)throw Error('Invalid profile in backup')}if(!confirm('Replace all fitness data on this device with this backup?'))return;const prior=state;state={profile:data.profile||null,logs:data.logs,weights:data.weights,shopping:Array.isArray(data.shopping)?data.shopping.slice(0,100):[],draft:{},selectedWorkout:workoutTemplates.some(w=>w.id===data.selectedWorkout)?data.selectedWorkout:'full-body',workoutDrafts:Object.fromEntries(workoutTemplates.filter(w=>data.workoutDrafts?.[w.id]&&typeof data.workoutDrafts[w.id]==='object').map(w=>[w.id,Object.fromEntries(Object.entries(data.workoutDrafts[w.id]).filter(([k,v])=>/^(sr|sw|sd)\d+-\d+$/.test(k)&&['string','number','boolean'].includes(typeof v)))]))};if(!save()){state=prior;return}tab='home';render()}).catch(err=>alert('Restore failed: '+err.message));return}if(action==='export'){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ezpz-fitness-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}});
+document.addEventListener('click',e=>{const addPlan=e.target.closest('[data-action="plan-to-shopping"],[data-action="week-to-shopping"]');if(addPlan){const all=addPlan.dataset.action==='week-to-shopping',dates=all?Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return d.toLocaleDateString('en-CA')}):[mealPlanDay()];const selected=dates.flatMap(date=>{const day=plannedMeals()[date]||{};return ['breakfast','lunch','dinner'].map(slot=>({i:day[slot],scale:planPortion(day,slot)})).filter(x=>Number.isInteger(x.i)&&recipes[x.i])});if(!selected.length){alert('Choose at least one meal first.');return}state.shopping=Array.isArray(state.shopping)?state.shopping:[];for(const {i,scale} of selected)for(const [name,g] of recipes[i].ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render();return}const remove=e.target.closest('[data-remove-food]');if(remove){state.foodLog=foodEntries().filter(x=>x.id!==remove.dataset.removeFood);save();eat();return}const logFood=e.target.closest('[data-log-food]');if(logFood){const i=Number(logFood.dataset.logFood),r=recipes[i],scale=Number(document.querySelector('[data-serving="'+i+'"]')?.value||1);if(r&&[.5,1,1.5,2].includes(scale)){state.foodLog=foodEntries();state.foodLog.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,7),date:foodDate(),name:r.name,servings:scale,macros:nutrition(r.ingredients,scale)});save();tab='eat';eat()}return}const lib=e.target.closest('[data-library-id]');if(lib){librarySelected=lib.dataset.libraryId;exerciseLibrary();window.scrollTo(0,0);return}const guide=e.target.closest('[data-open-exercise]');if(guide){const name=guide.dataset.openExercise;const aliases={'DB Romanian Deadlift':'Dumbbell Romanian Deadlift','Floor Press':'Dumbbell Floor Press','Hip Hinge':'Hip Hinge Drill','DB Shoulder Press':'Seated Dumbbell Shoulder Press'};librarySelected=(aliases[name]||name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');tab='library';render();window.scrollTo(0,0);return}const nav=e.target.closest('[data-tab]');if(nav){tab=nav.dataset.tab;render();window.scrollTo(0,0);return}const go=e.target.closest('[data-go]');if(go){tab=go.dataset.go;render();window.scrollTo(0,0);return}const meal=e.target.closest('[data-open-meal]');if(meal){tab='meal';document.body.dataset.view='meal';document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-current',b.dataset.tab==='eat'?'page':'false'));mealDetail(Number(meal.dataset.openMeal));window.scrollTo(0,0);return}const filter=e.target.closest('[data-meal-filter]');if(filter){mealFilter=filter.dataset.mealFilter;document.querySelectorAll('[data-meal-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===filter)));document.querySelectorAll('[data-meal-category]').forEach(el=>el.hidden=mealFilter!=='all'&&el.dataset.mealCategory!==mealFilter);return}const step=e.target.closest('[data-photo-step]');if(step){const frame=step.closest('.exercise-photo-frame'),img=frame?.querySelector('img');if(img){const next=step.dataset.photoStep==='1'?2:1;img.src=next===1?img.dataset.approvedStart:img.dataset.approvedFinish;img.alt=img.alt.replace(/starting position|next position/,next===1?'starting position':'next position');step.dataset.photoStep=String(next);step.textContent='Position '+next+' / 2 ↔';step.setAttribute('aria-label','Show '+(next===1?'next':'starting')+' position')}return}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='library-back'){librarySelected=null;exerciseLibrary();return}if(action==='reload-library'){exerciseCatalog=null;libraryLoading=false;exerciseLibrary();return}if(action==='finish'){const exercises=workoutPlan().exercises.map((x,i)=>{const sets=Array.from({length:x.sets},(_,j)=>({reps:document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg:document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done:!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked}));return {name:x.name,unit:x.unit||'reps',prescription:x.sets+' × '+x.reps+(x.unit&&x.unit!=='reps'?' '+x.unit:'')+(x.side?' / side':''),sets:sets.map(z=>z.done?z:{reps:'',kg:'',done:false}),reps:sets.filter(z=>z.done&&z.reps).map(z=>z.reps).join(', '),kg:sets.find(z=>z.done&&z.kg)?.kg||''}});const completedSets=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&z.reps!==''&&Number(z.reps)>0).length,0);if(!completedSets){alert('Enter a positive rep count or duration and check off at least one completed set before saving.');return}const incomplete=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&(z.reps===''||Number(z.reps)<=0)).length,0);if(incomplete){alert('Some checked sets have no valid rep count or duration. Add a value or uncheck those sets.');return}const unchecked=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.reps!==''&&!z.done).length,0);if(unchecked&&!confirm(unchecked+' entered set(s) are not checked complete. Save only the checked sets?'))return;const plan=workoutPlan();state.logs.push({date:new Date().toISOString(),type:state.profile.equipment,variant:plan.variant,workoutId:plan.id,title:workoutTitle(plan),setting:plan.equipment||state.profile.equipment,exercises});if(plan.id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[plan.id];if(save()){tab='progress';render()}}if(action==='clear-draft'&&confirm('Clear your unfinished workout entries?')){const id=activeWorkoutId();if(id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[id];save();render()}if(action==='reset'&&confirm('Change your plan? Your workout and weight history will be kept.')){state.profile=null;state.draft={};save();render()}if(action==='clear-completed'){const checked=state.checkedShopping||{};state.shopping=(state.shopping||[]).filter(x=>!checked[String(x).split(' — ')[0]]);state.checkedShopping={};save();render();return}if(action==='clear-shopping'&&confirm('Clear your entire shopping list?')){state.shopping=[];state.checkedShopping={};save();render()}const recipe=e.target.closest('[data-recipe]');if(recipe){const r=recipes[Number(recipe.dataset.recipe)];if(r){state.shopping=Array.isArray(state.shopping)?state.shopping:[];const scale=Number(document.querySelector('[data-serving="'+recipe.dataset.recipe+'"]')?.value||1);for(const [name,g] of r.ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render()}}if(action==='restore'){const file=document.getElementById('restore-file')?.files?.[0];if(!file){alert('Choose a backup JSON file first.');return}if(file.size>2000000){alert('Backup exceeds 2 MB.');return}file.text().then(raw=>{let data;try{data=JSON.parse(raw)}catch(e){throw Error('Invalid JSON backup')}if(!data||typeof data!=='object'||!Array.isArray(data.logs)||!Array.isArray(data.weights)||data.logs.length>10000||data.weights.length>10000||data.profile!==null&&typeof data.profile!=='object')throw Error('Not an EZPZ Fitness backup');if(data.profile){const p=data.profile;if(!['home','gym'].includes(p.equipment)||!['Beginner','Intermediate','Advanced'].includes(p.level)||!Number.isFinite(p.weight)||!Number.isFinite(p.height)||!Number.isFinite(p.age)||!Number.isFinite(p.days)||p.weight<30||p.weight>350||p.height<120||p.height>230||p.age<18||p.age>100||p.days<2||p.days>5)throw Error('Invalid profile in backup')}if(!confirm('Replace all fitness data on this device with this backup?'))return;const prior=state;state={profile:data.profile||null,logs:data.logs,weights:data.weights,shopping:Array.isArray(data.shopping)?data.shopping.slice(0,100):[],draft:{},workoutLayoutVersion:Number(data.workoutLayoutVersion)||1,selectedWorkout:workoutTemplates.some(w=>w.id===data.selectedWorkout)?data.selectedWorkout:'full-body',workoutDrafts:Object.fromEntries(workoutTemplates.filter(w=>data.workoutDrafts?.[w.id]&&typeof data.workoutDrafts[w.id]==='object').map(w=>[w.id,Object.fromEntries(Object.entries(data.workoutDrafts[w.id]).filter(([k,v])=>/^(sr|sw|sd)\d+-\d+$/.test(k)&&['string','number','boolean'].includes(typeof v)))]))};migrateWorkoutDrafts();if(!save()){state=prior;return}tab='home';render()}).catch(err=>alert('Restore failed: '+err.message));return}if(action==='export'){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ezpz-fitness-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}});
 render();
 </script></body></html>
