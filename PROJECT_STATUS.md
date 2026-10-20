@@ -59,10 +59,10 @@ A rest timer, post-workout summary and professionally filmed technique demonstra
 Ask the assistant to read this file and the latest GitHub Actions results, then continue the same app. GitHub is the source of truth; fetch current main before editing.
 
 ## Last verified release
-Code commit: 71a1272f93c1a3ead70f8a062df110fe5e6f2093.
-Mobile workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39490884134 — success.
-GitHub Pages workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39490882424 — success.
-All checks passed, including real Chromium at 320/390/430px. The contact sheet was visually reviewed. No known outstanding blocker remains for this workout-library request.
+Code commit: 2dae9eb9d40dec9c2d1d7929a38aef59c1feaaf0.
+Mobile workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39494819881 — success.
+GitHub Pages workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39494819707 — success.
+All checks passed, including real Chromium at 320/390/430px. The planning/builder contact sheet was visually reviewed. No known outstanding blocker remains for the planning, difficulty-label and practical-HIIT requests.
 
 ## Logged-food visual polish — October 20
 User authorized visual improvements to logged food only. Added a separate scoped style block (`food-log-visuals`) in fitness.html: block portion details, aligned 44px Remove controls, full-width calorie progress, readable macro tiles and less nested card padding. All existing approved functions, base stylesheet, recipes, values, images, handlers and storage remain identical. No wger/Feeel code imported; their stacks differ from this static web app. Added mobile checks and Logged-food screenshots at 320/390/430px in tests/mobile.cjs. Implementation commit 972df23; test commit fd9347e. Check their Actions results before continuing. This session has no local execution environment; verification runs in GitHub Actions.
@@ -75,3 +75,6 @@ Reworked hiit-a, hiit-b and hiit-gym to use one space (standing bodyweight; low 
 New state: customWorkouts, workoutSchedule (date → workout ID or rest), plannerStart, plannerDays, plannerOffset, activePlanDate, hiitLayoutVersion=3, workoutDraftArchives. User custom sessions may have fewer than six exercises; the six-main-exercise minimum still applies to the 55 built-ins.
 
 New tests/planning.cjs and expanded tests/mobile.cjs cover plans, custom sessions and backups. All non-browser checks passed in an in-memory harness; real asset and Chromium checks must be confirmed through the new GitHub Actions run before calling the release verified. Previous food-log run 39491993897 and deployment 39492016080 both succeeded. No local shell environment is available in this session.
+
+## Verified planning release
+Code commit 2dae9eb9d40dec9c2d1d7929a38aef59c1feaaf0 passed all GitHub checks: Home, 49 locked recipes and all image assets, app review, 55 built-in workouts, the new planning suite, and real Chromium flows at 320/390/430px. Mobile run 39494819881 succeeded; deployment run 39494819707 succeeded. Planning and builder screenshots were visually reviewed. The first run caught an unconstrained icon in More; the verified fix wraps it in the existing icon container. Custom sessions also appear in the main workout chooser. No outstanding known blocker. Continue this exact app and preserve the approved food content.
