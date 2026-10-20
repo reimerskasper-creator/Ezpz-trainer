@@ -52,7 +52,11 @@ try{
     await page.locator('.program-card').first().locator('img').evaluate(x=>x.decode());
     const buffer=await page.screenshot({path:path.join(out,'Arms-programs.jpg'),type:'jpeg',quality:85});captures.push({name:'Arms and preview',src:'data:image/jpeg;base64,'+buffer.toString('base64')});
    }
-   await page.locator('[data-workout-pick="'+id+'"]').click();
+
+   try{await page.locator('[data-workout-pick="'+id+'"]').click({timeout:5000})}catch(error){
+    console.log('PROGRAM_DIAGNOSTIC',id,JSON.stringify(await page.evaluate(id=>{const e=document.querySelector('[data-workout-pick="'+id+'"]'),r=e.getBoundingClientRect();return {innerWidth,innerHeight,scrollY,rect:r.toJSON(),hit:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.outerHTML.slice(0,300),dialog:document.getElementById('workout-chooser').getBoundingClientRect().toJSON()}},id)));
+    const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));throw error
+   }
    await page.waitForFunction(id=>JSON.parse(localStorage.getItem('ezpz-fitness-pilot-1')).selectedWorkout===id,id);
    assert(await page.locator('[data-set-reps]').count()>=6,'Workout fields '+id);
    assert.equal(await page.locator('.workout-trigger-photo img').getAttribute('src'),info.photo,'Selected training photo '+id);
