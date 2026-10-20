@@ -1,0 +1,1713 @@
+{
+  "foods": {
+    "Plain nonfat Greek yogurt": [
+      59,
+      10.3,
+      3.6,
+      0.4
+    ],
+    "Rolled oats (dry)": [
+      389,
+      16.9,
+      66.3,
+      6.9
+    ],
+    "Blueberries (raw)": [
+      57,
+      0.7,
+      14.5,
+      0.3
+    ],
+    "Peanut butter (plain)": [
+      588,
+      25,
+      20,
+      50
+    ],
+    "Chicken breast (cooked, skinless)": [
+      165,
+      31,
+      0,
+      3.6
+    ],
+    "White rice (cooked)": [
+      130,
+      2.7,
+      28.2,
+      0.3
+    ],
+    "Broccoli (cooked)": [
+      35,
+      2.4,
+      7.2,
+      0.4
+    ],
+    "Olive oil": [
+      884,
+      0,
+      0,
+      100
+    ],
+    "Whole eggs (without shell, raw weight)": [
+      143,
+      12.6,
+      0.7,
+      9.5
+    ],
+    "Whole wheat bread": [
+      247,
+      13,
+      41,
+      4.2
+    ],
+    "Banana (peeled)": [
+      89,
+      1.1,
+      22.8,
+      0.3
+    ],
+    "Tuna in water (drained)": [
+      116,
+      25.5,
+      0,
+      0.8
+    ],
+    "Potatoes (boiled, peeled)": [
+      87,
+      1.9,
+      20.1,
+      0.1
+    ],
+    "Tomatoes (raw)": [
+      18,
+      0.9,
+      3.9,
+      0.2
+    ],
+    "Turkey breast (cooked, skinless)": [
+      135,
+      29,
+      0,
+      1
+    ],
+    "Flour tortilla": [
+      312,
+      8.3,
+      52.1,
+      8.3
+    ],
+    "Lettuce (raw)": [
+      15,
+      1.4,
+      2.9,
+      0.2
+    ],
+    "Salmon (cooked)": [
+      206,
+      22.1,
+      0,
+      12.4
+    ],
+    "Quinoa (cooked)": [
+      120,
+      4.4,
+      21.3,
+      1.9
+    ],
+    "Brown rice (cooked)": [
+      123,
+      2.7,
+      25.6,
+      1
+    ],
+    "Whole wheat pasta (cooked)": [
+      149,
+      6,
+      30.1,
+      1.7
+    ],
+    "Lentils (cooked, drained)": [
+      116,
+      9,
+      20.1,
+      0.4
+    ],
+    "Chickpeas (cooked, drained, no added salt)": [
+      164,
+      8.9,
+      27.4,
+      2.6
+    ],
+    "Black beans (cooked, drained, no added salt)": [
+      132,
+      8.9,
+      23.7,
+      0.5
+    ],
+    "White beans (cooked, drained, no added salt)": [
+      139,
+      9.7,
+      25.1,
+      0.4
+    ],
+    "Firm tofu (drained)": [
+      144,
+      17.3,
+      2.8,
+      8.7
+    ],
+    "Edamame (cooked, shelled)": [
+      121,
+      11.9,
+      8.9,
+      5.2
+    ],
+    "Shrimp (cooked, peeled)": [
+      99,
+      24,
+      0.2,
+      0.3
+    ],
+    "Cod (cooked)": [
+      89,
+      19.9,
+      0,
+      0.7
+    ],
+    "Sweet potato (baked, flesh)": [
+      90,
+      2,
+      20.7,
+      0.2
+    ],
+    "Spinach (raw)": [
+      23,
+      2.9,
+      3.6,
+      0.4
+    ],
+    "Red bell pepper (raw)": [
+      31,
+      1,
+      6,
+      0.3
+    ],
+    "Cucumber (raw)": [
+      15,
+      0.7,
+      3.6,
+      0.1
+    ],
+    "Carrot (raw)": [
+      41,
+      0.9,
+      9.6,
+      0.2
+    ],
+    "Zucchini (raw)": [
+      17,
+      1.2,
+      3.1,
+      0.3
+    ],
+    "Mushrooms (raw)": [
+      22,
+      3.1,
+      3.3,
+      0.3
+    ],
+    "Onion (raw)": [
+      40,
+      1.1,
+      9.3,
+      0.1
+    ],
+    "Avocado (flesh)": [
+      160,
+      2,
+      8.5,
+      14.7
+    ],
+    "Apple (raw, with skin, cored)": [
+      52,
+      0.3,
+      13.8,
+      0.2
+    ],
+    "Strawberries (raw, hulled)": [
+      32,
+      0.7,
+      7.7,
+      0.3
+    ],
+    "Pear (raw, cored)": [
+      57,
+      0.4,
+      15.2,
+      0.1
+    ],
+    "Walnuts (shelled)": [
+      654,
+      15.2,
+      13.7,
+      65.2
+    ],
+    "Almonds (plain)": [
+      579,
+      21.2,
+      21.6,
+      49.9
+    ],
+    "Chia seeds (dry)": [
+      486,
+      16.5,
+      42.1,
+      30.7
+    ],
+    "Milk (1% fat)": [
+      42,
+      3.4,
+      5,
+      1
+    ],
+    "Cottage cheese (2% fat)": [
+      81,
+      10.5,
+      4.8,
+      2.3
+    ],
+    "Feta cheese": [
+      265,
+      14.2,
+      3.9,
+      21.5
+    ],
+    "Reduced-fat cheddar cheese": [
+      309,
+      27.4,
+      4.1,
+      20.4
+    ],
+    "Lemon juice (fresh)": [
+      22,
+      0.4,
+      6.9,
+      0.2
+    ],
+    "Tomatoes (canned, no added salt, with juice)": [
+      21,
+      1.1,
+      4.6,
+      0.1
+    ],
+    "Garlic (raw)": [
+      149,
+      6.4,
+      33.1,
+      0.5
+    ],
+    "Paprika (ground)": [
+      282,
+      14.1,
+      54,
+      12.9
+    ],
+    "Cumin (ground)": [
+      375,
+      17.8,
+      44.2,
+      22.3
+    ],
+    "Cinnamon (ground)": [
+      247,
+      4,
+      80.6,
+      1.2
+    ],
+    "Water": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "recipes": [
+    {
+      "name": "Greek yogurt berry bowl",
+      "ingredients": [
+        [
+          "Plain nonfat Greek yogurt",
+          250
+        ],
+        [
+          "Rolled oats (dry)",
+          45
+        ],
+        [
+          "Blueberries (raw)",
+          100
+        ],
+        [
+          "Peanut butter (plain)",
+          15
+        ]
+      ],
+      "instructions": "Combine yogurt and dry oats. Add berries and peanut butter."
+    },
+    {
+      "name": "Chicken rice bowl",
+      "ingredients": [
+        [
+          "Chicken breast (cooked, skinless)",
+          150
+        ],
+        [
+          "White rice (cooked)",
+          180
+        ],
+        [
+          "Broccoli (cooked)",
+          150
+        ],
+        [
+          "Olive oil",
+          10
+        ]
+      ],
+      "instructions": "Weigh chicken, rice and broccoli after cooking. Combine and add olive oil."
+    },
+    {
+      "name": "Eggs and toast",
+      "ingredients": [
+        [
+          "Whole eggs (without shell, raw weight)",
+          100
+        ],
+        [
+          "Whole wheat bread",
+          80
+        ],
+        [
+          "Banana (peeled)",
+          120
+        ]
+      ],
+      "instructions": "Weigh eggs without shells before cooking. Cook without additional fat, toast bread and serve with banana."
+    },
+    {
+      "name": "Tuna potato bowl",
+      "ingredients": [
+        [
+          "Tuna in water (drained)",
+          120
+        ],
+        [
+          "Potatoes (boiled, peeled)",
+          250
+        ],
+        [
+          "Tomatoes (raw)",
+          120
+        ],
+        [
+          "Olive oil",
+          10
+        ]
+      ],
+      "instructions": "Drain tuna, weigh cooked peeled potatoes and raw tomatoes. Mix with olive oil."
+    },
+    {
+      "name": "Turkey wrap",
+      "ingredients": [
+        [
+          "Turkey breast (cooked, skinless)",
+          130
+        ],
+        [
+          "Flour tortilla",
+          70
+        ],
+        [
+          "Lettuce (raw)",
+          50
+        ],
+        [
+          "Tomatoes (raw)",
+          100
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          50
+        ]
+      ],
+      "instructions": "Weigh cooked turkey, then fill the tortilla with turkey, vegetables and yogurt."
+    },
+    {
+      "name": "Salmon dinner",
+      "ingredients": [
+        [
+          "Salmon (cooked)",
+          150
+        ],
+        [
+          "Potatoes (boiled, peeled)",
+          230
+        ],
+        [
+          "Broccoli (cooked)",
+          150
+        ]
+      ],
+      "instructions": "Weigh all three ingredients after cooking. Do not add oil unless separately counted."
+    },
+    {
+      "name": "Chicken potato plate",
+      "ingredients": [
+        [
+          "Chicken breast (cooked, skinless)",
+          160
+        ],
+        [
+          "Potatoes (boiled, peeled)",
+          250
+        ],
+        [
+          "Broccoli (cooked)",
+          150
+        ],
+        [
+          "Olive oil",
+          8
+        ]
+      ],
+      "instructions": "Weigh the cooked chicken, peeled boiled potatoes and cooked broccoli. Plate and drizzle with measured olive oil."
+    },
+    {
+      "name": "Turkey rice bowl",
+      "ingredients": [
+        [
+          "Turkey breast (cooked, skinless)",
+          160
+        ],
+        [
+          "White rice (cooked)",
+          200
+        ],
+        [
+          "Tomatoes (raw)",
+          120
+        ],
+        [
+          "Olive oil",
+          8
+        ]
+      ],
+      "instructions": "Combine weighed cooked turkey and rice with diced tomatoes; add measured olive oil."
+    },
+    {
+      "name": "Salmon rice bowl",
+      "ingredients": [
+        [
+          "Salmon (cooked)",
+          140
+        ],
+        [
+          "White rice (cooked)",
+          170
+        ],
+        [
+          "Broccoli (cooked)",
+          150
+        ]
+      ],
+      "instructions": "Cook salmon thoroughly. Weigh cooked salmon, rice and broccoli, then serve together."
+    },
+    {
+      "name": "Egg and potato breakfast",
+      "ingredients": [
+        [
+          "Whole eggs (without shell, raw weight)",
+          150
+        ],
+        [
+          "Potatoes (boiled, peeled)",
+          200
+        ],
+        [
+          "Tomatoes (raw)",
+          100
+        ]
+      ],
+      "instructions": "Cook weighed eggs in a nonstick pan without added fat. Serve with boiled peeled potatoes and sliced tomatoes."
+    },
+    {
+      "name": "Yogurt banana oats",
+      "ingredients": [
+        [
+          "Plain nonfat Greek yogurt",
+          300
+        ],
+        [
+          "Rolled oats (dry)",
+          50
+        ],
+        [
+          "Banana (peeled)",
+          120
+        ],
+        [
+          "Peanut butter (plain)",
+          15
+        ]
+      ],
+      "instructions": "Combine yogurt and oats. Add sliced banana and weighed peanut butter."
+    },
+    {
+      "name": "Tuna rice salad",
+      "ingredients": [
+        [
+          "Tuna in water (drained)",
+          130
+        ],
+        [
+          "White rice (cooked)",
+          170
+        ],
+        [
+          "Lettuce (raw)",
+          80
+        ],
+        [
+          "Tomatoes (raw)",
+          120
+        ],
+        [
+          "Olive oil",
+          8
+        ]
+      ],
+      "instructions": "Drain and weigh tuna. Toss with cooked rice, washed lettuce, tomatoes and measured oil."
+    },
+    {
+      "name": "Chicken tortilla wrap",
+      "ingredients": [
+        [
+          "Chicken breast (cooked, skinless)",
+          140
+        ],
+        [
+          "Flour tortilla",
+          70
+        ],
+        [
+          "Lettuce (raw)",
+          50
+        ],
+        [
+          "Tomatoes (raw)",
+          90
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          50
+        ]
+      ],
+      "instructions": "Fill tortilla with weighed cooked chicken, lettuce, tomato and yogurt."
+    },
+    {
+      "name": "Salmon and tomato potatoes",
+      "ingredients": [
+        [
+          "Salmon (cooked)",
+          130
+        ],
+        [
+          "Potatoes (boiled, peeled)",
+          260
+        ],
+        [
+          "Tomatoes (raw)",
+          130
+        ],
+        [
+          "Olive oil",
+          5
+        ]
+      ],
+      "instructions": "Serve cooked salmon with boiled peeled potatoes, tomatoes and measured oil."
+    },
+    {
+      "name": "High protein egg toast",
+      "ingredients": [
+        [
+          "Whole eggs (without shell, raw weight)",
+          150
+        ],
+        [
+          "Whole wheat bread",
+          100
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          150
+        ]
+      ],
+      "instructions": "Cook eggs without added fat; serve with toast and yogurt."
+    },
+    {
+      "name": "Banana blueberry yogurt",
+      "ingredients": [
+        [
+          "Plain nonfat Greek yogurt",
+          300
+        ],
+        [
+          "Banana (peeled)",
+          100
+        ],
+        [
+          "Blueberries (raw)",
+          120
+        ],
+        [
+          "Peanut butter (plain)",
+          20
+        ]
+      ],
+      "instructions": "Combine yogurt, sliced banana, blueberries and measured peanut butter."
+    },
+    {
+      "name": "Turkey potato salad",
+      "ingredients": [
+        [
+          "Turkey breast (cooked, skinless)",
+          160
+        ],
+        [
+          "Potatoes (boiled, peeled)",
+          220
+        ],
+        [
+          "Lettuce (raw)",
+          70
+        ],
+        [
+          "Tomatoes (raw)",
+          120
+        ],
+        [
+          "Olive oil",
+          8
+        ]
+      ],
+      "instructions": "Combine weighed turkey, boiled potatoes, vegetables and measured oil."
+    },
+    {
+      "name": "Chicken broccoli rice",
+      "ingredients": [
+        [
+          "Chicken breast (cooked, skinless)",
+          180
+        ],
+        [
+          "White rice (cooked)",
+          150
+        ],
+        [
+          "Broccoli (cooked)",
+          200
+        ]
+      ],
+      "instructions": "Serve weighed cooked chicken, rice and broccoli. Do not add uncounted oil."
+    },
+    {
+      "name": "Tuna tomato toast",
+      "ingredients": [
+        [
+          "Tuna in water (drained)",
+          130
+        ],
+        [
+          "Whole wheat bread",
+          100
+        ],
+        [
+          "Tomatoes (raw)",
+          120
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          60
+        ]
+      ],
+      "instructions": "Mix drained tuna with yogurt; spread over toast with sliced tomatoes."
+    },
+    {
+      "name": "Egg rice bowl",
+      "ingredients": [
+        [
+          "Whole eggs (without shell, raw weight)",
+          150
+        ],
+        [
+          "White rice (cooked)",
+          180
+        ],
+        [
+          "Broccoli (cooked)",
+          130
+        ]
+      ],
+      "instructions": "Scramble eggs without added fat and serve with cooked rice and broccoli."
+    },
+    {
+      "name": "Peanut banana oatmeal",
+      "ingredients": [
+        [
+          "Rolled oats (dry)",
+          70
+        ],
+        [
+          "Banana (peeled)",
+          130
+        ],
+        [
+          "Peanut butter (plain)",
+          20
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          150
+        ]
+      ],
+      "instructions": "Cook oats in water and top with banana, peanut butter and yogurt."
+    },
+    {
+      "name": "Turkey broccoli potatoes",
+      "ingredients": [
+        [
+          "Turkey breast (cooked, skinless)",
+          170
+        ],
+        [
+          "Potatoes (boiled, peeled)",
+          280
+        ],
+        [
+          "Broccoli (cooked)",
+          160
+        ]
+      ],
+      "instructions": "Serve weighed cooked turkey, boiled peeled potatoes and cooked broccoli."
+    },
+    {
+      "name": "Salmon broccoli plate",
+      "ingredients": [
+        [
+          "Salmon (cooked)",
+          170
+        ],
+        [
+          "Broccoli (cooked)",
+          220
+        ],
+        [
+          "White rice (cooked)",
+          140
+        ]
+      ],
+      "instructions": "Serve weighed cooked salmon with broccoli and rice."
+    },
+    {
+      "name": "Blueberry overnight oats",
+      "ingredients": [
+        [
+          "Rolled oats (dry)",
+          60
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          260
+        ],
+        [
+          "Blueberries (raw)",
+          130
+        ],
+        [
+          "Peanut butter (plain)",
+          10
+        ]
+      ],
+      "instructions": "Mix oats and yogurt; refrigerate overnight and add blueberries and peanut butter."
+    },
+    {
+      "name": "Apple cinnamon overnight oats",
+      "category": "breakfast",
+      "minutes": 10,
+      "ingredients": [
+        [
+          "Rolled oats (dry)",
+          50
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          170
+        ],
+        [
+          "Milk (1% fat)",
+          100
+        ],
+        [
+          "Apple (raw, with skin, cored)",
+          120
+        ],
+        [
+          "Chia seeds (dry)",
+          10
+        ],
+        [
+          "Cinnamon (ground)",
+          1
+        ]
+      ],
+      "instructions": "Dice the apple and combine all ingredients in a covered jar. Refrigerate for at least 4 hours or overnight; stir before serving.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Strawberry almond yogurt bowl",
+      "category": "breakfast",
+      "minutes": 5,
+      "ingredients": [
+        [
+          "Plain nonfat Greek yogurt",
+          250
+        ],
+        [
+          "Rolled oats (dry)",
+          40
+        ],
+        [
+          "Strawberries (raw, hulled)",
+          150
+        ],
+        [
+          "Almonds (plain)",
+          15
+        ]
+      ],
+      "instructions": "Slice the strawberries and roughly chop the almonds. Spoon yogurt into a bowl and top with dry oats, berries and almonds.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Spinach mushroom egg toast",
+      "category": "breakfast",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Whole eggs (without shell, raw weight)",
+          100
+        ],
+        [
+          "Whole wheat bread",
+          80
+        ],
+        [
+          "Spinach (raw)",
+          60
+        ],
+        [
+          "Mushrooms (raw)",
+          100
+        ],
+        [
+          "Olive oil",
+          5
+        ]
+      ],
+      "instructions": "Slice mushrooms and cook in the measured oil for 5 minutes. Add spinach, then beaten eggs and stir until the eggs are set. Serve on toasted bread.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Cottage cheese pear bowl",
+      "category": "breakfast",
+      "minutes": 5,
+      "ingredients": [
+        [
+          "Cottage cheese (2% fat)",
+          250
+        ],
+        [
+          "Pear (raw, cored)",
+          160
+        ],
+        [
+          "Rolled oats (dry)",
+          30
+        ],
+        [
+          "Walnuts (shelled)",
+          15
+        ]
+      ],
+      "instructions": "Dice the cored pear and roughly chop walnuts. Spoon cottage cheese into a bowl and top with pear, dry oats and walnuts.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Banana oat pancakes",
+      "category": "breakfast",
+      "minutes": 20,
+      "ingredients": [
+        [
+          "Banana (peeled)",
+          100
+        ],
+        [
+          "Rolled oats (dry)",
+          50
+        ],
+        [
+          "Whole eggs (without shell, raw weight)",
+          50
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          100
+        ],
+        [
+          "Blueberries (raw)",
+          80
+        ],
+        [
+          "Olive oil",
+          3
+        ]
+      ],
+      "instructions": "Blend banana, dry oats and weighed egg into a batter. Brush a nonstick pan with the measured oil and cook small pancakes over medium heat for 2–3 minutes per side until set. Serve with yogurt and blueberries.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Breakfast bean burrito",
+      "category": "breakfast",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Whole eggs (without shell, raw weight)",
+          100
+        ],
+        [
+          "Black beans (cooked, drained, no added salt)",
+          80
+        ],
+        [
+          "Flour tortilla",
+          60
+        ],
+        [
+          "Red bell pepper (raw)",
+          70
+        ],
+        [
+          "Spinach (raw)",
+          30
+        ],
+        [
+          "Olive oil",
+          3
+        ],
+        [
+          "Cumin (ground)",
+          1
+        ]
+      ],
+      "instructions": "Dice pepper and cook in oil for 4 minutes with cumin. Add spinach and beaten eggs; stir until set, then warm the drained beans in the pan. Fill the warm tortilla and roll.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Peanut strawberry porridge",
+      "category": "breakfast",
+      "minutes": 10,
+      "ingredients": [
+        [
+          "Rolled oats (dry)",
+          55
+        ],
+        [
+          "Milk (1% fat)",
+          180
+        ],
+        [
+          "Water",
+          100
+        ],
+        [
+          "Strawberries (raw, hulled)",
+          150
+        ],
+        [
+          "Peanut butter (plain)",
+          15
+        ],
+        [
+          "Chia seeds (dry)",
+          8
+        ]
+      ],
+      "instructions": "Simmer oats with milk and water for 5–7 minutes, stirring. Stir in chia and top with sliced strawberries and peanut butter.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Chickpea quinoa crunch salad",
+      "category": "lunch",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Chickpeas (cooked, drained, no added salt)",
+          130
+        ],
+        [
+          "Quinoa (cooked)",
+          120
+        ],
+        [
+          "Cucumber (raw)",
+          100
+        ],
+        [
+          "Tomatoes (raw)",
+          100
+        ],
+        [
+          "Feta cheese",
+          25
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ],
+        [
+          "Olive oil",
+          5
+        ]
+      ],
+      "instructions": "Use cooked, drained chickpeas and cooked quinoa. Dice cucumber and tomato; toss with quinoa, chickpeas, measured oil and lemon juice. Crumble feta over the bowl.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Black bean quesadilla",
+      "category": "lunch",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Black beans (cooked, drained, no added salt)",
+          130
+        ],
+        [
+          "Flour tortilla",
+          70
+        ],
+        [
+          "Reduced-fat cheddar cheese",
+          30
+        ],
+        [
+          "Red bell pepper (raw)",
+          80
+        ],
+        [
+          "Tomatoes (raw)",
+          100
+        ],
+        [
+          "Cumin (ground)",
+          1
+        ]
+      ],
+      "instructions": "Mash half the drained beans and stir in diced pepper and cumin. Fill the tortilla with beans and cheese; fold and toast in a dry pan for 3 minutes per side until hot and the cheese melts. Serve with diced tomatoes.",
+      "inspiration": "quesadilla"
+    },
+    {
+      "name": "Lemon chicken quinoa bowl",
+      "category": "lunch",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Chicken breast (cooked, skinless)",
+          130
+        ],
+        [
+          "Quinoa (cooked)",
+          150
+        ],
+        [
+          "Cucumber (raw)",
+          100
+        ],
+        [
+          "Tomatoes (raw)",
+          100
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          60
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ]
+      ],
+      "instructions": "Use cooked chicken and quinoa. Dice cucumber and tomatoes and slice chicken. Mix yogurt with lemon juice and spoon over the assembled bowl.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Tuna white bean salad",
+      "category": "lunch",
+      "minutes": 10,
+      "ingredients": [
+        [
+          "Tuna in water (drained)",
+          100
+        ],
+        [
+          "White beans (cooked, drained, no added salt)",
+          140
+        ],
+        [
+          "Tomatoes (raw)",
+          120
+        ],
+        [
+          "Cucumber (raw)",
+          100
+        ],
+        [
+          "Olive oil",
+          7
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ]
+      ],
+      "instructions": "Drain tuna and beans thoroughly. Chop the vegetables and toss with beans, tuna, lemon juice and measured oil.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Tofu edamame rice bowl",
+      "category": "lunch",
+      "minutes": 20,
+      "ingredients": [
+        [
+          "Firm tofu (drained)",
+          130
+        ],
+        [
+          "Edamame (cooked, shelled)",
+          80
+        ],
+        [
+          "Brown rice (cooked)",
+          130
+        ],
+        [
+          "Carrot (raw)",
+          80
+        ],
+        [
+          "Cucumber (raw)",
+          80
+        ],
+        [
+          "Peanut butter (plain)",
+          12
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ],
+        [
+          "Water",
+          20
+        ]
+      ],
+      "instructions": "Pat tofu dry, cube and brown in a nonstick pan without extra oil for 8–10 minutes. Warm cooked rice and shelled edamame. Whisk peanut butter, lemon and water into a sauce and serve with tofu, grated carrot and sliced cucumber.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Turkey avocado sandwich",
+      "category": "lunch",
+      "minutes": 10,
+      "ingredients": [
+        [
+          "Turkey breast (cooked, skinless)",
+          110
+        ],
+        [
+          "Whole wheat bread",
+          90
+        ],
+        [
+          "Avocado (flesh)",
+          50
+        ],
+        [
+          "Tomatoes (raw)",
+          80
+        ],
+        [
+          "Lettuce (raw)",
+          30
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          30
+        ]
+      ],
+      "instructions": "Mash avocado with yogurt and spread on bread. Add sliced cooked turkey, tomato and washed lettuce; close and cut in half.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Lentil feta grain bowl",
+      "category": "lunch",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Lentils (cooked, drained)",
+          160
+        ],
+        [
+          "Quinoa (cooked)",
+          100
+        ],
+        [
+          "Red bell pepper (raw)",
+          100
+        ],
+        [
+          "Spinach (raw)",
+          40
+        ],
+        [
+          "Feta cheese",
+          25
+        ],
+        [
+          "Olive oil",
+          5
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ]
+      ],
+      "instructions": "Use cooked quinoa and drained cooked lentils. Finely dice pepper and slice spinach. Toss with grains, lentils, lemon and measured oil; finish with crumbled feta.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Chicken hummus-style wrap",
+      "category": "lunch",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Chicken breast (cooked, skinless)",
+          110
+        ],
+        [
+          "Chickpeas (cooked, drained, no added salt)",
+          70
+        ],
+        [
+          "Flour tortilla",
+          60
+        ],
+        [
+          "Carrot (raw)",
+          60
+        ],
+        [
+          "Lettuce (raw)",
+          30
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          40
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ]
+      ],
+      "instructions": "Mash chickpeas with yogurt and lemon juice. Spread onto the tortilla, then add sliced cooked chicken, grated carrot and lettuce. Fold in the sides and roll tightly.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Shrimp avocado quinoa bowl",
+      "category": "lunch",
+      "minutes": 15,
+      "ingredients": [
+        [
+          "Shrimp (cooked, peeled)",
+          140
+        ],
+        [
+          "Quinoa (cooked)",
+          140
+        ],
+        [
+          "Avocado (flesh)",
+          50
+        ],
+        [
+          "Cucumber (raw)",
+          100
+        ],
+        [
+          "Tomatoes (raw)",
+          100
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ],
+        [
+          "Olive oil",
+          3
+        ]
+      ],
+      "instructions": "Use thoroughly cooked peeled shrimp and cooked quinoa. Dice avocado and vegetables and arrange over quinoa. Toss shrimp with lemon and measured oil and add to the bowl.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Lentil tomato pasta",
+      "category": "dinner",
+      "minutes": 25,
+      "ingredients": [
+        [
+          "Lentils (cooked, drained)",
+          150
+        ],
+        [
+          "Whole wheat pasta (cooked)",
+          170
+        ],
+        [
+          "Tomatoes (canned, no added salt, with juice)",
+          200
+        ],
+        [
+          "Spinach (raw)",
+          60
+        ],
+        [
+          "Onion (raw)",
+          50
+        ],
+        [
+          "Garlic (raw)",
+          5
+        ],
+        [
+          "Olive oil",
+          5
+        ]
+      ],
+      "instructions": "Cook pasta according to its pack and weigh the cooked portion. Finely chop onion and garlic, soften in oil for 5 minutes, then add canned tomatoes and cooked lentils and simmer 10 minutes. Wilt in spinach and toss with pasta.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Lemon cod tray bake",
+      "category": "dinner",
+      "minutes": 30,
+      "ingredients": [
+        [
+          "Cod (cooked)",
+          170
+        ],
+        [
+          "Sweet potato (baked, flesh)",
+          250
+        ],
+        [
+          "Zucchini (raw)",
+          180
+        ],
+        [
+          "Olive oil",
+          8
+        ],
+        [
+          "Lemon juice (fresh)",
+          20
+        ],
+        [
+          "Garlic (raw)",
+          5
+        ]
+      ],
+      "instructions": "Slice zucchini and garlic and roast with half the oil at 200°C for 15 minutes. Add cod and the remaining oil and roast until fish reaches 63°C; weigh the cooked fish portion. Serve with weighed baked sweet potato flesh and lemon juice.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Chicken pepper fajita bowl",
+      "category": "dinner",
+      "minutes": 20,
+      "ingredients": [
+        [
+          "Chicken breast (cooked, skinless)",
+          140
+        ],
+        [
+          "Brown rice (cooked)",
+          150
+        ],
+        [
+          "Red bell pepper (raw)",
+          150
+        ],
+        [
+          "Onion (raw)",
+          60
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          50
+        ],
+        [
+          "Olive oil",
+          5
+        ],
+        [
+          "Paprika (ground)",
+          2
+        ],
+        [
+          "Cumin (ground)",
+          1
+        ]
+      ],
+      "instructions": "Slice pepper and onion and sauté in oil for 7–8 minutes with paprika and cumin. Add sliced cooked chicken and heat until steaming hot throughout. Serve over cooked brown rice with yogurt.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "Smoky bean sweet potato",
+      "category": "dinner",
+      "minutes": 20,
+      "ingredients": [
+        [
+          "Sweet potato (baked, flesh)",
+          280
+        ],
+        [
+          "Black beans (cooked, drained, no added salt)",
+          140
+        ],
+        [
+          "Tomatoes (raw)",
+          120
+        ],
+        [
+          "Avocado (flesh)",
+          40
+        ],
+        [
+          "Plain nonfat Greek yogurt",
+          50
+        ],
+        [
+          "Paprika (ground)",
+          2
+        ]
+      ],
+      "instructions": "Start with a baked sweet potato; weigh the cooked flesh for the listed portion. Warm drained beans with diced tomato and paprika for 5 minutes. Spoon over the potato and add diced avocado and yogurt.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Salmon quinoa greens",
+      "category": "dinner",
+      "minutes": 20,
+      "ingredients": [
+        [
+          "Salmon (cooked)",
+          140
+        ],
+        [
+          "Quinoa (cooked)",
+          140
+        ],
+        [
+          "Broccoli (cooked)",
+          180
+        ],
+        [
+          "Lemon juice (fresh)",
+          20
+        ],
+        [
+          "Olive oil",
+          3
+        ]
+      ],
+      "instructions": "Bake salmon at 200°C until it reaches 63°C and weigh the cooked portion. Steam broccoli and cook quinoa, then weigh both cooked portions. Plate with salmon and drizzle with measured oil and lemon juice.",
+      "inspiration": "balanced"
+    },
+    {
+      "name": "White bean tomato skillet",
+      "category": "dinner",
+      "minutes": 20,
+      "ingredients": [
+        [
+          "White beans (cooked, drained, no added salt)",
+          180
+        ],
+        [
+          "Tomatoes (canned, no added salt, with juice)",
+          200
+        ],
+        [
+          "Spinach (raw)",
+          80
+        ],
+        [
+          "Onion (raw)",
+          50
+        ],
+        [
+          "Garlic (raw)",
+          5
+        ],
+        [
+          "Olive oil",
+          7
+        ],
+        [
+          "Whole wheat bread",
+          70
+        ]
+      ],
+      "instructions": "Dice onion and garlic and soften in oil for 5 minutes. Add drained beans and canned tomatoes and simmer for 8 minutes. Stir in spinach until wilted and serve with toasted bread.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Tofu peanut whole wheat noodles",
+      "category": "dinner",
+      "minutes": 20,
+      "ingredients": [
+        [
+          "Firm tofu (drained)",
+          150
+        ],
+        [
+          "Whole wheat pasta (cooked)",
+          150
+        ],
+        [
+          "Broccoli (cooked)",
+          150
+        ],
+        [
+          "Carrot (raw)",
+          80
+        ],
+        [
+          "Peanut butter (plain)",
+          15
+        ],
+        [
+          "Lemon juice (fresh)",
+          15
+        ],
+        [
+          "Water",
+          30
+        ]
+      ],
+      "instructions": "Cube and brown tofu in a dry nonstick pan for 8–10 minutes. Steam carrot strips and broccoli until tender and cook pasta, weighing the cooked portions where listed. Whisk peanut butter, lemon and water and toss everything with the sauce.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Chickpea spinach tomato stew",
+      "category": "dinner",
+      "minutes": 25,
+      "ingredients": [
+        [
+          "Chickpeas (cooked, drained, no added salt)",
+          160
+        ],
+        [
+          "Tomatoes (canned, no added salt, with juice)",
+          200
+        ],
+        [
+          "Spinach (raw)",
+          100
+        ],
+        [
+          "Onion (raw)",
+          50
+        ],
+        [
+          "Brown rice (cooked)",
+          120
+        ],
+        [
+          "Olive oil",
+          5
+        ],
+        [
+          "Cumin (ground)",
+          2
+        ],
+        [
+          "Garlic (raw)",
+          5
+        ]
+      ],
+      "instructions": "Dice onion and garlic and soften in oil for 5 minutes with cumin. Add drained chickpeas and canned tomatoes and simmer for 10 minutes. Stir in spinach until wilted and serve over weighed cooked brown rice.",
+      "inspiration": "va"
+    },
+    {
+      "name": "Warm lentil vegetable soup",
+      "category": "dinner",
+      "minutes": 25,
+      "ingredients": [
+        [
+          "Lentils (cooked, drained)",
+          180
+        ],
+        [
+          "Carrot (raw)",
+          100
+        ],
+        [
+          "Zucchini (raw)",
+          100
+        ],
+        [
+          "Tomatoes (canned, no added salt, with juice)",
+          150
+        ],
+        [
+          "Onion (raw)",
+          50
+        ],
+        [
+          "Water",
+          200
+        ],
+        [
+          "Olive oil",
+          5
+        ],
+        [
+          "Whole wheat bread",
+          60
+        ],
+        [
+          "Cumin (ground)",
+          1
+        ]
+      ],
+      "instructions": "Dice carrot, zucchini and onion and soften in oil for 5 minutes with cumin. Add water, canned tomatoes and cooked drained lentils and simmer for 15 minutes until the carrots are tender. Serve with whole wheat toast.",
+      "inspiration": "va"
+    }
+  ]
+}

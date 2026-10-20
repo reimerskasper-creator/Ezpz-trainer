@@ -1303,6 +1303,8 @@ recipes.push(...[
 ]);
 function recipeCategory(i){return recipes[i].category||([0,2,9,10,14,15,20,23].includes(i)?'breakfast':[5,6,8,13,17,21,22].includes(i)?'dinner':'lunch')}
 function recipeSource(r){if(!r.inspiration)return '';const ref=r.inspiration==='quesadilla'?['https://www.nutrition.gov/recipes/black-bean-quesadilla','USDA Nutrition.gov']:r.inspiration==='balanced'?['https://www.nhs.uk/live-well/eat-well/how-to-eat-a-balanced-diet/eight-tips-for-healthy-eating/','NHS balanced eating guidance']:['https://www.nutrition.va.gov/Recipes/Vegetarian_Recipes.asp','VA Nutrition recipe collection'];return '<p class="note">An original EZPZ recipe, inspired by <a href="'+ref[0]+'" target="_blank" rel="noopener noreferrer">'+ref[1]+'</a>. Ingredients and portions adapted for EZPZ.</p>'}
+// Complete the original recipe photographs without changing recipe data.
+for(let i=6;i<24;i++)recipes[i].photo='./meal-images/recipe-'+i+'.jpg';
 function nutrition(ingredients,scale=1){const values=[0,0,0,0];for(const [name,grams] of ingredients){const row=foods[name];if(!row||!Number.isFinite(grams)||grams<0)throw Error('Missing nutrition reference: '+name);row.forEach((v,i)=>values[i]+=v*grams*scale/100)}return values.map(Math.round)}
 const meals=recipes.map(r=>[r.name,...nutrition(r.ingredients)]);
 let state;try{state=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!state||typeof state!=='object')state={profile:null,logs:[],weights:[]};if(!Array.isArray(state.logs))state.logs=[];if(!Array.isArray(state.weights))state.weights=[];

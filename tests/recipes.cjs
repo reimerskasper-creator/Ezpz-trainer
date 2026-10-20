@@ -10,6 +10,10 @@ let stored=JSON.stringify(initial);
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:id==='recipe-search'?{value:query}:null,querySelectorAll:s=>s==='[data-recipe-card]'?cards:[],querySelector:s=>fields[s]||null,addEventListener:(n,f)=>(listeners[n]??=[]).push(f)};
 const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
 assert(api.recipes.length===49,'Expected 49 recipes');
+const approved=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/approved-food.json'),'utf8'));
+assert(JSON.stringify(api.foods)===JSON.stringify(approved.foods),'Approved food reference values changed');
+assert(JSON.stringify(api.recipes.map(({photo,...r})=>r))===JSON.stringify(approved.recipes),'Approved recipes changed');
+for(let i=0;i<49;i++){const html=api.mealPhoto(i),photo=html.match(/src="([^"]+)"/)?.[1];assert(photo&&fs.existsSync(path.join(__dirname,'..',photo)),'Recipe image missing '+i)}
 assert(api.recipes[0].name==='Greek yogurt berry bowl'&&api.recipes[4].name==='Turkey wrap'&&api.recipes[23].name==='Blueberry overnight oats','Saved numeric recipe references changed');
 for(let i=24;i<49;i++){
  const r=api.recipes[i];
@@ -43,4 +47,4 @@ click('[data-recipe]');
 assert(api.state.shopping.includes('Lentils (cooked, drained) — 270 g'),'Shopping portion weights');
 assert(api.state.shopping.includes('Tomatoes (raw) — 100 g'),'Existing shopping data lost');
 assert(api.state.mealPlan.saved.lunch===4,'Existing meal plan changed');
-console.log('PASS: 49 recipes, 25 image assets, 100 portion cases, combined filters, logging, shopping and saved plans');
+console.log('PASS: 49 recipes, 49 image assets, 100 portion cases, combined filters, logging, shopping and saved plans');
