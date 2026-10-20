@@ -110,3 +110,10 @@ Added a Create your own photo category beside the eleven built-in workout catego
 
 ## Verified own-workout release
 Code a14e584f49f15eeafe330f01deb00020bb95eb01: mobile workflow 39500632783 (job 118896916072) and Pages deployment 39500631485 succeeded. All eight non-browser suites passed; Chromium creation, free-text names, cover selection, save-for-later, start, set persistence after reload and standard training passed at 320/390/430px with no browser errors. EZPZ_OWN_DATA builder/saved/Train contact sheet visually inspected. Approved food and all built-in workout prescriptions remain unchanged. No known release blocker.
+
+## Verified meal sections — October 20
+User explicitly requested High protein, High carb, High fat, and Balanced meal sections with matching photography. Implemented four compact photo tiles and section heading/count, combining existing meal-type and ingredient filters. Default Balanced contains all original 49 meals, completely unchanged. Added 18 portion-adjusted dishes (six per focus), appended at indices 49–66. They reuse photos of the same original dishes with the same ingredient sets; the UI explains that listed grams define portions. No new photographs were generated. All 67 recipes are available in planning, diary and shopping.
+
+Focus sorting conventions: protein >=35%, carbs >=55%, fat >=40% of macro-derived energy. See docs/meal-sections-2026-10.md. Storage schema and old recipe IDs remain stable. Updated tests preserve original food data and every protected food function except intentionally changed eat/filterRecipes. 172 portion cases, focus thresholds, matching photo ingredients, and new-recipe logging are covered.
+
+Implementation b37edb1079911b05c91ce686768e15b8a4c167f3; final screenshot test 680c52024050ca164ec939254cb1e6f45db274c9. Mobile workflow 39502710544 (job 118903923332) and Pages deployment 39502710575 succeeded. All eight unit suites and Chromium at 320/390/430px passed. Four-section screenshot sheet was visually reviewed from EZPZ_MEALS_DATA logs. No known release blocker.
