@@ -25,6 +25,7 @@ for(const cat of api.workoutCategories){
   api.state.selectedWorkout=plan.id;const before=JSON.stringify(api.state),photo=api.workoutCover(plan.coverCategory||plan.category);
   api.home();assert(screen.innerHTML.includes('src="'+photo.src+'"'),'Home photo must match '+plan.id);
   api.train();assert(screen.innerHTML.includes('workout-trigger-photo"><img src="'+photo.src+'"'),'Train photo must match '+plan.id);
+  assert(screen.innerHTML.includes('--train-cover:url(&quot;'+photo.src+'&quot;)'),'Train hero backdrop must match '+plan.id);
   const chooser=api.workoutChooser();assert((chooser.match(/data-workout-pick=/g)||[]).length===5,'Five program cards');
   assert(chooser.includes('data-workout-pick="'+plan.id+'" aria-label="Choose '+(plan.title||plan.programName)+'" aria-pressed="true"'),'Selected state '+plan.id);
   if(plan.id!=='full-body')for(const e of plan.exercises)assert(e.name&&e.sets>0&&e.reps&&e.rest>=0,'Exercise prescription '+plan.id);

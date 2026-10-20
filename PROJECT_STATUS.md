@@ -155,3 +155,10 @@ Implementation is Home-scoped CSS only; all markup, data readers, navigation, sc
 
 ## Verified Home photo backgrounds
 Code f5bc6c855014f3f573c0259209bd5209af01a8e6. Mobile workflow 39510779272 (job 118930961455) and Pages deployment 39510778316 succeeded. All unit suites and Chromium at 320/390/430px passed, including real background-image URLs/HTTP availability and unchanged stored data. The five-panel Home/nutrition/week/upcoming/weight screenshot sheet was visually reviewed from EZPZ_HOME_DATA logs. Relevant photos are clearly visible behind every main Home card and the macro tiles, with readable overlays and unchanged workout thumbnail mapping. All 157 recipes and training/planning behavior remain intact. No known release blocker.
+
+## Train photo styling — October 20
+User approved Home photo backgrounds and requested similar visuals for Train. Added a photo header that follows the selected workout's cover, equipment backdrop for session progress and options/footer, calm coastal imagery for the rest timer, and matching muscle-group cover backgrounds behind exercise summaries. The logging surface uses a very faint equipment photo under a nearly opaque light layer; input fields stay high contrast. Refined view tabs, jump chips, checked/invalid states and Finish bar.
+
+No new assets: reuse approved workout-category photographs plus Home planning/consistency images. Summary photos are decorative category covers, not verified demonstrations of each named exercise. No unapproved technical exercise imagery enabled. Custom/unknown exercises fall back to their workout cover.
+
+Implementation: new Train-only stylesheet; only train() presentation markup gains two escaped CSS cover variables (workout header and exercise cards). Exercise definitions, input IDs, saved fields, selectors, logging/timer/navigation logic and state schema are unchanged. Unit training suite passed in memory. Added assertions that all 55 workout headers follow the chosen photo and screenshots of header/progress/rest/logger/footer. Confirm Actions and visually review EZPZ_TRAIN_PHOTO_DATA before declaring verified.
