@@ -145,6 +145,78 @@ try{
   const planningRestored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
   for(const field of ['mealPlan','workoutSchedule','plannerStart','plannerDays','customWorkouts','selectedWorkout'])assert.deepEqual(planningRestored[field],customBackup[field],'Planning restore '+field);
 
+
+  // Upcoming workouts: sorted, matching covers, and an honest seven-day view.
+  await page.evaluate(({key,today})=>{
+   const s=JSON.parse(localStorage.getItem(key)),d=n=>datePlus(today,n);
+   Object.assign(s,{selectedWorkout:'push-a',trainingView:'focus',autoRest:false,restTimer:null,workoutSchedule:{[d(6)]:'core-a',[d(4)]:'leg-a',[d(2)]:'pull-a',[today]:'push-a',[d(1)]:'rest'},logs:[{date:new Date(Date.now()-86400000).toISOString(),workoutId:'push-a',type:'home',title:'Push Day A',exercises:[{name:'Barbell Bench Press',unit:'reps',sets:[{reps:'8',kg:'20',done:true},{reps:'8',kg:'20',done:true},{reps:'8',kg:'20',done:true}]}]}]});
+   s.workoutDrafts={...s.workoutDrafts,'push-a':{}};localStorage.setItem(key,JSON.stringify(s));
+  },{key,today});
+  await page.reload();
+  assert.equal(await page.locator('.home-next .upcoming-row').count(),3);
+  assert.deepEqual(await page.locator('.home-next .upcoming-row').evaluateAll(xs=>xs.map(x=>x.dataset.previewWorkout)),['push-a','pull-a','leg-a']);
+  assert.deepEqual(await page.locator('.home-next .upcoming-row img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src'))),['./workout-images/push.jpg','./workout-images/pull.jpg','./workout-images/leg.jpg']);
+  const homeBefore=await page.evaluate(key=>localStorage.getItem(key),key);
+  await page.locator('[data-home-schedule="week"]').click();
+  assert.equal(await page.locator('.upcoming-list>button').count(),7);
+  assert((await page.locator('.upcoming-list').innerText()).includes('Rest / recovery'));
+  await checkLayout('Seven-day schedule');
+  await page.locator('[data-home-schedule="next"]').click();
+  assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),homeBefore,'Home view changes must not write a plan');
+  await page.locator('.home-next').scrollIntoViewIfNeeded();
+  const upcomingJpg=await page.screenshot({path:path.join(out,'Upcoming-workouts-'+width+'.jpg'),type:'jpeg',quality:85});
+  if(width===390)captures.push({name:'Upcoming workouts',src:'data:image/jpeg;base64,'+upcomingJpg.toString('base64')});
+  // Focused training, reusable results and truthful progress.
+  await page.locator('[data-tab="train"]').click();
+  assert.equal(await page.locator('[data-training-card][open]').count(),1);
+  assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'');
+  await page.locator('[data-copy-previous="0"]').click();
+  for(const i of [0,1,2]){assert.equal(await page.locator('[data-set-reps="0-'+i+'"]').inputValue(),'8');assert.equal(await page.locator('[data-set-weight="0-'+i+'"]').inputValue(),'20')}
+  assert.equal(await page.locator('[data-set-done]:checked').count(),0,'Copying results must not complete sets');
+  await page.locator('[data-set-weight="0-0"]').fill('27.25');
+  for(const i of [1,2]){await page.locator('[data-set-reps="0-'+i+'"]').fill('');await page.locator('[data-set-weight="0-'+i+'"]').fill('')}
+  await page.locator('[data-repeat-set="0"]').click();await page.locator('[data-repeat-set="0"]').click();
+  assert.equal(await page.locator('[data-set-weight="0-1"]').inputValue(),'27.25');
+  assert.equal(await page.locator('[data-set-reps="0-2"]').inputValue(),'8');
+  await page.locator('[data-set-reps="0-0"]').fill('');await page.locator('[data-set-done="0-0"]').check();
+  assert.equal(await page.locator('[data-set-reps="0-0"]').getAttribute('aria-invalid'),'true');
+  assert((await page.locator('#workout-progress-label').innerText()).startsWith('0 of'));
+  await page.locator('[data-set-reps="0-0"]').fill('8');
+  assert((await page.locator('#workout-progress-label').innerText()).startsWith('1 of'));
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer,key),null,'Automatic timer is opt-in');
+  await page.locator('.training-rest-options>summary').click();await page.locator('[data-auto-rest]').check();
+  await page.locator('[data-set-done="0-1"]').check();
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.duration,key),120);
+  await page.locator('[data-action="pause-rest"]').click();assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key));
+  await page.locator('[data-action="pause-rest"]').click();assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key),false);
+  await page.locator('.rest-presets [data-rest-seconds="30"]').click();assert.equal(await page.locator('.training-rest-options').getAttribute('open'),null);
+  await page.reload();await page.locator('[data-tab="train"]').click();
+  assert.equal(await page.locator('[data-set-weight="0-1"]').inputValue(),'27.25');
+  assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.duration===30,key));
+  assert.notEqual(await page.locator('#rest-clock').innerText(),'0:00');
+  await page.locator('[data-exercise-jump="3"]').click();
+  assert.equal(await page.locator('[data-training-card="3"]').getAttribute('open'),'');assert.equal(await page.locator('[data-training-card][open]').count(),1);
+  await page.locator('[data-set-reps="3-0"]').fill('12');
+  await page.locator('[data-training-view="all"]').click();assert.equal(await page.locator('[data-training-card][open]').count(),6);
+  await page.locator('[data-training-view="focus"]').click();assert.equal(await page.locator('[data-training-card][open]').count(),1);
+  assert.equal(await page.locator('[data-set-reps="3-0"]').inputValue(),'12');
+  await page.locator('[data-action="continue-exercise"]').click();
+  assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'');
+  await page.locator('[data-set-done="0-2"]').check();assert.equal(await page.locator('#exercise-count-0').innerText(),'3/3');
+  await page.locator('[data-next-exercise="1"]').click();assert.equal(await page.locator('[data-training-card="1"]').getAttribute('open'),'');
+  await checkLayout('Focused training');await capture('Train overview');
+  await page.locator('#training-exercise-1').scrollIntoViewIfNeeded();
+  const focusedJpg=await page.screenshot({path:path.join(out,'Focused-training-'+width+'.jpg'),type:'jpeg',quality:85});
+  if(width===390)captures.push({name:'Focused training',src:'data:image/jpeg;base64,'+focusedJpg.toString('base64')});
+  // Dismissing the finish confirmation must preserve entered but unchecked results.
+  page.removeAllListeners('dialog');page.once('dialog',d=>{assert(d.message().includes('not checked complete'));return d.dismiss()});
+  await page.locator('[data-action="finish"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'train');
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).workoutDrafts['push-a']['sr3-0'],key),'12');
+  page.on('dialog',d=>d.accept());await page.locator('[data-action="finish"]').click();
+  await page.waitForFunction(()=>document.body.dataset.view==='progress');
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.at(-1).exercises[0].sets.filter(s=>s.done).length,key),3);
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer,key),null);
+
   await context.close();
  }
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
@@ -152,6 +224,10 @@ try{
 
  const planningCaptures=captures.filter(x=>['Four-week-plan','Workout-builder'].includes(x.name));
  if(planningCaptures.length){const sheet=await browser.newPage({viewport:{width:800,height:900},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif">'+planningCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'planning-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_PLAN_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_PLAN_DATA '+b.slice(i,i+4000));console.log('EZPZ_PLAN_END')}}
+
+ const trainingCaptures=captures.filter(x=>['Upcoming workouts','Train overview','Focused training'].includes(x.name));
+ if(trainingCaptures.length){const sheet=await browser.newPage({viewport:{width:1200,height:920},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif">'+trainingCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'training-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_TRAIN_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_TRAIN_DATA '+b.slice(i,i+4000));console.log('EZPZ_TRAIN_END')}}
+
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:49,workoutPrograms:55,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 49 recipe photos; 55 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});
