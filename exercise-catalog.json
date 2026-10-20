@@ -38,7 +38,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/barbell-bench-press/start.webp",
+          "finish": "./exercise-images/barbell-bench-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -76,7 +83,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-bench-press/start.webp",
+          "finish": "./exercise-images/dumbbell-bench-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -114,7 +128,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/incline-dumbbell-press/start.webp",
+          "finish": "./exercise-images/incline-dumbbell-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -152,7 +173,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/incline-barbell-press/start.webp",
+          "finish": "./exercise-images/incline-barbell-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -190,7 +218,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/machine-chest-press/start.webp",
+          "finish": "./exercise-images/machine-chest-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -228,7 +263,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/push-up/start.webp",
+          "finish": "./exercise-images/push-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -266,7 +308,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/incline-push-up/start.webp",
+          "finish": "./exercise-images/incline-push-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -304,7 +353,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/decline-push-up/start.webp",
+          "finish": "./exercise-images/decline-push-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -342,7 +398,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-floor-press/start.webp",
+          "finish": "./exercise-images/dumbbell-floor-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -380,7 +443,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/cable-chest-fly/start.webp",
+          "finish": "./exercise-images/cable-chest-fly/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -418,7 +488,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/pec-deck-fly/start.webp",
+          "finish": "./exercise-images/pec-deck-fly/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -456,7 +533,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/close-grip-push-up/start.webp",
+          "finish": "./exercise-images/close-grip-push-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -494,7 +578,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/pull-up/start.webp",
+          "finish": "./exercise-images/pull-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -532,7 +623,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/assisted-pull-up/start.webp",
+          "finish": "./exercise-images/assisted-pull-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -570,7 +668,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/chin-up/start.webp",
+          "finish": "./exercise-images/chin-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -608,7 +713,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/lat-pulldown/start.webp",
+          "finish": "./exercise-images/lat-pulldown/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -646,7 +758,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/close-grip-lat-pulldown/start.webp",
+          "finish": "./exercise-images/close-grip-lat-pulldown/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -684,7 +803,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/seated-cable-row/start.webp",
+          "finish": "./exercise-images/seated-cable-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -722,7 +848,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/chest-supported-dumbbell-row/start.webp",
+          "finish": "./exercise-images/chest-supported-dumbbell-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -760,7 +893,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/one-arm-dumbbell-row/start.webp",
+          "finish": "./exercise-images/one-arm-dumbbell-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -798,7 +938,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/bent-over-barbell-row/start.webp",
+          "finish": "./exercise-images/bent-over-barbell-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -836,7 +983,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/resistance-band-row/start.webp",
+          "finish": "./exercise-images/resistance-band-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -874,7 +1028,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/inverted-row/start.webp",
+          "finish": "./exercise-images/inverted-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -912,7 +1073,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/straight-arm-pulldown/start.webp",
+          "finish": "./exercise-images/straight-arm-pulldown/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -950,7 +1118,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/back-extension/start.webp",
+          "finish": "./exercise-images/back-extension/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -988,7 +1163,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/backpack-row/start.webp",
+          "finish": "./exercise-images/backpack-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1015,7 +1197,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Sit upright with dumbbells at shoulder height",
-        "end": "Action: Press weights overhead through a comfortable range",
+        "end": "Finish position: Lower slowly to shoulder level",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1026,7 +1208,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/seated-dumbbell-shoulder-press/start.webp",
+          "finish": "./exercise-images/seated-dumbbell-shoulder-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1053,7 +1242,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand tall with dumbbells at shoulders",
-        "end": "Action: Brace trunk and press overhead",
+        "end": "Finish position: Lower slowly without leaning back",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1064,7 +1253,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/standing-dumbbell-shoulder-press/start.webp",
+          "finish": "./exercise-images/standing-dumbbell-shoulder-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1091,7 +1287,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand with bar at upper chest and hands just outside shoulders",
-        "end": "Action: Brace and press bar overhead moving head slightly back",
+        "end": "Finish position: Return bar to upper chest under control",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1102,7 +1298,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/barbell-overhead-press/start.webp",
+          "finish": "./exercise-images/barbell-overhead-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1129,7 +1332,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Adjust seat so handles begin around shoulder height",
-        "end": "Action: Press handles upward without shrugging",
+        "end": "Finish position: Return slowly to a comfortable depth",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1140,7 +1343,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/machine-shoulder-press/start.webp",
+          "finish": "./exercise-images/machine-shoulder-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1167,7 +1377,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand tall with dumbbells beside thighs",
-        "end": "Action: Lift arms out to sides with softly bent elbows",
+        "end": "Finish position: Lower under control",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1178,7 +1388,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-lateral-raise/start.webp",
+          "finish": "./exercise-images/dumbbell-lateral-raise/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1205,7 +1422,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand side-on to low cable holding handle",
-        "end": "Action: Raise arm sideways toward shoulder height",
+        "end": "Finish position: Return slowly against cable tension",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1216,7 +1433,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/cable-lateral-raise/start.webp",
+          "finish": "./exercise-images/cable-lateral-raise/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1243,7 +1467,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand tall with dumbbells in front of thighs",
-        "end": "Action: Raise one or both arms forward to shoulder height",
+        "end": "Finish position: Lower slowly",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1254,7 +1478,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-front-raise/start.webp",
+          "finish": "./exercise-images/dumbbell-front-raise/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1281,7 +1512,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Adjust seat facing the pad with handles near shoulder height",
-        "end": "Action: Open arms outward and back",
+        "end": "Finish position: Return slowly without letting weights crash",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1292,7 +1523,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/reverse-pec-deck/start.webp",
+          "finish": "./exercise-images/reverse-pec-deck/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1319,7 +1557,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Hinge at hips with light dumbbells beneath shoulders",
-        "end": "Action: Open arms out to sides with softly bent elbows",
+        "end": "Finish position: Lower slowly while holding torso position",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1330,7 +1568,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/bent-over-reverse-fly/start.webp",
+          "finish": "./exercise-images/bent-over-reverse-fly/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1357,7 +1602,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Set cable rope at upper chest or face height",
-        "end": "Action: Pull rope toward face with elbows wide",
+        "end": "Finish position: Return slowly with controlled shoulders",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1368,7 +1613,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/face-pull/start.webp",
+          "finish": "./exercise-images/face-pull/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1395,7 +1647,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Hold band in front of chest with arms nearly straight",
-        "end": "Action: Pull hands apart until band approaches chest",
+        "end": "Finish position: Return under control",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1406,7 +1658,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/band-pull-apart/start.webp",
+          "finish": "./exercise-images/band-pull-apart/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1433,7 +1692,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Start seated or standing with palms facing you at shoulder level",
-        "end": "Action: Rotate palms outward as you press overhead",
+        "end": "Finish position: Reverse rotation while lowering",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1444,7 +1703,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-arnold-press/start.webp",
+          "finish": "./exercise-images/dumbbell-arnold-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1471,7 +1737,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand tall with dumbbells by sides and palms forward",
-        "end": "Action: Bend elbows to lift weights toward shoulders",
+        "end": "Finish position: Lower slowly without swinging",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1482,7 +1748,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-biceps-curl/start.webp",
+          "finish": "./exercise-images/dumbbell-biceps-curl/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1509,7 +1782,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Hold dumbbells by sides with palms facing inward",
-        "end": "Action: Curl weights while keeping neutral wrist position",
+        "end": "Finish position: Lower under control",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1520,7 +1793,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/hammer-curl/start.webp",
+          "finish": "./exercise-images/hammer-curl/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1547,7 +1827,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand tall gripping bar with palms forward",
-        "end": "Action: Curl bar toward upper chest",
+        "end": "Finish position: Lower slowly to starting position",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1558,7 +1838,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/barbell-curl/start.webp",
+          "finish": "./exercise-images/barbell-curl/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1585,7 +1872,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand facing low pulley with elbows by sides",
-        "end": "Action: Curl handle toward shoulders",
+        "end": "Finish position: Return slowly under tension",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1596,7 +1883,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/cable-biceps-curl/start.webp",
+          "finish": "./exercise-images/cable-biceps-curl/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1623,7 +1917,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Sit on incline bench with arms hanging below shoulders",
-        "end": "Action: Curl dumbbells without moving upper arms forward",
+        "end": "Finish position: Lower slowly through comfortable range",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1634,7 +1928,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/incline-dumbbell-curl/start.webp",
+          "finish": "./exercise-images/incline-dumbbell-curl/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1661,7 +1962,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand facing high pulley with elbows tucked",
-        "end": "Action: Straighten elbows to push rope toward thighs",
+        "end": "Finish position: Return slowly without letting elbows drift",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1672,7 +1973,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/rope-triceps-pushdown/start.webp",
+          "finish": "./exercise-images/rope-triceps-pushdown/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1699,7 +2007,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Hold dumbbell or cable handle overhead with elbows bent",
-        "end": "Action: Straighten elbows while upper arms stay mostly still",
+        "end": "Finish position: Lower behind head through comfortable range",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1710,7 +2018,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/overhead-triceps-extension/start.webp",
+          "finish": "./exercise-images/overhead-triceps-extension/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1737,7 +2052,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Lie on bench holding light bar or dumbbells above shoulders",
-        "end": "Action: Bend elbows to lower weight toward forehead or behind head",
+        "end": "Finish position: Extend elbows to return",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1748,7 +2063,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/skull-crusher/start.webp",
+          "finish": "./exercise-images/skull-crusher/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1775,7 +2097,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Lie on bench and grip bar around shoulder width",
-        "end": "Action: Lower bar to lower chest with elbows relatively close",
+        "end": "Finish position: Press back up under control",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1786,7 +2108,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/close-grip-bench-press/start.webp",
+          "finish": "./exercise-images/close-grip-bench-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1813,7 +2142,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Place hands on secure bench beside hips and feet on floor",
-        "end": "Action: Bend elbows to lower only through a comfortable shoulder range",
+        "end": "Finish position: Press back up",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -1824,7 +2153,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/bench-triceps-dip/start.webp",
+          "finish": "./exercise-images/bench-triceps-dip/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1862,7 +2198,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/chair-squat/start.webp",
+          "finish": "./exercise-images/chair-squat/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1900,7 +2243,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/bodyweight-squat/start.webp",
+          "finish": "./exercise-images/bodyweight-squat/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1938,7 +2288,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/goblet-squat/start.webp",
+          "finish": "./exercise-images/goblet-squat/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -1976,7 +2333,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/barbell-back-squat/start.webp",
+          "finish": "./exercise-images/barbell-back-squat/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2014,7 +2378,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/barbell-front-squat/start.webp",
+          "finish": "./exercise-images/barbell-front-squat/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2052,7 +2423,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/leg-press/start.webp",
+          "finish": "./exercise-images/leg-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2090,7 +2468,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/reverse-lunge/start.webp",
+          "finish": "./exercise-images/reverse-lunge/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2128,7 +2513,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/walking-lunge/start.webp",
+          "finish": "./exercise-images/walking-lunge/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2166,7 +2558,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/bulgarian-split-squat/start.webp",
+          "finish": "./exercise-images/bulgarian-split-squat/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2204,7 +2603,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/step-up/start.webp",
+          "finish": "./exercise-images/step-up/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2231,7 +2637,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand tall holding dumbbells at thighs",
-        "end": "Action: Hinge hips backward with knees softly bent",
+        "end": "Finish position: Stand by driving hips forward",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2242,7 +2648,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-romanian-deadlift/start.webp",
+          "finish": "./exercise-images/dumbbell-romanian-deadlift/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2269,7 +2682,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand holding bar in front of thighs",
-        "end": "Action: Hinge hips back while sliding bar close to legs",
+        "end": "Finish position: Return upright by extending hips",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2280,7 +2693,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/barbell-romanian-deadlift/start.webp",
+          "finish": "./exercise-images/barbell-romanian-deadlift/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2318,7 +2738,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/glute-bridge/start.webp",
+          "finish": "./exercise-images/glute-bridge/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2356,7 +2783,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/hip-thrust/start.webp",
+          "finish": "./exercise-images/hip-thrust/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2383,7 +2817,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Adjust machine pads to fit ankles and knees",
-        "end": "Action: Bend knees to draw heels toward glutes",
+        "end": "Finish position: Lower slowly to extended position",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2394,7 +2828,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/lying-leg-curl/start.webp",
+          "finish": "./exercise-images/lying-leg-curl/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2421,7 +2862,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Adjust seat and shin pad to fit knees",
-        "end": "Action: Straighten knees to raise pad",
+        "end": "Finish position: Lower slowly without dropping stack",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2432,7 +2873,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/leg-extension/start.webp",
+          "finish": "./exercise-images/leg-extension/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2459,7 +2907,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand with forefeet on platform or flat ground",
-        "end": "Action: Rise onto balls of feet",
+        "end": "Finish position: Lower heels slowly through comfortable range",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2470,7 +2918,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/standing-calf-raise/start.webp",
+          "finish": "./exercise-images/standing-calf-raise/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2497,7 +2952,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Sit with thigh pad positioned securely",
-        "end": "Action: Lift heels while forefeet stay planted",
+        "end": "Finish position: Lower slowly",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2508,7 +2963,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/seated-calf-raise/start.webp",
+          "finish": "./exercise-images/seated-calf-raise/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2546,7 +3008,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/plank/start.webp",
+          "finish": "./exercise-images/plank/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2584,7 +3053,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/side-plank/start.webp",
+          "finish": "./exercise-images/side-plank/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2622,7 +3098,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dead-bug/start.webp",
+          "finish": "./exercise-images/dead-bug/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2660,7 +3143,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/bird-dog/start.webp",
+          "finish": "./exercise-images/bird-dog/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2687,7 +3177,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Lie on back and gently flatten lower back toward floor",
-        "end": "Action: Raise shoulders and legs only as far as control allows",
+        "end": "Finish position: Hold while breathing",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2698,7 +3188,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/hollow-hold/start.webp",
+          "finish": "./exercise-images/hollow-hold/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2725,7 +3222,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Lie on back with knees bent and hips flexed",
-        "end": "Action: Curl pelvis slightly off floor toward ribs",
+        "end": "Finish position: Lower slowly without swinging legs",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2736,7 +3233,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/reverse-crunch/start.webp",
+          "finish": "./exercise-images/reverse-crunch/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2763,7 +3267,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Lie on back with hands lightly supporting head",
-        "end": "Action: Rotate torso toward opposite bent knee as other leg extends",
+        "end": "Finish position: Alternate sides slowly",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2774,7 +3278,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/bicycle-crunch/start.webp",
+          "finish": "./exercise-images/bicycle-crunch/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2801,7 +3312,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Kneel facing high cable holding rope by temples",
-        "end": "Action: Curl ribs toward pelvis while keeping hips mostly still",
+        "end": "Finish position: Return slowly under control",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2812,7 +3323,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/cable-crunch/start.webp",
+          "finish": "./exercise-images/cable-crunch/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2839,7 +3357,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand sideways to cable or band anchor holding handle at chest",
-        "end": "Action: Press hands forward while resisting rotation",
+        "end": "Finish position: Bring hands back to chest",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2850,7 +3368,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/pallof-press/start.webp",
+          "finish": "./exercise-images/pallof-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2877,7 +3402,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Hang from secure bar with shoulders engaged",
-        "end": "Action: Lift knees toward torso without swinging",
+        "end": "Finish position: Lower legs slowly",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2888,7 +3413,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/hanging-knee-raise/start.webp",
+          "finish": "./exercise-images/hanging-knee-raise/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2915,7 +3447,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Lie on back with legs extended and hands by sides",
-        "end": "Action: Lift legs while keeping pelvis controlled",
+        "end": "Finish position: Lower only as far as lower back stays stable",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2926,7 +3458,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/lying-leg-raise/start.webp",
+          "finish": "./exercise-images/lying-leg-raise/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -2953,7 +3492,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Sit with knees bent and torso slightly reclined",
-        "end": "Action: Rotate chest from side to side under control",
+        "end": "Finish position: Return through center each time",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -2964,7 +3503,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/russian-twist/start.webp",
+          "finish": "./exercise-images/russian-twist/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3002,7 +3548,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/suitcase-carry/start.webp",
+          "finish": "./exercise-images/suitcase-carry/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3040,7 +3593,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/mountain-climber/start.webp",
+          "finish": "./exercise-images/mountain-climber/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3078,7 +3638,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/kettlebell-swing/start.webp",
+          "finish": "./exercise-images/kettlebell-swing/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3105,7 +3672,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Hold dumbbells at shoulders and squat to comfortable depth",
-        "end": "Action: Stand powerfully and continue into overhead press",
+        "end": "Finish position: Lower weights to shoulders before next squat",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3116,7 +3683,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-thruster/start.webp",
+          "finish": "./exercise-images/dumbbell-thruster/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3143,7 +3717,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Hinge with dumbbells near thighs",
-        "end": "Action: Extend hips and guide dumbbells to shoulder rack",
+        "end": "Finish position: Press overhead then lower under control",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3154,7 +3728,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-clean-and-press/start.webp",
+          "finish": "./exercise-images/dumbbell-clean-and-press/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3192,7 +3773,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/farmer-carry/start.webp",
+          "finish": "./exercise-images/farmer-carry/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3230,7 +3818,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/sled-push/start.webp",
+          "finish": "./exercise-images/sled-push/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3268,7 +3863,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/sled-pull/start.webp",
+          "finish": "./exercise-images/sled-pull/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3306,7 +3908,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/burpee/start.webp",
+          "finish": "./exercise-images/burpee/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3344,7 +3953,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/medicine-ball-slam/start.webp",
+          "finish": "./exercise-images/medicine-ball-slam/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3371,7 +3987,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand over kettlebell between feet",
-        "end": "Action: Hinge hips and bend knees to grasp handle",
+        "end": "Finish position: Push floor away to stand tall",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3382,7 +3998,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/kettlebell-deadlift/start.webp",
+          "finish": "./exercise-images/kettlebell-deadlift/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3409,7 +4032,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Begin high plank with hands on stable dumbbells",
-        "end": "Action: Shift weight slightly and row one dumbbell toward hip",
+        "end": "Finish position: Lower and alternate sides",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3420,7 +4043,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/dumbbell-renegade-row/start.webp",
+          "finish": "./exercise-images/dumbbell-renegade-row/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3458,7 +4088,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/cat-cow/start.webp",
+          "finish": "./exercise-images/cat-cow/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3485,7 +4122,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Step into long lunge with both hands inside front foot",
-        "end": "Action: Rotate chest and reach one arm toward ceiling",
+        "end": "Finish position: Return and repeat on other side",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3496,7 +4133,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/world-s-greatest-stretch/start.webp",
+          "finish": "./exercise-images/world-s-greatest-stretch/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3523,7 +4167,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Kneel in half-kneeling position on padded surface",
-        "end": "Action: Tuck pelvis slightly and shift hips forward",
+        "end": "Finish position: Hold gentle stretch at front of rear hip",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3534,7 +4178,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/hip-flexor-stretch/start.webp",
+          "finish": "./exercise-images/hip-flexor-stretch/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3572,7 +4223,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/90-90-hip-switch/start.webp",
+          "finish": "./exercise-images/90-90-hip-switch/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3599,7 +4257,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Lie on side with hips and knees bent and arms extended together",
-        "end": "Action: Rotate top arm and chest open toward opposite side",
+        "end": "Finish position: Return slowly and repeat",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3610,7 +4268,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/thoracic-open-book/start.webp",
+          "finish": "./exercise-images/thoracic-open-book/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3648,7 +4313,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/wall-slide/start.webp",
+          "finish": "./exercise-images/wall-slide/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3686,7 +4358,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/shoulder-cars/start.webp",
+          "finish": "./exercise-images/shoulder-cars/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3713,7 +4392,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Stand with feet hip width and knees soft",
-        "end": "Action: Push hips backward while torso inclines forward",
+        "end": "Finish position: Drive hips forward to stand",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3724,7 +4403,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/hip-hinge-drill/start.webp",
+          "finish": "./exercise-images/hip-hinge-drill/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3751,7 +4437,7 @@
       ],
       "visualBrief": {
         "start": "Setup: Face wall in split stance with front foot flat",
-        "end": "Action: Drive front knee toward wall without lifting heel",
+        "end": "Finish position: Rock back and repeat gently",
         "camera": "Fixed tripod, three-quarter front angle at waist height; use a side angle when required to show spinal alignment",
         "model": "Same adult athletic model, charcoal fitted shirt, black shorts, neutral trainers; consistent appearance and body proportions",
         "setting": "Same clean, neutral gym studio with matte charcoal floor, soft diffused lighting and uncluttered background",
@@ -3762,7 +4448,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/ankle-rock/start.webp",
+          "finish": "./exercise-images/ankle-rock/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     },
     {
@@ -3800,7 +4493,14 @@
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
           "No text, watermarks or logos baked into the image"
-        ]
+        ],
+        "assetPaths": {
+          "start": "./exercise-images/glute-activation-clamshell/start.webp",
+          "finish": "./exercise-images/glute-activation-clamshell/finish.webp"
+        },
+        "productionStatus": "not-generated",
+        "technicalReview": "pending",
+        "licensing": "original-generation-required"
       }
     }
   ],
@@ -3809,6 +4509,14 @@
     "targetImages": 200,
     "completedPairs": 0,
     "style": "One consistent adult athletic model and neutral gym studio, two positions per movement; no synthetic visual accepted without anatomy and movement review.",
-    "licenseRequirement": "Confirm rights for commercial app use before publication."
+    "licenseRequirement": "Confirm rights for commercial app use before publication.",
+    "styleApproved": true,
+    "styleDescription": "Consistent athletic adult male wearing fitted charcoal shirt, black shorts and neutral trainers; same dark modern gym, photographic realistic lighting, uncluttered background; fixed matching camera per exercise. No embedded labels.",
+    "generatedImages": 0,
+    "approvedImages": 0,
+    "integratedImages": 0,
+    "reviewRequirement": "Verify each start and finish pose independently; specifically distinguish floor-supported split squat from rear-foot-elevated Bulgarian split squat.",
+    "assetFormat": "webp",
+    "assetRoot": "./exercise-images/"
   }
 }
