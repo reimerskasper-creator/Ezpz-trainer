@@ -1,0 +1,1107 @@
+{
+  "schemaVersion": 1,
+  "status": "catalogue-draft",
+  "imagePolicy": "Use one consistent model and lighting across all exercises; two verified movement-specific images per exercise. Do not mark reviewed until visual and technique are verified.",
+  "exercises": [
+    {
+      "id": "barbell-bench-press",
+      "name": "Barbell Bench Press",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-bench-press",
+      "name": "Dumbbell Bench Press",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "incline-dumbbell-press",
+      "name": "Incline Dumbbell Press",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "incline-barbell-press",
+      "name": "Incline Barbell Press",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "machine-chest-press",
+      "name": "Machine Chest Press",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "push-up",
+      "name": "Push-up",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "incline-push-up",
+      "name": "Incline Push-up",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "decline-push-up",
+      "name": "Decline Push-up",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-floor-press",
+      "name": "Dumbbell Floor Press",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "cable-chest-fly",
+      "name": "Cable Chest Fly",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "pec-deck-fly",
+      "name": "Pec Deck Fly",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "close-grip-push-up",
+      "name": "Close-Grip Push-up",
+      "category": "Chest",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "pull-up",
+      "name": "Pull-up",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "assisted-pull-up",
+      "name": "Assisted Pull-up",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "chin-up",
+      "name": "Chin-up",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "lat-pulldown",
+      "name": "Lat Pulldown",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "close-grip-lat-pulldown",
+      "name": "Close-Grip Lat Pulldown",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "seated-cable-row",
+      "name": "Seated Cable Row",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "chest-supported-dumbbell-row",
+      "name": "Chest-Supported Dumbbell Row",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "one-arm-dumbbell-row",
+      "name": "One-Arm Dumbbell Row",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "bent-over-barbell-row",
+      "name": "Bent-Over Barbell Row",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "resistance-band-row",
+      "name": "Resistance Band Row",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "inverted-row",
+      "name": "Inverted Row",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "straight-arm-pulldown",
+      "name": "Straight-Arm Pulldown",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "back-extension",
+      "name": "Back Extension",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "backpack-row",
+      "name": "Backpack Row",
+      "category": "Back",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "seated-dumbbell-shoulder-press",
+      "name": "Seated Dumbbell Shoulder Press",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "standing-dumbbell-shoulder-press",
+      "name": "Standing Dumbbell Shoulder Press",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "barbell-overhead-press",
+      "name": "Barbell Overhead Press",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "machine-shoulder-press",
+      "name": "Machine Shoulder Press",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-lateral-raise",
+      "name": "Dumbbell Lateral Raise",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "cable-lateral-raise",
+      "name": "Cable Lateral Raise",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-front-raise",
+      "name": "Dumbbell Front Raise",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "reverse-pec-deck",
+      "name": "Reverse Pec Deck",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "bent-over-reverse-fly",
+      "name": "Bent-Over Reverse Fly",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "face-pull",
+      "name": "Face Pull",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "band-pull-apart",
+      "name": "Band Pull-Apart",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-arnold-press",
+      "name": "Dumbbell Arnold Press",
+      "category": "Shoulders",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-biceps-curl",
+      "name": "Dumbbell Biceps Curl",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "hammer-curl",
+      "name": "Hammer Curl",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "barbell-curl",
+      "name": "Barbell Curl",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "cable-biceps-curl",
+      "name": "Cable Biceps Curl",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "incline-dumbbell-curl",
+      "name": "Incline Dumbbell Curl",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "rope-triceps-pushdown",
+      "name": "Rope Triceps Pushdown",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "overhead-triceps-extension",
+      "name": "Overhead Triceps Extension",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "skull-crusher",
+      "name": "Skull Crusher",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "close-grip-bench-press",
+      "name": "Close-Grip Bench Press",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "bench-triceps-dip",
+      "name": "Bench Triceps Dip",
+      "category": "Arms",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "chair-squat",
+      "name": "Chair Squat",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "bodyweight-squat",
+      "name": "Bodyweight Squat",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "goblet-squat",
+      "name": "Goblet Squat",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "barbell-back-squat",
+      "name": "Barbell Back Squat",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "barbell-front-squat",
+      "name": "Barbell Front Squat",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "leg-press",
+      "name": "Leg Press",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "reverse-lunge",
+      "name": "Reverse Lunge",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "walking-lunge",
+      "name": "Walking Lunge",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "bulgarian-split-squat",
+      "name": "Bulgarian Split Squat",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "step-up",
+      "name": "Step-up",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-romanian-deadlift",
+      "name": "Dumbbell Romanian Deadlift",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "barbell-romanian-deadlift",
+      "name": "Barbell Romanian Deadlift",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "glute-bridge",
+      "name": "Glute Bridge",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "hip-thrust",
+      "name": "Hip Thrust",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "lying-leg-curl",
+      "name": "Lying Leg Curl",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "leg-extension",
+      "name": "Leg Extension",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "standing-calf-raise",
+      "name": "Standing Calf Raise",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "seated-calf-raise",
+      "name": "Seated Calf Raise",
+      "category": "Legs & Glutes",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "plank",
+      "name": "Plank",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "side-plank",
+      "name": "Side Plank",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dead-bug",
+      "name": "Dead Bug",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "bird-dog",
+      "name": "Bird Dog",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "hollow-hold",
+      "name": "Hollow Hold",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "reverse-crunch",
+      "name": "Reverse Crunch",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "bicycle-crunch",
+      "name": "Bicycle Crunch",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "cable-crunch",
+      "name": "Cable Crunch",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "pallof-press",
+      "name": "Pallof Press",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "hanging-knee-raise",
+      "name": "Hanging Knee Raise",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "lying-leg-raise",
+      "name": "Lying Leg Raise",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "russian-twist",
+      "name": "Russian Twist",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "suitcase-carry",
+      "name": "Suitcase Carry",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "mountain-climber",
+      "name": "Mountain Climber",
+      "category": "Core",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "kettlebell-swing",
+      "name": "Kettlebell Swing",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-thruster",
+      "name": "Dumbbell Thruster",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-clean-and-press",
+      "name": "Dumbbell Clean and Press",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "farmer-carry",
+      "name": "Farmer Carry",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "sled-push",
+      "name": "Sled Push",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "sled-pull",
+      "name": "Sled Pull",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "burpee",
+      "name": "Burpee",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "medicine-ball-slam",
+      "name": "Medicine Ball Slam",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "kettlebell-deadlift",
+      "name": "Kettlebell Deadlift",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "dumbbell-renegade-row",
+      "name": "Dumbbell Renegade Row",
+      "category": "Full Body",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "cat-cow",
+      "name": "Cat-Cow",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "world-s-greatest-stretch",
+      "name": "World's Greatest Stretch",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "hip-flexor-stretch",
+      "name": "Hip Flexor Stretch",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "90-90-hip-switch",
+      "name": "90/90 Hip Switch",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "thoracic-open-book",
+      "name": "Thoracic Open Book",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "wall-slide",
+      "name": "Wall Slide",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "shoulder-cars",
+      "name": "Shoulder CARs",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "hip-hinge-drill",
+      "name": "Hip Hinge Drill",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "ankle-rock",
+      "name": "Ankle Rock",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    },
+    {
+      "id": "glute-activation-clamshell",
+      "name": "Glute Activation Clamshell",
+      "category": "Mobility & Warm-up",
+      "visuals": {
+        "start": null,
+        "finish": null
+      },
+      "visualStatus": "pending",
+      "reviewed": false
+    }
+  ]
+}
