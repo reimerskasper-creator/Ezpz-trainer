@@ -46,7 +46,7 @@ try{
   await page.screenshot({path:path.join(out,'Logged-food-'+width+'.jpg'),type:'jpeg',quality:85});
 
   await page.locator('[data-tab="train"]').click();
-  await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),11);
+  await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),12);
   const coverSources=await page.locator('#workout-chooser img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
   assert.equal(new Set(coverSources).size,11);for(const src of coverSources){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Workout photo '+src)}
   await page.locator('#workout-chooser').evaluate(async dialog=>{for(const img of dialog.querySelectorAll('img')){img.loading='eager';await img.decode()}dialog.scrollTop=0});
@@ -128,12 +128,14 @@ try{
   await page.locator('[data-tab="more"]').click();await page.locator('[data-go="planner"]').click();
   await page.locator('[data-action="new-workout"]').click();
   await page.locator('#builder-title').fill("Kasper's strength & balance");
+  await page.locator('.own-workout-settings>summary').click();
   await page.locator('#builder-equipment').fill('Dumbbells and mat');
   await page.locator('#builder-name-0').fill('Goblet Squat');
   await page.locator('[data-action="add-builder-exercise"]').click();
   assert.equal(await page.locator('#builder-title').inputValue(),"Kasper's strength & balance");
   assert.equal(await page.locator('#builder-name-0').inputValue(),'Goblet Squat');
   await page.locator('#builder-name-1').fill('Farmer March');
+  await page.locator('.own-exercise-options').nth(1).locator('summary').click();
   await page.locator('#builder-unit-1').selectOption('sec');
   await checkLayout('Workout builder');await capture('Workout-builder');
   await page.locator('#workout-builder button.primary').click();
@@ -242,7 +244,7 @@ try{
   assert.equal(await page.locator('select#planned-workout').count(),0);
   assert.equal(await page.locator('select[data-schedule-meal]').count(),0);
   await page.locator('#planned-workout').click();await page.locator('#planner-picker').waitFor({state:'visible'});
-  assert.equal(await page.locator('.plan-picker-categories img').count(),11);
+  assert.equal(await page.locator('.plan-picker-categories img').count(),12);
   assert.notEqual(await page.evaluate(()=>document.activeElement.id),'planner-picker-search','Opening should not summon the keyboard');
   await checkLayout('Workout photo picker');
   assert(await page.locator('#planner-picker').evaluate(x=>{const r=x.getBoundingClientRect();return r.left>=0&&r.right<=document.documentElement.clientWidth+1&&r.bottom<=innerHeight+1&&x.scrollWidth<=x.clientWidth+1}),'Picker fits screen');
@@ -307,6 +309,52 @@ try{
   await page.locator('#workout-builder').waitFor();await page.locator('[data-action="cancel-builder"]').click();
   await checkLayout('Photo-based planner');
 
+
+  // Freely named workouts use the same saved-session and training paths.
+  await page.locator('[data-tab="train"]').click();
+  await page.locator('[data-action="open-workouts"]').click();
+  await page.locator('[data-action="create-my-workout"]').click();
+  assert.equal(await page.locator('body').getAttribute('data-view'),'builder');
+  assert.equal(await page.locator('.own-workout-settings').getAttribute('open'),null);
+  assert.equal(await page.locator('#builder-name-0').getAttribute('list'),null);
+  await page.locator('#builder-title').fill('My beach strength');
+  await page.locator('#builder-name-0').fill('My sandbag march');
+  await page.locator('[data-action="add-builder-exercise"]').click();
+  await page.locator('#builder-name-1').fill('My towel row');
+  await page.locator('.own-workout-settings>summary').click();
+  await page.locator('#builder-category').selectOption('Arms');
+  await page.locator('.own-workout-settings>summary').click();
+  await checkLayout('Own workout builder');await capture('Create your own');
+  const beforeOwn=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  await page.locator('[data-destination="saved"]').click();
+  const afterOwn=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  assert.deepEqual(afterOwn.workoutSchedule,beforeOwn.workoutSchedule);
+  assert.equal(afterOwn.selectedWorkout,beforeOwn.selectedWorkout);
+  const own=afterOwn.customWorkouts.find(w=>w.title==='My beach strength');
+  assert(own);assert.equal(own.exercises[0].name,'My sandbag march');
+  assert((await page.locator('.own-saved-list').innerText()).includes('My beach strength'));
+  await checkLayout('Saved own workouts');await capture('Your saved workouts');
+  await page.locator('[data-own-start="'+own.id+'"]').click();
+  assert.equal(await page.locator('body').getAttribute('data-view'),'train');
+  assert((await page.locator('#screen').innerText()).includes('My sandbag march'));
+  await page.locator('[data-set-reps="0-0"]').fill('10');
+  await page.locator('[data-set-weight="0-0"]').fill('12');
+  await page.locator('[data-set-done="0-0"]').check();
+  await page.reload();await page.locator('[data-tab="train"]').click();
+  assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');
+  assert.equal(await page.locator('[data-set-weight="0-0"]').inputValue(),'12');
+  await capture('Train your own');
+  await page.locator('[data-action="finish"]').click();
+  await page.locator('[data-tab="train"]').click();
+  await page.locator('[data-action="open-workouts"]').click();
+  await page.locator('[data-action="create-my-workout"]').click();
+  await page.locator('#builder-title').fill('My quick session');
+  await page.locator('#builder-name-0').fill('My own movement');
+  await page.locator('[data-destination="train"]').click();
+  assert.equal(await page.locator('body').getAttribute('data-view'),'train');
+  assert((await page.locator('#screen').innerText()).includes('My own movement'));
+  await checkLayout('Own workout training');
+
   await context.close();
  }
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
@@ -321,6 +369,10 @@ try{
 
  const pickerCaptures=captures.filter(x=>['Planner workout categories','Planner workout choices','Planner meal picker'].includes(x.name));
  if(pickerCaptures.length){const sheet=await browser.newPage({viewport:{width:1200,height:920},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif">'+pickerCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'planner-picker-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_PICKER_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_PICKER_DATA '+b.slice(i,i+4000));console.log('EZPZ_PICKER_END')}}
+
+
+ const ownCaptures=captures.filter(x=>['Create your own','Your saved workouts','Train your own'].includes(x.name));
+ if(ownCaptures.length){const sheet=await browser.newPage({viewport:{width:1200,height:920},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif>'+ownCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'own-workouts-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_OWN_DATA '+b.slice(i,i+4000));}}
 
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:49,workoutPrograms:55,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 49 recipe photos; 55 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
