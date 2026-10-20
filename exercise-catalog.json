@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "status": "100-catalogued-12-chest-instruction-drafts-awaiting-review-and-images",
+  "status": "100-catalogued-26-instruction-drafts-awaiting-review-and-images",
   "imagePolicy": "Use one consistent model and lighting across all exercises; two verified movement-specific images per exercise. Do not mark reviewed until visual and technique are verified.",
   "exercises": [
     {
@@ -290,7 +290,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Pull-up bar",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hang from a secure bar with hands slightly wider than shoulders and palms facing away.",
+        "Brace your trunk and pull elbows down toward your ribs as your body rises.",
+        "Lower with control to a comfortable extended-arm position."
+      ],
+      "keyPoints": [
+        "Avoid kicking or swinging to complete repetitions.",
+        "Keep neck neutral rather than reaching chin forward.",
+        "Use assistance if you cannot control the lowering phase."
+      ]
     },
     {
       "id": "assisted-pull-up",
@@ -303,7 +313,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Pull-up bar",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Set the machine or resistance band to provide appropriate assistance.",
+        "Grip the bar securely, brace, and pull elbows toward your sides.",
+        "Rise under control, then lower slowly without dropping onto the assistance."
+      ],
+      "keyPoints": [
+        "Check the machine knee pad or band setup before starting.",
+        "Use enough assistance to keep the movement smooth.",
+        "Avoid shrugging your shoulders toward your ears."
+      ]
     },
     {
       "id": "chin-up",
@@ -316,7 +336,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Pull-up bar",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Grip a secure overhead bar with palms facing you and hands around shoulder width.",
+        "Brace your trunk and pull your chest upward by driving elbows down.",
+        "Lower slowly until arms reach a comfortable extension."
+      ],
+      "keyPoints": [
+        "Keep legs quiet instead of swinging.",
+        "Do not crane the neck to clear the bar.",
+        "Choose an assisted variation if needed."
+      ]
     },
     {
       "id": "lat-pulldown",
@@ -329,7 +359,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Adjust the thigh pad so your legs stay securely in place.",
+        "Take an overhand grip and pull the bar toward the upper chest.",
+        "Let arms rise overhead under control without losing torso position."
+      ],
+      "keyPoints": [
+        "Keep only a slight backward torso lean.",
+        "Drive elbows down rather than pulling behind the neck.",
+        "Avoid jerking the weight stack."
+      ]
     },
     {
       "id": "close-grip-lat-pulldown",
@@ -342,7 +382,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit with thighs secured and grip a close neutral-grip handle.",
+        "Pull elbows down alongside the torso until the handle approaches upper chest.",
+        "Return overhead slowly while keeping your trunk steady."
+      ],
+      "keyPoints": [
+        "Do not turn the exercise into a backward lean.",
+        "Keep shoulders away from ears at the bottom.",
+        "Let shoulder blades move naturally on the return."
+      ]
     },
     {
       "id": "seated-cable-row",
@@ -355,7 +405,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit tall with feet braced and knees slightly bent.",
+        "Pull the handle toward lower ribs, drawing elbows back.",
+        "Extend arms forward slowly without rounding the lower back excessively."
+      ],
+      "keyPoints": [
+        "Keep torso movement small and controlled.",
+        "Avoid shrugging at the end of the pull.",
+        "Select a load you can pause briefly."
+      ]
     },
     {
       "id": "chest-supported-dumbbell-row",
@@ -368,7 +428,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Set an incline bench and lie chest-down with dumbbells hanging beneath shoulders.",
+        "Pull elbows toward hips while keeping your chest against the pad.",
+        "Lower weights slowly until arms extend comfortably."
+      ],
+      "keyPoints": [
+        "Avoid lifting your chest off the bench.",
+        "Keep neck in line with your spine.",
+        "Use a controlled range without swinging."
+      ]
     },
     {
       "id": "one-arm-dumbbell-row",
@@ -381,7 +451,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Support one hand on a sturdy bench and hinge until torso is stable.",
+        "Pull the dumbbell toward your hip with the working elbow close to your side.",
+        "Lower slowly without twisting the torso."
+      ],
+      "keyPoints": [
+        "Keep shoulders and hips roughly level.",
+        "Avoid yanking the weight with momentum.",
+        "Brace your free hand securely."
+      ]
     },
     {
       "id": "bent-over-barbell-row",
@@ -394,7 +474,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hold a barbell and hinge at the hips with knees softly bent.",
+        "Brace the trunk and pull the bar toward your lower ribs.",
+        "Lower the bar under control while keeping the torso angle steady."
+      ],
+      "keyPoints": [
+        "Maintain a neutral, braced spine.",
+        "Do not stand upright to finish each rep.",
+        "Reduce load if the lower back position changes."
+      ]
     },
     {
       "id": "resistance-band-row",
@@ -407,7 +497,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Resistance band",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Anchor a resistance band securely around chest or waist height.",
+        "Stand or sit tall and pull handles toward your ribs.",
+        "Return arms forward under control while maintaining band tension."
+      ],
+      "keyPoints": [
+        "Test the anchor before every set.",
+        "Keep shoulders relaxed and avoid shrugging.",
+        "Keep wrists aligned with forearms."
+      ]
     },
     {
       "id": "inverted-row",
@@ -420,7 +520,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Set a secure bar or suspension handles and position your body beneath them.",
+        "Keep body rigid as you pull chest toward the bar or handles.",
+        "Lower slowly until arms extend comfortably."
+      ],
+      "keyPoints": [
+        "Keep hips lifted in line with shoulders.",
+        "Bend knees to make the exercise easier.",
+        "Ensure equipment cannot slip or tip."
+      ]
     },
     {
       "id": "straight-arm-pulldown",
@@ -433,7 +543,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand facing a high cable with arms extended and elbows softly bent.",
+        "Brace the trunk and sweep hands down toward thighs.",
+        "Return hands overhead slowly without arching the lower back."
+      ],
+      "keyPoints": [
+        "Keep the elbow angle nearly constant.",
+        "Avoid leaning your whole body into the cable.",
+        "Feel movement come from the shoulders, not the wrists."
+      ]
     },
     {
       "id": "back-extension",
@@ -446,7 +566,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Adjust the back-extension pad so your hips can hinge freely.",
+        "Lower your torso by hinging at the hips while keeping the spine neutral.",
+        "Raise until your body forms a straight line without hyperextending."
+      ],
+      "keyPoints": [
+        "Avoid throwing the head backward.",
+        "Do not arch beyond a neutral standing alignment.",
+        "Start with bodyweight and a controlled range."
+      ]
     },
     {
       "id": "backpack-row",
@@ -459,7 +589,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Backpack",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Load and secure a backpack, then hinge at the hips with knees softly bent.",
+        "Pull the backpack toward your lower ribs without twisting.",
+        "Lower slowly while keeping your trunk braced."
+      ],
+      "keyPoints": [
+        "Ensure the bag and straps are securely fastened.",
+        "Keep the back neutral and hips steady.",
+        "Use lighter contents if you need momentum."
+      ]
     },
     {
       "id": "seated-dumbbell-shoulder-press",
