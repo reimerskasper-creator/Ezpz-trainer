@@ -84,10 +84,74 @@ try{
   await page.locator('[data-go="library"]').click();await page.locator('.library-tile').first().waitFor();assert.equal(await page.locator('.library-tile').count(),100);if(expectUpgrade){const tile=page.locator('.library-tile').first(),icon=await tile.locator('.workout-category-icon').boundingBox(),title=await tile.locator('strong').boundingBox();assert(title.x>=icon.x+icon.width+8,'Exercise library must use horizontal rows');assert((await tile.boundingBox()).height<=110,'Library row too tall')}await checkLayout('Library');await capture('Library');
   await page.locator('#library-search').fill('bench');assert(await page.locator('.library-tile').count()>0);await page.locator('.library-tile').first().click();await checkLayout('Exercise guide');assert((await page.locator('#screen').innerText()).includes('Lie'));
   if(expectUpgrade){await page.locator('[data-tab="more"]').click();await page.locator('.data-tools summary').click();await page.locator('#restore-file').setInputFiles({name:'ezpz-backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(fixture))});await page.locator('[data-action="restore"]').click();await page.waitForFunction(()=>document.body.dataset.view==='home');const restored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);assert.deepEqual(restored.foodLog,fixture.foodLog);assert.deepEqual(restored.mealPlan,fixture.mealPlan);assert.deepEqual(restored.checkedShopping,fixture.checkedShopping);assert.deepEqual(restored.draft,fixture.draft);assert.deepEqual(restored.workoutDrafts,fixture.workoutDrafts);assert.equal(restored.logs.length,24)}
+
+  // Plan single days through four weeks using the real UI.
+  await page.locator('[data-tab="more"]').click();await page.locator('[data-go="planner"]').click();
+  for(const span of [1,7,14,21,28]){
+   await page.locator('#planner-span').selectOption(String(span));
+   assert.equal(await page.locator('[data-planner-offset]').count(),Math.min(7,span));
+   assert.equal(await page.locator('[data-plan-week]').count(),span>7?span/7:0);
+   await checkLayout('Planner '+span);
+  }
+  await page.locator('#planner-start').fill(today);await page.locator('#planner-start').dispatchEvent('change');
+  await page.locator('#planned-workout').selectOption('full-body-home');
+  assert((await page.locator('.planned-workout-preview').innerText()).includes('Beginner'));
+  await page.locator('[data-schedule-meal="breakfast"]').selectOption('0');
+  await page.locator('[data-schedule-portion="breakfast"]').selectOption('1.5');
+  await page.locator('[data-schedule-meal="lunch"]').selectOption('48');
+  await page.locator('[data-schedule-portion="lunch"]').selectOption('2');
+  const originalLogCount=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).foodLog.length,key);
+  await page.locator('[data-planner-offset="1"]').click();await page.locator('#planned-workout').selectOption('rest');
+  await page.locator('[data-plan-week="3"]').click();assert.equal(await page.locator('[data-planner-offset="21"]').getAttribute('aria-pressed'),'true');
+  await page.locator('[data-action="repeat-plan-week"]').click();
+  assert(await page.evaluate(({key,today})=>{const s=JSON.parse(localStorage.getItem(key));return [7,14,21].every(i=>s.workoutSchedule[datePlus(today,i)]==='full-body-home'&&s.workoutSchedule[datePlus(today,i+1)]==='rest'&&s.mealPlan[datePlus(today,i)].breakfastPortion===1.5)},{key,today}));
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).foodLog.length,key),originalLogCount,'Planning must not log food');
+  await checkLayout('Four-week plan');await capture('Four-week-plan');
+  await page.locator('[data-plan-week="0"]').click();
+  await page.locator('[data-action="planner-shop-range"]').click();
+  assert(await page.locator('.shopping-item').count()>1);await checkLayout('Plan shopping');
+  // Build a reusable custom session, preserve fields while adding exercises, and schedule it.
+  await page.locator('[data-tab="more"]').click();await page.locator('[data-go="planner"]').click();
+  await page.locator('[data-action="new-workout"]').click();
+  await page.locator('#builder-title').fill("Kasper's strength & balance");
+  await page.locator('#builder-equipment').fill('Dumbbells and mat');
+  await page.locator('#builder-name-0').fill('Goblet Squat');
+  await page.locator('[data-action="add-builder-exercise"]').click();
+  assert.equal(await page.locator('#builder-title').inputValue(),"Kasper's strength & balance");
+  assert.equal(await page.locator('#builder-name-0').inputValue(),'Goblet Squat');
+  await page.locator('#builder-name-1').fill('Farmer March');
+  await page.locator('#builder-unit-1').selectOption('sec');
+  await checkLayout('Workout builder');await capture('Workout-builder');
+  await page.locator('#workout-builder button.primary').click();
+  const custom=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).customWorkouts.at(-1),key);
+  assert(custom.id.startsWith('custom-'));assert.equal(custom.exercises.length,2);
+  assert.equal(await page.locator('#planned-workout').inputValue(),custom.id);
+  await page.locator('[data-tab="home"]').click();
+  assert((await page.locator('.home-next').innerText()).includes("Kasper's strength & balance"));
+  assert.equal(await page.locator('.home-shortcuts').count(),0);
+  await page.locator('[data-preview-workout="'+custom.id+'"]').click();
+  assert.equal(await page.locator('.preview-exercises li').count(),2);
+  await page.locator('[data-start-workout="'+custom.id+'"]').click();
+  await page.locator('[data-set-reps="0-0"]').fill('8');await page.locator('[data-set-done="0-0"]').check();
+  await page.reload();await page.locator('[data-tab="train"]').click();
+  assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'8');
+  await page.locator('[data-action="finish"]').click();
+  const customBackup=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  assert.equal(customBackup.logs.at(-1).workoutId,custom.id);
+  // A scheduled start records the date; ordinary preview starts retain normal log semantics.
+  await page.locator('[data-tab="more"]').click();await page.locator('.data-tools summary').click();
+  await page.locator('#restore-file').setInputFiles({name:'planning-backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(customBackup))});
+  await page.locator('[data-action="restore"]').click();await page.waitForFunction(()=>document.body.dataset.view==='home');
+  const planningRestored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  for(const field of ['mealPlan','workoutSchedule','plannerStart','plannerDays','customWorkouts','selectedWorkout'])assert.deepEqual(planningRestored[field],customBackup[field],'Planning restore '+field);
+
   await context.close();
  }
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
  if(captures.length){const sheet=await browser.newPage({viewport:{width:2528,height:570},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf0ee;font:14px sans-serif">'+captures.map(x=>'<figure style="margin:0;width:244px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:244px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'mobile-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_VISUAL_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));console.log('EZPZ_VISUAL_END')}}
+
+ const planningCaptures=captures.filter(x=>['Four-week-plan','Workout-builder'].includes(x.name));
+ if(planningCaptures.length){const sheet=await browser.newPage({viewport:{width:800,height:900},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif">'+planningCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'planning-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_PLAN_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_PLAN_DATA '+b.slice(i,i+4000));console.log('EZPZ_PLAN_END')}}
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:49,workoutPrograms:55,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 49 recipe photos; 55 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});

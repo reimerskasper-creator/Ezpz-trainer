@@ -984,108 +984,75 @@
     "category": "HIIT",
     "variant": "A",
     "title": "HIIT Day A",
-    "equipment": "Gym · bike, elliptical, low stable step",
-    "minutes": "32–37",
-    "guide": "Six different work exercises, excluding warm-up and cooldown. After warming up, finish the six intervals at the first station; then do one interval at each of the five additional stations. Work at a controlled hard effort around 8/10, never an all-out sprint. Take the full 90 sec easy recovery after every work interval, including when changing stations. Reduce interval count or shorten work periods when starting. Use 1–2 non-consecutive HIIT days per week. Log work seconds only and check an interval after recovery.",
+    "equipment": "One space · bodyweight only",
+    "minutes": "25–30",
+    "guide": "Stay in one clear space. Finish both intervals of each movement before moving on. Use 20 seconds of controlled hard work, then 60 seconds of easy recovery after each interval. Aim for 7–8/10 effort, never all-out. Shorten work or extend recovery as needed. Low impact describes movement, not low effort. Use 1–2 non-consecutive interval days per week.",
     "warmup": "Warm-up and cooldown are included as logged blocks.",
     "cooldown": "11 × (30 sec hard + 90 sec easy) = 22 min, plus 10 min warm-up/cooldown. Allow extra time to change stations.",
     "exercises": [
       {
-        "name": "Easy Cycling Warm-up",
+        "name": "Easy Walking Warm-up",
         "sets": 1,
         "reps": "5",
         "unit": "min",
         "rest": 0,
-        "side": false,
-        "cues": [
-          "Pedal easily for 5 min, gradually raising your cadence.",
-          "Include a few short moderate efforts near the end if comfortable."
-        ]
-      },
-      {
-        "name": "Bike Intervals",
-        "sets": 6,
-        "reps": "30",
-        "unit": "sec",
-        "rest": 90,
-        "side": false,
-        "cues": [
-          "Increase resistance or cadence for 30 sec at a controlled hard effort.",
-          "Then pedal very easily for 90 sec; recover fully before the next effort.",
-          "Complete 6 rounds, or begin with 4."
-        ]
+        "side": false
       },
       {
         "name": "Fast Marching",
-        "sets": 1,
-        "reps": "30",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 90,
-        "side": false,
-        "cues": [
-          "March briskly with quick, controlled arm swings.",
-          "Keep steps light; avoid leaning back as knees lift."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
         "name": "Step Jacks",
-        "sets": 1,
-        "reps": "30",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 90,
-        "side": false,
-        "cues": [
-          "Step one foot sideways as arms move outward, then return.",
-          "Alternate feet briskly without jumping; keep shoulders in a comfortable range."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
         "name": "Shadow Boxing",
-        "sets": 1,
-        "reps": "30",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 90,
-        "side": false,
-        "cues": [
-          "Keep a soft stance and punch the air without weights.",
-          "Alternate controlled punches without snapping elbows straight or twisting knees."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Fast Low Step-ups",
-        "sets": 1,
-        "reps": "30",
+        "name": "Standing Knee Lifts",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 90,
-        "side": false,
-        "cues": [
-          "Use a low stable step, placing the whole foot on it.",
-          "Choose quick but controlled steps and switch the lead leg halfway."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Elliptical Intervals",
-        "sets": 1,
-        "reps": "30",
+        "name": "Lateral Step Touch",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 90,
-        "side": false,
-        "cues": [
-          "Increase cadence or resistance for the work period while staying upright.",
-          "Then lower the effort for the full recovery period."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Easy Cycling Cooldown",
+        "name": "Bodyweight Squat",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Gentle Walking Cooldown",
         "sets": 1,
-        "reps": "5",
+        "reps": "3",
         "unit": "min",
         "rest": 0,
-        "side": false,
-        "cues": [
-          "Reduce resistance and pedal easily for 5 min.",
-          "Let breathing return toward normal."
-        ]
+        "side": false
       }
     ]
   },
@@ -1094,9 +1061,9 @@
     "category": "HIIT",
     "variant": "B",
     "title": "HIIT Day B",
-    "equipment": "Gym · treadmill, rower, air bike, ski erg, ropes",
-    "minutes": "32–37",
-    "guide": "Six different work exercises, excluding warm-up and cooldown. After warming up, finish the six intervals at the first station; then do one interval at each of the five additional stations. Work at a controlled hard effort around 8/10, never an all-out sprint. Take the full 75 sec easy recovery after every work interval, including when changing stations. Reduce interval count or shorten work periods when starting. Use 1–2 non-consecutive HIIT days per week. Log work seconds only and check an interval after recovery.",
+    "equipment": "One space · low stable step, sturdy counter",
+    "minutes": "25–30",
+    "guide": "Stay in one clear space. Finish both intervals of each movement before moving on. Use 20 seconds of controlled hard work, then 60 seconds of easy recovery after each interval. Aim for 7–8/10 effort, never all-out. Shorten work or extend recovery as needed. Low impact describes movement, not low effort. Use 1–2 non-consecutive interval days per week.",
     "warmup": "Warm-up and cooldown are included as logged blocks.",
     "cooldown": "11 × (45 sec hard + 75 sec easy) = 22 min, plus 10 min warm-up/cooldown. Allow extra time to change stations.",
     "exercises": [
@@ -1106,96 +1073,63 @@
         "reps": "5",
         "unit": "min",
         "rest": 0,
-        "side": false,
-        "cues": [
-          "Walk easily for 5 min, building to a comfortable purposeful pace.",
-          "Use the safety clip; practise adjusting speed and incline first."
-        ]
+        "side": false
       },
       {
-        "name": "Incline Walking Intervals",
-        "sets": 6,
-        "reps": "45",
+        "name": "Fast Low Step-ups",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 75,
-        "side": false,
-        "cues": [
-          "Raise incline to reach a controlled hard walking effort for 45 sec.",
-          "Reduce incline and walk easily for 75 sec. Allow time for belt adjustments.",
-          "Keep a natural stride; lower the incline if you need to hang on the rails."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Rowing Intervals",
-        "sets": 1,
-        "reps": "45",
+        "name": "Incline Push-up",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 75,
-        "side": false,
-        "cues": [
-          "Row strongly with legs first, torso next and arms last.",
-          "Keep technique smooth rather than chasing the highest stroke rate."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Air Bike Intervals",
-        "sets": 1,
-        "reps": "45",
+        "name": "Bodyweight Squat",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 75,
-        "side": false,
-        "cues": [
-          "Set the seat for a slightly bent knee at the bottom.",
-          "Use coordinated arm and leg action for a controlled hard effort."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Ski Erg Intervals",
-        "sets": 1,
-        "reps": "45",
+        "name": "Standing Knee Lifts",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 75,
-        "side": false,
-        "cues": [
-          "Use a light enough setting to keep the stroke smooth.",
-          "Drive handles down with a small hinge and soft knees; avoid jerking your back."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Lateral Shuffle",
-        "sets": 1,
-        "reps": "45",
+        "name": "Shadow Boxing",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 75,
-        "side": false,
-        "cues": [
-          "Use a clear non-slip space and start in a soft athletic stance.",
-          "Take short side steps without crossing feet; slow before changing direction."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
-        "name": "Battle Rope Waves",
-        "sets": 1,
-        "reps": "45",
+        "name": "Fast Marching",
+        "sets": 2,
+        "reps": "20",
         "unit": "sec",
-        "rest": 75,
-        "side": false,
-        "cues": [
-          "Keep a stable stance with soft knees and relaxed shoulders.",
-          "Make small alternating waves without shrugging or leaning back."
-        ]
+        "rest": 60,
+        "side": false
       },
       {
         "name": "Gentle Walking Cooldown",
         "sets": 1,
-        "reps": "5",
+        "reps": "3",
         "unit": "min",
         "rest": 0,
-        "side": false,
-        "cues": [
-          "Return to a low incline and gradually slow the pace for 5 min.",
-          "Let breathing settle before stepping off."
-        ]
+        "side": false
       }
     ]
   }

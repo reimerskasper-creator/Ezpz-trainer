@@ -29,6 +29,7 @@ jobs:
           node tests/recipes.cjs
           node tests/app-review.cjs
           node tests/workout-photos.cjs
+          node tests/planning.cjs
           node tests/mobile.cjs
       - name: Save mobile screenshots and results
         uses: actions/upload-artifact@v4

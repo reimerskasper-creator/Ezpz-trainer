@@ -19,7 +19,7 @@ assert(JSON.stringify(api.state)===initial,'Home changed saved data');
 assert(screen.innerHTML.includes('Start workout'),'Empty state must show Start');
 assert(screen.innerHTML.includes('0 meals logged'),'Empty nutrition state');
 assert(screen.innerHTML.includes('Add weigh-in'),'Missing weight should invite entry');
-assert(screen.innerHTML.includes('Plan your meals'),'Empty shopping list state');
+assert(screen.innerHTML.includes('Your next workout')&&screen.innerHTML.includes('data-go="planner"'),'Next workout and planner shortcut');
 assert(!screen.innerHTML.includes('undefined')&&!screen.innerHTML.includes('NaN'),'Broken home content');
 assert(screen.innerHTML.includes('id="workout-chooser"'),'Home must contain workout chooser');
 api.state.selectedWorkout='push-a';
