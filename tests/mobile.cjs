@@ -216,6 +216,7 @@ try{
   await page.waitForFunction(()=>document.body.dataset.view==='progress');
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.at(-1).exercises[0].sets.filter(s=>s.done).length,key),3);
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer,key),null);
+  await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'','A new session starts at the first exercise');
 
   await context.close();
  }
