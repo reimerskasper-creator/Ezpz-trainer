@@ -53,16 +53,16 @@ Exercise catalogue has 100 entries; technical demonstration images remain unappr
 See docs/app-review-2026-10.md for the earlier ten-app comparison.
 
 ## Future ideas, not yet authorized as a new implementation
-A rest timer, post-workout summary and professionally filmed technique demonstrations were suggested. The user instead prioritized this organized workout expansion. Do not assume those suggestions were approved.
+The rest timer is now implemented under the user's broad Train-optimization request. A dedicated post-workout summary and professionally filmed technique demonstrations remain future ideas.
 
 ## Starting a new chat
 Ask the assistant to read this file and the latest GitHub Actions results, then continue the same app. GitHub is the source of truth; fetch current main before editing.
 
 ## Last verified release
-Code commit: 2dae9eb9d40dec9c2d1d7929a38aef59c1feaaf0.
-Mobile workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39494819881 — success.
-GitHub Pages workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39494819707 — success.
-All checks passed, including real Chromium at 320/390/430px. The planning/builder contact sheet was visually reviewed. No known outstanding blocker remains for the planning, difficulty-label and practical-HIIT requests.
+Code commit: b2c40728db65f64ce85c32b5a80032df82056c91.
+Mobile workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39497527210 — success.
+GitHub Pages workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39497525748 — success.
+All checks passed, including real Chromium at 320/390/430px. The Home schedule and Train contact sheet was visually reviewed. No known outstanding blocker remains for the latest Home and Train requests.
 
 ## Logged-food visual polish — October 20
 User authorized visual improvements to logged food only. Added a separate scoped style block (`food-log-visuals`) in fitness.html: block portion details, aligned 44px Remove controls, full-width calorie progress, readable macro tiles and less nested card padding. All existing approved functions, base stylesheet, recipes, values, images, handlers and storage remain identical. No wger/Feeel code imported; their stacks differ from this static web app. Added mobile checks and Logged-food screenshots at 320/390/430px in tests/mobile.cjs. Implementation commit 972df23; test commit fd9347e. Check their Actions results before continuing. This session has no local execution environment; verification runs in GitHub Actions.
@@ -87,3 +87,8 @@ Train now has a compact header, focus/all views, per-exercise progress, exercise
 New state: trainingView, autoRest, restTimer. Pure readers ignore invalid timer values; backup restoration preserves valid preferences/deadlines. No food functions or approved food data/styles changed. All 55 built-in workout definitions and custom/planning behavior remain intact. See docs/training-2026-10.md.
 
 Added tests/training.cjs to the workflow and expanded real mobile flows with schedule thumbnails/order, views, previous/repeat results, validation, rest timer persistence, focused navigation and finishing confirmation. Existing non-browser checks and the new training suite passed in an in-memory harness. Confirm the new GitHub Actions and deployment results, and visually inspect EZPZ_TRAIN_DATA contact-sheet output before calling this release verified.
+
+## Verified Home/Train release
+Final code b2c40728db65f64ce85c32b5a80032df82056c91. Mobile workflow 39497527210 — success; Pages deployment 39497525748 — success. All seven check commands passed: Home, locked food/recipe assets, app review, workout photos/prescriptions, planning, training, and real Chromium at 320/390/430px. The Home upcoming list and Train overview/focused set-entry screenshots were visually inspected in the preceding successful run 39497144356; the final follow-up changes only automatic-rest fallback and adds zero-rest warm-up coverage. All approved food functions/data/styles and all built-in workout prescriptions remain unchanged.
+
+Follow-up fixes: browser-only interval scheduling prevents Node test processes being kept alive; fresh/cleared workouts reset exercise focus; rotating sessions use a 60-second default for opt-in automatic rest, while explicit zero-rest warm-ups do not start the timer. No known outstanding blocker. This remains the same canonical fitness.html app; continue from current main.
