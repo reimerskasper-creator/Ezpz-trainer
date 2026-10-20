@@ -63,3 +63,6 @@ Code commit: 71a1272f93c1a3ead70f8a062df110fe5e6f2093.
 Mobile workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39490884134 — success.
 GitHub Pages workflow: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/39490882424 — success.
 All checks passed, including real Chromium at 320/390/430px. The contact sheet was visually reviewed. No known outstanding blocker remains for this workout-library request.
+
+## Logged-food visual polish — October 20
+User authorized visual improvements to logged food only. Added a separate scoped style block (`food-log-visuals`) in fitness.html: block portion details, aligned 44px Remove controls, full-width calorie progress, readable macro tiles and less nested card padding. All existing approved functions, base stylesheet, recipes, values, images, handlers and storage remain identical. No wger/Feeel code imported; their stacks differ from this static web app. Added mobile checks and Logged-food screenshots at 320/390/430px in tests/mobile.cjs. Implementation commit 972df23; test commit fd9347e. Check their Actions results before continuing. This session has no local execution environment; verification runs in GitHub Actions.
