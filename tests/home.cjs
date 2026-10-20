@@ -45,6 +45,15 @@ assert(overview.food.totals.join(',')==='450,35,45,12','Nutrition must include t
 assert(overview.delta===-.5,'Weight delta incorrect');
 assert(overview.shoppingTotal===2&&overview.shoppingLeft===1,'Shopping must merge duplicate ingredients and respect checkmarks');
 assert(screen.innerHTML.includes('450')&&screen.innerHTML.includes('1 meal logged'),'Nutrition labels incorrect');
+// The Home energy visual reflects real totals, with a bounded arc over target.
+assert(screen.innerHTML.includes('class="home-energy-ring"'),'Energy visual missing');
+const savedFood=api.state.foodLog,goal=api.homeOverview().goals.calories;
+api.state.foodLog=[{date:api.foodDate(),macros:[goal+300,200,250,80],name:'Over target test',servings:1}];api.home();
+assert(screen.innerHTML.includes('stroke-dashoffset="0.00"'),'Energy arc must cap at one full circle');
+assert(screen.innerHTML.includes('300 kcal over target'),'Over-target amount must stay honest');
+api.state.foodLog=[];api.home();assert(screen.innerHTML.includes('stroke-dashoffset="251.33"'),'Empty energy arc');
+assert(!screen.innerHTML.includes('NaN')&&!screen.innerHTML.includes('undefined'),'Empty Home visual values');
+api.state.foodLog=savedFood;api.home();
 const before=JSON.stringify(api.state);api.home();assert(JSON.stringify(api.state)===before,'Rendering mutated history/drafts');
 for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.home();assert(!screen.innerHTML.includes('undefined')&&!screen.innerHTML.includes('NaN'),'Invalid home for '+w.id)}
 // Existing workout pages must still render the correct set counts.

@@ -135,3 +135,10 @@ Tests protect the first 97 recipe objects, four new references, 15 new images, f
 
 ## Verified 157-recipe release
 Code b67c9fcc8b6bbe69a88be669a67eaddaca21395a. Mobile workflow 39507765809 (job 118920894856) and Pages deployment 39507764883 succeeded. All eight unit suites and Chromium at 320/390/430px passed: 157 recipe image references, all 15 new photo assets, 532 portion cases, new profiles, search, logging/shopping, planner and existing workout/backup behavior. Four-section screenshot sheet was visually reviewed from EZPZ_MEALS_DATA logs, and every new photograph was individually reviewed in contact sheets. All existing 97 recipes and their data remain unchanged. Photos are 640px JPEGs, approximately 1.48 MB total for the 15 new assets. No known release blocker.
+
+## Home visual overhaul — October 20
+User requested a finished, polished front page after sharing the existing nutrition/week/upcoming cards. Refined Home only: horizontal dark-green branding, date hierarchy, larger photo workout hero with clear CTA, real calorie percentage ring, colored macro tiles with explicit Chromium/Firefox progress fills, dark weekly card with dated day markers, tighter upcoming-workout rows and deliberate dashed planning placeholders, and coordinated weight/settings footer.
+
+All new styles are scoped to body[data-view=home] in home-visual-overhaul. Home markup adds presentation for the ring and day numbers; homeOverview, scheduling, food, logging, goals and storage readers/handlers are unchanged. Calorie totals remain exact; arc caps at 100% while percentage/over-target labels report real values. No recipe, workout definition, image asset or saved-data changes.
+
+Home unit checks passed for empty, populated, over-goal and resumed/completed states. Existing training/schedule tests passed in memory. Added mobile Home component screenshots and checks at 320/390/430px; inspect EZPZ_HOME_DATA and confirm Actions/Pages before declaring verified.
