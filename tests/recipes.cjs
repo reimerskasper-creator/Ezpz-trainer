@@ -11,6 +11,8 @@ const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:id==='
 const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
 assert(api.recipes.length===49,'Expected 49 recipes');
 const approved=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/approved-food.json'),'utf8'));
+for(const [name,body] of Object.entries(approved.foodFunctions||{}))assert(source.includes(body),'Approved food function changed: '+name);
+if(approved.stylePrefix)assert(source.includes(approved.stylePrefix),'Approved base styles changed');
 assert(JSON.stringify(api.foods)===JSON.stringify(approved.foods),'Approved food reference values changed');
 assert(JSON.stringify(api.recipes.map(({photo,...r})=>r))===JSON.stringify(approved.recipes),'Approved recipes changed');
 for(let i=0;i<49;i++){const html=api.mealPhoto(i),photo=html.match(/src="([^"]+)"/)?.[1];assert(photo&&fs.existsSync(path.join(__dirname,'..',photo)),'Recipe image missing '+i)}

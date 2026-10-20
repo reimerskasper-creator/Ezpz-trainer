@@ -26,6 +26,7 @@ jobs:
         run: |
           node tests/home.cjs
           node tests/recipes.cjs
+          node tests/app-review.cjs
           node tests/mobile.cjs
       - name: Save mobile screenshots and results
         uses: actions/upload-artifact@v4
