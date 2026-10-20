@@ -26,7 +26,7 @@ These patterns informed the changes; no competitor branding, screenshots, videos
 ## Whole-app findings and changes
 
 - **Home:** Existing selected-workout, resume, nutrition and weekly actions already provide a strong starting point. Kept its layout. The weight shortcut now opens the weight-entry disclosure before focusing the field.
-- **Training:** The old photo-placeholder column squeezed the inputs. Replaced it with full-width cards, clearer exercise targets, 44 px completion controls, per-set previous results, and a persistent finish bar. All workout prescriptions and draft storage keys remain intact.
+- **Training:** The old photo-placeholder column squeezed the inputs. Replaced it with full-width cards, clearer exercise targets, 44 px completion controls, per-set previous results, and a persistent finish bar. All workout prescriptions and draft storage keys remain intact. Background exercise-catalogue loading no longer rebuilds the form and discards an entry before it loses focus.
 - **Technique:** Existing cues stay available beside the workout. Added a direct return to the session. Unreviewed exercise photographs remain unpublished.
 - **Exercise library:** Replaced the dense grid of photo-pending notices with readable movement rows, category symbols and equipment labels. Search and filters remain. Draft coaching status remains disclosed in the individual guide.
 - **Progress:** Replaced the sparse summary with workout and completed-set totals, four weeks of actual training-day consistency, a labeled weight chart, readable session history and access to every saved session. No estimated strength or recovery scores were invented.
