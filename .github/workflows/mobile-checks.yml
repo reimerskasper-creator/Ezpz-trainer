@@ -3,6 +3,7 @@ on:
   push:
     branches: [main]
     paths: ['fitness.html', 'exercise-catalog.json', 'meal-images/**', 'tests/**', '.github/workflows/mobile-checks.yml']
+  workflow_dispatch:
   pull_request:
     branches: [main]
 permissions:
