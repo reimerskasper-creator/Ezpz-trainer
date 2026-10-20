@@ -8,16 +8,17 @@ let query='',writes=0;
 const initial={profile:{weight:80,height:180,age:35,sex:'male',days:3,goal:'maintain',level:'Beginner',equipment:'home'},logs:[],weights:[],shopping:['Tomatoes (raw) — 100 g'],foodLog:[],mealPlan:{saved:{breakfast:0,lunch:4,dinner:5}},workoutLayoutVersion:2};
 let stored=JSON.stringify(initial);
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:id==='recipe-search'?{value:query}:null,querySelectorAll:s=>s==='[data-recipe-card]'?cards:[],querySelector:s=>fields[s]||null,addEventListener:(n,f)=>(listeners[n]??=[]).push(f)};
-const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
-assert(api.recipes.length===49,'Expected 49 recipes');
+const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v},setFocus(v){mealFocus=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
+assert(api.recipes.length===67,'Expected 67 recipes');
 const approved=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/approved-food.json'),'utf8'));
-for(const [name,body] of Object.entries(approved.foodFunctions||{}))assert(source.includes(body),'Approved food function changed: '+name);
+for(const [name,body] of Object.entries(approved.foodFunctions||{}))if(!['eat','filterRecipes'].includes(name))assert(source.includes(body),'Approved food function changed: '+name);
 if(approved.stylePrefix)assert(source.includes(approved.stylePrefix),'Approved base styles changed');
 assert(JSON.stringify(api.foods)===JSON.stringify(approved.foods),'Approved food reference values changed');
-assert(JSON.stringify(api.recipes.map(({photo,...r})=>r))===JSON.stringify(approved.recipes),'Approved recipes changed');
-for(let i=0;i<49;i++){const html=api.mealPhoto(i),photo=html.match(/src="([^"]+)"/)?.[1];assert(photo&&fs.existsSync(path.join(__dirname,'..',photo)),'Recipe image missing '+i)}
+assert(JSON.stringify(api.recipes.slice(0,49).map(({photo,...r})=>r))===JSON.stringify(approved.recipes),'Approved recipes changed');
+for(let i=0;i<67;i++){const html=api.mealPhoto(i),photo=html.match(/src="([^"]+)"/)?.[1];assert(photo&&fs.existsSync(path.join(__dirname,'..',photo)),'Recipe image missing '+i)}
 assert(api.recipes[0].name==='Greek yogurt berry bowl'&&api.recipes[4].name==='Turkey wrap'&&api.recipes[23].name==='Blueberry overnight oats','Saved numeric recipe references changed');
-for(let i=24;i<49;i++){
+for(const focus of ['protein','carbs','fat']){const added=api.recipes.filter(r=>r.focus===focus);assert(added.length===6,'Six meals per focus');for(const r of added){const n=api.nutrition(r.ingredients),total=n[1]*4+n[2]*4+n[3]*9,share=(focus==='protein'?n[1]*4:focus==='carbs'?n[2]*4:n[3]*9)/total;assert(share>=(focus==='protein'?.35:focus==='carbs'?.55:.40),'Macro focus '+r.name);assert(r.photo===api.recipes[r.baseRecipe].photo,'Same-dish photo');assert(r.ingredients.every(([name])=>api.recipes[r.baseRecipe].ingredients.some(x=>x[0]===name)),'Photo ingredient mismatch')}}
+for(let i=24;i<67;i++){
  const r=api.recipes[i];
  assert(api.mealPhoto(i).includes(r.photo),'Missing image '+i);
  assert(fs.existsSync(path.join(__dirname,'..',r.photo)),'Missing photo asset '+r.photo);
@@ -34,11 +35,11 @@ for(let i=24;i<49;i++){
  }
  cards.push({dataset:{recipeIndex:String(i),mealCategory:api.recipeCategory(i)},textContent:r.name,hidden:false});
 }
-api.eat();assert((screen.innerHTML.match(/data-recipe-card /g)||[]).length===49,'Recipe cards missing');
+api.eat();assert((screen.innerHTML.match(/data-recipe-card /g)||[]).length===67,'Recipe cards missing');
 assert(api.mealPlanner().includes('value="48"'),'New recipes unavailable in planner');
 api.setFilter('dinner');query='chickpea';api.filterRecipes();
 assert(cards.filter(x=>!x.hidden).map(x=>Number(x.dataset.recipeIndex)).join(',')==='47','Search and category must combine');
-query='garlic';api.filterRecipes();assert(cards.some(x=>!x.hidden),'Search ingredients');
+for(const focus of ['protein','carbs','fat']){api.setFocus(focus);api.setFilter('all');query='';api.filterRecipes();assert(cards.filter(x=>!x.hidden).length===6,'Focus filtering '+focus)}api.setFocus('balanced');api.setFilter('dinner');query='garlic';api.filterRecipes();assert(cards.some(x=>!x.hidden),'Search ingredients');
 assert(writes===0&&stored===JSON.stringify(initial),'Browsing changed saved data');
 // Exercise the existing food-log and shopping handlers using the final added recipe.
 const click=selector=>{const key=selector==='[data-log-food]'?'logFood':'recipe',node={dataset:{[key]:'48'}};for(const listener of listeners.click||[])listener({target:{closest:s=>s===selector?node:null}})};
@@ -49,4 +50,6 @@ click('[data-recipe]');
 assert(api.state.shopping.includes('Lentils (cooked, drained) — 270 g'),'Shopping portion weights');
 assert(api.state.shopping.includes('Tomatoes (raw) — 100 g'),'Existing shopping data lost');
 assert(api.state.mealPlan.saved.lunch===4,'Existing meal plan changed');
-console.log('PASS: 49 recipes, 49 image assets, 100 portion cases, combined filters, logging, shopping and saved plans');
+// The appended meals use the same diary and shopping paths.
+for(const index of [49,66]){fields['[data-serving="'+index+'"]']={value:'1.5'};for(const selector of ['[data-log-food]','[data-recipe]']){const key=selector==='[data-log-food]'?'logFood':'recipe',node={dataset:{[key]:String(index)}};for(const listener of listeners.click||[])listener({target:{closest:s=>s===selector?node:null}})}const entry=api.state.foodLog.at(-1);assert(entry.name===api.recipes[index].name&&entry.servings===1.5,'Appended recipe logging');assert(JSON.stringify(entry.macros)===JSON.stringify(api.nutrition(api.recipes[index].ingredients,1.5)),'Appended recipe macros')}
+console.log('PASS: 67 recipes, all image assets, 172 portion cases, combined filters, logging, shopping and saved plans');

@@ -31,7 +31,10 @@ try{
   const checkLayout=async(label)=>{const ok=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);if(!ok){console.log('OVERFLOW_DIAGNOSTIC',label,JSON.stringify(await page.evaluate(()=>({innerWidth,clientWidth:document.documentElement.clientWidth,elements:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>document.documentElement.clientWidth+1}).slice(0,25).map(e=>({tag:e.tagName,class:e.className,rect:e.getBoundingClientRect().toJSON(),text:e.textContent.slice(0,100)}))}))));const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000))}assert(ok,'Horizontal overflow: '+width+' '+label)};
   const capture=async(name)=>{await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(out,name+'-'+width+'.jpg'),type:'jpeg',quality:80});if(width===390)captures.push({name,src:'data:image/jpeg;base64,'+fs.readFileSync(path.join(out,name+'-'+width+'.jpg')).toString('base64')})};
   await page.goto(base+'/fitness.html');await page.locator('[data-tab="home"]').waitFor();await checkLayout('Home');await capture('Home');
-  await page.locator('[data-tab="eat"]').click();assert.equal(await page.locator('[data-recipe-card]').count(),49);assert.equal(await page.locator('[data-recipe-card] img').count(),49);
+  await page.locator('[data-tab="eat"]').click();assert.equal(await page.locator('[data-recipe-card]').count(),67);assert.equal(await page.locator('[data-recipe-card] img').count(),67);
+  for(const focus of ['protein','carbs','fat','balanced']){await page.locator('[data-meal-focus="'+focus+'"]').click();assert.equal(await page.locator('[data-recipe-card]:visible').count(),focus==='balanced'?49:6);await checkLayout('meal section '+focus);await capture('Meals-'+focus)}
+  await page.locator('[data-meal-focus="protein"]').click();await page.locator('#recipe-search').fill('chicken');assert.equal(await page.locator('[data-recipe-card]:visible').count(),2);await page.locator('[data-meal-filter="dinner"]').click();assert.equal(await page.locator('[data-recipe-card]:visible').count(),1);
+  await page.locator('[data-meal-focus="balanced"]').click();await page.locator('[data-meal-filter="all"]').click();await page.locator('#recipe-search').fill('');
   if(width===390){for(const src of await page.locator('[data-recipe-card] img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')))){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Photo '+src);const bytes=await response.body();assert(bytes[0]===255&&bytes[1]===216,'JPEG asset '+src)}}
   await checkLayout('Food');await capture('Food');
   await page.locator('#recipe-search').fill('Chicken potato plate');await page.locator('[data-open-meal="6"]').click();await page.locator('[data-serving="6"]').selectOption('2');assert((await page.locator('[data-ingredients="6"]').innerText()).includes('320 g'));await page.locator('[data-log-food="6"]').click();
@@ -276,8 +279,8 @@ try{
   assert.equal(await page.locator('#planned-workout img').getAttribute('src'),'./meal-images/workout-hero.jpg');
   await page.locator('[data-open-meal-picker="breakfast"]').click();
   await page.locator('[data-plan-picker-filter="all"]').click();
-  assert.equal(await page.locator('[data-plan-pick-meal]').count(),49);
-  assert.equal(await page.locator('[data-plan-pick-meal] img').count(),49);
+  assert.equal(await page.locator('[data-plan-pick-meal]').count(),67);
+  assert.equal(await page.locator('[data-plan-pick-meal] img').count(),67);
   await checkLayout('Recipe photo picker');
   assert.equal(await page.locator('[data-plan-picker-filter="all"]').getAttribute('aria-pressed'),'true');
   assert.equal(await page.locator('[data-plan-picker-filter="breakfast"]').getAttribute('aria-pressed'),'false');
@@ -286,7 +289,7 @@ try{
   if(width===390)captures.push({name:'Planner meal picker',src:'data:image/jpeg;base64,'+mealPickerJpg.toString('base64')});
   await page.locator('#planner-picker-search').fill('zzzz-no-recipe');
   assert.equal(await page.locator('[data-plan-pick-meal]').count(),0);assert((await page.locator('.picker-empty').innerText()).includes('No recipes'));
-  await page.locator('[data-plan-picker-action="reset"]').click();assert.equal(await page.locator('[data-plan-pick-meal]').count(),49);
+  await page.locator('[data-plan-picker-action="reset"]').click();assert.equal(await page.locator('[data-plan-pick-meal]').count(),67);
   await page.locator('#planner-picker-search').fill('Greek yogurt berry bowl');
   assert.equal(await page.locator('[data-plan-pick-meal]').count(),1);
   await page.locator('[data-plan-pick-meal="0"]').click();
@@ -374,6 +377,6 @@ try{
  const ownCaptures=captures.filter(x=>['Create your own','Your saved workouts','Train your own'].includes(x.name));
  if(ownCaptures.length){const sheet=await browser.newPage({viewport:{width:1200,height:920},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif>'+ownCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'own-workouts-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_OWN_DATA '+b.slice(i,i+4000));}}
 
- assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:49,workoutPrograms:55,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 49 recipe photos; 55 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
+ assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:67,workoutPrograms:55,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 67 recipe photos; 55 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});

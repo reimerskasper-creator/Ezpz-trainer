@@ -447,7 +447,9 @@ body[data-view=train] .session-footer{padding:10px 18px}
 .own-saved-workout>button{min-height:44px;font-size:12px}
 .own-empty{text-align:center;padding:30px 18px}.own-empty>span{display:grid;place-items:center;width:50px;height:50px;border-radius:15px;background:#e3f4e9;color:#439461;font-size:27px;margin:0 auto 15px}.own-empty h3{font-size:17px}.own-empty p{font-size:12px;margin:10px 0 17px}
 </style>
-</head><body>
+<style id="meal-focus-styles">
+.meal-focus-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:14px 0 20px}.meal-focus-grid button{display:flex;align-items:center;gap:9px;min-width:0;text-align:left;background:#fff;border:1px solid #e0e8e2;padding:8px;border-radius:13px;min-height:72px}.meal-focus-grid button[aria-pressed=true]{background:#e5f6ec;border-color:#64bd8b;box-shadow:0 0 0 1px #64bd8b}.meal-focus-grid img{width:44px;height:48px;border-radius:8px;object-fit:cover;flex:none}.meal-focus-grid span{min-width:0}.meal-focus-grid strong{display:block;font-size:11px;line-height:1.35}.meal-focus-grid small{display:block;font-size:9px;margin-top:4px;color:#7b8c81}.meal-focus-heading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:5px}.meal-focus-heading h3{font-size:17px}.meal-focus-heading small{font-size:10px;white-space:nowrap}#meal-results-empty{padding:22px 8px;text-align:center;font-size:12px}@media(max-width:360px){.meal-focus-grid{gap:7px}.meal-focus-grid button{gap:6px;padding:7px}.meal-focus-grid img{width:36px;height:44px}.meal-focus-grid strong{font-size:10px}}
+</style></head><body>
 <header class="row"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div><a class="link" href="./index.html">Trainer ↗</a></header>
 <main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg><span>Home</span></button><button data-tab="train"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="5" width="10" height="14" rx="1"/><path d="M3 9v6m18-6v6M5 7v10m14-10v10"/></svg><span>Train</span></button><button data-tab="eat"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg><span>Eat</span></button><button data-tab="progress"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18 10 12l4 3 6-9"/><path d="M15 6h5v5"/></svg><span>Progress</span></button><button data-tab="more"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14M5 10h14M5 15h14M5 20h14"/><path d="M2 5h.01M2 10h.01M2 15h.01M2 20h.01"/></svg><span>More</span></button></nav>
 <script>
@@ -1732,6 +1734,701 @@ function recipeSource(r){if(!r.inspiration)return '';const ref=r.inspiration==='
 // Complete the original recipe photographs without changing recipe data.
 for(let i=6;i<24;i++)recipes[i].photo='./meal-images/recipe-'+i+'.jpg';
 function nutrition(ingredients,scale=1){const values=[0,0,0,0];for(const [name,grams] of ingredients){const row=foods[name];if(!row||!Number.isFinite(grams)||grams<0)throw Error('Missing nutrition reference: '+name);row.forEach((v,i)=>values[i]+=v*grams*scale/100)}return values.map(Math.round)}
+
+// Portion-adjusted dishes: append only, preserving the original 49 recipe IDs.
+// Photographs show the same ingredients and plating; listed grams define the serving.
+recipes.push(...[
+  {
+    "name": "Protein strawberry yogurt bowl",
+    "category": "breakfast",
+    "minutes": 5,
+    "ingredients": [
+      [
+        "Plain nonfat Greek yogurt",
+        350
+      ],
+      [
+        "Rolled oats (dry)",
+        20
+      ],
+      [
+        "Strawberries (raw, hulled)",
+        150
+      ],
+      [
+        "Almonds (plain)",
+        10
+      ]
+    ],
+    "instructions": "Slice the strawberries and roughly chop the almonds. Spoon yogurt into a bowl and top with dry oats, berries and almonds.",
+    "photo": "./meal-images/recipe-25.jpg",
+    "inspiration": "balanced",
+    "focus": "protein",
+    "baseRecipe": 25
+  },
+  {
+    "name": "Protein lemon chicken quinoa",
+    "category": "lunch",
+    "minutes": 15,
+    "ingredients": [
+      [
+        "Chicken breast (cooked, skinless)",
+        190
+      ],
+      [
+        "Quinoa (cooked)",
+        100
+      ],
+      [
+        "Cucumber (raw)",
+        100
+      ],
+      [
+        "Tomatoes (raw)",
+        100
+      ],
+      [
+        "Plain nonfat Greek yogurt",
+        80
+      ],
+      [
+        "Lemon juice (fresh)",
+        15
+      ]
+    ],
+    "instructions": "Use cooked chicken and quinoa. Dice cucumber and tomatoes and slice chicken. Mix yogurt with lemon juice and spoon over the assembled bowl.",
+    "photo": "./meal-images/recipe-33.jpg",
+    "inspiration": "balanced",
+    "focus": "protein",
+    "baseRecipe": 33
+  },
+  {
+    "name": "Protein tuna white bean salad",
+    "category": "lunch",
+    "minutes": 10,
+    "ingredients": [
+      [
+        "Tuna in water (drained)",
+        180
+      ],
+      [
+        "White beans (cooked, drained, no added salt)",
+        100
+      ],
+      [
+        "Tomatoes (raw)",
+        120
+      ],
+      [
+        "Cucumber (raw)",
+        100
+      ],
+      [
+        "Olive oil",
+        5
+      ],
+      [
+        "Lemon juice (fresh)",
+        15
+      ]
+    ],
+    "instructions": "Drain tuna and beans thoroughly. Chop the vegetables and toss with beans, tuna, lemon juice and measured oil.",
+    "photo": "./meal-images/recipe-34.jpg",
+    "inspiration": "balanced",
+    "focus": "protein",
+    "baseRecipe": 34
+  },
+  {
+    "name": "Protein shrimp quinoa bowl",
+    "category": "lunch",
+    "minutes": 15,
+    "ingredients": [
+      [
+        "Shrimp (cooked, peeled)",
+        220
+      ],
+      [
+        "Quinoa (cooked)",
+        100
+      ],
+      [
+        "Avocado (flesh)",
+        40
+      ],
+      [
+        "Cucumber (raw)",
+        100
+      ],
+      [
+        "Tomatoes (raw)",
+        100
+      ],
+      [
+        "Lemon juice (fresh)",
+        15
+      ],
+      [
+        "Olive oil",
+        3
+      ]
+    ],
+    "instructions": "Use thoroughly cooked peeled shrimp and cooked quinoa. Dice avocado and vegetables and arrange over quinoa. Toss shrimp with lemon and measured oil and add to the bowl.",
+    "photo": "./meal-images/recipe-39.jpg",
+    "inspiration": "balanced",
+    "focus": "protein",
+    "baseRecipe": 39
+  },
+  {
+    "name": "Protein lemon cod plate",
+    "category": "dinner",
+    "minutes": 30,
+    "ingredients": [
+      [
+        "Cod (cooked)",
+        240
+      ],
+      [
+        "Sweet potato (baked, flesh)",
+        180
+      ],
+      [
+        "Zucchini (raw)",
+        180
+      ],
+      [
+        "Olive oil",
+        6
+      ],
+      [
+        "Lemon juice (fresh)",
+        20
+      ],
+      [
+        "Garlic (raw)",
+        5
+      ]
+    ],
+    "instructions": "Slice zucchini and garlic and roast with half the oil at 200°C for 15 minutes. Add cod and the remaining oil and roast until fish reaches 63°C; weigh the cooked fish portion. Serve with weighed baked sweet potato flesh and lemon juice.",
+    "photo": "./meal-images/recipe-41.jpg",
+    "inspiration": "balanced",
+    "focus": "protein",
+    "baseRecipe": 41
+  },
+  {
+    "name": "Protein chicken fajita bowl",
+    "category": "dinner",
+    "minutes": 20,
+    "ingredients": [
+      [
+        "Chicken breast (cooked, skinless)",
+        200
+      ],
+      [
+        "Brown rice (cooked)",
+        100
+      ],
+      [
+        "Red bell pepper (raw)",
+        150
+      ],
+      [
+        "Onion (raw)",
+        60
+      ],
+      [
+        "Plain nonfat Greek yogurt",
+        80
+      ],
+      [
+        "Olive oil",
+        5
+      ],
+      [
+        "Paprika (ground)",
+        2
+      ],
+      [
+        "Cumin (ground)",
+        1
+      ]
+    ],
+    "instructions": "Slice pepper and onion and sauté in oil for 7–8 minutes with paprika and cumin. Add sliced cooked chicken and heat until steaming hot throughout. Serve over cooked brown rice with yogurt.",
+    "photo": "./meal-images/recipe-42.jpg",
+    "inspiration": "balanced",
+    "focus": "protein",
+    "baseRecipe": 42
+  },
+  {
+    "name": "Apple cinnamon oat fuel bowl",
+    "category": "breakfast",
+    "minutes": 10,
+    "ingredients": [
+      [
+        "Rolled oats (dry)",
+        80
+      ],
+      [
+        "Plain nonfat Greek yogurt",
+        150
+      ],
+      [
+        "Milk (1% fat)",
+        150
+      ],
+      [
+        "Apple (raw, with skin, cored)",
+        160
+      ],
+      [
+        "Chia seeds (dry)",
+        8
+      ],
+      [
+        "Cinnamon (ground)",
+        1
+      ]
+    ],
+    "instructions": "Dice the apple and combine all ingredients in a covered jar. Refrigerate for at least 4 hours or overnight; stir before serving.",
+    "photo": "./meal-images/recipe-24.jpg",
+    "inspiration": "balanced",
+    "focus": "carbs",
+    "baseRecipe": 24
+  },
+  {
+    "name": "Banana oat fuel pancakes",
+    "category": "breakfast",
+    "minutes": 20,
+    "ingredients": [
+      [
+        "Banana (peeled)",
+        160
+      ],
+      [
+        "Rolled oats (dry)",
+        80
+      ],
+      [
+        "Whole eggs (without shell, raw weight)",
+        50
+      ],
+      [
+        "Plain nonfat Greek yogurt",
+        100
+      ],
+      [
+        "Blueberries (raw)",
+        100
+      ],
+      [
+        "Olive oil",
+        3
+      ]
+    ],
+    "instructions": "Blend banana, dry oats and weighed egg into a batter. Brush a nonstick pan with the measured oil and cook small pancakes over medium heat for 2–3 minutes per side until set. Serve with yogurt and blueberries.",
+    "photo": "./meal-images/recipe-28.jpg",
+    "inspiration": "balanced",
+    "focus": "carbs",
+    "baseRecipe": 28
+  },
+  {
+    "name": "Lentil pasta fuel plate",
+    "category": "dinner",
+    "minutes": 25,
+    "ingredients": [
+      [
+        "Lentils (cooked, drained)",
+        160
+      ],
+      [
+        "Whole wheat pasta (cooked)",
+        250
+      ],
+      [
+        "Tomatoes (canned, no added salt, with juice)",
+        200
+      ],
+      [
+        "Spinach (raw)",
+        60
+      ],
+      [
+        "Onion (raw)",
+        50
+      ],
+      [
+        "Garlic (raw)",
+        5
+      ],
+      [
+        "Olive oil",
+        3
+      ]
+    ],
+    "instructions": "Cook pasta according to its pack and weigh the cooked portion. Finely chop onion and garlic, soften in oil for 5 minutes, then add canned tomatoes and cooked lentils and simmer 10 minutes. Wilt in spinach and toss with pasta.",
+    "photo": "./meal-images/recipe-40.jpg",
+    "inspiration": "va",
+    "focus": "carbs",
+    "baseRecipe": 40
+  },
+  {
+    "name": "Smoky bean sweet potato fuel",
+    "category": "dinner",
+    "minutes": 20,
+    "ingredients": [
+      [
+        "Sweet potato (baked, flesh)",
+        350
+      ],
+      [
+        "Black beans (cooked, drained, no added salt)",
+        170
+      ],
+      [
+        "Tomatoes (raw)",
+        120
+      ],
+      [
+        "Avocado (flesh)",
+        25
+      ],
+      [
+        "Plain nonfat Greek yogurt",
+        50
+      ],
+      [
+        "Paprika (ground)",
+        2
+      ]
+    ],
+    "instructions": "Start with a baked sweet potato; weigh the cooked flesh for the listed portion. Warm drained beans with diced tomato and paprika for 5 minutes. Spoon over the potato and add diced avocado and yogurt.",
+    "photo": "./meal-images/recipe-43.jpg",
+    "inspiration": "va",
+    "focus": "carbs",
+    "baseRecipe": 43
+  },
+  {
+    "name": "Chickpea brown rice fuel bowl",
+    "category": "dinner",
+    "minutes": 25,
+    "ingredients": [
+      [
+        "Chickpeas (cooked, drained, no added salt)",
+        160
+      ],
+      [
+        "Tomatoes (canned, no added salt, with juice)",
+        200
+      ],
+      [
+        "Spinach (raw)",
+        100
+      ],
+      [
+        "Onion (raw)",
+        50
+      ],
+      [
+        "Brown rice (cooked)",
+        220
+      ],
+      [
+        "Olive oil",
+        3
+      ],
+      [
+        "Cumin (ground)",
+        2
+      ],
+      [
+        "Garlic (raw)",
+        5
+      ]
+    ],
+    "instructions": "Dice onion and garlic and soften in oil for 5 minutes with cumin. Add drained chickpeas and canned tomatoes and simmer for 10 minutes. Stir in spinach until wilted and serve over weighed cooked brown rice.",
+    "photo": "./meal-images/recipe-47.jpg",
+    "inspiration": "va",
+    "focus": "carbs",
+    "baseRecipe": 47
+  },
+  {
+    "name": "Lentil soup with extra toast",
+    "category": "dinner",
+    "minutes": 25,
+    "ingredients": [
+      [
+        "Lentils (cooked, drained)",
+        200
+      ],
+      [
+        "Carrot (raw)",
+        100
+      ],
+      [
+        "Zucchini (raw)",
+        100
+      ],
+      [
+        "Tomatoes (canned, no added salt, with juice)",
+        150
+      ],
+      [
+        "Onion (raw)",
+        50
+      ],
+      [
+        "Water",
+        200
+      ],
+      [
+        "Olive oil",
+        3
+      ],
+      [
+        "Whole wheat bread",
+        100
+      ],
+      [
+        "Cumin (ground)",
+        1
+      ]
+    ],
+    "instructions": "Dice carrot, zucchini and onion and soften in oil for 5 minutes with cumin. Add water, canned tomatoes and cooked drained lentils and simmer for 15 minutes until the carrots are tender. Serve with whole wheat toast.",
+    "photo": "./meal-images/recipe-48.jpg",
+    "inspiration": "va",
+    "focus": "carbs",
+    "baseRecipe": 48
+  },
+  {
+    "name": "Pear walnut cottage cheese bowl",
+    "category": "breakfast",
+    "minutes": 5,
+    "ingredients": [
+      [
+        "Cottage cheese (2% fat)",
+        200
+      ],
+      [
+        "Pear (raw, cored)",
+        140
+      ],
+      [
+        "Rolled oats (dry)",
+        15
+      ],
+      [
+        "Walnuts (shelled)",
+        35
+      ]
+    ],
+    "instructions": "Dice the cored pear and roughly chop walnuts. Spoon cottage cheese into a bowl and top with pear, dry oats and walnuts.",
+    "photo": "./meal-images/recipe-27.jpg",
+    "inspiration": "balanced",
+    "focus": "fat",
+    "baseRecipe": 27
+  },
+  {
+    "name": "Tofu peanut edamame bowl",
+    "category": "lunch",
+    "minutes": 20,
+    "ingredients": [
+      [
+        "Firm tofu (drained)",
+        180
+      ],
+      [
+        "Edamame (cooked, shelled)",
+        80
+      ],
+      [
+        "Brown rice (cooked)",
+        70
+      ],
+      [
+        "Carrot (raw)",
+        80
+      ],
+      [
+        "Cucumber (raw)",
+        80
+      ],
+      [
+        "Peanut butter (plain)",
+        30
+      ],
+      [
+        "Lemon juice (fresh)",
+        15
+      ],
+      [
+        "Water",
+        30
+      ]
+    ],
+    "instructions": "Pat tofu dry, cube and brown in a nonstick pan without extra oil for 8–10 minutes. Warm cooked rice and shelled edamame. Whisk peanut butter, lemon and water into a sauce and serve with tofu, grated carrot and sliced cucumber.",
+    "photo": "./meal-images/recipe-35.jpg",
+    "inspiration": "va",
+    "focus": "fat",
+    "baseRecipe": 35
+  },
+  {
+    "name": "Turkey avocado sandwich",
+    "category": "lunch",
+    "minutes": 10,
+    "ingredients": [
+      [
+        "Turkey breast (cooked, skinless)",
+        80
+      ],
+      [
+        "Whole wheat bread",
+        60
+      ],
+      [
+        "Avocado (flesh)",
+        160
+      ],
+      [
+        "Tomatoes (raw)",
+        80
+      ],
+      [
+        "Lettuce (raw)",
+        30
+      ],
+      [
+        "Plain nonfat Greek yogurt",
+        30
+      ]
+    ],
+    "instructions": "Mash avocado with yogurt and spread on bread. Add sliced cooked turkey, tomato and washed lettuce; close and cut in half.",
+    "photo": "./meal-images/recipe-36.jpg",
+    "inspiration": "balanced",
+    "focus": "fat",
+    "baseRecipe": 36
+  },
+  {
+    "name": "Shrimp avocado olive oil bowl",
+    "category": "lunch",
+    "minutes": 15,
+    "ingredients": [
+      [
+        "Shrimp (cooked, peeled)",
+        140
+      ],
+      [
+        "Quinoa (cooked)",
+        80
+      ],
+      [
+        "Avocado (flesh)",
+        130
+      ],
+      [
+        "Cucumber (raw)",
+        100
+      ],
+      [
+        "Tomatoes (raw)",
+        100
+      ],
+      [
+        "Lemon juice (fresh)",
+        15
+      ],
+      [
+        "Olive oil",
+        12
+      ]
+    ],
+    "instructions": "Use thoroughly cooked peeled shrimp and cooked quinoa. Dice avocado and vegetables and arrange over quinoa. Toss shrimp with lemon and measured oil and add to the bowl.",
+    "photo": "./meal-images/recipe-39.jpg",
+    "inspiration": "balanced",
+    "focus": "fat",
+    "baseRecipe": 39
+  },
+  {
+    "name": "Salmon olive oil quinoa plate",
+    "category": "dinner",
+    "minutes": 20,
+    "ingredients": [
+      [
+        "Salmon (cooked)",
+        190
+      ],
+      [
+        "Quinoa (cooked)",
+        80
+      ],
+      [
+        "Broccoli (cooked)",
+        180
+      ],
+      [
+        "Lemon juice (fresh)",
+        20
+      ],
+      [
+        "Olive oil",
+        12
+      ]
+    ],
+    "instructions": "Bake salmon at 200°C until it reaches 63°C and weigh the cooked portion. Steam broccoli and cook quinoa, then weigh both cooked portions. Plate with salmon and drizzle with measured oil and lemon juice.",
+    "photo": "./meal-images/recipe-44.jpg",
+    "inspiration": "balanced",
+    "focus": "fat",
+    "baseRecipe": 44
+  },
+  {
+    "name": "Tofu peanut noodle plate",
+    "category": "dinner",
+    "minutes": 20,
+    "ingredients": [
+      [
+        "Firm tofu (drained)",
+        200
+      ],
+      [
+        "Whole wheat pasta (cooked)",
+        80
+      ],
+      [
+        "Broccoli (cooked)",
+        150
+      ],
+      [
+        "Carrot (raw)",
+        80
+      ],
+      [
+        "Peanut butter (plain)",
+        35
+      ],
+      [
+        "Lemon juice (fresh)",
+        15
+      ],
+      [
+        "Water",
+        40
+      ]
+    ],
+    "instructions": "Cube and brown tofu in a dry nonstick pan for 8–10 minutes. Steam carrot strips and broccoli until tender and cook pasta, weighing the cooked portions where listed. Whisk peanut butter, lemon and water and toss everything with the sauce.",
+    "photo": "./meal-images/recipe-46.jpg",
+    "inspiration": "va",
+    "focus": "fat",
+    "baseRecipe": 46
+  }
+]);
+const mealFocusGroups=[
+{id:'protein',label:'High protein meals',caption:'Protein-forward portions',cover:33},
+{id:'carbs',label:'High carb meals',caption:'Carbohydrate-forward portions',cover:40},
+{id:'fat',label:'High fat meals',caption:'Fat-forward portions',cover:44},
+{id:'balanced',label:'Balanced meals',caption:'Your original favourites',cover:24}
+];
+let mealFocus='balanced';
+function recipeFocus(i){return recipes[i]?.focus||'balanced'}
+function mealFocusTiles(){return '<div class="meal-focus-grid" role="group" aria-label="Meal sections">'+mealFocusGroups.map(g=>'<button type="button" data-meal-focus="'+g.id+'" aria-pressed="'+(mealFocus===g.id)+'">'+mealPhoto(g.cover)+'<span><strong>'+g.label+'</strong><small>'+recipes.filter((r,i)=>recipeFocus(i)===g.id).length+' meals</small></span></button>').join('')+'</div><div class="meal-focus-heading"><h3 id="meal-focus-title">'+mealFocusGroups.find(g=>g.id===mealFocus).label+'</h3><small id="meal-result-count" role="status" aria-live="polite"></small></div>'}
+
 const meals=recipes.map(r=>[r.name,...nutrition(r.ingredients)]);
 let state;try{state=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}if(!state||typeof state!=='object')state={profile:null,logs:[],weights:[]};if(!Array.isArray(state.logs))state.logs=[];if(!Array.isArray(state.weights))state.weights=[];
 let tab='home',mealFilter='all';
@@ -5626,8 +6323,9 @@ function foodDate(){return new Date().toLocaleDateString('en-CA')}
 function foodEntries(){return Array.isArray(state.foodLog)?state.foodLog:[]}
 function foodSummary(){const entries=foodEntries().filter(x=>x.date===foodDate());const totals=[0,0,0,0];for(const e of entries){if(!Array.isArray(e.macros))continue;e.macros.forEach((n,i)=>{if(i<4&&Number.isFinite(n))totals[i]+=n})}return {entries,totals:totals.map(Math.round)}}
 function foodDiary(){const t=target(),s=foodSummary(),names=['Calories','Protein','Carbs','Fat'],goals=[t.calories,t.protein,t.carbs,t.fat];return '<section class="card food-diary"><div class="row"><div><h3>Today’s food</h3><p class="note">'+safe(foodDate())+' · '+s.entries.length+' meals logged</p></div><strong>'+s.totals[0]+' / '+t.calories+' kcal</strong></div><progress max="'+t.calories+'" value="'+Math.min(t.calories,s.totals[0])+'"></progress><div class="food-macro-grid">'+names.slice(1).map((n,i)=>'<div><strong>'+s.totals[i+1]+'g</strong><small>'+n+' / '+goals[i+1]+'g</small></div>').join('')+'</div>'+(s.entries.length?'<div class="food-log-list">'+s.entries.map(e=>'<div class="food-log-entry"><span>'+safe(e.name)+'<small>'+safe(e.servings)+' serving(s) · '+Math.round(e.macros[0])+' kcal</small></span><button type="button" data-remove-food="'+safe(e.id)+'" aria-label="Remove '+safe(e.name)+' from food log">Remove</button></div>').join('')+'</div>':'<p class="note">Open a recipe and tap Log this meal to start tracking.</p>')+'<p class="note">Targets and nutrition values are estimates. Your food log is stored on this device.</p></section>'}
-function filterRecipes(){const q=(document.getElementById('recipe-search')?.value||'').toLowerCase().trim();document.querySelectorAll('[data-recipe-card]').forEach(card=>{const r=recipes[Number(card.dataset.recipeIndex)];const searchable=r?[r.name,...r.ingredients.map(x=>x[0])].join(' ').toLowerCase():card.textContent.toLowerCase();card.hidden=(mealFilter!=='all'&&card.dataset.mealCategory!==mealFilter)||!searchable.includes(q)})}
-function eat(){mealFilter='all';screen.innerHTML='<div class="food-page-head"><div><span>EZPZ NUTRITION</span><h2>Meals</h2><p>Simple food. Clear portions.</p></div><b>✳</b></div><div class="food-section-title"><h3>Explore recipes</h3><span>'+recipes.length+' meals</span></div><label for="recipe-search" class="food-search-label">Search recipes</label><input id="recipe-search" type="search" placeholder="Search recipes or ingredients..."><div class="meal-filter"><button data-meal-filter="all" aria-pressed="true">All</button><button data-meal-filter="breakfast">Breakfast</button><button data-meal-filter="lunch">Lunch</button><button data-meal-filter="dinner">Dinner</button></div><div id="recipe-results">'+recipes.map((r,i)=>({r,i})).sort((a,b)=>Number(!!b.r.minutes)-Number(!!a.r.minutes)).map(({r,i})=>{const n=nutrition(r.ingredients),category=recipeCategory(i);return '<button class="meal-list-card" data-open-meal="'+i+'" data-meal-category="'+category+'" data-recipe-card data-recipe-index="'+i+'">'+mealPhoto(i)+'<span class="meal-list-info"><strong>'+safe(r.name)+'</strong><b>'+n[0]+' kcal</b><span class="meal-macro-pills"><em>P '+n[1]+'g</em><em>C '+n[2]+'g</em><em>F '+n[3]+'g</em></span><small>'+(r.minutes?r.minutes+' min prep · ':'')+'View recipe →</small></span></button>'}).join('')+'</div><div class="food-section-title food-tools-heading"><h3>My nutrition</h3></div><details class="food-tool" data-home-diary><summary><strong>◉ &nbsp; Today’s food</strong><small>Calories and macros　⌄</small></summary>'+foodDiary()+'</details><details class="food-tool"><summary><strong>▦ &nbsp; Plan workouts & meals</strong><small>Single day to 4 weeks　⌄</small></summary>'+plannerTeaser()+'</details><p class="note">The latest 25 recipes appear first. Photos illustrate ingredients; use the listed weights for portions. Nutrition is estimated from ingredient weights.</p>'}
+function filterRecipes(){const q=(document.getElementById('recipe-search')?.value||'').toLowerCase().trim();let count=0;document.querySelectorAll('[data-recipe-card]').forEach(card=>{const i=Number(card.dataset.recipeIndex),r=recipes[i];const searchable=r?[r.name,...r.ingredients.map(x=>x[0])].join(' ').toLowerCase():card.textContent.toLowerCase();card.hidden=recipeFocus(i)!==mealFocus||(mealFilter!=='all'&&card.dataset.mealCategory!==mealFilter)||!searchable.includes(q);if(!card.hidden)count++});const status=document.getElementById('meal-result-count');if(status)status.textContent=count+' '+(count===1?'meal':'meals');const empty=document.getElementById('meal-results-empty');if(empty)empty.hidden=count>0}
+
+function eat(){mealFilter='all';screen.innerHTML='<div class="food-page-head"><div><span>EZPZ NUTRITION</span><h2>Meals</h2><p>Simple food. Clear portions.</p></div><b>✳</b></div><div class="food-section-title"><h3>Explore recipes</h3><span>'+recipes.length+' meals</span></div><label for="recipe-search" class="food-search-label">Search recipes</label><input id="recipe-search" type="search" placeholder="Search recipes or ingredients...">'+mealFocusTiles()+'<div class="meal-filter"><button data-meal-filter="all" aria-pressed="true">All</button><button data-meal-filter="breakfast">Breakfast</button><button data-meal-filter="lunch">Lunch</button><button data-meal-filter="dinner">Dinner</button></div><div id="recipe-results">'+recipes.map((r,i)=>({r,i})).sort((a,b)=>Number(!!b.r.minutes)-Number(!!a.r.minutes)).map(({r,i})=>{const n=nutrition(r.ingredients),category=recipeCategory(i);return '<button class="meal-list-card" data-open-meal="'+i+'" data-meal-category="'+category+'" data-recipe-card data-recipe-index="'+i+'">'+mealPhoto(i)+'<span class="meal-list-info"><strong>'+safe(r.name)+'</strong><b>'+n[0]+' kcal</b><span class="meal-macro-pills"><em>P '+n[1]+'g</em><em>C '+n[2]+'g</em><em>F '+n[3]+'g</em></span><small>'+(r.minutes?r.minutes+' min prep · ':'')+'View recipe →</small></span></button>'}).join('')+'</div><p id="meal-results-empty" hidden>No meals match. Try another search or meal type.</p><div class="food-section-title food-tools-heading"><h3>My nutrition</h3></div><details class="food-tool" data-home-diary><summary><strong>◉ &nbsp; Today’s food</strong><small>Calories and macros　⌄</small></summary>'+foodDiary()+'</details><details class="food-tool"><summary><strong>▦ &nbsp; Plan workouts & meals</strong><small>Single day to 4 weeks　⌄</small></summary>'+plannerTeaser()+'</details><p class="note">Photos illustrate the dish; portion-adjusted recipes share the original dish photo. Use listed gram weights for your serving. Nutrition is estimated from ingredients.</p>';filterRecipes()}
 function mealDetail(i){const r=recipes[i];if(!r){tab='eat';eat();return}const n=nutrition(r.ingredients);screen.innerHTML='<button class="back-link" data-go="eat">← All recipes</button><div class="meal-hero '+(i<6||r.photo?'':'meal-hero-placeholder')+'">'+mealPhoto(i,true)+'</div><section class="card meal-detail"><div class="detail-eyebrow">EZPZ RECIPE · '+Math.round(r.ingredients.reduce((sum,x)=>sum+x[1],0))+' G INGREDIENTS</div><h2>'+safe(r.name)+'</h2><p>'+(r.minutes?r.minutes+' min prep · 1 serving':'Simple ingredients. Clear portions.')+'</p><div class="nutrition-grid"><div><strong data-kcal="'+i+'">'+n[0]+'</strong><small>kcal</small></div><div><strong data-protein="'+i+'">'+n[1]+'g</strong><small>Protein</small></div><div><strong data-carbs="'+i+'">'+n[2]+'g</strong><small>Carbs</small></div><div><strong data-fat="'+i+'">'+n[3]+'g</strong><small>Fat</small></div></div><h3>Ingredients</h3><label for="servings-'+i+'">Serving size</label><select id="servings-'+i+'" data-serving="'+i+'"><option value=".5">½ serving</option><option value="1" selected>1 serving</option><option value="1.5">1½ servings</option><option value="2">2 servings</option></select><ul class="ingredient-list" data-ingredients="'+i+'"></ul><h3>Instructions</h3>'+(r.minutes?'<p class="note">Prep time assumes ingredients labeled cooked are ready. Weigh each ingredient as labeled: raw, cooked, peeled or drained. Water can evaporate, so final dish weight may differ.</p>':'')+'<ol class="recipe-steps">'+r.instructions.split(/\.\s+/).filter(Boolean).map(step=>'<li>'+safe(step.replace(/\.$/,''))+'.</li>').join('')+'</ol><button class="primary" data-log-food="'+i+'">Log this meal ✓</button><button data-recipe="'+i+'" style="margin-top:10px">Add to shopping list</button><p class="note" data-nutrition="'+i+'"></p><p class="note">Nutrition is estimated from per-100g ingredient reference values. Brands and cooking methods change values. Photos are AI-generated serving illustrations; use ingredient weights for portions.</p>'+recipeSource(r)+'</section>';updateRecipe(i)}
 function updateRecipe(i){const r=recipes[i],scale=Number(document.querySelector('[data-serving="'+i+'"]')?.value||1),n=nutrition(r.ingredients,scale),grams=Math.round(r.ingredients.reduce((sum,x)=>sum+x[1]*scale,0)),out=document.querySelector('[data-nutrition="'+i+'"]'),list=document.querySelector('[data-ingredients="'+i+'"]');if(out)out.textContent=grams+' g total ingredient weight';const kcal=document.querySelector('[data-kcal="'+i+'"]'),macros=document.querySelector('[data-macros="'+i+'"]');if(kcal)kcal.textContent=n[0];if(macros)macros.textContent='P '+n[1]+' g  ·  C '+n[2]+' g  ·  F '+n[3]+' g';for(const [key,v] of [['protein',n[1]],['carbs',n[2]],['fat',n[3]]]){const el=document.querySelector('[data-'+key+'="'+i+'"]');if(el)el.textContent=v+'g'}if(list)list.innerHTML=r.ingredients.map(([food,g])=>'<li><span>'+safe(food)+'</span><b>'+Math.round(g*scale*10)/10+' g</b></li>').join('')}
 function shopping(){const list=Array.isArray(state.shopping)?state.shopping:[],merged=new Map();for(const entry of list){if(typeof entry!=='string')continue;const m=entry.match(/^(.*) — ([0-9.]+) g$/);if(!m)continue;merged.set(m[1],(merged.get(m[1])||0)+Number(m[2]))}const entries=[...merged.entries()];const checked=state.checkedShopping||{};screen.innerHTML='<div class="shopping-head"><span class="shopping-eyebrow">EZPZ NUTRITION</span><h2>Shopping list</h2><p>Everything you need, in one place.</p></div><div class="shopping-group-label"><strong>Ingredients</strong><small>Tap to check off</small></div><section class="card shopping-panel">'+(entries.length?entries.map(([food,g],i)=>'<label class="shopping-item"><input type="checkbox" data-shop-check="'+i+'" data-shop-name="'+safe(food)+'" '+(checked[food]?'checked':'')+'><span>'+safe(food)+'</span><strong>'+Math.round(g*10)/10+' g</strong></label>').join(''):'<div class="shopping-empty"><span aria-hidden="true">☷</span><strong>Your list is empty</strong><p>Choose a recipe to add ingredients.</p></div>')+'</section><button class="primary" data-go="eat">Browse recipes</button>'+(entries.length?'<button data-action="clear-completed" style="margin-top:10px">Remove checked ingredients</button><button data-action="clear-shopping" style="margin-top:10px">Clear entire list</button>':'')+'<button data-go="library" class="subtle-action" style="margin-top:14px">Exercise library →</button><p class="note">Checkmarks stay saved on this device.</p>'}
@@ -5660,7 +6358,7 @@ document.addEventListener('input',e=>{if(e.target.id==='library-search'){library
 function saveWorkoutField(target){const d=target.dataset||{};let k=null,value=target.value;if(d.setReps!==undefined)k='sr'+d.setReps;else if(d.setWeight!==undefined)k='sw'+d.setWeight;else if(d.setDone!==undefined){k='sd'+d.setDone;value=target.checked}else if(d.reps!==undefined)k='r'+d.reps;else if(d.load!==undefined)k='w'+d.load;if(k&&state.profile){const plan=workoutPlan();if(plan.id==='full-body'){state.draft={variant:plan.variant,equipment:state.profile.equipment,...workoutDraft(plan)};state.draft[k]=value}else{state.workoutDrafts=state.workoutDrafts||{};state.workoutDrafts[plan.id]={...workoutDraft(plan),[k]:value}};save();if(d.setDone!==undefined)updateWorkoutProgress()}}
 document.addEventListener('input',e=>{const d=e.target.dataset||{};if(d.setReps!==undefined||d.setWeight!==undefined)saveWorkoutField(e.target)});
 document.addEventListener('change',e=>{if(e.target.id==='workout-select'){const id=e.target.value;if(knownWorkout(id)){state.selectedWorkout=id;save();render()}return}if(e.target.dataset.planDay!==undefined){const offset=Number(e.target.value);if(Number.isInteger(offset)&&offset>=0&&offset<=6){state.mealPlanOffset=offset;save();eat()}return}if(e.target.dataset.planPortion){const slot=e.target.dataset.planPortion,v=Number(e.target.value);if(['breakfast','lunch','dinner'].includes(slot)&&[.5,1,1.5,2,2.5,3].includes(v)){state.mealPlan=plannedMeals();const day=mealPlanDay();state.mealPlan[day]=state.mealPlan[day]||{};state.mealPlan[day][slot+'Portion']=v;save();eat()}return}if(e.target.dataset.planSlot){const slot=e.target.dataset.planSlot;if(!['breakfast','lunch','dinner'].includes(slot))return;state.mealPlan=plannedMeals();const day=mealPlanDay();state.mealPlan[day]=state.mealPlan[day]||{};const index=e.target.value===''?null:Number(e.target.value);if(index===null){delete state.mealPlan[day][slot];delete state.mealPlan[day][slot+'Portion']}else if(Number.isInteger(index)&&index>=0&&index<recipes.length){state.mealPlan[day][slot]=index;state.mealPlan[day][slot+'Portion']=1;}save();eat();return}if(e.target.id==='library-category'){libraryCategory=e.target.value;exerciseLibrary();return}if(e.target.id==='library-equipment'){libraryEquipment=e.target.value;exerciseLibrary();return}if(e.target.dataset.shopName!==undefined){state.checkedShopping=state.checkedShopping||{};state.checkedShopping[e.target.dataset.shopName]=e.target.checked;save();return}if(e.target.dataset.serving!==undefined){updateRecipe(Number(e.target.dataset.serving));return}saveWorkoutField(e.target)});
-document.addEventListener('click',e=>{const homeFocus=e.target.closest('[data-home-focus]');if(homeFocus){const destination=homeFocus.dataset.homeFocus;tab=destination==='weight'?'progress':'eat';render();const section=document.querySelector(destination==='weight'?'#weightform':'[data-home-diary]');if(section){if(destination==='diary')section.open=true;if(destination==='weight'){const entry=section.closest?.('details');if(entry)entry.open=true}section.scrollIntoView({block:'start',behavior:'instant'});if(destination==='weight')section.querySelector('input')?.focus({preventScroll:true})}return}const categoryChoice=e.target.closest('[data-workout-category]');if(categoryChoice){showWorkoutCategory(categoryChoice.dataset.workoutCategory);return}const workoutChoice=e.target.closest('[data-workout-pick]');if(workoutChoice){const id=workoutChoice.dataset.workoutPick;if(knownWorkout(id)){document.getElementById('workout-chooser')?.close();delete state.activePlanDate;state.selectedWorkout=id;save();render();document.getElementById('workout-select')?.focus()}return}const addPlan=e.target.closest('[data-action="plan-to-shopping"],[data-action="week-to-shopping"]');if(addPlan){const all=addPlan.dataset.action==='week-to-shopping',dates=all?Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return d.toLocaleDateString('en-CA')}):[mealPlanDay()];const selected=dates.flatMap(date=>{const day=plannedMeals()[date]||{};return ['breakfast','lunch','dinner'].map(slot=>({i:day[slot],scale:planPortion(day,slot)})).filter(x=>Number.isInteger(x.i)&&recipes[x.i])});if(!selected.length){alert('Choose at least one meal first.');return}state.shopping=Array.isArray(state.shopping)?state.shopping:[];for(const {i,scale} of selected)for(const [name,g] of recipes[i].ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render();return}const remove=e.target.closest('[data-remove-food]');if(remove){state.foodLog=foodEntries().filter(x=>x.id!==remove.dataset.removeFood);save();eat();return}const logFood=e.target.closest('[data-log-food]');if(logFood){const i=Number(logFood.dataset.logFood),r=recipes[i],scale=Number(document.querySelector('[data-serving="'+i+'"]')?.value||1);if(r&&[.5,1,1.5,2].includes(scale)){state.foodLog=foodEntries();state.foodLog.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,7),date:foodDate(),name:r.name,servings:scale,macros:nutrition(r.ingredients,scale)});save();tab='eat';eat()}return}const lib=e.target.closest('[data-library-id]');if(lib){librarySelected=lib.dataset.libraryId;exerciseLibrary();window.scrollTo(0,0);return}const guide=e.target.closest('[data-open-exercise]');if(guide){const name=guide.dataset.openExercise;const aliases={'DB Romanian Deadlift':'Dumbbell Romanian Deadlift','Floor Press':'Dumbbell Floor Press','Hip Hinge':'Hip Hinge Drill','DB Shoulder Press':'Seated Dumbbell Shoulder Press'};librarySelected=(aliases[name]||name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');tab='library';render();window.scrollTo(0,0);return}const nav=e.target.closest('[data-tab]');if(nav){tab=nav.dataset.tab;render();window.scrollTo(0,0);return}const go=e.target.closest('[data-go]');if(go){tab=go.dataset.go;render();window.scrollTo(0,0);return}const meal=e.target.closest('[data-open-meal]');if(meal){tab='meal';document.body.dataset.view='meal';document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-current',b.dataset.tab==='eat'?'page':'false'));mealDetail(Number(meal.dataset.openMeal));window.scrollTo(0,0);return}const filter=e.target.closest('[data-meal-filter]');if(filter){mealFilter=filter.dataset.mealFilter;document.querySelectorAll('[data-meal-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===filter)));filterRecipes();return}const step=e.target.closest('[data-photo-step]');if(step){const frame=step.closest('.exercise-photo-frame'),img=frame?.querySelector('img');if(img){const next=step.dataset.photoStep==='1'?2:1;img.src=next===1?img.dataset.approvedStart:img.dataset.approvedFinish;img.alt=img.alt.replace(/starting position|next position/,next===1?'starting position':'next position');step.dataset.photoStep=String(next);step.textContent='Position '+next+' / 2 ↔';step.setAttribute('aria-label','Show '+(next===1?'next':'starting')+' position')}return}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='workout-categories'){showWorkoutCategory(null);return}if(action==='open-workouts'){chooserCategory=null;const dialog=document.getElementById('workout-chooser');if(dialog&&!dialog.open){dialog.innerHTML=chooserContents();dialog.showModal();dialog.scrollTop=0}return}if(action==='close-workouts'){document.getElementById('workout-chooser')?.close();document.getElementById('workout-select')?.focus();return}if(action==='more-history'){historyLimit+=12;progress();return}if(action==='clear-library-filters'){librarySearch='';libraryCategory='All';libraryEquipment='All';exerciseLibrary();return}if(action==='library-back'){librarySelected=null;exerciseLibrary();return}if(action==='reload-library'){exerciseCatalog=null;libraryLoading=false;exerciseLibrary();return}if(action==='finish'){const exercises=workoutPlan().exercises.map((x,i)=>{const sets=Array.from({length:x.sets},(_,j)=>({reps:document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg:document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done:!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked}));return {name:x.name,unit:x.unit||'reps',prescription:x.sets+' × '+x.reps+(x.unit&&x.unit!=='reps'?' '+x.unit:'')+(x.side?' / side':''),sets:sets.map(z=>z.done?z:{reps:'',kg:'',done:false}),reps:sets.filter(z=>z.done&&z.reps).map(z=>z.reps).join(', '),kg:sets.find(z=>z.done&&z.kg)?.kg||''}});const completedSets=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&z.reps!==''&&Number(z.reps)>0).length,0);if(!completedSets){alert('Enter a positive rep count or duration and check off at least one completed set before saving.');return}const invalidLoads=exercises.some(x=>x.sets.some(z=>z.done&&z.kg!==''&&(!Number.isFinite(Number(z.kg))||Number(z.kg)<0||Number(z.kg)>1000)));if(invalidLoads){alert('Use a weight from 0 to 1000 kg, or leave it blank for bodyweight.');return}const incomplete=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&(z.reps===''||Number(z.reps)<=0)).length,0);if(incomplete){alert('Some checked sets have no valid rep count or duration. Add a value or uncheck those sets.');return}const unchecked=workoutPlan().exercises.reduce((n,x,i)=>n+Array.from({length:x.sets},(_,j)=>{const reps=document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg=document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done=!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked;return !done&&(reps!==''||kg!=='')?1:0}).reduce((a,b)=>a+b,0),0);if(unchecked&&!confirm(unchecked+' entered set(s) are not checked complete. Save only the checked sets?'))return;const plan=workoutPlan();state.logs.push({planDate:validPlanDate(state.activePlanDate)&&state.workoutSchedule?.[state.activePlanDate]===plan.id?state.activePlanDate:undefined,date:new Date().toISOString(),type:state.profile.equipment,variant:plan.variant,workoutId:plan.id,title:workoutTitle(plan),setting:plan.equipment||state.profile.equipment,exercises});if(plan.id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[plan.id];delete trainingFocus[trainingKey(plan)];state.restTimer=null;delete state.activePlanDate;if(save()){tab='progress';render()}}if(action==='clear-draft'&&confirm('Clear your unfinished workout entries?')){const id=activeWorkoutId();delete trainingFocus[trainingKey()];if(state.restTimer?.workoutId===id)state.restTimer=null;if(id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[id];save();render()}if(action==='reset'&&confirm('Change your plan? Your workout and weight history will be kept.')){state.profile=null;save();render()}if(action==='clear-completed'){const checked=state.checkedShopping||{};state.shopping=(state.shopping||[]).filter(x=>!checked[String(x).split(' — ')[0]]);state.checkedShopping={};save();render();return}if(action==='clear-shopping'&&confirm('Clear your entire shopping list?')){state.shopping=[];state.checkedShopping={};save();render()}const recipe=e.target.closest('[data-recipe]');if(recipe){const r=recipes[Number(recipe.dataset.recipe)];if(r){state.shopping=Array.isArray(state.shopping)?state.shopping:[];const scale=Number(document.querySelector('[data-serving="'+recipe.dataset.recipe+'"]')?.value||1);for(const [name,g] of r.ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render()}}if(action==='restore'){const file=document.getElementById('restore-file')?.files?.[0];if(!file){alert('Choose a backup JSON file first.');return}if(file.size>2000000){alert('Backup exceeds 2 MB.');return}file.text().then(raw=>{let data;try{data=JSON.parse(raw)}catch(e){throw Error('Invalid JSON backup')}if(!data||typeof data!=='object'||!Array.isArray(data.logs)||!Array.isArray(data.weights)||data.logs.length>10000||data.weights.length>10000||data.profile!==null&&typeof data.profile!=='object')throw Error('Not an EZPZ Fitness backup');if(data.profile){const p=data.profile;if(!['home','gym'].includes(p.equipment)||!['Beginner','Intermediate','Advanced'].includes(p.level)||!Number.isFinite(p.weight)||!Number.isFinite(p.height)||!Number.isFinite(p.age)||!Number.isFinite(p.days)||p.weight<30||p.weight>350||p.height<120||p.height>230||p.age<18||p.age>100||p.days<2||p.days>5)throw Error('Invalid profile in backup')}if(!confirm('Replace all fitness data on this device with this backup?'))return;const prior=state;state=restoredState(data);migrateWorkoutDrafts();migratePracticalHiit();if(!save()){state=prior;return}tab='home';render()}).catch(err=>alert('Restore failed: '+err.message));return}if(action==='export'){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ezpz-fitness-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}});
+document.addEventListener('click',e=>{const homeFocus=e.target.closest('[data-home-focus]');if(homeFocus){const destination=homeFocus.dataset.homeFocus;tab=destination==='weight'?'progress':'eat';render();const section=document.querySelector(destination==='weight'?'#weightform':'[data-home-diary]');if(section){if(destination==='diary')section.open=true;if(destination==='weight'){const entry=section.closest?.('details');if(entry)entry.open=true}section.scrollIntoView({block:'start',behavior:'instant'});if(destination==='weight')section.querySelector('input')?.focus({preventScroll:true})}return}const categoryChoice=e.target.closest('[data-workout-category]');if(categoryChoice){showWorkoutCategory(categoryChoice.dataset.workoutCategory);return}const workoutChoice=e.target.closest('[data-workout-pick]');if(workoutChoice){const id=workoutChoice.dataset.workoutPick;if(knownWorkout(id)){document.getElementById('workout-chooser')?.close();delete state.activePlanDate;state.selectedWorkout=id;save();render();document.getElementById('workout-select')?.focus()}return}const addPlan=e.target.closest('[data-action="plan-to-shopping"],[data-action="week-to-shopping"]');if(addPlan){const all=addPlan.dataset.action==='week-to-shopping',dates=all?Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return d.toLocaleDateString('en-CA')}):[mealPlanDay()];const selected=dates.flatMap(date=>{const day=plannedMeals()[date]||{};return ['breakfast','lunch','dinner'].map(slot=>({i:day[slot],scale:planPortion(day,slot)})).filter(x=>Number.isInteger(x.i)&&recipes[x.i])});if(!selected.length){alert('Choose at least one meal first.');return}state.shopping=Array.isArray(state.shopping)?state.shopping:[];for(const {i,scale} of selected)for(const [name,g] of recipes[i].ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render();return}const remove=e.target.closest('[data-remove-food]');if(remove){state.foodLog=foodEntries().filter(x=>x.id!==remove.dataset.removeFood);save();eat();return}const logFood=e.target.closest('[data-log-food]');if(logFood){const i=Number(logFood.dataset.logFood),r=recipes[i],scale=Number(document.querySelector('[data-serving="'+i+'"]')?.value||1);if(r&&[.5,1,1.5,2].includes(scale)){state.foodLog=foodEntries();state.foodLog.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,7),date:foodDate(),name:r.name,servings:scale,macros:nutrition(r.ingredients,scale)});save();tab='eat';eat()}return}const lib=e.target.closest('[data-library-id]');if(lib){librarySelected=lib.dataset.libraryId;exerciseLibrary();window.scrollTo(0,0);return}const guide=e.target.closest('[data-open-exercise]');if(guide){const name=guide.dataset.openExercise;const aliases={'DB Romanian Deadlift':'Dumbbell Romanian Deadlift','Floor Press':'Dumbbell Floor Press','Hip Hinge':'Hip Hinge Drill','DB Shoulder Press':'Seated Dumbbell Shoulder Press'};librarySelected=(aliases[name]||name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');tab='library';render();window.scrollTo(0,0);return}const nav=e.target.closest('[data-tab]');if(nav){tab=nav.dataset.tab;render();window.scrollTo(0,0);return}const go=e.target.closest('[data-go]');if(go){tab=go.dataset.go;render();window.scrollTo(0,0);return}const meal=e.target.closest('[data-open-meal]');if(meal){tab='meal';document.body.dataset.view='meal';document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-current',b.dataset.tab==='eat'?'page':'false'));mealDetail(Number(meal.dataset.openMeal));window.scrollTo(0,0);return}const focus=e.target.closest('[data-meal-focus]');if(focus){mealFocus=focus.dataset.mealFocus;document.querySelectorAll('[data-meal-focus]').forEach(b=>b.setAttribute('aria-pressed',String(b===focus)));const heading=document.getElementById('meal-focus-title');if(heading)heading.textContent=mealFocusGroups.find(g=>g.id===mealFocus).label;filterRecipes();return}const filter=e.target.closest('[data-meal-filter]');if(filter){mealFilter=filter.dataset.mealFilter;document.querySelectorAll('[data-meal-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===filter)));filterRecipes();return}const step=e.target.closest('[data-photo-step]');if(step){const frame=step.closest('.exercise-photo-frame'),img=frame?.querySelector('img');if(img){const next=step.dataset.photoStep==='1'?2:1;img.src=next===1?img.dataset.approvedStart:img.dataset.approvedFinish;img.alt=img.alt.replace(/starting position|next position/,next===1?'starting position':'next position');step.dataset.photoStep=String(next);step.textContent='Position '+next+' / 2 ↔';step.setAttribute('aria-label','Show '+(next===1?'next':'starting')+' position')}return}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='workout-categories'){showWorkoutCategory(null);return}if(action==='open-workouts'){chooserCategory=null;const dialog=document.getElementById('workout-chooser');if(dialog&&!dialog.open){dialog.innerHTML=chooserContents();dialog.showModal();dialog.scrollTop=0}return}if(action==='close-workouts'){document.getElementById('workout-chooser')?.close();document.getElementById('workout-select')?.focus();return}if(action==='more-history'){historyLimit+=12;progress();return}if(action==='clear-library-filters'){librarySearch='';libraryCategory='All';libraryEquipment='All';exerciseLibrary();return}if(action==='library-back'){librarySelected=null;exerciseLibrary();return}if(action==='reload-library'){exerciseCatalog=null;libraryLoading=false;exerciseLibrary();return}if(action==='finish'){const exercises=workoutPlan().exercises.map((x,i)=>{const sets=Array.from({length:x.sets},(_,j)=>({reps:document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg:document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done:!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked}));return {name:x.name,unit:x.unit||'reps',prescription:x.sets+' × '+x.reps+(x.unit&&x.unit!=='reps'?' '+x.unit:'')+(x.side?' / side':''),sets:sets.map(z=>z.done?z:{reps:'',kg:'',done:false}),reps:sets.filter(z=>z.done&&z.reps).map(z=>z.reps).join(', '),kg:sets.find(z=>z.done&&z.kg)?.kg||''}});const completedSets=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&z.reps!==''&&Number(z.reps)>0).length,0);if(!completedSets){alert('Enter a positive rep count or duration and check off at least one completed set before saving.');return}const invalidLoads=exercises.some(x=>x.sets.some(z=>z.done&&z.kg!==''&&(!Number.isFinite(Number(z.kg))||Number(z.kg)<0||Number(z.kg)>1000)));if(invalidLoads){alert('Use a weight from 0 to 1000 kg, or leave it blank for bodyweight.');return}const incomplete=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&(z.reps===''||Number(z.reps)<=0)).length,0);if(incomplete){alert('Some checked sets have no valid rep count or duration. Add a value or uncheck those sets.');return}const unchecked=workoutPlan().exercises.reduce((n,x,i)=>n+Array.from({length:x.sets},(_,j)=>{const reps=document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg=document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done=!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked;return !done&&(reps!==''||kg!=='')?1:0}).reduce((a,b)=>a+b,0),0);if(unchecked&&!confirm(unchecked+' entered set(s) are not checked complete. Save only the checked sets?'))return;const plan=workoutPlan();state.logs.push({planDate:validPlanDate(state.activePlanDate)&&state.workoutSchedule?.[state.activePlanDate]===plan.id?state.activePlanDate:undefined,date:new Date().toISOString(),type:state.profile.equipment,variant:plan.variant,workoutId:plan.id,title:workoutTitle(plan),setting:plan.equipment||state.profile.equipment,exercises});if(plan.id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[plan.id];delete trainingFocus[trainingKey(plan)];state.restTimer=null;delete state.activePlanDate;if(save()){tab='progress';render()}}if(action==='clear-draft'&&confirm('Clear your unfinished workout entries?')){const id=activeWorkoutId();delete trainingFocus[trainingKey()];if(state.restTimer?.workoutId===id)state.restTimer=null;if(id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[id];save();render()}if(action==='reset'&&confirm('Change your plan? Your workout and weight history will be kept.')){state.profile=null;save();render()}if(action==='clear-completed'){const checked=state.checkedShopping||{};state.shopping=(state.shopping||[]).filter(x=>!checked[String(x).split(' — ')[0]]);state.checkedShopping={};save();render();return}if(action==='clear-shopping'&&confirm('Clear your entire shopping list?')){state.shopping=[];state.checkedShopping={};save();render()}const recipe=e.target.closest('[data-recipe]');if(recipe){const r=recipes[Number(recipe.dataset.recipe)];if(r){state.shopping=Array.isArray(state.shopping)?state.shopping:[];const scale=Number(document.querySelector('[data-serving="'+recipe.dataset.recipe+'"]')?.value||1);for(const [name,g] of r.ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render()}}if(action==='restore'){const file=document.getElementById('restore-file')?.files?.[0];if(!file){alert('Choose a backup JSON file first.');return}if(file.size>2000000){alert('Backup exceeds 2 MB.');return}file.text().then(raw=>{let data;try{data=JSON.parse(raw)}catch(e){throw Error('Invalid JSON backup')}if(!data||typeof data!=='object'||!Array.isArray(data.logs)||!Array.isArray(data.weights)||data.logs.length>10000||data.weights.length>10000||data.profile!==null&&typeof data.profile!=='object')throw Error('Not an EZPZ Fitness backup');if(data.profile){const p=data.profile;if(!['home','gym'].includes(p.equipment)||!['Beginner','Intermediate','Advanced'].includes(p.level)||!Number.isFinite(p.weight)||!Number.isFinite(p.height)||!Number.isFinite(p.age)||!Number.isFinite(p.days)||p.weight<30||p.weight>350||p.height<120||p.height>230||p.age<18||p.age>100||p.days<2||p.days>5)throw Error('Invalid profile in backup')}if(!confirm('Replace all fitness data on this device with this backup?'))return;const prior=state;state=restoredState(data);migrateWorkoutDrafts();migratePracticalHiit();if(!save()){state=prior;return}tab='home';render()}).catch(err=>alert('Restore failed: '+err.message));return}if(action==='export'){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ezpz-fitness-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}});
 
 
 function customWorkoutChoices(){const custom=cleanCustomWorkouts(state.customWorkouts);return '<div class="chooser-section-title"><span>YOUR OWN SESSIONS</span></div><button data-action="new-workout">＋ Build a workout</button>'+(custom.length?'<div class="program-list">'+custom.map(w=>'<article class="program-card"><div class="program-photo">'+workoutCoverImage(w.category)+'</div><div class="program-copy"><h3>'+safe(w.title)+'</h3>'+workoutBadges(w)+'<p>'+w.exercises.length+' exercises · '+safe(w.minutes)+' min</p><small>'+safe(w.equipment)+'</small><button data-workout-pick="'+safe(w.id)+'" aria-pressed="'+(activeWorkoutId()===w.id)+'">Choose my workout →</button></div></article>').join('')+'</div>':'')}

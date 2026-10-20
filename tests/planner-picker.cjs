@@ -25,7 +25,7 @@ api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.stat
 api.openPlannerPicker('workout');api.commitPickerWorkout('');assert(!api.state.workoutSchedule[date]&&api.state.workoutSchedule[other]==='pull-a','Remove only selected workout');
 api.state.foodLog=[{id:'old',date,servings:1,name:'Saved',macros:[400,30,45,10]}];
 api.openPlannerPicker('meal','breakfast');assert(api.pickerMealMatches().every(x=>api.recipeCategory(x.i)==='breakfast'),'Slot filter defaults to breakfast');
-api.picker.mealFilter='all';assert(api.pickerMealMatches().length===49,'All 49 approved recipes available');
+api.picker.mealFilter='all';assert(api.pickerMealMatches().length===67,'All 67 recipes available');
 assert(api.commitPickerMeal(0),'Assign breakfast');assert(api.state.mealPlan[date].breakfast===0&&api.state.mealPlan[date].breakfastPortion===1,'New recipe starts at one serving');
 api.setPlannedRecipe(date,'breakfast',0,1.5);api.setPlannedRecipe(date,'lunch',48,2);
 api.openPlannerPicker('meal','breakfast');api.commitPickerMeal(0);assert(api.state.mealPlan[date].breakfastPortion===1.5,'Reselecting same recipe preserves portion');
@@ -37,4 +37,4 @@ api.openPlannerPicker('workout');fail=true;assert(!api.commitPickerWorkout('leg-
 assert(alerts.length===1&&alerts[0].includes('Unable to save'),'Storage error surfaced');
 const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);equal(restored.mealPlan,backup.mealPlan,'Meal backup unchanged');equal(restored.workoutSchedule,backup.workoutSchedule,'Workout backup unchanged');
 assert(focuses.includes('planned-workout'),'Focus returns to trigger');
-console.log('PASS: photo picker categories, combined search/level filters, all 49 recipes, cancellation, target date/slot assignment, rest/removal, portion preservation, active drafts, food log, backups and storage rollback');
+console.log('PASS: photo picker categories, combined search/level filters, all 67 recipes, cancellation, target date/slot assignment, rest/removal, portion preservation, active drafts, food log, backups and storage rollback');
