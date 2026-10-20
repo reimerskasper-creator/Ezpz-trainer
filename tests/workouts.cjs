@@ -43,4 +43,11 @@ assert.equal(run('state.logs.at(-1).workoutId'),'hiit-a');assert.equal(run('stat
 run("state.selectedWorkout='full-body'");assert.equal(run('workoutPlan().variant'),'B');assert.equal(run('workoutDraft()["sr0-0"]'),'11');assert.equal(run('state.workoutDrafts["push-a"]["sr0-0"]'),'8');
 const saved=JSON.parse(stored);assert.deepEqual(saved.weights,original.weights);assert.deepEqual(saved.shopping,original.shopping);assert.deepEqual(saved.foodLog,original.foodLog);assert.deepEqual(saved.logs[0],original.logs[0]);
 run('state=JSON.parse(localStorage.getItem(KEY));state.selectedWorkout="push-a"');assert.equal(run('workoutDraft()["sr0-0"]'),'8');
-console.log('PASS: every preset and full-body A/B has at least six main exercises; cooldown draft migration is stable; 16 sessions render; movement cues, units and set counts; isolated draft persistence; interval logging/history; original full-body progression and existing data preserved.');
+// Custom chooser keeps native dialog accessibility and routes choices without losing drafts.
+run("tab='train';render()");assert.ok(screen.innerHTML.includes('aria-haspopup="dialog"'));assert.ok(screen.innerHTML.includes('<dialog id="workout-chooser"'));assert.ok(screen.innerHTML.includes('aria-label="Choose HIIT Day B"'));assert.ok(!screen.innerHTML.includes('<select id="workout-select"'));
+function chooseWorkout(id){const choice={dataset:{workoutPick:id}};for(const fn of listeners.click||[])fn({target:{closest:s=>s==='[data-workout-pick]'?choice:null}})}
+chooseWorkout('mobility-b');assert.equal(run('activeWorkoutId()'),'mobility-b');assert.equal(run('state.workoutDrafts["push-a"]["sr0-0"]'),'8');chooseWorkout('not-a-workout');assert.equal(run('activeWorkoutId()'),'mobility-b');
+const dialog={open:false,showModal(){this.open=true},close(){this.open=false}};context.document.getElementById=id=>id==='screen'?screen:id==='workout-chooser'?dialog:null;
+function clickAction(action){for(const fn of listeners.click||[])fn({target:{closest:s=>s==='[data-action]'?{dataset:{action}}:null}})}
+clickAction('open-workouts');assert.equal(dialog.open,true);clickAction('close-workouts');assert.equal(dialog.open,false);
+console.log('PASS: every preset and full-body A/B has at least six main exercises; cooldown draft migration is stable; 16 sessions render; custom chooser open/close/selection works; movement cues, units and set counts; isolated draft persistence; interval logging/history; original full-body progression and existing data preserved.');
