@@ -11,7 +11,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructions": [
@@ -37,14 +37,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/barbell-bench-press/start.webp",
           "finish": "./exercise-images/barbell-bench-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -56,7 +59,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructions": [
@@ -82,14 +85,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-bench-press/start.webp",
           "finish": "./exercise-images/dumbbell-bench-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -101,7 +107,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructions": [
@@ -127,14 +133,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/incline-dumbbell-press/start.webp",
           "finish": "./exercise-images/incline-dumbbell-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -146,7 +155,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructions": [
@@ -172,14 +181,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/incline-barbell-press/start.webp",
           "finish": "./exercise-images/incline-barbell-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -191,7 +203,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructions": [
@@ -217,14 +229,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/machine-chest-press/start.webp",
           "finish": "./exercise-images/machine-chest-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -236,7 +251,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructions": [
@@ -262,14 +277,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/push-up/start.webp",
           "finish": "./exercise-images/push-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -281,7 +299,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bench",
       "instructions": [
@@ -307,14 +325,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/incline-push-up/start.webp",
           "finish": "./exercise-images/incline-push-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -326,7 +347,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructions": [
@@ -352,14 +373,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/decline-push-up/start.webp",
           "finish": "./exercise-images/decline-push-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -371,7 +395,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructions": [
@@ -397,14 +421,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-floor-press/start.webp",
           "finish": "./exercise-images/dumbbell-floor-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -416,7 +443,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructions": [
@@ -442,14 +469,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/cable-chest-fly/start.webp",
           "finish": "./exercise-images/cable-chest-fly/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -461,7 +491,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructions": [
@@ -487,14 +517,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/pec-deck-fly/start.webp",
           "finish": "./exercise-images/pec-deck-fly/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -506,7 +539,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructions": [
@@ -532,14 +565,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/close-grip-push-up/start.webp",
           "finish": "./exercise-images/close-grip-push-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -551,7 +587,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Pull-up bar",
       "instructionStatus": "draft-needs-coach-review",
@@ -577,14 +613,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/pull-up/start.webp",
           "finish": "./exercise-images/pull-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -596,7 +635,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Pull-up bar",
       "instructionStatus": "draft-needs-coach-review",
@@ -622,14 +661,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/assisted-pull-up/start.webp",
           "finish": "./exercise-images/assisted-pull-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -641,7 +683,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Pull-up bar",
       "instructionStatus": "draft-needs-coach-review",
@@ -667,14 +709,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/chin-up/start.webp",
           "finish": "./exercise-images/chin-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -686,7 +731,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -712,14 +757,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/lat-pulldown/start.webp",
           "finish": "./exercise-images/lat-pulldown/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -731,7 +779,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -757,14 +805,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/close-grip-lat-pulldown/start.webp",
           "finish": "./exercise-images/close-grip-lat-pulldown/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -776,7 +827,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -802,14 +853,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/seated-cable-row/start.webp",
           "finish": "./exercise-images/seated-cable-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -821,7 +875,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -847,14 +901,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/chest-supported-dumbbell-row/start.webp",
           "finish": "./exercise-images/chest-supported-dumbbell-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -866,7 +923,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -892,14 +949,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/one-arm-dumbbell-row/start.webp",
           "finish": "./exercise-images/one-arm-dumbbell-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -911,7 +971,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -937,14 +997,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/bent-over-barbell-row/start.webp",
           "finish": "./exercise-images/bent-over-barbell-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -956,7 +1019,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Resistance band",
       "instructionStatus": "draft-needs-coach-review",
@@ -982,14 +1045,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/resistance-band-row/start.webp",
           "finish": "./exercise-images/resistance-band-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1001,7 +1067,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -1027,14 +1093,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/inverted-row/start.webp",
           "finish": "./exercise-images/inverted-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1046,7 +1115,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -1072,14 +1141,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/straight-arm-pulldown/start.webp",
           "finish": "./exercise-images/straight-arm-pulldown/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1091,7 +1163,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -1117,14 +1189,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/back-extension/start.webp",
           "finish": "./exercise-images/back-extension/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1136,7 +1211,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Backpack",
       "instructionStatus": "draft-needs-coach-review",
@@ -1162,14 +1237,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/backpack-row/start.webp",
           "finish": "./exercise-images/backpack-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1181,7 +1259,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1207,14 +1285,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/seated-dumbbell-shoulder-press/start.webp",
           "finish": "./exercise-images/seated-dumbbell-shoulder-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1226,7 +1307,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1252,14 +1333,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/standing-dumbbell-shoulder-press/start.webp",
           "finish": "./exercise-images/standing-dumbbell-shoulder-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1271,7 +1355,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -1297,14 +1381,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/barbell-overhead-press/start.webp",
           "finish": "./exercise-images/barbell-overhead-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1316,7 +1403,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -1342,14 +1429,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/machine-shoulder-press/start.webp",
           "finish": "./exercise-images/machine-shoulder-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1361,7 +1451,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1387,14 +1477,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-lateral-raise/start.webp",
           "finish": "./exercise-images/dumbbell-lateral-raise/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1406,7 +1499,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -1432,14 +1525,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/cable-lateral-raise/start.webp",
           "finish": "./exercise-images/cable-lateral-raise/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1451,7 +1547,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1477,14 +1573,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-front-raise/start.webp",
           "finish": "./exercise-images/dumbbell-front-raise/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1496,7 +1595,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -1522,14 +1621,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/reverse-pec-deck/start.webp",
           "finish": "./exercise-images/reverse-pec-deck/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1541,7 +1643,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1567,14 +1669,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/bent-over-reverse-fly/start.webp",
           "finish": "./exercise-images/bent-over-reverse-fly/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1586,7 +1691,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -1612,14 +1717,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/face-pull/start.webp",
           "finish": "./exercise-images/face-pull/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1631,7 +1739,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Resistance band",
       "instructionStatus": "draft-needs-coach-review",
@@ -1657,14 +1765,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/band-pull-apart/start.webp",
           "finish": "./exercise-images/band-pull-apart/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1676,7 +1787,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1702,14 +1813,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-arnold-press/start.webp",
           "finish": "./exercise-images/dumbbell-arnold-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1721,7 +1835,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1747,14 +1861,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-biceps-curl/start.webp",
           "finish": "./exercise-images/dumbbell-biceps-curl/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1766,7 +1883,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1792,14 +1909,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/hammer-curl/start.webp",
           "finish": "./exercise-images/hammer-curl/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1811,7 +1931,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -1837,14 +1957,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/barbell-curl/start.webp",
           "finish": "./exercise-images/barbell-curl/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1856,7 +1979,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -1882,14 +2005,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/cable-biceps-curl/start.webp",
           "finish": "./exercise-images/cable-biceps-curl/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1901,7 +2027,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -1927,14 +2053,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/incline-dumbbell-curl/start.webp",
           "finish": "./exercise-images/incline-dumbbell-curl/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1946,7 +2075,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -1972,14 +2101,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/rope-triceps-pushdown/start.webp",
           "finish": "./exercise-images/rope-triceps-pushdown/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -1991,7 +2123,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2017,14 +2149,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/overhead-triceps-extension/start.webp",
           "finish": "./exercise-images/overhead-triceps-extension/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2036,7 +2171,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -2062,14 +2197,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/skull-crusher/start.webp",
           "finish": "./exercise-images/skull-crusher/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2081,7 +2219,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -2107,14 +2245,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/close-grip-bench-press/start.webp",
           "finish": "./exercise-images/close-grip-bench-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2126,7 +2267,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bench",
       "instructionStatus": "draft-needs-coach-review",
@@ -2152,14 +2293,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/bench-triceps-dip/start.webp",
           "finish": "./exercise-images/bench-triceps-dip/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2171,7 +2315,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2197,14 +2341,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/chair-squat/start.webp",
           "finish": "./exercise-images/chair-squat/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2216,7 +2363,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2242,14 +2389,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/bodyweight-squat/start.webp",
           "finish": "./exercise-images/bodyweight-squat/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2261,7 +2411,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -2287,14 +2437,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/goblet-squat/start.webp",
           "finish": "./exercise-images/goblet-squat/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2306,7 +2459,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -2332,14 +2485,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/barbell-back-squat/start.webp",
           "finish": "./exercise-images/barbell-back-squat/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2351,7 +2507,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -2377,14 +2533,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/barbell-front-squat/start.webp",
           "finish": "./exercise-images/barbell-front-squat/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2396,7 +2555,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -2422,14 +2581,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/leg-press/start.webp",
           "finish": "./exercise-images/leg-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2441,7 +2603,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2467,14 +2629,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/reverse-lunge/start.webp",
           "finish": "./exercise-images/reverse-lunge/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2486,7 +2651,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2512,14 +2677,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/walking-lunge/start.webp",
           "finish": "./exercise-images/walking-lunge/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2531,7 +2699,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2557,14 +2725,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/bulgarian-split-squat/start.webp",
           "finish": "./exercise-images/bulgarian-split-squat/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2576,7 +2747,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Step",
       "instructionStatus": "draft-needs-coach-review",
@@ -2602,14 +2773,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/step-up/start.webp",
           "finish": "./exercise-images/step-up/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2621,7 +2795,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -2647,14 +2821,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-romanian-deadlift/start.webp",
           "finish": "./exercise-images/dumbbell-romanian-deadlift/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2666,7 +2843,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Barbell",
       "instructionStatus": "draft-needs-coach-review",
@@ -2692,14 +2869,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/barbell-romanian-deadlift/start.webp",
           "finish": "./exercise-images/barbell-romanian-deadlift/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2711,7 +2891,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2737,14 +2917,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/glute-bridge/start.webp",
           "finish": "./exercise-images/glute-bridge/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2756,7 +2939,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2782,14 +2965,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/hip-thrust/start.webp",
           "finish": "./exercise-images/hip-thrust/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2801,7 +2987,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -2827,14 +3013,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/lying-leg-curl/start.webp",
           "finish": "./exercise-images/lying-leg-curl/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2846,7 +3035,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -2872,14 +3061,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/leg-extension/start.webp",
           "finish": "./exercise-images/leg-extension/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2891,7 +3083,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -2917,14 +3109,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/standing-calf-raise/start.webp",
           "finish": "./exercise-images/standing-calf-raise/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2936,7 +3131,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -2962,14 +3157,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/seated-calf-raise/start.webp",
           "finish": "./exercise-images/seated-calf-raise/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -2981,7 +3179,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3007,14 +3205,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/plank/start.webp",
           "finish": "./exercise-images/plank/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3026,7 +3227,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3052,14 +3253,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/side-plank/start.webp",
           "finish": "./exercise-images/side-plank/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3071,7 +3275,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3097,14 +3301,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dead-bug/start.webp",
           "finish": "./exercise-images/dead-bug/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3116,7 +3323,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3142,14 +3349,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/bird-dog/start.webp",
           "finish": "./exercise-images/bird-dog/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3161,7 +3371,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3187,14 +3397,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/hollow-hold/start.webp",
           "finish": "./exercise-images/hollow-hold/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3206,7 +3419,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3232,14 +3445,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/reverse-crunch/start.webp",
           "finish": "./exercise-images/reverse-crunch/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3251,7 +3467,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3277,14 +3493,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/bicycle-crunch/start.webp",
           "finish": "./exercise-images/bicycle-crunch/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3296,7 +3515,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -3322,14 +3541,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/cable-crunch/start.webp",
           "finish": "./exercise-images/cable-crunch/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3341,7 +3563,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Cable machine",
       "instructionStatus": "draft-needs-coach-review",
@@ -3367,14 +3589,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/pallof-press/start.webp",
           "finish": "./exercise-images/pallof-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3386,7 +3611,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Pull-up bar",
       "instructionStatus": "draft-needs-coach-review",
@@ -3412,14 +3637,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/hanging-knee-raise/start.webp",
           "finish": "./exercise-images/hanging-knee-raise/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3431,7 +3659,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3457,14 +3685,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/lying-leg-raise/start.webp",
           "finish": "./exercise-images/lying-leg-raise/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3476,7 +3707,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3502,14 +3733,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/russian-twist/start.webp",
           "finish": "./exercise-images/russian-twist/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3521,7 +3755,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -3547,14 +3781,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/suitcase-carry/start.webp",
           "finish": "./exercise-images/suitcase-carry/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3566,7 +3803,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3592,14 +3829,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/mountain-climber/start.webp",
           "finish": "./exercise-images/mountain-climber/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3611,7 +3851,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Kettlebell",
       "instructionStatus": "draft-needs-coach-review",
@@ -3637,14 +3877,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/kettlebell-swing/start.webp",
           "finish": "./exercise-images/kettlebell-swing/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3656,7 +3899,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -3682,14 +3925,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-thruster/start.webp",
           "finish": "./exercise-images/dumbbell-thruster/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3701,7 +3947,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -3727,14 +3973,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-clean-and-press/start.webp",
           "finish": "./exercise-images/dumbbell-clean-and-press/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3746,7 +3995,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -3772,14 +4021,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/farmer-carry/start.webp",
           "finish": "./exercise-images/farmer-carry/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3791,7 +4043,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Sled",
       "instructionStatus": "draft-needs-coach-review",
@@ -3817,14 +4069,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/sled-push/start.webp",
           "finish": "./exercise-images/sled-push/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3836,7 +4091,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Sled",
       "instructionStatus": "draft-needs-coach-review",
@@ -3862,14 +4117,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/sled-pull/start.webp",
           "finish": "./exercise-images/sled-pull/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3881,7 +4139,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -3907,14 +4165,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/burpee/start.webp",
           "finish": "./exercise-images/burpee/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3926,7 +4187,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Medicine ball",
       "instructionStatus": "draft-needs-coach-review",
@@ -3952,14 +4213,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/medicine-ball-slam/start.webp",
           "finish": "./exercise-images/medicine-ball-slam/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -3971,7 +4235,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Kettlebell",
       "instructionStatus": "draft-needs-coach-review",
@@ -3997,14 +4261,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/kettlebell-deadlift/start.webp",
           "finish": "./exercise-images/kettlebell-deadlift/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4016,7 +4283,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Dumbbells",
       "instructionStatus": "draft-needs-coach-review",
@@ -4042,14 +4309,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/dumbbell-renegade-row/start.webp",
           "finish": "./exercise-images/dumbbell-renegade-row/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4061,7 +4331,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4087,14 +4357,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/cat-cow/start.webp",
           "finish": "./exercise-images/cat-cow/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4106,7 +4379,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4132,14 +4405,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/world-s-greatest-stretch/start.webp",
           "finish": "./exercise-images/world-s-greatest-stretch/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4151,7 +4427,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4177,14 +4453,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/hip-flexor-stretch/start.webp",
           "finish": "./exercise-images/hip-flexor-stretch/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4196,7 +4475,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4222,14 +4501,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/90-90-hip-switch/start.webp",
           "finish": "./exercise-images/90-90-hip-switch/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4241,7 +4523,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4267,14 +4549,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/thoracic-open-book/start.webp",
           "finish": "./exercise-images/thoracic-open-book/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4286,7 +4571,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4312,14 +4597,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/wall-slide/start.webp",
           "finish": "./exercise-images/wall-slide/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4331,7 +4619,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4357,14 +4645,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/shoulder-cars/start.webp",
           "finish": "./exercise-images/shoulder-cars/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4376,7 +4667,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4402,14 +4693,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/hip-hinge-drill/start.webp",
           "finish": "./exercise-images/hip-hinge-drill/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4421,7 +4715,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4447,14 +4741,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/ankle-rock/start.webp",
           "finish": "./exercise-images/ankle-rock/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     },
@@ -4466,7 +4763,7 @@
         "start": null,
         "finish": null
       },
-      "visualStatus": "awaiting-production",
+      "visualStatus": "awaiting-technical-review",
       "reviewed": false,
       "equipment": "Bodyweight",
       "instructionStatus": "draft-needs-coach-review",
@@ -4492,14 +4789,17 @@
           "Same model, clothing, camera and background in both positions",
           "No distorted limbs, duplicated fingers or impossible anatomy",
           "Position corresponds to named exercise and written instructions",
-          "No text, watermarks or logos baked into the image"
+          "No text, watermarks or logos baked into the image",
+          "Reject images with anatomically implausible limb positions, spinal hyperextension, incorrect joint angles or nonfunctional equipment",
+          "Start and finish must clearly differ and demonstrate the named movement accurately",
+          "No image is publishable until independent visual and coaching technique review passes"
         ],
         "assetPaths": {
           "start": "./exercise-images/glute-activation-clamshell/start.webp",
           "finish": "./exercise-images/glute-activation-clamshell/finish.webp"
         },
         "productionStatus": "not-generated",
-        "technicalReview": "pending",
+        "technicalReview": "not-passed",
         "licensing": "original-generation-required"
       }
     }
@@ -4517,6 +4817,18 @@
     "integratedImages": 0,
     "reviewRequirement": "Verify each start and finish pose independently; specifically distinguish floor-supported split squat from rear-foot-elevated Bulgarian split squat.",
     "assetFormat": "webp",
-    "assetRoot": "./exercise-images/"
+    "assetRoot": "./exercise-images/",
+    "technicalApproval": "none",
+    "publicationRule": "Do not publish any image unless both start and finish have passed anatomical realism, technique, movement differentiation, equipment, and identity consistency checks. Visual style approval alone is insufficient.",
+    "rejectedExamples": [
+      {
+        "exercise": "Donkey Kick (Bodyweight)",
+        "reason": "Excessive spinal extension and implausible leg pose; not part of canonical 100 catalog"
+      },
+      {
+        "exercise": "Hanging Leg Raise",
+        "reason": "Standing rather than freely hanging in start pose; not part of canonical 100 catalog"
+      }
+    ]
   }
 }
