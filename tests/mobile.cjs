@@ -260,6 +260,9 @@ try{
   await page.locator('.picker-exercises>summary').first().click();
   assert.equal(await page.locator('.picker-exercises').first().locator('li').count(),6);
   await checkLayout('Filtered workout choices');
+  assert.equal(await page.locator('[data-plan-picker-level="Beginner"]').getAttribute('aria-pressed'),'true');
+  assert.equal(await page.locator('[data-plan-picker-level="all"]').getAttribute('aria-pressed'),'false');
+  await page.locator('.picker-choice img').evaluateAll(async imgs=>{for(const x of imgs){x.loading='eager';await x.decode()}});
   const sessionPickerJpg=await page.screenshot({path:path.join(out,'Planner-workout-choices-'+width+'.jpg'),type:'jpeg',quality:85});
   if(width===390)captures.push({name:'Planner workout choices',src:'data:image/jpeg;base64,'+sessionPickerJpg.toString('base64')});
   await page.locator('[data-plan-pick-workout="full-body-home"]').click();
@@ -274,6 +277,9 @@ try{
   assert.equal(await page.locator('[data-plan-pick-meal]').count(),49);
   assert.equal(await page.locator('[data-plan-pick-meal] img').count(),49);
   await checkLayout('Recipe photo picker');
+  assert.equal(await page.locator('[data-plan-picker-filter="all"]').getAttribute('aria-pressed'),'true');
+  assert.equal(await page.locator('[data-plan-picker-filter="breakfast"]').getAttribute('aria-pressed'),'false');
+  await page.locator('[data-plan-pick-meal] img').evaluateAll(async imgs=>{for(const x of imgs){x.loading='eager';await x.decode()}});
   const mealPickerJpg=await page.screenshot({path:path.join(out,'Planner-meal-picker-'+width+'.jpg'),type:'jpeg',quality:85});
   if(width===390)captures.push({name:'Planner meal picker',src:'data:image/jpeg;base64,'+mealPickerJpg.toString('base64')});
   await page.locator('#planner-picker-search').fill('zzzz-no-recipe');
