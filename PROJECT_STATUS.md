@@ -125,3 +125,10 @@ Added a snapshot of the first 67 recipes to protect them. Recipe tests cover all
 
 ## Verified 97-meal release
 Final code 74cc8388888cf73f421c88ab53b7d4cbcb69ca66. Mobile workflow 39503987459 (job 118908184068) passed all eight unit suites and Chromium flows at 320/390/430px. Pages deployment 39503987119 succeeded. Four-category contact sheet visually reviewed. Newest recipes tested at half/double portions; all 30 additions checked through diary/shopping handlers; 292 portion cases passed. The browser test found an existing 320px recipe-detail margin overflow; a scoped media rule now aligns hero/detail margins with the small-screen body padding. Previous 67 recipe data and all workout definitions remain unchanged. No known release blocker.
+
+## Popular-ingredient meal collection — October 20
+User requested another 15 recipes per category and suggested kiwi, apples, banana, blueberry, Greek yogurt, cottage cheese, chicken, beef, peanut butter, avocado, mango, honey and oats. Scope communicated as all four categories. Added 15 new dish families with four gram-weighted profiles each: 60 appended recipes, IDs 97–156. Totals now 31 protein, 31 carb, 31 fat and 64 balanced (157 total). Prior 97 recipes remain exactly unchanged; new recipes appear first in the browsing sections.
+
+Generated 15 new individual dish photographs with the built-in image-generation tool. The four profiles of a dish share its matching photograph. Existing images remain unchanged. See docs/meal-collection-2026-10.md and docs/meal-collection-prompts-2026-10.json for ingredients, generic nutrient references, photo paths and prompts. Added four food references: green kiwi, mango, honey and cooked 95% lean ground beef crumbles. Prior ingredient reference values are untouched.
+
+Tests protect the first 97 recipe objects, four new references, 15 new images, four distinct gram profiles per dish, focus thresholds, all new diary/shopping paths and 532 portion cases. Browser tests include new kiwi dishes in every section and half/double portion rendering. Unit recipe and planner-picker checks passed in memory; real asset/Chromium verification pending.

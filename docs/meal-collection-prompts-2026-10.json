@@ -1,0 +1,672 @@
+[
+  {
+    "dish": 1,
+    "name": "Kiwi mango honey yogurt bowl",
+    "path": "meal-images/collection-2026-10-dish-01.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: A bowl of thick white Greek yogurt with a visible small layer of oats, fresh green kiwi half-moon slices, golden mango cubes, chopped almonds and a light honey drizzle. No other fruit. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one bowl; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration; no exact macro claims.",
+    "ingredients": [
+      "Plain nonfat Greek yogurt",
+      "Rolled oats (dry)",
+      "Kiwi (green, peeled)",
+      "Mango (flesh)",
+      "Almonds (plain)",
+      "Honey"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        220,
+        35,
+        80,
+        100,
+        15,
+        8
+      ],
+      "protein": [
+        350,
+        20,
+        80,
+        80,
+        10,
+        5
+      ],
+      "carbs": [
+        130,
+        70,
+        100,
+        140,
+        8,
+        15
+      ],
+      "fat": [
+        180,
+        20,
+        70,
+        80,
+        50,
+        5
+      ]
+    }
+  },
+  {
+    "dish": 2,
+    "name": "Apple blueberry cottage cheese bowl",
+    "path": "meal-images/collection-2026-10-dish-02.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Cottage cheese with natural visible curds topped with small red-skinned apple cubes, blueberries, a little dry rolled oats, chopped walnuts and a light honey drizzle. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Cottage cheese (2% fat)",
+      "Rolled oats (dry)",
+      "Apple (raw, with skin, cored)",
+      "Blueberries (raw)",
+      "Walnuts (shelled)",
+      "Honey"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        220,
+        30,
+        120,
+        80,
+        15,
+        8
+      ],
+      "protein": [
+        350,
+        10,
+        60,
+        50,
+        5,
+        3
+      ],
+      "carbs": [
+        150,
+        65,
+        150,
+        100,
+        8,
+        15
+      ],
+      "fat": [
+        180,
+        15,
+        100,
+        60,
+        40,
+        5
+      ]
+    }
+  },
+  {
+    "dish": 3,
+    "name": "Banana peanut honey yogurt bowl",
+    "path": "meal-images/collection-2026-10-dish-03.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Thick Greek yogurt topped with banana rounds, rolled oats, a natural peanut butter swirl and a small honey drizzle. No nuts or extra fruit. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Plain nonfat Greek yogurt",
+      "Rolled oats (dry)",
+      "Banana (peeled)",
+      "Peanut butter (plain)",
+      "Honey"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        250,
+        40,
+        100,
+        20,
+        8
+      ],
+      "protein": [
+        350,
+        20,
+        80,
+        15,
+        5
+      ],
+      "carbs": [
+        150,
+        75,
+        150,
+        10,
+        15
+      ],
+      "fat": [
+        200,
+        15,
+        70,
+        50,
+        5
+      ]
+    }
+  },
+  {
+    "dish": 4,
+    "name": "Mango chia cottage cheese bowl",
+    "path": "meal-images/collection-2026-10-dish-04.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Cottage cheese with realistic curds, a small scattering of oats, fresh golden mango cubes, chia seeds and chopped almonds. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Cottage cheese (2% fat)",
+      "Rolled oats (dry)",
+      "Mango (flesh)",
+      "Chia seeds (dry)",
+      "Almonds (plain)"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        250,
+        30,
+        150,
+        10,
+        12
+      ],
+      "protein": [
+        350,
+        10,
+        70,
+        4,
+        5
+      ],
+      "carbs": [
+        150,
+        70,
+        200,
+        5,
+        8
+      ],
+      "fat": [
+        200,
+        15,
+        100,
+        15,
+        40
+      ]
+    }
+  },
+  {
+    "dish": 5,
+    "name": "Apple cinnamon peanut yogurt oats",
+    "path": "meal-images/collection-2026-10-dish-05.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: A thick yogurt and rolled oat breakfast bowl with chopped red-skinned apple, a swirl of peanut butter, a small honey drizzle and a subtle cinnamon dusting. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Plain nonfat Greek yogurt",
+      "Rolled oats (dry)",
+      "Apple (raw, with skin, cored)",
+      "Peanut butter (plain)",
+      "Honey",
+      "Cinnamon (ground)"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        220,
+        45,
+        130,
+        18,
+        8,
+        1
+      ],
+      "protein": [
+        350,
+        25,
+        90,
+        12,
+        5,
+        1
+      ],
+      "carbs": [
+        140,
+        80,
+        160,
+        10,
+        15,
+        1
+      ],
+      "fat": [
+        200,
+        20,
+        90,
+        50,
+        5,
+        1
+      ]
+    }
+  },
+  {
+    "dish": 6,
+    "name": "Beef avocado rice plate",
+    "path": "meal-images/collection-2026-10-dish-06.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: A savoury plate with cooked browned ground beef crumbles, white rice, sliced avocado, chopped red tomatoes and shredded green lettuce. No sauce or cheese. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Ground beef (95% lean, cooked)",
+      "White rice (cooked)",
+      "Avocado (flesh)",
+      "Tomatoes (raw)",
+      "Lettuce (raw)"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        150,
+        150,
+        60,
+        120,
+        50
+      ],
+      "protein": [
+        220,
+        90,
+        35,
+        120,
+        50
+      ],
+      "carbs": [
+        70,
+        300,
+        30,
+        120,
+        50
+      ],
+      "fat": [
+        150,
+        60,
+        170,
+        120,
+        50
+      ]
+    }
+  },
+  {
+    "dish": 7,
+    "name": "Beef sweet potato broccoli plate",
+    "path": "meal-images/collection-2026-10-dish-07.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Browned cooked ground beef crumbles, roasted orange sweet potato flesh chunks, steamed broccoli florets and a light olive oil gloss on a single plate. No other ingredients. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Ground beef (95% lean, cooked)",
+      "Sweet potato (baked, flesh)",
+      "Broccoli (cooked)",
+      "Olive oil"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        150,
+        220,
+        160,
+        8
+      ],
+      "protein": [
+        230,
+        140,
+        160,
+        5
+      ],
+      "carbs": [
+        80,
+        380,
+        160,
+        3
+      ],
+      "fat": [
+        170,
+        100,
+        160,
+        22
+      ]
+    }
+  },
+  {
+    "dish": 8,
+    "name": "Chicken mango avocado rice plate",
+    "path": "meal-images/collection-2026-10-dish-08.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Sliced cooked chicken breast, white rice, fresh golden mango cubes, sliced avocado and small raw red bell pepper strips on a single plate. No garnishes or sauce. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Chicken breast (cooked, skinless)",
+      "White rice (cooked)",
+      "Mango (flesh)",
+      "Avocado (flesh)",
+      "Red bell pepper (raw)"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        140,
+        140,
+        90,
+        60,
+        80
+      ],
+      "protein": [
+        220,
+        80,
+        70,
+        35,
+        80
+      ],
+      "carbs": [
+        80,
+        270,
+        150,
+        30,
+        80
+      ],
+      "fat": [
+        140,
+        60,
+        70,
+        180,
+        80
+      ]
+    }
+  },
+  {
+    "dish": 9,
+    "name": "Chicken apple walnut quinoa salad",
+    "path": "meal-images/collection-2026-10-dish-09.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: A plate salad of sliced chicken breast, cooked quinoa, red-skinned apple cubes, fresh baby spinach and chopped walnuts. No other ingredients. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Chicken breast (cooked, skinless)",
+      "Quinoa (cooked)",
+      "Apple (raw, with skin, cored)",
+      "Spinach (raw)",
+      "Walnuts (shelled)"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        140,
+        140,
+        100,
+        60,
+        18
+      ],
+      "protein": [
+        220,
+        80,
+        80,
+        60,
+        10
+      ],
+      "carbs": [
+        70,
+        270,
+        160,
+        60,
+        8
+      ],
+      "fat": [
+        130,
+        70,
+        80,
+        60,
+        45
+      ]
+    }
+  },
+  {
+    "dish": 10,
+    "name": "Beef tomato spinach pasta",
+    "path": "meal-images/collection-2026-10-dish-10.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Cooked whole wheat penne pasta mixed with browned ground beef in a simple red tomato sauce and wilted spinach, olive oil gloss. No cheese, herbs, bread or extra ingredients. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Ground beef (95% lean, cooked)",
+      "Whole wheat pasta (cooked)",
+      "Tomatoes (canned, no added salt, with juice)",
+      "Spinach (raw)",
+      "Olive oil"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        140,
+        170,
+        180,
+        60,
+        7
+      ],
+      "protein": [
+        220,
+        90,
+        180,
+        60,
+        4
+      ],
+      "carbs": [
+        70,
+        300,
+        200,
+        60,
+        3
+      ],
+      "fat": [
+        160,
+        70,
+        180,
+        60,
+        22
+      ]
+    }
+  },
+  {
+    "dish": 11,
+    "name": "Chicken avocado potato salad",
+    "path": "meal-images/collection-2026-10-dish-11.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: A single plate with sliced chicken breast, boiled peeled potato chunks, avocado pieces and red tomato chunks with a small visible dollop of plain Greek yogurt and a light olive oil gloss. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Chicken breast (cooked, skinless)",
+      "Potatoes (boiled, peeled)",
+      "Avocado (flesh)",
+      "Tomatoes (raw)",
+      "Plain nonfat Greek yogurt",
+      "Olive oil"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        140,
+        200,
+        65,
+        120,
+        60,
+        5
+      ],
+      "protein": [
+        210,
+        130,
+        35,
+        120,
+        80,
+        3
+      ],
+      "carbs": [
+        65,
+        380,
+        30,
+        120,
+        40,
+        2
+      ],
+      "fat": [
+        140,
+        80,
+        150,
+        120,
+        50,
+        12
+      ]
+    }
+  },
+  {
+    "dish": 12,
+    "name": "Tuna mango avocado rice salad",
+    "path": "meal-images/collection-2026-10-dish-12.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Flaked drained tuna, white rice, golden mango cubes, cucumber half-moon slices and fresh avocado slices arranged together on a single plate. No sesame, sauce or garnish. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Tuna in water (drained)",
+      "White rice (cooked)",
+      "Mango (flesh)",
+      "Cucumber (raw)",
+      "Avocado (flesh)"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        150,
+        160,
+        100,
+        100,
+        70
+      ],
+      "protein": [
+        230,
+        90,
+        70,
+        100,
+        40
+      ],
+      "carbs": [
+        80,
+        280,
+        170,
+        100,
+        30
+      ],
+      "fat": [
+        150,
+        60,
+        70,
+        100,
+        190
+      ]
+    }
+  },
+  {
+    "dish": 13,
+    "name": "Salmon kiwi quinoa plate",
+    "path": "meal-images/collection-2026-10-dish-13.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: A cooked salmon fillet with cooked quinoa, fresh green kiwi cubes and cucumber slices, a light olive oil gloss on a single plate. Kiwi is a fresh side salsa without added herbs. No other fruit or ingredients. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Salmon (cooked)",
+      "Quinoa (cooked)",
+      "Kiwi (green, peeled)",
+      "Cucumber (raw)",
+      "Olive oil"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        150,
+        150,
+        80,
+        100,
+        5
+      ],
+      "protein": [
+        240,
+        70,
+        60,
+        100,
+        3
+      ],
+      "carbs": [
+        60,
+        300,
+        140,
+        100,
+        2
+      ],
+      "fat": [
+        190,
+        60,
+        60,
+        100,
+        15
+      ]
+    }
+  },
+  {
+    "dish": 14,
+    "name": "Banana blueberry honey cottage bowl",
+    "path": "meal-images/collection-2026-10-dish-14.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Cottage cheese with visible curds topped with banana rounds, fresh blueberries, a scattering of oats, chopped almonds and a small honey drizzle. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Cottage cheese (2% fat)",
+      "Rolled oats (dry)",
+      "Banana (peeled)",
+      "Blueberries (raw)",
+      "Almonds (plain)",
+      "Honey"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        230,
+        35,
+        100,
+        80,
+        15,
+        8
+      ],
+      "protein": [
+        350,
+        10,
+        50,
+        50,
+        5,
+        3
+      ],
+      "carbs": [
+        140,
+        70,
+        150,
+        100,
+        8,
+        15
+      ],
+      "fat": [
+        200,
+        15,
+        60,
+        60,
+        45,
+        5
+      ]
+    }
+  },
+  {
+    "dish": 15,
+    "name": "Tofu mango peanut rice bowl",
+    "path": "meal-images/collection-2026-10-dish-15.jpg",
+    "prompt": "Use case: photorealistic-natural. Asset type: square food photograph for EZPZ Fitness recipe catalogue. Create one realistic food photograph, 1024x1024 square. Subject: Golden browned tofu cubes, white rice, fresh golden mango cubes, shelled green edamame and a creamy peanut lemon dressing in a single bowl. No sesame, garnish or other ingredients. Style consistency: overhead top-down view, the entire single shallow round matte warm ivory ceramic bowl or plate fully visible and centered with a small margin, on pale beige natural stone tabletop. Soft daylight from upper left, natural appetizing portions, realistic food texture, soft low-contrast shadows, restrained editorial food photography. All ingredients in the one dish; no side dishes, no cups, no hands, utensils, props, labels, text, frames or watermark. Only the explicitly described foods. This is a serving illustration.",
+    "ingredients": [
+      "Firm tofu (drained)",
+      "White rice (cooked)",
+      "Mango (flesh)",
+      "Edamame (cooked, shelled)",
+      "Peanut butter (plain)",
+      "Lemon juice (fresh)"
+    ],
+    "gramProfiles": {
+      "balanced": [
+        160,
+        130,
+        100,
+        80,
+        15,
+        15
+      ],
+      "protein": [
+        250,
+        30,
+        40,
+        120,
+        5,
+        15
+      ],
+      "carbs": [
+        80,
+        270,
+        160,
+        60,
+        8,
+        15
+      ],
+      "fat": [
+        200,
+        50,
+        70,
+        80,
+        40,
+        15
+      ]
+    }
+  }
+]
