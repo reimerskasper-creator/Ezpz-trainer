@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 2,
-  "status": "catalogue-classified-awaiting-image-and-technique-review",
+  "schemaVersion": 3,
+  "status": "100-catalogued-12-chest-instruction-drafts-awaiting-review-and-images",
   "imagePolicy": "Use one consistent model and lighting across all exercises; two verified movement-specific images per exercise. Do not mark reviewed until visual and technique are verified.",
   "exercises": [
     {
@@ -13,7 +13,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructions": [
+        "Lie on a flat bench with eyes under the bar and feet firmly planted.",
+        "Grip the bar slightly wider than shoulder width and brace your torso.",
+        "Lower the bar under control toward the mid-chest, then press upward."
+      ],
+      "keyPoints": [
+        "Keep wrists stacked over forearms.",
+        "Keep shoulder blades stable against the bench.",
+        "Use a spotter or safety arms for challenging loads."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "dumbbell-bench-press",
@@ -25,7 +36,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructions": [
+        "Lie on a flat bench with dumbbells above your chest.",
+        "Lower both dumbbells under control until elbows reach a comfortable depth.",
+        "Press back up without banging the dumbbells together."
+      ],
+      "keyPoints": [
+        "Keep feet planted and torso stable.",
+        "Keep wrists aligned with forearms.",
+        "Avoid flaring elbows straight out."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "incline-dumbbell-press",
@@ -37,7 +59,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructions": [
+        "Set the bench to a moderate incline, roughly 15–30 degrees.",
+        "Start with dumbbells above the upper chest.",
+        "Lower under control, then press up and slightly inward."
+      ],
+      "keyPoints": [
+        "Keep shoulders down and back.",
+        "Avoid excessive lower-back arch.",
+        "Choose a pain-free shoulder range."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "incline-barbell-press",
@@ -49,7 +82,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructions": [
+        "Set an incline bench to a moderate angle.",
+        "Grip the bar slightly wider than shoulder width.",
+        "Lower toward the upper chest and press upward under control."
+      ],
+      "keyPoints": [
+        "Keep feet planted and upper back stable.",
+        "Avoid bouncing the bar off the chest.",
+        "Use safety arms or a spotter."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "machine-chest-press",
@@ -61,7 +105,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructions": [
+        "Adjust seat height so handles align around mid-chest.",
+        "Keep back against the pad and feet planted.",
+        "Press forward, then return slowly through a comfortable range."
+      ],
+      "keyPoints": [
+        "Keep shoulders relaxed and stable.",
+        "Do not forcefully lock elbows.",
+        "Adjust the seat before loading weight."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "push-up",
@@ -73,7 +128,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructions": [
+        "Place hands slightly wider than shoulders and extend legs behind you.",
+        "Brace your trunk and lower your body as one unit.",
+        "Press the floor away to return to the top."
+      ],
+      "keyPoints": [
+        "Maintain a straight line from head to heels.",
+        "Keep elbows angled rather than flared sideways.",
+        "Elevate hands if full push-ups are too difficult."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "incline-push-up",
@@ -85,7 +151,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bench"
+      "equipment": "Bench",
+      "instructions": [
+        "Place hands on a stable raised bench or counter.",
+        "Step feet back and brace into a straight-body plank.",
+        "Lower chest toward the surface, then push away."
+      ],
+      "keyPoints": [
+        "Use a surface that will not move.",
+        "Keep hips from sagging.",
+        "Lower the incline gradually as strength improves."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "decline-push-up",
@@ -97,7 +174,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructions": [
+        "Place feet on a stable low platform and hands on the floor.",
+        "Brace your trunk with shoulders above hands.",
+        "Lower chest toward the floor and press back up."
+      ],
+      "keyPoints": [
+        "Keep hips in line with the torso.",
+        "Use a low elevation initially.",
+        "Stop if shoulders become uncomfortable."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "dumbbell-floor-press",
@@ -109,7 +197,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructions": [
+        "Lie on the floor with knees bent and dumbbells above chest.",
+        "Lower elbows slowly until upper arms lightly contact the floor.",
+        "Press dumbbells back up without slamming elbows down."
+      ],
+      "keyPoints": [
+        "Keep wrists straight.",
+        "Pause gently at the floor.",
+        "Use a comfortable elbow angle."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "cable-chest-fly",
@@ -121,7 +220,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructions": [
+        "Set cable handles around chest height and stand in a staggered stance.",
+        "With elbows softly bent, bring hands together in front of the chest.",
+        "Open arms slowly to a comfortable chest stretch."
+      ],
+      "keyPoints": [
+        "Maintain the same elbow bend throughout.",
+        "Avoid shrugging or arching back.",
+        "Start light to control both cables."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "pec-deck-fly",
@@ -133,7 +243,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructions": [
+        "Adjust seat and handles so upper arms are near chest height.",
+        "Keep torso against the backrest and bring pads or handles together.",
+        "Return slowly until a comfortable chest stretch."
+      ],
+      "keyPoints": [
+        "Avoid forcing shoulders far behind the body.",
+        "Keep neck and shoulders relaxed.",
+        "Adjust machine settings before loading."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "close-grip-push-up",
@@ -145,7 +266,18 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructions": [
+        "Set hands slightly narrower than a standard push-up, not necessarily touching.",
+        "Brace your body in a straight line and lower under control.",
+        "Press back to the top with elbows tracking near your sides."
+      ],
+      "keyPoints": [
+        "Keep wrists comfortable.",
+        "Do not let hips sag.",
+        "Use an incline if the movement is too demanding."
+      ],
+      "instructionStatus": "draft-needs-coach-review"
     },
     {
       "id": "pull-up",
@@ -157,7 +289,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Pull-up bar"
+      "equipment": "Pull-up bar",
+      "instructionStatus": "pending"
     },
     {
       "id": "assisted-pull-up",
@@ -169,7 +302,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Pull-up bar"
+      "equipment": "Pull-up bar",
+      "instructionStatus": "pending"
     },
     {
       "id": "chin-up",
@@ -181,7 +315,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Pull-up bar"
+      "equipment": "Pull-up bar",
+      "instructionStatus": "pending"
     },
     {
       "id": "lat-pulldown",
@@ -193,7 +328,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "close-grip-lat-pulldown",
@@ -205,7 +341,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "seated-cable-row",
@@ -217,7 +354,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "chest-supported-dumbbell-row",
@@ -229,7 +367,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "one-arm-dumbbell-row",
@@ -241,7 +380,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "bent-over-barbell-row",
@@ -253,7 +393,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "resistance-band-row",
@@ -265,7 +406,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Resistance band"
+      "equipment": "Resistance band",
+      "instructionStatus": "pending"
     },
     {
       "id": "inverted-row",
@@ -277,7 +419,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "straight-arm-pulldown",
@@ -289,7 +432,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "back-extension",
@@ -301,7 +445,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "backpack-row",
@@ -313,7 +458,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Backpack"
+      "equipment": "Backpack",
+      "instructionStatus": "pending"
     },
     {
       "id": "seated-dumbbell-shoulder-press",
@@ -325,7 +471,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "standing-dumbbell-shoulder-press",
@@ -337,7 +484,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "barbell-overhead-press",
@@ -349,7 +497,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "machine-shoulder-press",
@@ -361,7 +510,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-lateral-raise",
@@ -373,7 +523,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "cable-lateral-raise",
@@ -385,7 +536,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-front-raise",
@@ -397,7 +549,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "reverse-pec-deck",
@@ -409,7 +562,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "bent-over-reverse-fly",
@@ -421,7 +575,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "face-pull",
@@ -433,7 +588,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "band-pull-apart",
@@ -445,7 +601,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Resistance band"
+      "equipment": "Resistance band",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-arnold-press",
@@ -457,7 +614,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-biceps-curl",
@@ -469,7 +627,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "hammer-curl",
@@ -481,7 +640,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "barbell-curl",
@@ -493,7 +653,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "cable-biceps-curl",
@@ -505,7 +666,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "incline-dumbbell-curl",
@@ -517,7 +679,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "rope-triceps-pushdown",
@@ -529,7 +692,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "overhead-triceps-extension",
@@ -541,7 +705,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "skull-crusher",
@@ -553,7 +718,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "close-grip-bench-press",
@@ -565,7 +731,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "bench-triceps-dip",
@@ -577,7 +744,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bench"
+      "equipment": "Bench",
+      "instructionStatus": "pending"
     },
     {
       "id": "chair-squat",
@@ -589,7 +757,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "bodyweight-squat",
@@ -601,7 +770,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "goblet-squat",
@@ -613,7 +783,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "barbell-back-squat",
@@ -625,7 +796,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "barbell-front-squat",
@@ -637,7 +809,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "leg-press",
@@ -649,7 +822,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "reverse-lunge",
@@ -661,7 +835,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "walking-lunge",
@@ -673,7 +848,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "bulgarian-split-squat",
@@ -685,7 +861,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "step-up",
@@ -697,7 +874,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Step"
+      "equipment": "Step",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-romanian-deadlift",
@@ -709,7 +887,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "barbell-romanian-deadlift",
@@ -721,7 +900,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Barbell"
+      "equipment": "Barbell",
+      "instructionStatus": "pending"
     },
     {
       "id": "glute-bridge",
@@ -733,7 +913,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "hip-thrust",
@@ -745,7 +926,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "lying-leg-curl",
@@ -757,7 +939,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "leg-extension",
@@ -769,7 +952,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "standing-calf-raise",
@@ -781,7 +965,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "seated-calf-raise",
@@ -793,7 +978,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Machine"
+      "equipment": "Machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "plank",
@@ -805,7 +991,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "side-plank",
@@ -817,7 +1004,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "dead-bug",
@@ -829,7 +1017,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "bird-dog",
@@ -841,7 +1030,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "hollow-hold",
@@ -853,7 +1043,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "reverse-crunch",
@@ -865,7 +1056,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "bicycle-crunch",
@@ -877,7 +1069,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "cable-crunch",
@@ -889,7 +1082,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "pallof-press",
@@ -901,7 +1095,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Cable machine"
+      "equipment": "Cable machine",
+      "instructionStatus": "pending"
     },
     {
       "id": "hanging-knee-raise",
@@ -913,7 +1108,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Pull-up bar"
+      "equipment": "Pull-up bar",
+      "instructionStatus": "pending"
     },
     {
       "id": "lying-leg-raise",
@@ -925,7 +1121,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "russian-twist",
@@ -937,7 +1134,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "suitcase-carry",
@@ -949,7 +1147,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "mountain-climber",
@@ -961,7 +1160,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "kettlebell-swing",
@@ -973,7 +1173,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Kettlebell"
+      "equipment": "Kettlebell",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-thruster",
@@ -985,7 +1186,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-clean-and-press",
@@ -997,7 +1199,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "farmer-carry",
@@ -1009,7 +1212,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "sled-push",
@@ -1021,7 +1225,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Sled"
+      "equipment": "Sled",
+      "instructionStatus": "pending"
     },
     {
       "id": "sled-pull",
@@ -1033,7 +1238,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Sled"
+      "equipment": "Sled",
+      "instructionStatus": "pending"
     },
     {
       "id": "burpee",
@@ -1045,7 +1251,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "medicine-ball-slam",
@@ -1057,7 +1264,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Medicine ball"
+      "equipment": "Medicine ball",
+      "instructionStatus": "pending"
     },
     {
       "id": "kettlebell-deadlift",
@@ -1069,7 +1277,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Kettlebell"
+      "equipment": "Kettlebell",
+      "instructionStatus": "pending"
     },
     {
       "id": "dumbbell-renegade-row",
@@ -1081,7 +1290,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Dumbbells"
+      "equipment": "Dumbbells",
+      "instructionStatus": "pending"
     },
     {
       "id": "cat-cow",
@@ -1093,7 +1303,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "world-s-greatest-stretch",
@@ -1105,7 +1316,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "hip-flexor-stretch",
@@ -1117,7 +1329,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "90-90-hip-switch",
@@ -1129,7 +1342,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "thoracic-open-book",
@@ -1141,7 +1355,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "wall-slide",
@@ -1153,7 +1368,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "shoulder-cars",
@@ -1165,7 +1381,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "hip-hinge-drill",
@@ -1177,7 +1394,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "ankle-rock",
@@ -1189,7 +1407,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     },
     {
       "id": "glute-activation-clamshell",
@@ -1201,7 +1420,8 @@
       },
       "visualStatus": "pending",
       "reviewed": false,
-      "equipment": "Bodyweight"
+      "equipment": "Bodyweight",
+      "instructionStatus": "pending"
     }
   ]
 }
