@@ -1,6 +1,6 @@
 {
-  "schemaVersion": 3,
-  "status": "100-catalogued-26-instruction-drafts-awaiting-review-and-images",
+  "schemaVersion": 4,
+  "status": "100-catalogued-100-instruction-drafts-awaiting-coach-review-and-images",
   "imagePolicy": "Use one consistent model and lighting across all exercises; two verified movement-specific images per exercise. Do not mark reviewed until visual and technique are verified.",
   "exercises": [
     {
@@ -612,7 +612,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit upright with dumbbells at shoulder height",
+        "Press weights overhead through a comfortable range",
+        "Lower slowly to shoulder level"
+      ],
+      "keyPoints": [
+        "Keep ribs stacked over pelvis",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "standing-dumbbell-shoulder-press",
@@ -625,7 +635,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall with dumbbells at shoulders",
+        "Brace trunk and press overhead",
+        "Lower slowly without leaning back"
+      ],
+      "keyPoints": [
+        "Avoid arching the lower back",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "barbell-overhead-press",
@@ -638,7 +658,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand with bar at upper chest and hands just outside shoulders",
+        "Brace and press bar overhead moving head slightly back",
+        "Return bar to upper chest under control"
+      ],
+      "keyPoints": [
+        "Keep wrists stacked and avoid excessive back arch",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "machine-shoulder-press",
@@ -651,7 +681,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Adjust seat so handles begin around shoulder height",
+        "Press handles upward without shrugging",
+        "Return slowly to a comfortable depth"
+      ],
+      "keyPoints": [
+        "Keep torso against the pad",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-lateral-raise",
@@ -664,7 +704,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall with dumbbells beside thighs",
+        "Lift arms out to sides with softly bent elbows",
+        "Lower under control"
+      ],
+      "keyPoints": [
+        "Avoid swinging or shrugging",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "cable-lateral-raise",
@@ -677,7 +727,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand side-on to low cable holding handle",
+        "Raise arm sideways toward shoulder height",
+        "Return slowly against cable tension"
+      ],
+      "keyPoints": [
+        "Keep torso still",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-front-raise",
@@ -690,7 +750,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall with dumbbells in front of thighs",
+        "Raise one or both arms forward to shoulder height",
+        "Lower slowly"
+      ],
+      "keyPoints": [
+        "Avoid leaning backward",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "reverse-pec-deck",
@@ -703,7 +773,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Adjust seat facing the pad with handles near shoulder height",
+        "Open arms outward and back",
+        "Return slowly without letting weights crash"
+      ],
+      "keyPoints": [
+        "Keep neck relaxed",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "bent-over-reverse-fly",
@@ -716,7 +796,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hinge at hips with light dumbbells beneath shoulders",
+        "Open arms out to sides with softly bent elbows",
+        "Lower slowly while holding torso position"
+      ],
+      "keyPoints": [
+        "Avoid swinging torso",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "face-pull",
@@ -729,7 +819,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Set cable rope at upper chest or face height",
+        "Pull rope toward face with elbows wide",
+        "Return slowly with controlled shoulders"
+      ],
+      "keyPoints": [
+        "Avoid flaring ribs",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "band-pull-apart",
@@ -742,7 +842,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Resistance band",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hold band in front of chest with arms nearly straight",
+        "Pull hands apart until band approaches chest",
+        "Return under control"
+      ],
+      "keyPoints": [
+        "Keep shoulders down",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-arnold-press",
@@ -755,7 +865,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Start seated or standing with palms facing you at shoulder level",
+        "Rotate palms outward as you press overhead",
+        "Reverse rotation while lowering"
+      ],
+      "keyPoints": [
+        "Use a light load and pain-free range",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-biceps-curl",
@@ -768,7 +888,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall with dumbbells by sides and palms forward",
+        "Bend elbows to lift weights toward shoulders",
+        "Lower slowly without swinging"
+      ],
+      "keyPoints": [
+        "Keep elbows near torso",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "hammer-curl",
@@ -781,7 +911,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hold dumbbells by sides with palms facing inward",
+        "Curl weights while keeping neutral wrist position",
+        "Lower under control"
+      ],
+      "keyPoints": [
+        "Avoid moving upper arms",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "barbell-curl",
@@ -794,7 +934,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall gripping bar with palms forward",
+        "Curl bar toward upper chest",
+        "Lower slowly to starting position"
+      ],
+      "keyPoints": [
+        "Keep torso still",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "cable-biceps-curl",
@@ -807,7 +957,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand facing low pulley with elbows by sides",
+        "Curl handle toward shoulders",
+        "Return slowly under tension"
+      ],
+      "keyPoints": [
+        "Avoid leaning backward",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "incline-dumbbell-curl",
@@ -820,7 +980,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit on incline bench with arms hanging below shoulders",
+        "Curl dumbbells without moving upper arms forward",
+        "Lower slowly through comfortable range"
+      ],
+      "keyPoints": [
+        "Avoid overstretching shoulders",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "rope-triceps-pushdown",
@@ -833,7 +1003,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand facing high pulley with elbows tucked",
+        "Straighten elbows to push rope toward thighs",
+        "Return slowly without letting elbows drift"
+      ],
+      "keyPoints": [
+        "Keep wrists neutral",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "overhead-triceps-extension",
@@ -846,7 +1026,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hold dumbbell or cable handle overhead with elbows bent",
+        "Straighten elbows while upper arms stay mostly still",
+        "Lower behind head through comfortable range"
+      ],
+      "keyPoints": [
+        "Avoid arching lower back",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "skull-crusher",
@@ -859,7 +1049,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on bench holding light bar or dumbbells above shoulders",
+        "Bend elbows to lower weight toward forehead or behind head",
+        "Extend elbows to return"
+      ],
+      "keyPoints": [
+        "Keep upper arms steady and use a controlled load",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "close-grip-bench-press",
@@ -872,7 +1072,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on bench and grip bar around shoulder width",
+        "Lower bar to lower chest with elbows relatively close",
+        "Press back up under control"
+      ],
+      "keyPoints": [
+        "Use a spotter or safety arms",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "bench-triceps-dip",
@@ -885,7 +1095,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bench",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Place hands on secure bench beside hips and feet on floor",
+        "Bend elbows to lower only through a comfortable shoulder range",
+        "Press back up"
+      ],
+      "keyPoints": [
+        "Avoid deep shoulder extension or pain",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "chair-squat",
@@ -898,7 +1118,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand in front of a sturdy chair with feet about hip width",
+        "Bend hips and knees until you lightly touch chair",
+        "Stand by pressing through feet"
+      ],
+      "keyPoints": [
+        "Keep knees tracking over feet",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "bodyweight-squat",
@@ -911,7 +1141,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand with feet around shoulder width",
+        "Sit down between hips while bending knees",
+        "Stand tall through whole foot"
+      ],
+      "keyPoints": [
+        "Keep heels grounded",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "goblet-squat",
@@ -924,7 +1164,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hold a dumbbell or kettlebell at chest",
+        "Squat down between hips with trunk braced",
+        "Drive through feet to stand"
+      ],
+      "keyPoints": [
+        "Keep load close to chest",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "barbell-back-squat",
@@ -937,7 +1187,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Position bar securely on upper back in a rack",
+        "Brace and bend hips and knees to comfortable depth",
+        "Stand while maintaining trunk position"
+      ],
+      "keyPoints": [
+        "Use safety bars and avoid collapsing knees",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "barbell-front-squat",
@@ -950,7 +1210,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Rest bar on front shoulders with elbows high",
+        "Brace and descend between hips",
+        "Drive upward keeping elbows lifted"
+      ],
+      "keyPoints": [
+        "Avoid letting torso fold forward",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "leg-press",
@@ -963,7 +1233,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit with back supported and feet on platform",
+        "Bend knees to a comfortable depth without pelvis lifting",
+        "Press platform away without locking knees forcefully"
+      ],
+      "keyPoints": [
+        "Keep knees aligned with toes",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "reverse-lunge",
@@ -976,7 +1256,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall and step one foot backward",
+        "Lower both knees toward a comfortable depth",
+        "Push through front foot to return"
+      ],
+      "keyPoints": [
+        "Keep front knee aligned with foot",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "walking-lunge",
@@ -989,7 +1279,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Step forward into a controlled lunge",
+        "Lower body with trunk upright",
+        "Push through front foot into next step"
+      ],
+      "keyPoints": [
+        "Keep steps steady and balanced",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "bulgarian-split-squat",
@@ -1002,7 +1302,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Place rear foot on low secure bench and front foot ahead",
+        "Lower hips by bending front knee",
+        "Press through front foot to rise"
+      ],
+      "keyPoints": [
+        "Keep majority of weight on front leg",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "step-up",
@@ -1015,7 +1325,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Step",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Place one foot fully on a stable step",
+        "Push through leading foot to stand on platform",
+        "Lower slowly with control"
+      ],
+      "keyPoints": [
+        "Avoid pushing excessively from trailing foot",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-romanian-deadlift",
@@ -1028,7 +1348,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall holding dumbbells at thighs",
+        "Hinge hips backward with knees softly bent",
+        "Stand by driving hips forward"
+      ],
+      "keyPoints": [
+        "Keep weights near legs and spine neutral",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "barbell-romanian-deadlift",
@@ -1041,7 +1371,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Barbell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand holding bar in front of thighs",
+        "Hinge hips back while sliding bar close to legs",
+        "Return upright by extending hips"
+      ],
+      "keyPoints": [
+        "Stop before losing neutral back position",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "glute-bridge",
@@ -1054,7 +1394,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on back with knees bent and feet flat",
+        "Press through feet to raise hips",
+        "Lower pelvis slowly to floor"
+      ],
+      "keyPoints": [
+        "Avoid over-arching lower back",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "hip-thrust",
@@ -1067,7 +1417,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Rest upper back against secure bench with feet planted",
+        "Drive through feet to raise hips until torso and thighs align",
+        "Lower hips slowly"
+      ],
+      "keyPoints": [
+        "Keep chin gently tucked and ribs down",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "lying-leg-curl",
@@ -1080,7 +1440,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Adjust machine pads to fit ankles and knees",
+        "Bend knees to draw heels toward glutes",
+        "Lower slowly to extended position"
+      ],
+      "keyPoints": [
+        "Keep hips against pad",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "leg-extension",
@@ -1093,7 +1463,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Adjust seat and shin pad to fit knees",
+        "Straighten knees to raise pad",
+        "Lower slowly without dropping stack"
+      ],
+      "keyPoints": [
+        "Keep hips against seat",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "standing-calf-raise",
@@ -1106,7 +1486,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand with forefeet on platform or flat ground",
+        "Rise onto balls of feet",
+        "Lower heels slowly through comfortable range"
+      ],
+      "keyPoints": [
+        "Avoid bouncing",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "seated-calf-raise",
@@ -1119,7 +1509,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit with thigh pad positioned securely",
+        "Lift heels while forefeet stay planted",
+        "Lower slowly"
+      ],
+      "keyPoints": [
+        "Avoid rocking torso",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "plank",
@@ -1132,7 +1532,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Set forearms beneath shoulders and extend legs",
+        "Brace abdomen and glutes while holding straight body line",
+        "Breathe steadily until target time"
+      ],
+      "keyPoints": [
+        "Avoid hips sagging or hiking",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "side-plank",
@@ -1145,7 +1555,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on side with elbow beneath shoulder",
+        "Raise hips into straight line",
+        "Hold while breathing steadily"
+      ],
+      "keyPoints": [
+        "Use bent knees to reduce difficulty",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dead-bug",
@@ -1158,7 +1578,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on back with arms up and hips and knees at 90 degrees",
+        "Slowly extend opposite arm and leg while bracing",
+        "Return and alternate sides"
+      ],
+      "keyPoints": [
+        "Keep lower back from arching",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "bird-dog",
@@ -1171,7 +1601,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Begin on hands and knees with spine neutral",
+        "Reach opposite arm and leg away",
+        "Return slowly and alternate sides"
+      ],
+      "keyPoints": [
+        "Keep hips from rotating",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "hollow-hold",
@@ -1184,7 +1624,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on back and gently flatten lower back toward floor",
+        "Raise shoulders and legs only as far as control allows",
+        "Hold while breathing"
+      ],
+      "keyPoints": [
+        "Bend knees if back arches",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "reverse-crunch",
@@ -1197,7 +1647,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on back with knees bent and hips flexed",
+        "Curl pelvis slightly off floor toward ribs",
+        "Lower slowly without swinging legs"
+      ],
+      "keyPoints": [
+        "Keep movement small and controlled",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "bicycle-crunch",
@@ -1210,7 +1670,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on back with hands lightly supporting head",
+        "Rotate torso toward opposite bent knee as other leg extends",
+        "Alternate sides slowly"
+      ],
+      "keyPoints": [
+        "Avoid pulling neck",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "cable-crunch",
@@ -1223,7 +1693,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Kneel facing high cable holding rope by temples",
+        "Curl ribs toward pelvis while keeping hips mostly still",
+        "Return slowly under control"
+      ],
+      "keyPoints": [
+        "Avoid pulling with arms",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "pallof-press",
@@ -1236,7 +1716,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Cable machine",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand sideways to cable or band anchor holding handle at chest",
+        "Press hands forward while resisting rotation",
+        "Bring hands back to chest"
+      ],
+      "keyPoints": [
+        "Keep hips and shoulders square",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "hanging-knee-raise",
@@ -1249,7 +1739,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Pull-up bar",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hang from secure bar with shoulders engaged",
+        "Lift knees toward torso without swinging",
+        "Lower legs slowly"
+      ],
+      "keyPoints": [
+        "Avoid jerking shoulders",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "lying-leg-raise",
@@ -1262,7 +1762,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on back with legs extended and hands by sides",
+        "Lift legs while keeping pelvis controlled",
+        "Lower only as far as lower back stays stable"
+      ],
+      "keyPoints": [
+        "Bend knees if needed",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "russian-twist",
@@ -1275,7 +1785,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit with knees bent and torso slightly reclined",
+        "Rotate chest from side to side under control",
+        "Return through center each time"
+      ],
+      "keyPoints": [
+        "Avoid swinging a heavy weight",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "suitcase-carry",
@@ -1288,7 +1808,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall holding one dumbbell at side",
+        "Walk slowly while resisting sideways lean",
+        "Switch hands after prescribed distance or time"
+      ],
+      "keyPoints": [
+        "Keep shoulders level",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "mountain-climber",
@@ -1301,7 +1831,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Start in high plank with hands under shoulders",
+        "Bring one knee toward chest then return",
+        "Alternate legs at controlled pace"
+      ],
+      "keyPoints": [
+        "Avoid bouncing hips",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "kettlebell-swing",
@@ -1314,7 +1854,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Kettlebell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand with kettlebell ahead and hinge hips back",
+        "Hike bell between thighs and drive hips forward",
+        "Let bell swing back as hips hinge again"
+      ],
+      "keyPoints": [
+        "Use hips not a squat or arm lift",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-thruster",
@@ -1327,7 +1877,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hold dumbbells at shoulders and squat to comfortable depth",
+        "Stand powerfully and continue into overhead press",
+        "Lower weights to shoulders before next squat"
+      ],
+      "keyPoints": [
+        "Keep trunk braced throughout",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-clean-and-press",
@@ -1340,7 +1900,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Hinge with dumbbells near thighs",
+        "Extend hips and guide dumbbells to shoulder rack",
+        "Press overhead then lower under control"
+      ],
+      "keyPoints": [
+        "Avoid curling weights with only arms",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "farmer-carry",
@@ -1353,7 +1923,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall with heavy dumbbells or kettlebells at sides",
+        "Walk with short controlled steps",
+        "Set weights down safely at end"
+      ],
+      "keyPoints": [
+        "Avoid leaning or shrugging",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "sled-push",
@@ -1366,7 +1946,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Sled",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Grip sled handles and lean forward with braced trunk",
+        "Drive through legs to move sled forward",
+        "Maintain smooth steps for prescribed distance"
+      ],
+      "keyPoints": [
+        "Keep path clear",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "sled-pull",
@@ -1379,7 +1969,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Sled",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Attach appropriate handles or harness to sled",
+        "Walk backward or forward while maintaining steady tension",
+        "Control pace to prescribed distance"
+      ],
+      "keyPoints": [
+        "Check attachment and walking path",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "burpee",
@@ -1392,7 +1992,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand and squat down to place hands on floor",
+        "Step or jump feet back into plank then return feet toward hands",
+        "Stand up or jump vertically as appropriate"
+      ],
+      "keyPoints": [
+        "Step instead of jumping for lower impact",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "medicine-ball-slam",
@@ -1405,7 +2015,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Medicine ball",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall holding a non-bouncing slam ball overhead",
+        "Brace and drive ball toward floor with trunk and arms",
+        "Squat or hinge to retrieve safely"
+      ],
+      "keyPoints": [
+        "Use a ball rated for slams",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "kettlebell-deadlift",
@@ -1418,7 +2038,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Kettlebell",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand over kettlebell between feet",
+        "Hinge hips and bend knees to grasp handle",
+        "Push floor away to stand tall"
+      ],
+      "keyPoints": [
+        "Keep bell close and spine neutral",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "dumbbell-renegade-row",
@@ -1431,7 +2061,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Dumbbells",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Begin high plank with hands on stable dumbbells",
+        "Shift weight slightly and row one dumbbell toward hip",
+        "Lower and alternate sides"
+      ],
+      "keyPoints": [
+        "Keep hips square and use non-rolling weights",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "cat-cow",
@@ -1444,7 +2084,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Start on hands and knees with hands under shoulders",
+        "Slowly round spine while exhaling",
+        "Reverse into gentle extension while inhaling"
+      ],
+      "keyPoints": [
+        "Move only through comfortable range",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "world-s-greatest-stretch",
@@ -1457,7 +2107,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Step into long lunge with both hands inside front foot",
+        "Rotate chest and reach one arm toward ceiling",
+        "Return and repeat on other side"
+      ],
+      "keyPoints": [
+        "Keep movements slow and controlled",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "hip-flexor-stretch",
@@ -1470,7 +2130,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Kneel in half-kneeling position on padded surface",
+        "Tuck pelvis slightly and shift hips forward",
+        "Hold gentle stretch at front of rear hip"
+      ],
+      "keyPoints": [
+        "Avoid arching lower back",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "90-90-hip-switch",
@@ -1483,7 +2153,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Sit with both knees bent around 90 degrees to one side",
+        "Rotate knees through center toward opposite side",
+        "Repeat slowly without forcing range"
+      ],
+      "keyPoints": [
+        "Use hands for support",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "thoracic-open-book",
@@ -1496,7 +2176,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on side with hips and knees bent and arms extended together",
+        "Rotate top arm and chest open toward opposite side",
+        "Return slowly and repeat"
+      ],
+      "keyPoints": [
+        "Keep knees stacked",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "wall-slide",
@@ -1509,7 +2199,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand with back near wall and arms in goalpost shape",
+        "Slide arms upward while keeping ribs controlled",
+        "Lower arms slowly"
+      ],
+      "keyPoints": [
+        "Stay within pain-free shoulder range",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "shoulder-cars",
@@ -1522,7 +2222,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand tall and slowly circle one straight arm overhead",
+        "Rotate arm through a controlled comfortable range",
+        "Reverse direction then switch sides"
+      ],
+      "keyPoints": [
+        "Avoid twisting trunk to gain range",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "hip-hinge-drill",
@@ -1535,7 +2245,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Stand with feet hip width and knees soft",
+        "Push hips backward while torso inclines forward",
+        "Drive hips forward to stand"
+      ],
+      "keyPoints": [
+        "Keep spine neutral and shins relatively vertical",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "ankle-rock",
@@ -1548,7 +2268,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Face wall in split stance with front foot flat",
+        "Drive front knee toward wall without lifting heel",
+        "Rock back and repeat gently"
+      ],
+      "keyPoints": [
+        "Keep knee tracking over toes",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     },
     {
       "id": "glute-activation-clamshell",
@@ -1561,7 +2291,17 @@
       "visualStatus": "pending",
       "reviewed": false,
       "equipment": "Bodyweight",
-      "instructionStatus": "pending"
+      "instructionStatus": "draft-needs-coach-review",
+      "instructions": [
+        "Lie on side with knees bent and feet together",
+        "Lift top knee while keeping feet touching",
+        "Lower slowly without rolling pelvis"
+      ],
+      "keyPoints": [
+        "Keep hips stacked",
+        "Move slowly and stop if you feel sharp pain.",
+        "Use a load or range you can control."
+      ]
     }
   ]
 }
