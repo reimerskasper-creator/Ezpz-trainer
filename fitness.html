@@ -5701,7 +5701,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('change',e=>{
  if(e.target.dataset.autoRest!==undefined){state.autoRest=!!e.target.checked;save();return}
- const key=e.target.dataset.setDone;if(key!==undefined&&e.target.checked&&state.autoRest===true){const [i]=key.split('-').map(Number),plan=workoutPlan(),value=workoutDraft(plan)['sr'+key];if(validSetValue(value)&&plan.exercises[i]?.rest)startRestTimer(plan.exercises[i].rest)}
+ const key=e.target.dataset.setDone;if(key!==undefined&&e.target.checked&&state.autoRest===true){const [i]=key.split('-').map(Number),plan=workoutPlan(),value=workoutDraft(plan)['sr'+key];if(validSetValue(value)&&plan.exercises[i]&&(plan.exercises[i].rest??60)>0)startRestTimer(plan.exercises[i].rest??60)}
 });
 document.addEventListener('input',e=>{if(e.target.dataset.setReps!==undefined||e.target.dataset.setWeight!==undefined)updateWorkoutProgress()});
 document.addEventListener('toggle',e=>{const el=e.target;if(tab!=='train'||el?.dataset?.trainingCard===undefined||!el.open)return;const i=Number(el.dataset.trainingCard);if(trainingMode()!=='focus')return;rememberExercise(i);document.querySelectorAll('[data-training-card]').forEach(card=>{if(card!==el)card.open=false});document.querySelectorAll('[data-exercise-jump]').forEach(button=>button.setAttribute('aria-current',Number(button.dataset.exerciseJump)===i?'step':'false'))},true);

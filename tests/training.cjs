@@ -39,4 +39,12 @@ api.state.restTimer.endsAt=Date.now()-1000;assert(api.restTimerState().left===0,
 const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);equal(restored.restTimer,backup.restTimer,'Timer survives backup');assert(restored.trainingView==='all','Training preference survives backup');
 const old=api.state.restTimer;api.startRestTimer(-1);equal(api.state.restTimer,old,'Invalid rest duration ignored');
 api.state.restTimer={duration:90,workoutId:'missing',endsAt:Date.now(),remaining:90};assert(api.restTimerState()===null,'Invalid timer ignored');
+
+api.state.selectedWorkout='full-body';api.state.logs=[];api.state.draft={variant:'A',equipment:'home','sr0-0':'10'};api.state.autoRest=true;api.state.restTimer=null;
+for(const listener of listeners.change)listener({target:{id:'',dataset:{setDone:'0-0'},value:'',checked:true}});
+assert(api.state.restTimer?.duration===60,'Rotating plan uses its default automatic rest period');
+api.state.selectedWorkout='hiit-a';api.state.workoutDrafts['hiit-a']={'sr0-0':'5'};api.state.restTimer=null;
+for(const listener of listeners.change)listener({target:{id:'',dataset:{setDone:'0-0'},value:'',checked:true}});
+assert(api.state.restTimer===null,'Zero-rest warm-up must not trigger automatic rest');
+
 console.log('PASS: ordered upcoming workouts and matching photos, honest empty plans, previous/ repeat results, no accidental completion, progress validity, focus/all views, resume selection and persistent deadline rest timer');
