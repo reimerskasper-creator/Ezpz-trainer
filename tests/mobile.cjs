@@ -33,7 +33,7 @@ try{
   await page.goto(base+'/fitness.html');await page.locator('[data-tab="home"]').waitFor();await checkLayout('Home');await capture('Home');
   const homeStorageBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   assert.equal(await page.locator('.home-energy-ring').count(),1);assert.equal(await page.locator('.home-macro-row progress').count(),3);
-  for(const [selector,name] of [['.home-nutrition','Home nutrition'],['.home-week-card','Home week'],['.home-next','Home next']]){await page.locator(selector).scrollIntoViewIfNeeded();await checkLayout(name);if(width===390){const jpg=await page.locator(selector).screenshot({type:'jpeg',quality:85,path:path.join(out,name.replaceAll(' ','-')+'-'+width+'.jpg')});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')});}}
+  for(const [selector,name] of [['.home-nutrition','Home nutrition'],['.home-week-card','Home week'],['.home-next','Home next']]){await page.locator(selector).evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));await checkLayout(name);if(width===390){const jpg=await page.locator(selector).screenshot({type:'jpeg',quality:85,path:path.join(out,name.replaceAll(' ','-')+'-'+width+'.jpg')});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')});}}
   assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),homeStorageBefore,'Home visual inspection must not write data');
 
   await page.locator('[data-tab="eat"]').click();assert.equal(await page.locator('[data-recipe-card]').count(),157);assert.equal(await page.locator('[data-recipe-card] img').count(),157);
