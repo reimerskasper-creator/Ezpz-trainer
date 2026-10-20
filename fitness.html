@@ -197,6 +197,38 @@ body[data-view=home] .home-workout>img{object-position:center 45%}
 #workout-chooser .workout-cover-check{z-index:2}
 #workout-chooser .workout-choice-copy{padding-top:11px}
 @media(max-width:350px){#workout-chooser .workout-choice-photo h3{font-size:16px;left:10px;bottom:10px}}
+
+/* Workout library: categories first, then five clear program choices. */
+#workout-chooser .category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#workout-chooser .category-tile{padding:0;overflow:hidden;background:white;border:1px solid #e1e9e3;border-radius:17px;text-align:left;min-width:0}
+#workout-chooser .category-tile.is-selected{border-color:#65c592;box-shadow:0 0 0 1px #65c59233}
+#workout-chooser .category-photo{display:block;position:relative;height:106px;overflow:hidden;background:#233b30}
+#workout-chooser .category-photo img{width:100%;height:100%;object-fit:cover;display:block}
+#workout-chooser .category-copy{display:block;padding:12px}
+#workout-chooser .category-copy strong{display:block;font-size:16px;letter-spacing:-.4px}
+#workout-chooser .category-copy small{display:block;font-size:10px;line-height:1.5;margin:5px 0 10px;min-height:30px;color:#718679}
+#workout-chooser .category-copy b{display:flex;justify-content:space-between;color:#248a54;font-size:10px}
+#workout-chooser .chooser-back{width:auto;background:none;border:0;padding:0 4px;color:#278755;font-size:12px;margin:0 0 12px}
+#workout-chooser .program-list{display:grid;gap:16px}
+#workout-chooser .program-card{border:1px solid #e0e9e2;border-radius:18px;overflow:hidden;background:white}
+#workout-chooser .program-card.is-selected{border-color:#55be86;box-shadow:0 0 0 1px #55be8622}
+#workout-chooser .program-photo{position:relative;height:156px;background:#20382c;overflow:hidden}
+#workout-chooser .program-photo img{display:block;width:100%;height:100%;object-fit:cover}
+#workout-chooser .program-copy{padding:16px}
+#workout-chooser .program-copy h3{font-size:19px;letter-spacing:-.5px;color:#213c2b}
+#workout-chooser .program-copy p{font-size:12px;line-height:1.5;margin:7px 0 12px;color:#728679}
+#workout-chooser .program-meta{display:block;font-size:11px;font-weight:650;color:#3b7653;margin-bottom:6px}
+#workout-chooser .program-copy>small{display:block;font-size:10px;color:#839388;line-height:1.5}
+#workout-chooser .program-copy>button{margin-top:14px;border:0;background:#13ae64;color:white;font-size:12px;min-height:46px}
+#workout-chooser .program-copy>button[aria-pressed=true]{background:#e3f5e9;color:#278452}
+#workout-chooser .program-preview{border-top:1px solid #edf2ee;margin-top:12px;padding-top:2px}
+#workout-chooser .program-preview summary{font-size:11px;color:#487759;min-height:44px;display:flex;align-items:center;cursor:pointer}
+#workout-chooser .program-preview summary:after{content:'＋';margin-left:auto}
+#workout-chooser .program-preview[open] summary:after{content:'−'}
+#workout-chooser .program-preview ol{padding-left:18px;margin:0 0 4px}
+#workout-chooser .program-preview li{font-size:11px;line-height:1.6;margin:7px 0;color:#3b5845}
+#workout-chooser .program-preview li small{font-size:10px;color:#8c9c90}
+@media(max-width:360px){#workout-chooser .category-photo{height:90px}#workout-chooser .category-copy{padding:10px}#workout-chooser .category-copy strong{font-size:14px}}
 </style></head><body>
 <header class="row"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div><a class="link" href="./index.html">Trainer ↗</a></header>
 <main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></svg><span>Home</span></button><button data-tab="train"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="5" width="10" height="14" rx="1"/><path d="M3 9v6m18-6v6M5 7v10m14-10v10"/></svg><span>Train</span></button><button data-tab="eat"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg><span>Eat</span></button><button data-tab="progress"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18 10 12l4 3 6-9"/><path d="M15 6h5v5"/></svg><span>Progress</span></button><button data-tab="more"><svg class="nav-symbol" viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14M5 10h14M5 15h14M5 20h14"/><path d="M2 5h.01M2 10h.01M2 15h.01M2 20h.01"/></svg><span>More</span></button></nav>
@@ -1493,7 +1525,7 @@ if(migrateWorkoutDrafts()&&state.profile)save();
 function onboarding(){screen.innerHTML='<section class="card hero"><h2>Make it yours</h2><p>Five quick steps to choose your starting plan. You can change this later.</p><form id="setup"><label>Primary goal</label><select name="goal"><option value="lose">Lose fat</option><option value="maintain">Get fitter / maintain</option><option value="gain">Build muscle</option></select><label>Training experience</label><select name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><label>Where do you train?</label><select name="equipment"><option value="home">At home</option><option value="gym">At a gym</option></select><label>Workout days per week</label><select name="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select><div class="grid"><div><label>Age (years)</label><input name="age" type="number" min="18" max="100" required placeholder="35"></div><div><label>Weight (kg)</label><input name="weight" type="number" min="30" max="350" step=".1" required placeholder="80"></div><div><label>Height (cm)</label><input name="height" type="number" min="120" max="230" required placeholder="180"></div><div><label>For calorie estimate</label><select name="sex"><option value="male">Male formula</option><option value="female">Female formula</option></select></div></div><button class="primary" style="margin-top:20px">Create my plan →</button></form><p class="note">Estimates are general starting points for adults, not medical advice. Data stays in this browser during the pilot.</p></section>'}
 function homeIcon(name){const paths={arrow:'M5 12h14m-6-6 6 6-6 6',food:'M5 3v7m3-7v7M3 7h7m-4 3v11M17 3v18m0-18c-4 4-4 8 0 8',scale:'M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2m3 4a6 6 0 0 1 8 0m-4 4 2-4',cart:'M2 3h3l3 12h11l3-8H6m3 13h.01M18 20h.01',chart:'M4 18 10 12l4 3 6-9M15 6h5v5',change:'M4 7h16M4 17h16M8 4v6m8 4v6',check:'m5 12 4 4L19 6',settings:'M4 7h16M4 17h16M8 4v6m8 4v6'};return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(paths[name]||paths.arrow)+'"/></svg>'}
 function homeOverview(){const now=new Date(),monday=new Date(now);monday.setDate(now.getDate()-(now.getDay()+6)%7);monday.setHours(0,0,0,0);const nextMonday=new Date(monday);nextMonday.setDate(monday.getDate()+7);const logs=state.logs.filter(x=>x&&Number.isFinite(new Date(x.date).getTime())&&new Date(x.date)<=now),weekly=logs.filter(x=>new Date(x.date)>=monday&&new Date(x.date)<nextMonday),trainingDays=new Set(weekly.map(x=>new Date(x.date).toDateString()));const plan=workoutPlan(),draft=workoutDraft(plan),totalSets=plan.exercises.reduce((sum,x)=>sum+x.sets,0),doneSets=plan.exercises.reduce((sum,x,i)=>sum+Array.from({length:x.sets},(_,j)=>draft['sd'+i+'-'+j]===true?1:0).reduce((a,b)=>a+b,0),0),hasDraft=Object.entries(draft).some(([k,v])=>/^(sr|sw|sd)\d+-\d+$/.test(k)&&(v===true||typeof v==='number'&&Number.isFinite(v)||typeof v==='string'&&v.trim()!=='')),completedToday=logs.some(x=>new Date(x.date).toDateString()===now.toDateString()&&(plan.id==='full-body'?(!x.workoutId||x.workoutId==='full-body')&&x.type===state.profile.equipment:x.workoutId===plan.id));const weights=state.weights.filter(x=>x&&Number.isFinite(Number(x.kg))&&Number(x.kg)>0),weight=weights.at(-1),previous=weights.at(-2),delta=weight&&previous?Math.round((Number(weight.kg)-Number(previous.kg))*10)/10:null;const shoppingNames=new Set((Array.isArray(state.shopping)?state.shopping:[]).flatMap(x=>{const m=typeof x==='string'&&x.match(/^(.*) — ([0-9.]+) g$/);return m?[m[1]]:[]})),shoppingLeft=[...shoppingNames].filter(x=>!state.checkedShopping?.[x]).length;return {now,monday,weekly,trainingDays,plan,draft,totalSets,doneSets,hasDraft,completedToday,weight,delta,shoppingLeft,shoppingTotal:shoppingNames.size,food:foodSummary(),goals:target()}}
-function home(){const h=homeOverview(),p=state.profile,plan=h.plan,n=h.food.totals,t=h.goals,mainCount=plan.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length,remaining=t.calories-n[0],days=Array.from({length:7},(_,i)=>{const date=new Date(h.monday);date.setDate(date.getDate()+i);return {label:['M','T','W','T','F','S','S'][i],long:date.toLocaleDateString(undefined,{weekday:'long'}),done:h.trainingDays.has(date.toDateString()),today:date.toDateString()===h.now.toDateString()}});screen.innerHTML='<div class="row home-heading"><div><h2>Today</h2><p>'+safe(h.now.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'}))+'</p></div><span class="home-day-badge">'+(plan.id==='full-body'?'Week '+plan.week+' of 12':'Your day, your pace')+'</span></div><section class="workout-feature home-workout">'+workoutCoverImage(plan.category||'Full Body',true)+'<span class="home-session-status">'+(h.hasDraft?'IN PROGRESS':h.completedToday?'LOGGED TODAY':'YOUR SELECTED WORKOUT')+'</span><div class="workout-feature-shade"><h2>'+safe(workoutTitle(plan))+'</h2><p>'+mainCount+' exercises'+(plan.minutes?' · '+plan.minutes+' min':' · '+(p.equipment==='home'?'At home':'At the gym'))+'</p>'+(h.hasDraft?'<div class="home-session-progress"><span>'+h.doneSets+' / '+h.totalSets+' sets checked</span><progress max="'+h.totalSets+'" value="'+h.doneSets+'"></progress></div>':'')+'<div class="home-workout-actions"><button class="primary" data-go="train">'+(h.hasDraft?'Resume workout':h.completedToday?'Open workout':'Start workout')+homeIcon('arrow')+'</button><button id="workout-select" type="button" class="home-change-workout" data-action="open-workouts" aria-label="Choose a different workout" aria-haspopup="dialog" aria-controls="workout-chooser">'+homeIcon('change')+'<span>Change</span></button></div></div></section><section class="home-nutrition"><div class="row"><h3>'+homeIcon('food')+'Today’s nutrition</h3><button type="button" class="home-text-link" data-home-focus="diary">View log '+homeIcon('arrow')+'</button></div><div class="home-calorie-line"><strong>'+n[0].toLocaleString()+'<small> / '+t.calories.toLocaleString()+' kcal</small></strong><span>'+h.food.entries.length+' '+(h.food.entries.length===1?'meal':'meals')+' logged</span></div><progress class="home-calorie-progress" aria-label="Calories logged toward today’s target" max="'+t.calories+'" value="'+Math.min(t.calories,n[0])+'"></progress><div class="home-macro-row">'+[['Protein',n[1],t.protein],['Carbs',n[2],t.carbs],['Fat',n[3],t.fat]].map(([name,value,goal])=>'<div><span>'+name+'</span><strong>'+value+'<small> / '+goal+'g</small></strong><progress aria-label="'+name+' logged toward target" max="'+Math.max(1,goal)+'" value="'+Math.min(goal,value)+'"></progress></div>').join('')+'</div><div class="home-nutrition-bottom"><small>'+(remaining>=0?remaining.toLocaleString()+' kcal left':Math.abs(remaining).toLocaleString()+' kcal over target')+'</small><button class="home-text-link" data-go="eat">Log a meal '+homeIcon('arrow')+'</button></div></section><button class="home-week-card" data-go="progress" aria-label="View weekly progress and workout history"><div class="row"><h3>This week</h3><strong>'+h.trainingDays.size+'<small> / '+p.days+' days</small></strong></div><div class="home-week-meter"><span style="width:'+Math.min(100,Math.round(h.trainingDays.size/p.days*100))+'%"></span></div><div class="home-week-days">'+days.map(d=>'<div aria-label="'+d.long+(d.today?', today':'')+(d.done?', workout logged':'')+'"><span class="'+(d.done?'is-done ':'')+(d.today?'is-today':'')+'">'+(d.done?homeIcon('check'):'')+'</span><small>'+d.label+'</small></div>').join('')+'</div><div class="home-week-footer"><small>'+h.weekly.length+' '+(h.weekly.length===1?'session':'sessions')+' logged</small><span>View progress '+homeIcon('arrow')+'</span></div></button><div class="home-shortcuts"><button class="home-shortcut" data-home-focus="weight">'+homeIcon('scale')+'<span class="home-shortcut-label">Weight</span><strong>'+(h.weight?safe(h.weight.kg)+'<small> kg</small>':'Add weigh-in')+'</strong><span class="home-shortcut-note">'+(h.delta!==null?(h.delta>0?'+':'')+h.delta+' kg since last entry':'Track your trend')+'</span><span class="home-shortcut-arrow">'+homeIcon('arrow')+'</span></button><button class="home-shortcut" data-go="shopping">'+homeIcon('cart')+'<span class="home-shortcut-label">Shopping list</span><strong>'+(h.shoppingTotal?h.shoppingLeft+'<small> left</small>':'Plan your meals')+'</strong><span class="home-shortcut-note">'+(h.shoppingTotal?h.shoppingTotal+' ingredients on your list':'Build a list from recipes')+'</span><span class="home-shortcut-arrow">'+homeIcon('arrow')+'</span></button></div><button data-action="reset" class="home-edit-plan">'+homeIcon('settings')+'Edit goals & plan</button>'+workoutChooser()}
+function home(){const h=homeOverview(),p=state.profile,plan=h.plan,n=h.food.totals,t=h.goals,mainCount=plan.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length,remaining=t.calories-n[0],days=Array.from({length:7},(_,i)=>{const date=new Date(h.monday);date.setDate(date.getDate()+i);return {label:['M','T','W','T','F','S','S'][i],long:date.toLocaleDateString(undefined,{weekday:'long'}),done:h.trainingDays.has(date.toDateString()),today:date.toDateString()===h.now.toDateString()}});screen.innerHTML='<div class="row home-heading"><div><h2>Today</h2><p>'+safe(h.now.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'}))+'</p></div><span class="home-day-badge">'+(plan.id==='full-body'?'Week '+plan.week+' of 12':'Your day, your pace')+'</span></div><section class="workout-feature home-workout">'+workoutCoverImage(plan.coverCategory||plan.category||'Full Body',true)+'<span class="home-session-status">'+(h.hasDraft?'IN PROGRESS':h.completedToday?'LOGGED TODAY':'YOUR SELECTED WORKOUT')+'</span><div class="workout-feature-shade"><h2>'+safe(workoutTitle(plan))+'</h2><p>'+mainCount+' exercises'+(plan.minutes?' · '+plan.minutes+' min':' · '+(p.equipment==='home'?'At home':'At the gym'))+'</p>'+(h.hasDraft?'<div class="home-session-progress"><span>'+h.doneSets+' / '+h.totalSets+' sets checked</span><progress max="'+h.totalSets+'" value="'+h.doneSets+'"></progress></div>':'')+'<div class="home-workout-actions"><button class="primary" data-go="train">'+(h.hasDraft?'Resume workout':h.completedToday?'Open workout':'Start workout')+homeIcon('arrow')+'</button><button id="workout-select" type="button" class="home-change-workout" data-action="open-workouts" aria-label="Choose a different workout" aria-haspopup="dialog" aria-controls="workout-chooser">'+homeIcon('change')+'<span>Change</span></button></div></div></section><section class="home-nutrition"><div class="row"><h3>'+homeIcon('food')+'Today’s nutrition</h3><button type="button" class="home-text-link" data-home-focus="diary">View log '+homeIcon('arrow')+'</button></div><div class="home-calorie-line"><strong>'+n[0].toLocaleString()+'<small> / '+t.calories.toLocaleString()+' kcal</small></strong><span>'+h.food.entries.length+' '+(h.food.entries.length===1?'meal':'meals')+' logged</span></div><progress class="home-calorie-progress" aria-label="Calories logged toward today’s target" max="'+t.calories+'" value="'+Math.min(t.calories,n[0])+'"></progress><div class="home-macro-row">'+[['Protein',n[1],t.protein],['Carbs',n[2],t.carbs],['Fat',n[3],t.fat]].map(([name,value,goal])=>'<div><span>'+name+'</span><strong>'+value+'<small> / '+goal+'g</small></strong><progress aria-label="'+name+' logged toward target" max="'+Math.max(1,goal)+'" value="'+Math.min(goal,value)+'"></progress></div>').join('')+'</div><div class="home-nutrition-bottom"><small>'+(remaining>=0?remaining.toLocaleString()+' kcal left':Math.abs(remaining).toLocaleString()+' kcal over target')+'</small><button class="home-text-link" data-go="eat">Log a meal '+homeIcon('arrow')+'</button></div></section><button class="home-week-card" data-go="progress" aria-label="View weekly progress and workout history"><div class="row"><h3>This week</h3><strong>'+h.trainingDays.size+'<small> / '+p.days+' days</small></strong></div><div class="home-week-meter"><span style="width:'+Math.min(100,Math.round(h.trainingDays.size/p.days*100))+'%"></span></div><div class="home-week-days">'+days.map(d=>'<div aria-label="'+d.long+(d.today?', today':'')+(d.done?', workout logged':'')+'"><span class="'+(d.done?'is-done ':'')+(d.today?'is-today':'')+'">'+(d.done?homeIcon('check'):'')+'</span><small>'+d.label+'</small></div>').join('')+'</div><div class="home-week-footer"><small>'+h.weekly.length+' '+(h.weekly.length===1?'session':'sessions')+' logged</small><span>View progress '+homeIcon('arrow')+'</span></div></button><div class="home-shortcuts"><button class="home-shortcut" data-home-focus="weight">'+homeIcon('scale')+'<span class="home-shortcut-label">Weight</span><strong>'+(h.weight?safe(h.weight.kg)+'<small> kg</small>':'Add weigh-in')+'</strong><span class="home-shortcut-note">'+(h.delta!==null?(h.delta>0?'+':'')+h.delta+' kg since last entry':'Track your trend')+'</span><span class="home-shortcut-arrow">'+homeIcon('arrow')+'</span></button><button class="home-shortcut" data-go="shopping">'+homeIcon('cart')+'<span class="home-shortcut-label">Shopping list</span><strong>'+(h.shoppingTotal?h.shoppingLeft+'<small> left</small>':'Plan your meals')+'</strong><span class="home-shortcut-note">'+(h.shoppingTotal?h.shoppingTotal+' ingredients on your list':'Build a list from recipes')+'</span><span class="home-shortcut-arrow">'+homeIcon('arrow')+'</span></button></div><button data-action="reset" class="home-edit-plan">'+homeIcon('settings')+'Edit goals & plan</button>'+workoutChooser()}
 const alternate={
 home:[['Reverse Lunge','3 × 8 / side'],['Floor Press','3 × 10'],['Resistance Band Row','3 × 12'],['Hip Hinge','3 × 12'],['Side Plank','3 × 25 sec'],['Glute Activation Clamshell','3 × 12 / side']],
 gym:[['Leg Press','3 × 10'],['Lat Pulldown','3 × 10'],['DB Shoulder Press','3 × 10'],['Hip Thrust','3 × 12'],['Pallof Press','3 × 12 / side'],['Seated Calf Raise','3 × 15']]
@@ -2701,6 +2733,2588 @@ const workoutTemplates=[
     ]
   }
 ];
+// Existing IDs and prescriptions remain stable so drafts and history keep their meaning.
+const legacyProgramInfo={"push-a":["Classic Push A","Balanced pressing with barbell, dumbbells and cables."],"push-b":["Classic Push B","Dumbbells and machines with a different pressing mix."],"pull-a":["Classic Pull A","Pulldowns, rows and rear-shoulder work."],"pull-b":["Classic Pull B","Assisted pull-ups, one-arm rows and curls."],"leg-a":["Classic Legs A","Squats, hinges and lunges with dumbbells."],"leg-b":["Classic Legs B","Machines, hip thrusts and walking lunges."],"core-a":["Classic Core A","Bracing, rotation resistance and floor control."],"core-b":["Classic Core B","Side stability, carries and hanging knee raises."],"mobility-a":["Daily Mobility A","Hips, spine, ankles and shoulders."],"mobility-b":["Daily Mobility B","A different whole-body mobility sequence."],"stability-a":["Stability A","Foundational balance and trunk control."],"stability-b":["Stability B","Single-leg work, side stability and carries."],"cardio-a":["Low-Impact Cardio","Walking and simple standing movements."],"cardio-b":["Gym Cardio Mix","Steady work across cardio machines."],"hiit-a":["Low-Impact HIIT","Bike intervals and standing conditioning."],"hiit-b":["Mixed Gym HIIT","Machine intervals, shuffles and battle ropes."]};
+workoutTemplates.forEach(w=>{w.programName=legacyProgramInfo[w.id][0];w.summary=legacyProgramInfo[w.id][1]});
+workoutTemplates.push(...[
+  {
+    "id": "full-body-balanced",
+    "category": "Full Body",
+    "variant": "Balanced Strength",
+    "title": "Balanced Strength",
+    "programName": "Balanced Strength",
+    "summary": "Squat, hinge, push, pull and core in one gym session.",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "minutes": "40–50",
+    "coverCategory": "Full Body",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Bench Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Seated Cable Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dead Bug",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "full-body-leg-focus",
+    "category": "Full Body",
+    "variant": "Lower-Body Emphasis",
+    "title": "Lower-Body Emphasis",
+    "programName": "Lower-Body Emphasis",
+    "summary": "Extra leg work with upper-body pushing and pulling.",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "minutes": "45–55",
+    "coverCategory": "Leg",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Lat Pulldown",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "full-body-home",
+    "category": "Full Body",
+    "variant": "Home Essentials",
+    "title": "Home Essentials",
+    "programName": "Home Essentials",
+    "summary": "Simple whole-body strength with a backpack and sturdy support.",
+    "equipment": "Home · backpack, sturdy counter, mat",
+    "minutes": "25–35",
+    "coverCategory": "Full Body",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Chair Squat",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Incline Push-up",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Backpack Row",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      }
+    ]
+  },
+  {
+    "id": "full-body-hiit",
+    "category": "Full Body",
+    "variant": "Full-Body HIIT",
+    "title": "Full-Body HIIT",
+    "programName": "Full-Body HIIT",
+    "summary": "Six short bodyweight intervals with generous recovery.",
+    "equipment": "Home · mat, sturdy counter",
+    "minutes": "25–30",
+    "coverCategory": "HIIT",
+    "guide": "After warming up, complete the listed sets of each movement before moving on. Work briskly at about 7–8 out of 10 effort, then recover for the listed rest. Avoid all-out sprints. Reduce to one set per movement or extend recovery if needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bodyweight Squat",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Incline Push-up",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Fast Marching",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Step Jacks",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Mountain Climber",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ]
+  },
+  {
+    "id": "push-chest",
+    "category": "Push",
+    "variant": "Chest Emphasis",
+    "title": "Chest Emphasis",
+    "programName": "Chest Emphasis",
+    "summary": "Three chest movements, then shoulders and triceps.",
+    "equipment": "Gym · bench, dumbbells, cable",
+    "minutes": "40–50",
+    "coverCategory": "Push",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Bench Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Cable Chest Fly",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "push-shoulders",
+    "category": "Push",
+    "variant": "Shoulder Emphasis",
+    "title": "Shoulder Emphasis",
+    "programName": "Shoulder Emphasis",
+    "summary": "Start with overhead pressing and shoulder accessories.",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "minutes": "35–45",
+    "coverCategory": "Push",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Seated Dumbbell Shoulder Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Front Raise",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Cable Chest Fly",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "push-home",
+    "category": "Push",
+    "variant": "Home Push",
+    "title": "Home Push",
+    "programName": "Home Push",
+    "summary": "Pressing strength with dumbbells and a mat.",
+    "equipment": "Home · dumbbells, mat, sturdy counter",
+    "minutes": "30–40",
+    "coverCategory": "Push",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Incline Push-up",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Floor Press",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Standing Dumbbell Shoulder Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Close-Grip Push-up",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "pull-back",
+    "category": "Pull",
+    "variant": "Back Emphasis",
+    "title": "Back Emphasis",
+    "programName": "Back Emphasis",
+    "summary": "Vertical and horizontal pulls before lighter arm work.",
+    "equipment": "Gym · cable, dumbbells, bench",
+    "minutes": "40–50",
+    "coverCategory": "Pull",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Lat Pulldown",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Chest-Supported Dumbbell Row",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "One-Arm Dumbbell Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Straight-Arm Pulldown",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Face Pull",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "pull-arms",
+    "category": "Pull",
+    "variant": "Back & Biceps",
+    "title": "Back and Biceps",
+    "programName": "Back and Biceps",
+    "summary": "A balanced back session with extra biceps variety.",
+    "equipment": "Gym · cable, dumbbells, bench",
+    "minutes": "35–45",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Close-Grip Lat Pulldown",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Seated Cable Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Band Pull-Apart",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "pull-home",
+    "category": "Pull",
+    "variant": "Home Pull",
+    "title": "Home Pull",
+    "programName": "Home Pull",
+    "summary": "Rows, rear shoulders and curls without cable machines.",
+    "equipment": "Home · dumbbells, resistance band, bench",
+    "minutes": "30–40",
+    "coverCategory": "Pull",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "One-Arm Dumbbell Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Resistance Band Row",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Bent-Over Reverse Fly",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Band Pull-Apart",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "leg-quads",
+    "category": "Leg",
+    "variant": "Quad Emphasis",
+    "title": "Quad Emphasis",
+    "programName": "Quad Emphasis",
+    "summary": "Squat and lunge patterns lead this leg session.",
+    "equipment": "Gym · leg machines, dumbbells, low step",
+    "minutes": "45–55",
+    "coverCategory": "Leg",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Leg Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Walking Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Leg Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "leg-posterior",
+    "category": "Leg",
+    "variant": "Glutes & Hamstrings",
+    "title": "Glutes and Hamstrings",
+    "programName": "Glutes and Hamstrings",
+    "summary": "Hinges and hip extension with controlled single-leg work.",
+    "equipment": "Gym · bench, dumbbells, leg curl",
+    "minutes": "40–50",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Lying Leg Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "leg-home",
+    "category": "Leg",
+    "variant": "Home Legs",
+    "title": "Home Legs",
+    "programName": "Home Legs",
+    "summary": "Lower-body strength using bodyweight and dumbbells.",
+    "equipment": "Home · dumbbells, mat, low step",
+    "minutes": "30–40",
+    "coverCategory": "Leg",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "core-brace",
+    "category": "Core",
+    "variant": "Bracing Basics",
+    "title": "Bracing Basics",
+    "programName": "Bracing Basics",
+    "summary": "Resist extension and rotation with slow controlled reps.",
+    "equipment": "Home · mat, resistance band",
+    "minutes": "20–25",
+    "coverCategory": "Core",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dead Bug",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Plank",
+        "reps": "20",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Side Plank",
+        "reps": "20",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "sec"
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "core-loaded",
+    "category": "Core",
+    "variant": "Loaded Core",
+    "title": "Loaded Core",
+    "programName": "Loaded Core",
+    "summary": "Cable work and carries alongside floor control.",
+    "equipment": "Gym · cable, dumbbell, mat",
+    "minutes": "25–35",
+    "coverCategory": "Core",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cable Crunch",
+        "reps": "10–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Suitcase Carry",
+        "sets": 2,
+        "reps": "20–30",
+        "unit": "sec",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Farmer Carry",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Reverse Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
+      },
+      {
+        "name": "Plank",
+        "reps": "25",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ]
+  },
+  {
+    "id": "core-no-kit",
+    "category": "Core",
+    "variant": "No-Equipment Core",
+    "title": "No-Equipment Core",
+    "programName": "No-Equipment Core",
+    "summary": "Six floor movements with no hanging bar or cable needed.",
+    "equipment": "Home · mat",
+    "minutes": "20–25",
+    "coverCategory": "Core",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dead Bug",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Reverse Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
+      },
+      {
+        "name": "Bicycle Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Side Plank",
+        "reps": "20",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "sec"
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Hollow Hold",
+        "reps": "15",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ]
+  },
+  {
+    "id": "mobility-hips",
+    "category": "Mobility",
+    "variant": "Hips & Ankles",
+    "title": "Hips and Ankles",
+    "programName": "Hips and Ankles",
+    "summary": "Gentle lower-body movement for hips, ankles and squat range.",
+    "equipment": "Home · mat, wall",
+    "minutes": "20–25",
+    "coverCategory": "Leg",
+    "guide": "Move slowly through a comfortable range. Do not force a stretch or hold your breath. Finish both sides before resting. The goal is relaxed movement, not fatigue.",
+    "warmup": "3–5 min easy walking and gentle joint movements.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "90/90 Hip Switch",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Ankle Rock",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Hip Flexor Stretch",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Adductor Rock-Back",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true,
+        "cues": [
+          "Start on hands and knees; extend one leg sideways with foot supported.",
+          "Keep your back steady and gently rock hips backward.",
+          "Use a small comfortable range; repeat on the other side."
+        ]
+      },
+      {
+        "name": "Standing Calf Stretch",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true,
+        "cues": [
+          "Place hands against a wall and step one foot behind you.",
+          "Keep the back heel down and lean forward gently.",
+          "Hold without bouncing; switch legs."
+        ]
+      },
+      {
+        "name": "Hip Hinge Drill",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "mobility-upper",
+    "category": "Mobility",
+    "variant": "Upper-Body Reset",
+    "title": "Upper-Body Reset",
+    "programName": "Upper-Body Reset",
+    "summary": "Shoulders and thoracic movement with easy floor work.",
+    "equipment": "Home · mat, wall",
+    "minutes": "15–20",
+    "coverCategory": "Mobility",
+    "guide": "Move slowly through a comfortable range. Do not force a stretch or hold your breath. Finish both sides before resting. The goal is relaxed movement, not fatigue.",
+    "warmup": "3–5 min easy walking and gentle joint movements.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cat-Cow",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Thoracic Open Book",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Wall Slide",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Shoulder CARs",
+        "sets": 2,
+        "reps": "3–5",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Child's Pose Lat Reach",
+        "reps": "25",
+        "sets": 2,
+        "rest": 15,
+        "side": true,
+        "unit": "sec",
+        "cues": [
+          "Kneel on a mat, sit hips gently toward heels and reach arms forward.",
+          "Walk hands slightly to one side for a gentle lat stretch; repeat on the other side."
+        ]
+      },
+      {
+        "name": "Seated Thoracic Rotation",
+        "reps": "6",
+        "sets": 2,
+        "rest": 15,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Sit upright on a sturdy chair, feet flat, arms crossed over chest.",
+          "Turn your upper back slowly while keeping hips facing forward; repeat both directions."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "mobility-gentle",
+    "category": "Mobility",
+    "variant": "Gentle Daily Flow",
+    "title": "Gentle Daily Flow",
+    "programName": "Gentle Daily Flow",
+    "summary": "An easy whole-body sequence for lighter days.",
+    "equipment": "Home · mat, wall",
+    "minutes": "15–20",
+    "coverCategory": "Mobility",
+    "guide": "Move slowly through a comfortable range. Do not force a stretch or hold your breath. Finish both sides before resting. The goal is relaxed movement, not fatigue.",
+    "warmup": "3–5 min easy walking and gentle joint movements.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cat-Cow",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "90/90 Hip Switch",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Thoracic Open Book",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Shoulder CARs",
+        "sets": 2,
+        "reps": "3–5",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Ankle Rock",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Hip Flexor Stretch",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "stability-single-leg",
+    "category": "Stability",
+    "variant": "Single-Leg Control",
+    "title": "Single-Leg Control",
+    "programName": "Single-Leg Control",
+    "summary": "Supported balance, hinges and step control.",
+    "equipment": "Home · sturdy support, low step, mat",
+    "minutes": "25–30",
+    "coverCategory": "Stability",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Supported Single-Leg Balance",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Stand beside a wall or sturdy chair and keep fingertips on it as needed.",
+          "Lift one foot slightly; keep hips level and eyes forward.",
+          "Hold steadily, then switch sides."
+        ]
+      },
+      {
+        "name": "Supported Single-Leg Hinge",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 45,
+        "side": true,
+        "cues": [
+          "Use one hand on a stable support and soften the standing knee.",
+          "Hinge at the hips as the other leg moves gently behind you.",
+          "Keep hips square and return tall; begin without weight."
+        ]
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "stability-carries",
+    "category": "Stability",
+    "variant": "Carries & Control",
+    "title": "Carries and Control",
+    "programName": "Carries and Control",
+    "summary": "Loaded carries paired with anti-rotation and slow steps.",
+    "equipment": "Gym · dumbbells, band, low step, mat",
+    "minutes": "25–35",
+    "coverCategory": "Stability",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Suitcase Carry",
+        "sets": 2,
+        "reps": "20–30",
+        "unit": "sec",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Farmer Carry",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Side Plank",
+        "sets": 2,
+        "reps": "15–20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "stability-foundation",
+    "category": "Stability",
+    "variant": "Balance Foundations",
+    "title": "Balance Foundations",
+    "programName": "Balance Foundations",
+    "summary": "Gentle supported balance and floor-based stability.",
+    "equipment": "Home · sturdy support, mat",
+    "minutes": "20–25",
+    "coverCategory": "Stability",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Supported Single-Leg Balance",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Stand beside a wall or sturdy chair and keep fingertips on it as needed.",
+          "Lift one foot slightly; keep hips level and eyes forward.",
+          "Hold steadily, then switch sides."
+        ]
+      },
+      {
+        "name": "Heel-to-Toe Walk",
+        "sets": 2,
+        "reps": "10–20",
+        "unit": "reps",
+        "rest": 30,
+        "side": false,
+        "cues": [
+          "Walk beside a wall or counter for support.",
+          "Place each heel just ahead of the toes of the other foot.",
+          "Take slow small steps while looking ahead."
+        ]
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Wall Slide",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cardio-walk",
+    "category": "Cardio",
+    "variant": "Walking Variety",
+    "title": "Walking Variety",
+    "programName": "Walking Variety",
+    "summary": "Six steady walking stages; no running required.",
+    "equipment": "Outdoors · flat route and gentle incline",
+    "minutes": "25–30",
+    "coverCategory": "Cardio",
+    "guide": "Work at a sustainable pace where you can speak in sentences. Follow each stage in order; the six movement blocks make one session, not six all-out efforts.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Easy Walking",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min",
+        "cues": [
+          "Walk on a clear, stable route with relaxed shoulders and natural strides.",
+          "Use an easy conversational pace; slow down if needed."
+        ]
+      },
+      {
+        "name": "Brisk Walking",
+        "reps": "5",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Incline Walking",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Comfortable Walking",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min",
+        "cues": [
+          "Walk on a clear, stable route with relaxed shoulders and natural strides.",
+          "Use an easy conversational pace; slow down if needed."
+        ]
+      },
+      {
+        "name": "Brisk Walking Finish",
+        "reps": "5",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min",
+        "cues": [
+          "Walk on a clear, stable route with relaxed shoulders and natural strides.",
+          "Choose a brisk pace while still able to speak in sentences."
+        ]
+      },
+      {
+        "name": "Easy Walking Finish",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min",
+        "cues": [
+          "Walk on a clear, stable route with relaxed shoulders and natural strides.",
+          "Use an easy conversational pace; slow down if needed."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cardio-home",
+    "category": "Cardio",
+    "variant": "Home Low Impact",
+    "title": "Home Low Impact",
+    "programName": "Home Low Impact",
+    "summary": "Keep moving at home without jumps or machines.",
+    "equipment": "Home · space to move, optional low step",
+    "minutes": "25–30",
+    "coverCategory": "Cardio",
+    "guide": "Work at a sustainable pace where you can speak in sentences. Follow each stage in order; the six movement blocks make one session, not six all-out efforts.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Steady Marching",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Step Touch",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Heel Digs",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Standing Knee Lifts",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Low Step-ups",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      }
+    ]
+  },
+  {
+    "id": "cardio-machines",
+    "category": "Cardio",
+    "variant": "Gym Endurance",
+    "title": "Cycle and Walk",
+    "programName": "Cycle and Walk",
+    "summary": "Bike endurance blocks with walking recovery between efforts.",
+    "equipment": "Gym · stationary bike, treadmill",
+    "minutes": "30–40",
+    "coverCategory": "Cardio",
+    "guide": "Work at a sustainable pace where you can speak in sentences. Follow each stage in order; the six movement blocks make one session, not six all-out efforts.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Easy Cycling",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "unit": "min",
+        "cues": [
+          "Adjust the seat for a slight knee bend at the bottom of the pedal stroke.",
+          "Pedal smoothly at a conversational pace with relaxed shoulders; reduce resistance if needed."
+        ]
+      },
+      {
+        "name": "Steady Cycling",
+        "reps": "6",
+        "sets": 1,
+        "rest": 30,
+        "unit": "min"
+      },
+      {
+        "name": "Walking Recovery",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "unit": "min",
+        "cues": [
+          "Walk slowly on a flat treadmill with a comfortable stride.",
+          "Let your breathing settle before the next cycling block."
+        ]
+      },
+      {
+        "name": "Moderate Cycling",
+        "reps": "6",
+        "sets": 1,
+        "rest": 30,
+        "unit": "min",
+        "cues": [
+          "Adjust the seat for a slight knee bend at the bottom of the pedal stroke.",
+          "Pedal smoothly at a conversational pace with relaxed shoulders; reduce resistance if needed."
+        ]
+      },
+      {
+        "name": "Brisk Walking",
+        "reps": "5",
+        "sets": 1,
+        "rest": 30,
+        "unit": "min"
+      },
+      {
+        "name": "Easy Cycling Finish",
+        "reps": "3",
+        "sets": 1,
+        "rest": 0,
+        "unit": "min",
+        "cues": [
+          "Adjust the seat for a slight knee bend at the bottom of the pedal stroke.",
+          "Pedal smoothly at a conversational pace with relaxed shoulders; reduce resistance if needed."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiit-bodyweight",
+    "category": "HIIT",
+    "variant": "Bodyweight Intervals",
+    "title": "Bodyweight Intervals",
+    "programName": "Bodyweight Intervals",
+    "summary": "Six brisk bodyweight moves; no gym equipment.",
+    "equipment": "Home · mat, sturdy counter",
+    "minutes": "25–30",
+    "coverCategory": "HIIT",
+    "guide": "After warming up, complete the listed sets of each movement before moving on. Work briskly at about 7–8 out of 10 effort, then recover for the listed rest. Avoid all-out sprints. Reduce to one set per movement or extend recovery if needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bodyweight Squat",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Incline Push-up",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Mountain Climber",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Step Jacks",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Fast Marching",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ]
+  },
+  {
+    "id": "hiit-low-impact",
+    "category": "HIIT",
+    "variant": "Low-Impact Intervals",
+    "title": "Low-Impact Intervals",
+    "programName": "Low-Impact Intervals",
+    "summary": "Raise your effort while keeping one foot grounded.",
+    "equipment": "Home · low step, space to move",
+    "minutes": "25–30",
+    "coverCategory": "Cardio",
+    "guide": "After warming up, complete the listed sets of each movement before moving on. Work briskly at about 7–8 out of 10 effort, then recover for the listed rest. Avoid all-out sprints. Reduce to one set per movement or extend recovery if needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Fast Marching",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Step Jacks",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Fast Low Step-ups",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Standing Knee Lifts",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Lateral Step Touch",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec",
+        "cues": [
+          "Step to one side and bring the other foot in to tap.",
+          "Alternate sides without jumping and keep knees soft."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiit-gym",
+    "category": "HIIT",
+    "variant": "Gym Conditioning",
+    "title": "Gym Conditioning",
+    "programName": "Gym Conditioning",
+    "summary": "Six gym intervals with recovery between each effort.",
+    "equipment": "Gym · cardio machines, ropes, sled, medicine ball",
+    "minutes": "30–35",
+    "coverCategory": "HIIT",
+    "guide": "After warming up, complete the listed sets of each movement before moving on. Work briskly at about 7–8 out of 10 effort, then recover for the listed rest. Avoid all-out sprints. Reduce to one set per movement or extend recovery if needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bike Intervals",
+        "reps": "30",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Rowing Intervals",
+        "reps": "30",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Battle Rope Waves",
+        "reps": "20",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Sled Push",
+        "reps": "20",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Medicine Ball Slam",
+        "reps": "20",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Elliptical Intervals",
+        "reps": "30",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "sec"
+      }
+    ]
+  },
+  {
+    "id": "arms-balanced",
+    "category": "Arms",
+    "variant": "Balanced Arms",
+    "title": "Balanced Arms",
+    "programName": "Balanced Arms",
+    "summary": "Three curl variations and three triceps movements.",
+    "equipment": "Gym · dumbbells, cable, bench",
+    "minutes": "30–40",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Skull Crusher",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      }
+    ]
+  },
+  {
+    "id": "arms-biceps",
+    "category": "Arms",
+    "variant": "Biceps Emphasis",
+    "title": "Biceps Emphasis",
+    "programName": "Biceps Emphasis",
+    "summary": "Start with curls, then finish with two triceps accessories.",
+    "equipment": "Gym · barbell, dumbbells, cable, bench",
+    "minutes": "30–40",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Barbell Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Cable Biceps Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "arms-triceps",
+    "category": "Arms",
+    "variant": "Triceps Emphasis",
+    "title": "Triceps Emphasis",
+    "programName": "Triceps Emphasis",
+    "summary": "Presses and extensions first, with biceps work to finish.",
+    "equipment": "Gym · bench, barbell, cable, dumbbells",
+    "minutes": "35–45",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Close-Grip Bench Press",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Skull Crusher",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "arms-dumbbells",
+    "category": "Arms",
+    "variant": "Dumbbell Arms",
+    "title": "Dumbbell Arms",
+    "programName": "Dumbbell Arms",
+    "summary": "A complete arm session using one pair of dumbbells.",
+    "equipment": "Home · dumbbells, mat",
+    "minutes": "25–35",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Lying Dumbbell Triceps Extension",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps",
+        "cues": [
+          "Lie on a mat holding light dumbbells above shoulders.",
+          "Keep upper arms steady, bend elbows to lower weights beside your head, then extend."
+        ]
+      },
+      {
+        "name": "Concentration Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Sit on a sturdy chair with one elbow lightly against the inner thigh.",
+          "Curl a dumbbell without swinging; lower slowly and repeat on the other arm."
+        ]
+      },
+      {
+        "name": "Triceps Kickback",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Hinge forward with a flat back and support one hand on a sturdy bench.",
+          "Keep the upper arm by your torso, extend the elbow, then return slowly; repeat both sides."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "arms-cables",
+    "category": "Arms",
+    "variant": "Cable Arms",
+    "title": "Cable Arms",
+    "programName": "Cable Arms",
+    "summary": "Constant-resistance curls and extensions at one station.",
+    "equipment": "Gym · cable, straight bar and rope attachments",
+    "minutes": "25–35",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cable Biceps Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Single-Arm Cable Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Stand balanced, holding a low-cable handle at your side.",
+          "Keep elbow still as you curl and lower slowly; repeat with the other arm."
+        ]
+      },
+      {
+        "name": "Cable Overhead Triceps Extension",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps",
+        "cues": [
+          "Stand in a stable split stance holding a rope overhead from a low pulley.",
+          "Keep upper arms steady and ribs down while bending and extending elbows."
+        ]
+      },
+      {
+        "name": "Rope Hammer Curl",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps",
+        "cues": [
+          "Hold a rope on a low pulley with palms facing each other.",
+          "Keep elbows near your torso; curl without leaning back and lower under control."
+        ]
+      },
+      {
+        "name": "Single-Arm Triceps Pushdown",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Face a high pulley and keep the working elbow close to your torso.",
+          "Straighten the arm without swinging, return slowly and repeat on the other side."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "glutes-builder",
+    "category": "Glutes",
+    "variant": "Glute Builder",
+    "title": "Glute Builder",
+    "programName": "Glute Builder",
+    "summary": "Hip thrusts, hinges and unilateral work for glute strength.",
+    "equipment": "Gym · bench, dumbbells, resistance band",
+    "minutes": "40–50",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Bulgarian Split Squat",
+        "reps": "8–12",
+        "sets": 2,
+        "rest": 90,
+        "side": true,
+        "unit": "reps"
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "glutes-home",
+    "category": "Glutes",
+    "variant": "Home Glutes",
+    "title": "Home Glutes",
+    "programName": "Home Glutes",
+    "summary": "Bodyweight and band work with a stable low step.",
+    "equipment": "Home · band, mat, low step",
+    "minutes": "25–35",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Quadruped Hip Extension",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Start on hands and knees with ribs gently braced.",
+          "Keep knee bent and lift one thigh only as far as your lower back stays still; repeat both sides."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "glutes-hinge",
+    "category": "Glutes",
+    "variant": "Hinge Emphasis",
+    "title": "Hinge Emphasis",
+    "programName": "Hinge Emphasis",
+    "summary": "Controlled hinges, hip extension and hamstring support.",
+    "equipment": "Gym · dumbbells, bench, leg curl, band",
+    "minutes": "35–45",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Lying Leg Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "glutes-single-leg",
+    "category": "Glutes",
+    "variant": "Single-Leg Glutes",
+    "title": "Single-Leg Glutes",
+    "programName": "Single-Leg Glutes",
+    "summary": "Split squats, step-ups and supported single-leg control.",
+    "equipment": "Gym · dumbbells, low step, bench, mat",
+    "minutes": "35–45",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bulgarian Split Squat",
+        "reps": "8–12",
+        "sets": 2,
+        "rest": 90,
+        "side": true,
+        "unit": "reps"
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Supported Single-Leg Hinge",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 45,
+        "side": true,
+        "cues": [
+          "Use one hand on a stable support and soften the standing knee.",
+          "Hinge at the hips as the other leg moves gently behind you.",
+          "Keep hips square and return tall; begin without weight."
+        ]
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "glutes-foundation",
+    "category": "Glutes",
+    "variant": "Glute Foundations",
+    "title": "Glute Foundations",
+    "programName": "Glute Foundations",
+    "summary": "Simple activation and strength patterns at an easy pace.",
+    "equipment": "Home · sturdy chair, mat, optional band",
+    "minutes": "25–30",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Quadruped Hip Extension",
+        "reps": "12",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Start on hands and knees with ribs gently braced.",
+          "Keep knee bent and lift one thigh only as far as your lower back stays still; repeat both sides."
+        ]
+      },
+      {
+        "name": "Chair Squat",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Supported Single-Leg Hinge",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 45,
+        "side": true,
+        "cues": [
+          "Use one hand on a stable support and soften the standing knee.",
+          "Hinge at the hips as the other leg moves gently behind you.",
+          "Keep hips square and return tall; begin without weight."
+        ]
+      }
+    ]
+  }
+]);
+
 function activeWorkoutId(){return workoutTemplates.some(w=>w.id===state.selectedWorkout)?state.selectedWorkout:'full-body'}
 function workoutDraft(plan=workoutPlan()){if(plan.id==='full-body')return state.draft?.variant===plan.variant&&state.draft?.equipment===state.profile.equipment?state.draft:{};return state.workoutDrafts?.[plan.id]||{}}
 function workoutTitle(plan=workoutPlan()){return plan.title||'Full Body '+plan.variant}
@@ -2717,6 +5331,8 @@ HIIT:['#fff0df','#c78b40','M13 2 5 14h6l-1 8 9-13h-6z']
 };
 function workoutIcon(category){const [bg,ink,path]=workoutCategoryArt[category]||workoutCategoryArt['Full Body'];return '<span class="workout-category-icon" style="--tile-bg:'+bg+';--tile-ink:'+ink+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+path+'"/></svg></span>'}
 const workoutCovers={
+ "Arms":{src:"./workout-images/arms.png",alt:"Arm workout: controlled dumbbell biceps curl"},
+ "Glutes":{src:"./workout-images/glutes.png",alt:"Glute workout: bodyweight glute bridge"},
   "Full Body": {
     "src": "./meal-images/workout-hero.jpg",
     "alt": "Full body workout with dumbbells"
@@ -2756,10 +5372,47 @@ const workoutCovers={
 };
 function workoutCover(category){return workoutCovers[category]||workoutCovers['Full Body']}
 function workoutCoverImage(category,hero=false){const p=workoutCover(category);return '<img src="'+safe(p.src)+'" alt="'+safe(p.alt)+'" '+(hero?'fetchpriority="high"':'loading="lazy"')+' decoding="async" width="960" height="640" onerror="this.hidden=true">'}
-function workoutChooser(){const id=activeWorkoutId();return '<dialog id="workout-chooser" aria-labelledby="workout-chooser-title"><div class="chooser-head"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><span class="chooser-eyebrow">MAKE YOUR NEXT MOVE</span><h2 id="workout-chooser-title">Choose your workout</h2></div><button type="button" data-action="close-workouts" aria-label="Close workout chooser" autofocus>×</button></div><p>Pick your focus. Make it an A or B day.</p></div><div class="chooser-body"><button type="button" class="fullbody-choice '+(id==='full-body'?'is-selected':'')+'" data-workout-pick="full-body" aria-pressed="'+(id==='full-body')+'"><span class="fullbody-choice-photo">'+workoutCoverImage('Full Body')+'</span><span><strong>Full Body</strong><small>6 exercises · your rotating A/B plan</small></span><b aria-hidden="true">'+(id==='full-body'?'✓':'→')+'</b></button><div class="chooser-section-title"><span>FIND YOUR FOCUS</span><small>8 ways to move</small></div><div class="workout-choice-grid">'+['Push','Pull','Leg','Core','Mobility','Stability','Cardio','HIIT'].map(category=>{const pair=workoutTemplates.filter(w=>w.category===category),selected=pair.some(w=>w.id===id),description={Push:'Chest · shoulders · triceps',Pull:'Back · rear delts · biceps',Leg:'Quads · glutes · hamstrings',Core:'Brace · resist · control',Mobility:'Move freely · feel better',Stability:'Balance · coordination',Cardio:'Steady pace · endurance',HIIT:'Work hard · recover well'}[category];return '<section class="workout-choice-card '+(selected?'is-selected':'')+'"><div class="workout-choice-photo">'+workoutCoverImage(category)+(selected?'<span class="workout-cover-check" aria-hidden="true">✓</span>':'')+'<h3>'+category+(category==='HIIT'?'':' day')+'</h3></div><div class="workout-choice-copy"><p>'+description+'</p><small class="workout-choice-meta">6 exercises · '+pair[0].minutes+' min</small><div class="workout-variant-options">'+pair.map(w=>'<button type="button" data-workout-pick="'+w.id+'" aria-label="Choose '+w.title+'" aria-pressed="'+(w.id===id)+'">'+w.variant+(w.id===id?'<span aria-hidden="true">✓</span>':'')+'</button>').join('')+'</div></div></section>'}).join('')+'</div><p class="chooser-footnote">Your unfinished sets stay saved for each workout.</p></div></dialog>'}
-function workoutPicker(){const plan=workoutPlan(),category=plan.category||'Full Body',count=plan.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length;return '<span class="workout-picker-label">YOUR SESSION</span><button id="workout-select" type="button" class="workout-picker-trigger" data-action="open-workouts" aria-haspopup="dialog" aria-controls="workout-chooser"><span class="workout-trigger-photo">'+workoutCoverImage(category)+'</span><span class="workout-trigger-copy"><strong>'+safe(workoutTitle(plan))+'</strong><small>'+count+' exercises'+(plan.minutes?' · '+plan.minutes+' min':' · your A/B plan')+'</small></span><span class="workout-trigger-change">Change<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></span></button>'+workoutChooser()}
 
-function workoutGuide(plan){return plan.guide?'<details class="session-guide"><summary>Session guide · '+plan.minutes+' min</summary><p>'+safe(plan.guide)+'</p><p><b>Warm-up:</b> '+safe(plan.warmup)+'</p><p><b>Finish:</b> '+safe(plan.cooldown)+'</p><p>These are individual sessions, not an eight-day schedule. Alternate A and B when repeating a category. Allow at least 48 hours before training the same muscles hard again.</p></details>':''}
+const workoutCategories=[
+ {id:'Full Body',label:'Full Body',description:'Strength from head to toe'},
+ {id:'Push',label:'Push',description:'Chest · shoulders · triceps'},
+ {id:'Pull',label:'Pull',description:'Back · rear delts · biceps'},
+ {id:'Leg',label:'Legs',description:'Quads · glutes · hamstrings'},
+ {id:'Arms',label:'Arms',description:'Biceps · triceps · forearms'},
+ {id:'Glutes',label:'Glute Builder',description:'Hip strength · glute focus'},
+ {id:'Core',label:'Core',description:'Brace · resist · control'},
+ {id:'Mobility',label:'Mobility',description:'Move freely · feel better'},
+ {id:'Stability',label:'Stability',description:'Balance · coordination'},
+ {id:'Cardio',label:'Cardio',description:'Steady pace · endurance'},
+ {id:'HIIT',label:'HIIT',description:'Short efforts · full recovery'}
+];
+let chooserCategory=null;
+function categoryPrograms(category){
+ const plans=workoutTemplates.filter(w=>w.category===category);
+ return category==='Full Body'?[{id:'full-body',category:'Full Body',programName:'Your Rotating Plan',summary:'Your existing A/B plan, matched to your equipment and level.',equipment:state.profile?.equipment==='gym'?'Gym · your current equipment':'Home · your current equipment',minutes:'30–45',exercises:Array(6).fill({name:'Your current exercises'})},...plans]:plans
+}
+function chooserContents(){
+ const id=activeWorkoutId(),cat=workoutCategories.find(c=>c.id===chooserCategory),plans=cat?categoryPrograms(cat.id):[];
+ return '<div class="chooser-head"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><span class="chooser-eyebrow">'+(cat?'CHOOSE YOUR SESSION':'MAKE YOUR NEXT MOVE')+'</span><h2 id="workout-chooser-title">'+(cat?safe(cat.label):'Find your workout')+'</h2></div><button type="button" data-action="close-workouts" aria-label="Close workout chooser" autofocus>×</button></div><p>'+(cat?'Five ways to train. Find the one that fits today.':'Choose a focus, then explore five different programs.')+'</p></div><div class="chooser-body">'+
+ (cat?'<button class="chooser-back" type="button" data-action="workout-categories">← All categories</button><div class="program-list">'+plans.map(w=>{
+ const selected=id===w.id;
+ return '<article class="program-card '+(selected?'is-selected':'')+'"><div class="program-photo">'+workoutCoverImage(w.coverCategory||w.category)+(selected?'<span class="workout-cover-check">Selected ✓</span>':'')+'</div><div class="program-copy"><h3>'+safe(w.programName||w.title)+'</h3><p>'+safe(w.summary)+'</p><span class="program-meta">'+w.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length+' exercises · '+safe(w.minutes)+' min</span><small>'+safe(w.equipment)+'</small>'+(w.id==='full-body'?'':'<details class="program-preview"><summary>See exercises</summary><ol>'+w.exercises.map(x=>'<li>'+safe(x.name)+' <small>· '+x.sets+' × '+safe(x.reps)+(x.unit&&x.unit!=='reps'?' '+x.unit:'')+(x.side?' / side':'')+'</small></li>').join('')+'</ol></details>')+'<button type="button" data-workout-pick="'+w.id+'" aria-label="Choose '+safe(w.title||w.programName)+'" aria-pressed="'+selected+'">'+(selected?'Selected workout ✓':'Choose program →')+'</button></div></article>'
+ }).join('')+'</div>':
+ '<div class="chooser-section-title"><span>FIND YOUR FOCUS</span><small>11 categories · 55 programs</small></div><div class="category-grid">'+workoutCategories.map(c=>{
+ const selected=(id==='full-body'?'Full Body':workoutTemplates.find(w=>w.id===id)?.category)===c.id;
+ return '<button type="button" class="category-tile '+(selected?'is-selected':'')+'" data-workout-category="'+c.id+'" aria-label="Explore '+c.label+' programs"><span class="category-photo">'+workoutCoverImage(c.id)+(selected?'<span class="workout-cover-check" aria-hidden="true">✓</span>':'')+'</span><span class="category-copy"><strong>'+c.label+'</strong><small>'+c.description+'</small><b>5 programs <span aria-hidden="true">→</span></b></span></button>'
+ }).join('')+'</div>')+'<p class="chooser-footnote">Your unfinished sets stay saved for each workout.</p></div>'
+}
+function workoutChooser(){return '<dialog id="workout-chooser" aria-labelledby="workout-chooser-title">'+chooserContents()+'</dialog>'}
+function showWorkoutCategory(category){
+ chooserCategory=workoutCategories.some(c=>c.id===category)?category:null;
+ const dialog=document.getElementById('workout-chooser');if(!dialog)return;
+ dialog.innerHTML=chooserContents();dialog.scrollTop=0;
+ dialog.querySelector(chooserCategory?'[data-action="workout-categories"]':'[data-workout-category]')?.focus({preventScroll:true})
+}
+function workoutPicker(){const plan=workoutPlan(),category=plan.category||'Full Body',count=plan.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length;return '<span class="workout-picker-label">YOUR SESSION</span><button id="workout-select" type="button" class="workout-picker-trigger" data-action="open-workouts" aria-haspopup="dialog" aria-controls="workout-chooser"><span class="workout-trigger-photo">'+workoutCoverImage(plan.coverCategory||category)+'</span><span class="workout-trigger-copy"><strong>'+safe(workoutTitle(plan))+'</strong><small>'+count+' exercises'+(plan.minutes?' · '+plan.minutes+' min':' · your A/B plan')+'</small></span><span class="workout-trigger-change">Change<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></span></button>'+workoutChooser()}
+
+function workoutGuide(plan){return plan.guide?'<details class="session-guide"><summary>Session guide · '+plan.minutes+' min</summary><p>'+safe(plan.guide)+'</p><p><b>Warm-up:</b> '+safe(plan.warmup)+'</p><p><b>Finish:</b> '+safe(plan.cooldown)+'</p><p>Choose one session for today. Repeat a program consistently to track progress, and allow at least 48 hours before training the same muscles hard again.</p></details>':''}
 function exerciseTips(x){return x.cues||exerciseCues[x.name]||exerciseCatalog?.find(e=>e.name===x.name)?.instructions||['Set up in a stable position.','Move through a comfortable controlled range.','Stop if the movement causes pain.']}
 function exerciseHasLoad(x){return !x.unit||x.unit==='reps'||/Carry$/.test(x.name)}
 function performanceText(e){const unit=e.unit||(/\bsec/.test(e.prescription||'')?'sec':'reps');return (e.sets?.length?e.sets.filter(z=>z.reps).map(z=>z.reps+' '+unit+(unit==='reps'?' × '+(z.kg||'BW')+(z.kg?' kg':''):z.kg?' × '+z.kg+' kg':'')).join(' / '):e.reps||e.prescription||'—')||'Not logged'}
@@ -2864,6 +5517,6 @@ function render(){const chooserOpen=!!document.getElementById('workout-chooser')
 document.addEventListener('submit',e=>{if(e.target.id==='setup'){e.preventDefault();const f=new FormData(e.target);const p={goal:f.get('goal'),level:f.get('level'),equipment:f.get('equipment'),days:Number(f.get('days')),age:Number(f.get('age')),weight:Number(f.get('weight')),height:Number(f.get('height')),sex:f.get('sex')};if(![p.days,p.age,p.weight,p.height].every(Number.isFinite)||p.days<2||p.days>5||p.age<18||p.age>100||p.weight<30||p.weight>350||p.height<120||p.height>230)return;state.profile=p;save();tab='home';render()}if(e.target.id==='weightform'){e.preventDefault();const kg=Number(new FormData(e.target).get('kg'));if(!Number.isFinite(kg)||kg<30||kg>350)return;state.weights.push({date:new Date().toISOString(),kg});save();render()}});
 document.addEventListener('input',e=>{if(e.target.id==='recipe-search'){filterRecipes()}});
 document.addEventListener('input',e=>{if(e.target.id==='library-search'){librarySearch=e.target.value;const caret=e.target.selectionStart;exerciseLibrary();const input=document.getElementById('library-search');if(input){input.focus();input.setSelectionRange(caret,caret)}}});document.addEventListener('change',e=>{if(e.target.id==='workout-select'){const id=e.target.value;if(id==='full-body'||workoutTemplates.some(w=>w.id===id)){state.selectedWorkout=id;save();render()}return}if(e.target.dataset.planDay!==undefined){const offset=Number(e.target.value);if(Number.isInteger(offset)&&offset>=0&&offset<=6){state.mealPlanOffset=offset;save();eat()}return}if(e.target.dataset.planPortion){const slot=e.target.dataset.planPortion,v=Number(e.target.value);if(['breakfast','lunch','dinner'].includes(slot)&&[.5,1,1.5,2,2.5,3].includes(v)){state.mealPlan=plannedMeals();const day=mealPlanDay();state.mealPlan[day]=state.mealPlan[day]||{};state.mealPlan[day][slot+'Portion']=v;save();eat()}return}if(e.target.dataset.planSlot){const slot=e.target.dataset.planSlot;if(!['breakfast','lunch','dinner'].includes(slot))return;state.mealPlan=plannedMeals();const day=mealPlanDay();state.mealPlan[day]=state.mealPlan[day]||{};const index=e.target.value===''?null:Number(e.target.value);if(index===null){delete state.mealPlan[day][slot];delete state.mealPlan[day][slot+'Portion']}else if(Number.isInteger(index)&&index>=0&&index<recipes.length){state.mealPlan[day][slot]=index;state.mealPlan[day][slot+'Portion']=1;}save();eat();return}if(e.target.id==='library-category'){libraryCategory=e.target.value;exerciseLibrary();return}if(e.target.id==='library-equipment'){libraryEquipment=e.target.value;exerciseLibrary();return}if(e.target.dataset.shopName!==undefined){state.checkedShopping=state.checkedShopping||{};state.checkedShopping[e.target.dataset.shopName]=e.target.checked;save();return}if(e.target.dataset.serving!==undefined){updateRecipe(Number(e.target.dataset.serving));return}const d=e.target.dataset;let k=null,value=e.target.value;if(d.setReps!==undefined)k='sr'+d.setReps;else if(d.setWeight!==undefined)k='sw'+d.setWeight;else if(d.setDone!==undefined){k='sd'+d.setDone;value=e.target.checked}else if(d.reps!==undefined)k='r'+d.reps;else if(d.load!==undefined)k='w'+d.load;if(k&&state.profile){const plan=workoutPlan();if(plan.id==='full-body'){state.draft={variant:plan.variant,equipment:state.profile.equipment,...workoutDraft(plan)};state.draft[k]=value}else{state.workoutDrafts=state.workoutDrafts||{};state.workoutDrafts[plan.id]={...workoutDraft(plan),[k]:value}};save();if(d.setDone!==undefined)updateWorkoutProgress()}});
-document.addEventListener('click',e=>{const homeFocus=e.target.closest('[data-home-focus]');if(homeFocus){const destination=homeFocus.dataset.homeFocus;tab=destination==='weight'?'progress':'eat';render();const section=document.querySelector(destination==='weight'?'#weightform':'[data-home-diary]');if(section){if(destination==='diary')section.open=true;if(destination==='weight'){const entry=section.closest?.('details');if(entry)entry.open=true}section.scrollIntoView({block:'start',behavior:'instant'});if(destination==='weight')section.querySelector('input')?.focus({preventScroll:true})}return}const workoutChoice=e.target.closest('[data-workout-pick]');if(workoutChoice){const id=workoutChoice.dataset.workoutPick;if(id==='full-body'||workoutTemplates.some(w=>w.id===id)){document.getElementById('workout-chooser')?.close();state.selectedWorkout=id;save();render();document.getElementById('workout-select')?.focus()}return}const addPlan=e.target.closest('[data-action="plan-to-shopping"],[data-action="week-to-shopping"]');if(addPlan){const all=addPlan.dataset.action==='week-to-shopping',dates=all?Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return d.toLocaleDateString('en-CA')}):[mealPlanDay()];const selected=dates.flatMap(date=>{const day=plannedMeals()[date]||{};return ['breakfast','lunch','dinner'].map(slot=>({i:day[slot],scale:planPortion(day,slot)})).filter(x=>Number.isInteger(x.i)&&recipes[x.i])});if(!selected.length){alert('Choose at least one meal first.');return}state.shopping=Array.isArray(state.shopping)?state.shopping:[];for(const {i,scale} of selected)for(const [name,g] of recipes[i].ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render();return}const remove=e.target.closest('[data-remove-food]');if(remove){state.foodLog=foodEntries().filter(x=>x.id!==remove.dataset.removeFood);save();eat();return}const logFood=e.target.closest('[data-log-food]');if(logFood){const i=Number(logFood.dataset.logFood),r=recipes[i],scale=Number(document.querySelector('[data-serving="'+i+'"]')?.value||1);if(r&&[.5,1,1.5,2].includes(scale)){state.foodLog=foodEntries();state.foodLog.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,7),date:foodDate(),name:r.name,servings:scale,macros:nutrition(r.ingredients,scale)});save();tab='eat';eat()}return}const lib=e.target.closest('[data-library-id]');if(lib){librarySelected=lib.dataset.libraryId;exerciseLibrary();window.scrollTo(0,0);return}const guide=e.target.closest('[data-open-exercise]');if(guide){const name=guide.dataset.openExercise;const aliases={'DB Romanian Deadlift':'Dumbbell Romanian Deadlift','Floor Press':'Dumbbell Floor Press','Hip Hinge':'Hip Hinge Drill','DB Shoulder Press':'Seated Dumbbell Shoulder Press'};librarySelected=(aliases[name]||name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');tab='library';render();window.scrollTo(0,0);return}const nav=e.target.closest('[data-tab]');if(nav){tab=nav.dataset.tab;render();window.scrollTo(0,0);return}const go=e.target.closest('[data-go]');if(go){tab=go.dataset.go;render();window.scrollTo(0,0);return}const meal=e.target.closest('[data-open-meal]');if(meal){tab='meal';document.body.dataset.view='meal';document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-current',b.dataset.tab==='eat'?'page':'false'));mealDetail(Number(meal.dataset.openMeal));window.scrollTo(0,0);return}const filter=e.target.closest('[data-meal-filter]');if(filter){mealFilter=filter.dataset.mealFilter;document.querySelectorAll('[data-meal-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===filter)));filterRecipes();return}const step=e.target.closest('[data-photo-step]');if(step){const frame=step.closest('.exercise-photo-frame'),img=frame?.querySelector('img');if(img){const next=step.dataset.photoStep==='1'?2:1;img.src=next===1?img.dataset.approvedStart:img.dataset.approvedFinish;img.alt=img.alt.replace(/starting position|next position/,next===1?'starting position':'next position');step.dataset.photoStep=String(next);step.textContent='Position '+next+' / 2 ↔';step.setAttribute('aria-label','Show '+(next===1?'next':'starting')+' position')}return}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='open-workouts'){const dialog=document.getElementById('workout-chooser');if(dialog&&!dialog.open)dialog.showModal();return}if(action==='close-workouts'){document.getElementById('workout-chooser')?.close();document.getElementById('workout-select')?.focus();return}if(action==='more-history'){historyLimit+=12;progress();return}if(action==='clear-library-filters'){librarySearch='';libraryCategory='All';libraryEquipment='All';exerciseLibrary();return}if(action==='library-back'){librarySelected=null;exerciseLibrary();return}if(action==='reload-library'){exerciseCatalog=null;libraryLoading=false;exerciseLibrary();return}if(action==='finish'){const exercises=workoutPlan().exercises.map((x,i)=>{const sets=Array.from({length:x.sets},(_,j)=>({reps:document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg:document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done:!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked}));return {name:x.name,unit:x.unit||'reps',prescription:x.sets+' × '+x.reps+(x.unit&&x.unit!=='reps'?' '+x.unit:'')+(x.side?' / side':''),sets:sets.map(z=>z.done?z:{reps:'',kg:'',done:false}),reps:sets.filter(z=>z.done&&z.reps).map(z=>z.reps).join(', '),kg:sets.find(z=>z.done&&z.kg)?.kg||''}});const completedSets=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&z.reps!==''&&Number(z.reps)>0).length,0);if(!completedSets){alert('Enter a positive rep count or duration and check off at least one completed set before saving.');return}const incomplete=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&(z.reps===''||Number(z.reps)<=0)).length,0);if(incomplete){alert('Some checked sets have no valid rep count or duration. Add a value or uncheck those sets.');return}const unchecked=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.reps!==''&&!z.done).length,0);if(unchecked&&!confirm(unchecked+' entered set(s) are not checked complete. Save only the checked sets?'))return;const plan=workoutPlan();state.logs.push({date:new Date().toISOString(),type:state.profile.equipment,variant:plan.variant,workoutId:plan.id,title:workoutTitle(plan),setting:plan.equipment||state.profile.equipment,exercises});if(plan.id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[plan.id];if(save()){tab='progress';render()}}if(action==='clear-draft'&&confirm('Clear your unfinished workout entries?')){const id=activeWorkoutId();if(id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[id];save();render()}if(action==='reset'&&confirm('Change your plan? Your workout and weight history will be kept.')){state.profile=null;save();render()}if(action==='clear-completed'){const checked=state.checkedShopping||{};state.shopping=(state.shopping||[]).filter(x=>!checked[String(x).split(' — ')[0]]);state.checkedShopping={};save();render();return}if(action==='clear-shopping'&&confirm('Clear your entire shopping list?')){state.shopping=[];state.checkedShopping={};save();render()}const recipe=e.target.closest('[data-recipe]');if(recipe){const r=recipes[Number(recipe.dataset.recipe)];if(r){state.shopping=Array.isArray(state.shopping)?state.shopping:[];const scale=Number(document.querySelector('[data-serving="'+recipe.dataset.recipe+'"]')?.value||1);for(const [name,g] of r.ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render()}}if(action==='restore'){const file=document.getElementById('restore-file')?.files?.[0];if(!file){alert('Choose a backup JSON file first.');return}if(file.size>2000000){alert('Backup exceeds 2 MB.');return}file.text().then(raw=>{let data;try{data=JSON.parse(raw)}catch(e){throw Error('Invalid JSON backup')}if(!data||typeof data!=='object'||!Array.isArray(data.logs)||!Array.isArray(data.weights)||data.logs.length>10000||data.weights.length>10000||data.profile!==null&&typeof data.profile!=='object')throw Error('Not an EZPZ Fitness backup');if(data.profile){const p=data.profile;if(!['home','gym'].includes(p.equipment)||!['Beginner','Intermediate','Advanced'].includes(p.level)||!Number.isFinite(p.weight)||!Number.isFinite(p.height)||!Number.isFinite(p.age)||!Number.isFinite(p.days)||p.weight<30||p.weight>350||p.height<120||p.height>230||p.age<18||p.age>100||p.days<2||p.days>5)throw Error('Invalid profile in backup')}if(!confirm('Replace all fitness data on this device with this backup?'))return;const prior=state;state=restoredState(data);migrateWorkoutDrafts();if(!save()){state=prior;return}tab='home';render()}).catch(err=>alert('Restore failed: '+err.message));return}if(action==='export'){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ezpz-fitness-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}});
+document.addEventListener('click',e=>{const homeFocus=e.target.closest('[data-home-focus]');if(homeFocus){const destination=homeFocus.dataset.homeFocus;tab=destination==='weight'?'progress':'eat';render();const section=document.querySelector(destination==='weight'?'#weightform':'[data-home-diary]');if(section){if(destination==='diary')section.open=true;if(destination==='weight'){const entry=section.closest?.('details');if(entry)entry.open=true}section.scrollIntoView({block:'start',behavior:'instant'});if(destination==='weight')section.querySelector('input')?.focus({preventScroll:true})}return}const categoryChoice=e.target.closest('[data-workout-category]');if(categoryChoice){showWorkoutCategory(categoryChoice.dataset.workoutCategory);return}const workoutChoice=e.target.closest('[data-workout-pick]');if(workoutChoice){const id=workoutChoice.dataset.workoutPick;if(id==='full-body'||workoutTemplates.some(w=>w.id===id)){document.getElementById('workout-chooser')?.close();state.selectedWorkout=id;save();render();document.getElementById('workout-select')?.focus()}return}const addPlan=e.target.closest('[data-action="plan-to-shopping"],[data-action="week-to-shopping"]');if(addPlan){const all=addPlan.dataset.action==='week-to-shopping',dates=all?Array.from({length:7},(_,i)=>{const d=new Date();d.setDate(d.getDate()+i);return d.toLocaleDateString('en-CA')}):[mealPlanDay()];const selected=dates.flatMap(date=>{const day=plannedMeals()[date]||{};return ['breakfast','lunch','dinner'].map(slot=>({i:day[slot],scale:planPortion(day,slot)})).filter(x=>Number.isInteger(x.i)&&recipes[x.i])});if(!selected.length){alert('Choose at least one meal first.');return}state.shopping=Array.isArray(state.shopping)?state.shopping:[];for(const {i,scale} of selected)for(const [name,g] of recipes[i].ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render();return}const remove=e.target.closest('[data-remove-food]');if(remove){state.foodLog=foodEntries().filter(x=>x.id!==remove.dataset.removeFood);save();eat();return}const logFood=e.target.closest('[data-log-food]');if(logFood){const i=Number(logFood.dataset.logFood),r=recipes[i],scale=Number(document.querySelector('[data-serving="'+i+'"]')?.value||1);if(r&&[.5,1,1.5,2].includes(scale)){state.foodLog=foodEntries();state.foodLog.push({id:String(Date.now())+'-'+Math.random().toString(36).slice(2,7),date:foodDate(),name:r.name,servings:scale,macros:nutrition(r.ingredients,scale)});save();tab='eat';eat()}return}const lib=e.target.closest('[data-library-id]');if(lib){librarySelected=lib.dataset.libraryId;exerciseLibrary();window.scrollTo(0,0);return}const guide=e.target.closest('[data-open-exercise]');if(guide){const name=guide.dataset.openExercise;const aliases={'DB Romanian Deadlift':'Dumbbell Romanian Deadlift','Floor Press':'Dumbbell Floor Press','Hip Hinge':'Hip Hinge Drill','DB Shoulder Press':'Seated Dumbbell Shoulder Press'};librarySelected=(aliases[name]||name).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');tab='library';render();window.scrollTo(0,0);return}const nav=e.target.closest('[data-tab]');if(nav){tab=nav.dataset.tab;render();window.scrollTo(0,0);return}const go=e.target.closest('[data-go]');if(go){tab=go.dataset.go;render();window.scrollTo(0,0);return}const meal=e.target.closest('[data-open-meal]');if(meal){tab='meal';document.body.dataset.view='meal';document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-current',b.dataset.tab==='eat'?'page':'false'));mealDetail(Number(meal.dataset.openMeal));window.scrollTo(0,0);return}const filter=e.target.closest('[data-meal-filter]');if(filter){mealFilter=filter.dataset.mealFilter;document.querySelectorAll('[data-meal-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===filter)));filterRecipes();return}const step=e.target.closest('[data-photo-step]');if(step){const frame=step.closest('.exercise-photo-frame'),img=frame?.querySelector('img');if(img){const next=step.dataset.photoStep==='1'?2:1;img.src=next===1?img.dataset.approvedStart:img.dataset.approvedFinish;img.alt=img.alt.replace(/starting position|next position/,next===1?'starting position':'next position');step.dataset.photoStep=String(next);step.textContent='Position '+next+' / 2 ↔';step.setAttribute('aria-label','Show '+(next===1?'next':'starting')+' position')}return}const action=e.target.closest('[data-action]')?.dataset.action;if(action==='workout-categories'){showWorkoutCategory(null);return}if(action==='open-workouts'){chooserCategory=null;const dialog=document.getElementById('workout-chooser');if(dialog&&!dialog.open){dialog.innerHTML=chooserContents();dialog.showModal();dialog.scrollTop=0}return}if(action==='close-workouts'){document.getElementById('workout-chooser')?.close();document.getElementById('workout-select')?.focus();return}if(action==='more-history'){historyLimit+=12;progress();return}if(action==='clear-library-filters'){librarySearch='';libraryCategory='All';libraryEquipment='All';exerciseLibrary();return}if(action==='library-back'){librarySelected=null;exerciseLibrary();return}if(action==='reload-library'){exerciseCatalog=null;libraryLoading=false;exerciseLibrary();return}if(action==='finish'){const exercises=workoutPlan().exercises.map((x,i)=>{const sets=Array.from({length:x.sets},(_,j)=>({reps:document.querySelector('[data-set-reps="'+i+'-'+j+'"]')?.value||'',kg:document.querySelector('[data-set-weight="'+i+'-'+j+'"]')?.value||'',done:!!document.querySelector('[data-set-done="'+i+'-'+j+'"]')?.checked}));return {name:x.name,unit:x.unit||'reps',prescription:x.sets+' × '+x.reps+(x.unit&&x.unit!=='reps'?' '+x.unit:'')+(x.side?' / side':''),sets:sets.map(z=>z.done?z:{reps:'',kg:'',done:false}),reps:sets.filter(z=>z.done&&z.reps).map(z=>z.reps).join(', '),kg:sets.find(z=>z.done&&z.kg)?.kg||''}});const completedSets=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&z.reps!==''&&Number(z.reps)>0).length,0);if(!completedSets){alert('Enter a positive rep count or duration and check off at least one completed set before saving.');return}const incomplete=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.done&&(z.reps===''||Number(z.reps)<=0)).length,0);if(incomplete){alert('Some checked sets have no valid rep count or duration. Add a value or uncheck those sets.');return}const unchecked=exercises.reduce((n,x)=>n+x.sets.filter(z=>z.reps!==''&&!z.done).length,0);if(unchecked&&!confirm(unchecked+' entered set(s) are not checked complete. Save only the checked sets?'))return;const plan=workoutPlan();state.logs.push({date:new Date().toISOString(),type:state.profile.equipment,variant:plan.variant,workoutId:plan.id,title:workoutTitle(plan),setting:plan.equipment||state.profile.equipment,exercises});if(plan.id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[plan.id];if(save()){tab='progress';render()}}if(action==='clear-draft'&&confirm('Clear your unfinished workout entries?')){const id=activeWorkoutId();if(id==='full-body')state.draft={};else if(state.workoutDrafts)delete state.workoutDrafts[id];save();render()}if(action==='reset'&&confirm('Change your plan? Your workout and weight history will be kept.')){state.profile=null;save();render()}if(action==='clear-completed'){const checked=state.checkedShopping||{};state.shopping=(state.shopping||[]).filter(x=>!checked[String(x).split(' — ')[0]]);state.checkedShopping={};save();render();return}if(action==='clear-shopping'&&confirm('Clear your entire shopping list?')){state.shopping=[];state.checkedShopping={};save();render()}const recipe=e.target.closest('[data-recipe]');if(recipe){const r=recipes[Number(recipe.dataset.recipe)];if(r){state.shopping=Array.isArray(state.shopping)?state.shopping:[];const scale=Number(document.querySelector('[data-serving="'+recipe.dataset.recipe+'"]')?.value||1);for(const [name,g] of r.ingredients)state.shopping.push(name+' — '+Math.round(g*scale*10)/10+' g');save();tab='shopping';render()}}if(action==='restore'){const file=document.getElementById('restore-file')?.files?.[0];if(!file){alert('Choose a backup JSON file first.');return}if(file.size>2000000){alert('Backup exceeds 2 MB.');return}file.text().then(raw=>{let data;try{data=JSON.parse(raw)}catch(e){throw Error('Invalid JSON backup')}if(!data||typeof data!=='object'||!Array.isArray(data.logs)||!Array.isArray(data.weights)||data.logs.length>10000||data.weights.length>10000||data.profile!==null&&typeof data.profile!=='object')throw Error('Not an EZPZ Fitness backup');if(data.profile){const p=data.profile;if(!['home','gym'].includes(p.equipment)||!['Beginner','Intermediate','Advanced'].includes(p.level)||!Number.isFinite(p.weight)||!Number.isFinite(p.height)||!Number.isFinite(p.age)||!Number.isFinite(p.days)||p.weight<30||p.weight>350||p.height<120||p.height>230||p.age<18||p.age>100||p.days<2||p.days>5)throw Error('Invalid profile in backup')}if(!confirm('Replace all fitness data on this device with this backup?'))return;const prior=state;state=restoredState(data);migrateWorkoutDrafts();if(!save()){state=prior;return}tab='home';render()}).catch(err=>alert('Restore failed: '+err.message));return}if(action==='export'){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='ezpz-fitness-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}});
 render();
 </script></body></html>

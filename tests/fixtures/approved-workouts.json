@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "push-a",
+    "category": "Push",
+    "variant": "A",
+    "title": "Push Day A",
+    "equipment": "Gym · bench, dumbbells, cable",
+    "minutes": "45–55",
+    "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
+    "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Barbell Bench Press",
+        "sets": 3,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Seated Dumbbell Shoulder Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Cable Chest Fly",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "push-b",
+    "category": "Push",
+    "variant": "B",
+    "title": "Push Day B",
+    "equipment": "Gym · dumbbells, machines, cable",
+    "minutes": "45–55",
+    "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
+    "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Bench Press",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Machine Chest Press",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Standing Dumbbell Shoulder Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Cable Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": true
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Close-Grip Push-up",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "pull-a",
+    "category": "Pull",
+    "variant": "A",
+    "title": "Pull Day A",
+    "equipment": "Gym · cable, bench, dumbbells",
+    "minutes": "45–55",
+    "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
+    "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Lat Pulldown",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Seated Cable Row",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Chest-Supported Dumbbell Row",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Reverse Pec Deck",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Face Pull",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "pull-b",
+    "category": "Pull",
+    "variant": "B",
+    "title": "Pull Day B",
+    "equipment": "Gym · assisted pull-up, cable, dumbbells",
+    "minutes": "45–55",
+    "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. For assisted pull-ups, reduce assistance instead. Start with 2 sets if new to lifting.",
+    "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Assisted Pull-up",
+        "sets": 3,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "One-Arm Dumbbell Row",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Straight-Arm Pulldown",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Band Pull-Apart",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "leg-a",
+    "category": "Leg",
+    "variant": "A",
+    "title": "Leg Day A",
+    "equipment": "Gym · dumbbells, leg-curl machine",
+    "minutes": "50–60",
+    "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
+    "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Lying Leg Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Standing Calf Raise",
+        "sets": 3,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "leg-b",
+    "category": "Leg",
+    "variant": "B",
+    "title": "Leg Day B",
+    "equipment": "Gym · leg press, bench, machines",
+    "minutes": "50–60",
+    "guide": "Complete straight sets in order. Rest 90–120 sec after compound lifts and 60 sec after accessories. Leave 2–3 good reps in reserve. When every set reaches the top of its range with good form, add the smallest available load. Start with 2 sets if new to lifting.",
+    "warmup": "5–10 min easy movement, then lighter practice sets of the first exercise.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Leg Press",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Hip Thrust",
+        "sets": 3,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Walking Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Leg Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Seated Calf Raise",
+        "sets": 3,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "core-a",
+    "category": "Core",
+    "variant": "A",
+    "title": "Core Day A",
+    "equipment": "Mat + band or cable",
+    "minutes": "25–30",
+    "guide": "Work slowly and breathe throughout. Rest 30–45 sec between sets. For each-side movements, do both sides before checking a set; enter reps or seconds for one side. Choose a range you can control without back or hip discomfort.",
+    "warmup": "3–5 min easy walking, then a few gentle pelvic tilts.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dead Bug",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Plank",
+        "sets": 3,
+        "reps": "20–30",
+        "unit": "sec",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Reverse Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Hollow Hold",
+        "sets": 2,
+        "reps": "15–20",
+        "unit": "sec",
+        "rest": 30,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "core-b",
+    "category": "Core",
+    "variant": "B",
+    "title": "Core Day B",
+    "equipment": "Mat + pull-up station + dumbbell",
+    "minutes": "25–30",
+    "guide": "Work slowly and breathe throughout. Rest 30–45 sec between sets. For each-side movements, do both sides before checking a set; enter reps or seconds for one side. Choose a range you can control without back or hip discomfort.",
+    "warmup": "3–5 min easy walking, then a few controlled bodyweight hinges.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Side Plank",
+        "sets": 2,
+        "reps": "15–25",
+        "unit": "sec",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Hanging Knee Raise",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
+      },
+      {
+        "name": "Suitcase Carry",
+        "sets": 3,
+        "reps": "20–30",
+        "unit": "sec",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Bicycle Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Lying Leg Raise",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "mobility-a",
+    "category": "Mobility",
+    "variant": "A",
+    "title": "Mobility Day A",
+    "equipment": "Mat + wall",
+    "minutes": "20–25",
+    "guide": "Move slowly through comfortable ranges. Do both sides before checking a set; enter the amount for one side. Rest about 15 sec as needed. Do not force end range. Begin holds at 10 sec if needed, building toward the listed target.",
+    "warmup": "3–5 min easy walking or marching.",
+    "cooldown": "1–2 min relaxed breathing; finish feeling comfortable.",
+    "exercises": [
+      {
+        "name": "Cat-Cow",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "90/90 Hip Switch",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Ankle Rock",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Wall Slide",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Hip Flexor Stretch",
+        "sets": 3,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Thoracic Open Book",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "mobility-b",
+    "category": "Mobility",
+    "variant": "B",
+    "title": "Mobility Day B",
+    "equipment": "Mat + wall",
+    "minutes": "20–25",
+    "guide": "Move slowly through comfortable ranges. Do both sides before checking a set; enter the amount for one side. Rest about 15 sec as needed. Do not force end range. Begin holds at 10 sec if needed, building toward the listed target.",
+    "warmup": "3–5 min easy walking or marching.",
+    "cooldown": "1–2 min relaxed breathing; finish feeling comfortable.",
+    "exercises": [
+      {
+        "name": "Thoracic Open Book",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "World's Greatest Stretch",
+        "sets": 2,
+        "reps": "4–6",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Shoulder CARs",
+        "sets": 2,
+        "reps": "3–5",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Adductor Rock-Back",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true,
+        "cues": [
+          "Start on hands and knees; extend one leg sideways with foot supported.",
+          "Keep your back steady and gently rock hips backward.",
+          "Use a small comfortable range; repeat on the other side."
+        ]
+      },
+      {
+        "name": "Standing Calf Stretch",
+        "sets": 3,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true,
+        "cues": [
+          "Place hands against a wall and step one foot behind you.",
+          "Keep the back heel down and lean forward gently.",
+          "Hold without bouncing; switch legs."
+        ]
+      },
+      {
+        "name": "Hip Hinge Drill",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "stability-a",
+    "category": "Stability",
+    "variant": "A",
+    "title": "Stability Day A",
+    "equipment": "Mat + wall or chair + band",
+    "minutes": "25–30",
+    "guide": "Quality before load. Use a wall or sturdy support when balance is challenging. Rest 30–45 sec. Do both sides before checking each set; log one side. Stop the set when posture or control breaks down.",
+    "warmup": "3–5 min easy walking and gentle ankle movements.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Supported Single-Leg Balance",
+        "sets": 3,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Stand beside a wall or sturdy chair and keep fingertips on it as needed.",
+          "Lift one foot slightly; keep hips level and eyes forward.",
+          "Hold steadily, then switch sides."
+        ]
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Heel-to-Toe Walk",
+        "sets": 2,
+        "reps": "10–20",
+        "unit": "reps",
+        "rest": 30,
+        "side": false,
+        "cues": [
+          "Walk beside a wall or counter for support.",
+          "Place each heel just ahead of the toes of the other foot.",
+          "Take slow small steps while looking ahead."
+        ]
+      },
+      {
+        "name": "Wall Slide",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      }
+    ]
+  },
+  {
+    "id": "stability-b",
+    "category": "Stability",
+    "variant": "B",
+    "title": "Stability Day B",
+    "equipment": "Mat + low step + light dumbbell",
+    "minutes": "25–30",
+    "guide": "Quality before load. Use a wall or sturdy support when balance is challenging. Rest 30–45 sec. Do both sides before checking each set; log one side. Stop the set when posture or control breaks down.",
+    "warmup": "3–5 min easy walking and controlled bodyweight hinges.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Supported Single-Leg Hinge",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 45,
+        "side": true,
+        "cues": [
+          "Use one hand on a stable support and soften the standing knee.",
+          "Hinge at the hips as the other leg moves gently behind you.",
+          "Keep hips square and return tall; begin without weight."
+        ]
+      },
+      {
+        "name": "Side Plank",
+        "sets": 2,
+        "reps": "15–20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Suitcase Carry",
+        "sets": 2,
+        "reps": "20–30",
+        "unit": "sec",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ]
+  },
+  {
+    "id": "cardio-a",
+    "category": "Cardio",
+    "variant": "A",
+    "title": "Cardio Day A",
+    "equipment": "Walking space + low stable step",
+    "minutes": "30–35",
+    "guide": "Six different main movements, excluding warm-up and cooldown. Do the 5 min opening movement, then 3 min at each of the next five stations, in the listed order. Keep effort moderate, around 4–6/10, and be able to speak in full sentences. Take extra transition time as needed; start with shorter blocks if needed.",
+    "warmup": "First block includes a 5 min warm-up.",
+    "cooldown": "20 min of main work plus 5 min warm-up and 5 min cooldown; allow time to change stations.",
+    "exercises": [
+      {
+        "name": "Easy Walking Warm-up",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Walk slowly on level ground.",
+          "Let breathing and stride settle."
+        ]
+      },
+      {
+        "name": "Brisk Walking",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Walk at a steady purposeful pace.",
+          "Stay tall with relaxed shoulders; use the talk test."
+        ]
+      },
+      {
+        "name": "Steady Marching",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "March in place with relaxed arm swings.",
+          "Keep an even pace that still allows full sentences."
+        ]
+      },
+      {
+        "name": "Step Touch",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Step sideways and bring the other foot toward it.",
+          "Repeat in both directions with soft knees and relaxed shoulders."
+        ]
+      },
+      {
+        "name": "Heel Digs",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Alternate tapping each heel forward.",
+          "Keep the supporting knee soft and swing arms gently."
+        ]
+      },
+      {
+        "name": "Standing Knee Lifts",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Stand tall and alternate lifting one knee at a time.",
+          "Stay controlled; use a sturdy support if needed."
+        ]
+      },
+      {
+        "name": "Low Step-ups",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Use a low, stable step and place the whole foot on it.",
+          "Step up and down at a steady pace, changing the lead leg halfway."
+        ]
+      },
+      {
+        "name": "Gentle Walking Cooldown",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Slow your walking pace gradually.",
+          "Let breathing ease toward normal."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cardio-b",
+    "category": "Cardio",
+    "variant": "B",
+    "title": "Cardio Day B",
+    "equipment": "Gym · bike, rower, elliptical, treadmill, stairs, ski erg",
+    "minutes": "30–35",
+    "guide": "Six different main movements, excluding warm-up and cooldown. Do the 5 min opening movement, then 3 min at each of the next five stations, in the listed order. Keep effort moderate, around 4–6/10, and be able to speak in full sentences. Take extra transition time as needed; start with shorter blocks if needed.",
+    "warmup": "First block includes a 5 min warm-up.",
+    "cooldown": "20 min of main work plus 5 min warm-up and 5 min cooldown; allow time to change stations.",
+    "exercises": [
+      {
+        "name": "Easy Cycling Warm-up",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Set the saddle so the knee stays slightly bent at the bottom.",
+          "Pedal easily with light resistance."
+        ]
+      },
+      {
+        "name": "Steady Cycling",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Maintain a comfortable steady cadence.",
+          "Use moderate resistance and a pace that allows full sentences."
+        ]
+      },
+      {
+        "name": "Steady Rowing",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Set a light-to-moderate rowing resistance.",
+          "Drive through legs, then lean slightly and pull; reverse that order to return."
+        ]
+      },
+      {
+        "name": "Elliptical Training",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Stand upright with feet supported on the pedals.",
+          "Use smooth strides at a comfortable moderate effort."
+        ]
+      },
+      {
+        "name": "Incline Walking",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Choose a manageable treadmill incline and natural walking pace.",
+          "Use the safety clip and avoid hanging on the handrails."
+        ]
+      },
+      {
+        "name": "Stair Machine",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Start at a low speed and keep feet well supported on each step.",
+          "Stand tall; use the rails only for light balance support."
+        ]
+      },
+      {
+        "name": "Ski Erg",
+        "sets": 1,
+        "reps": "3",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Stand with soft knees and a light resistance setting.",
+          "Hinge gently and pull handles down; return smoothly without jerking."
+        ]
+      },
+      {
+        "name": "Easy Cycling Cooldown",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Reduce resistance and pedal gently.",
+          "Let breathing settle before stopping."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiit-a",
+    "category": "HIIT",
+    "variant": "A",
+    "title": "HIIT Day A",
+    "equipment": "Gym · bike, elliptical, low stable step",
+    "minutes": "32–37",
+    "guide": "Six different work exercises, excluding warm-up and cooldown. After warming up, finish the six intervals at the first station; then do one interval at each of the five additional stations. Work at a controlled hard effort around 8/10, never an all-out sprint. Take the full 90 sec easy recovery after every work interval, including when changing stations. Reduce interval count or shorten work periods when starting. Use 1–2 non-consecutive HIIT days per week. Log work seconds only and check an interval after recovery.",
+    "warmup": "Warm-up and cooldown are included as logged blocks.",
+    "cooldown": "11 × (30 sec hard + 90 sec easy) = 22 min, plus 10 min warm-up/cooldown. Allow extra time to change stations.",
+    "exercises": [
+      {
+        "name": "Easy Cycling Warm-up",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Pedal easily for 5 min, gradually raising your cadence.",
+          "Include a few short moderate efforts near the end if comfortable."
+        ]
+      },
+      {
+        "name": "Bike Intervals",
+        "sets": 6,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Increase resistance or cadence for 30 sec at a controlled hard effort.",
+          "Then pedal very easily for 90 sec; recover fully before the next effort.",
+          "Complete 6 rounds, or begin with 4."
+        ]
+      },
+      {
+        "name": "Fast Marching",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "March briskly with quick, controlled arm swings.",
+          "Keep steps light; avoid leaning back as knees lift."
+        ]
+      },
+      {
+        "name": "Step Jacks",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Step one foot sideways as arms move outward, then return.",
+          "Alternate feet briskly without jumping; keep shoulders in a comfortable range."
+        ]
+      },
+      {
+        "name": "Shadow Boxing",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Keep a soft stance and punch the air without weights.",
+          "Alternate controlled punches without snapping elbows straight or twisting knees."
+        ]
+      },
+      {
+        "name": "Fast Low Step-ups",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Use a low stable step, placing the whole foot on it.",
+          "Choose quick but controlled steps and switch the lead leg halfway."
+        ]
+      },
+      {
+        "name": "Elliptical Intervals",
+        "sets": 1,
+        "reps": "30",
+        "unit": "sec",
+        "rest": 90,
+        "side": false,
+        "cues": [
+          "Increase cadence or resistance for the work period while staying upright.",
+          "Then lower the effort for the full recovery period."
+        ]
+      },
+      {
+        "name": "Easy Cycling Cooldown",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Reduce resistance and pedal easily for 5 min.",
+          "Let breathing return toward normal."
+        ]
+      }
+    ]
+  },
+  {
+    "id": "hiit-b",
+    "category": "HIIT",
+    "variant": "B",
+    "title": "HIIT Day B",
+    "equipment": "Gym · treadmill, rower, air bike, ski erg, ropes",
+    "minutes": "32–37",
+    "guide": "Six different work exercises, excluding warm-up and cooldown. After warming up, finish the six intervals at the first station; then do one interval at each of the five additional stations. Work at a controlled hard effort around 8/10, never an all-out sprint. Take the full 75 sec easy recovery after every work interval, including when changing stations. Reduce interval count or shorten work periods when starting. Use 1–2 non-consecutive HIIT days per week. Log work seconds only and check an interval after recovery.",
+    "warmup": "Warm-up and cooldown are included as logged blocks.",
+    "cooldown": "11 × (45 sec hard + 75 sec easy) = 22 min, plus 10 min warm-up/cooldown. Allow extra time to change stations.",
+    "exercises": [
+      {
+        "name": "Easy Walking Warm-up",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Walk easily for 5 min, building to a comfortable purposeful pace.",
+          "Use the safety clip; practise adjusting speed and incline first."
+        ]
+      },
+      {
+        "name": "Incline Walking Intervals",
+        "sets": 6,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Raise incline to reach a controlled hard walking effort for 45 sec.",
+          "Reduce incline and walk easily for 75 sec. Allow time for belt adjustments.",
+          "Keep a natural stride; lower the incline if you need to hang on the rails."
+        ]
+      },
+      {
+        "name": "Rowing Intervals",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Row strongly with legs first, torso next and arms last.",
+          "Keep technique smooth rather than chasing the highest stroke rate."
+        ]
+      },
+      {
+        "name": "Air Bike Intervals",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Set the seat for a slightly bent knee at the bottom.",
+          "Use coordinated arm and leg action for a controlled hard effort."
+        ]
+      },
+      {
+        "name": "Ski Erg Intervals",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Use a light enough setting to keep the stroke smooth.",
+          "Drive handles down with a small hinge and soft knees; avoid jerking your back."
+        ]
+      },
+      {
+        "name": "Lateral Shuffle",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Use a clear non-slip space and start in a soft athletic stance.",
+          "Take short side steps without crossing feet; slow before changing direction."
+        ]
+      },
+      {
+        "name": "Battle Rope Waves",
+        "sets": 1,
+        "reps": "45",
+        "unit": "sec",
+        "rest": 75,
+        "side": false,
+        "cues": [
+          "Keep a stable stance with soft knees and relaxed shoulders.",
+          "Make small alternating waves without shrugging or leaning back."
+        ]
+      },
+      {
+        "name": "Gentle Walking Cooldown",
+        "sets": 1,
+        "reps": "5",
+        "unit": "min",
+        "rest": 0,
+        "side": false,
+        "cues": [
+          "Return to a low incline and gradually slow the pace for 5 min.",
+          "Let breathing settle before stepping off."
+        ]
+      }
+    ]
+  }
+]
