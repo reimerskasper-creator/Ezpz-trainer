@@ -37,7 +37,10 @@ try{
   for(const id of programIds){
    const info=await page.evaluate(id=>{const p=workoutTemplates.find(w=>w.id===id);return {category:p?.category||'Full Body',photo:workoutCover(p?.coverCategory||p?.category||'Full Body').src}},id);
    await page.locator('[data-action="open-workouts"]').click();
-   await page.locator('[data-workout-category="'+info.category+'"]').click();
+   try{await page.locator('[data-workout-category="'+info.category+'"]').click({timeout:5000})}catch(error){
+    console.log('CHOOSER_DIAGNOSTIC',JSON.stringify(await page.evaluate(()=>({scrollY,innerWidth,innerHeight,dialog:document.getElementById('workout-chooser').getBoundingClientRect().toJSON(),items:[...document.querySelectorAll('[data-workout-category]')].slice(0,3).map(e=>{const r=e.getBoundingClientRect();return {category:e.dataset.workoutCategory,rect:r.toJSON(),hit:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.outerHTML.slice(0,250)}})}))));
+    const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));throw error
+   }
    assert.equal(await page.locator('[data-workout-pick]').count(),5);
    if(id==='full-body-balanced'&&width===390){
     await page.locator('#workout-chooser').evaluate(async d=>{for(const img of d.querySelectorAll('img')){img.loading='eager';await img.decode()}});
