@@ -117,3 +117,8 @@ User explicitly requested High protein, High carb, High fat, and Balanced meal s
 Focus sorting conventions: protein >=35%, carbs >=55%, fat >=40% of macro-derived energy. See docs/meal-sections-2026-10.md. Storage schema and old recipe IDs remain stable. Updated tests preserve original food data and every protected food function except intentionally changed eat/filterRecipes. 172 portion cases, focus thresholds, matching photo ingredients, and new-recipe logging are covered.
 
 Implementation b37edb1079911b05c91ce686768e15b8a4c167f3; final screenshot test 680c52024050ca164ec939254cb1e6f45db274c9. Mobile workflow 39502710544 (job 118903923332) and Pages deployment 39502710575 succeeded. All eight unit suites and Chromium at 320/390/430px passed. Four-section screenshot sheet was visually reviewed from EZPZ_MEALS_DATA logs. No known release blocker.
+
+## Meal category expansion — October 20
+User requested 10 more meals per new category. Appended 30 portion-adjusted dishes at indices 67–96, keeping every previous recipe unchanged. High protein, High carb and High fat now contain 16 each; Balanced retains 49. Total 97. The dishes reuse the matching original photos and same ingredient sets. All new names are distinct from previous names. Gram-based nutrition and focus thresholds are unchanged.
+
+Added a snapshot of the first 67 recipes to protect them. Recipe tests cover all 30 new meals through diary/shopping handlers, 292 portion cases and same-dish photo checks. Browser checks cover all category counts, newest dishes at half/double portions and planner availability. Verification pending for this commit.
