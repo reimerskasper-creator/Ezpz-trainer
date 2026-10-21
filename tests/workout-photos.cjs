@@ -6,8 +6,8 @@ const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,q
 const api=new Function('document','window','localStorage','fetch','console',scripts+'\nreturn {home,train,workoutChooser,workoutCover,workoutCovers,workoutTemplates,categoryPrograms,workoutCategories,setCategory(v){chooserCategory=v},get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem(){writes++}},()=>new Promise(()=>{}),{error(){}});
 const assert=(v,m)=>{if(!v)throw Error(m)};
 
-assert(api.workoutCategories.length===12,'Expected 11 categories');
-assert(api.workoutTemplates.length===64,'54 fixed programs plus the existing rotating plan');
+assert(api.workoutCategories.length===12,'Expected 12 categories');
+assert(api.workoutTemplates.length===64,'64 fixed programs plus the existing rotating plan');
 assert(new Set(api.workoutTemplates.map(w=>w.id)).size===64,'Duplicate program IDs');
 const baseline=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/approved-workouts.json'),'utf8'));
 for(const old of baseline){const current=api.workoutTemplates.find(w=>w.id===old.id);for(const [key,value] of Object.entries(old))assert(JSON.stringify(current[key])===JSON.stringify(value),'Existing workout changed: '+old.id+' '+key)}
@@ -32,6 +32,6 @@ for(const cat of api.workoutCategories){
   assert(JSON.stringify(api.state)===before,'Rendering changed draft data');
  }
 }
-assert(count===65,'55 program choices');assert(api.state.workoutDrafts['pull-b']['sr0-0']==='8','Saved draft lost');assert(writes===0,'Rendering wrote storage');
+assert(count===65,'65 program choices');assert(api.state.workoutDrafts['pull-b']['sr0-0']==='8','Saved draft lost');assert(writes===0,'Rendering wrote storage');
 console.log('PASS: 12 categories, 65 choices, 6+ exercises, distinct sessions, matching photos, original prescriptions and drafts preserved');
 
