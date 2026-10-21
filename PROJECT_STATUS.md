@@ -22,7 +22,7 @@
 - Finishing shows a recap above Progress with completed sets, elapsed minutes since first manual entry (includes breaks and resumed time), paired load/rep improvements against the previous comparable record, and next scheduled workout. Missing legacy duration is not invented. Session finish now rolls back logs and drafts together if saving fails.
 - More begins with measurement/display settings and plan settings, then planner/shopping shortcuts. Exercise guides/history and backups/archived drafts are collapsed sections.
 - tests/training-usability.cjs covers conversions, failed writes, swaps, completion eligibility, paired improvement comparisons and recap/finish. Existing browser flows open the intentionally collapsed sections; new mobile flows test all five features at 320/390/430px. Current supported unit suites pass; legacy tests/workouts.cjs is obsolete (expects 16 fixed programs; current protected suite verifies 64).
-- CUA preview manually verified setup conversion, swap, lb entry, finish recap and More controls; browser CI and deployment pending.
+- CUA preview manually verified setup conversion, swap, lb entry, finish recap and More controls. Source 1c6b01250b4d090e1fe1d7e4c67e101116d437d3 passed Mobile app checks 39620756092 (job 119293196667) including the new five-feature flows at 320/390/430px; Pages deployment 39620755124 succeeded. The deployed app blob matches the locally checked source. No known release blocker.
 
 ## Latest update — body measurement preference, 21 October 2026
 - More → Measurement units persists Metric (kg/cm) or Imperial (lb/inches), default metric for existing users. Setup includes the same choice and converts entered body measurements while preserving other answers.
