@@ -445,3 +445,6 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ## Discoverable method banner — 21 October 2026
 - Moved the logo shortcut into its own compact dark green banner beneath greeting/calendar. Richer gold, blue, mint and lavender artwork generated from the approved letterforms. Clear “Discover your four foundations” title, foundation subtitle and chevron make the entire button discoverable; it retains the existing explanation dialog and pressed/focus behavior.
+
+## Compact Home introduction — 21 October 2026
+- Removed the calendar/date from Home at user request and tightened greeting, method banner and workout spacing. Banner now has a compact 76px minimum height, with 12px spacing between adjacent sections; same readable copy, artwork and dialog behavior.
