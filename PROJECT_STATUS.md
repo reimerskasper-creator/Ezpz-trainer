@@ -15,7 +15,17 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest visual update — food logging, 21 October 2026
+## Latest feature — custom foods, 21 October 2026
+- Eat → Today's food → Add your own food opens a simple form for a food name and protein/carbs/fat grams for one portion. Calories calculate as 4P+4C+9F unless optional label calories are entered. The live label distinguishes label calories from calculated calories.
+- A required eight-choice photo picker uses existing related dish assets. It is explicitly a closest-photo visual reminder; all nutrition comes from user input. The chosen photo appears on every logged custom food.
+- Save for next time is optional. Saved foods can be logged at different portion amounts or removed without removing diary entries or their photo snapshots.
+- state.customFoods contains small validated records (id/name/macros/photoKey). Diary entries use custom:true, photoKey and optional customFoodId. Custom entries never resolve by recipe name, even if their name matches a library dish.
+- New helpers: parseCustomFood, logCustomFood, cleanCustomFoods, customFoodPhoto, deleteCustomFood, customFoodPage and openFoodDiary. Save failures roll back additions/deletions. Backup restoration validates saved foods and preserves logged food/photo metadata.
+- Existing recipes, nutrition references, gram weights and library recipe logging remain unchanged. The authorized diary presentation snapshot now includes the custom-food entry button.
+- tests/custom-foods.cjs covers calculations, override, validation, images, totals, portions, reuse, duplicate prevention, removal, legacy isolation, backups and failed-storage rollback; it is included in Mobile app checks.
+- Final verification: commit c3aa447d51248ced180f01a6da9a350dd89c3009; Mobile app checks run 39597968713 and Pages deployment 39597968115 passed. Chromium exercised creation, required photo selection, invalid values, live calorie override, saved-food portion reuse, reload persistence, deletion and backup photo metadata at 320/390/430px. The final form/diary screenshot was visually reviewed.
+
+## Previous visual update — food logging, 21 October 2026
 - Today's food diary now matches Home with a dark green nutrition-photo overview, bright calorie progress and readable macro tiles. Individual logged meals use white cards with small matching recipe photographs.
 - New food entries save recipeIndex alongside the existing name/servings/macros. loggedRecipeIndex validates the indexed name, then resolves old entries by exact recipe name. The two same-name Turkey avocado sandwich variants are disambiguated by saved nutrition; if ambiguity remains, matching photographs must agree. Unknown foods use a neutral utensil icon, never an unrelated dish.
 - Thumbnails open the existing recipe. Logging opens and scrolls to the diary. Broken thumbnails have a neutral fallback.
