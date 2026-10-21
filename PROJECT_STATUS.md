@@ -399,3 +399,5 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 - Verification: all 20 current local unit/regression suites passed. Full existing Chromium mobile suite passed at 320/390/430px with zero browser errors; new daily-refinement browser flows also passed at all three widths. Phone screenshots of Train, filters, first-use Progress, More, Eat and grouped shopping were visually reviewed and refined.
 - Final Home choice check: choosing an alternative workout from Home opens that selected workout in Train, without changing the scheduled calendar. Selection rolls back on storage failure. Added a phone regression for the explicit choice and preserved calendar; it passes at all three widths.
+
+- Release verified: final source 34efdf4d3522aeff97f0238896892edc94d0258d passed hosted Mobile app checks 39682599005 (job 119508556200); Pages deployment 39682598310 succeeded. Downloaded live HTML blob cf1388ac851e64e8271446b5e7080df3ae727fc6 matches local tested source. Live Home, compact Train and More daily tools/preferences were inspected. No known release blocker.
