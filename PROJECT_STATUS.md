@@ -435,3 +435,5 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ## Corrected logo artwork — 21 October 2026
 - Removed the colored square emblem from the header at user request, retaining white EZPZ Fitness. Replaced the inaccurate SVG recreation in Home with a production image generated from the approved logo reference, preserving the clear fork, crescent, diagonal arrow and wave. The image uses the pale Home background and remains the method-dialog button.
+
+- Removed the external Trainer app link from the top banner at user request. Header retains EZPZ Fitness; no replacement control added pending design choice.
