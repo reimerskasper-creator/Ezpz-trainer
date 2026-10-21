@@ -301,4 +301,4 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Selected program covers follow through Home, Train, planner, previews and history. Custom workouts retain category fallbacks. Kettlebell program counts now reflect the actual ten choices.
 - Mapping and generation provenance are recorded in docs/program-cover-mapping.json and docs/program-covers-2026-10.json.
 - Workout prescriptions, saved-data schema and all approved meal content remain unchanged.
-- Local workout-photo, training, planning, planner-picker, recipe and training-usability checks passed. Push and Arms chooser visuals were reviewed in the mobile preview. Full hosted mobile CI and deployment verification pending.
+- Local workout-photo, training, planning, planner-picker, recipe and training-usability checks passed. Push and Arms chooser visuals were reviewed in the mobile preview. Full hosted mobile CI passed: run 39641858707, job 119367162984, on cc1bffd7fa98ff9b7f10797be96a5c8b8d76965f. GitHub Pages deployment 39641856482 succeeded. Cover implementation commit: fdfdf73731efd18d228465eba5a6b07c50990c3a.
