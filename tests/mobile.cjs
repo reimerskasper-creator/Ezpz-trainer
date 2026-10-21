@@ -86,13 +86,16 @@ try{
   const programIds=await page.evaluate(()=>['full-body',...workoutTemplates.map(w=>w.id)]);
   assert.equal(programIds.length,65);
   for(const id of programIds){
-   const info=await page.evaluate(id=>{const p=workoutTemplates.find(w=>w.id===id);return {category:p?.category||'Full Body',photo:workoutCover(p?.coverCategory||p?.category||'Full Body').src}},id);
+   const info=await page.evaluate(id=>{const p=workoutTemplates.find(w=>w.id===id);return {category:p?.category||'Full Body',photo:workoutCover(p||'Full Body').src}},id);
    await page.locator('[data-action="open-workouts"]').click();
    try{await page.locator('[data-workout-category="'+info.category+'"]').click({timeout:5000})}catch(error){
     console.log('CHOOSER_DIAGNOSTIC',JSON.stringify(await page.evaluate(()=>({scrollY,innerWidth,innerHeight,dialog:document.getElementById('workout-chooser').getBoundingClientRect().toJSON(),items:[...document.querySelectorAll('[data-workout-category]')].slice(0,3).map(e=>{const r=e.getBoundingClientRect();return {category:e.dataset.workoutCategory,rect:r.toJSON(),hit:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.outerHTML.slice(0,250)}})}))));
     const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));throw error
    }
    assert.equal(await page.locator('[data-workout-pick]').count(),info.category==='Kettlebell'?10:5);
+   const cardPhotos=await page.locator('.program-card .program-photo img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));assert.equal(new Set(cardPhotos).size,cardPhotos.length,'Each '+info.category+' program has a distinct cover');
+   const selectedPhoto=page.locator('.program-card').filter({has:page.locator('[data-workout-pick="'+id+'"]')}).locator('.program-photo img');assert.equal(await selectedPhoto.getAttribute('src'),info.photo,'Program card uses the assigned cover '+id);
+   if(width===390){await selectedPhoto.evaluate(async x=>{x.loading='eager';await x.decode()});}
    if(id==='full-body-balanced'&&width===390){
     await page.locator('#workout-chooser').evaluate(async d=>{for(const img of d.querySelectorAll('img')){img.loading='eager';await img.decode()}});
     const buffer=await page.screenshot({path:path.join(out,'Full-body-programs.jpg'),type:'jpeg',quality:85});captures.push({name:'Full Body programs',src:'data:image/jpeg;base64,'+buffer.toString('base64')});

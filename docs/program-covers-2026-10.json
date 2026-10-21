@@ -1,0 +1,276 @@
+{
+  "generator": "built-in image_gen",
+  "purpose": "Decorative workout program covers; not technique demonstrations",
+  "dimensions": [
+    960,
+    480
+  ],
+  "assets": [
+    {
+      "id": "arms-biceps",
+      "asset": "program-images/arms-biceps.jpg",
+      "prompt": "Use case: photorealistic-natural. Landscape fitness program cover: adult woman in a charcoal sleeveless top and black leggings doing a controlled small-barbell biceps curl in a sunlit black-and-green gym with tall windows and green plants. Wide framing, natural hands and anatomy, no text or branding. Decorative program cover, not a technique diagram.",
+      "sha256": "52177215d2a233ef155d965f5b08a05ab9ebb27516dbfc92bfa33837b95fb76c",
+      "bytes": 111033
+    },
+    {
+      "id": "push-b",
+      "asset": "program-images/push-b.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Classic Push B'. One photograph, no collage. Subject: A woman sitting upright in a realistic seated chest-press machine, hands on the two handles at chest height, feet grounded. Side three-quarter view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting Dumbbells and machines with a different pressing mix. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "cc71cc4c0bb81df3458dd26bb0bff23ea914031cca88c48d7a0ac3bb5b4fa06c",
+      "bytes": 127540
+    },
+    {
+      "id": "mobility-b",
+      "asset": "program-images/mobility-b.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Daily Mobility B'. One photograph, no collage. Subject: A woman on a mat in a gentle half-kneeling hip-flexor stretch, upright torso, one knee padded on the mat and opposite foot planted forward, hands resting on the forward thigh. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting A different whole-body mobility sequence. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "2aa2116d283fd4cd0f123aff5d54dfdb4755d09bfe8f6b33e375e30126b83b64",
+      "bytes": 109079
+    },
+    {
+      "id": "leg-b",
+      "asset": "program-images/leg-b.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Classic Legs B'. One photograph, no collage. Subject: A woman seated in a realistic 45-degree leg press sled, feet planted shoulder-width on one broad footplate, knees comfortably bent, hands on side handles. Entire machine and both legs clearly visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting Machines, hip thrusts and walking lunges. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "53ef282c9184dba8dcaf02be0e23a1eaf6b84952a123207024795a04d416847e",
+      "bytes": 127284
+    },
+    {
+      "id": "pull-b",
+      "asset": "program-images/pull-b.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Classic Pull B'. One photograph, no collage. Subject: A woman performing a supported one-arm dumbbell row, one hand and one knee on a sturdy flat bench, other hand holding a single dumbbell near her lower ribs, neutral back. Side view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting Assisted pull-ups, one-arm rows and curls. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "accc0dce80719dc39f1e9282f25f719545be84b5dd9d78ee15ae99439e624a13",
+      "bytes": 118723
+    },
+    {
+      "id": "core-b",
+      "asset": "program-images/core-b.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Classic Core B'. One photograph, no collage. Subject: A woman in a controlled side plank on her forearm on a forest-green mat, feet stacked, hips lifted, free hand on her hip. Wide side view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting Side stability, carries and hanging knee raises. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "431a2be6597e60c424c40fc0dc58aff6579af15958b36ce5f78a0751f71cbef7",
+      "bytes": 112397
+    },
+    {
+      "id": "cardio-a",
+      "asset": "program-images/cardio-a.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Low-Impact Cardio'. One photograph, no collage. Subject: An adult woman walking briskly along a flat sunlit park path, both arms moving naturally, upright posture, one heel contacting the path. Green trees and a calm coastal setting, no running or jumping. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting Walking and simple standing movements. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "315d259b6390f0a047af8096be39daa813f3ef5aa57bb604d26c924a8450f314",
+      "bytes": 127232
+    },
+    {
+      "id": "stability-b",
+      "asset": "program-images/stability-b.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Stability B'. One photograph, no collage. Subject: A woman carefully stepping onto a low broad stable platform, one foot fully planted on it, other foot still near the floor, wearing trainers, a sturdy support nearby. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting Single-leg work, side stability and carries. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "fb8f71b56e3fa1831c81285cf7619075e90df6ccde508541e0792d3a74919256",
+      "bytes": 130491
+    },
+    {
+      "id": "cardio-b",
+      "asset": "program-images/cardio-b.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: landscape 2:1 workout-program cover photograph for 'Gym Cardio Mix'. One photograph, no collage. Subject: An adult woman seated on a realistic gym stationary exercise bike, both feet on pedals and hands lightly resting on handlebars, upright easy cycling posture. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless training top, black leggings and trainers, realistic anatomy and plausible equipment. Backdrop: an upscale black-and-forest-green gym with tall windows, green plants and soft warm daylight; if the subject specifies a home room use a clean home exercise corner with matching green palette instead. Composition: wide frame, full relevant body parts and equipment visible, person centered and ample crop margin for a wide banner. Distinct scene reflecting Steady work across cardio machines. Avoid text, logos, numbers, watermarks, unrealistic limbs, floating objects, extreme loads or impossible cables. Decorative cover, not an instruction diagram.",
+      "sha256": "db29e1673a83d1c91749460f377d898e34d153f4605a9017141ecc1c6cff6a06",
+      "bytes": 128812
+    },
+    {
+      "id": "hiit-a",
+      "asset": "program-images/hiit-a.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Standing HIIT · No Kit'. One photograph, no collage. Scene: A woman doing standing marching in place, one knee raised moderately, opposite elbow bent naturally, one foot firmly grounded, in a clear gym studio with no machines nearby. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Six standing intervals in one clear space. No machines or jumping. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "c8204c683dcd5ab0e8f7222a0bb1b6d3931a809ce2651de9296b622a31251501",
+      "bytes": 88303
+    },
+    {
+      "id": "full-body-balanced",
+      "asset": "program-images/full-body-balanced.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Balanced Strength'. One photograph, no collage. Scene: A woman standing tall holding a single dumbbell vertically at chest height ready for a goblet squat, beside a bench with a pair of dumbbells, open gym floor visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Squat, hinge, push, pull and core in one gym session. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "cff71ff35744a712add2daa8f52965190934d99626d4847ba67eef0a1b499fa2",
+      "bytes": 118067
+    },
+    {
+      "id": "full-body-home",
+      "asset": "program-images/full-body-home.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Home Essentials'. One photograph, no collage. Scene: A woman in a bright uncluttered home training corner doing a chair squat toward a solid wooden chair, hips just above the seat, a closed backpack and folded green mat nearby. Same warm daylight and forest-green styling, no gym machines. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Simple whole-body strength with a backpack and sturdy support. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "47037c6c3a4235ac89452f29af37a3343428d31bbdd059d39fe18459443890b2",
+      "bytes": 132706
+    },
+    {
+      "id": "push-chest",
+      "asset": "program-images/push-chest.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Chest Emphasis'. One photograph, no collage. Scene: A woman lying on a modestly inclined workout bench holding two light dumbbells over her chest, arms nearly extended, feet flat, realistic head and shoulder support. Full bench and weights visible, three-quarter side view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Three chest movements, then shoulders and triceps. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "6df248e2244cec5f8c5b88aac7ec13c0067b4ffc7515d71649678f5e17d926f1",
+      "bytes": 121202
+    },
+    {
+      "id": "push-shoulders",
+      "asset": "program-images/push-shoulders.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Shoulder Emphasis'. One photograph, no collage. Scene: A woman sitting on a supported upright bench holding two light dumbbells at shoulder height before a shoulder press, elbows naturally beneath wrists, feet flat. Frontal three-quarter view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Start with overhead pressing and shoulder accessories. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "a60dac6bf10fdce69391cfa3d29935a98a23d48c7e8df6309967e5283e81cd51",
+      "bytes": 124088
+    },
+    {
+      "id": "push-home",
+      "asset": "program-images/push-home.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Home Push'. One photograph, no collage. Scene: A woman lying on a forest-green mat with knees bent and feet planted, performing a dumbbell floor press, two light dumbbells above her chest and elbows nearly extended. Home training corner, no heavy machines. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Pressing strength with dumbbells and a mat. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "e4559cf0587060fda986ab7cf1a2bce3fda95f2eefeda7316de6207223762555",
+      "bytes": 96036
+    },
+    {
+      "id": "pull-back",
+      "asset": "program-images/pull-back.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Back Emphasis'. One photograph, no collage. Scene: A woman using a realistic lat pulldown station, seated with thighs under pads, both hands evenly spaced on a wide cable bar at upper-chest height, vertical cable above. Rear three-quarter view shows her back and the machine. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Vertical and horizontal pulls before lighter arm work. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "9744f4d3aa9915d34288654a57318de9957b71602f5408e5ca140df093975885",
+      "bytes": 115855
+    },
+    {
+      "id": "pull-arms",
+      "asset": "program-images/pull-arms.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Back and Biceps'. One photograph, no collage. Scene: A woman sitting on a slightly reclined bench doing an incline dumbbell curl with a pair of small dumbbells, elbows near sides, feet grounded, visible gym cable station behind. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: A balanced back session with extra biceps variety. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "447e5a763102c5bd713c8dd9927502202a9688f5e705f4c47100d617aacd3045",
+      "bytes": 121858
+    },
+    {
+      "id": "leg-posterior",
+      "asset": "program-images/leg-posterior.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Glutes and Hamstrings'. One photograph, no collage. Scene: A woman performing a light dumbbell Romanian deadlift, hips back, soft knees, neutral back, two small dumbbells close to her thighs just below the knees. Side view with entire body visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Hinges and hip extension with controlled single-leg work. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "3b90920dade4bed229d64b7d31abf4c9205b7a491395dd98346e138f7ecf06b6",
+      "bytes": 116040
+    },
+    {
+      "id": "pull-home",
+      "asset": "program-images/pull-home.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Home Pull'. One photograph, no collage. Scene: A woman seated upright on a green mat using a resistance band row, band looped securely around both shoe soles, both hands hold the ends close to lower ribs. Home training corner, no machines. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. The same tasteful black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home training room with the same warm green palette and only listed equipment; for outdoors use a green coastal park. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for banner. Program focus: Rows, rear shoulders and curls without cable machines. No text, logos, watermarks, impossible equipment, extra limbs, hazardous poses or heavy loads. Decorative cover, not an instruction diagram.",
+      "sha256": "a9bed362f68c4aba4c1195e07273baa35e69d05df439a75e6c47d1ed2dea15cf",
+      "bytes": 102871
+    },
+    {
+      "id": "leg-home",
+      "asset": "program-images/leg-home.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Home Legs'. One photograph, no collage. Scene: A woman stepping onto a low broad stable step at home, carrying two small dumbbells at her sides, full feet and secure platform visible, mat behind. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Lower-body strength using bodyweight and dumbbells. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "10c657a8ec93665cbf4a481ee58bdae3ed5ef5dbbda999549dc4456d9807e063",
+      "bytes": 102266
+    },
+    {
+      "id": "core-brace",
+      "asset": "program-images/core-brace.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Bracing Basics'. One photograph, no collage. Scene: A woman lying on a green mat doing a simple dead bug, knees bent over hips and opposite arm and leg gently extended, lower back controlled, full limbs visible in side view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Resist extension and rotation with slow controlled reps. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "83bd393114233a21ff0e3476894e586fe93ccf7fbe451ac15a85f3befd6a25c5",
+      "bytes": 111233
+    },
+    {
+      "id": "core-no-kit",
+      "asset": "program-images/core-no-kit.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'No-Equipment Core'. One photograph, no collage. Scene: A woman doing a controlled bird dog on a green mat, on hands and knees with one arm reaching forward and opposite leg reaching back at torso height, steady neutral spine. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Six floor movements with no hanging bar or cable needed. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "27b2c65fb2856f8103f3adb3e66fe1914da70745814330da866772275332b640",
+      "bytes": 94782
+    },
+    {
+      "id": "mobility-upper",
+      "asset": "program-images/mobility-upper.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Upper-Body Reset'. One photograph, no collage. Scene: A woman standing with her back against a plain green wall doing a gentle wall slide, elbows bent and arms raised comfortably, ribs relaxed and feet planted, full upper body visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Shoulders and thoracic movement with easy floor work. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "5a2570288e457f519eafa2593b3b400e45f6750fb0389774d9947106a5d51d45",
+      "bytes": 85033
+    },
+    {
+      "id": "mobility-hips",
+      "asset": "program-images/mobility-hips.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Hips and Ankles'. One photograph, no collage. Scene: A woman seated on a green mat in a relaxed 90/90 hip stretch, both knees bent comfortably, upright torso and hands lightly on the mat for support, full legs visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Gentle lower-body movement for hips, ankles and squat range. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "b36e947aef8d30909b6b31925b90c01c5550be94c42af213a256ea192e53fb63",
+      "bytes": 99256
+    },
+    {
+      "id": "mobility-gentle",
+      "asset": "program-images/mobility-gentle.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Gentle Daily Flow'. One photograph, no collage. Scene: A woman on all fours on a green mat in a gentle cat-cow stretch, shoulders over hands, knees beneath hips, softly rounded back, calm uncluttered sunlit studio. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: An easy whole-body sequence for lighter days. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "9c4c537a071c73e269c050f5612cd18c9bef190fd022fc5026d745c8417af30e",
+      "bytes": 93842
+    },
+    {
+      "id": "cardio-machines",
+      "asset": "program-images/cardio-machines.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Low-Impact Gym'. One photograph, no collage. Scene: A woman seated on a realistic rowing ergometer at a comfortable finish position, knees softly bent, torso near upright, handle near lower ribs, feet secured in footplates. Entire machine visible in side view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Four steady cardio stations plus two simple movement blocks. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "3e89db735c37cf4b618334405374b7a84dc5f36d506c54261ec3a24c61c2b8b7",
+      "bytes": 129486
+    },
+    {
+      "id": "stability-carries",
+      "asset": "program-images/stability-carries.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Carries and Control'. One photograph, no collage. Scene: A woman walking slowly with two modest dumbbells at her sides, upright shoulders and level hips, clear gym lane, full body and both dumbbells visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Loaded carries paired with anti-rotation and slow steps. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "9588f6c7d97e41ee84df30a33c5696fd99075c493ea004b9d2958c50dddba492",
+      "bytes": 131276
+    },
+    {
+      "id": "hiit-bodyweight",
+      "asset": "program-images/hiit-bodyweight.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Bodyweight Intervals'. One photograph, no collage. Scene: A woman doing a controlled bodyweight squat in a home studio, arms extended forward, feet flat shoulder-width, no weights, clear floor and green mat behind. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Six brisk bodyweight moves; no gym equipment. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "7d890d03397b2983f5fd06beedd46d3bee391839cb3a62bd561aac96006163d0",
+      "bytes": 106657
+    },
+    {
+      "id": "arms-triceps",
+      "asset": "program-images/arms-triceps.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Triceps Emphasis'. One photograph, no collage. Scene: A woman at a realistic cable station doing a rope triceps pushdown, elbows tucked near ribs, forearms nearly straight downward, both hands holding opposite ends of one rope attached to a high vertical cable. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Presses and extensions first, with biceps work to finish. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "1ae1a4fce52ea20691ebc2b9751b2404a2834545c240c8b5636adbaf232b9ac2",
+      "bytes": 117268
+    },
+    {
+      "id": "hiit-low-impact",
+      "asset": "program-images/hiit-low-impact.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Low-Impact Intervals'. One photograph, no collage. Scene: A woman doing gentle shadow boxing on a clear studio floor, feet grounded in a modest staggered stance, one hand extended at shoulder height and other near her chin, no gloves and no punching bag. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Raise your effort while keeping one foot grounded. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "5eda6402e373a2da6f997f96ed892cadc0ee24251377d39889cb83c42296e6ab",
+      "bytes": 110182
+    },
+    {
+      "id": "arms-cables",
+      "asset": "program-images/arms-cables.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Cable Arms'. One photograph, no collage. Scene: A woman standing at a low cable pulley performing a straight-bar biceps curl, elbows near sides, a small straight bar held evenly with palms upward near waist, visible cable angled down to a low pulley. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Constant-resistance curls and extensions at one station. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "a7b6c6de989a31943a82bf6c883aa0bfee10498dfb215e8118f9f29e1008b914",
+      "bytes": 114645
+    },
+    {
+      "id": "kb-full-body",
+      "asset": "program-images/kb-full-body.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Kettlebell Full Body Strength'. One photograph, no collage. Scene: A woman standing holding one black cast-iron kettlebell at her chest in a goblet hold, elbows tucked, full body and sturdy bench visible, preparing for whole-body strength. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Squat, hinge, press, pull and carry. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "52262e2c0b15ff62e244e1d3053cff0351ce7e0ec27f6cc3918ee8a510007577",
+      "bytes": 122321
+    },
+    {
+      "id": "arms-dumbbells",
+      "asset": "program-images/arms-dumbbells.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Dumbbell Arms'. One photograph, no collage. Scene: A woman seated upright on a simple workout bench performing a light dumbbell hammer curl, palms facing inward, one dumbbell near waist and other at side, home training corner, green mat on floor. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: A complete arm session using one pair of dumbbells. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "d3ebeb9b76268c66c050a93b626da4dec30221e57a679bc93afde42e28129f63",
+      "bytes": 104297
+    },
+    {
+      "id": "kb-upper-body",
+      "asset": "program-images/kb-upper-body.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Kettlebell Upper Body'. One photograph, no collage. Scene: A woman in a supported half-kneeling position on a padded green mat holding one small black kettlebell at shoulder height in rack position, opposite foot flat, wrist straight, calm gym. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Presses, rows and arm work with one bell. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "ffaae0bba2126dbe8db28cd18cbfcad7528beb6911c6a8f05e425f31fb01a20a",
+      "bytes": 113875
+    },
+    {
+      "id": "kb-core-carries",
+      "asset": "program-images/kb-core-carries.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Kettlebell Core & Carries'. One photograph, no collage. Scene: A woman walking upright holding one black kettlebell at one side in a suitcase carry, shoulders level, clear walking lane, full body and bell visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Brace, carry and resist rotation. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "f84519f54ddf3d759b864e154bf85bc3cbe3dedd852ea2044105ba7bc93032c3",
+      "bytes": 103221
+    },
+    {
+      "id": "kb-hinge-swing",
+      "asset": "program-images/kb-hinge-swing.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Kettlebell Hinge & Swing'. One photograph, no collage. Scene: A woman at the upright phase of a modest two-handed kettlebell swing, one black bell at roughly lower-chest height, arms long, feet shoulder-width, spine tall, realistic controlled posture and visible full body. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Practice the hinge before controlled swing sets. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "99d9ed7d7aa6c80395fd80e87a0209e2cd38a55204820912afe8a64b1395bda0",
+      "bytes": 103101
+    },
+    {
+      "id": "kb-unilateral",
+      "asset": "program-images/kb-unilateral.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Kettlebell Single-side Strength'. One photograph, no collage. Scene: A woman in a kickstand kettlebell hinge, one foot planted and the other foot lightly behind, one black bell close to the front shin, neutral back, side view. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Train both sides with steady technique. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "311c86de1f2debf98be32a851ca2fddd8191ba9a59d9d783ccc772c3096bb6ad",
+      "bytes": 112496
+    },
+    {
+      "id": "kb-double-strength",
+      "asset": "program-images/kb-double-strength.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: 2:1 landscape workout-program cover for 'Kettlebell Double Bell Strength'. One photograph, no collage. Scene: A woman standing tall holding two matching black cast-iron kettlebells at her sides after a controlled deadlift, feet planted hip-width, full body and both separate bells clearly visible. Style: premium natural fitness editorial photo, adult athletic woman in plain charcoal sleeveless top, black leggings and trainers, realistic anatomy, natural hands, modest light equipment. Consistent black-and-forest-green gym style, tall windows, green plants and soft warm daylight; for a home exercise use a clean home room with the same green palette and only the listed equipment. Composition wide, centered, full relevant limbs and equipment visible, ample crop margin for a banner. Program focus: Six strength movements with two matched bells. No text, logos, watermarks, extra limbs, floating or impossible equipment, extreme loads or risky poses. Decorative cover, not an instruction diagram.",
+      "sha256": "6497bd3b1ac91f8dd02455f0fa599babbe455cf4672b8d709328e604ce99885c",
+      "bytes": 109763
+    }
+  ]
+}

@@ -293,3 +293,12 @@ Implementation: new Train-only stylesheet; only train() presentation markup gain
 
 ## Verified Train photo refresh
 Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 118934472523) and Pages deployment 39511828705 succeeded. All unit suites and Chromium at 320/390/430px passed, including all 55 header-cover associations, saved set entries after reload, checked/invalid rows, rest-timer persistence, focus/all navigation, custom workouts and completion/history. Five-panel header/progress/rest/logger/footer screenshot sheet visually reviewed from EZPZ_TRAIN_PHOTO_DATA. Home and all 157 recipes remain intact. No known release blocker.
+
+## Distinct workout program covers — 2026-10-21
+
+- All 65 workout choices now have explicit relevant cover mappings, with distinct images within each of the 12 categories (including all ten kettlebell choices).
+- Added 38 optimized 960×480 generated JPEG covers, retaining the main category photos and reusing relevant movement photos across categories. These are decorative covers, not exercise technique demonstrations.
+- Selected program covers follow through Home, Train, planner, previews and history. Custom workouts retain category fallbacks. Kettlebell program counts now reflect the actual ten choices.
+- Mapping and generation provenance are recorded in docs/program-cover-mapping.json and docs/program-covers-2026-10.json.
+- Workout prescriptions, saved-data schema and all approved meal content remain unchanged.
+- Local workout-photo, training, planning, planner-picker, recipe and training-usability checks passed. Push and Arms chooser visuals were reviewed in the mobile preview. Full hosted mobile CI and deployment verification pending.

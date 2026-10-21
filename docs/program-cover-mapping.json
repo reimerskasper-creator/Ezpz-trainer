@@ -1,0 +1,262 @@
+{
+  "push-a": {
+    "src": "./workout-images/push.jpg",
+    "alt": "Classic Push A — Dumbbell bench press in a sunlit gym"
+  },
+  "push-b": {
+    "src": "./program-images/push-b.jpg",
+    "alt": "Classic Push B — A woman sitting upright in a seated chest-press machine"
+  },
+  "pull-a": {
+    "src": "./workout-images/pull.jpg",
+    "alt": "Classic Pull A — Seated cable row in a sunlit gym"
+  },
+  "pull-b": {
+    "src": "./program-images/pull-b.jpg",
+    "alt": "Classic Pull B — A woman performing a supported one-arm dumbbell row"
+  },
+  "leg-a": {
+    "src": "./workout-images/leg.jpg",
+    "alt": "Classic Legs A — Controlled reverse lunge"
+  },
+  "leg-b": {
+    "src": "./program-images/leg-b.jpg",
+    "alt": "Classic Legs B — A woman seated in a 45-degree leg press sled"
+  },
+  "core-a": {
+    "src": "./workout-images/core.jpg",
+    "alt": "Classic Core A — Forearm plank on a mat"
+  },
+  "core-b": {
+    "src": "./program-images/core-b.jpg",
+    "alt": "Classic Core B — A woman in a controlled side plank on her forearm on a forest-green mat"
+  },
+  "mobility-a": {
+    "src": "./workout-images/mobility.jpg",
+    "alt": "Daily Mobility A — Gentle seated mobility stretch"
+  },
+  "mobility-b": {
+    "src": "./program-images/mobility-b.jpg",
+    "alt": "Daily Mobility B — A woman on a mat in a gentle half-kneeling hip-flexor stretch"
+  },
+  "stability-a": {
+    "src": "./workout-images/stability.jpg",
+    "alt": "Stability A — Supported single-leg balance"
+  },
+  "stability-b": {
+    "src": "./program-images/core-b.jpg",
+    "alt": "Stability B — Side plank on a green mat"
+  },
+  "cardio-a": {
+    "src": "./program-images/cardio-a.jpg",
+    "alt": "Low-Impact Cardio — An adult woman walking briskly along a flat sunlit park path"
+  },
+  "cardio-b": {
+    "src": "./program-images/cardio-b.jpg",
+    "alt": "Gym Cardio Mix — An adult woman seated on a gym stationary exercise bike"
+  },
+  "hiit-a": {
+    "src": "./program-images/hiit-a.jpg",
+    "alt": "Standing HIIT · No Kit — A woman doing standing marching in place"
+  },
+  "hiit-b": {
+    "src": "./program-images/stability-b.jpg",
+    "alt": "Step & Bodyweight HIIT — A woman carefully stepping onto a low broad stable platform"
+  },
+  "full-body-balanced": {
+    "src": "./program-images/full-body-balanced.jpg",
+    "alt": "Balanced Strength — A woman standing tall holding a single dumbbell vertically at chest height ready for a goblet squat"
+  },
+  "full-body-leg-focus": {
+    "src": "./workout-images/leg.jpg",
+    "alt": "Lower-Body Emphasis — Controlled reverse lunge"
+  },
+  "full-body-home": {
+    "src": "./program-images/full-body-home.jpg",
+    "alt": "Home Essentials — A woman in a bright uncluttered home training corner doing a chair squat toward a solid wooden chair"
+  },
+  "full-body-hiit": {
+    "src": "./program-images/hiit-bodyweight.jpg",
+    "alt": "Full-Body HIIT — A woman doing a controlled bodyweight squat in a home studio"
+  },
+  "push-chest": {
+    "src": "./program-images/push-chest.jpg",
+    "alt": "Chest Emphasis — A woman lying on a inclined workout bench holding two light dumbbells over her chest"
+  },
+  "push-shoulders": {
+    "src": "./program-images/push-shoulders.jpg",
+    "alt": "Shoulder Emphasis — A woman sitting on a supported upright bench holding two light dumbbells at shoulder height before a shoulder press"
+  },
+  "push-home": {
+    "src": "./program-images/push-home.jpg",
+    "alt": "Home Push — A woman lying on a forest-green mat with knees bent and feet planted"
+  },
+  "pull-back": {
+    "src": "./program-images/pull-back.jpg",
+    "alt": "Back Emphasis — A woman using a lat pulldown station"
+  },
+  "pull-arms": {
+    "src": "./program-images/pull-arms.jpg",
+    "alt": "Back and Biceps — A woman sitting on a slightly reclined bench doing an incline dumbbell curl with a pair of small dumbbells"
+  },
+  "pull-home": {
+    "src": "./program-images/pull-home.jpg",
+    "alt": "Home Pull — A woman seated upright on a green mat using a resistance band row"
+  },
+  "leg-quads": {
+    "src": "./program-images/full-body-balanced.jpg",
+    "alt": "Quad Emphasis — A woman standing tall holding a single dumbbell vertically at chest height ready for a goblet squat"
+  },
+  "leg-posterior": {
+    "src": "./program-images/leg-posterior.jpg",
+    "alt": "Glutes and Hamstrings — A woman performing a light dumbbell Romanian deadlift"
+  },
+  "leg-home": {
+    "src": "./program-images/leg-home.jpg",
+    "alt": "Home Legs — A woman stepping onto a low broad stable step at home"
+  },
+  "core-brace": {
+    "src": "./program-images/core-brace.jpg",
+    "alt": "Bracing Basics — A woman lying on a green mat doing a simple dead bug"
+  },
+  "core-loaded": {
+    "src": "./program-images/stability-carries.jpg",
+    "alt": "Loaded Core — A woman walking slowly with two modest dumbbells at her sides"
+  },
+  "core-no-kit": {
+    "src": "./program-images/core-no-kit.jpg",
+    "alt": "No-Equipment Core — A woman doing a controlled bird dog on a green mat"
+  },
+  "mobility-hips": {
+    "src": "./program-images/mobility-hips.jpg",
+    "alt": "Hips and Ankles — A woman seated on a green mat in a relaxed 90/90 hip stretch"
+  },
+  "mobility-upper": {
+    "src": "./program-images/mobility-upper.jpg",
+    "alt": "Upper-Body Reset — A woman standing with her back against a plain green wall doing a gentle wall slide"
+  },
+  "mobility-gentle": {
+    "src": "./program-images/mobility-gentle.jpg",
+    "alt": "Gentle Daily Flow — A woman on all fours on a green mat in a gentle cat-cow stretch"
+  },
+  "stability-single-leg": {
+    "src": "./program-images/stability-b.jpg",
+    "alt": "Single-Leg Control — Supported step-up using a low stable platform"
+  },
+  "stability-carries": {
+    "src": "./program-images/stability-carries.jpg",
+    "alt": "Carries and Control — A woman walking slowly with two modest dumbbells at her sides"
+  },
+  "stability-foundation": {
+    "src": "./program-images/mobility-upper.jpg",
+    "alt": "Balance Foundations — A woman standing with her back against a plain green wall doing a gentle wall slide"
+  },
+  "cardio-walk": {
+    "src": "./home-images/consistency.jpg",
+    "alt": "Outdoor Walk and Move — Walking on a green coastal path"
+  },
+  "cardio-home": {
+    "src": "./program-images/hiit-a.jpg",
+    "alt": "Home Low Impact — A woman doing standing marching in place"
+  },
+  "cardio-machines": {
+    "src": "./program-images/cardio-machines.jpg",
+    "alt": "Low-Impact Gym — A woman seated on a rowing ergometer at a comfortable finish position"
+  },
+  "hiit-bodyweight": {
+    "src": "./program-images/hiit-bodyweight.jpg",
+    "alt": "Bodyweight Intervals — A woman doing a controlled bodyweight squat in a home studio"
+  },
+  "hiit-low-impact": {
+    "src": "./program-images/hiit-low-impact.jpg",
+    "alt": "Low-Impact Intervals — A woman doing gentle shadow boxing on a clear studio floor"
+  },
+  "hiit-gym": {
+    "src": "./program-images/full-body-balanced.jpg",
+    "alt": "Dumbbell Conditioning — A woman standing tall holding a single dumbbell vertically at chest height ready for a goblet squat"
+  },
+  "arms-balanced": {
+    "src": "./workout-images/arms.png",
+    "alt": "Balanced Arms — Standing dumbbell biceps curl"
+  },
+  "arms-biceps": {
+    "src": "./program-images/arms-biceps.jpg",
+    "alt": "Biceps Emphasis — A woman performing a controlled barbell biceps curl"
+  },
+  "arms-triceps": {
+    "src": "./program-images/arms-triceps.jpg",
+    "alt": "Triceps Emphasis — A woman at a cable station doing a rope triceps pushdown"
+  },
+  "arms-dumbbells": {
+    "src": "./program-images/arms-dumbbells.jpg",
+    "alt": "Dumbbell Arms — A woman seated upright on a simple workout bench performing a light dumbbell hammer curl"
+  },
+  "arms-cables": {
+    "src": "./program-images/arms-cables.jpg",
+    "alt": "Cable Arms — A woman standing at a low cable pulley performing a straight-bar biceps curl"
+  },
+  "glutes-builder": {
+    "src": "./workout-images/glutes.png",
+    "alt": "Glute Builder — Bodyweight glute bridge on a mat"
+  },
+  "glutes-home": {
+    "src": "./program-images/stability-b.jpg",
+    "alt": "Home Glutes — Bodyweight step-up using a low stable platform"
+  },
+  "glutes-hinge": {
+    "src": "./program-images/leg-posterior.jpg",
+    "alt": "Hinge Emphasis — A woman performing a light dumbbell Romanian deadlift"
+  },
+  "glutes-single-leg": {
+    "src": "./workout-images/leg.jpg",
+    "alt": "Single-Leg Glutes — Controlled reverse lunge"
+  },
+  "glutes-foundation": {
+    "src": "./program-images/full-body-home.jpg",
+    "alt": "Glute Foundations — A woman in a bright uncluttered home training corner doing a chair squat toward a solid wooden chair"
+  },
+  "kb-foundations": {
+    "src": "./train-images/kettlebell.jpg",
+    "alt": "Kettlebell Foundations — Kettlebells and a training mat"
+  },
+  "kb-full-body": {
+    "src": "./program-images/kb-full-body.jpg",
+    "alt": "Kettlebell Full Body Strength — A woman standing holding one black cast-iron kettlebell at her chest in a goblet hold"
+  },
+  "kb-lower-body": {
+    "src": "./train-images/squat.jpg",
+    "alt": "Kettlebell Lower Body — A kettlebell and sturdy box in a sunlit gym"
+  },
+  "kb-upper-body": {
+    "src": "./program-images/kb-upper-body.jpg",
+    "alt": "Kettlebell Upper Body — A woman in a supported half-kneeling position on a padded green mat holding one small black kettlebell at shoulder height in rack position"
+  },
+  "kb-core-carries": {
+    "src": "./program-images/kb-core-carries.jpg",
+    "alt": "Kettlebell Core & Carries — A woman walking upright holding one black kettlebell at one side in a suitcase carry"
+  },
+  "kb-hinge-swing": {
+    "src": "./program-images/kb-hinge-swing.jpg",
+    "alt": "Kettlebell Hinge & Swing — A woman at the upright phase of a modest two-handed kettlebell swing"
+  },
+  "kb-unilateral": {
+    "src": "./program-images/kb-unilateral.jpg",
+    "alt": "Kettlebell Single-side Strength — A woman in a kickstand kettlebell hinge"
+  },
+  "kb-low-impact": {
+    "src": "./train-images/unilateral.jpg",
+    "alt": "Kettlebell Low-impact Basics — Low stable step, mat and kettlebells"
+  },
+  "kb-conditioning": {
+    "src": "./train-images/hinge.jpg",
+    "alt": "Kettlebell Controlled Conditioning — Kettlebells and dumbbells for controlled strength work"
+  },
+  "kb-double-strength": {
+    "src": "./program-images/kb-double-strength.jpg",
+    "alt": "Kettlebell Double Bell Strength — A woman standing tall holding two matching black cast-iron kettlebells at her sides after a controlled deadlift"
+  },
+  "full-body": {
+    "src": "./meal-images/workout-hero.jpg",
+    "alt": "Your Rotating Plan — Full-body training with dumbbells"
+  }
+}

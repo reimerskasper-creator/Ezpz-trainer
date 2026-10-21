@@ -9,7 +9,7 @@ const today=api.foodDate(),d=n=>api.datePlus(today,n);
 api.state.workoutSchedule={[d(6)]:'leg-a',[d(1)]:'pull-a',[d(0)]:'push-a',[d(2)]:'rest',[d(4)]:'core-a',[d(-1)]:'push-b'};
 api.state.logs=[{date:new Date().toISOString(),workoutId:'push-a',planDate:today}];
 equal(api.upcomingWorkouts().map(x=>[x.date,x.workout.id]),[[d(1),'pull-a'],[d(4),'core-a'],[d(6),'leg-a']],'Upcoming order excludes completed, past and rest');
-api.home();for(const id of ['pull-a','core-a','leg-a']){const w=api.planWorkout(id);assert(screen.innerHTML.includes('data-preview-workout="'+id+'"'),'Upcoming workout '+id);assert(screen.innerHTML.includes('src="'+api.workoutCover(w.coverCategory||w.category).src+'"'),'Matching thumbnail '+id)}
+api.home();for(const id of ['pull-a','core-a','leg-a']){const w=api.planWorkout(id);assert(screen.innerHTML.includes('data-preview-workout="'+id+'"'),'Upcoming workout '+id);assert(screen.innerHTML.includes('src="'+api.workoutCover(w).src+'"'),'Matching thumbnail '+id)}
 const before=JSON.stringify(api.state);api.home();assert(JSON.stringify(api.state)===before,'Home must not create a schedule');
 api.state.workoutSchedule={};api.home();assert((screen.innerHTML.match(/class="upcoming-empty"/g)||[]).length===2,'Empty plan has honest placeholders');
 api.state.selectedWorkout='push-a';api.state.workoutDrafts={'push-a':{'sr0-0':'10','sw0-0':'25'}};
