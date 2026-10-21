@@ -400,6 +400,37 @@ try{
 
   await context.close();
  }
+
+ // Custom foods use the same diary and persist their chosen photo independently of saved favourites.
+ for(const width of [320,390,430]){
+  const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
+  const initial={...fixture,foodLog:[],customFoods:[]};await context.addInitScript(({key,initial})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(initial))},{key,initial});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
+  const openCustom=async()=>{await page.locator('[data-tab="eat"]').click();await page.locator('[data-home-diary]').evaluate(x=>x.open=true);await page.locator('.custom-food-open').click();assert.equal(await page.locator('body').getAttribute('data-view'),'custom-food');assert.equal(await page.locator('[data-tab="eat"]').getAttribute('aria-current'),'page')};
+  const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'Custom food horizontal layout '+width);
+  await openCustom();await fits();
+  await page.locator('#custom-food-name').fill('My yogurt snack');await page.locator('#custom-food-protein').fill('20.5');await page.locator('#custom-food-carbs').fill('30');await page.locator('#custom-food-fat').fill('10');
+  assert.equal(await page.locator('#custom-food-calorie-output').innerText(),'292 kcal');
+  await page.locator('.custom-food-submit').click();assert.equal(await page.locator('body').getAttribute('data-view'),'custom-food','Photo is required');assert.equal(await page.evaluate(()=>foodEntries().length),0);
+  await page.locator('.custom-food-calorie-option>summary').click();await page.locator('#custom-food-calories').fill('315.5');assert.equal(await page.locator('#custom-food-calorie-output').innerText(),'315.5 kcal');
+  await page.locator('.custom-food-photo-grid label:has(input[value="yogurt"])').click();
+  await page.locator('#custom-food-fat').fill('-1');await page.locator('.custom-food-submit').click();assert.equal(await page.evaluate(()=>foodEntries().length),0,'Negative macros cannot log');await page.locator('#custom-food-fat').fill('10');
+  for(const img of await page.locator('.custom-food-photo-grid img').all())await img.evaluate(x=>x.decode());
+  if(width===390){const jpg=await page.screenshot({type:'jpeg',quality:85,fullPage:true,path:path.join(out,'custom-food-form.jpg')});captures.push({name:'Custom food form',src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
+  await page.locator('.custom-food-submit').click();assert.equal(await page.locator('body').getAttribute('data-view'),'eat');assert(await page.locator('[data-home-diary]').evaluate(x=>x.open));
+  assert.deepEqual(await page.evaluate(()=>foodEntries()[0].macros),[315.5,20.5,30,10]);assert.deepEqual(await page.evaluate(()=>foodSummary().totals),[316,21,30,10]);assert.equal(await page.evaluate(()=>cleanCustomFoods(state.customFoods).length),1);
+  assert.equal(await page.locator('.food-log-entry img').getAttribute('src'),'./meal-images/meal-0.jpg');assert((await page.locator('.food-log-copy').innerText()).includes('Custom food'));
+  await page.reload();await page.locator('[data-tab="eat"]').click();await page.locator('[data-home-diary]').evaluate(x=>x.open=true);assert.equal(await page.locator('.food-log-entry img').getAttribute('src'),'./meal-images/meal-0.jpg');
+  await openCustom();await page.locator('.custom-food-saved>summary').click();await page.locator('[data-custom-portions]').fill('.5');await fits();await page.locator('[data-log-custom]').click();
+  assert.equal(await page.locator('.food-log-entry').count(),2);assert.deepEqual(await page.evaluate(()=>foodEntries()[1].macros),[157.8,10.3,15,5]);assert.equal(await page.locator('.food-log-entry img').nth(1).getAttribute('src'),'./meal-images/meal-0.jpg');
+  if(width===390){await page.locator('[data-home-diary]').scrollIntoViewIfNeeded();const jpg=await page.locator('[data-home-diary]').screenshot({type:'jpeg',quality:85,path:path.join(out,'custom-food-diary.jpg')});captures.push({name:'Custom food diary',src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
+  await openCustom();await page.locator('.custom-food-saved>summary').click();await page.locator('[data-delete-custom]').click();assert.equal(await page.evaluate(()=>state.customFoods.length),0);assert.equal(await page.evaluate(()=>foodEntries().length),2);
+  await page.locator('#custom-food-name').fill('Greek yogurt berry bowl');await page.locator('#custom-food-protein').fill('10');await page.locator('#custom-food-carbs').fill('20');await page.locator('#custom-food-fat').fill('5');await page.locator('.custom-food-photo-grid label:has(input[value="oats"])').click();await page.locator('[name="remember"]').uncheck();await page.locator('.custom-food-submit').click();
+  assert.equal(await page.evaluate(()=>state.customFoods.length),0);assert.equal(await page.locator('.food-log-entry').count(),3);const last=page.locator('.food-log-entry').last();assert.equal(await last.locator('img').getAttribute('src'),'./meal-images/recipe-23.jpg');assert.equal(await last.locator('[data-open-meal]').count(),0,'Custom names never open a library recipe');
+  const firstId=await page.evaluate(()=>foodEntries()[0].id);await page.locator('[data-remove-food="'+firstId+'"]').click();assert.equal(await page.evaluate(()=>foodEntries().length),2);await page.locator('[data-home-diary]').evaluate(x=>x.open=true);await fits();
+  const backup=await page.evaluate(()=>{const restored=restoredState(JSON.parse(JSON.stringify(state)));return restored.foodLog.map(f=>({custom:f.custom,photoKey:f.photoKey}))});assert.deepEqual(backup,[{custom:true,photoKey:'yogurt'},{custom:true,photoKey:'oats'}]);
+  await context.close();
+ }
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
  if(captures.length){const sheet=await browser.newPage({viewport:{width:2528,height:570},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf0ee;font:14px sans-serif">'+captures.map(x=>'<figure style="margin:0;width:244px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:244px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'mobile-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_VISUAL_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));console.log('EZPZ_VISUAL_END')}}
 
@@ -426,6 +457,8 @@ try{
 
  const trainPhotoCaptures=captures.filter(x=>x.name.startsWith('Train photo')||x.name==='Kettlebell foundations');
  if(trainPhotoCaptures.length){const sheet=await browser.newPage({viewport:{width:1860,height:1100},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf2ee;font:12px sans-serif">'+trainPhotoCaptures.map(x=>'<figure style="margin:0;width:300px"><figcaption style="height:22px;text-align:center">'+x.name+'</figcaption><img style="width:300px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:83,path:path.join(out,'train-photo-overview.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_TRAIN_PHOTO_DATA '+b.slice(i,i+4000))}
+ const customPhotos=captures.filter(x=>x.name.startsWith('Custom food'));
+ if(customPhotos.length){const sheet=await browser.newPage({viewport:{width:820,height:1500},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf2ee;font:12px sans-serif">'+customPhotos.map(x=>'<figure style="margin:0;width:390px"><figcaption style="height:24px">'+x.name+'</figcaption><img style="width:390px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'custom-food-overview.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_CUSTOM_FOOD_DATA '+b.slice(i,i+4000))}
  const foodLogPhotos=captures.filter(x=>x.name==='Food log photos');
  if(foodLogPhotos.length){const sheet=await browser.newPage({viewport:{width:430,height:1000},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;padding:12px;background:#edf2ee">'+foodLogPhotos.map(x=>'<img style="width:406px" src="'+x.src+'">').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'food-log-review.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_FOOD_LOG_DATA '+b.slice(i,i+4000))}
  const progressPhotos=captures.filter(x=>x.name.startsWith('Progress photo'));
@@ -433,6 +466,7 @@ try{
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:157,workoutPrograms:65,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 157 recipe photos; 65 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});
+
 
 
 
