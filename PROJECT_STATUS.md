@@ -321,3 +321,9 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Sleep now uses a dedicated calm bedroom photo. Stronger together has a balanced morning routine (breakfast, journal and walking shoes), and the simple system section has an open planner background. Dark green/blue overlays and light text preserve readability; approved wording is unchanged.
 - Added three optimized 960×480 JPEGs in home-images/method-{sleep,together,system}.jpg. Built-in image_gen prompts recorded in docs/method-backgrounds.json; all source images visually reviewed.
 - Full Mobile app checks 39652842214 and Pages deployment 39652841214 succeeded on c8f1b8531ffe55e8d8f866f47987db2347c8fd5d.
+
+## Home method tile and Trainer separation preparation — 2026-10-21
+
+- Replaced the two pale Home pills with a compact forest-green method tile and four colored EZPZ letters. Native modal behavior and accessible Why EZPZ label retained. Preview visually reviewed, Home checks passed; full Mobile checks 39654460397 and Pages deployment 39654456950 succeeded on 10fc1e4f6d9715d66e050d2e76b09e23e3ef6b2f.
+- Trainer is the separate self-contained index.html coaching app, with manifest.webmanifest, sw.js and icon.svg. Exact unchanged source package and SHA256 manifest are committed under docs/trainer-separation. No client records are included.
+- Repository separation is NOT completed: GitHub connector has no repository-creation operation; browser GitHub/new requires sign-in. Need user-created destination repo (suggest EZPZ-Coach) and connector access. Transfer source, enable and verify hosting, then update fitness.html Trainer link. Keep old Trainer route until verified; review old root service-worker scope before removing it. Same github.io origin preserves localStorage access if keys remain unchanged; other origins require backup/restore.
