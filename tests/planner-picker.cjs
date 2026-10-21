@@ -10,8 +10,8 @@ api.setTab('planner');api.planner();
 assert(!screen.innerHTML.includes('<select id="planned-workout"')&&!screen.innerHTML.includes('data-schedule-meal='),'Long native selects removed');
 assert(screen.innerHTML.includes('data-open-plan-picker="workout"')&&screen.innerHTML.includes('data-open-meal-picker="breakfast"'),'Photo picker triggers');
 const before=JSON.stringify(api.state),writesBefore=writes;api.openPlannerPicker('workout');
-assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===11,'Eleven workout photo categories');
-assert(api.pickerWorkoutMatches().length===55,'All built-in sessions available');
+assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===12,'Eleven workout photo categories');
+assert(api.pickerWorkoutMatches().length===65,'All built-in sessions available');
 api.picker.category='Full Body';api.picker.level='Beginner';api.filterPlannerPicker();
 assert(api.pickerWorkoutMatches().length===2&&body.innerHTML.includes('Beginner'),'Category and level combine');
 api.picker.category=null;api.picker.level='all';api.picker.query='full-body-home';api.filterPlannerPicker();
@@ -21,7 +21,7 @@ const date=api.planSettings().date,other=api.datePlus(date,1);api.state.workoutS
 api.openPlannerPicker('workout');assert(api.commitPickerWorkout('full-body-home'),'Assign workout');
 assert(api.state.workoutSchedule[date]==='full-body-home'&&api.state.workoutSchedule[other]==='pull-a','Only selected date changes');
 assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Planning preserves active workout and draft');
-api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
+api.openPlannerPicker('workout');api.picker.category='Kettlebell';assert(api.pickerWorkoutMatches().length===10,'Ten kettlebell planner choices');assert(api.commitPickerWorkout('kb-foundations'),'Plan kettlebell session');assert(api.state.workoutSchedule[date]==='kb-foundations','Kettlebell schedule saved');api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
 api.openPlannerPicker('workout');api.commitPickerWorkout('');assert(!api.state.workoutSchedule[date]&&api.state.workoutSchedule[other]==='pull-a','Remove only selected workout');
 api.state.foodLog=[{id:'old',date,servings:1,name:'Saved',macros:[400,30,45,10]}];
 api.openPlannerPicker('meal','breakfast');assert(api.pickerMealMatches().every(x=>api.recipeCategory(x.i)==='breakfast'),'Slot filter defaults to breakfast');
@@ -38,3 +38,4 @@ assert(alerts.length===1&&alerts[0].includes('Unable to save'),'Storage error su
 const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);equal(restored.mealPlan,backup.mealPlan,'Meal backup unchanged');equal(restored.workoutSchedule,backup.workoutSchedule,'Workout backup unchanged');
 assert(focuses.includes('planned-workout'),'Focus returns to trigger');
 console.log('PASS: photo picker categories, combined search/level filters, all 157 recipes, cancellation, target date/slot assignment, rest/removal, portion preservation, active drafts, food log, backups and storage rollback');
+

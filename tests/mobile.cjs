@@ -59,7 +59,7 @@ try{
   await page.locator('[data-tab="train"]').click();
   await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),12);
   const coverSources=await page.locator('#workout-chooser img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
-  assert.equal(new Set(coverSources).size,11);for(const src of coverSources){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Workout photo '+src)}
+  assert.equal(new Set(coverSources).size,12);for(const src of coverSources){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Workout photo '+src)}
   await page.locator('#workout-chooser').evaluate(async dialog=>{for(const img of dialog.querySelectorAll('img')){img.loading='eager';await img.decode()}dialog.scrollTop=0});
   await checkLayout('Workout chooser');assert(await page.locator('#workout-chooser').evaluate(x=>x.scrollWidth<=x.clientWidth+1&&x.getBoundingClientRect().left>=-1&&x.getBoundingClientRect().right<=document.documentElement.clientWidth+1),'Chooser fits phone viewport');
   if(width===390){const buffer=await page.screenshot({path:path.join(out,'Workout-chooser-390.jpg'),type:'jpeg',quality:85});captures.push({name:'Workout chooser',src:'data:image/jpeg;base64,'+buffer.toString('base64')})}
@@ -67,7 +67,7 @@ try{
   if(expectUpgrade){await page.locator('[data-set-reps="0-0"]').fill('7');await page.waitForFunction(()=>Array.isArray(exerciseCatalog));assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'7','Catalogue refresh discarded unblurred input');await page.locator('[data-set-reps="0-0"]').fill('')}
 
   const programIds=await page.evaluate(()=>['full-body',...workoutTemplates.map(w=>w.id)]);
-  assert.equal(programIds.length,55);
+  assert.equal(programIds.length,65);
   for(const id of programIds){
    const info=await page.evaluate(id=>{const p=workoutTemplates.find(w=>w.id===id);return {category:p?.category||'Full Body',photo:workoutCover(p?.coverCategory||p?.category||'Full Body').src}},id);
    await page.locator('[data-action="open-workouts"]').click();
@@ -75,11 +75,11 @@ try{
     console.log('CHOOSER_DIAGNOSTIC',JSON.stringify(await page.evaluate(()=>({scrollY,innerWidth,innerHeight,dialog:document.getElementById('workout-chooser').getBoundingClientRect().toJSON(),items:[...document.querySelectorAll('[data-workout-category]')].slice(0,3).map(e=>{const r=e.getBoundingClientRect();return {category:e.dataset.workoutCategory,rect:r.toJSON(),hit:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.outerHTML.slice(0,250)}})}))));
     const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));throw error
    }
-   assert.equal(await page.locator('[data-workout-pick]').count(),5);
+   assert.equal(await page.locator('[data-workout-pick]').count(),info.category==='Kettlebell'?10:5);
    if(id==='full-body-balanced'&&width===390){
     await page.locator('#workout-chooser').evaluate(async d=>{for(const img of d.querySelectorAll('img')){img.loading='eager';await img.decode()}});
     const buffer=await page.screenshot({path:path.join(out,'Full-body-programs.jpg'),type:'jpeg',quality:85});captures.push({name:'Full Body programs',src:'data:image/jpeg;base64,'+buffer.toString('base64')});
-    await page.locator('[data-action="workout-categories"]').click();assert.equal(await page.locator('[data-workout-category]').count(),11);await page.locator('[data-workout-category="Full Body"]').click();
+    await page.locator('[data-action="workout-categories"]').click();assert.equal(await page.locator('[data-workout-category]').count(),12);await page.locator('[data-workout-category="Full Body"]').click();
    }
    if(id==='arms-balanced'&&width===390){
     await page.locator('.program-card').first().locator('summary').click();assert.equal(await page.locator('.program-card').first().locator('li').count(),6);
@@ -95,12 +95,16 @@ try{
    assert(await page.locator('[data-set-reps]').count()>=6,'Workout fields '+id);
    assert.equal(await page.locator('.workout-trigger-photo img').getAttribute('src'),info.photo,'Selected training photo '+id);
    assert((await page.locator('.training-header').evaluate(el=>getComputedStyle(el).backgroundImage)).includes(info.photo.replace('./','/')),'Photo header follows '+id);
+   const photos=await page.locator('.training-exercise').evaluateAll(xs=>xs.map(x=>x.style.getPropertyValue('--exercise-cover')));
+   assert.equal(new Set(photos).size,photos.length,'Distinct exercise photos '+id);
+   if(id==='kb-foundations'&&width===390){await capture('Kettlebell foundations')}
+   if(id==='kb-conditioning')assert.equal(await page.locator('[data-set-weight]').count(),12,'Timed kettlebell sets support kg logging');
    await checkLayout(id);
   }
   // New programs preserve their own draft alongside existing A/B drafts.
   await page.locator('[data-set-reps="0-0"]').fill('11');await page.locator('[data-set-done="0-0"]').check();
   await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'11');
-  await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-workout>img').getAttribute('src'),'./workout-images/glutes.png');await page.locator('.home-workout>img').evaluate(x=>x.decode());await capture('Selected workout');await page.locator('[data-tab="train"]').click();
+  await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-workout>img').getAttribute('src'),'./train-images/kettlebell.jpg');await page.locator('.home-workout>img').evaluate(x=>x.decode());await capture('Selected workout');await page.locator('[data-tab="train"]').click();
   await page.locator('[data-action="open-workouts"]').click();await page.locator('[data-workout-category="Push"]').click();await page.locator('[data-workout-pick="push-a"]').click();
   await page.locator('[data-set-reps="0-0"]').fill('10');await page.locator('[data-set-weight="0-0"]').fill('20');await page.locator('[data-set-done="0-0"]').check();await capture('Train');
   assert((await page.locator('.training-header').evaluate(el=>getComputedStyle(el).backgroundImage)).includes('/workout-images/push.jpg'),'Train hero follows chosen workout');
@@ -396,8 +400,9 @@ try{
  const homeCaptures=captures.filter(x=>['Home','Home nutrition','Home week','Home next','Home weight'].includes(x.name));
  if(homeCaptures.length){const sheet=await browser.newPage({viewport:{width:1560,height:760},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf1ed;font:12px sans-serif">'+homeCaptures.map(x=>'<figure style="margin:0;width:300px"><figcaption style="height:22px;text-align:center">'+x.name+'</figcaption><img style="width:300px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:82,path:path.join(out,'home-visual-overhaul.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_HOME_DATA '+b.slice(i,i+4000))}
 
- const trainPhotoCaptures=captures.filter(x=>x.name.startsWith('Train photo'));
+ const trainPhotoCaptures=captures.filter(x=>x.name.startsWith('Train photo')||x.name==='Kettlebell foundations');
  if(trainPhotoCaptures.length){const sheet=await browser.newPage({viewport:{width:1560,height:900},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf2ee;font:12px sans-serif">'+trainPhotoCaptures.map(x=>'<figure style="margin:0;width:300px"><figcaption style="height:22px;text-align:center">'+x.name+'</figcaption><img style="width:300px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:83,path:path.join(out,'train-photo-overview.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_TRAIN_PHOTO_DATA '+b.slice(i,i+4000))}
- assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:157,workoutPrograms:55,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 157 recipe photos; 55 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
+ assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:157,workoutPrograms:65,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 157 recipe photos; 65 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});
+

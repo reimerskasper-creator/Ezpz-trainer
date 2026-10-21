@@ -58,7 +58,12 @@
         "rest": 60,
         "side": false
       }
-    ]
+    ],
+    "programName": "Classic Push A",
+    "summary": "Balanced pressing with barbell, dumbbells and cables.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "push-b",
@@ -119,7 +124,12 @@
         "rest": 60,
         "side": false
       }
-    ]
+    ],
+    "programName": "Classic Push B",
+    "summary": "Dumbbells and machines with a different pressing mix.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "pull-a",
@@ -180,7 +190,12 @@
         "rest": 60,
         "side": false
       }
-    ]
+    ],
+    "programName": "Classic Pull A",
+    "summary": "Pulldowns, rows and rear-shoulder work.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "pull-b",
@@ -241,7 +256,12 @@
         "rest": 60,
         "side": false
       }
-    ]
+    ],
+    "programName": "Classic Pull B",
+    "summary": "Assisted pull-ups, one-arm rows and curls.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "leg-a",
@@ -302,7 +322,12 @@
         "rest": 60,
         "side": true
       }
-    ]
+    ],
+    "programName": "Classic Legs A",
+    "summary": "Squats, hinges and lunges with dumbbells.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "leg-b",
@@ -363,7 +388,12 @@
         "rest": 90,
         "side": false
       }
-    ]
+    ],
+    "programName": "Classic Legs B",
+    "summary": "Machines, hip thrusts and walking lunges.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "core-a",
@@ -424,7 +454,12 @@
         "rest": 30,
         "side": false
       }
-    ]
+    ],
+    "programName": "Classic Core A",
+    "summary": "Bracing, rotation resistance and floor control.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "core-b",
@@ -485,7 +520,12 @@
         "rest": 45,
         "side": false
       }
-    ]
+    ],
+    "programName": "Classic Core B",
+    "summary": "Side stability, carries and hanging knee raises.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "mobility-a",
@@ -546,7 +586,12 @@
         "rest": 15,
         "side": true
       }
-    ]
+    ],
+    "programName": "Daily Mobility A",
+    "summary": "Hips, spine, ankles and shoulders.",
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Controlled pace · support when needed"
   },
   {
     "id": "mobility-b",
@@ -617,7 +662,12 @@
         "rest": 15,
         "side": false
       }
-    ]
+    ],
+    "programName": "Daily Mobility B",
+    "summary": "A different whole-body mobility sequence.",
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Controlled pace · support when needed"
   },
   {
     "id": "stability-a",
@@ -688,7 +738,12 @@
         "rest": 30,
         "side": false
       }
-    ]
+    ],
+    "programName": "Stability A",
+    "summary": "Foundational balance and trunk control.",
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Controlled pace · support when needed"
   },
   {
     "id": "stability-b",
@@ -759,7 +814,12 @@
         "rest": 30,
         "side": true
       }
-    ]
+    ],
+    "programName": "Stability B",
+    "summary": "Single-leg work, side stability and carries.",
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Controlled pace · support when needed"
   },
   {
     "id": "cardio-a",
@@ -868,7 +928,12 @@
           "Let breathing ease toward normal."
         ]
       }
-    ]
+    ],
+    "programName": "Low-Impact Cardio",
+    "summary": "Walking and simple standing movements.",
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
   },
   {
     "id": "cardio-b",
@@ -977,7 +1042,12 @@
           "Let breathing settle before stopping."
         ]
       }
-    ]
+    ],
+    "programName": "Gym Cardio Mix",
+    "summary": "Steady work across cardio machines.",
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Multiple stations · steady pace, no timed transitions"
   },
   {
     "id": "hiit-a",
@@ -1054,7 +1124,12 @@
         "rest": 0,
         "side": false
       }
-    ]
+    ],
+    "programName": "Standing HIIT · No Kit",
+    "summary": "Six standing intervals in one clear space. No machines or jumping.",
+    "level": "Intermediate",
+    "effort": "Hard intervals",
+    "setup": "One space · finish one movement before the next"
   },
   {
     "id": "hiit-b",
@@ -1131,6 +1206,2675 @@
         "rest": 0,
         "side": false
       }
-    ]
+    ],
+    "programName": "Step & Bodyweight HIIT",
+    "summary": "One low step and a sturdy counter. Finish each movement before changing.",
+    "level": "Intermediate",
+    "effort": "Hard intervals",
+    "setup": "One space · finish one movement before the next"
+  },
+  {
+    "id": "full-body-balanced",
+    "category": "Full Body",
+    "variant": "Balanced Strength",
+    "title": "Balanced Strength",
+    "programName": "Balanced Strength",
+    "summary": "Squat, hinge, push, pull and core in one gym session.",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "minutes": "40–50",
+    "coverCategory": "Full Body",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Bench Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Seated Cable Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dead Bug",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "full-body-leg-focus",
+    "category": "Full Body",
+    "variant": "Lower-Body Emphasis",
+    "title": "Lower-Body Emphasis",
+    "programName": "Lower-Body Emphasis",
+    "summary": "Extra leg work with upper-body pushing and pulling.",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "minutes": "45–55",
+    "coverCategory": "Leg",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Lat Pulldown",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "full-body-home",
+    "category": "Full Body",
+    "variant": "Home Essentials",
+    "title": "Home Essentials",
+    "programName": "Home Essentials",
+    "summary": "Simple whole-body strength with a backpack and sturdy support.",
+    "equipment": "Home · backpack, sturdy counter, mat",
+    "minutes": "25–35",
+    "coverCategory": "Full Body",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Chair Squat",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Incline Push-up",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Backpack Row",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "full-body-hiit",
+    "category": "Full Body",
+    "variant": "Full-Body HIIT",
+    "title": "Full-Body HIIT",
+    "programName": "Full-Body HIIT",
+    "summary": "Six short bodyweight intervals with generous recovery.",
+    "equipment": "Home · mat, sturdy counter",
+    "minutes": "25–30",
+    "coverCategory": "HIIT",
+    "guide": "After warming up, complete the listed sets of each movement before moving on. Work briskly at about 7–8 out of 10 effort, then recover for the listed rest. Avoid all-out sprints. Reduce to one set per movement or extend recovery if needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bodyweight Squat",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Incline Push-up",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Fast Marching",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Step Jacks",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Mountain Climber",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Hard intervals",
+    "setup": "One space · finish one movement before the next"
+  },
+  {
+    "id": "push-chest",
+    "category": "Push",
+    "variant": "Chest Emphasis",
+    "title": "Chest Emphasis",
+    "programName": "Chest Emphasis",
+    "summary": "Three chest movements, then shoulders and triceps.",
+    "equipment": "Gym · bench, dumbbells, cable",
+    "minutes": "40–50",
+    "coverCategory": "Push",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Bench Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Cable Chest Fly",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "push-shoulders",
+    "category": "Push",
+    "variant": "Shoulder Emphasis",
+    "title": "Shoulder Emphasis",
+    "programName": "Shoulder Emphasis",
+    "summary": "Start with overhead pressing and shoulder accessories.",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "minutes": "35–45",
+    "coverCategory": "Push",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Seated Dumbbell Shoulder Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Front Raise",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Incline Dumbbell Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Cable Chest Fly",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "push-home",
+    "category": "Push",
+    "variant": "Home Push",
+    "title": "Home Push",
+    "programName": "Home Push",
+    "summary": "Pressing strength with dumbbells and a mat.",
+    "equipment": "Home · dumbbells, mat, sturdy counter",
+    "minutes": "30–40",
+    "coverCategory": "Push",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Incline Push-up",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Floor Press",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Standing Dumbbell Shoulder Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Lateral Raise",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Close-Grip Push-up",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "pull-back",
+    "category": "Pull",
+    "variant": "Back Emphasis",
+    "title": "Back Emphasis",
+    "programName": "Back Emphasis",
+    "summary": "Vertical and horizontal pulls before lighter arm work.",
+    "equipment": "Gym · cable, dumbbells, bench",
+    "minutes": "40–50",
+    "coverCategory": "Pull",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Lat Pulldown",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Chest-Supported Dumbbell Row",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "One-Arm Dumbbell Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Straight-Arm Pulldown",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Face Pull",
+        "sets": 2,
+        "reps": "12–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "pull-arms",
+    "category": "Pull",
+    "variant": "Back & Biceps",
+    "title": "Back and Biceps",
+    "programName": "Back and Biceps",
+    "summary": "A balanced back session with extra biceps variety.",
+    "equipment": "Gym · cable, dumbbells, bench",
+    "minutes": "35–45",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Close-Grip Lat Pulldown",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Seated Cable Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Band Pull-Apart",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "pull-home",
+    "category": "Pull",
+    "variant": "Home Pull",
+    "title": "Home Pull",
+    "programName": "Home Pull",
+    "summary": "Rows, rear shoulders and curls without cable machines.",
+    "equipment": "Home · dumbbells, resistance band, bench",
+    "minutes": "30–40",
+    "coverCategory": "Pull",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "One-Arm Dumbbell Row",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Resistance Band Row",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Bent-Over Reverse Fly",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Band Pull-Apart",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "leg-quads",
+    "category": "Leg",
+    "variant": "Quad Emphasis",
+    "title": "Quad Emphasis",
+    "programName": "Quad Emphasis",
+    "summary": "Squat and lunge patterns lead this leg session.",
+    "equipment": "Gym · leg machines, dumbbells, low step",
+    "minutes": "45–55",
+    "coverCategory": "Leg",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Leg Press",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Walking Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Leg Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "leg-posterior",
+    "category": "Leg",
+    "variant": "Glutes & Hamstrings",
+    "title": "Glutes and Hamstrings",
+    "programName": "Glutes and Hamstrings",
+    "summary": "Hinges and hip extension with controlled single-leg work.",
+    "equipment": "Gym · bench, dumbbells, leg curl",
+    "minutes": "40–50",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Lying Leg Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "leg-home",
+    "category": "Leg",
+    "variant": "Home Legs",
+    "title": "Home Legs",
+    "programName": "Home Legs",
+    "summary": "Lower-body strength using bodyweight and dumbbells.",
+    "equipment": "Home · dumbbells, mat, low step",
+    "minutes": "30–40",
+    "coverCategory": "Leg",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Calf Raise",
+        "sets": 2,
+        "reps": "12–20",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "core-brace",
+    "category": "Core",
+    "variant": "Bracing Basics",
+    "title": "Bracing Basics",
+    "programName": "Bracing Basics",
+    "summary": "Resist extension and rotation with slow controlled reps.",
+    "equipment": "Home · mat, resistance band",
+    "minutes": "20–25",
+    "coverCategory": "Core",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dead Bug",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Plank",
+        "reps": "20",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Side Plank",
+        "reps": "20",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "sec"
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "core-loaded",
+    "category": "Core",
+    "variant": "Loaded Core",
+    "title": "Loaded Core",
+    "programName": "Loaded Core",
+    "summary": "Cable work and carries alongside floor control.",
+    "equipment": "Gym · cable, dumbbell, mat",
+    "minutes": "25–35",
+    "coverCategory": "Core",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cable Crunch",
+        "reps": "10–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Suitcase Carry",
+        "sets": 2,
+        "reps": "20–30",
+        "unit": "sec",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Farmer Carry",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Reverse Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
+      },
+      {
+        "name": "Plank",
+        "reps": "25",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "core-no-kit",
+    "category": "Core",
+    "variant": "No-Equipment Core",
+    "title": "No-Equipment Core",
+    "programName": "No-Equipment Core",
+    "summary": "Six floor movements with no hanging bar or cable needed.",
+    "equipment": "Home · mat",
+    "minutes": "20–25",
+    "coverCategory": "Core",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dead Bug",
+        "sets": 2,
+        "reps": "6–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Reverse Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 45,
+        "side": false
+      },
+      {
+        "name": "Bicycle Crunch",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Side Plank",
+        "reps": "20",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "sec"
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Hollow Hold",
+        "reps": "15",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "mobility-hips",
+    "category": "Mobility",
+    "variant": "Hips & Ankles",
+    "title": "Hips and Ankles",
+    "programName": "Hips and Ankles",
+    "summary": "Gentle lower-body movement for hips, ankles and squat range.",
+    "equipment": "Home · mat, wall",
+    "minutes": "20–25",
+    "coverCategory": "Leg",
+    "guide": "Move slowly through a comfortable range. Do not force a stretch or hold your breath. Finish both sides before resting. The goal is relaxed movement, not fatigue.",
+    "warmup": "3–5 min easy walking and gentle joint movements.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "90/90 Hip Switch",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Ankle Rock",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Hip Flexor Stretch",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Adductor Rock-Back",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true,
+        "cues": [
+          "Start on hands and knees; extend one leg sideways with foot supported.",
+          "Keep your back steady and gently rock hips backward.",
+          "Use a small comfortable range; repeat on the other side."
+        ]
+      },
+      {
+        "name": "Standing Calf Stretch",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true,
+        "cues": [
+          "Place hands against a wall and step one foot behind you.",
+          "Keep the back heel down and lean forward gently.",
+          "Hold without bouncing; switch legs."
+        ]
+      },
+      {
+        "name": "Hip Hinge Drill",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Controlled pace · support when needed"
+  },
+  {
+    "id": "mobility-upper",
+    "category": "Mobility",
+    "variant": "Upper-Body Reset",
+    "title": "Upper-Body Reset",
+    "programName": "Upper-Body Reset",
+    "summary": "Shoulders and thoracic movement with easy floor work.",
+    "equipment": "Home · mat, wall",
+    "minutes": "15–20",
+    "coverCategory": "Mobility",
+    "guide": "Move slowly through a comfortable range. Do not force a stretch or hold your breath. Finish both sides before resting. The goal is relaxed movement, not fatigue.",
+    "warmup": "3–5 min easy walking and gentle joint movements.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cat-Cow",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Thoracic Open Book",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Wall Slide",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Shoulder CARs",
+        "sets": 2,
+        "reps": "3–5",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Child's Pose Lat Reach",
+        "reps": "25",
+        "sets": 2,
+        "rest": 15,
+        "side": true,
+        "unit": "sec",
+        "cues": [
+          "Kneel on a mat, sit hips gently toward heels and reach arms forward.",
+          "Walk hands slightly to one side for a gentle lat stretch; repeat on the other side."
+        ]
+      },
+      {
+        "name": "Seated Thoracic Rotation",
+        "reps": "6",
+        "sets": 2,
+        "rest": 15,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Sit upright on a sturdy chair, feet flat, arms crossed over chest.",
+          "Turn your upper back slowly while keeping hips facing forward; repeat both directions."
+        ]
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Controlled pace · support when needed"
+  },
+  {
+    "id": "mobility-gentle",
+    "category": "Mobility",
+    "variant": "Gentle Daily Flow",
+    "title": "Gentle Daily Flow",
+    "programName": "Gentle Daily Flow",
+    "summary": "An easy whole-body sequence for lighter days.",
+    "equipment": "Home · mat, wall",
+    "minutes": "15–20",
+    "coverCategory": "Mobility",
+    "guide": "Move slowly through a comfortable range. Do not force a stretch or hold your breath. Finish both sides before resting. The goal is relaxed movement, not fatigue.",
+    "warmup": "3–5 min easy walking and gentle joint movements.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cat-Cow",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "90/90 Hip Switch",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": false
+      },
+      {
+        "name": "Thoracic Open Book",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Shoulder CARs",
+        "sets": 2,
+        "reps": "3–5",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Ankle Rock",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 15,
+        "side": true
+      },
+      {
+        "name": "Hip Flexor Stretch",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 15,
+        "side": true
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Controlled pace · support when needed"
+  },
+  {
+    "id": "stability-single-leg",
+    "category": "Stability",
+    "variant": "Single-Leg Control",
+    "title": "Single-Leg Control",
+    "programName": "Single-Leg Control",
+    "summary": "Supported balance, hinges and step control.",
+    "equipment": "Home · sturdy support, low step, mat",
+    "minutes": "25–30",
+    "coverCategory": "Stability",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Supported Single-Leg Balance",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Stand beside a wall or sturdy chair and keep fingertips on it as needed.",
+          "Lift one foot slightly; keep hips level and eyes forward.",
+          "Hold steadily, then switch sides."
+        ]
+      },
+      {
+        "name": "Supported Single-Leg Hinge",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 45,
+        "side": true,
+        "cues": [
+          "Use one hand on a stable support and soften the standing knee.",
+          "Hinge at the hips as the other leg moves gently behind you.",
+          "Keep hips square and return tall; begin without weight."
+        ]
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Controlled pace · support when needed"
+  },
+  {
+    "id": "stability-carries",
+    "category": "Stability",
+    "variant": "Carries & Control",
+    "title": "Carries and Control",
+    "programName": "Carries and Control",
+    "summary": "Loaded carries paired with anti-rotation and slow steps.",
+    "equipment": "Gym · dumbbells, band, low step, mat",
+    "minutes": "25–35",
+    "coverCategory": "Stability",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Suitcase Carry",
+        "sets": 2,
+        "reps": "20–30",
+        "unit": "sec",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Farmer Carry",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Pallof Press",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Side Plank",
+        "sets": 2,
+        "reps": "15–20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Controlled pace · support when needed"
+  },
+  {
+    "id": "stability-foundation",
+    "category": "Stability",
+    "variant": "Balance Foundations",
+    "title": "Balance Foundations",
+    "programName": "Balance Foundations",
+    "summary": "Gentle supported balance and floor-based stability.",
+    "equipment": "Home · sturdy support, mat",
+    "minutes": "20–25",
+    "coverCategory": "Stability",
+    "guide": "Use a wall or sturdy support within reach. Work slowly, finish both sides, and rest as listed. Keep control throughout; reduce the range or use more support when needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Supported Single-Leg Balance",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Stand beside a wall or sturdy chair and keep fingertips on it as needed.",
+          "Lift one foot slightly; keep hips level and eyes forward.",
+          "Hold steadily, then switch sides."
+        ]
+      },
+      {
+        "name": "Heel-to-Toe Walk",
+        "sets": 2,
+        "reps": "10–20",
+        "unit": "reps",
+        "rest": 30,
+        "side": false,
+        "cues": [
+          "Walk beside a wall or counter for support.",
+          "Place each heel just ahead of the toes of the other foot.",
+          "Take slow small steps while looking ahead."
+        ]
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Bird Dog",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Wall Slide",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Controlled pace · support when needed"
+  },
+  {
+    "id": "cardio-walk",
+    "category": "Cardio",
+    "variant": "Walking Variety",
+    "title": "Outdoor Walk and Move",
+    "programName": "Outdoor Walk and Move",
+    "summary": "Brisk walking and five simple cardio movements on an outdoor route.",
+    "equipment": "Outdoors · safe flat route and gentle incline",
+    "minutes": "25–30",
+    "coverCategory": "Cardio",
+    "guide": "Work at a sustainable pace where you can speak in sentences. Follow each stage in order; the six movement blocks make one session, not six all-out efforts.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Brisk Walking",
+        "reps": "5",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Incline Walking",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Steady Marching",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Step Touch",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Heel Digs",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Standing Knee Lifts",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "cardio-home",
+    "category": "Cardio",
+    "variant": "Home Low Impact",
+    "title": "Home Low Impact",
+    "programName": "Home Low Impact",
+    "summary": "Keep moving at home without jumps or machines.",
+    "equipment": "Home · space to move, optional low step",
+    "minutes": "25–30",
+    "coverCategory": "Cardio",
+    "guide": "Work at a sustainable pace where you can speak in sentences. Follow each stage in order; the six movement blocks make one session, not six all-out efforts.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Steady Marching",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Step Touch",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Heel Digs",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Standing Knee Lifts",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Low Step-ups",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "cardio-machines",
+    "category": "Cardio",
+    "variant": "Gym Endurance",
+    "title": "Low-Impact Gym",
+    "programName": "Low-Impact Gym",
+    "summary": "Four steady cardio stations plus two simple movement blocks.",
+    "equipment": "Gym · bike, rower, elliptical, treadmill, low step",
+    "minutes": "30–40",
+    "coverCategory": "Cardio",
+    "guide": "Work at a sustainable pace where you can speak in sentences. Follow each stage in order; the six movement blocks make one session, not six all-out efforts.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Steady Cycling",
+        "reps": "5",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Steady Rowing",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Elliptical Training",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Incline Walking",
+        "reps": "4",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      },
+      {
+        "name": "Low Step-ups",
+        "reps": "3",
+        "sets": 1,
+        "rest": 30,
+        "side": false,
+        "unit": "min"
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Multiple stations · steady pace, no timed transitions"
+  },
+  {
+    "id": "hiit-bodyweight",
+    "category": "HIIT",
+    "variant": "Bodyweight Intervals",
+    "title": "Bodyweight Intervals",
+    "programName": "Bodyweight Intervals",
+    "summary": "Six brisk bodyweight moves; no gym equipment.",
+    "equipment": "Home · mat, sturdy counter",
+    "minutes": "25–30",
+    "coverCategory": "HIIT",
+    "guide": "After warming up, complete the listed sets of each movement before moving on. Work briskly at about 7–8 out of 10 effort, then recover for the listed rest. Avoid all-out sprints. Reduce to one set per movement or extend recovery if needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bodyweight Squat",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Incline Push-up",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Mountain Climber",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Step Jacks",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Fast Marching",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Hard intervals",
+    "setup": "One space · finish one movement before the next"
+  },
+  {
+    "id": "hiit-low-impact",
+    "category": "HIIT",
+    "variant": "Low-Impact Intervals",
+    "title": "Low-Impact Intervals",
+    "programName": "Low-Impact Intervals",
+    "summary": "Raise your effort while keeping one foot grounded.",
+    "equipment": "Home · low step, space to move",
+    "minutes": "25–30",
+    "coverCategory": "Cardio",
+    "guide": "After warming up, complete the listed sets of each movement before moving on. Work briskly at about 7–8 out of 10 effort, then recover for the listed rest. Avoid all-out sprints. Reduce to one set per movement or extend recovery if needed.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Fast Marching",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Step Jacks",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Shadow Boxing",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Fast Low Step-ups",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Standing Knee Lifts",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec"
+      },
+      {
+        "name": "Lateral Step Touch",
+        "reps": "30",
+        "sets": 2,
+        "rest": 45,
+        "side": false,
+        "unit": "sec",
+        "cues": [
+          "Step to one side and bring the other foot in to tap.",
+          "Alternate sides without jumping and keep knees soft."
+        ]
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Hard intervals",
+    "setup": "One space · finish one movement before the next"
+  },
+  {
+    "id": "hiit-gym",
+    "category": "HIIT",
+    "variant": "Gym Conditioning",
+    "title": "Gym Conditioning",
+    "programName": "Dumbbell Conditioning",
+    "summary": "Controlled dumbbell intervals and bodyweight work in one training spot.",
+    "equipment": "One space · light dumbbells, mat",
+    "minutes": "25–30",
+    "coverCategory": "Full Body",
+    "guide": "Stay in one clear space. Finish both intervals of each movement before moving on. Use 20 seconds of controlled hard work, then 60 seconds of easy recovery after each interval. Aim for 7–8/10 effort, never all-out. Shorten work or extend recovery as needed. Low impact describes movement, not low effort. Use 1–2 non-consecutive interval days per week. Choose light dumbbells and prioritize control over speed. For rows, complete 20 seconds per side before resting; log seconds for one side.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Goblet Squat",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Floor Press",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "One-Arm Dumbbell Row",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 60,
+        "side": true
+      },
+      {
+        "name": "Farmer March",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Shadow Boxing",
+        "sets": 2,
+        "reps": "20",
+        "unit": "sec",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Hard intervals",
+    "setup": "One space · finish one movement before the next"
+  },
+  {
+    "id": "arms-balanced",
+    "category": "Arms",
+    "variant": "Balanced Arms",
+    "title": "Balanced Arms",
+    "programName": "Balanced Arms",
+    "summary": "Three curl variations and three triceps movements.",
+    "equipment": "Gym · dumbbells, cable, bench",
+    "minutes": "30–40",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Skull Crusher",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "arms-biceps",
+    "category": "Arms",
+    "variant": "Biceps Emphasis",
+    "title": "Biceps Emphasis",
+    "programName": "Biceps Emphasis",
+    "summary": "Start with curls, then finish with two triceps accessories.",
+    "equipment": "Gym · barbell, dumbbells, cable, bench",
+    "minutes": "30–40",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Barbell Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Incline Dumbbell Curl",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Cable Biceps Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "arms-triceps",
+    "category": "Arms",
+    "variant": "Triceps Emphasis",
+    "title": "Triceps Emphasis",
+    "programName": "Triceps Emphasis",
+    "summary": "Presses and extensions first, with biceps work to finish.",
+    "equipment": "Gym · bench, barbell, cable, dumbbells",
+    "minutes": "35–45",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Close-Grip Bench Press",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Skull Crusher",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "arms-dumbbells",
+    "category": "Arms",
+    "variant": "Dumbbell Arms",
+    "title": "Dumbbell Arms",
+    "programName": "Dumbbell Arms",
+    "summary": "A complete arm session using one pair of dumbbells.",
+    "equipment": "Home · dumbbells, mat",
+    "minutes": "25–35",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Biceps Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Overhead Triceps Extension",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Hammer Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Lying Dumbbell Triceps Extension",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps",
+        "cues": [
+          "Lie on a mat holding light dumbbells above shoulders.",
+          "Keep upper arms steady, bend elbows to lower weights beside your head, then extend."
+        ]
+      },
+      {
+        "name": "Concentration Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Sit on a sturdy chair with one elbow lightly against the inner thigh.",
+          "Curl a dumbbell without swinging; lower slowly and repeat on the other arm."
+        ]
+      },
+      {
+        "name": "Triceps Kickback",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Hinge forward with a flat back and support one hand on a sturdy bench.",
+          "Keep the upper arm by your torso, extend the elbow, then return slowly; repeat both sides."
+        ]
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "arms-cables",
+    "category": "Arms",
+    "variant": "Cable Arms",
+    "title": "Cable Arms",
+    "programName": "Cable Arms",
+    "summary": "Constant-resistance curls and extensions at one station.",
+    "equipment": "Gym · cable, straight bar and rope attachments",
+    "minutes": "25–35",
+    "coverCategory": "Arms",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Cable Biceps Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps"
+      },
+      {
+        "name": "Rope Triceps Pushdown",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Single-Arm Cable Curl",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Stand balanced, holding a low-cable handle at your side.",
+          "Keep elbow still as you curl and lower slowly; repeat with the other arm."
+        ]
+      },
+      {
+        "name": "Cable Overhead Triceps Extension",
+        "reps": "10–12",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps",
+        "cues": [
+          "Stand in a stable split stance holding a rope overhead from a low pulley.",
+          "Keep upper arms steady and ribs down while bending and extending elbows."
+        ]
+      },
+      {
+        "name": "Rope Hammer Curl",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": false,
+        "unit": "reps",
+        "cues": [
+          "Hold a rope on a low pulley with palms facing each other.",
+          "Keep elbows near your torso; curl without leaning back and lower under control."
+        ]
+      },
+      {
+        "name": "Single-Arm Triceps Pushdown",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 60,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Face a high pulley and keep the working elbow close to your torso.",
+          "Straighten the arm without swinging, return slowly and repeat on the other side."
+        ]
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "glutes-builder",
+    "category": "Glutes",
+    "variant": "Glute Builder",
+    "title": "Glute Builder",
+    "programName": "Glute Builder",
+    "summary": "Hip thrusts, hinges and unilateral work for glute strength.",
+    "equipment": "Gym · bench, dumbbells, resistance band",
+    "minutes": "40–50",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Bulgarian Split Squat",
+        "reps": "8–12",
+        "sets": 2,
+        "rest": 90,
+        "side": true,
+        "unit": "reps"
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "glutes-home",
+    "category": "Glutes",
+    "variant": "Home Glutes",
+    "title": "Home Glutes",
+    "programName": "Home Glutes",
+    "summary": "Bodyweight and band work with a stable low step.",
+    "equipment": "Home · band, mat, low step",
+    "minutes": "25–35",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Quadruped Hip Extension",
+        "reps": "12–15",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Start on hands and knees with ribs gently braced.",
+          "Keep knee bent and lift one thigh only as far as your lower back stays still; repeat both sides."
+        ]
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "glutes-hinge",
+    "category": "Glutes",
+    "variant": "Hinge Emphasis",
+    "title": "Hinge Emphasis",
+    "programName": "Hinge Emphasis",
+    "summary": "Controlled hinges, hip extension and hamstring support.",
+    "equipment": "Gym · dumbbells, bench, leg curl, band",
+    "minutes": "35–45",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Dumbbell Romanian Deadlift",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 90,
+        "side": false
+      },
+      {
+        "name": "Hip Thrust",
+        "sets": 2,
+        "reps": "8–12",
+        "unit": "reps",
+        "rest": 120,
+        "side": false
+      },
+      {
+        "name": "Lying Leg Curl",
+        "sets": 2,
+        "reps": "10–15",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "glutes-single-leg",
+    "category": "Glutes",
+    "variant": "Single-Leg Glutes",
+    "title": "Single-Leg Glutes",
+    "programName": "Single-Leg Glutes",
+    "summary": "Split squats, step-ups and supported single-leg control.",
+    "equipment": "Gym · dumbbells, low step, bench, mat",
+    "minutes": "35–45",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Bulgarian Split Squat",
+        "reps": "8–12",
+        "sets": 2,
+        "rest": 90,
+        "side": true,
+        "unit": "reps"
+      },
+      {
+        "name": "Step-up",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 45,
+        "side": true
+      },
+      {
+        "name": "Reverse Lunge",
+        "sets": 2,
+        "reps": "8–10",
+        "unit": "reps",
+        "rest": 90,
+        "side": true
+      },
+      {
+        "name": "Supported Single-Leg Hinge",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 45,
+        "side": true,
+        "cues": [
+          "Use one hand on a stable support and soften the standing knee.",
+          "Hinge at the hips as the other leg moves gently behind you.",
+          "Keep hips square and return tall; begin without weight."
+        ]
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      }
+    ],
+    "level": "Intermediate",
+    "effort": "Moderate",
+    "setup": "Straight sets · move stations after all sets"
+  },
+  {
+    "id": "glutes-foundation",
+    "category": "Glutes",
+    "variant": "Glute Foundations",
+    "title": "Glute Foundations",
+    "programName": "Glute Foundations",
+    "summary": "Simple activation and strength patterns at an easy pace.",
+    "equipment": "Home · sturdy chair, mat, optional band",
+    "minutes": "25–30",
+    "coverCategory": "Glutes",
+    "guide": "Complete straight sets in order. Use a controlled, comfortable range and finish each set with 2–3 good reps in reserve. Rest as listed between sets. Start with one set per exercise if needed; build to the listed sets. Add the smallest load only when all sets reach the top of the rep range with good form.",
+    "warmup": "5–10 min easy movement, then lighter practice sets before loaded exercises.",
+    "cooldown": "3–5 min easy walking and relaxed breathing.",
+    "exercises": [
+      {
+        "name": "Glute Bridge",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": false
+      },
+      {
+        "name": "Glute Activation Clamshell",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true
+      },
+      {
+        "name": "Standing Hip Abduction",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 30,
+        "side": true,
+        "cues": [
+          "Hold a stable support and stand tall.",
+          "Move one leg a little out to the side without leaning.",
+          "Return slowly; keep toes facing forward."
+        ]
+      },
+      {
+        "name": "Quadruped Hip Extension",
+        "reps": "12",
+        "sets": 2,
+        "rest": 45,
+        "side": true,
+        "unit": "reps",
+        "cues": [
+          "Start on hands and knees with ribs gently braced.",
+          "Keep knee bent and lift one thigh only as far as your lower back stays still; repeat both sides."
+        ]
+      },
+      {
+        "name": "Chair Squat",
+        "sets": 2,
+        "reps": "10–12",
+        "unit": "reps",
+        "rest": 60,
+        "side": false
+      },
+      {
+        "name": "Supported Single-Leg Hinge",
+        "sets": 2,
+        "reps": "6–8",
+        "unit": "reps",
+        "rest": 45,
+        "side": true,
+        "cues": [
+          "Use one hand on a stable support and soften the standing knee.",
+          "Hinge at the hips as the other leg moves gently behind you.",
+          "Keep hips square and return tall; begin without weight."
+        ]
+      }
+    ],
+    "level": "Beginner",
+    "effort": "Gentle",
+    "setup": "Straight sets · move stations after all sets"
   }
 ]
