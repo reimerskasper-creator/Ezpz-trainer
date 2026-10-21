@@ -368,3 +368,9 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Removed weekly count in Home card heading, training meter and dated weekday boxes. Progress-page weekly statistics remain unchanged. Footer links to training history.
 - Curved connecting paths, softer ring backgrounds, radial glow and rounded explanation area reduce rigid framing. Preview visually reviewed. Existing data and prescriptions unchanged.
 - Added tests for full and partial daily sessions, unchecked/invalid reps, omitted planned sets, missing exercise sets, multiple partial sessions, yesterday/future exclusion. Home, Zone and overall local checks passed; browser asserts weekly strip absent. Full Mobile app checks 39663266925 and Pages deployment 39663266091 succeeded on d5544ed50c658578fde81384703080374bd172aa.
+
+## Compact row of four with Overall below — 2026-10-21
+
+- User approved removing all connectors and arranging four smaller equal rings (Eat, Sleep, Train, Zone) in one row, with a larger Overall centered beneath. Removed foundationPaths rendering/function and related obsolete assertions. No scoring or saved-data changes.
+- Removed visible helper sentences under rings; detailed state remains in accessible labels and the original tap views. Train is the short Home label; method explanation still calls the pillar Progression. Expandable score explanation remains below with updated wording and no path references.
+- Preview visually reviewed. Home, Zone and overall local checks passed. Mobile suite asserts one top row, centered Overall beneath, non-overlapping ring visuals, usable touch targets, no paths and unchanged interactions at 320/390/430px. Full Mobile app checks 39664651191 and Pages deployment 39664650184 succeeded on 7f8cbf1edcb1db14009a3ee041c8393625b74cab.
