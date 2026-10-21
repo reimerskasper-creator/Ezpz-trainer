@@ -15,6 +15,13 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
+## Latest update — body measurement preference, 21 October 2026
+- More → Measurement units persists Metric (kg/cm) or Imperial (lb/inches), default metric for existing users. Setup includes the same choice and converts entered body measurements while preserving other answers.
+- Home weight/delta, Progress summary/trend/accessible chart text, weigh-in entry and editing use selected units. Stored profiles/measurements remain normalized kg/cm; changing display does not rewrite history. Nutrition questionnaire starts in preferred units; existing explicit calculator unit switching remains.
+- Backup restore validates state.units. Weigh-in save now rolls back on storage failure.
+- Scope: body measurements. Workout load inputs/history remain explicitly kg; recipe portions/macros remain grams.
+- Added tests/units.cjs to CI; local syntax, units, privacy, nutrition-targets, daily-use, Home and protected recipes passed. Browser checks and deployment pending.
+
 ## Latest update — five everyday-use upgrades, 21 October 2026
 - Eat diary has a date picker, previous/next day and Back to today. Recipe/custom/recent logging uses the selected past-or-today date; recipe screen displays date too. Home totals remain today-only. Food entries have portion/date editing, exact dish photos retained, transactional removal and Undo.
 - Favourite library recipe indexes are validated in state.favouriteRecipes, included in backups. Recipe pages toggle favourites; Eat's collapsed Favourites & recent meals has photos, portions and direct logging. Recents derive from logs, deduplicated by recipe identity or custom per-portion snapshot. Custom unitMacros prevent repeated editing rounding drift.
