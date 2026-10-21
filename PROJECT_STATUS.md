@@ -15,7 +15,18 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest implemented request
+## Current release — 21 October 2026
+This section supersedes earlier category/program counts below.
+- Train now has 12 categories and 65 choices: 64 fixed programs plus the existing rotating Full Body plan.
+- New Kettlebell category contains ten complete six-exercise sessions: Foundations, Full Body Strength, Lower Body, Upper Body, Core & Carries, Hinge & Swing, Single-side Strength, Low-impact Basics, Controlled Conditioning, Double Bell Strength.
+- Kettlebell sessions include sets/reps or duration, rests, per-side markers, warm-up, cooldown and technique cues. Timed loaded exercises retain kg inputs through exerciseHasLoad(x.load).
+- Kettlebell works in the Train chooser, Home cover, planner, builder category and saved/backup data validation. No IDs or prescriptions in the original 54 fixed programs changed; the regression fixture now protects all 54.
+- Eleven original generated still-life gym photographs live in train-images/*.jpg (about 1.2 MB total). These are background decoration, not exercise demonstrations. All were visually inspected before compression.
+- trainingExercisePhotos(plan) assigns stable distinct relevant equipment photos to each exercise in every built-in session. It does not depend on catalogue loading or logged sets. The workout hero retains the category photo; progress, rest, guide and finish panels use separate photos. The expanded logger shares its card's photo under a light overlay.
+- Verification: Mobile app checks run 39591657316 passed on commit fc7c44fc06f55c570ae223285cb92b2e78960039; Pages deployment run 39591657240 passed. The six-panel Train/Kettlebell screenshot was visually reviewed.
+- Mobile checks cover 320/390/430px, all 65 choices, distinct exercise photos, timed kettlebell load inputs, draft persistence, planner assignment and existing app behavior.
+
+## Earlier implemented request
 The workout chooser opens eleven photo categories. Opening a category shows five session programs with a description, equipment, estimated duration, related photograph and an expandable exercise/prescription preview.
 
 Categories: Full Body, Push, Pull, Legs, Arms, Glute Builder, Core, Mobility, Stability, Cardio, HIIT.
