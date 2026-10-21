@@ -20,6 +20,7 @@
 - Training uses unique workout days/current weekly goal and retains counts/session labels. Macros sum each logged day's foods (including custom), use the Home macro completion calculation, and average only logged food days. Sleep averages per-night completion against the current personal goal, capped each night at 100%. Future days excluded.
 - Missing macro/sleep weeks show an em dash and zero logged days/nights, rather than inferred 0%; coverage counts and methodology are visible. Historical comparisons use current targets explicitly; no historical target snapshots are invented. Current-week comparison is labelled in progress.
 - Rings switch charts locally without storage writes or changing logs. Log food and Log sleep actions use existing pages. Existing body-weight and workout-history sections unchanged.
+- Verified main implementation with Mobile app checks run 39608546167 (job 119251030960) and Pages deployment 39608544163: all checks passed; final macro and sleep panel screenshots visually reviewed. Follow-up label polish singularizes day/night counts.
 - tests/habits.cjs verifies grouping, per-day food aggregation, cutoff, missing logs, capped averages and read-only rendering. Mobile checks exercise all three views at 320/390/430px and capture macro/sleep review screenshots.
 
 ## Previous update — weekly habit circles and sleep, 21 October 2026
