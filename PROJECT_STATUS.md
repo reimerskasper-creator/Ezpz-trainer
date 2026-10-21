@@ -440,3 +440,5 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ## Compact Home calendar — 21 October 2026
 - Replaced plain date with a compact flip-calendar visual: dark green month strip, bold day, subtle page seam/shadow and weekday beside it. Semantic time element provides the complete localized date; no animation or new action. Existing local date source and method shortcut retained.
+
+- Added the visible “Explore the EZPZ method ›” caption below the Home logo within the same accessible button, with subtle pressed feedback and retained keyboard focus. Calendar and logo share the existing compact row.
