@@ -426,3 +426,4 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Weekly progress rings — 21 October 2026
 - Replaced all 28 weekly square progress cells with SVG rings matching the four foundation colors. Arcs start at twelve o’clock and fill clockwise with the existing exact daily percentage; completed rings retain checkmarks, today has a circular halo, and future rings remain faint and disabled.
 - Existing selected-date log shortcuts, calculations, records, recipes and top five rings remain unchanged. Phone verification at 320/390/430px checks arc percentages, circular styling, no box fills, all navigation/save flows and record preservation. Weekly math, Home and protected recipe checks passed; screenshot visually reviewed.
+- Published source 06340f03fede61b245afa0f537b1dc1c51ed9449: Mobile app checks 39688720514 passed; Pages 39688719432 succeeded. Live HTML blob e44e208b9d6d87d4345a77fc56f906610424064c matches the tested source.
