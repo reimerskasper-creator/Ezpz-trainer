@@ -594,6 +594,24 @@ try{
  const planningCaptures=captures.filter(x=>['Four-week-plan','Workout-builder'].includes(x.name));
  if(planningCaptures.length){const sheet=await browser.newPage({viewport:{width:800,height:900},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf0ee;font:14px sans-serif">'+planningCaptures.map(x=>'<figure style="margin:0;width:380px"><figcaption style="height:25px;text-align:center">'+x.name+'</figcaption><img style="width:380px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'planning-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_PLAN_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_PLAN_DATA '+b.slice(i,i+4000));console.log('EZPZ_PLAN_END')}}
 
+ // Welcome styling and personal name flow for new and existing users.
+ for(const width of [320,390,430]){
+  const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,timezoneId:'America/New_York'}),page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
+  assert.equal(await page.locator('.setup-panel').count(),3);assert((await page.locator('.setup-hero').evaluate(x=>getComputedStyle(x).backgroundImage)).includes('/home-images/planning.jpg'));
+  const colors=await page.locator('.setup-panel').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundColor));assert.equal(new Set(colors).size,3);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Setup fits '+width);
+  if(width===390)await page.screenshot({type:'jpeg',quality:85,fullPage:true,path:path.join(out,'personal-welcome-setup.jpg')});
+  await page.locator('#setup-first-name').fill('Kasper');await page.locator('#setup-age').fill('35');await page.locator('#setup-weight').fill('80');await page.locator('#setup-height').fill('180');await page.locator('#setup-goal').selectOption('maintain');await page.locator('#body-units').selectOption('imperial');
+  assert.equal(await page.locator('#setup-first-name').inputValue(),'Kasper');assert.equal(await page.locator('#setup-goal').inputValue(),'maintain');assert(Math.abs(Number(await page.locator('#setup-weight').inputValue())-176.37)<.001);await page.locator('#body-units').selectOption('metric');
+  await page.locator('#setup button').click();await page.locator('.home-greeting').waitFor();assert.equal(await page.locator('.home-greeting').innerText(),'Kasper, you’ve got this!');assert.equal(await page.evaluate(()=>scrollY),0);assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).firstName,key),'Kasper');
+  await page.reload();assert.equal(await page.locator('.home-greeting').innerText(),'Kasper, you’ve got this!');if(width===390)await page.screenshot({type:'jpeg',quality:85,path:path.join(out,'personal-welcome-home.jpg')});
+  const before=await page.evaluate(key=>{const x=JSON.parse(localStorage.getItem(key));return {profile:x.profile,logs:x.logs,weights:x.weights,foodLog:x.foodLog}},key);
+  await page.locator('[data-tab="more"]').click();assert.equal(await page.locator('#preferred-name').inputValue(),'Kasper');await page.locator('#preferred-name').fill('Søren');await page.locator('#name-preferences-form button').click();assert((await page.locator('#name-save-status').innerText()).includes('Name saved'));await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-greeting').innerText(),'Søren, you’ve got this!');
+  await page.locator('[data-tab="more"]').click();await page.locator('#preferred-name').fill('A'.repeat(40));await page.locator('#name-preferences-form button').click();await page.locator('[data-tab="home"]').click();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Long greeting fits '+width);
+  await page.locator('[data-tab="more"]').click();await page.locator('#preferred-name').fill('');await page.locator('#name-preferences-form button').click();await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-greeting').innerText(),'You’ve got this!');
+  assert.deepEqual(await page.evaluate(key=>{const x=JSON.parse(localStorage.getItem(key));return {profile:x.profile,logs:x.logs,weights:x.weights,foodLog:x.foodLog}},key),before);await context.close();
+ }
+
  // Training usability: unit switching, conservative suggestions, session-only swaps and recap.
  for(const width of [320,390,430]){
   const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:1,isMobile:true,hasTouch:true});

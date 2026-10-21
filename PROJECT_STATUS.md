@@ -15,12 +15,19 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
+## Latest update — welcome questionnaire and personal greeting, 21 October 2026
+- First-time setup now has a gym-photo welcome hero, green/gold/blue habit pills, and three photo-backed panels for personal preferences, training choices and starting body details. Same one-page questionnaire, existing choices, body units and calculations; every form field has an explicit label. Setup branding matches Home. Completion scrolls Home to the top.
+- Optional firstName is collected at setup; existing users can add/edit/remove it in More → What should we call you? Home's heading says “[name], you’ve got this!” or “You’ve got this!” when blank. No name is hardcoded or inferred for other users.
+- Names are whitespace/control cleaned and limited to 40 Unicode characters, escaped in markup, retained while switching setup units, included in backups and validated on restore. Save failures roll back; name edits do not change profiles, foods, weights, workouts or targets. Setup profile/name writes now also roll back together.
+- tests/personal-welcome.cjs covers names, Unicode, escaping, backup validation, rollback and retained records. Mobile flows cover new setup, unit switching with draft preservation, name save/reload/change/removal, 40-character greeting layout and read-only record preservation at 320/390/430px. New screenshots: personal-welcome-setup.jpg and personal-welcome-home.jpg.
+- Local unit/regression checks passed. CUA visually inspected the photo-backed setup and a named Home greeting; verified name/measurement preservation across unit switching and name changes through More. New mobile CI and deployment pending.
+
 ## Latest update — Train color harmony, 21 October 2026
 - User requested less white on Train, one or two darker tones, Home's green/gold/blue boxes and a more visual top workout summary.
 - Train-only color-harmony stylesheet darkens the page and exercise-photo overlay to sage; colors logging actions green/gold/blue, next-weight guidance green, swap blue, technique tips gold, and next-exercise green. Light number inputs remain distinct; photos, selected/completed/invalid states and functionality are preserved.
 - Train calls workoutPicker(true) to omit its redundant count/time subtitle; the default picker is unchanged elsewhere. Header now shows three colored real-value tiles (exercise count, duration, total logged sets), followed by labeled format/progression and equipment rows. Experience/effort badges and workout/photo selection remain.
 - Added a dumbbell path to the existing homeIcon helper for the equipment row. No workout definitions, recipes, saved-data readers, handlers, unit conversion or schema changes.
-- Local syntax, training, training-usability, workout-photo/prescription and protected recipe suites passed. CUA preview header and logger visually reviewed with actual photo assets. Mobile suite now checks summary/color distinctions, duplicate removal and responsive layout at 320/390/430px; CI and deployment pending.
+- Local syntax, training, training-usability, workout-photo/prescription and protected recipe suites passed. CUA preview header and logger visually reviewed with actual photo assets. Mobile suite now checks summary/color distinctions, duplicate removal and responsive layout at 320/390/430px; Mobile app checks 39622823949 and Pages deployment 39622823228 passed on source bef89f02a4927dabdba69baf74253e040a2a2263.
 
 ## Latest update — five training usability improvements, 21 October 2026
 - The saved metric/imperial preference now applies to workout load entry, previous results, history corrections, strength charts, archived entries and kettlebell per-bell cues. All storage, comparisons and backups remain kg; exact stored loads survive display-only switches and unchanged edits. Food content is unchanged.

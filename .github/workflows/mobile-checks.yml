@@ -25,6 +25,7 @@ jobs:
         env:
           EZPZ_VISUAL_LOG: ${{ contains(github.event.head_commit.message, '[visual-review]') && '1' || '0' }}
         run: |
+          node tests/personal-welcome.cjs
           node tests/training-usability.cjs
           node tests/units.cjs
           node tests/daily-use.cjs
