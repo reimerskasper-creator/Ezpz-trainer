@@ -476,6 +476,22 @@ try{
   await page.evaluate(()=>{const date=planSettings().date;state.workoutSchedule[date]='rest';planner()});assert((await picture('.plan-workout')).includes('/home-images/consistency.jpg'));assert((await page.locator('#planned-workout').innerText()).includes('Rest / recovery day'));await fits();
   await context.close();
  }
+
+ // The visible planner back button returns to its entry section; More uses distinct related photos.
+ for(const width of [320,390,430]){
+  const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,timezoneId:'America/New_York'});await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
+  const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'More / planner back layout '+width);
+  for(const origin of ['home','train','eat','more']){
+   await page.locator('[data-tab="'+origin+'"]').click();if(origin==='eat')await page.locator('.eat-planner').evaluate(x=>x.open=true);
+   const before=await page.evaluate(key=>localStorage.getItem(key),key);await page.locator('[data-go="planner"]').first().click();assert.equal(await page.locator('body').getAttribute('data-view'),'planner');const back=page.locator('.planner-back'),rect=await back.boundingBox();assert(rect.y>=0&&rect.y+rect.height<150,'Back is visible at the top');assert(rect.height>=44,'Back touch target');assert.equal(await back.getAttribute('data-go'),origin,'Back returns to entry section');await fits();
+   if(width===390&&origin==='more'){const jpg=await page.screenshot({type:'jpeg',quality:85,path:path.join(out,'planner-back.jpg')});captures.push({name:'More My Plan back',src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
+   await back.click();assert.equal(await page.locator('body').getAttribute('data-view'),origin);assert.equal(await page.evaluate(()=>scrollY),0);assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before,'Back navigation preserves saved data');
+  }
+  await fits();const backgrounds=await page.locator('.more-link').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundImage));assert.equal(backgrounds.length,4);assert.equal(new Set(backgrounds).size,4,'More tools have different related backgrounds');assert(backgrounds.every(x=>x.includes('url(')));assert((await page.locator('.data-tools').evaluate(x=>getComputedStyle(x).backgroundImage)).includes('/train-images/guide.jpg'));
+  if(width===390){await page.evaluate(()=>scrollTo(0,0));const jpg=await page.screenshot({type:'jpeg',quality:85,path:path.join(out,'more-page-top.jpg')});captures.push({name:'More top',src:'data:image/jpeg;base64,'+jpg.toString('base64')});for(const [selector,name]of [['.more-group','More tools'],['.data-tools','More backup']]){const el=page.locator(selector);await el.scrollIntoViewIfNeeded();const jpg=await el.screenshot({type:'jpeg',quality:85});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')})}}
+  for(const [destination,expected]of [['library','library'],['shopping','shopping'],['progress','progress']]){await page.locator('.more-link[data-go="'+destination+'"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),expected);await page.locator('[data-tab="more"]').click()}
+  await page.locator('.data-tools details>summary').click();assert(await page.locator('#restore-file').isVisible());await fits();await context.close();
+ }
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
  if(captures.length){const sheet=await browser.newPage({viewport:{width:2528,height:570},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf0ee;font:14px sans-serif">'+captures.map(x=>'<figure style="margin:0;width:244px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:244px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'mobile-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_VISUAL_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));console.log('EZPZ_VISUAL_END')}}
 
@@ -502,6 +518,8 @@ try{
 
  const trainPhotoCaptures=captures.filter(x=>x.name.startsWith('Train photo')||x.name==='Kettlebell foundations');
  if(trainPhotoCaptures.length){const sheet=await browser.newPage({viewport:{width:1860,height:1100},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf2ee;font:12px sans-serif">'+trainPhotoCaptures.map(x=>'<figure style="margin:0;width:300px"><figcaption style="height:22px;text-align:center">'+x.name+'</figcaption><img style="width:300px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:83,path:path.join(out,'train-photo-overview.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_TRAIN_PHOTO_DATA '+b.slice(i,i+4000))}
+ const moreCaptures=captures.filter(x=>x.name.startsWith('More '));
+ if(moreCaptures.length){const sheet=await browser.newPage({viewport:{width:1450,height:1100},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf2ee;font:12px sans-serif">'+moreCaptures.map(x=>'<figure style="margin:0;width:350px"><figcaption style="height:24px">'+x.name+'</figcaption><img style="width:350px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'more-visual-overhaul.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_MORE_PHOTO_DATA '+b.slice(i,i+4000))}
  const myPlanCaptures=captures.filter(x=>x.name.startsWith('My Plan '));
  if(myPlanCaptures.length){const sheet=await browser.newPage({viewport:{width:1710,height:1600},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:10px;padding:10px;background:#edf2ee;font:12px sans-serif">'+myPlanCaptures.map(x=>'<figure style="margin:0;width:330px"><figcaption style="height:24px">'+x.name+'</figcaption><img style="width:330px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'my-plan-visual-overhaul.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_MY_PLAN_DATA '+b.slice(i,i+4000))}
  const nutritionCaptures=captures.filter(x=>x.name.startsWith('Nutrition '));
@@ -515,6 +533,7 @@ try{
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:157,workoutPrograms:65,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 157 recipe photos; 65 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});
+
 
 
 
