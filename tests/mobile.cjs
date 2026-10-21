@@ -514,6 +514,26 @@ try{
   await context.close();
  }
 
+
+ // Explore the three habits without changing saved data.
+ for(const width of [320,390,430]){
+  const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
+  const habitFixture={...fixture,sleepGoal:420,sleepLog:{[today]:210}};
+  await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture:habitFixture});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');await page.locator('[data-tab="progress"]').click();
+  const before=await page.evaluate(key=>localStorage.getItem(key),key);
+  for(const metric of ['training','macros','sleep']){
+   await page.locator('[data-habit-metric="'+metric+'"]').click();assert.equal(await page.locator('[data-habit-metric="'+metric+'"]').getAttribute('aria-pressed'),'true');
+   assert.equal(await page.locator('.habit-progress .consistency-week').count(),4);
+   assert((await page.locator('.habit-metric-heading').innerText()).toLowerCase().includes(metric));
+   assert(await page.locator('.habit-progress').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
+   assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before);
+   if(width===390&&metric!=='training'){await page.locator('.habit-progress').evaluate(el=>el.scrollIntoView({block:'start'}));const jpg=await page.locator('.habit-progress').screenshot({type:'jpeg',quality:85,path:path.join(out,'habit-progress-'+metric+'.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_HABIT_'+metric.toUpperCase()+'_DATA '+b.slice(i,i+4000))}
+  }
+  await page.locator('.habit-progress [data-go="sleep"]').click();await page.locator('#sleep-form').waitFor({state:'visible'});
+  await context.close();
+ }
+
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
  if(captures.length){const sheet=await browser.newPage({viewport:{width:2528,height:570},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf0ee;font:14px sans-serif">'+captures.map(x=>'<figure style="margin:0;width:244px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:244px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'mobile-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_VISUAL_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));console.log('EZPZ_VISUAL_END')}}
 

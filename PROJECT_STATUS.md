@@ -15,7 +15,14 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest update — weekly habit circles and sleep, 21 October 2026
+## Latest update — Build the habit progress visuals, 21 October 2026
+- Progress's Build the habit card has three selectable current-week completion rings (training, macros, sleep) and a corresponding four-week chart.
+- Training uses unique workout days/current weekly goal and retains counts/session labels. Macros sum each logged day's foods (including custom), use the Home macro completion calculation, and average only logged food days. Sleep averages per-night completion against the current personal goal, capped each night at 100%. Future days excluded.
+- Missing macro/sleep weeks show an em dash and zero logged days/nights, rather than inferred 0%; coverage counts and methodology are visible. Historical comparisons use current targets explicitly; no historical target snapshots are invented. Current-week comparison is labelled in progress.
+- Rings switch charts locally without storage writes or changing logs. Log food and Log sleep actions use existing pages. Existing body-weight and workout-history sections unchanged.
+- tests/habits.cjs verifies grouping, per-day food aggregation, cutoff, missing logs, capped averages and read-only rendering. Mobile checks exercise all three views at 320/390/430px and capture macro/sleep review screenshots.
+
+## Previous update — weekly habit circles and sleep, 21 October 2026
 - Home's This week card retains the training calendar and adds three interactive 0–100% SVG rings: unique training days / weekly goal; today's macro completion; sleep logged for today's wake-up date / personal sleep goal.
 - Macro completion averages protein/carbs/fat target fractions, capping each at 100% before averaging (zero targets excluded). It reads shared target() and today's foodSummary(), including custom foods. Clearly labelled weekly versus today.
 - Sleep opens from the ring or Log sleep & set your goal. Matching photo-backed page supports wake-up date, integer hours/minutes, personal goal (default 8 hours), replacing/editing a date and recent seven nights. Up to 24h sleep and 1–24h goal; no future dates. This is a user preference, no clinical recommendation.
