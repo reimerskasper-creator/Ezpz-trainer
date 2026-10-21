@@ -354,3 +354,10 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Overall color bands use displayed integer: 0–25 red, 26–50 orange, 51–69 yellow, 70–100 green. Expandable explanation discloses mixed daily/weekly periods, caps and that this is goal completion rather than health/wellbeing scoring. Existing four pillar colors remain unchanged.
 - Pure tests/overall.cjs checks precise sleep/macros, caps, no early 100, missing goals, invalid values and boundaries; existing sleep/Home checks pass. Browser suite updated to log through Sleep ring and confirm Overall exists and bar absent. Preview visually reviewed red Overall and expanded explanation.
 - Full Mobile app checks 39659910246 and Pages deployment 39659910250 succeeded on b88b21059f4e98f4b9dd602be573db7e9dd825b9. No new saved fields or Trainer edits.
+
+## Connected five-ring foundation map — 2026-10-21
+
+- User approved four corner rings around centered Overall with lit paths. Home now places Eat/Sleep top left/right, Progression/Zone bottom left/right and slightly larger Overall centrally, in a compact 350px map (340px narrow phones).
+- Four decorative steady SVG paths are dim until something is logged: today's food entries, sleep entry for today's wake date (including zero minutes), at least one training day this week, today's Zone check-in. Lit does not mean full completion; original scoring, caps and red/orange/yellow/green thresholds remain unchanged. Paths ignore pointer input, center is read-only, corner actions and accessible labels retained.
+- Shortened corner helper text. All long explanation moved into How your overall ring works directly below the map, including logged-vs-complete distinction. Existing Progress-page ring layout unaffected.
+- Preview visually reviewed collapsed map and lit Zone path. Local Home, Zone and overall tests passed; pure path assertions added. Browser checks assert no five-ring visual overlap, corner touch targets, path state after reload/undo at 320/390/430px. Full Mobile app checks 39661733899 and Pages deployment 39661732622 succeeded on 82f0f8fef4ff1235509fbb19b64cf48ec06b5a1d.
