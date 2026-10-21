@@ -333,3 +333,9 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - User authorized an existing repository from their list. reimerskasper-creator/Ezpz contained only README.md; preserved it and committed exact Trainer index.html, manifest.webmanifest, icon.svg and sw.js plus deployment workflow and TRAINER.md. Canonical Trainer source now resides in Ezpz; fitness.html remains in Ezpz-trainer.
 - Destination commit ce6d74ccafc60ce55ad1138eeb7a85b1f4ac77ab, Deploy Trainer run 39655223019. Trainer script/manifest validation passed. configure-pages failed first-time creation with Resource not accessible by integration. User must set Ezpz Settings → Pages → Source: GitHub Actions, then rerun workflow.
 - Old Trainer route and fitness.html link deliberately retained pending successful destination deployment. Once live is verified, update Trainer link and replace old Trainer source with compatibility redirect; review root service worker before removal. No client records copied or changed.
+
+## Trainer split completed — 2026-10-21
+
+- Standalone Trainer canonical source: reimerskasper-creator/Ezpz; live https://reimerskasper-creator.github.io/Ezpz/. User enabled GitHub Actions Pages. Deploy Trainer run 39655223019 attempt 2, job 119414687105 succeeded. Downloaded live HTML SHA256 af65331532046f49748832e4df1705291d1279520918f891d88060d83719b0f4 exactly matched original Trainer source.
+- Fitness header now links to standalone Trainer. Old Ezpz-trainer/index.html is a compatibility redirect to the new Trainer, preserving query/hash and leaving browser records unchanged. Same github.io origin and unchanged Trainer keys retain saved records. Old service-worker files retained for installed-client compatibility; do not clear browser data.
+- Fitness canonical URL remains /Ezpz-trainer/fitness.html. Future Trainer edits belong in Ezpz, fitness edits in Ezpz-trainer.
