@@ -521,7 +521,7 @@ try{
   const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
   await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
-  assert.equal(await page.locator('.habit-rings .habit-item').count(),4);assert.equal(await page.locator('.overall-ring').count(),1);assert.equal(await page.locator('.sleep-open').count(),0);
+  assert.equal(await page.locator('.habit-rings .habit-item').count(),4);assert.equal(await page.locator('.overall-ring').count(),1);assert.equal(await page.locator('.sleep-open').count(),0);assert.equal(await page.locator('.home-week-days,.home-week-meter').count(),0);
   const prior=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
   assert.deepEqual(await page.locator('.habit-rings .habit-item>strong').allTextContents(),['Eat','Sleep','Progression','Zone']);
   assert.equal(await page.locator('.foundation-paths path').count(),4);
