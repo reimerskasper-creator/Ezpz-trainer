@@ -19,6 +19,7 @@
 - Home's weight shortcut and Progress's weight trend have a Hide weight button. Hiding omits Home's weigh-in card, Progress's weight summary tile, weight trend and logging reminder from rendered markup. Progress becomes a two-tile summary.
 - More has a matching photo-backed Display preferences panel with Show weight on Home & Progress On/Off control. Users can re-enable without losing measurements.
 - state.hideWeight is an explicit boolean (false/default visible). Restore validates strict true; export includes preference. setWeightHidden rolls back on storage failure. Does not delete measurements, change body-weight-based nutrition calculations, profile, workouts or food logs.
+- Verified source commit e2969ce565e8d1db5d5a09f81e01db427d1ec5bd: Mobile app checks 39609713055 (job 119255072087) and Pages deployment 39609712079 succeeded. Final preference screenshot visually reviewed.
 - tests/privacy.cjs covers omitted weight DOM, opt-in, data retention, backup validation and rollback. Mobile tests hide from both locations, reload, restore via More, verify persisted measurements and layouts at 320/390/430px.
 
 ## Previous update — Build the habit progress visuals, 21 October 2026
