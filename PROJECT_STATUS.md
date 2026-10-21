@@ -15,7 +15,13 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest update — Build the habit progress visuals, 21 October 2026
+## Latest update — optional weight display, 21 October 2026
+- Home's weight shortcut and Progress's weight trend have a Hide weight button. Hiding omits Home's weigh-in card, Progress's weight summary tile, weight trend and logging reminder from rendered markup. Progress becomes a two-tile summary.
+- More has a matching photo-backed Display preferences panel with Show weight on Home & Progress On/Off control. Users can re-enable without losing measurements.
+- state.hideWeight is an explicit boolean (false/default visible). Restore validates strict true; export includes preference. setWeightHidden rolls back on storage failure. Does not delete measurements, change body-weight-based nutrition calculations, profile, workouts or food logs.
+- tests/privacy.cjs covers omitted weight DOM, opt-in, data retention, backup validation and rollback. Mobile tests hide from both locations, reload, restore via More, verify persisted measurements and layouts at 320/390/430px.
+
+## Previous update — Build the habit progress visuals, 21 October 2026
 - Progress's Build the habit card has three selectable current-week completion rings (training, macros, sleep) and a corresponding four-week chart.
 - Training uses unique workout days/current weekly goal and retains counts/session labels. Macros sum each logged day's foods (including custom), use the Home macro completion calculation, and average only logged food days. Sleep averages per-night completion against the current personal goal, capped each night at 100%. Future days excluded.
 - Missing macro/sleep weeks show an em dash and zero logged days/nights, rather than inferred 0%; coverage counts and methodology are visible. Historical comparisons use current targets explicitly; no historical target snapshots are invented. Current-week comparison is labelled in progress.

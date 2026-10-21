@@ -534,6 +534,25 @@ try{
   await context.close();
  }
 
+
+ // Weight display is optional and never deletes measurements.
+ for(const width of [320,390,430]){
+  const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
+  await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
+  const before=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  await page.locator('.home-weight-card [data-hide-weight]').click();assert.equal(await page.locator('.home-weight-row').count(),0);
+  await page.reload();assert.equal(await page.locator('.home-weight-row').count(),0);
+  await page.locator('[data-tab="progress"]').click();assert.equal(await page.locator('.weight-trend-card').count(),0);assert.equal(await page.locator('.progress-summary section').count(),2);
+  await page.locator('[data-tab="more"]').click();assert.equal(await page.locator('.weight-preferences button').getAttribute('aria-pressed'),'false');
+  assert(await page.locator('.weight-preferences').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
+  if(width===390){await page.locator('.weight-preferences').scrollIntoViewIfNeeded();const jpg=await page.locator('.weight-preferences').screenshot({type:'jpeg',quality:85,path:path.join(out,'weight-preferences.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_WEIGHT_PREFERENCE_DATA '+b.slice(i,i+4000))}
+  await page.locator('.weight-preferences button').click();assert.equal(await page.locator('.weight-preferences button').getAttribute('aria-pressed'),'true');
+  await page.locator('[data-tab="progress"]').click();assert.equal(await page.locator('.progress-summary section').count(),3);await page.locator('.weight-trend-card [data-hide-weight]').click();assert.equal(await page.locator('.weight-trend-card').count(),0);
+  const after=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['weights','logs','foodLog','mealPlan','workoutDrafts'])assert.deepEqual(after[name],before[name]);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await context.close();
+ }
+
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
  if(captures.length){const sheet=await browser.newPage({viewport:{width:2528,height:570},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf0ee;font:14px sans-serif">'+captures.map(x=>'<figure style="margin:0;width:244px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:244px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'mobile-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_VISUAL_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));console.log('EZPZ_VISUAL_END')}}
 
