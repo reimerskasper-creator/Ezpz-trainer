@@ -437,3 +437,6 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Removed the colored square emblem from the header at user request, retaining white EZPZ Fitness. Replaced the inaccurate SVG recreation in Home with a production image generated from the approved logo reference, preserving the clear fork, crescent, diagonal arrow and wave. The image uses the pale Home background and remains the method-dialog button.
 
 - Removed the external Trainer app link from the top banner at user request. Header retains EZPZ Fitness; no replacement control added pending design choice.
+
+## Compact Home calendar — 21 October 2026
+- Replaced plain date with a compact flip-calendar visual: dark green month strip, bold day, subtle page seam/shadow and weekday beside it. Semantic time element provides the complete localized date; no animation or new action. Existing local date source and method shortcut retained.
