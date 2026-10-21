@@ -374,3 +374,10 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - User approved removing all connectors and arranging four smaller equal rings (Eat, Sleep, Train, Zone) in one row, with a larger Overall centered beneath. Removed foundationPaths rendering/function and related obsolete assertions. No scoring or saved-data changes.
 - Removed visible helper sentences under rings; detailed state remains in accessible labels and the original tap views. Train is the short Home label; method explanation still calls the pillar Progression. Expandable score explanation remains below with updated wording and no path references.
 - Preview visually reviewed. Home, Zone and overall local checks passed. Mobile suite asserts one top row, centered Overall beneath, non-overlapping ring visuals, usable touch targets, no paths and unchanged interactions at 320/390/430px. Full Mobile app checks 39664651191 and Pages deployment 39664650184 succeeded on 7f8cbf1edcb1db14009a3ee041c8393625b74cab.
+
+
+## Workout support photo update verified — 2026-10-21
+
+- Recovered interrupted update f67ab388c271a8f8404ce2a69556e8488c9c32a8. Next weight now uses a green hinge-photo panel, Swap exercise a blue kettlebell-photo panel, and Technique tips a gold guide-photo panel. Existing local images reused; light set-entry fields remain clear.
+- Train-scoped presentation only; no changes to logging, exercise prescriptions, saved records or approved meal content.
+- Local training-usability, training, workout-photos and protected recipe checks passed. Live HTML SHA256 matches checked source. Pages deployment 39678494294 and Mobile app checks 39678494983 both succeeded. Live browser review confirmed photo panels and functioning swap/technique disclosures. Local Chromium unavailable; hosted mobile CI provides responsive verification.
