@@ -49,9 +49,19 @@ try{
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).foodLog.length,key),2);
   await page.locator('[data-home-diary]').evaluate(x=>x.open=true);
   await checkLayout('Logged food');
-  assert(await page.locator('.food-diary progress').evaluate(x=>Math.abs(x.getBoundingClientRect().width-x.parentElement.clientWidth)<2),'Food progress fills diary');
+  const loggedPhoto=page.locator('.food-log-photo[data-open-meal="6"] img');await loggedPhoto.evaluate(img=>img.decode());
+  assert.equal(await loggedPhoto.getAttribute('src'),await page.evaluate(()=>recipes[6].photo),'Logged thumbnail matches exact recipe');
+  assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).foodLog.at(-1).recipeIndex,key),6);
+  const logBefore=await page.evaluate(key=>JSON.stringify(JSON.parse(localStorage.getItem(key)).foodLog),key);
+  await page.reload();await page.locator('[data-tab="eat"]').click();await page.locator('[data-home-diary]').evaluate(x=>x.open=true);
+  assert.equal(await page.locator('.food-log-photo[data-open-meal="6"] img').getAttribute('src'),await page.evaluate(()=>recipes[6].photo),'Logged photo survives reload');
+  assert.equal(await page.evaluate(key=>JSON.stringify(JSON.parse(localStorage.getItem(key)).foodLog),key),logBefore,'Opening diary preserves saved log');
+  if(width===390){const diary=page.locator('[data-home-diary]');await diary.scrollIntoViewIfNeeded();const jpg=await diary.screenshot({type:'jpeg',quality:85,path:path.join(out,'food-log-photos.jpg')});captures.push({name:'Food log photos',src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
+  await page.locator('.food-log-photo[data-open-meal="6"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'meal');assert((await page.locator('.meal-detail h2').innerText()).includes('Chicken potato plate'));await page.locator('[data-go="eat"]').click();await page.locator('[data-home-diary]').evaluate(x=>x.open=true);
+
+  assert(await page.locator('.food-diary progress').evaluate(x=>{const p=x.parentElement,style=getComputedStyle(p);return Math.abs(x.getBoundingClientRect().width-(p.clientWidth-parseFloat(style.paddingLeft)-parseFloat(style.paddingRight)))<2}),'Food progress fills diary');
   for(const entry of await page.locator('.food-log-entry').all()){
-   assert(await entry.evaluate(x=>{const name=x.querySelector('span'),detail=name.querySelector('small'),button=x.querySelector('button'),a=name.getBoundingClientRect(),b=button.getBoundingClientRect();return getComputedStyle(detail).display==='block'&&a.right<=b.left&&b.height>=44}),'Meal details separated and Remove button aligned');
+   assert(await entry.evaluate(x=>{const name=x.querySelector('.food-log-copy'),detail=name.querySelector('small'),button=x.querySelector('[data-remove-food]'),a=name.getBoundingClientRect(),b=button.getBoundingClientRect();return getComputedStyle(detail).display==='block'&&a.right<=b.left&&b.height>=44}),'Meal details separated and Remove button aligned');
   }
   await page.locator('[data-home-diary]').scrollIntoViewIfNeeded();
   await page.screenshot({path:path.join(out,'Logged-food-'+width+'.jpg'),type:'jpeg',quality:85});
@@ -416,10 +426,13 @@ try{
 
  const trainPhotoCaptures=captures.filter(x=>x.name.startsWith('Train photo')||x.name==='Kettlebell foundations');
  if(trainPhotoCaptures.length){const sheet=await browser.newPage({viewport:{width:1860,height:1100},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf2ee;font:12px sans-serif">'+trainPhotoCaptures.map(x=>'<figure style="margin:0;width:300px"><figcaption style="height:22px;text-align:center">'+x.name+'</figcaption><img style="width:300px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:83,path:path.join(out,'train-photo-overview.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_TRAIN_PHOTO_DATA '+b.slice(i,i+4000))}
+ const foodLogPhotos=captures.filter(x=>x.name==='Food log photos');
+ if(foodLogPhotos.length){const sheet=await browser.newPage({viewport:{width:430,height:1000},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;padding:12px;background:#edf2ee">'+foodLogPhotos.map(x=>'<img style="width:406px" src="'+x.src+'">').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'food-log-review.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_FOOD_LOG_DATA '+b.slice(i,i+4000))}
  const progressPhotos=captures.filter(x=>x.name.startsWith('Progress photo'));
  if(progressPhotos.length){const sheet=await browser.newPage({viewport:{width:1648,height:1000},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf2ee;font:12px sans-serif">'+progressPhotos.map(x=>'<figure style="margin:0;width:320px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:320px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'progress-photos.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_PROGRESS_PHOTO_DATA '+b.slice(i,i+4000))}
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:157,workoutPrograms:65,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 157 recipe photos; 65 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});
+
 
 

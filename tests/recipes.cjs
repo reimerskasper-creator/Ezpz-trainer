@@ -8,7 +8,7 @@ let query='',writes=0;
 const initial={profile:{weight:80,height:180,age:35,sex:'male',days:3,goal:'maintain',level:'Beginner',equipment:'home'},logs:[],weights:[],shopping:['Tomatoes (raw) — 100 g'],foodLog:[],mealPlan:{saved:{breakfast:0,lunch:4,dinner:5}},workoutLayoutVersion:2};
 let stored=JSON.stringify(initial);
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:id==='recipe-search'?{value:query}:null,querySelectorAll:s=>s==='[data-recipe-card]'?cards:[],querySelector:s=>fields[s]||null,addEventListener:(n,f)=>(listeners[n]??=[]).push(f)};
-const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v},setFocus(v){mealFocus=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
+const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,loggedRecipeIndex,foodDiary,restoredState,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v},setFocus(v){mealFocus=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
 assert(api.recipes.length===157,'Expected 157 recipes');
 const approved=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/approved-food.json'),'utf8'));
 for(const [name,body] of Object.entries(approved.foodFunctions||{}))if(!['eat','filterRecipes'].includes(name))assert(source.includes(body),'Approved food function changed: '+name);
@@ -47,6 +47,7 @@ assert(writes===0&&stored===JSON.stringify(initial),'Browsing changed saved data
 // Exercise the existing food-log and shopping handlers using the final added recipe.
 const click=selector=>{const key=selector==='[data-log-food]'?'logFood':'recipe',node={dataset:{[key]:'48'}};for(const listener of listeners.click||[])listener({target:{closest:s=>s===selector?node:null}})};
 fields['[data-serving="48"]']={value:'1.5'};click('[data-log-food]');
+assert(api.state.foodLog[0].recipeIndex===48,'New logs save recipe identity');
 assert(api.state.foodLog.length===1&&api.state.foodLog[0].servings===1.5,'New recipe food logging');
 assert(JSON.stringify(api.state.foodLog[0].macros)===JSON.stringify(api.nutrition(api.recipes[48].ingredients,1.5)),'Logged macros');
 click('[data-recipe]');
@@ -56,3 +57,16 @@ assert(api.state.mealPlan.saved.lunch===4,'Existing meal plan changed');
 // The appended meals use the same diary and shopping paths.
 for(const index of [49,66,...Array.from({length:60},(_,i)=>97+i)]){fields['[data-serving="'+index+'"]']={value:'1.5'};for(const selector of ['[data-log-food]','[data-recipe]']){const key=selector==='[data-log-food]'?'logFood':'recipe',node={dataset:{[key]:String(index)}};for(const listener of listeners.click||[])listener({target:{closest:s=>s===selector?node:null}})}const entry=api.state.foodLog.at(-1);assert(entry.name===api.recipes[index].name&&entry.servings===1.5,'Appended recipe logging');assert(JSON.stringify(entry.macros)===JSON.stringify(api.nutrition(api.recipes[index].ingredients,1.5)),'Appended recipe macros')}
 console.log('PASS: 157 recipes, all image assets, 532 portion cases, combined filters, logging, shopping and saved plans');
+
+
+// Saved identity and exact-name legacy matching must use the original recipe photo.
+for(let i=0;i<api.recipes.length;i++){
+ const recipe=api.recipes[i],entry={id:'photo-'+i,date:new Date().toLocaleDateString('en-CA'),name:recipe.name,servings:1.5,macros:api.nutrition(recipe.ingredients,1.5),recipeIndex:i};
+ assert(api.loggedRecipeIndex(entry)===i,'Saved recipe identity '+i);
+ const legacy={...entry};delete legacy.recipeIndex;assert(api.loggedRecipeIndex(legacy)===i,'Legacy exact name '+i);
+ const previous=api.state.foodLog;api.state.foodLog=[entry];const before=JSON.stringify(api.state);const html=api.foodDiary(),photo=recipe.photo||(i<6?'./meal-images/meal-'+i+'.jpg':null);assert(html.includes('src="'+photo+'"'),'Exact logged dish photo '+i);assert(JSON.stringify(api.state)===before,'Diary render mutated state');api.state.foodLog=previous;
+}
+assert(api.loggedRecipeIndex({recipeIndex:0,name:'Unknown meal'})===null,'Never show an unrelated recipe photo');
+assert(api.loggedRecipeIndex({recipeIndex:0,name:api.recipes[48].name})===48,'Stale reference resolves by exact name');
+const restored=api.restoredState({...api.state,foodLog:[{id:'restore-photo',date:'2026-10-21',name:api.recipes[48].name,recipeIndex:48,servings:1.5,macros:api.nutrition(api.recipes[48].ingredients,1.5)}]});assert(restored.foodLog[0].recipeIndex===48,'Backup preserves recipe reference');
+console.log('PASS: exact photos for all 157 logged dishes, legacy entries, stale references, backup identity and read-only diary rendering');
