@@ -442,3 +442,6 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Replaced plain date with a compact flip-calendar visual: dark green month strip, bold day, subtle page seam/shadow and weekday beside it. Semantic time element provides the complete localized date; no animation or new action. Existing local date source and method shortcut retained.
 
 - Added the visible “Explore the EZPZ method ›” caption below the Home logo within the same accessible button, with subtle pressed feedback and retained keyboard focus. Calendar and logo share the existing compact row.
+
+## Discoverable method banner — 21 October 2026
+- Moved the logo shortcut into its own compact dark green banner beneath greeting/calendar. Richer gold, blue, mint and lavender artwork generated from the approved letterforms. Clear “Discover your four foundations” title, foundation subtitle and chevron make the entire button discoverable; it retains the existing explanation dialog and pressed/focus behavior.
