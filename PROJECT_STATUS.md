@@ -15,7 +15,13 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest visual update — My Plan, 21 October 2026
+## Latest update — planner back button and More visuals, 21 October 2026
+- My Plan has a visible 44px-minimum back button above its hero. Both top and bottom back links return to the section that opened the planner (Home, Train, Eat, More or Progress), rather than always Home.
+- Ephemeral plannerReturnTo / lastMainView routing tracks the last main section during render; it does not alter saved state, schedule dates or planner selections.
+- More now matches Home with a photo hero, photo-backed training-plan card, distinct related photos for the four Explore tools, and a logbook-backed backup/restore panel. All existing tool links, editing and backup behaviors remain intact.
+- Verified source commit b7fc90b540f3c35640abfbf8a35794c207cf5feb; Mobile app checks run 39604805847 and Pages deployment 39604805138 passed. Chromium tested top back visibility, return destinations from Home/Train/Eat/More, scroll reset and preservation of stored data, distinct More tool backdrops, links, restore controls and layouts at 320/390/430px. The final four-panel screenshot was visually reviewed.
+
+## Previous visual update — My Plan, 21 October 2026
 - My Plan now matches Home with a photographic hero, logbook-backed date/length controls, week tabs and a landscape-backed day calendar with clear selected-day highlighting.
 - Workout panels and picker triggers use the chosen program's actual cover. Rest days use the recovery landscape. Meal triggers use the chosen recipe's exact photograph alongside the existing thumbnail; empty meal slots show relevant labelled suggestions.
 - Meals/portions sit over a softly washed nutrition photo. Daily totals have separate calorie/protein/carb/fat colors and compare with the shared current nutrition targets. Copy/repeat/shopping actions have a dark nutrition-photo panel.
