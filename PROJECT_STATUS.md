@@ -15,6 +15,15 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
+## Latest update — five training usability improvements, 21 October 2026
+- The saved metric/imperial preference now applies to workout load entry, previous results, history corrections, strength charts, archived entries and kettlebell per-bell cues. All storage, comparisons and backups remain kg; exact stored loads survive display-only switches and unchanged edits. Food content is unchanged.
+- Next weight hints use completed paired results. An increase is suggested only after two sessions with every recorded set completed at the current rep target and the same load, with at least the current required number of sets. The user chooses the smallest available increment; no automatic load changes. Timed sets, assistance exercises and nonnumeric prescriptions are excluded.
+- Curated movement groups offer Swap exercise for the current draft/session only. Replacements use their own cues, side markers and related equipment imagery, preserving session set/rep/rest targets. Existing exercise entries lock swapping; an explicit confirmed clear applies only to that exercise. Base programs, past logs, other exercises and future sessions remain unchanged. Swap keys survive validated backups and reload.
+- Finishing shows a recap above Progress with completed sets, elapsed minutes since first manual entry (includes breaks and resumed time), paired load/rep improvements against the previous comparable record, and next scheduled workout. Missing legacy duration is not invented. Session finish now rolls back logs and drafts together if saving fails.
+- More begins with measurement/display settings and plan settings, then planner/shopping shortcuts. Exercise guides/history and backups/archived drafts are collapsed sections.
+- tests/training-usability.cjs covers conversions, failed writes, swaps, completion eligibility, paired improvement comparisons and recap/finish. Existing browser flows open the intentionally collapsed sections; new mobile flows test all five features at 320/390/430px. Current supported unit suites pass; legacy tests/workouts.cjs is obsolete (expects 16 fixed programs; current protected suite verifies 64).
+- CUA preview manually verified setup conversion, swap, lb entry, finish recap and More controls; browser CI and deployment pending.
+
 ## Latest update — body measurement preference, 21 October 2026
 - More → Measurement units persists Metric (kg/cm) or Imperial (lb/inches), default metric for existing users. Setup includes the same choice and converts entered body measurements while preserving other answers.
 - Home weight/delta, Progress summary/trend/accessible chart text, weigh-in entry and editing use selected units. Stored profiles/measurements remain normalized kg/cm; changing display does not rewrite history. Nutrition questionnaire starts in preferred units; existing explicit calculator unit switching remains.
