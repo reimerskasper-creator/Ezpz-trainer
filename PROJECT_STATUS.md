@@ -15,7 +15,15 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest update — logging first and nutrition targets, 21 October 2026
+## Latest visual update — My Plan, 21 October 2026
+- My Plan now matches Home with a photographic hero, logbook-backed date/length controls, week tabs and a landscape-backed day calendar with clear selected-day highlighting.
+- Workout panels and picker triggers use the chosen program's actual cover. Rest days use the recovery landscape. Meal triggers use the chosen recipe's exact photograph alongside the existing thumbnail; empty meal slots show relevant labelled suggestions.
+- Meals/portions sit over a softly washed nutrition photo. Daily totals have separate calorie/protein/carb/fat colors and compare with the shared current nutrition targets. Copy/repeat/shopping actions have a dark nutrition-photo panel.
+- Workout and meal picker headers have related photo backdrops with readable search/filter controls.
+- This was a visual change: planning IDs, date ranges, portions, copying, repeating, shopping, workout starts and saved data remain unchanged.
+- Verified source commit 4f73c9b28d338b32e8d4e5ddf8a89d683cd81a57; Mobile app checks run 39603270439 and Pages deployment 39603271233 passed. Chromium tested 320/390/430px, exact selected recipe/workout backdrops, empty slots, rest days, picker headers, current macro targets, no rendering storage writes and existing planning flows. The five-panel My Plan screenshot was visually reviewed.
+
+## Previous update — logging first and nutrition targets, 21 October 2026
 - Eat now starts with photo-backed Log custom food and Nutrition targets buttons, followed by Today's food and the planner. These precede recipe search and all recipe cards. Navigation into new pages returns to the top.
 - Custom-food saved/fill panels have distinct related photo backgrounds. Input text is explicitly dark on light fields and browser-checked for at least 4.5:1 contrast.
 - Nutrition targets has Set my own (daily protein/carbs/fat boxes with matching calculated calories) and Calculate for me (three steps: body details, overall routine/goals, review/save).
