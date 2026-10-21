@@ -10539,10 +10539,10 @@ document.addEventListener('click',event=>{
  if(button.dataset.ezpzMethod==='open'){if(!dialog.open){dialog.showModal();dialog.scrollTop=0}}
  else dialog.close();
 });
-document.getElementById('ezpz-method')?.addEventListener('click',event=>{
- if(event.target!==event.currentTarget)return;
- const rect=event.currentTarget.getBoundingClientRect();
- if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.currentTarget.close();
+document.addEventListener('click',event=>{
+ if(event.target.id!=='ezpz-method')return;
+ const rect=event.target.getBoundingClientRect();
+ if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.target.close();
 });
 </script></body></html>
 
