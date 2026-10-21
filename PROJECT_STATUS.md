@@ -15,6 +15,13 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
+## Latest update — Train color harmony, 21 October 2026
+- User requested less white on Train, one or two darker tones, Home's green/gold/blue boxes and a more visual top workout summary.
+- Train-only color-harmony stylesheet darkens the page and exercise-photo overlay to sage; colors logging actions green/gold/blue, next-weight guidance green, swap blue, technique tips gold, and next-exercise green. Light number inputs remain distinct; photos, selected/completed/invalid states and functionality are preserved.
+- Train calls workoutPicker(true) to omit its redundant count/time subtitle; the default picker is unchanged elsewhere. Header now shows three colored real-value tiles (exercise count, duration, total logged sets), followed by labeled format/progression and equipment rows. Experience/effort badges and workout/photo selection remain.
+- Added a dumbbell path to the existing homeIcon helper for the equipment row. No workout definitions, recipes, saved-data readers, handlers, unit conversion or schema changes.
+- Local syntax, training, training-usability, workout-photo/prescription and protected recipe suites passed. CUA preview header and logger visually reviewed with actual photo assets. Mobile suite now checks summary/color distinctions, duplicate removal and responsive layout at 320/390/430px; CI and deployment pending.
+
 ## Latest update — five training usability improvements, 21 October 2026
 - The saved metric/imperial preference now applies to workout load entry, previous results, history corrections, strength charts, archived entries and kettlebell per-bell cues. All storage, comparisons and backups remain kg; exact stored loads survive display-only switches and unchanged edits. Food content is unchanged.
 - Next weight hints use completed paired results. An increase is suggested only after two sessions with every recorded set completed at the current rep target and the same load, with at least the current required number of sets. The user chooses the smallest available increment; no automatic load changes. Timed sets, assistance exercises and nonnumeric prescriptions are excluded.

@@ -67,6 +67,13 @@ try{
   await page.screenshot({path:path.join(out,'Logged-food-'+width+'.jpg'),type:'jpeg',quality:85});
 
   await page.locator('[data-tab="train"]').click();
+  assert.equal(await page.locator('.training-facts>span').count(),3,'Three clear session summary tiles');
+  assert.equal(await page.locator('.training-header .workout-trigger-copy>small').count(),0,'No repeated exercise/time line');
+  assert((await page.locator('.training-facts').innerText()).includes('TOTAL SETS'));
+  const summaryColors=await page.locator('.training-facts>span').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundColor));assert.equal(new Set(summaryColors).size,3,'Green, gold and blue summary tiles');
+  const controlColors=await page.locator('#training-exercise-0 .exercise-logging-tools>button').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundColor));assert.equal(new Set(controlColors).size,3,'Distinct colored exercise actions');
+  assert.equal(await page.locator('.training-format').count(),1);assert.equal(await page.locator('.session-setting .training-detail-icon').count(),1);
+  await checkLayout('Train color harmony');
   await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),13);
   const coverSources=await page.locator('#workout-chooser img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
   assert.equal(new Set(coverSources).size,12);for(const src of coverSources){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Workout photo '+src)}
