@@ -381,3 +381,18 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Recovered interrupted update f67ab388c271a8f8404ce2a69556e8488c9c32a8. Next weight now uses a green hinge-photo panel, Swap exercise a blue kettlebell-photo panel, and Technique tips a gold guide-photo panel. Existing local images reused; light set-entry fields remain clear.
 - Train-scoped presentation only; no changes to logging, exercise prescriptions, saved records or approved meal content.
 - Local training-usability, training, workout-photos and protected recipe checks passed. Live HTML SHA256 matches checked source. Pages deployment 39678494294 and Mobile app checks 39678494983 both succeeded. Live browser review confirmed photo panels and functioning swap/technique disclosures. Local Chromium unavailable; hosted mobile CI provides responsive verification.
+
+## App-wide daily-use refinement — 2026-10-21
+
+User approved all ten review recommendations plus the two smaller fixes. Continue this same canonical app.
+
+- Train: compact photo header with expandable session details; one progress row; horizontally scrolling exercise shortcuts; compact idle timer that expands while running. Set inputs now precede next-weight/swap guidance. Existing photos, guidance, focus/all modes, checked-set rules, timing and draft storage remain.
+- Home: read-only featured-session resolution prefers the selected unfinished session, otherwise today's scheduled workout or a recovery card, then selected fallback. Starting explicitly selects/persists the featured workout and plan date with rollback on failed save.
+- Progress: first-use welcome instead of empty weekly/macro/exercise charts; relevant charts appear with records. Existing weight visibility, history, corrections and trends retained.
+- More: everyday planner/shopping shortcuts first, direct backup shortcut, name/units/display grouped in a collapsed Profile & preferences disclosure. Existing settings and backup data retained.
+- Workout chooser: equipment, experience and maximum-duration filters with reset/no-match state; filters persist and survive validated backup restore. Duration uses the upper end of the published range. Labels use programName consistently; rotating plan includes its A/B session. Historical records are not renamed.
+- Eat: logging and open diary first, compact target settings below recent meals, direct My plan button. Removed duplicate custom-food button inside the diary. Recipe photos, all 157 recipes, ingredients, portions, nutrition values and instructions unchanged.
+- Planner: confirmed Log as eaten action uses selected recipe, exact portion and past/today date; future logging disabled. Planning itself never logs meals.
+- Shopping: grouped grocery sections, live remaining count, saved checks, compact management disclosure, relevant photo header and planner back link. Removed unrelated exercise-library link. Plan updates replace previously tracked contributions for the selected dates instead of repeatedly adding them. Manual ingredients, other-date contributions and legacy untracked lists are preserved; older contributions cannot be inferred retroactively. Increased requirements uncheck affected items; unchanged requirements retain checks. Storage failure rolls back updates, clears, checks and individual recipe additions.
+- Custom-food photo is optional with Main meal selected by default; the photo selector is collapsed. Invalid supplied photo IDs remain rejected.
+- Added tests/daily-refinement.cjs and tests/daily-refinement-mobile.cjs. Existing tests adapted for intentional disclosures/names/default photo. Only explicitly authorized shopping/diary UI snapshots changed in the protected fixture; recipe/reference baselines remain intact.

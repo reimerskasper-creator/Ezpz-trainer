@@ -27,7 +27,7 @@ api.state.workoutDrafts={'push-a':{'sr0-0':'8','sw0-0':'20','sd0-0':true}};
 api.home();let overview=api.homeOverview();
 assert(overview.hasDraft&&overview.doneSets===1,'Selected workout draft not counted');
 assert(screen.innerHTML.includes('Resume workout'),'Resume action missing');
-assert(screen.innerHTML.includes('Push Day A'),'Selected workout name missing');
+assert(screen.innerHTML.includes('Classic Push A'),'Selected workout name missing');
 api.state.selectedWorkout='core-b';api.home();
 assert(!api.homeOverview().hasDraft,'Draft leaked across workouts');
 api.state.selectedWorkout='push-a';api.home();
@@ -57,7 +57,7 @@ api.state.foodLog=savedFood;api.home();
 const before=JSON.stringify(api.state);api.home();assert(JSON.stringify(api.state)===before,'Rendering mutated history/drafts');
 for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.home();assert(!screen.innerHTML.includes('undefined')&&!screen.innerHTML.includes('NaN'),'Invalid home for '+w.id)}
 // Existing workout pages must still render the correct set counts.
-for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.setTab('train');api.render();assert((screen.innerHTML.match(/data-set-done=/g)||[]).length===w.exercises.reduce((sum,x)=>sum+x.sets,0),'Workout set count changed for '+w.id);api.setTab('instructions');api.render();assert(screen.innerHTML.includes(w.title.replaceAll('&','&amp;')),'Instructions changed for '+w.id)}
+for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.setTab('train');api.render();assert((screen.innerHTML.match(/data-set-done=/g)||[]).length===w.exercises.reduce((sum,x)=>sum+x.sets,0),'Workout set count changed for '+w.id);api.setTab('instructions');api.render();assert(screen.innerHTML.includes((w.programName||w.title).replaceAll('&','&amp;')),'Instructions changed for '+w.id)}
 api.setTab('home');
 // Test shortcut routing into existing food log and weigh-in form.
 let scrolled=false,focused=false;const section={open:false,scrollIntoView(){scrolled=true},querySelector(){return {focus(){focused=true}}}};
