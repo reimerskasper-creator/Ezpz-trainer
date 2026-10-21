@@ -33,6 +33,7 @@ jobs:
           node tests/habits.cjs
           node tests/sleep.cjs
           node tests/zone.cjs
+          node tests/overall.cjs
           node tests/home.cjs
           node tests/recipes.cjs
           node tests/custom-foods.cjs

@@ -521,9 +521,9 @@ try{
   const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
   await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
-  assert.equal(await page.locator('.habit-item').count(),4);
+  assert.equal(await page.locator('.habit-rings .habit-item').count(),4);assert.equal(await page.locator('.overall-ring').count(),1);assert.equal(await page.locator('.sleep-open').count(),0);
   const prior=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
-  assert.deepEqual(await page.locator('.habit-item>strong').allTextContents(),['Eat','Sleep','Progression','Zone']);
+  assert.deepEqual(await page.locator('.habit-rings .habit-item>strong').allTextContents(),['Eat','Sleep','Progression','Zone']);
   await page.locator('[data-zone="open"]').click();assert(await page.locator('#zone-checkin').evaluate(d=>d.open));
   assert(await page.locator('#zone-checkin').evaluate(d=>d.scrollWidth<=d.clientWidth+1));
   await page.locator('[data-zone="save"]').click();assert((await page.locator('[data-zone="open"]').innerText()).includes('Time for yourself ✓'));
@@ -532,17 +532,17 @@ try{
   assert((await page.locator('[data-zone="open"]').innerText()).includes('Make time for yourself'));
   const zoneAfter=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['logs','foodLog','weights','workoutDrafts','mealPlan'])assert.deepEqual(zoneAfter[name],prior[name],'Zone preserves '+name);
 
-  await page.locator('.sleep-open').click();await page.locator('#sleep-hours').fill('3');await page.locator('#sleep-minutes').fill('30');await page.locator('#sleep-goal-hours').fill('7');await page.locator('#sleep-goal-minutes').fill('0');
+  await page.locator('.habit-rings [data-go="sleep"]').click();await page.locator('#sleep-hours').fill('3');await page.locator('#sleep-minutes').fill('30');await page.locator('#sleep-goal-hours').fill('7');await page.locator('#sleep-goal-minutes').fill('0');
   assert(await page.locator('#sleep-form').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
   if(width===390){await page.locator('.sleep-hero').scrollIntoViewIfNeeded();const jpg=await page.screenshot({type:'jpeg',quality:80,path:path.join(out,'sleep-form.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_SLEEP_FORM_DATA '+b.slice(i,i+4000))}
-  await page.locator('#sleep-form button').click();assert.equal(await page.locator('.habit-item').nth(1).locator('b').innerText(),'50%');
-  await page.reload();assert.equal(await page.locator('.habit-item').nth(1).locator('b').innerText(),'50%');
-  await page.locator('.habit-item').nth(1).click();await page.locator('#sleep-hours').fill('7');await page.locator('#sleep-minutes').fill('0');await page.locator('#sleep-form button').click();
-  assert.equal(await page.locator('.habit-item').nth(1).locator('b').innerText(),'100%');
+  await page.locator('#sleep-form button').click();assert.equal(await page.locator('.habit-rings .habit-item').nth(1).locator('b').innerText(),'50%');
+  await page.reload();assert.equal(await page.locator('.habit-rings .habit-item').nth(1).locator('b').innerText(),'50%');
+  await page.locator('.habit-rings .habit-item').nth(1).click();await page.locator('#sleep-hours').fill('7');await page.locator('#sleep-minutes').fill('0');await page.locator('#sleep-form button').click();
+  assert.equal(await page.locator('.habit-rings .habit-item').nth(1).locator('b').innerText(),'100%');
   const after=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['logs','foodLog','weights','workoutDrafts','mealPlan'])assert.deepEqual(after[name],prior[name],'Sleep preserves '+name);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
   if(width===390){await page.locator('.home-week-card').scrollIntoViewIfNeeded();const jpg=await page.locator('.home-week-card').screenshot({type:'jpeg',quality:85,path:path.join(out,'weekly-habits.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_HABITS_DATA '+b.slice(i,i+4000))}
-  await page.locator('.habit-item').nth(0).click();assert.equal(await page.locator('body').getAttribute('data-view'),'eat');
+  await page.locator('.habit-rings .habit-item').nth(0).click();assert.equal(await page.locator('body').getAttribute('data-view'),'eat');
   await context.close();
  }
 
