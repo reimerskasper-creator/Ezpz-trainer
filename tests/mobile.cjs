@@ -326,7 +326,7 @@ try{
   assert.equal(afterWorkoutPick.workoutSchedule[pickerDate],'full-body-home');
   assert.equal(afterWorkoutPick.selectedWorkout,pickerBefore.selectedWorkout);
   assert.deepEqual(afterWorkoutPick.workoutDrafts,pickerBefore.workoutDrafts);
-  assert.equal(await page.locator('#planned-workout img').getAttribute('src'),'./meal-images/workout-hero.jpg');
+  assert.equal(await page.locator('#planned-workout img').getAttribute('src'),'./program-images/full-body-home.jpg');
   await page.locator('[data-open-meal-picker="breakfast"]').click();
   await page.locator('[data-plan-picker-filter="all"]').click();
   assert.equal(await page.locator('[data-plan-pick-meal]').count(),157);
