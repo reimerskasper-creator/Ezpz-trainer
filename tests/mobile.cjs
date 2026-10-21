@@ -31,6 +31,19 @@ try{
   const checkLayout=async(label)=>{const ok=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);if(!ok){console.log('OVERFLOW_DIAGNOSTIC',label,JSON.stringify(await page.evaluate(()=>({innerWidth,clientWidth:document.documentElement.clientWidth,elements:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>document.documentElement.clientWidth+1}).slice(0,25).map(e=>({tag:e.tagName,class:e.className,rect:e.getBoundingClientRect().toJSON(),text:e.textContent.slice(0,100)}))}))));const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000))}assert(ok,'Horizontal overflow: '+width+' '+label)};
   const capture=async(name)=>{await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(out,name+'-'+width+'.jpg'),type:'jpeg',quality:80});if(width===390)captures.push({name,src:'data:image/jpeg;base64,'+fs.readFileSync(path.join(out,name+'-'+width+'.jpg')).toString('base64')})};
   await page.goto(base+'/fitness.html');await page.locator('[data-tab="home"]').waitFor();await checkLayout('Home');await capture('Home');
+  const methodBefore=await page.evaluate(key=>localStorage.getItem(key),key);
+  await page.locator('[data-ezpz-method="open"]').click();
+  assert(await page.locator('#ezpz-method').evaluate(d=>d.open),'Method opens as a modal');
+  assert.deepEqual(await page.locator('.method-pillar h3').allTextContents(),['Eat','Sleep','Progression','Zone']);
+  assert(await page.locator('#ezpz-method').evaluate(d=>d.scrollWidth<=d.clientWidth+1),'Method fits phone width');
+  assert((await page.locator('.method-explainer').first().innerText()).includes('Each pillar supports the others'));
+  assert((await page.locator('.method-system').innerText()).includes('reduces the decisions'));
+  if(width===390){await page.screenshot({path:path.join(out,'ezpz-method.jpg'),type:'jpeg',quality:85})}
+  await page.keyboard.press('Escape');assert.equal(await page.locator('#ezpz-method').evaluate(d=>d.open),false);
+  assert(await page.locator('[data-ezpz-method="open"]').evaluate(b=>document.activeElement===b),'Method restores trigger focus');
+  await page.locator('[data-ezpz-method="open"]').click();await page.locator('.method-done').click();
+  assert.equal(await page.locator('#ezpz-method').evaluate(d=>d.open),false);
+  assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),methodBefore,'Reading the method preserves saved data');
   if(width===390){for(const [selector,file] of [['.home-nutrition','nutrition'],['.home-week-card','consistency'],['.home-next','planning'],['.home-weight-row','weight']]){const image=await page.locator(selector).evaluate(el=>getComputedStyle(el).backgroundImage);assert(image.includes('/home-images/'+file+'.jpg'),'Relevant Home background '+file);const response=await context.request.get(base+'/home-images/'+file+'.jpg');assert.equal(response.status(),200,'Home photo available '+file);}}
   const homeStorageBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   assert.equal(await page.locator('.home-energy-ring').count(),1);assert.equal(await page.locator('.home-macro-row progress').count(),3);
