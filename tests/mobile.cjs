@@ -523,19 +523,19 @@ try{
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
   assert.equal(await page.locator('.habit-rings .habit-item').count(),4);assert.equal(await page.locator('.overall-ring').count(),1);assert.equal(await page.locator('.sleep-open').count(),0);assert.equal(await page.locator('.home-week-days,.home-week-meter').count(),0);
   const prior=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
-  assert.deepEqual(await page.locator('.habit-rings .habit-item>strong').allTextContents(),['Eat','Sleep','Progression','Zone']);
-  assert.equal(await page.locator('.foundation-paths path').count(),4);
+  assert.deepEqual(await page.locator('.habit-rings .habit-item>strong').allTextContents(),['Eat','Sleep','Train','Zone']);
+  assert.equal(await page.locator('.foundation-paths').count(),0);
+  assert(await page.locator('.foundation-map').evaluate(map=>{const items=[...map.querySelectorAll('.habit-rings>.habit-item')].map(x=>x.getBoundingClientRect()),overall=map.querySelector('.overall-ring .habit-ring').getBoundingClientRect();return items.every(x=>Math.abs(x.top-items[0].top)<1)&&overall.top>=Math.max(...items.map(x=>x.bottom))&&Math.abs((overall.left+overall.right)/2-(map.getBoundingClientRect().left+map.getBoundingClientRect().right)/2)<2}),'Four in one row with Overall centered below');
+
   assert(await page.locator('.foundation-map').evaluate(map=>{const rings=[...map.querySelectorAll('.habit-ring')].map(r=>r.getBoundingClientRect());return rings.every((a,i)=>rings.every((b,j)=>i===j||a.right<=b.left||b.right<=a.left||a.bottom<=b.top||b.bottom<=a.top))}),'Five ring visuals do not overlap');
   assert(await page.locator('.foundation-map .habit-rings>.habit-item').evaluateAll(bs=>bs.every(b=>{const r=b.getBoundingClientRect();return r.width>=44&&r.height>=44})),'Corner touch targets');
 
   await page.locator('[data-zone="open"]').click();assert(await page.locator('#zone-checkin').evaluate(d=>d.open));
   assert(await page.locator('#zone-checkin').evaluate(d=>d.scrollWidth<=d.clientWidth+1));
-  await page.locator('[data-zone="save"]').click();assert((await page.locator('[data-zone="open"]').innerText()).includes('Time for yourself ✓'));
-  await page.reload();assert((await page.locator('[data-zone="open"]').innerText()).includes('Time for yourself ✓'));
-  assert.equal(await page.locator('[data-foundation-path="zone"]').getAttribute('data-logged'),'true');
+  await page.locator('[data-zone="save"]').click();assert((await page.locator('[data-zone="open"]').getAttribute('aria-label')).includes('Time for yourself ✓'));
+  await page.reload();assert((await page.locator('[data-zone="open"]').getAttribute('aria-label')).includes('Time for yourself ✓'));
   await page.locator('[data-zone="open"]').click();await page.locator('[data-zone="undo"]').click();
-  assert((await page.locator('[data-zone="open"]').innerText()).includes('Take a moment'));
-  assert.equal(await page.locator('[data-foundation-path="zone"]').getAttribute('data-logged'),'false');
+  assert((await page.locator('[data-zone="open"]').getAttribute('aria-label')).includes('Take a moment'));
   const zoneAfter=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['logs','foodLog','weights','workoutDrafts','mealPlan'])assert.deepEqual(zoneAfter[name],prior[name],'Zone preserves '+name);
 
   await page.locator('.habit-rings [data-go="sleep"]').click();await page.locator('#sleep-hours').fill('3');await page.locator('#sleep-minutes').fill('30');await page.locator('#sleep-goal-hours').fill('7');await page.locator('#sleep-goal-minutes').fill('0');
