@@ -99,6 +99,7 @@ try{
    assert.equal(new Set(photos).size,photos.length,'Distinct exercise photos '+id);
    if(id==='kb-foundations'&&width===390){await capture('Kettlebell foundations')}
    if(id==='kb-conditioning')assert.equal(await page.locator('[data-set-weight]').count(),12,'Timed kettlebell sets support kg logging');
+   assert(await page.locator('[data-exercise-jump]').evaluateAll(xs=>xs.every(x=>getComputedStyle(x).backgroundImage.includes('url(')))),'Exercise shortcut photos render '+id);
    await checkLayout(id);
   }
   // New programs preserve their own draft alongside existing A/B drafts.

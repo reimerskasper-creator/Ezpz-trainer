@@ -247,59 +247,6 @@ body[data-view=home] .home-workout>img{object-position:center 45%}
 body[data-view=train] .week-track{grid-template-columns:repeat(12,minmax(0,1fr));min-width:0}
 body[data-view=train] .week-track span{min-width:0;min-height:0;width:100%;max-width:24px;height:20px;aspect-ratio:auto;justify-self:center}
 
-/* Progress and Train share Home's photographic surfaces and green accents. */
-body[data-view=progress] .progress-summary{gap:8px}
-body[data-view=progress] .progress-summary>section{background-color:#173c2b;background-image:linear-gradient(105deg,#0c2b20e8,#0c2b2094),var(--metric-photo);background-size:cover;background-position:center;border:1px solid #365a46;border-radius:16px;box-shadow:0 5px 16px #173a2410;padding:15px 10px;min-height:108px}
-body[data-view=progress] .progress-summary>section:nth-child(1){--metric-photo:url('./workout-images/pull.jpg')}
-body[data-view=progress] .progress-summary>section:nth-child(2){--metric-photo:url('./train-images/arms.jpg')}
-body[data-view=progress] .progress-summary>section:nth-child(3){--metric-photo:url('./home-images/weight.jpg')}
-body[data-view=progress] .progress-summary small,body[data-view=progress] .progress-summary span{color:#d1e6da}
-body[data-view=progress] .progress-summary strong{color:#f4fff8;font-size:28px;text-shadow:0 1px 8px #0003}
-body[data-view=progress] .consistency-card{background-color:#163e2c;background-image:linear-gradient(110deg,#0c2d20f0,#0c2d20b8),url('./home-images/consistency.jpg');background-size:cover;background-position:center;border-color:#365e48;color:#effff5;box-shadow:0 6px 20px #193e2710}
-body[data-view=progress] .consistency-card h3{color:#f4fff8}
-body[data-view=progress] .consistency-card .section-kicker{color:#abd7bd}
-body[data-view=progress] .consistency-card>.row>svg{color:#a0e9bf}
-body[data-view=progress] .consistency-week>strong{color:#d2e8db}
-body[data-view=progress] .consistency-week.is-current>strong{color:#8af0b6}
-body[data-view=progress] .consistency-track{background:#e2f7ea16;border:1px solid #e2f7ea17}
-body[data-view=progress] .consistency-track>span{background:#a9ddbf}
-body[data-view=progress] .consistency-week.is-current .consistency-track>span{background:#58df98}
-body[data-view=progress] .consistency-week>small,body[data-view=progress] .consistency-card>.note{color:#c9e1d2}
-body[data-view=progress] .weight-trend-card{background-color:#f5faf6;background-image:linear-gradient(100deg,#f7fcf9f2,#f7fcf9d9),url('./home-images/weight.jpg');background-size:cover;background-position:center,right center;box-shadow:0 6px 20px #193e2708}
-body[data-view=progress] .weight-trend-card .section-kicker{color:#547762}
-body[data-view=progress] .weight-trend-card .weight-delta,body[data-view=progress] .weight-delta>small,body[data-view=progress] .weight-trend-card>.note,body[data-view=progress] .weight-trend-card .progress-empty p{color:#536e5d}
-body[data-view=progress] .weight-plot{position:relative;background:#ffffffeb;border:1px solid #e0ebe4;border-radius:12px;padding:1px 9px 9px;margin-top:15px}
-body[data-view=progress] .weight-plot .weight-axis{left:9px;top:18px;bottom:19px;color:#526f5d}
-body[data-view=progress] .weight-plot .trend-chart{margin-top:12px}
-body[data-view=progress] .chart-dates{color:#526f5d}
-body[data-view=progress] .weight-entry{border-top-color:#ccded1}
-body[data-view=progress] .weight-entry>summary{color:#256243}
-body[data-view=progress] .weight-entry label{color:#456550}
-body[data-view=progress] .weight-entry input{background:#fff;border-color:#cbded1}
-body[data-view=progress] .history-session{overflow:hidden;border-color:#d1e0d6;box-shadow:0 3px 13px #193d2308}
-body[data-view=progress] .history-session>summary{background-color:#173c2b;background-image:linear-gradient(90deg,#0b2a1fea,#0b2a1fc4 60%,#0b2a1f80),var(--history-photo);background-size:cover;background-position:center,center 38%;min-height:86px}
-body[data-view=progress] .history-title>strong{color:#f0fff5}
-body[data-view=progress] .history-title>small,body[data-view=progress] .history-session>summary>b{color:#cce7d7}
-body[data-view=progress] .history-date{background:#e1f8e91c;border:1px solid #e1f8e92b}
-body[data-view=progress] .history-date>strong{color:#b8f4d1}
-body[data-view=progress] .history-date>small{color:#d4edde}
-body[data-view=progress] .history-details{background:#f8fcf9}
-body[data-view=progress] .history-list>.progress-empty{background-color:#173c2b;background-image:linear-gradient(110deg,#0c2b20ee,#0c2b20b8),url('./train-images/finish.jpg');background-size:cover;background-position:center;color:#f0fff6;padding:24px 17px}
-body[data-view=progress] .history-list>.progress-empty h3{color:#f0fff6}
-body[data-view=progress] .history-list>.progress-empty p{color:#cce7d7}
-body[data-view=train] .training-view-switch{background-image:linear-gradient(100deg,#e8f2ecd9,#e8f2eceb),url('./train-images/guide.jpg');background-size:cover;background-position:center;border-color:#d0e1d6}
-body[data-view=train] .exercise-jump-list button{background-color:#204534;background-image:linear-gradient(110deg,#102f23e6,#102f23a6),var(--jump-photo);background-size:cover;background-position:center;border-color:#3b614d}
-body[data-view=train] .exercise-jump-list button>small{color:#f0fff5}
-body[data-view=train] .exercise-jump-list button>span{background:#dff7e82b;color:#d5fbe5}
-body[data-view=train] .exercise-jump-list button[aria-current=step]{background-image:linear-gradient(110deg,#16412dea,#16412db8),var(--jump-photo);border-color:#65d89b;box-shadow:0 0 0 1px #65d89b}
-body[data-view=train] .exercise-jump-list button[aria-current=step]>span{background:#75dea5;color:#133c24}
-body[data-view=train] .training-exercise>.session-exercise{background-image:linear-gradient(100deg,#f8fcf9f2,#f8fcf9d6),var(--exercise-cover)}
-body[data-view=train] .set-head,body[data-view=train] .set-previous{color:#5c7766}
-body[data-view=train] .exercise-logging-tools>button{background:#f2f8f4ed;border-color:#d4e3d9;color:#38624a}
-body[data-view=train] .exercise-logging-tools>button:disabled{color:#667e70;opacity:.65}
-body[data-view=train] .quick-guide summary{background:#edf6f0ec}
-body[data-view=train] .quick-guide[open]{background:#f6fbf8ed;border-radius:10px;padding-bottom:8px}
-body[data-view=train] .quick-guide ol{padding-right:12px}
 </style>
 <style id="food-log-visuals">
 /* Presentation only: preserve approved food markup, values and handlers. */
@@ -798,6 +745,62 @@ body[data-view=train] .training-exercise>.session-exercise{padding-left:11px;pad
 body[data-view=train] .training-progress-bottom>small{font-size:8px}
 body[data-view=train] .training-progress-bottom>button{font-size:9px}
 }
+</style>
+<style id="progress-train-photo-harmony">
+/* Progress and Train share Home's photographic surfaces and green accents. */
+body[data-view=progress] .progress-summary{gap:8px}
+body[data-view=progress] .progress-summary>section{background-color:#173c2b;background-image:linear-gradient(105deg,#0c2b20e8,#0c2b2094),var(--metric-photo);background-size:cover;background-position:center;border:1px solid #365a46;border-radius:16px;box-shadow:0 5px 16px #173a2410;padding:15px 10px;min-height:108px}
+body[data-view=progress] .progress-summary>section:nth-child(1){--metric-photo:url('./workout-images/pull.jpg')}
+body[data-view=progress] .progress-summary>section:nth-child(2){--metric-photo:url('./train-images/arms.jpg')}
+body[data-view=progress] .progress-summary>section:nth-child(3){--metric-photo:url('./home-images/weight.jpg')}
+body[data-view=progress] .progress-summary small,body[data-view=progress] .progress-summary span{color:#d1e6da}
+body[data-view=progress] .progress-summary strong{color:#f4fff8;font-size:28px;text-shadow:0 1px 8px #0003}
+body[data-view=progress] .consistency-card{background-color:#163e2c;background-image:linear-gradient(110deg,#0c2d20f0,#0c2d20b8),url('./home-images/consistency.jpg');background-size:cover;background-position:center;border-color:#365e48;color:#effff5;box-shadow:0 6px 20px #193e2710}
+body[data-view=progress] .consistency-card h3{color:#f4fff8}
+body[data-view=progress] .consistency-card .section-kicker{color:#abd7bd}
+body[data-view=progress] .consistency-card>.row>svg{color:#a0e9bf}
+body[data-view=progress] .consistency-week>strong{color:#d2e8db}
+body[data-view=progress] .consistency-week.is-current>strong{color:#8af0b6}
+body[data-view=progress] .consistency-track{background:#e2f7ea16;border:1px solid #e2f7ea17}
+body[data-view=progress] .consistency-track>span{background:#a9ddbf}
+body[data-view=progress] .consistency-week.is-current .consistency-track>span{background:#58df98}
+body[data-view=progress] .consistency-week>small,body[data-view=progress] .consistency-card>.note{color:#c9e1d2}
+body[data-view=progress] .weight-trend-card{background-color:#f5faf6;background-image:linear-gradient(100deg,#f7fcf9f2,#f7fcf9d9),url('./home-images/weight.jpg');background-size:cover;background-position:center,right center;box-shadow:0 6px 20px #193e2708}
+body[data-view=progress] .weight-trend-card .section-kicker{color:#547762}
+body[data-view=progress] .weight-trend-card .weight-delta,body[data-view=progress] .weight-delta>small,body[data-view=progress] .weight-trend-card>.note,body[data-view=progress] .weight-trend-card .progress-empty p{color:#536e5d}
+body[data-view=progress] .weight-plot{position:relative;background:#ffffffeb;border:1px solid #e0ebe4;border-radius:12px;padding:1px 9px 9px;margin-top:15px}
+body[data-view=progress] .weight-plot .weight-axis{left:9px;top:18px;bottom:19px;color:#526f5d}
+body[data-view=progress] .weight-plot .trend-chart{margin-top:12px}
+body[data-view=progress] .chart-dates{color:#526f5d}
+body[data-view=progress] .weight-entry{border-top-color:#ccded1}
+body[data-view=progress] .weight-entry>summary{color:#256243}
+body[data-view=progress] .weight-entry label{color:#456550}
+body[data-view=progress] .weight-entry input{background:#fff;border-color:#cbded1}
+body[data-view=progress] .history-session{overflow:hidden;border-color:#d1e0d6;box-shadow:0 3px 13px #193d2308}
+body[data-view=progress] .history-session>summary{background-color:#173c2b;background-image:linear-gradient(90deg,#0b2a1fea,#0b2a1fc4 60%,#0b2a1f80),var(--history-photo);background-size:cover;background-position:center,center 38%;min-height:86px}
+body[data-view=progress] .history-title>strong{color:#f0fff5}
+body[data-view=progress] .history-title>small,body[data-view=progress] .history-session>summary>b{color:#cce7d7}
+body[data-view=progress] .history-date{background:#e1f8e91c;border:1px solid #e1f8e92b}
+body[data-view=progress] .history-date>strong{color:#b8f4d1}
+body[data-view=progress] .history-date>small{color:#d4edde}
+body[data-view=progress] .history-details{background:#f8fcf9}
+body[data-view=progress] .history-list>.progress-empty{background-color:#173c2b;background-image:linear-gradient(110deg,#0c2b20ee,#0c2b20b8),url('./train-images/finish.jpg');background-size:cover;background-position:center;color:#f0fff6;padding:24px 17px}
+body[data-view=progress] .history-list>.progress-empty h3{color:#f0fff6}
+body[data-view=progress] .history-list>.progress-empty p{color:#cce7d7}
+body[data-view=train] .training-view-switch{background-image:linear-gradient(100deg,#e8f2ecd9,#e8f2eceb),url('./train-images/guide.jpg');background-size:cover;background-position:center;border-color:#d0e1d6}
+body[data-view=train] .exercise-jump-list button{background-color:#204534;background-image:linear-gradient(110deg,#102f23e6,#102f23a6),var(--jump-photo);background-size:cover;background-position:center;border-color:#3b614d}
+body[data-view=train] .exercise-jump-list button>small{color:#f0fff5}
+body[data-view=train] .exercise-jump-list button>span{background:#dff7e82b;color:#d5fbe5}
+body[data-view=train] .exercise-jump-list button[aria-current=step]{background-image:linear-gradient(110deg,#16412dea,#16412db8),var(--jump-photo);border-color:#65d89b;box-shadow:0 0 0 1px #65d89b}
+body[data-view=train] .exercise-jump-list button[aria-current=step]>span{background:#75dea5;color:#133c24}
+body[data-view=train] .training-exercise>.session-exercise{background-image:linear-gradient(100deg,#f8fcf9f2,#f8fcf9d6),var(--exercise-cover)}
+body[data-view=train] .set-head,body[data-view=train] .set-previous{color:#5c7766}
+body[data-view=train] .exercise-logging-tools>button{background:#f2f8f4ed;border-color:#d4e3d9;color:#38624a}
+body[data-view=train] .exercise-logging-tools>button:disabled{color:#667e70;opacity:.65}
+body[data-view=train] .quick-guide summary{background:#edf6f0ec}
+body[data-view=train] .quick-guide[open]{background:#f6fbf8ed;border-radius:10px;padding-bottom:8px}
+body[data-view=train] .quick-guide ol{padding-right:12px}
+body[data-view=progress] .trend-chart polyline{stroke:#168553}
 </style>
 </head><body>
 <header class="row"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div><a class="link" href="./index.html">Trainer ↗</a></header>
