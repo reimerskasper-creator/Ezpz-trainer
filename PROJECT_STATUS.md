@@ -315,3 +315,9 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Zone means mental state. This is an optional introduction without extra scores, tracking or changes to saved records. Uses existing local photos, readable overlays, sticky close control, Escape dismissal, native focus return and Got it.
 - Reviewed panel visuals and keyboard dismissal in browser preview. Home and planner-picker local checks passed. Mobile suite now checks all four pillars, phone-width fit, Escape/focus return, Got it and unchanged browser data at 320/390/430px.
 - Full mobile checks 39651209043 (job 119399691522) passed; Pages deployment 39651206734 succeeded on 6988fd61254dd45c9270829d322b1536f3198354.
+
+## Method background corrections — 2026-10-21
+
+- Sleep now uses a dedicated calm bedroom photo. Stronger together has a balanced morning routine (breakfast, journal and walking shoes), and the simple system section has an open planner background. Dark green/blue overlays and light text preserve readability; approved wording is unchanged.
+- Added three optimized 960×480 JPEGs in home-images/method-{sleep,together,system}.jpg. Built-in image_gen prompts recorded in docs/method-backgrounds.json; all source images visually reviewed.
+- Full Mobile app checks 39652842214 and Pages deployment 39652841214 succeeded on c8f1b8531ffe55e8d8f866f47987db2347c8fd5d.
