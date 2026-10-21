@@ -15,7 +15,11 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest update — optional weight display, 21 October 2026
+## Latest update — Show weight shortcut, 21 October 2026
+- Hiding weight now leaves a small Show weight button in place on Home and Progress. It restores weight immediately using the same persisted preference. More's existing switch remains available. Hidden measurements are still omitted from markup.
+- Privacy unit and mobile tests now verify direct restoration on both pages, including after reload.
+
+## Previous update — optional weight display, 21 October 2026
 - Home's weight shortcut and Progress's weight trend have a Hide weight button. Hiding omits Home's weigh-in card, Progress's weight summary tile, weight trend and logging reminder from rendered markup. Progress becomes a two-tile summary.
 - More has a matching photo-backed Display preferences panel with Show weight on Home & Progress On/Off control. Users can re-enable without losing measurements.
 - state.hideWeight is an explicit boolean (false/default visible). Restore validates strict true; export includes preference. setWeightHidden rolls back on storage failure. Does not delete measurements, change body-weight-based nutrition calculations, profile, workouts or food logs.

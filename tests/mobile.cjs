@@ -542,13 +542,13 @@ try{
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
   const before=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
   await page.locator('.home-weight-card [data-hide-weight]').click();assert.equal(await page.locator('.home-weight-row').count(),0);
-  await page.reload();assert.equal(await page.locator('.home-weight-row').count(),0);
+  await page.reload();assert.equal(await page.locator('.home-weight-row').count(),0);await page.getByRole('button',{name:'Show weight',exact:true}).click();assert.equal(await page.locator('.home-weight-row').count(),1);await page.locator('.home-weight-card [data-hide-weight]').click();
   await page.locator('[data-tab="progress"]').click();assert.equal(await page.locator('.weight-trend-card').count(),0);assert.equal(await page.locator('.progress-summary section').count(),2);
   await page.locator('[data-tab="more"]').click();assert.equal(await page.locator('.weight-preferences button').getAttribute('aria-pressed'),'false');
   assert(await page.locator('.weight-preferences').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
   if(width===390){await page.locator('.weight-preferences').scrollIntoViewIfNeeded();const jpg=await page.locator('.weight-preferences').screenshot({type:'jpeg',quality:85,path:path.join(out,'weight-preferences.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_WEIGHT_PREFERENCE_DATA '+b.slice(i,i+4000))}
   await page.locator('.weight-preferences button').click();assert.equal(await page.locator('.weight-preferences button').getAttribute('aria-pressed'),'true');
-  await page.locator('[data-tab="progress"]').click();assert.equal(await page.locator('.progress-summary section').count(),3);await page.locator('.weight-trend-card [data-hide-weight]').click();assert.equal(await page.locator('.weight-trend-card').count(),0);
+  await page.locator('[data-tab="progress"]').click();assert.equal(await page.locator('.progress-summary section').count(),3);await page.locator('.weight-trend-card [data-hide-weight]').click();assert.equal(await page.locator('.weight-trend-card').count(),0);await page.getByRole('button',{name:'Show weight',exact:true}).click();assert.equal(await page.locator('.weight-trend-card').count(),1);
   const after=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['weights','logs','foodLog','mealPlan','workoutDrafts'])assert.deepEqual(after[name],before[name]);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await context.close();
  }
