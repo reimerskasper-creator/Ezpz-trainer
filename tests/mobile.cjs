@@ -553,6 +553,31 @@ try{
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await context.close();
  }
 
+
+ // Daily diary/calendar, favourites, corrections and exercise charts.
+ for(const width of [320,390,430]){
+  const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
+  await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',dialog=>dialog.accept());await page.goto(base+'/fitness.html');await page.locator('[data-tab="eat"]').click();await page.locator('[data-home-diary]>summary').click();
+  const yesterday=await page.evaluate(()=>datePlus(foodDate(),-1));
+  await page.locator('#diary-date').fill(yesterday);await page.locator('#diary-date').press('Tab');
+  assert.equal(await page.locator('.food-log-entry').count(),0);
+  await page.locator('[data-recipe-card][data-open-meal="0"]').click();await page.locator('[data-favourite-recipe="0"]').click();assert.equal(await page.locator('[data-favourite-recipe="0"]').getAttribute('aria-pressed'),'true');assert.equal(await page.locator('#meal-log-date').inputValue(),yesterday);await page.locator('[data-log-food="0"]').click();
+  assert.equal(await page.locator('.food-log-entry').count(),1);await page.locator('[data-edit-food]').click();await page.locator('.food-edit-form [name="servings"]').fill('1.5');await page.locator('.food-edit-form button.primary').click();assert.equal(await page.evaluate(()=>foodEntries().find(e=>e.date===diaryDay()).servings),1.5);
+  if(width===390){const jpg=await page.locator('.food-diary').screenshot({type:'jpeg',quality:82,path:path.join(out,'daily-diary.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_DAILY_DIARY_DATA '+b.slice(i,i+4000))}
+  await page.locator('[data-remove-food]').click();assert.equal(await page.locator('.food-log-entry').count(),0);await page.locator('[data-undo-removal]').click();assert.equal(await page.locator('.food-log-entry').count(),1);
+  await page.locator('.quick-meals>summary').click();await page.locator('[data-quick-view="favourites"]').click();await page.locator('[data-quick-recipe="0"]').click();assert.equal(await page.locator('.food-log-entry').count(),2);
+  await page.locator('[data-diary-today]').click();assert.equal(await page.locator('.food-log-entry').count(),1);
+  await page.reload();await page.locator('[data-tab="eat"]').click();await page.locator('.quick-meals>summary').click();await page.locator('[data-quick-view="favourites"]').click();assert.equal(await page.locator('[data-quick-recipe="0"]').count(),1);
+  await page.locator('[data-tab="progress"]').click();assert.equal(await page.locator('.macro-history').count(),3);assert.equal(await page.locator('#progress-exercise').count(),1);await page.locator('#progress-exercise-metric').selectOption('reps');assert.equal(await page.locator('.exercise-chart').count(),1);
+  if(width===390){for(const [selector,marker] of [['.macro-progress-card','MACROS'],['.exercise-progress-card','EXERCISE']]){const jpg=await page.locator(selector).screenshot({type:'jpeg',quality:82,path:path.join(out,'daily-'+marker+'.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_DAILY_'+marker+'_DATA '+b.slice(i,i+4000))}}
+  await page.locator('.history-session').first().locator('summary').click();await page.locator('[data-edit-history]').first().click();assert.equal(await page.locator('[data-tab="progress"]').getAttribute('aria-current'),'page');await page.locator('#history-edit-form [name="r0-0"]').fill('11');await page.locator('#history-edit-form [name="w0-0"]').fill('21');
+  if(width===390){const jpg=await page.locator('#history-edit-form').screenshot({type:'jpeg',quality:82,path:path.join(out,'daily-history-editor.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_DAILY_HISTORY_DATA '+b.slice(i,i+4000))}
+  await page.locator('#history-edit-form button.primary').click();assert(await page.evaluate(()=>state.logs.some(l=>l.exercises.some(e=>e.sets.some(z=>z.reps==='11'&&z.kg==='21')))));
+  await page.locator('.weight-records>summary').click();await page.locator('[data-weight-edit="0"] [name="kg"]').fill('78.5');await page.locator('[data-weight-edit="0"] button').first().click();assert.equal(await page.evaluate(()=>state.weights[0].kg),78.5);await page.locator('.weight-records>summary').click();await page.locator('[data-delete-weight="0"]').click();assert.equal(await page.evaluate(()=>state.weights.length),1);await page.locator('[data-undo-removal]').click();assert.equal(await page.evaluate(()=>state.weights.length),2);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await context.close();
+ }
+
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
  if(captures.length){const sheet=await browser.newPage({viewport:{width:2528,height:570},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf0ee;font:14px sans-serif">'+captures.map(x=>'<figure style="margin:0;width:244px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:244px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'mobile-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_VISUAL_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));console.log('EZPZ_VISUAL_END')}}
 

@@ -15,7 +15,16 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest update — Show weight shortcut, 21 October 2026
+## Latest update — five everyday-use upgrades, 21 October 2026
+- Eat diary has a date picker, previous/next day and Back to today. Recipe/custom/recent logging uses the selected past-or-today date; recipe screen displays date too. Home totals remain today-only. Food entries have portion/date editing, exact dish photos retained, transactional removal and Undo.
+- Favourite library recipe indexes are validated in state.favouriteRecipes, included in backups. Recipe pages toggle favourites; Eat's collapsed Favourites & recent meals has photos, portions and direct logging. Recents derive from logs, deduplicated by recipe identity or custom per-portion snapshot. Custom unitMacros prevent repeated editing rounding drift.
+- Progress shows separate four-week protein/carb/fat average grams, uncapped percentages (bars capped only visually), logged-day coverage, current target labels and methodology. Combined habit rings remain a clearly capped average.
+- Exercise progress on Progress has exercise/unit and load/reps selectors, actual-date SVG chart, first/latest values and per-session records. Each point is the heaviest completed set paired with reps or highest completed reps/duration; bodyweight never converted to external load. Sec/min distinct; latest 30 sessions. History exercise names open their chart.
+- Workout history can edit set reps/duration, kg/BW and completed state; legacy aggregate fields updated alongside sets. At least one valid completed set required. Workout deletion has confirmation and Undo. Weigh-ins can edit/remove with Undo, respecting hidden weight setting. Removal Undo is session-only and cleared on backup restore.
+- All mutations roll back on storage failure. Rendering does not alter saved logs, foods, recipes, schedules or targets. Existing food fixture updates restricted to authorized foodSummary/foodDiary/mealDetail UI/date changes; recipe ingredients/macros/photos unchanged.
+- tests/daily-use.cjs covers dates, precise custom portions, favourites/recent, over-target macros, chart units/completed sets, correction, undo, backups and rollback. Mobile tests cover the main workflows at 320/390/430px with visual review markers EZPZ_DAILY_DIARY_DATA / MACROS / EXERCISE / HISTORY.
+
+## Previous update — Show weight shortcut, 21 October 2026
 - Hiding weight now leaves a small Show weight button in place on Home and Progress. It restores weight immediately using the same persisted preference. More's existing switch remains available. Hidden measurements are still omitted from markup.
 - Privacy unit and mobile tests now verify direct restoration on both pages, including after reload.
 
