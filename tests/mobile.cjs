@@ -408,11 +408,11 @@ try{
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
   const openCustom=async()=>{await page.locator('[data-tab="eat"]').click();await page.locator('[data-home-diary]').evaluate(x=>x.open=true);await page.locator('.custom-food-open').click();assert.equal(await page.locator('body').getAttribute('data-view'),'custom-food');assert.equal(await page.locator('[data-tab="eat"]').getAttribute('aria-current'),'page')};
   const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'Custom food horizontal layout '+width);
-  await openCustom();await fits();
+  await openCustom();await fits();const back=await page.locator('.back-link').boundingBox(),hero=await page.locator('.custom-food-hero').boundingBox();assert(back.y+back.height<=hero.y,'Back button must not overlap hero');
   await page.locator('#custom-food-name').fill('My yogurt snack');await page.locator('#custom-food-protein').fill('20.5');await page.locator('#custom-food-carbs').fill('30');await page.locator('#custom-food-fat').fill('10');
   assert.equal(await page.locator('#custom-food-calorie-output').innerText(),'292 kcal');
   await page.locator('.custom-food-submit').click();assert.equal(await page.locator('body').getAttribute('data-view'),'custom-food','Photo is required');assert.equal(await page.evaluate(()=>foodEntries().length),0);
-  await page.locator('.custom-food-calorie-option>summary').click();await page.locator('#custom-food-calories').fill('315.5');assert.equal(await page.locator('#custom-food-calorie-output').innerText(),'315.5 kcal');
+  await page.locator('.custom-food-calorie-option>summary').click();await page.locator('#custom-food-calories').fill('315.5');assert.equal(await page.locator('#custom-food-calorie-output').innerText(),'315.5 kcal');assert.equal(await page.locator('#custom-food-calorie-source').innerText(),'Using your label calories');
   await page.locator('.custom-food-photo-grid label:has(input[value="yogurt"])').click();
   await page.locator('#custom-food-fat').fill('-1');await page.locator('.custom-food-submit').click();assert.equal(await page.evaluate(()=>foodEntries().length),0,'Negative macros cannot log');await page.locator('#custom-food-fat').fill('10');
   for(const img of await page.locator('.custom-food-photo-grid img').all())await img.evaluate(x=>x.decode());
