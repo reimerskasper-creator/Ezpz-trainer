@@ -15,6 +15,14 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
+## Latest visual update — Progress and Train, 21 October 2026
+- Progress summary tiles now use relevant gym, dumbbell and body-weight photographs. Four-week consistency has a dark green landscape photo; the weight-trend panel uses a scale photo under a light overlay and a white chart surface.
+- Workout-history cards show the corresponding logged program's cover, with readable date/title overlays and light expanded details. Old logs without a recognized workout ID use a related title-based cover or Full Body fallback.
+- Train exercise shortcuts show the same stable individual photos as their exercise cards. View controls have a subtle logbook backdrop, and expanded logging panels have a more visible photo while keeping white entry fields.
+- Harmony CSS must remain AFTER train-photo-refresh and all other legacy style blocks so the Train imagery is not overridden.
+- Verified source commit: 196a5afa42271176fdcf22788a780c34ef4ca0ae. Mobile checks run 39593773017 and Pages deployment 39593773338 passed. Chromium checked 320/390/430px, all 65 choices, data preservation, history, logging, backups, and empty/single-entry/populated Progress states. Progress and Train screenshot sheets were visually reviewed.
+- Saved data, prescriptions, recipe content and calculations remain unchanged.
+
 ## Current release — 21 October 2026
 This section supersedes earlier category/program counts below.
 - Train now has 12 categories and 65 choices: 64 fixed programs plus the existing rotating Full Body plan.
