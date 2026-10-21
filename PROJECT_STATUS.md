@@ -15,7 +15,14 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest visual update — Progress and Train, 21 October 2026
+## Latest visual update — food logging, 21 October 2026
+- Today's food diary now matches Home with a dark green nutrition-photo overview, bright calorie progress and readable macro tiles. Individual logged meals use white cards with small matching recipe photographs.
+- New food entries save recipeIndex alongside the existing name/servings/macros. loggedRecipeIndex validates the indexed name, then resolves old entries by exact recipe name. The two same-name Turkey avocado sandwich variants are disambiguated by saved nutrition; if ambiguity remains, matching photographs must agree. Unknown foods use a neutral utensil icon, never an unrelated dish.
+- Thumbnails open the existing recipe. Logging opens and scrolls to the diary. Broken thumbnails have a neutral fallback.
+- Recipes, gram weights, nutrition calculations and saved totals are unchanged. Only the user-authorized foodDiary presentation snapshot was refreshed; all other approved food snapshots remain protected.
+- Verified commit 369400c099b0cb0afc501f588f4bc5c0901b3b45; Mobile app checks run 39595431515 and Pages deployment 39595431230 passed. All 157 logged recipe photos were checked, along with legacy references, backup identity and rendering without storage changes. Chromium passed at 320/390/430px including photo decoding, persistence after reload and thumbnail navigation. The diary screenshot was visually reviewed.
+
+## Previous visual update — Progress and Train, 21 October 2026
 - Progress summary tiles now use relevant gym, dumbbell and body-weight photographs. Four-week consistency has a dark green landscape photo; the weight-trend panel uses a scale photo under a light overlay and a white chart surface.
 - Workout-history cards show the corresponding logged program's cover, with readable date/title overlays and light expanded details. Old logs without a recognized workout ID use a related title-based cover or Full Body fallback.
 - Train exercise shortcuts show the same stable individual photos as their exercise cards. View controls have a subtle logbook backdrop, and expanded logging panels have a more visible photo while keeping white entry fields.
