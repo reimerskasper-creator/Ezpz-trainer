@@ -432,3 +432,6 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Header now uses the approved four-letter square emblem beside EZPZ Fitness. Removed the separate Home method tile; a horizontal gold/blue/mint/lavender EZPZ wordmark sits beside the date below the full-width greeting and opens the existing method dialog. Accessible dialog label, keyboard focus and minimum 44px tap target retained.
 - Shared crisp SVG letterforms incorporate fork, crescent, rising arrow and breathing wave; transparent backgrounds support both header and Home. No data/schema, recipe, workout or ring changes.
 - Branding checks at 320/390/430px verify assets load, no horizontal overflow, dialog activation/Escape/focus return and no stored record changes. Weekly shortcut mobile suite and Home checks passed.
+
+## Corrected logo artwork — 21 October 2026
+- Removed the colored square emblem from the header at user request, retaining white EZPZ Fitness. Replaced the inaccurate SVG recreation in Home with a production image generated from the approved logo reference, preserving the clear fork, crescent, diagonal arrow and wave. The image uses the pale Home background and remains the method-dialog button.
