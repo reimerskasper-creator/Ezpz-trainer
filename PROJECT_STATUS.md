@@ -420,3 +420,5 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Expanded foundation-week browser tests verify all category/date routes, past sleep saving, past Zone save/undo, past workout set correction with date preservation, today's draft resume, future guards, unchanged data on opening and all phone widths. Zone unit tests cover explicit historical opt-in and storage rollback. Related Home/sleep/overall/weekly/protected recipe suites passed locally; updated cell styling visually reviewed.
 
 - Zone focus return retains the initiating control after a saved check-in: the main Zone ring for normal entry, or the selected weekly cell for weekly entry. The expanded phone suite verifies this along with selected-day navigation and passes at all three widths.
+
+- Verified release: final source c99b16db5cdbfffd12d73b08a6504aff4f5f9f0e passed hosted Mobile app checks 39687601014; Pages deployment 39687600411 succeeded. Live HTML blob 0f60e7428d5766cb241ebe29c41b0eb6bbba45f6 matches the tested source. Live weekly buttons and a past-day Sleep route were inspected. No known release blocker.
