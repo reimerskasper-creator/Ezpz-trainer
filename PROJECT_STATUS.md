@@ -15,7 +15,17 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest feature — custom foods, 21 October 2026
+## Latest update — logging first and nutrition targets, 21 October 2026
+- Eat now starts with photo-backed Log custom food and Nutrition targets buttons, followed by Today's food and the planner. These precede recipe search and all recipe cards. Navigation into new pages returns to the top.
+- Custom-food saved/fill panels have distinct related photo backgrounds. Input text is explicitly dark on light fields and browser-checked for at least 4.5:1 contrast.
+- Nutrition targets has Set my own (daily protein/carbs/fat boxes with matching calculated calories) and Calculate for me (three steps: body details, overall routine/goals, review/save).
+- The questionnaire supports kg/cm and lb/in, with draft preservation across units and tabs. It uses Mifflin–St Jeor plus explicit overall activity factors, modest goal adjustments and documented macro defaults. Exercise is included in the activity choice and is not added again.
+- Results are clearly personalized starting estimates, not exact measured needs. Unsupported pregnancy/breastfeeding/clinician-prescribed situations route to individual target entry. Weight-loss estimates below BMI 18.5 are blocked. Calculation details, assumptions and primary research are in docs/nutrition-targets.md and the result's expandable method.
+- state.nutritionTargets is validated and read by target() for both Home and diary. state.nutritionAssessment stores normalized answers. Existing targets remain unchanged until the user explicitly saves. Logged foods, custom foods, recipes, workout data and saved portions remain intact. Backups sanitize/preserve the two new records; save failures roll back.
+- tests/nutrition-targets.cjs covers formula examples, all activity/goal combinations, units, limits, source consistency, targets/backup integration and rollback. Full Chromium flows cover entry-point placement, manual targets, all questionnaire steps, unsupported situations, draft preservation, photo/form contrast, reload and backup behavior at 320/390/430px.
+- Verified source commit 9bceefff3d57353c3374245ed057debe56e84bd4; Mobile app checks run 39601715299 and Pages deployment 39601714386 passed. Final Eat, manual-target, body/activity/result, and dark custom-food screenshots were visually reviewed.
+
+## Previous feature — custom foods, 21 October 2026
 - Eat → Today's food → Add your own food opens a simple form for a food name and protein/carbs/fat grams for one portion. Calories calculate as 4P+4C+9F unless optional label calories are entered. The live label distinguishes label calories from calculated calories.
 - A required eight-choice photo picker uses existing related dish assets. It is explicitly a closest-photo visual reminder; all nutrition comes from user input. The chosen photo appears on every logged custom food.
 - Save for next time is optional. Saved foods can be logged at different portion amounts or removed without removing diary entries or their photo snapshots.
