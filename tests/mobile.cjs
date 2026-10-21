@@ -112,6 +112,19 @@ try{
   await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');assert(await page.locator('[data-set-done="0-0"]').isChecked());
   if(expectUpgrade){await page.waitForFunction(()=>{const b=document.querySelector('[data-set-done="0-0"]')?.getBoundingClientRect();return b&&b.width>=44&&b.height>=44});assert((await page.locator('.set-previous').first().innerText()).includes('18 kg'),'Previous set comparison');const finish=await page.locator('.session-footer').boundingBox(),nav=await page.locator('.nav').boundingBox();assert(finish.y+finish.height<=nav.y+1,'Finish bar overlaps navigation')}
   await page.locator('[data-action="finish"]').click();await page.waitForFunction(()=>document.body.dataset.view==='progress');assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.length,key),25);await checkLayout('Progress');await capture('Progress');
+  const progressBefore=await page.evaluate(key=>localStorage.getItem(key),key);
+  const summaryPhotos=await page.locator('.progress-summary>section').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundImage));assert.equal(new Set(summaryPhotos).size,3,'Distinct relevant Progress metric photos');assert(summaryPhotos.every(x=>x.includes('url(')),'Progress metrics have photos');
+  assert((await page.locator('.history-session').first().evaluate(x=>getComputedStyle(x.querySelector('summary')).backgroundImage)).includes('/workout-images/push.jpg'),'History photo matches the logged workout');
+  if(width===390){
+   for(const [selector,name] of [['.progress-summary','Progress photo metrics'],['.consistency-card','Progress photo consistency'],['.weight-trend-card','Progress photo weight'],['.history-session','Progress photo history']]){const el=page.locator(selector).first();await el.scrollIntoViewIfNeeded();const jpg=await el.screenshot({type:'jpeg',quality:85});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
+  }
+  const progressState=await page.evaluate(()=>JSON.stringify(state));
+  for(const entries of [0,1]){
+   await page.evaluate(n=>{state.weights=state.weights.slice(0,n);state.logs=[];progress()},entries);await checkLayout('Progress photo empty state '+entries);assert.equal(await page.locator('.trend-chart').count(),0);assert(await page.locator('#weightform').count());
+   if(width===390&&entries===0)await capture('Progress photo empty');
+  }
+  await page.evaluate(saved=>{state=JSON.parse(saved);progress()},progressState);
+  assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),progressBefore,'Visual rendering preserves saved data');
   if(expectUpgrade){assert.equal(await page.locator('.history-session').count(),12);await page.locator('[data-action="more-history"]').click();assert.equal(await page.locator('.history-session').count(),24);await page.locator('[data-action="more-history"]').click();assert.equal(await page.locator('.history-session').count(),25)}
   const moreTab=expectUpgrade?'more':'shopping';await page.locator('[data-tab="'+moreTab+'"]').click();await checkLayout('More');await capture('More');
   await page.locator('[data-go="library"]').click();await page.locator('.library-tile').first().waitFor();assert.equal(await page.locator('.library-tile').count(),100);if(expectUpgrade){const tile=page.locator('.library-tile').first(),icon=await tile.locator('.workout-category-icon').boundingBox(),title=await tile.locator('strong').boundingBox();assert(title.x>=icon.x+icon.width+8,'Exercise library must use horizontal rows');assert((await tile.boundingBox()).height<=110,'Library row too tall')}await checkLayout('Library');await capture('Library');
@@ -402,7 +415,10 @@ try{
 
  const trainPhotoCaptures=captures.filter(x=>x.name.startsWith('Train photo')||x.name==='Kettlebell foundations');
  if(trainPhotoCaptures.length){const sheet=await browser.newPage({viewport:{width:1860,height:1100},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf2ee;font:12px sans-serif">'+trainPhotoCaptures.map(x=>'<figure style="margin:0;width:300px"><figcaption style="height:22px;text-align:center">'+x.name+'</figcaption><img style="width:300px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:83,path:path.join(out,'train-photo-overview.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_TRAIN_PHOTO_DATA '+b.slice(i,i+4000))}
+ const progressPhotos=captures.filter(x=>x.name.startsWith('Progress photo'));
+ if(progressPhotos.length){const sheet=await browser.newPage({viewport:{width:1648,height:1000},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf2ee;font:12px sans-serif">'+progressPhotos.map(x=>'<figure style="margin:0;width:320px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:320px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'progress-photos.jpg')});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_PROGRESS_PHOTO_DATA '+b.slice(i,i+4000))}
  assert.deepEqual(errors,[],'Browser errors');fs.writeFileSync(path.join(out,'summary.json'),JSON.stringify({passed:true,widths:[320,390,430],recipes:157,workoutPrograms:65,upgradedUI:expectUpgrade,browserErrors:errors},null,2));console.log('PASS: Chromium at 320/390/430px; 157 recipe photos; 65 workout programs; draft persistence; set logging; history; navigation; exercise search; onboarding'+(expectUpgrade?'; complete backup restoration':''));
 }finally{await browser.close();server.close()}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1});
+
 
