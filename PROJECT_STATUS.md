@@ -308,3 +308,10 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Reworked More with a larger photo hero, forest-green personal card, blue equipment-backed measurement settings and warm gold display settings. Existing local photos are reused without extra downloads.
 - Larger photo-backed tool links and photographic disclosure headers tie guides, history and backups into the same visual style. Settings behavior and saved-data formats remain unchanged; the units class is styled only within More.
 - Reviewed top preferences and expanded tools/backup sections in browser preview. Local name and units checks passed. Full Mobile app checks run 39645729719 (job 119380668917) and Pages deployment 39645728313 succeeded on bfa21536eeb4d433da3636d20c2b571b42a9e0e3.
+
+## Why EZPZ method introduction — 2026-10-21
+
+- Added a small Why EZPZ? button at the top-right of Home. Opens a native modal bottom sheet with photo-backed Eat, Sleep, Progression and Zone cards, followed by Stronger together and Why a simple system helps using the approved wording.
+- Zone means mental state. This is an optional introduction without extra scores, tracking or changes to saved records. Uses existing local photos, readable overlays, sticky close control, Escape dismissal, native focus return and Got it.
+- Reviewed panel visuals and keyboard dismissal in browser preview. Home and planner-picker local checks passed. Mobile suite now checks all four pillars, phone-width fit, Escape/focus return, Got it and unchanged browser data at 320/390/430px.
+- Full mobile checks 39651209043 (job 119399691522) passed; Pages deployment 39651206734 succeeded on 6988fd61254dd45c9270829d322b1536f3198354.
