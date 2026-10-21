@@ -20,6 +20,7 @@
 - Macro completion averages protein/carbs/fat target fractions, capping each at 100% before averaging (zero targets excluded). It reads shared target() and today's foodSummary(), including custom foods. Clearly labelled weekly versus today.
 - Sleep opens from the ring or Log sleep & set your goal. Matching photo-backed page supports wake-up date, integer hours/minutes, personal goal (default 8 hours), replacing/editing a date and recent seven nights. Up to 24h sleep and 1–24h goal; no future dates. This is a user preference, no clinical recommendation.
 - state.sleepLog is a date=>minutes record; state.sleepGoal is minutes. Backup restore validates both. Save failure rolls back both; other logs/drafts unchanged.
+- Verified source commit 44e6999abed30a08c87b15e57047f0782d3d59fc: Mobile app checks 39607057518 (job 119245873688) and Pages 39607057244 succeeded. Both final habit-card and sleep-form screenshots visually reviewed.
 - tests/sleep.cjs covers math, validation, cap, roundtrip and rollback. Chromium mobile tests cover logging 3h30 against 7h=50%, reload, editing to 100%, navigation, no data loss and 320/390/430px. Visual review markers EZPZ_HABITS_DATA and EZPZ_SLEEP_FORM_DATA.
 
 ## Previous update — planner back button and More visuals, 21 October 2026
