@@ -492,6 +492,28 @@ try{
   for(const [destination,expected]of [['library','library'],['shopping','shopping'],['progress','progress']]){await page.locator('.more-link[data-go="'+destination+'"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),expected);await page.locator('[data-tab="more"]').click()}
   await page.locator('.data-tools details>summary').click();assert(await page.locator('#restore-file').isVisible());await fits();await context.close();
  }
+
+ // Weekly training, today's macro completion and manual sleep.
+ for(const width of [320,390,430]){
+  const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
+  await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
+  assert.equal(await page.locator('.habit-item').count(),3);
+  const prior=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
+  await page.locator('.sleep-open').click();await page.locator('#sleep-hours').fill('3');await page.locator('#sleep-minutes').fill('30');await page.locator('#sleep-goal-hours').fill('7');await page.locator('#sleep-goal-minutes').fill('0');
+  assert(await page.locator('#sleep-form').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
+  if(width===390){await page.locator('.sleep-hero').scrollIntoViewIfNeeded();const jpg=await page.screenshot({type:'jpeg',quality:80,path:path.join(out,'sleep-form.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_SLEEP_FORM_DATA '+b.slice(i,i+4000))}
+  await page.locator('#sleep-form button').click();assert.equal(await page.locator('.habit-item').nth(2).locator('b').innerText(),'50%');
+  await page.reload();assert.equal(await page.locator('.habit-item').nth(2).locator('b').innerText(),'50%');
+  await page.locator('.habit-item').nth(2).click();await page.locator('#sleep-hours').fill('7');await page.locator('#sleep-minutes').fill('0');await page.locator('#sleep-form button').click();
+  assert.equal(await page.locator('.habit-item').nth(2).locator('b').innerText(),'100%');
+  const after=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['logs','foodLog','weights','workoutDrafts','mealPlan'])assert.deepEqual(after[name],prior[name],'Sleep preserves '+name);
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  if(width===390){await page.locator('.home-week-card').scrollIntoViewIfNeeded();const jpg=await page.locator('.home-week-card').screenshot({type:'jpeg',quality:85,path:path.join(out,'weekly-habits.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_HABITS_DATA '+b.slice(i,i+4000))}
+  await page.locator('.habit-item').nth(1).click();assert.equal(await page.locator('body').getAttribute('data-view'),'eat');
+  await context.close();
+ }
+
  const clean=await browser.newContext({viewport:{width:390,height:844}}),onboarding=await clean.newPage();onboarding.on('pageerror',e=>errors.push(e.message));await onboarding.goto(base+'/fitness.html');await onboarding.locator('[name="age"]').fill('35');await onboarding.locator('[name="weight"]').fill('80');await onboarding.locator('[name="height"]').fill('180');await onboarding.locator('#setup button').click();await onboarding.waitForFunction(()=>document.body.dataset.view==='home');await clean.close();
  if(captures.length){const sheet=await browser.newPage({viewport:{width:2528,height:570},deviceScaleFactor:1});await sheet.setContent('<html><body style="margin:0;display:flex;gap:8px;padding:8px;background:#edf0ee;font:14px sans-serif">'+captures.map(x=>'<figure style="margin:0;width:244px"><figcaption style="height:24px;text-align:center">'+x.name+'</figcaption><img style="width:244px" src="'+x.src+'"></figure>').join('')+'</body></html>');const jpg=await sheet.screenshot({type:'jpeg',quality:85,path:path.join(out,'mobile-overview.jpg')});if(process.env.EZPZ_VISUAL_LOG==='1'){console.log('EZPZ_VISUAL_BEGIN');const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));console.log('EZPZ_VISUAL_END')}}
 

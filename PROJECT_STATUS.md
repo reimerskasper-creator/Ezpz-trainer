@@ -15,7 +15,14 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
-## Latest update — planner back button and More visuals, 21 October 2026
+## Latest update — weekly habit circles and sleep, 21 October 2026
+- Home's This week card retains the training calendar and adds three interactive 0–100% SVG rings: unique training days / weekly goal; today's macro completion; sleep logged for today's wake-up date / personal sleep goal.
+- Macro completion averages protein/carbs/fat target fractions, capping each at 100% before averaging (zero targets excluded). It reads shared target() and today's foodSummary(), including custom foods. Clearly labelled weekly versus today.
+- Sleep opens from the ring or Log sleep & set your goal. Matching photo-backed page supports wake-up date, integer hours/minutes, personal goal (default 8 hours), replacing/editing a date and recent seven nights. Up to 24h sleep and 1–24h goal; no future dates. This is a user preference, no clinical recommendation.
+- state.sleepLog is a date=>minutes record; state.sleepGoal is minutes. Backup restore validates both. Save failure rolls back both; other logs/drafts unchanged.
+- tests/sleep.cjs covers math, validation, cap, roundtrip and rollback. Chromium mobile tests cover logging 3h30 against 7h=50%, reload, editing to 100%, navigation, no data loss and 320/390/430px. Visual review markers EZPZ_HABITS_DATA and EZPZ_SLEEP_FORM_DATA.
+
+## Previous update — planner back button and More visuals, 21 October 2026
 - My Plan has a visible 44px-minimum back button above its hero. Both top and bottom back links return to the section that opened the planner (Home, Train, Eat, More or Progress), rather than always Home.
 - Ephemeral plannerReturnTo / lastMainView routing tracks the last main section during render; it does not alter saved state, schedule dates or planner selections.
 - More now matches Home with a photo hero, photo-backed training-plan card, distinct related photos for the four Explore tools, and a logbook-backed backup/restore panel. All existing tool links, editing and backup behaviors remain intact.
