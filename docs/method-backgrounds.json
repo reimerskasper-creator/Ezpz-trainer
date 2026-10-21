@@ -1,0 +1,18 @@
+{
+  "generator": "Built-in image_gen",
+  "purpose": "Decorative EZPZ method card backgrounds",
+  "assets": [
+    {
+      "path": "home-images/method-sleep.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: background photograph for the Sleep pillar of a premium wellness app. One wide landscape editorial photograph of a peaceful, realistic bedroom at bedtime. A neatly inviting bed with rumpled cream linen duvet and soft pillows, forest green upholstered headboard, small wooden bedside table and warm dim bedside lamp, blue dusk through sheer curtains. No people. Quiet restorative atmosphere, natural textures, realistic interior proportions. Bed and pillows clearly recognizable in a wide 2:1 crop. Restrained deep green and muted blue palette, matching a calm fitness and wellbeing app. No text, logos, clocks with digits, collage, watermark or gym equipment."
+    },
+    {
+      "path": "home-images/method-together.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide wellness app background photograph. A realistic calm morning routine still life in a warm home: a nourishing breakfast bowl of yogurt berries and oats on a wooden table, a plain closed journal and walking shoes on floor beside the table, soft morning window light with garden greenery. Harmonious food, mindful routine and movement in one coherent scene, not a collage. Natural forest green and cream palette, premium understated editorial photography. Wide landscape with crop space for a 2:1 banner. No people, no readable text, no logos or watermark."
+    },
+    {
+      "path": "home-images/method-system.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: wide wellness app background photograph illustrating a simple plan. Overhead editorial photograph of a realistic wooden desk with an open cream weekly planner notebook containing only a few understated handwritten check marks and simple lines, a plain pencil, a green ceramic mug, warm window light and soft leaf shadows. No legible words, dates, numbers or brand names. Calm approachable daily planning, modest uncluttered arrangement. Muted forest green, warm wood and blue-gray details, natural realistic textures. Wide landscape composition with ample crop margin for 2:1 banner, no people, collage or watermark."
+    }
+  ]
+}
