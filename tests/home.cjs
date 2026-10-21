@@ -57,7 +57,7 @@ api.state.foodLog=savedFood;api.home();
 const before=JSON.stringify(api.state);api.home();assert(JSON.stringify(api.state)===before,'Rendering mutated history/drafts');
 for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.home();assert(!screen.innerHTML.includes('undefined')&&!screen.innerHTML.includes('NaN'),'Invalid home for '+w.id)}
 // Existing workout pages must still render the correct set counts.
-for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.setTab('train');api.render();assert((screen.innerHTML.match(/data-set-done=/g)||[]).length===w.exercises.reduce((sum,x)=>sum+x.sets,0),'Workout set count changed for '+w.id);api.setTab('instructions');api.render();assert(screen.innerHTML.includes(w.title),'Instructions changed for '+w.id)}
+for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.setTab('train');api.render();assert((screen.innerHTML.match(/data-set-done=/g)||[]).length===w.exercises.reduce((sum,x)=>sum+x.sets,0),'Workout set count changed for '+w.id);api.setTab('instructions');api.render();assert(screen.innerHTML.includes(w.title.replaceAll('&','&amp;')),'Instructions changed for '+w.id)}
 api.setTab('home');
 // Test shortcut routing into existing food log and weigh-in form.
 let scrolled=false,focused=false;const section={open:false,scrollIntoView(){scrolled=true},querySelector(){return {focus(){focused=true}}}};
@@ -66,3 +66,4 @@ function clickFocus(homeFocus){for(const fn of listeners.click)fn({target:{close
 clickFocus('diary');assert(section.open&&scrolled&&document.body.dataset.view==='eat','Food-log shortcut failed');
 scrolled=false;clickFocus('weight');assert(scrolled&&focused&&document.body.dataset.view==='progress','Weight shortcut failed');
 console.log('PASS: empty/populated home, all 16 workouts, resume/completed states, today-only nutrition, unique training days, weight delta, merged shopping counts, useful shortcuts and unchanged saved data.');
+
