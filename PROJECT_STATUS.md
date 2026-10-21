@@ -302,3 +302,9 @@ Code f66fa2dd84ed4f8b377d2b7d0f0583d02d176baa. Mobile workflow 39511828306 (job 
 - Mapping and generation provenance are recorded in docs/program-cover-mapping.json and docs/program-covers-2026-10.json.
 - Workout prescriptions, saved-data schema and all approved meal content remain unchanged.
 - Local workout-photo, training, planning, planner-picker, recipe and training-usability checks passed. Push and Arms chooser visuals were reviewed in the mobile preview. Full hosted mobile CI passed: run 39641858707, job 119367162984, on cc1bffd7fa98ff9b7f10797be96a5c8b8d76965f. GitHub Pages deployment 39641856482 succeeded. Cover implementation commit: fdfdf73731efd18d228465eba5a6b07c50990c3a.
+
+## More page visual harmony — 2026-10-21
+
+- Reworked More with a larger photo hero, forest-green personal card, blue equipment-backed measurement settings and warm gold display settings. Existing local photos are reused without extra downloads.
+- Larger photo-backed tool links and photographic disclosure headers tie guides, history and backups into the same visual style. Settings behavior and saved-data formats remain unchanged; the units class is styled only within More.
+- Reviewed top preferences and expanded tools/backup sections in browser preview. Local name and units checks passed. Full Mobile app checks run 39645729719 (job 119380668917) and Pages deployment 39645728313 succeeded on bfa21536eeb4d433da3636d20c2b571b42a9e0e3.
