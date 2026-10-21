@@ -401,3 +401,10 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Final Home choice check: choosing an alternative workout from Home opens that selected workout in Train, without changing the scheduled calendar. Selection rolls back on storage failure. Added a phone regression for the explicit choice and preserved calendar; it passes at all three widths.
 
 - Release verified: final source 34efdf4d3522aeff97f0238896892edc94d0258d passed hosted Mobile app checks 39682599005 (job 119508556200); Pages deployment 39682598310 succeeded. Downloaded live HTML blob cf1388ac851e64e8271446b5e7080df3ae727fc6 matches local tested source. Live Home, compact Train and More daily tools/preferences were inspected. No known release blocker.
+
+## Tappable Overall and weekly foundation progress — 2026-10-21
+
+- Overall is now a keyboard-accessible button opening a native modal sheet with the existing scoring explanation. Close, Got it, Escape, backdrop dismissal and native focus return are supported. Removed the standalone explanation disclosure from Home; daily scoring is unchanged.
+- Under Overall, a compact Monday–Sunday grid shows Eat, Sleep, Train and Zone in their existing colors. Daily progress fills each marker; completed goals get checks, today is outlined, and future days are faded. Missing entries and logged zero values remain distinct. Encouraging copy counts individual completed foundation goals, not healthy days or weekly training targets.
+- Historical day values use current nutrition/sleep goals explicitly. Training uses the same best-saved-session completion rule as the daily ring, with no pooling of partial sessions, and excludes future timestamps. No new state or storage writes from rendering or modal interaction.
+- Added foundation-week unit and phone-browser suites covering historical grouping, partial/full/missing/zero logs, future dates/times, week boundary, modal controls/Escape/focus, reload/data preservation and layouts at 320/390/430px. Those suites and existing Home/overall/Zone/sleep/habits/daily-refinement/protected recipe checks passed locally. Weekly grid and explanation screenshots were visually reviewed.
