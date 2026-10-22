@@ -25,6 +25,8 @@ jobs:
         env:
           EZPZ_VISUAL_LOG: ${{ contains(github.event.head_commit.message, '[visual-review]') && '1' || '0' }}
         run: |
+          node tests/wellness.cjs
+          node tests/wellness-mobile.cjs
           node tests/pillar-pages.cjs
           node tests/foundation-week.cjs
           node tests/foundation-week-mobile.cjs
@@ -38,8 +40,6 @@ jobs:
           node tests/daily-use.cjs
           node tests/privacy.cjs
           node tests/habits.cjs
-          node tests/wellness.cjs
-          node tests/wellness-mobile.cjs
           node tests/sleep.cjs
           node tests/zone.cjs
           node tests/overall.cjs
