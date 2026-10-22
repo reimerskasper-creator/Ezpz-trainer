@@ -42,7 +42,7 @@ class HealthConnectPlugin : Plugin() {
             } catch (_: Exception) { call.reject("Could not check Health Connect permissions. Reopen the app and try again.") }
         }
     }
-    @PluginMethod fun requestPermissions(call: PluginCall) {
+    @PluginMethod override fun requestPermissions(call: PluginCall) {
         try {
             client()
             val intent = PermissionController.createRequestPermissionResultContract().createIntent(context, permissionMetrics.keys)
