@@ -61,7 +61,7 @@ assert(await page.evaluate(()=>Number.isFinite(Date.parse(readDeviceSafety().las
 await page.locator('.readiness-panel').first().scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'native-backup-save.jpg'),type:'jpeg',quality:85});
 // Restore the exported bytes in this isolated browser; no real phone data is erased.
 const exported=await page.evaluate(()=>window.testExportJson);
-await page.evaluate(()=>{const el=document.getElementById('restore-file');el.closest('details').open=true;window.beforeRestoreWellness=JSON.stringify(cleanWellnessRecords(state.wellnessRecords))});
+await page.evaluate(()=>{const el=document.getElementById('restore-file');for(let parent=el.parentElement;parent;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;window.beforeRestoreWellness=JSON.stringify(cleanWellnessRecords(state.wellnessRecords))});
 await page.locator('#restore-file').setInputFiles({name:'ezpz-fitness-backup.json',mimeType:'application/json',buffer:Buffer.from(exported)});
 page.once('dialog',d=>d.accept());await page.locator('[data-action="restore"]').click();await page.waitForFunction(()=>tab==='home');
 assert.equal(await page.evaluate(()=>JSON.stringify(cleanWellnessRecords(state.wellnessRecords))===window.beforeRestoreWellness),true);
