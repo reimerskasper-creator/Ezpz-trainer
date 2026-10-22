@@ -45,7 +45,7 @@ api.applyNativeHealthSnapshot(snapshot([period]));
 let corrected=api.state.wellnessRecords.find(r=>r.source==='whoop-health-connect'&&r.metric==='steps');
 assert.equal(corrected.value,8061);assert.equal(corrected.stepBasis,'whoop-period');assert.equal(api.normalizeWellnessRecord(corrected,true).periodEnd,period.periodEnd);
 assert.equal(api.selectedWellnessRecord('steps',date).value,100); // manual choice stays selected
-api.connectedAppsPage();assert(screen.innerHTML.includes('Imports saved'));assert(!screen.innerHTML.includes('<span>Not connected</span>'));
+api.connectedAppsPage();assert(screen.innerHTML.includes('Saved sources'));assert(!screen.innerHTML.includes('<span>Not connected</span>'));
 for(const bad of [{...period,periodEnd:period.periodStart},{...period,stepBasis:'guess'},{...period,source:'manual'}])assert.equal(api.normalizeWellnessRecord(bad),null);
 let before=JSON.stringify(api.state);
 for(const invalid of [snapshot([row('steps',-1)]),snapshot([{...row('steps',200),source:'manual'}]),snapshot([row('steps',200)],['sleep']),{...snapshot([]),metrics:[]},{...snapshot([]),through:'2999-01-01'}]){
