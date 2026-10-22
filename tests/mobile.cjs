@@ -130,7 +130,7 @@ try{
    assert.equal(new Set(photos).size,photos.length,'Distinct exercise photos '+id);
    if(id==='kb-foundations'&&width===390){await capture('Kettlebell foundations')}
    if(id==='kb-conditioning')assert.equal(await page.locator('[data-set-weight]').count(),12,'Timed kettlebell sets support kg logging');
-   assert.equal(await page.locator('#training-exercise-select option').count(),photos.length,'Every exercise is in the compact selector '+id);
+   assert.equal(await page.locator('[data-exercise-pick]').count(),photos.length,'Every exercise is in the compact selector '+id);
    await checkLayout(id);
   }
   // New programs preserve their own draft alongside existing A/B drafts.
@@ -274,7 +274,7 @@ try{
   assert.equal(await page.locator('[data-set-weight="0-1"]').inputValue(),'27.25');
   assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.duration===30,key));
   assert.notEqual(await page.locator('#footer-rest-clock').innerText(),'0:00');
-  await page.locator('#training-exercise-select').selectOption('3');
+  await page.locator('#training-exercise-select').click(); await page.locator('[data-exercise-pick="3"]').click();
   assert.equal(await page.locator('[data-training-card="3"]').getAttribute('open'),'');assert.equal(await page.locator('[data-training-card][open]').count(),1);
   await page.locator('[data-set-reps="3-0"]').fill('12');
   await page.locator('.training-options>summary').click();await page.locator('[data-training-view="all"]').click();assert.equal(await page.locator('[data-training-card][open]').count(),6);
