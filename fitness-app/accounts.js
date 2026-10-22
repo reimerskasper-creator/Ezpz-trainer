@@ -17,7 +17,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function panel(){
  const box=document.getElementById('fitness-account-panel');if(!box)return;
  const action=(name,label)=>'<button data-account="'+name+'" '+(busy?'disabled':'')+'>'+label+'</button>';
- box.innerHTML='<span class="section-kicker">YOUR PROGRESS, YOUR CHOICE</span><h3>Save my progress</h3><p>Keep using EZPZ without an account, or sign in with Google.</p>'+(user?'<p>Signed in as <strong>'+esc(user.email||'Google account')+'</strong></p><p>Signing in does not upload or replace your records.</p>'+action('review','Check cloud backup')+(config?.backupEnabled?'<div class="account-actions">'+action('save','Save device progress to cloud')+action('restore','Restore cloud progress')+'</div>':'<p>Cloud Save and Restore are being checked before activation. Keep a downloaded backup for now.</p>')+action('signout','Sign out — keep device records')+'<p class="note">Keeping records leaves them readable on this device. Use Delete records from this device below when using a shared device.</p>':action('signin','Continue with Google'))+'<p role="status" aria-live="polite">'+esc(message)+'</p><details><summary>Account & privacy</summary><p>Google supplies your account identity and email. Supabase holds your sign-in session and, only after an explicit Save, your fitness backup. No wearable access is granted. Fitness backups can include measurements, food, sleep, steps, workout records and photos.</p><p>This is a private backup test. Cloud saves and restores happen only when you choose them. To request deletion of your test account, contact reimerskasper@gmail.com. Device deletion below does not delete a cloud account.</p></details>';
+ box.innerHTML='<span class="section-kicker">YOUR PROGRESS, YOUR CHOICE</span><h3>Save my progress</h3><p>Keep using EZPZ without an account, or sign in with Google.</p>'+(user?'<p>Signed in as <strong>'+esc(user.email||'Google account')+'</strong></p><p>Signing in does not upload or replace your records.</p>'+action('review','Check cloud backup')+(config?.backupEnabled?'<div class="account-actions">'+action('save','Save device progress to cloud')+action('restore','Restore cloud progress')+'</div>':'<p>Cloud Save and Restore are being checked before activation. Keep a downloaded backup for now.</p>')+action('signout','Sign out — keep device records')+'<p class="note">Keeping records leaves them readable on this device. Use Delete records from this device below when using a shared device.</p>':action('signin','Continue with Google'))+'<p role="status" aria-live="polite">'+esc(message)+'</p><details><summary>Account & privacy</summary><p>Google supplies your account identity and email. Supabase holds your sign-in session and, only after an explicit Save, your fitness backup. No wearable access is granted. Fitness backups can include measurements, food, sleep, steps, workout records and photos.</p><p>This is a private backup test. Cloud saves and restores happen only when you choose them. To request deletion of your test account, contact reimerskasper@gmail.com. Device deletion below does not delete a cloud account.</p><p><a href="./fitness-privacy.html">Privacy and deletion information</a></p>'+(user&&config?.accountDeletionEnabled?'<p>Deleting your cloud account permanently removes its cloud backup. Device records and downloaded copies remain.</p>'+action('delete-account','Delete my cloud account and backup'):'')+'</details>';
 }
 function status(text){message=text;panel();}
 async function verified(){const {data,error}=await client.auth.getUser();if(error||!data?.user)throw Error('Your session has expired. Sign in again.');if(user&&data.user.id!==user.id)throw Error('Account changed. Reload before continuing.');user=data.user;assertOwner(app.snapshot(),user.id);return user;}
@@ -35,6 +35,20 @@ async function run(name){
   }else if(name==='signout'){
    if(!confirm('Sign out and KEEP your records on this device? They will remain readable here. Their account ownership is retained so another account cannot upload them.'))return;
    const {error}=await client.auth.signOut({scope:'local'});if(error)throw Error('Could not sign out. Try again online.');user=null;remote=null;status('Signed out. Device records were kept.');
+  }else if(name==='delete-account'){
+   if(!config.accountDeletionEnabled)throw Error('Account deletion is not activated yet. Use the privacy page to contact support.');
+   if(!navigator.locks)throw Error('Use a current browser to delete your account safely.');
+   await navigator.locks.request('ezpz-fitness-cloud-operation',async()=>{
+    const u=await verified();
+    if(prompt('Permanently delete the EZPZ cloud account and backup for '+u.email+'? Device records and downloaded copies stay. Type DELETE to continue:')!=='DELETE')return;
+    if(!confirm('Permanently delete '+u.email+' and its cloud backup? This cannot be undone. Your Google account will not be deleted.'))return;
+    await verified();
+    const {data,error}=await client.functions.invoke('delete-fitness-account',{body:{confirmation:'DELETE'}});
+    if(error||data?.deleted!==true)throw Error('Cloud account deletion was not confirmed. Contact support before retrying. Device records were kept.');
+    user=null;remote=null;
+    try{await client.auth.signOut({scope:'local'});}catch{}
+    status('Cloud account and backup deleted. Device records and downloaded files were kept. Export and delete this device’s records before connecting a new account.');
+   });
   }else if(name==='review'){
    const d=await readRemote();status(d?'Cloud backup: '+summary(d.payload)+' · saved '+new Date(d.updated_at).toLocaleString()+'. Device records were not changed.':'No cloud backup yet. Device records were not changed.');
   }else if(name==='save'||name==='restore'){
