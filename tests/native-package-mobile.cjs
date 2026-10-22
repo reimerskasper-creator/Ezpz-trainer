@@ -13,6 +13,11 @@ await page.locator('[data-native-health="permissions"]').click();await page.wait
 await page.evaluate(()=>{window.testAllowed=['steps'];const date=foodDate();window.testPayload={version:1,from:date,through:date,metrics:['steps'],records:[{metric:'steps',value:8061,stepBasis:'whoop-period',periodStart:new Date(Date.now()-25*3600000).toISOString(),periodEnd:new Date(Date.now()-3600000).toISOString(),date,source:'whoop-health-connect',externalId:'native-package-'+date,unit:'count',updatedAt:new Date().toISOString()}]}});
 await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('Imported 1'));
 assert.equal(await page.evaluate(()=>selectedWellnessRecord('steps',foodDate()).value),8061);assert.deepEqual(errors,[]);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+// Native reads use a fresh updatedAt even when measurement content is unchanged.
+await page.evaluate(()=>{window.testPayload.records[0].updatedAt=new Date(Date.now()+60000).toISOString()});
+await page.locator('[data-native-health="sync"]').click();
+await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('No new records'));
+assert.equal(await page.evaluate(()=>state.wellnessRecords.filter(r=>r.source==='whoop-health-connect').length),1);
 // Simulate an old unsupported aggregate, then a successful native read with no raw total.
 await page.evaluate(()=>{const date=foodDate(),stamp=new Date().toISOString();applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['totalCalories'],records:[{metric:'totalCalories',value:2608.2169,date,source:'whoop-health-connect',externalId:'old-total-'+date,unit:'kcal',updatedAt:stamp}]});applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['totalCalories','activeCalories'],records:[{metric:'activeCalories',value:465.882,date,source:'whoop-health-connect',externalId:'activity-'+date,unit:'kcal',updatedAt:stamp}]})});
 assert.equal(await page.evaluate(()=>selectedWellnessRecord('totalCalories',foodDate())),null);
