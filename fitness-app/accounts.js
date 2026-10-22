@@ -50,11 +50,13 @@ async function run(name){
      if(!before.accountBackup?.ownerId&&!confirm('Attach this device’s existing fitness records to '+u.email+' and upload a backup?'))return;
      if(!confirm('Save '+summary(payload)+' and the rest of this device’s fitness data to '+u.email+'?'))return;
      await verified();if(JSON.stringify(app.snapshot())!==fingerprint||!app.diskMatches())throw Error('Device records changed while reviewing. Try again.');
+     if(!before.accountBackup?.ownerId)app.replace(attached(before,u.id,0));
+     const savedFingerprint=JSON.stringify(app.snapshot());
      const {data,error}=await client.rpc('save_fitness_backup',{p_payload:payload,p_expected_revision:d?.revision||0});
      if(error){if(error.code==='40001')throw Error('Another device saved first. Check the cloud backup and review again.');throw Error('Cloud save was not confirmed. Check cloud backup before retrying.');}
      const revision=data?.[0]?.revision;if(!Number.isSafeInteger(revision))throw Error('Could not confirm the saved revision. Check cloud backup before retrying.');
      // Record ownership even if another local edit occurred during the network request; never replace edits.
-     const now=app.snapshot();assertOwner(now,u.id);app.replace(attached(now,u.id,revision));status('Cloud backup saved. Later edits stay on this device until you Save again.');
+     const now=app.snapshot();assertOwner(now,u.id);if(JSON.stringify(now)!==savedFingerprint||!app.diskMatches()){status('Cloud backup saved. Device records changed during upload; they were kept. Check cloud backup before saving again.');return;}app.replace(attached(now,u.id,revision));status('Cloud backup saved. Later edits stay on this device until you Save again.');
     }else{
      if(!d)throw Error('There is no cloud backup to restore.');
      app.download(before,'ezpz-before-cloud-restore.json');if(!confirm('Restore '+summary(d.payload)+' from '+u.email+'? This REPLACES device records. A safety download was requested. Check that it downloaded before continuing.'))return;
