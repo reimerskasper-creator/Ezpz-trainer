@@ -8,11 +8,12 @@ const key='ezpz-fitness-pilot-1',fixture={profile:{goal:'maintain',level:'Beginn
  window.Capacitor={isNativePlatform:()=>true,isPluginAvailable:()=>true,registerPlugin:()=>bridge};
 },{key,fixture});await page.goto('http://127.0.0.1:'+server.address().port+'/fitness.html');
 await page.evaluate(()=>{tab='connected-apps';render()});
+await page.locator('.native-health-details > summary').click();
 await page.locator('[data-native-health="permissions"]').click();await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('No EZPZ access'));
 await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('Tap Allow'));assert.equal(await page.evaluate(()=>window.testRead),0);
 await page.evaluate(()=>{window.testAllowed=['steps'];const date=foodDate();window.testPayload={version:1,from:date,through:date,metrics:['steps'],records:[{metric:'steps',value:4200,date,source:'whoop-health-connect',externalId:'native-test-'+date,unit:'count',updatedAt:new Date().toISOString()}]}});
 await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('Imported 1'));
 assert.equal(await page.evaluate(()=>selectedWellnessRecord('steps',foodDate()).value),4200);
-await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>!nativeHealthBusy);assert.equal(await page.evaluate(()=>state.wellnessRecords.length),1);
+await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>!nativeHealthBusy);assert((await page.locator('#native-health-status').innerText()).includes('No new records'));assert.equal(await page.evaluate(()=>state.wellnessRecords.length),1);
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.deepEqual(errors,[]);if(width===390)await page.screenshot({path:path.join(out,'native-health-connected.jpg'),type:'jpeg',quality:85});await context.close()}
 console.log('PASS: native permission denial, read gating, WHOOP import, repeated sync and responsive controls at 320/390/430px');}finally{await browser.close();await new Promise(r=>server.close(r))}})().catch(e=>{console.error(e);process.exitCode=1});
