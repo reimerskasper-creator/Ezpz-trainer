@@ -116,9 +116,12 @@ class HealthConnectPlugin : Plugin() {
                         add("sleep", day, duration)
                         val row = rows.getJSONObject(rows.length() - 1)
                         val stages = all.flatMap { it.stages }
-                        val deep = SleepIntervals.minutes(stages.filter { it.stage == SleepSessionRecord.STAGE_TYPE_DEEP }.map { interval(it.startTime, it.endTime) })
-                        val rem = SleepIntervals.minutes(stages.filter { it.stage == SleepSessionRecord.STAGE_TYPE_REM }.map { interval(it.startTime, it.endTime) })
-                        if (stages.isNotEmpty() && deep + rem <= duration) { row.put("deepMinutes", deep); row.put("remMinutes", rem) }
+                        val deep = SleepIntervals.reportedMinutes(stages.filter { it.stage == SleepSessionRecord.STAGE_TYPE_DEEP }.map { interval(it.startTime, it.endTime) })
+                        val rem = SleepIntervals.reportedMinutes(stages.filter { it.stage == SleepSessionRecord.STAGE_TYPE_REM }.map { interval(it.startTime, it.endTime) })
+                        if ((deep ?: 0) + (rem ?: 0) <= duration) {
+                            if (deep != null) row.put("deepMinutes", deep)
+                            if (rem != null) row.put("remMinutes", rem)
+                        }
                     }
                 }
                 // Permission loss during the read rejects the whole snapshot. Do not prune old data.
