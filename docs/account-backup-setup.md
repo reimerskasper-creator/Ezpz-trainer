@@ -1,6 +1,6 @@
 # Optional account backup — implementation handoff
 
-Status: **prepared, not connected**. The live app stays usable without signing in. No SDK, login button, account, token, database or cloud backup is active. This migration is source preparation; it has not been run against Postgres yet.
+Status: **private Google login test implemented; cloud writes remain disabled**. The owner applied migration 001 successfully and configured Google basic identity, test user, callback and canonical Fitness return URLs. The app remains usable without signing in. Sign-in alone never uploads or replaces fitness records. Live settings confirm Google enabled; anonymous backup reads return HTTP 401. These checks do not prove authenticated account isolation.
 
 ## Owner step 1
 
@@ -44,3 +44,11 @@ Actual two-account authorization and Google callback test; phone loss/restore; a
 ## Owner project received — 22 October 2026
 
 Owner created project `uwfetvlddswsmqcitgzy` and supplied its public app URL/publishable key. Public values are prepared in `fitness-app/account-config.json` with `enabled: false`. It is not loaded by the live app yet. No personal records have been uploaded. Next owner action: open Supabase SQL Editor to apply `backend/001_optional_backup.sql`; then verify anonymous denial and two-account isolation before enabling optional sign-in. Google provider configuration remains pending.
+
+## Login test implementation — 22 October 2026
+- More and onboarding include Save my progress. SDK 2.118.0 is vendored unchanged with its MIT license; PKCE code exchange, account display, sign-out and explicit backup review are implemented. No client secret or privileged key is shipped.
+- `fitness-app/account-config.json`: enabled true (identity), backupEnabled false (fitness writes). Keep backupEnabled false until backend verification and real account/callback tests pass. Do not describe cloud Save/Restore as live.
+- Explicit Save/Restore handlers are implemented behind the write gate, with account ownership, locked operations, safety downloads, validation, revision conflicts and storage failure handling. There is no automatic merge or sync. Owner association is preserved in device snapshots. A signed-out retained dataset stays readable on the device by the user's explicit choice.
+- `backend/002_verify_backup_isolation.sql` is a transactional regression script for the owner to run in SQL Editor. It tests role permissions, two distinct identities, own-only reads, RPC writes, collisions, stale revisions and account deletion cascade, then rolls back. It has NOT been executed here. It does not replace real two-account OAuth testing.
+- Next owner step after deployment: open Fitness → More → Continue with Google, finish sign-in in the same browser and report result. Never request session tokens/auth codes in chat.
+- Remaining: live backend test above, two real-account tests, session expiry/multi-tab recovery checks, remote/device replacement review, secure self-service account deletion, public privacy/support pages, production OAuth branding/verification as applicable. Existing test-account deletion can be requested from the owner support address; no automated account deletion claim.

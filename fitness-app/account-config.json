@@ -1,6 +1,7 @@
 {
-  "enabled": false,
+  "enabled": true,
   "provider": "supabase",
   "projectUrl": "https://uwfetvlddswsmqcitgzy.supabase.co",
-  "publishableKey": "sb_publishable_D1IQycyQZ7NvjOFmRT99gg_GPxtU1i_"
+  "publishableKey": "sb_publishable_D1IQycyQZ7NvjOFmRT99gg_GPxtU1i_",
+  "backupEnabled": false
 }
