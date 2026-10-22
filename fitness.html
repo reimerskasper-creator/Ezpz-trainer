@@ -6330,6 +6330,7 @@ function selectedWellnessRecord(metric,date,index=wellnessIndex()){
 }
 function effectiveSleepLog(){const index=wellnessIndex(),dates=new Set(Object.keys(index.manualSleep));for(const key of index.groups.keys())if(key.startsWith('sleep|'))dates.add(key.slice(6));const out={};for(const date of dates){const r=selectedWellnessRecord('sleep',date,index);if(r)out[date]=r.value}return out}
 function wellnessTransaction(fields){const before=Object.fromEntries(Object.keys(fields).map(k=>[k,{had:Object.hasOwn(state,k),value:state[k]}]));Object.assign(state,fields);if(save())return true;for(const [k,old] of Object.entries(before)){if(old.had)state[k]=old.value;else delete state[k]}return false}
+function sameWellnessMeasurement(a,b){const comparable=r=>JSON.stringify(Object.keys(r).filter(k=>k!=='syncedAt'&&k!=='updatedAt').sort().map(k=>[k,r[k]]));return comparable(a)===comparable(b)}
 function sameWellnessRecord(a,b){const comparable=r=>{const {syncedAt,...rest}=r;return JSON.stringify(rest)};return comparable(a)===comparable(b)}
 function prepareWellnessImport(payload){
  if(!payload||payload.version!==1||!Array.isArray(payload.records)||payload.records.length>10000)throw Error('Use a version 1 daily-data batch with at most 10,000 records.');
@@ -6425,7 +6426,7 @@ async function runNativeHealth(action){
   const before=JSON.stringify(state);out.textContent='Reading WHOOP data…';const payload=await bridge.sync();
   if(before!==JSON.stringify(state))throw Error('Your device records changed while reading. Tap Sync now again.');
   const previous=cleanWellnessRecords(state.wellnessRecords).filter(r=>r.source==='whoop-health-connect');
-  const count=applyNativeHealthSnapshot(payload),next=cleanWellnessRecords(state.wellnessRecords).filter(r=>r.source==='whoop-health-connect'),changed=next.filter(r=>!previous.some(old=>wellnessRecordKey(old)===wellnessRecordKey(r)&&sameWellnessRecord(old,r))).length,removed=previous.filter(r=>!next.some(n=>wellnessRecordKey(n)===wellnessRecordKey(r))).length;
+  const count=applyNativeHealthSnapshot(payload),next=cleanWellnessRecords(state.wellnessRecords).filter(r=>r.source==='whoop-health-connect'),changed=next.filter(r=>!previous.some(old=>wellnessRecordKey(old)===wellnessRecordKey(r)&&sameWellnessMeasurement(old,r))).length,removed=previous.filter(r=>!next.some(n=>wellnessRecordKey(n)===wellnessRecordKey(r))).length;
   nativeHealthLastMessage=count?(changed?'Imported '+changed+' new or updated measurement'+(changed===1?'':'s')+'.':'No new records. Your saved imports are up to date.')+(removed?' '+removed+' removed record'+(removed===1?'':'s')+' reconciled.':'')+' Manual entries stay saved.':'No measurements shared for the permitted types in the last seven days.'+(removed?' Removed records were reconciled.':'')+' Check WHOOP sharing and EZPZ permissions in Details.';
   if(tab==='connected-apps')connectedAppsPage();
   const current=document.getElementById('native-health-status');if(current)current.textContent=nativeHealthLastMessage;

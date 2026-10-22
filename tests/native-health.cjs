@@ -1,8 +1,12 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const scripts=[...fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),screen={innerHTML:''};let fail=false,writes=0,stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2});
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {movementMini,sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {sameWellnessMeasurement,movementMini,sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 const date=api.foodDate(),stamp=new Date().toISOString();
+const sample={metric:'steps',value:100,date,source:'whoop-health-connect',externalId:'same-day',unit:'count',updatedAt:stamp};
+assert(api.sameWellnessMeasurement(sample,{...sample,updatedAt:new Date(Date.parse(stamp)+60000).toISOString(),syncedAt:stamp}));
+assert(!api.sameWellnessMeasurement(sample,{...sample,value:101}));
+assert(!api.sameWellnessMeasurement({...sample,stepBasis:'whoop-period',periodStart:stamp},{...sample,stepBasis:'whoop-period',periodStart:new Date(Date.parse(stamp)+1).toISOString()}));
 const row=(metric,value)=>({metric,value,date,unit:metric==='steps'?'count':'kcal',source:'whoop-health-connect',externalId:metric+'-'+date,updatedAt:stamp});
 const snapshot=(records,metrics=['steps'])=>({version:1,from:date,through:date,metrics,records});
 assert.equal(api.nativeHealthPanel(),'');
