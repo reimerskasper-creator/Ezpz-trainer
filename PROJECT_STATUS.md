@@ -479,3 +479,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Footer-only rest timer — 21 October 2026
 - Removed the large inline timer and its page space from Train. The exercise cards immediately follow the jump selector. Widened the footer countdown with larger numerals.
 - Preserved existing presets, pause/resume, clear and Auto after a set in a bottom-sheet dialog opened by the footer ellipsis. Countdown still shares the existing persisted deadline and updates on reload. Main footer timer keeps direct start/pause/resume behavior.
+
+## Eat plan and discovery color harmony — 21 October 2026
+- Styled My plan as a dark photo-backed banner and grouped Explore recipes/count/search in a dark green search panel matching meal categories. Existing planner access, recipe search/filtering, counts, dish content and saved records unchanged.
+- Navigation/Zone redesign is under discussion only; main tabs and More access unchanged.
