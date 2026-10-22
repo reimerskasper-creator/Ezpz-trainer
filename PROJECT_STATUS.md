@@ -483,3 +483,10 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Eat plan and discovery color harmony — 21 October 2026
 - Styled My plan as a dark photo-backed banner and grouped Explore recipes/count/search in a dark green search panel matching meal categories. Existing planner access, recipe search/filtering, counts, dish content and saved records unchanged.
 - Navigation/Zone redesign is under discussion only; main tabs and More access unchanged.
+
+## Four pillar navigation and visual overhaul — 21 October 2026
+- Resumed user-approved work after conversation interruption. Bottom navigation is Home → Eat → Sleep → Train → Zone; More remains directly available in the header. Swipe order follows the new main tabs; Progress remains accessible through Home and More and Zone.
+- Sleep retains the validated dated hours/minutes and goal form, adds a blue-accent photographic introduction, actual last-night status, current-week logged-duration bars and an optional wind-down disclosure. Missing nights remain missing. No generated or illustrative values.
+- Zone is now a full lavender-accent page with existing explicit check-in/edit/undo, simple activity suggestions, shared weekly foundation shortcuts and a Progress link. Check-in completion renders Zone again when entered there; Home still preserves its existing behavior.
+- Manual workout builder now uses dark forest cards, gold exercise numbers, related cover imagery and high-contrast light fields. Existing options, validations, draft handling and save destinations remain unchanged.
+- Updated navigation-dependent mobile tests and swipe expectations. Local sleep, Zone, own-workout, recipe protection, overall, Home, weekly foundation, training-usability and daily-refinement tests pass. CUA inspected Sleep and Zone and confirmed explicit Zone save updates its page and weekly marker. Hosted mobile/deployment checks pending.

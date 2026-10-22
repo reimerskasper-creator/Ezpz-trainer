@@ -9,9 +9,9 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
  async function gesture(selector,points,options={}){await page.locator(selector).first().evaluate((el,{points,options})=>{const touches=points.map(([x,y])=>new Touch({identifier:1,target:el,clientX:x,clientY:y}));const send=(type,t,live)=>el.dispatchEvent(new TouchEvent(type,{bubbles:true,cancelable:true,touches:live,changedTouches:[t],targetTouches:live}));send('touchstart',touches[0],[touches[0]]);for(const t of touches.slice(1,-1))send('touchmove',t,[t]);if(options.cancel)send('touchcancel',touches.at(-1),[]);else send('touchend',touches.at(-1),[])},{points,options});}
  const before=await page.evaluate(key=>localStorage.getItem(key),key);
  await nativeSwipe(false);assert.equal(await view(),'home','No wrap before Home');
- for(const dest of ['train','eat','progress','more']){await nativeSwipe(true);assert.equal(await view(),dest,'Native swipe to '+dest);assert.equal(await page.locator('.nav [aria-current="page"]').getAttribute('data-tab'),dest)}
- await nativeSwipe(true);assert.equal(await view(),'more','No wrap after More');
- for(const dest of ['progress','eat','train','home']){await nativeSwipe(false);assert.equal(await view(),dest)}
+ for(const dest of ['eat','sleep','train','zone']){await nativeSwipe(true);assert.equal(await view(),dest,'Native swipe to '+dest);assert.equal(await page.locator('.nav [aria-current="page"]').getAttribute('data-tab'),dest)}
+ await nativeSwipe(true);assert.equal(await view(),'zone','No wrap after Zone');
+ for(const dest of ['train','sleep','eat','home']){await nativeSwipe(false);assert.equal(await view(),dest)}
  assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before,'Swiping alone does not change saved data');
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:width/2,y:600}]});for(let i=1;i<=8;i++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:width/2,y:600-i*35}]});await page.waitForTimeout(18)}await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await page.waitForTimeout(200);assert.equal(await view(),'home');assert(await page.evaluate(()=>scrollY>30),'Normal vertical touch scrolling still works');await page.evaluate(()=>window.scrollTo(0,0));
 
@@ -20,8 +20,8 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
  await page.locator('.method-trigger').click();await gesture('#ezpz-method-title',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'home');await page.keyboard.press('Escape');
  await page.evaluate(()=>{const el=document.createElement('div');el.id='swipe-carousel';el.style='width:100px;overflow-x:auto';el.innerHTML='<span style="display:block;width:500px">Carousel</span>';screen.prepend(el)});await gesture('#swipe-carousel span',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'home','Nested horizontal carousel keeps gesture');
  await page.locator('[data-tab="train"]').click();const input=page.locator('[data-set-reps="0-0"]');await input.fill('9');await gesture('[data-set-reps="0-0"]',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'train','Input gesture does not navigate');await input.blur();
- await nativeSwipe(false);assert.equal(await view(),'home');await nativeSwipe(true);assert.equal(await view(),'train');assert.equal(await input.inputValue(),'9','Draft survives swipe round trip');
+ await nativeSwipe(false);assert.equal(await view(),'sleep');await nativeSwipe(true);assert.equal(await view(),'train');assert.equal(await input.inputValue(),'9','Draft survives swipe round trip');
  await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await input.inputValue(),'9','Draft survives reload');
- await page.evaluate(()=>{tab='sleep';render()});await gesture('.sleep-hero',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'sleep','Nested view does not swipe away');
+ await page.evaluate(()=>{tab='shopping';render()});await gesture('.shopping-head',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'shopping','Nested view does not swipe away');
  assert.deepEqual(errors,[]);await context.close();console.log('PASS swipe navigation '+width);
  }}finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});
