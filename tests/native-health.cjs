@@ -30,7 +30,7 @@ assert.equal(api.selectedWellnessRecord('steps',date).value,100);
 const sleep={metric:'sleep',value:411,date,unit:'minutes',source:'whoop-health-connect',externalId:'sleep-'+date,updatedAt:stamp};
 api.applyNativeHealthSnapshot(snapshot([{...sleep,deepMinutes:0,remMinutes:0}],['sleep']));
 api.applyNativeHealthSnapshot(snapshot([{...sleep,updatedAt:new Date(Date.parse(stamp)+1).toISOString()}],['sleep']));
-const detail=api.sleepImportDetails(date);assert(detail.includes('Not shared by WHOOP'));assert(!detail.includes('sleep-stage-grid'));assert.equal(api.selectedWellnessRecord('sleep',date).value,411);assert.equal(api.selectedWellnessRecord('sleep',date).deepMinutes,undefined);
+const detail=api.sleepImportDetails(date);assert(!detail.includes('sleep-stage-detail'));assert(detail.includes('wellness-source-sleep'));assert(!detail.includes('sleep-stage-grid'));assert.equal(api.selectedWellnessRecord('sleep',date).value,411);assert.equal(api.selectedWellnessRecord('sleep',date).deepMinutes,undefined);
 // A successful empty raw-total snapshot clears unsupported native totals, preserving manual/other records.
 api.applyNativeHealthSnapshot(snapshot([row('totalCalories',2608.2169)],['totalCalories']));
 api.applyNativeHealthSnapshot(snapshot([],['totalCalories']));

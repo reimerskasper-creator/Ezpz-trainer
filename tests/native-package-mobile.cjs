@@ -62,7 +62,7 @@ assert.equal(await page.evaluate(()=>JSON.stringify(state)===window.beforeCalori
 assert.deepEqual(errors,[]);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 await page.locator('#native-calorie-check').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'native-calorie-check.jpg'),type:'jpeg',quality:85});
 await page.evaluate(()=>{const date=foodDate();applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['sleep'],records:[{metric:'sleep',value:411,date,source:'whoop-health-connect',externalId:'generic-sleep-'+date,unit:'minutes',updatedAt:new Date().toISOString()}]});tab='sleep';render()});
-assert((await page.locator('#sleep-import-detail').innerText()).includes('Not shared by WHOOP'));assert.equal(await page.locator('#sleep-import-detail .sleep-stage-grid').count(),0);await page.locator('.sleep-stage-detail summary').click();assert((await page.locator('#sleep-import-detail').innerText()).includes('Total sleep is still available.'));
+assert.equal(await page.locator('.sleep-stage-detail').count(),0);assert.equal(await page.locator('#wellness-source-sleep').count(),1);assert.equal(await page.evaluate(()=>selectedWellnessRecord('sleep',foodDate()).value),411);
 await page.screenshot({path:path.join(out,'native-package-startup.jpg'),type:'jpeg',quality:85});
 await page.evaluate(()=>{tab='more';render();window.beforeBackup=JSON.stringify(state);window.testBackupMode='cancel'});
 await page.locator('.readiness-panel [data-action="export"]').click();await page.waitForFunction(()=>document.getElementById('backup-status').textContent.includes('cancelled'));
