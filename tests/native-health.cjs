@@ -1,11 +1,19 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const scripts=[...fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),screen={innerHTML:''};let fail=false,writes=0,stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2});
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {movementMini,sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 const date=api.foodDate(),stamp=new Date().toISOString();
 const row=(metric,value)=>({metric,value,date,unit:metric==='steps'?'count':'kcal',source:'whoop-health-connect',externalId:metric+'-'+date,updatedAt:stamp});
 const snapshot=(records,metrics=['steps'])=>({version:1,from:date,through:date,metrics,records});
 assert.equal(api.nativeHealthPanel(),'');
+const yesterday=new Date(Date.parse(date+'T12:00:00Z')-86400000).toISOString().slice(0,10);
+assert(api.movementMini().includes('steps-footprints'));assert(api.movementMini().includes('Today · not logged'));
+api.applyNativeHealthSnapshot({version:1,from:yesterday,through:date,metrics:['steps'],records:[{...row('steps',8061),date:yesterday,externalId:'steps-'+yesterday}]});
+const unchanged=JSON.stringify(api.state),latestCard=api.movementMini();
+assert(latestCard.includes('Latest · '));assert(latestCard.includes('8,061'));assert(latestCard.includes('No count shared for today yet.'));assert(latestCard.includes('Goal met'));assert.equal(JSON.stringify(api.state),unchanged);
+api.applyNativeHealthSnapshot(snapshot([row('steps',0)]));const zeroCard=api.movementMini();assert(!zeroCard.includes('Latest ·'));assert(zeroCard.includes('0<small> steps'));assert(!zeroCard.includes('steps-footprints'));
+api.applyNativeHealthSnapshot({version:1,from:yesterday,through:date,metrics:['steps'],records:[]});
+
 assert(api.saveManualMovement(date,{steps:'100',activeCalories:'',totalCalories:'',stepGoal:'8000'}));
 assert.equal(api.applyNativeHealthSnapshot(snapshot([row('steps',2000)])),1);
 assert.equal(api.selectedWellnessRecord('steps',date).value,100);

@@ -15,6 +15,22 @@ assert.equal(await page.evaluate(()=>selectedWellnessRecord('steps',foodDate()).
 // Simulate an old unsupported aggregate, then a successful native read with no raw total.
 await page.evaluate(()=>{const date=foodDate(),stamp=new Date().toISOString();applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['totalCalories'],records:[{metric:'totalCalories',value:2608.2169,date,source:'whoop-health-connect',externalId:'old-total-'+date,unit:'kcal',updatedAt:stamp}]});applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['totalCalories','activeCalories'],records:[{metric:'activeCalories',value:465.882,date,source:'whoop-health-connect',externalId:'activity-'+date,unit:'kcal',updatedAt:stamp}]})});
 assert.equal(await page.evaluate(()=>selectedWellnessRecord('totalCalories',foodDate())),null);
+await page.evaluate(()=>{tab='home';render();window.beforeStepVisual=JSON.stringify(state)});
+assert((await page.locator('.foundation-steps').innerText()).includes('Your steps'));
+for(const width of [320,390,430]){
+ await page.setViewportSize({width,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+ await page.locator('.foundation-steps').screenshot({path:path.join(out,'steps-card-'+width+'.jpg'),type:'jpeg',quality:90});
+}
+await page.setViewportSize({width:390,height:844});
+await page.evaluate(()=>{const today=foodDate(),prior=datePlus(today,-1),r=state.wellnessRecords.find(r=>r.metric==='steps');state.wellnessRecords=state.wellnessRecords.filter(r=>r.metric!=='steps');state.wellnessRecords.push({...r,date:prior});render()});
+assert((await page.locator('.foundation-steps').innerText()).includes('Latest ·'));
+assert((await page.locator('.foundation-steps').innerText()).includes('No count shared for today yet.'));
+await page.locator('.foundation-steps').screenshot({path:path.join(out,'steps-card-latest.jpg'),type:'jpeg',quality:90});
+await page.evaluate(()=>{state.wellnessRecords=state.wellnessRecords.filter(r=>r.metric!=='steps');render()});
+assert((await page.locator('.foundation-steps').innerText()).includes('Today · not logged'));
+await page.locator('.foundation-steps').screenshot({path:path.join(out,'steps-card-empty.jpg'),type:'jpeg',quality:90});
+await page.evaluate(()=>{state=JSON.parse(window.beforeStepVisual);render()});
+await page.locator('.foundation-steps').click();await page.waitForFunction(()=>tab==='movement');
 await page.evaluate(()=>{tab='movement';render()});
 assert((await page.locator('#screen').innerText()).includes('WHOOP reporting period'));
 assert((await page.locator('#screen').innerText()).includes('Total daily calories: Not available from WHOOP'));
