@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),asse
 const root=path.resolve(__dirname,'..'),native=path.join(root,'native'),html=fs.readFileSync(path.join(native,'www/index.html'),'utf8');
 assert(html.indexOf('src="./capacitor-runtime.js"')>=0);
 assert(html.indexOf('src="./capacitor-runtime.js"')<html.indexOf('<script>'));
-const methods=['status','requestPermissions','sync','openSettings'],calls=[];
+const methods=['status','requestPermissions','sync','openSettings','checkSteps'],calls=[];
 const ctx=vm.createContext({console,androidBridge:{},Capacitor:{isNativePlatform:()=>true,isPluginAvailable:()=>true,PluginHeaders:[{name:'EzpzHealthConnect',methods:methods.map(name=>({name,rtype:'promise'}))}],nativePromise:async(plugin,method)=>{calls.push([plugin,method]);return {available:true,metrics:[]}}}});ctx.window=ctx;
 const source=fs.readFileSync(path.join(root,'fitness.html'),'utf8');
 const bridgeCode=source.slice(source.indexOf('let nativeHealthPlugin=null;'),source.indexOf('let nativeHealthBusy=false;'));

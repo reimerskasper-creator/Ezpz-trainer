@@ -62,6 +62,8 @@ jobs:
         if: always()
         with:
           name: Android-startup-review
-          path: test-results/native-package-startup.jpg
+          path: |
+            test-results/native-package-startup.jpg
+            test-results/native-step-check.jpg
           if-no-files-found: ignore
           retention-days: 14

@@ -57,6 +57,57 @@ class HealthConnectPlugin : Plugin() {
         try { activity.startActivity(Intent(HealthConnectClient.ACTION_HEALTH_CONNECT_SETTINGS)); call.resolve() }
         catch (_: Exception) { call.reject("Open Health Connect from Android Settings to change EZPZ permissions.") }
     }
+    /** Read-only comparison: never substitutes raw sums for Health Connect's deduped totals. */
+    @PluginMethod fun checkSteps(call: PluginCall) {
+        scope.launch {
+            try {
+                val hc = client()
+                val permission = HealthPermission.getReadPermission(StepsRecord::class)
+                check(permission in hc.permissionController.getGrantedPermissions()) { "Allow EZPZ Steps access first." }
+                val zone = ZoneId.systemDefault()
+                val now = Instant.now()
+                val day = now.atZone(zone).toLocalDate().minusDays(1)
+                val (start, end) = StepDays.bounds(day, zone)
+                suspend fun total(a: Instant, b: Instant): Long? = hc.aggregate(
+                    AggregateRequest(setOf(StepsRecord.COUNT_TOTAL), TimeRangeFilter.between(a, b), origin)
+                )[StepsRecord.COUNT_TOTAL]
+                val localTotal = total(start, end)
+                val utcTotal = total(day.atStartOfDay(ZoneOffset.UTC).toInstant(), day.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant())
+                val storedDateTotal = hc.aggregate(AggregateRequest(setOf(StepsRecord.COUNT_TOTAL),
+                    TimeRangeFilter.between(day.atStartOfDay(), day.plusDays(1).atStartOfDay()), origin))[StepsRecord.COUNT_TOTAL]
+                val records = mutableListOf<StepsRecord>()
+                var token: String? = null
+                do {
+                    val page = hc.readRecords(ReadRecordsRequest(StepsRecord::class,
+                        TimeRangeFilter.between(start.minus(Duration.ofDays(1)), minOf(end.plus(Duration.ofDays(1)), now)),
+                        dataOriginFilter = origin, pageSize = 1000, pageToken = token))
+                    records.addAll(page.records)
+                    token = page.pageToken?.takeIf { it.isNotBlank() }
+                    check(records.size <= 10000) { "Too many step records for a compact check. Your saved data was not changed." }
+                } while (token != null)
+                check(permission in hc.permissionController.getGrantedPermissions()) { "Steps access changed. Review permissions and check again." }
+                val lines = mutableListOf(
+                    "EZPZ step check v1", "Checked: $now", "Day: $day", "Phone zone: $zone",
+                    "Source filter: com.whoop.android only", "Local window: $start to $end",
+                    "Health Connect local-day steps: ${localTotal ?: "unavailable"}",
+                    "Health Connect UTC-day steps: ${utcTotal ?: "unavailable"}",
+                    "Health Connect recorded-local-date steps: ${storedDateTotal ?: "unavailable"}",
+                    "WHOOP raw records in surrounding window: ${records.size}",
+                    "Raw record counts below are unsplit record sums, NOT daily totals."
+                )
+                for ((label, group) in records.groupBy { StepDays.recordDate(it.startTime, null, zone) }.toSortedMap())
+                    lines.add("By record start on phone: $label / ${group.size} records / ${group.sumOf { it.count }} raw steps")
+                for ((label, group) in records.groupBy { StepDays.recordDate(it.startTime, it.startZoneOffset, zone) }.toSortedMap())
+                    lines.add("By record start with supplied offset: $label / ${group.size} records / ${group.sumOf { it.count }} raw steps")
+                val relevant = records.filter { it.startTime < end && it.endTime > start }
+                lines.add("Records overlapping local day: ${relevant.size}")
+                val examples = relevant.sortedByDescending { Duration.between(it.startTime, it.endTime) }.take(8)
+                for (r in examples) lines.add("Record: ${r.count} steps / ${r.startTime} to ${r.endTime} / offsets ${r.startZoneOffset ?: "missing"}, ${r.endZoneOffset ?: "missing"} / updated ${r.metadata.lastModifiedTime}")
+                lines.add("No device records were changed. No phone-counted steps were included.")
+                call.resolve(JSObject().put("date", day.toString()).put("total", localTotal ?: org.json.JSONObject.NULL).put("text", lines.joinToString("\n")))
+            } catch (e: Exception) { call.reject(if (e is SecurityException) "Allow EZPZ Steps access, then check again." else e.message ?: "Step check failed. Your records were kept.") }
+        }
+    }
     @PluginMethod fun sync(call: PluginCall) {
         scope.launch {
             try {
@@ -77,8 +128,8 @@ class HealthConnectPlugin : Plugin() {
                 }
                 for (offset in 0L..6L) {
                     val day = first.plusDays(offset)
-                    val start = day.atStartOfDay(zone).toInstant()
-                    val end = minOf(day.plusDays(1).atStartOfDay(zone).toInstant(), now)
+                    val (start, dayEnd) = StepDays.bounds(day, zone)
+                    val end = minOf(dayEnd, now)
                     val range = TimeRangeFilter.between(start, end)
                     if ("steps" in metrics) {
                         val r = hc.aggregate(AggregateRequest(setOf(StepsRecord.COUNT_TOTAL), range, origin))

@@ -31,3 +31,7 @@ The reader imports only records with Android data origin `com.whoop.android`. Cr
 Steps and active/total calories use Health Connect aggregation filtered to WHOOP. Active and total energy are separate. Sleep is grouped by wake date using each record's end offset (current timezone fallback), unioned to avoid overlapping/duplicate sessions, and awake/out-of-bed intervals are subtracted. Unknown gaps count as session duration; this may differ from WHOOP's displayed sleep calculation. Stages are included only when available and internally consistent. No WHOOP recovery/strain/HRV or food macros are imported.
 
 Remaining release work: real-device consent/read/export/restore verification, native Google login, stable signing, privacy policy review and Play health-data declarations. Do not describe this as working on a phone until the APK and permissions are verified there.
+
+## Read-only step comparison
+
+More → Connected apps → Check step totals reads yesterday's WHOOP-only aggregate using phone-zone, UTC and record-local date boundaries. It inspects a bounded, paginated surrounding record window and formats one copyable report with dates, counts and up to eight record time ranges. It does not import, delete, select a source or upload anything. Raw counts are explicitly marked as unsplit record sums and are never used as replacements for deduplicated daily totals. This is evidence collection for the reported 8,061-versus-7,478 mismatch; the underlying cause remains unverified until the phone report is reviewed.
