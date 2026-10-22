@@ -20,7 +20,7 @@ jobs:
       - name: Install browser test dependency
         run: npm install --no-save --no-package-lock playwright@1.64.1
       - name: Install Chromium
-        run: npx playwright install --with-deps chromium
+        run: npx playwright install --only-shell chromium
       - name: Run app and mobile checks
         env:
           EZPZ_VISUAL_LOG: ${{ contains(github.event.head_commit.message, '[visual-review]') && '1' || '0' }}
