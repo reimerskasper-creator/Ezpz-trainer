@@ -19,6 +19,14 @@ const sleep={metric:'sleep',value:411,date,unit:'minutes',source:'whoop-health-c
 api.applyNativeHealthSnapshot(snapshot([{...sleep,deepMinutes:0,remMinutes:0}],['sleep']));
 api.applyNativeHealthSnapshot(snapshot([{...sleep,updatedAt:new Date(Date.parse(stamp)+1).toISOString()}],['sleep']));
 const detail=api.sleepImportDetails(date);assert(detail.includes('Not shared by WHOOP'));assert(!detail.includes('sleep-stage-grid'));assert.equal(api.selectedWellnessRecord('sleep',date).value,411);assert.equal(api.selectedWellnessRecord('sleep',date).deepMinutes,undefined);
+// A corrected WHOOP period replaces its old calendar total and survives normalization/restore.
+const period={...row('steps',8061),stepBasis:'whoop-period',periodStart:new Date(Date.parse(stamp)-25*3600000).toISOString(),periodEnd:new Date(Date.parse(stamp)-3600000).toISOString()};
+api.applyNativeHealthSnapshot(snapshot([period]));
+let corrected=api.state.wellnessRecords.find(r=>r.source==='whoop-health-connect'&&r.metric==='steps');
+assert.equal(corrected.value,8061);assert.equal(corrected.stepBasis,'whoop-period');assert.equal(api.normalizeWellnessRecord(corrected,true).periodEnd,period.periodEnd);
+assert.equal(api.selectedWellnessRecord('steps',date).value,100); // manual choice stays selected
+api.connectedAppsPage();assert(screen.innerHTML.includes('Imports saved'));assert(!screen.innerHTML.includes('<span>Not connected</span>'));
+for(const bad of [{...period,periodEnd:period.periodStart},{...period,stepBasis:'guess'},{...period,source:'manual'}])assert.equal(api.normalizeWellnessRecord(bad),null);
 let before=JSON.stringify(api.state);
 for(const invalid of [snapshot([row('steps',-1)]),snapshot([{...row('steps',200),source:'manual'}]),snapshot([row('steps',200)],['sleep']),{...snapshot([]),metrics:[]},{...snapshot([]),through:'2999-01-01'}]){
  assert.throws(()=>api.applyNativeHealthSnapshot(invalid));assert.equal(JSON.stringify(api.state),before);

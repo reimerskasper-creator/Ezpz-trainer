@@ -57,7 +57,21 @@ class HealthConnectPlugin : Plugin() {
         try { activity.startActivity(Intent(HealthConnectClient.ACTION_HEALTH_CONNECT_SETTINGS)); call.resolve() }
         catch (_: Exception) { call.reject("Open Health Connect from Android Settings to change EZPZ permissions.") }
     }
-    /** Read-only comparison: never substitutes raw sums for Health Connect's deduped totals. */
+    private suspend fun readWhoopSteps(hc: HealthConnectClient, start: Instant, end: Instant): List<StepsRecord> {
+        val records = mutableListOf<StepsRecord>()
+        var token: String? = null
+        do {
+            val page = hc.readRecords(ReadRecordsRequest(StepsRecord::class,
+                TimeRangeFilter.between(start, end), dataOriginFilter = origin, pageSize = 1000, pageToken = token))
+            records.addAll(page.records)
+            token = page.pageToken?.takeIf { it.isNotBlank() }
+            check(records.size <= 10000) { "Too many WHOOP step records. Saved records were kept." }
+        } while (token != null)
+        return records
+    }
+    private fun stepPeriods(records: List<StepsRecord>, zone: ZoneId, now: Instant) =
+        WhoopStepPeriods.daily(records.map { WhoopStepPeriods.Record(it.startTime, it.endTime, it.endZoneOffset, it.count) }, zone, now)
+    /** Read-only comparison includes both calendar aggregation and whole WHOOP periods. */
     @PluginMethod fun checkSteps(call: PluginCall) {
         scope.launch {
             try {
@@ -75,23 +89,18 @@ class HealthConnectPlugin : Plugin() {
                 val utcTotal = total(day.atStartOfDay(ZoneOffset.UTC).toInstant(), day.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant())
                 val storedDateTotal = hc.aggregate(AggregateRequest(setOf(StepsRecord.COUNT_TOTAL),
                     TimeRangeFilter.between(day.atStartOfDay(), day.plusDays(1).atStartOfDay()), origin))[StepsRecord.COUNT_TOTAL]
-                val records = mutableListOf<StepsRecord>()
-                var token: String? = null
-                do {
-                    val page = hc.readRecords(ReadRecordsRequest(StepsRecord::class,
-                        TimeRangeFilter.between(start.minus(Duration.ofDays(1)), minOf(end.plus(Duration.ofDays(1)), now)),
-                        dataOriginFilter = origin, pageSize = 1000, pageToken = token))
-                    records.addAll(page.records)
-                    token = page.pageToken?.takeIf { it.isNotBlank() }
-                    check(records.size <= 10000) { "Too many step records for a compact check. Your saved data was not changed." }
-                } while (token != null)
+                val records = readWhoopSteps(hc, start.minus(Duration.ofDays(2)), minOf(end.plus(Duration.ofDays(1)), now))
+                val periodResult = runCatching { stepPeriods(records, zone, now) }
+                val period = periodResult.getOrNull()?.get(day)
                 check(permission in hc.permissionController.getGrantedPermissions()) { "Steps access changed. Review permissions and check again." }
                 val lines = mutableListOf(
-                    "EZPZ step check v1", "Checked: $now", "Day: $day", "Phone zone: $zone",
+                    "EZPZ step check v2", "Checked: $now", "Day: $day", "Phone zone: $zone",
                     "Source filter: com.whoop.android only", "Local window: $start to $end",
                     "Health Connect local-day steps: ${localTotal ?: "unavailable"}",
                     "Health Connect UTC-day steps: ${utcTotal ?: "unavailable"}",
                     "Health Connect recorded-local-date steps: ${storedDateTotal ?: "unavailable"}",
+                    "WHOOP reporting-period steps: ${period?.count ?: "unavailable"}",
+                    "Reporting-period check: ${if (periodResult.isFailure) "ambiguous; no import" else if (periodResult.getOrNull() == null) "short records; calendar aggregation" else "whole record on local ending date"}",
                     "WHOOP raw records in surrounding window: ${records.size}",
                     "Raw record counts below are unsplit record sums, NOT daily totals."
                 )
@@ -104,7 +113,7 @@ class HealthConnectPlugin : Plugin() {
                 val examples = relevant.sortedByDescending { Duration.between(it.startTime, it.endTime) }.take(8)
                 for (r in examples) lines.add("Record: ${r.count} steps / ${r.startTime} to ${r.endTime} / offsets ${r.startZoneOffset ?: "missing"}, ${r.endZoneOffset ?: "missing"} / updated ${r.metadata.lastModifiedTime}")
                 lines.add("No device records were changed. No phone-counted steps were included.")
-                call.resolve(JSObject().put("date", day.toString()).put("total", localTotal ?: org.json.JSONObject.NULL).put("text", lines.joinToString("\n")))
+                call.resolve(JSObject().put("date", day.toString()).put("total", (if (periodResult.getOrNull() != null) period?.count else localTotal) ?: org.json.JSONObject.NULL).put("text", lines.joinToString("\n")))
             } catch (e: Exception) { call.reject(if (e is SecurityException) "Allow EZPZ Steps access, then check again." else e.message ?: "Step check failed. Your records were kept.") }
         }
     }
@@ -126,14 +135,24 @@ class HealthConnectPlugin : Plugin() {
                         .put("unit", if (metric == "steps") "count" else if (metric == "sleep") "minutes" else "kcal")
                         .put("value", value).put("updatedAt", now.toString()))
                 }
+                val periods = if ("steps" in metrics) stepPeriods(readWhoopSteps(hc,
+                    first.minusDays(2).atStartOfDay(zone).toInstant(), now), zone, now) else null
                 for (offset in 0L..6L) {
                     val day = first.plusDays(offset)
                     val (start, dayEnd) = StepDays.bounds(day, zone)
                     val end = minOf(dayEnd, now)
                     val range = TimeRangeFilter.between(start, end)
                     if ("steps" in metrics) {
-                        val r = hc.aggregate(AggregateRequest(setOf(StepsRecord.COUNT_TOTAL), range, origin))
-                        r[StepsRecord.COUNT_TOTAL]?.let { add("steps", day, it) }
+                        if (periods != null) {
+                            periods[day]?.let {
+                                add("steps", day, it.count)
+                                rows.getJSONObject(rows.length() - 1).put("stepBasis", "whoop-period")
+                                    .put("periodStart", it.start.toString()).put("periodEnd", it.end.toString())
+                            }
+                        } else {
+                            val r = hc.aggregate(AggregateRequest(setOf(StepsRecord.COUNT_TOTAL), range, origin))
+                            r[StepsRecord.COUNT_TOTAL]?.let { add("steps", day, it) }
+                        }
                     }
                     if ("activeCalories" in metrics) {
                         val r = hc.aggregate(AggregateRequest(setOf(ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL), range, origin))
