@@ -30,6 +30,16 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           npm run sync
+      - name: Verify packaged app startup with actual Capacitor scripts
+        run: |
+          node tests/native-runtime.cjs
+          npm install --no-save --no-package-lock playwright@1.64.1
+          npx playwright install --only-shell chromium
+          node tests/native-package-mobile.cjs
+      - uses: actions/cache@v4
+        with:
+          path: ~/.android/debug.keystore
+          key: ezpz-fitness-debug-signing-v1
       - name: Build and test Android
         working-directory: native/android
         run: |
@@ -39,4 +49,11 @@ jobs:
         with:
           name: EZPZ-Fitness-Android-test
           path: native/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Android-startup-review
+          path: test-results/native-package-startup.jpg
+          if-no-files-found: ignore
           retention-days: 14

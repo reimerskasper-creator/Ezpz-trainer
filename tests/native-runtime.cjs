@@ -1,0 +1,13 @@
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'..'),native=path.join(root,'native'),html=fs.readFileSync(path.join(native,'www/index.html'),'utf8');
+assert(html.indexOf('src="./capacitor-runtime.js"')>=0);
+assert(html.indexOf('src="./capacitor-runtime.js"')<html.indexOf('<script>'));
+const methods=['status','requestPermissions','sync','openSettings'],calls=[];
+const ctx=vm.createContext({console,androidBridge:{},Capacitor:{isNativePlatform:()=>true,isPluginAvailable:()=>true,PluginHeaders:[{name:'EzpzHealthConnect',methods:methods.map(name=>({name,rtype:'promise'}))}],nativePromise:async(plugin,method)=>{calls.push([plugin,method]);return {available:true,metrics:[]}}}});ctx.window=ctx;
+const source=fs.readFileSync(path.join(root,'fitness.html'),'utf8');
+const bridgeCode=source.slice(source.indexOf('let nativeHealthPlugin=null;'),source.indexOf('let nativeHealthBusy=false;'));
+vm.runInContext(bridgeCode,ctx);
+assert.equal(vm.runInContext('nativeHealthBridge()',ctx),null,'Raw native bridge without the JS runtime must not crash startup');
+vm.runInContext(fs.readFileSync(path.join(native,'www/capacitor-runtime.js'),'utf8'),ctx);
+assert.equal(vm.runInContext('typeof Capacitor.registerPlugin',ctx),'function');
+(async()=>{for(const method of methods)await vm.runInContext('nativeHealthBridge().'+method+'()',ctx);assert.deepEqual(calls,methods.map(m=>['EzpzHealthConnect',m]));assert(vm.runInContext('nativeHealthBridge()===nativeHealthBridge()',ctx));console.log('PASS: packaged runtime loads before app, missing runtime is safe, real Capacitor registration routes all four native methods and reuses one proxy');})().catch(e=>{console.error(e);process.exitCode=1});
