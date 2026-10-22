@@ -464,3 +464,6 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ## Food diary date panel — 21 October 2026
 - Styled the date navigation as a cohesive dark green band between the diary summary and nutrition panel. High-contrast date field, lighter label, outlined day arrows and clear disabled future navigation replace the unfinished pale strip. Native date picker, day selection, limits and stored meals remain unchanged.
+
+## Dark recipe category menu — 21 October 2026
+- Restyled the four meal-category tiles as dark forest green cards with white labels, muted readable counts and preserved dish thumbnails. Active category uses a richer green surface and clear mint border; keyboard focus and pressed feedback remain distinct. Existing selection/filtering, counts, recipes and photos unchanged.
