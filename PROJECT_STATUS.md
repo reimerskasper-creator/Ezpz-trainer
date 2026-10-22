@@ -461,3 +461,6 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Dark exercise cards — 21 October 2026
 - Replaced the translucent pale green set logger with an opaque deep charcoal-green surface. Related header photographs remain; one faint equipment accent sits in the bottom corner away from inputs. Solid high-contrast set rows and light numeric fields retain clear completed/invalid/unchecked states.
 - Logging actions now use richer green/gold/blue. Next weight, Swap and Technique panels use restrained solid colors instead of competing full photographs; all handlers, draft saving and workout data are unchanged.
+
+## Food diary date panel — 21 October 2026
+- Styled the date navigation as a cohesive dark green band between the diary summary and nutrition panel. High-contrast date field, lighter label, outlined day arrows and clear disabled future navigation replace the unfinished pale strip. Native date picker, day selection, limits and stored meals remain unchanged.
