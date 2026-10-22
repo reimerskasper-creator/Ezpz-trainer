@@ -67,5 +67,6 @@ jobs:
             test-results/native-step-check.jpg
             test-results/native-step-period.jpg
             test-results/native-calorie-check.jpg
+            test-results/native-backup-save.jpg
           if-no-files-found: ignore
           retention-days: 14
