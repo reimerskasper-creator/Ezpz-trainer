@@ -117,6 +117,71 @@ class HealthConnectPlugin : Plugin() {
             } catch (e: Exception) { call.reject(if (e is SecurityException) "Allow EZPZ Steps access, then check again." else e.message ?: "Step check failed. Your records were kept.") }
         }
     }
+    /** Inspect calories without importing or changing records; aggregates can differ from raw entries. */
+    @PluginMethod fun checkCalories(call: PluginCall) {
+        scope.launch {
+            try {
+                val hc = client()
+                val zone = ZoneId.systemDefault()
+                val now = Instant.now()
+                val today = now.atZone(zone).toLocalDate()
+                val day = LocalDate.parse(call.getString("date") ?: today.minusDays(1).toString())
+                check(day >= today.minusDays(6) && day <= today) { "Choose a date in the last seven days." }
+                val permissions = hc.permissionController.getGrantedPermissions()
+                val totalPermission = HealthPermission.getReadPermission(TotalCaloriesBurnedRecord::class)
+                val activePermission = HealthPermission.getReadPermission(ActiveCaloriesBurnedRecord::class)
+                val allowed = setOf(totalPermission, activePermission).intersect(permissions)
+                check(allowed.isNotEmpty()) { "Allow EZPZ calorie read access first." }
+                val (start, dayEnd) = StepDays.bounds(day, zone)
+                val end = minOf(dayEnd, now)
+                val range = TimeRangeFilter.between(start, end)
+                val readStart = start.minus(Duration.ofDays(2))
+                val readEnd = minOf(dayEnd.plus(Duration.ofDays(1)), now)
+                val lines = mutableListOf("EZPZ calorie check v1", "Checked: $now", "Day: $day", "Phone zone: $zone",
+                    "Source filter: com.whoop.android only", "Local window: $start to $end", "Raw window: $readStart to $readEnd")
+                fun kcal(value: Double?) = value?.let { String.format(java.util.Locale.ROOT, "%.3f", it) } ?: "unavailable"
+                if (totalPermission in allowed) {
+                    val aggregate = hc.aggregate(AggregateRequest(setOf(TotalCaloriesBurnedRecord.ENERGY_TOTAL), range, origin))
+                    lines.add("Health Connect local-day total kcal: ${kcal(aggregate[TotalCaloriesBurnedRecord.ENERGY_TOTAL]?.inKilocalories)}")
+                    val utcStart=day.atStartOfDay(ZoneOffset.UTC).toInstant()
+                    val utcEnd=minOf(day.plusDays(1).atStartOfDay(ZoneOffset.UTC).toInstant(),now)
+                    val utc=hc.aggregate(AggregateRequest(setOf(TotalCaloriesBurnedRecord.ENERGY_TOTAL),TimeRangeFilter.between(utcStart,utcEnd),origin))
+                    lines.add("Health Connect UTC-day total kcal: ${kcal(utc[TotalCaloriesBurnedRecord.ENERGY_TOTAL]?.inKilocalories)}")
+                    val records=mutableListOf<TotalCaloriesBurnedRecord>()
+                    var token: String?=null
+                    do {
+                        val page=hc.readRecords(ReadRecordsRequest(TotalCaloriesBurnedRecord::class,TimeRangeFilter.between(readStart,readEnd),dataOriginFilter=origin,pageSize=1000,pageToken=token))
+                        records.addAll(page.records);token=page.pageToken?.takeIf { it.isNotBlank() }
+                        check(records.size<=10000) { "Too many calorie records for a compact report. Saved records were kept." }
+                    } while(token!=null)
+                    lines.add("WHOOP raw total-calorie records in window: ${records.size}")
+                    for((date,group) in records.groupBy { StepDays.recordDate(it.endTime.minusNanos(1),it.endZoneOffset,zone) }.toSortedMap())
+                        lines.add("By total-record ending date: $date / ${group.size} records / ${kcal(group.sumOf { it.energy.inKilocalories })} raw kcal (unsplit; not a daily total)")
+                    for(r in records.sortedByDescending { Duration.between(it.startTime,it.endTime) }.take(8))
+                        lines.add("Total record: ${kcal(r.energy.inKilocalories)} kcal / ${r.startTime} to ${r.endTime} / offsets ${r.startZoneOffset}, ${r.endZoneOffset} / updated ${r.metadata.lastModifiedTime}")
+                } else lines.add("Total-calorie access: not granted")
+                if(activePermission in allowed) {
+                    val aggregate=hc.aggregate(AggregateRequest(setOf(ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL),range,origin))
+                    lines.add("Health Connect local-day active kcal: ${kcal(aggregate[ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL]?.inKilocalories)}")
+                    val records=mutableListOf<ActiveCaloriesBurnedRecord>()
+                    var token: String?=null
+                    do {
+                        val page=hc.readRecords(ReadRecordsRequest(ActiveCaloriesBurnedRecord::class,TimeRangeFilter.between(readStart,readEnd),dataOriginFilter=origin,pageSize=1000,pageToken=token))
+                        records.addAll(page.records);token=page.pageToken?.takeIf { it.isNotBlank() }
+                        check(records.size<=10000) { "Too many calorie records for a compact report. Saved records were kept." }
+                    } while(token!=null)
+                    lines.add("WHOOP raw active-calorie records in window: ${records.size}")
+                    for((date,group) in records.groupBy { StepDays.recordDate(it.endTime.minusNanos(1),it.endZoneOffset,zone) }.toSortedMap())
+                        lines.add("By active-record ending date: $date / ${group.size} records / ${kcal(group.sumOf { it.energy.inKilocalories })} raw kcal (unsplit; not a daily total)")
+                    for(r in records.sortedByDescending { Duration.between(it.startTime,it.endTime) }.take(8))
+                        lines.add("Active record: ${kcal(r.energy.inKilocalories)} kcal / ${r.startTime} to ${r.endTime} / offsets ${r.startZoneOffset}, ${r.endZoneOffset} / updated ${r.metadata.lastModifiedTime}")
+                } else lines.add("Active-calorie access: not granted")
+                check(hc.permissionController.getGrantedPermissions().containsAll(allowed)) { "Calorie access changed. Review permissions and check again." }
+                lines.add("Aggregates and raw entries are reported separately. No BMR was read or estimated by EZPZ. No device records were changed.")
+                call.resolve(JSObject().put("date",day.toString()).put("text",lines.joinToString("\n")))
+            } catch(e: Exception) { call.reject(if(e is SecurityException) "Allow EZPZ calorie read access, then check again." else e.message ?: "Calorie check failed. Saved records were kept.") }
+        }
+    }
     @PluginMethod fun sync(call: PluginCall) {
         scope.launch {
             try {
