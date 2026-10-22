@@ -29,14 +29,14 @@ api.state.workoutDrafts['push-a']['sr0-1']='11';api.state.workoutDrafts['push-a'
 assert(api.trainingStats().done===3&&api.trainingStats().complete===1,'Completed exercise count');
 assert(api.activeTrainingExercise()===1,'Resume first unfinished exercise');
 api.rememberExercise(4);assert(api.activeTrainingExercise()===4,'Remember explicitly selected exercise');
-api.state.trainingView='focus';api.train();assert((screen.innerHTML.match(/data-training-card="\d+" open/g)||[]).length===1,'Focus opens one exercise');
-api.state.trainingView='all';api.train();assert((screen.innerHTML.match(/data-training-card="\d+" open/g)||[]).length===6,'All view opens whole workout');
+api.state.trainingCompactAll=false;api.train();assert((screen.innerHTML.match(/data-training-card="\d+" open/g)||[]).length===1,'Focus opens one exercise');
+api.state.trainingCompactAll=true;api.train();assert((screen.innerHTML.match(/data-training-card="\d+" open/g)||[]).length===6,'All view opens whole workout');
 assert(!/undefined|NaN/.test(screen.innerHTML),'Valid training content');
 api.startRestTimer(90);let timer=api.restTimerState();assert(timer.left>=89&&timer.left<=90,'Deadline countdown');
 api.pauseRestTimer();timer=api.restTimerState();assert(timer.paused&&timer.left<=90,'Pause timer');
 api.pauseRestTimer();assert(!api.restTimerState().paused,'Resume timer');
 api.state.restTimer.endsAt=Date.now()-1000;assert(api.restTimerState().left===0,'Elapsed timer remains truthful');
-const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);equal(restored.restTimer,backup.restTimer,'Timer survives backup');assert(restored.trainingView==='all','Training preference survives backup');
+const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);equal(restored.restTimer,backup.restTimer,'Timer survives backup');assert(restored.trainingCompactAll===true,'Training preference survives backup');
 const old=api.state.restTimer;api.startRestTimer(-1);equal(api.state.restTimer,old,'Invalid rest duration ignored');
 api.state.restTimer={duration:90,workoutId:'missing',endsAt:Date.now(),remaining:90};assert(api.restTimerState()===null,'Invalid timer ignored');
 

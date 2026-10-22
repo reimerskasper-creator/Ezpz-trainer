@@ -80,14 +80,12 @@ try{
   await page.screenshot({path:path.join(out,'Logged-food-'+width+'.jpg'),type:'jpeg',quality:85});
 
   await page.locator('[data-tab="train"]').click();
-  await page.locator('.session-overview').evaluate(x=>x.open=true);assert.equal(await page.locator('.training-facts>span').count(),3,'Three clear session summary tiles');
-  assert.equal(await page.locator('.training-header .workout-trigger-copy>small').count(),0,'No repeated exercise/time line');
-  assert((await page.locator('.training-facts').innerText()).includes('TOTAL SETS'));
-  const summaryColors=await page.locator('.training-facts>span').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundColor));assert.equal(new Set(summaryColors).size,3,'Green, gold and blue summary tiles');
-  const controlColors=await page.locator('#training-exercise-0 .exercise-logging-tools>button').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundColor));assert.equal(new Set(controlColors).size,3,'Distinct colored exercise actions');
-  assert.equal(await page.locator('.training-format').count(),1);assert.equal(await page.locator('.session-setting .training-detail-icon').count(),1);
+  assert.equal(await page.locator('.training-options[open]').count(),0,'Secondary controls start closed');
+  assert.equal(await page.locator('.exercise-jump-list').count(),0,'Exercise picker replaces the carousel');
+  assert(await page.locator('[data-set-reps="0-0"]').isVisible(),'Current exercise is directly usable');
+  assert((await page.locator('.compact-training-meta').innerText()).includes('exercises'));
   await checkLayout('Train color harmony');
-  await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),13);
+  if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),13);
   const coverSources=await page.locator('#workout-chooser img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
   assert.equal(new Set(coverSources).size,12);for(const src of coverSources){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Workout photo '+src)}
   await page.locator('#workout-chooser').evaluate(async dialog=>{for(const img of dialog.querySelectorAll('img')){img.loading='eager';await img.decode()}dialog.scrollTop=0});
@@ -100,7 +98,7 @@ try{
   assert.equal(programIds.length,65);
   for(const id of programIds){
    const info=await page.evaluate(id=>{const p=workoutTemplates.find(w=>w.id===id);return {category:p?.category||'Full Body',photo:workoutCover(p||'Full Body').src}},id);
-   await page.locator('[data-action="open-workouts"]').click();
+   if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();
    try{await page.locator('[data-workout-category="'+info.category+'"]').click({timeout:5000})}catch(error){
     console.log('CHOOSER_DIAGNOSTIC',JSON.stringify(await page.evaluate(()=>({scrollY,innerWidth,innerHeight,dialog:document.getElementById('workout-chooser').getBoundingClientRect().toJSON(),items:[...document.querySelectorAll('[data-workout-category]')].slice(0,3).map(e=>{const r=e.getBoundingClientRect();return {category:e.dataset.workoutCategory,rect:r.toJSON(),hit:document.elementFromPoint(r.x+r.width/2,r.y+r.height/2)?.outerHTML.slice(0,250)}})}))));
     const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000));throw error
@@ -132,19 +130,19 @@ try{
    assert.equal(new Set(photos).size,photos.length,'Distinct exercise photos '+id);
    if(id==='kb-foundations'&&width===390){await capture('Kettlebell foundations')}
    if(id==='kb-conditioning')assert.equal(await page.locator('[data-set-weight]').count(),12,'Timed kettlebell sets support kg logging');
-   assert(await page.locator('[data-exercise-jump]').evaluateAll(xs=>xs.every(x=>getComputedStyle(x).backgroundImage.includes('url('))),'Exercise shortcut photos render '+id);
+   assert.equal(await page.locator('#training-exercise-select option').count(),photos.length,'Every exercise is in the compact selector '+id);
    await checkLayout(id);
   }
   // New programs preserve their own draft alongside existing A/B drafts.
   await page.locator('[data-set-reps="0-0"]').fill('11');await page.locator('[data-set-done="0-0"]').check();
   await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'11');
   await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-workout>img').getAttribute('src'),'./program-images/kb-double-strength.jpg');await page.locator('.home-workout>img').evaluate(x=>x.decode());await capture('Selected workout');await page.locator('[data-tab="train"]').click();
-  await page.locator('[data-action="open-workouts"]').click();await page.locator('[data-workout-category="Push"]').click();await page.locator('[data-workout-pick="push-a"]').click();
+  if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();await page.locator('[data-workout-category="Push"]').click();await page.locator('[data-workout-pick="push-a"]').click();
   await page.locator('[data-set-reps="0-0"]').fill('10');await page.locator('[data-set-weight="0-0"]').fill('20');await page.locator('[data-set-done="0-0"]').check();await capture('Train');
   assert((await page.locator('.training-header').evaluate(el=>getComputedStyle(el).backgroundImage)).includes('/workout-images/push.jpg'),'Train hero follows chosen workout');
   if(width===390){const storageBefore=await page.evaluate(key=>localStorage.getItem(key),key);for(const [selector,name] of [['.training-header','Train photo header'],['.workout-progress-card','Train photo progress'],['.training-exercise[open]','Train photo logger'],['.session-footer','Train photo footer']]){const el=page.locator(selector).first();await el.evaluate(x=>x.scrollIntoView({block:'start',behavior:'instant'}));await checkLayout(name);const jpg=await el.screenshot({type:'jpeg',quality:85,path:path.join(out,name.replaceAll(' ','-')+'-'+width+'.jpg')});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')});}assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),storageBefore,'Train photo review must preserve drafts');}
   await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');assert(await page.locator('[data-set-done="0-0"]').isChecked());
-  if(expectUpgrade){await page.waitForFunction(()=>{const b=document.querySelector('[data-set-done="0-0"]')?.getBoundingClientRect();return b&&b.width>=44&&b.height>=44});assert((await page.locator('.set-previous').first().innerText()).includes('18 kg'),'Previous set comparison');const finish=await page.locator('.session-footer').boundingBox(),nav=await page.locator('.nav').boundingBox();assert(finish.y+finish.height<=nav.y+1,'Finish bar overlaps navigation')}
+  if(expectUpgrade){await page.waitForFunction(()=>{const b=document.querySelector('[data-set-done="0-0"]')?.getBoundingClientRect();return b&&b.width>=44&&b.height>=44});await page.locator('#exercise-tools-0>summary').click();assert((await page.locator('#exercise-tools-0 .previous-results').innerText()).includes('18 kg'),'Previous set comparison');await page.locator('#exercise-tools-0>summary').click();const finish=await page.locator('.session-footer').boundingBox(),nav=await page.locator('.nav').boundingBox();assert(finish.y+finish.height<=nav.y+1,'Finish bar overlaps navigation')}
   await page.locator('[data-action="finish"]').click();await page.waitForFunction(()=>document.body.dataset.view==='progress');assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.length,key),25);await checkLayout('Progress');await capture('Progress');
   const progressBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   const summaryPhotos=await page.locator('.progress-summary>section').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundImage));assert.equal(new Set(summaryPhotos).size,3,'Distinct relevant Progress metric photos');assert(summaryPhotos.every(x=>x.includes('url(')),'Progress metrics have photos');
@@ -252,7 +250,7 @@ try{
   await page.locator('[data-tab="train"]').click();
   assert.equal(await page.locator('[data-training-card][open]').count(),1);
   assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'');
-  await page.locator('[data-copy-previous="0"]').click();
+  await page.locator('#exercise-tools-0>summary').click();await page.locator('[data-copy-previous="0"]').click();
   for(const i of [0,1,2]){assert.equal(await page.locator('[data-set-reps="0-'+i+'"]').inputValue(),'8');assert.equal(await page.locator('[data-set-weight="0-'+i+'"]').inputValue(),'20')}
   assert.equal(await page.locator('[data-set-done]:checked').count(),0,'Copying results must not complete sets');
   await page.locator('[data-set-weight="0-0"]').fill('27.25');
@@ -276,13 +274,13 @@ try{
   assert.equal(await page.locator('[data-set-weight="0-1"]').inputValue(),'27.25');
   assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.duration===30,key));
   assert.notEqual(await page.locator('#footer-rest-clock').innerText(),'0:00');
-  await page.locator('[data-exercise-jump="3"]').click();
+  await page.locator('#training-exercise-select').selectOption('3');
   assert.equal(await page.locator('[data-training-card="3"]').getAttribute('open'),'');assert.equal(await page.locator('[data-training-card][open]').count(),1);
   await page.locator('[data-set-reps="3-0"]').fill('12');
-  await page.locator('[data-training-view="all"]').click();assert.equal(await page.locator('[data-training-card][open]').count(),6);
-  await page.locator('[data-training-view="focus"]').click();assert.equal(await page.locator('[data-training-card][open]').count(),1);
+  await page.locator('.training-options>summary').click();await page.locator('[data-training-view="all"]').click();assert.equal(await page.locator('[data-training-card][open]').count(),6);
+  await page.locator('.training-options>summary').click();await page.locator('[data-training-view="focus"]').click();assert.equal(await page.locator('[data-training-card][open]').count(),1);
   assert.equal(await page.locator('[data-set-reps="3-0"]').inputValue(),'12');
-  await page.locator('[data-action="continue-exercise"]').click();
+  await page.locator('.training-options>summary').click();await page.locator('[data-action="continue-exercise"]').click();
   assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'');
   await page.locator('[data-set-done="0-2"]').check();assert.equal(await page.locator('#exercise-count-0').innerText(),'3/3');
   await page.locator('[data-next-exercise="1"]').click();assert.equal(await page.locator('[data-training-card="1"]').getAttribute('open'),'');
@@ -378,7 +376,7 @@ try{
 
   // Freely named workouts use the same saved-session and training paths.
   await page.locator('[data-tab="train"]').click();
-  await page.locator('[data-action="open-workouts"]').click();
+  if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();
   await page.locator('[data-action="create-my-workout"]').click();
   assert.equal(await page.locator('body').getAttribute('data-view'),'builder');
   assert.equal(await page.locator('.own-workout-settings').getAttribute('open'),null);
@@ -412,7 +410,7 @@ try{
   await capture('Train your own');
   await page.locator('[data-action="finish"]').click();
   await page.locator('[data-tab="train"]').click();
-  await page.locator('[data-action="open-workouts"]').click();
+  if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();
   await page.locator('[data-action="create-my-workout"]').click();
   await page.locator('#builder-title').fill('My quick session');
   await page.locator('#builder-name-0').fill('My own movement');
@@ -484,7 +482,7 @@ try{
  for(const width of [320,390,430]){
   const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
   const initial={...fixture,plannerStart:today,plannerDays:28,plannerOffset:0,workoutSchedule:{[today]:'pull-a'},mealPlan:{[today]:{breakfast:0,breakfastPortion:1.5,lunch:48,lunchPortion:2,dinner:36,dinnerPortion:1}},nutritionTargets:{protein:190,carbs:230,fat:80,calories:2400,source:'manual'}};
-  await context.addInitScript(({key,initial})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(initial))},{key,initial});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(base+'/fitness.html');await page.locator('[data-go="planner"]').first().click();
+  await context.addInitScript(({key,initial})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(initial))},{key,initial});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(base+'/fitness.html');if(await page.locator('body').getAttribute('data-view')==='train')await page.locator('.training-options>summary').click();await page.locator('[data-go="planner"]').first().click();
   const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'My Plan layout '+width);
   const picture=async selector=>page.locator(selector).first().evaluate(x=>getComputedStyle(x).backgroundImage);
   await fits();const before=await page.evaluate(key=>localStorage.getItem(key),key);
@@ -506,7 +504,7 @@ try{
   const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'More / planner back layout '+width);
   for(const origin of ['home','train','eat','more']){
    await page.locator('[data-tab="'+origin+'"]').click();
-   const before=await page.evaluate(key=>localStorage.getItem(key),key);await page.locator('[data-go="planner"]').first().click();assert.equal(await page.locator('body').getAttribute('data-view'),'planner');const back=page.locator('.planner-back'),rect=await back.boundingBox();assert(rect.y>=0&&rect.y+rect.height<150,'Back is visible at the top');assert(rect.height>=44,'Back touch target');assert.equal(await back.getAttribute('data-go'),origin,'Back returns to entry section');await fits();
+   const before=await page.evaluate(key=>localStorage.getItem(key),key);if(await page.locator('body').getAttribute('data-view')==='train')await page.locator('.training-options>summary').click();await page.locator('[data-go="planner"]').first().click();assert.equal(await page.locator('body').getAttribute('data-view'),'planner');const back=page.locator('.planner-back'),rect=await back.boundingBox();assert(rect.y>=0&&rect.y+rect.height<150,'Back is visible at the top');assert(rect.height>=44,'Back touch target');assert.equal(await back.getAttribute('data-go'),origin,'Back returns to entry section');await fits();
    if(width===390&&origin==='more'){const jpg=await page.screenshot({type:'jpeg',quality:85,path:path.join(out,'planner-back.jpg')});captures.push({name:'More My Plan back',src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
    await back.click();assert.equal(await page.locator('body').getAttribute('data-view'),origin);assert.equal(await page.evaluate(()=>scrollY),0);assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before,'Back navigation preserves saved data');
   }
@@ -649,7 +647,7 @@ try{
   const initial=JSON.parse(JSON.stringify(fixture));initial.logs=Array.from({length:2},(_,i)=>({date:new Date(Date.now()-(2-i)*86400000).toISOString(),workoutId:'push-a',title:'Push',exercises:[{name:'Barbell Bench Press',unit:'reps',sets:Array.from({length:3},()=>({reps:'12',kg:'40',done:true}))}]}));initial.workoutDrafts={};initial.units='imperial';initial.workoutSchedule={[new Date(Date.now()+86400000).toLocaleDateString('en-CA')]:'leg-a'};
   await context.addInitScript(({key,initial})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(initial))},{key,initial});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
   await page.goto(base+'/fitness.html');await page.locator('[data-tab="train"]').click();
-  assert((await page.locator('#training-exercise-0 .progression-hint').innerText()).includes('last two sessions'));assert((await page.locator('#training-exercise-0 .progression-hint').innerText()).includes('lb'));
+  await page.locator('#exercise-tools-0>summary').click();assert((await page.locator('#training-exercise-0 .progression-hint').innerText()).includes('last two sessions'));assert((await page.locator('#training-exercise-0 .progression-hint').innerText()).includes('lb'));
   await page.locator('#training-exercise-0 .exercise-swap>summary').click();await page.locator('#swap-0').selectOption('Dumbbell Bench Press');assert.equal(await page.locator('#exercise-name-0').innerText(),'Dumbbell Bench Press');
   await page.locator('[data-set-reps="0-0"]').fill('10');await page.locator('[data-set-weight="0-0"]').fill('100');await page.locator('[data-set-done="0-0"]').check();
   let saved=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);assert(Math.abs(Number(saved.workoutDrafts['push-a']['sw0-0'])-45.359237)<1e-6);assert(saved.workoutDrafts['push-a'].startedAt>0);
