@@ -475,3 +475,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Footer rest timer and profile panel — 21 October 2026
 - Added a compact countdown between Session progress and Finish workout. It shares the existing deadline timer and saved state: tap to start the current exercise rest duration, pause while running, resume while paused, or restart when ready. Updates immediately on Train render and every existing timer tick; no second timer or completion changes.
 - Profile & preferences now uses a dark photo-backed summary, lighter labels and clear chevron, matching More’s existing cards. The expandable settings and controls remain unchanged.
+
+## Footer-only rest timer — 21 October 2026
+- Removed the large inline timer and its page space from Train. The exercise cards immediately follow the jump selector. Widened the footer countdown with larger numerals.
+- Preserved existing presets, pause/resume, clear and Auto after a set in a bottom-sheet dialog opened by the footer ellipsis. Countdown still shares the existing persisted deadline and updates on reload. Main footer timer keeps direct start/pause/resume behavior.

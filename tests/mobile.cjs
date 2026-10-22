@@ -142,7 +142,7 @@ try{
   await page.locator('[data-action="open-workouts"]').click();await page.locator('[data-workout-category="Push"]').click();await page.locator('[data-workout-pick="push-a"]').click();
   await page.locator('[data-set-reps="0-0"]').fill('10');await page.locator('[data-set-weight="0-0"]').fill('20');await page.locator('[data-set-done="0-0"]').check();await capture('Train');
   assert((await page.locator('.training-header').evaluate(el=>getComputedStyle(el).backgroundImage)).includes('/workout-images/push.jpg'),'Train hero follows chosen workout');
-  if(width===390){const storageBefore=await page.evaluate(key=>localStorage.getItem(key),key);for(const [selector,name] of [['.training-header','Train photo header'],['.workout-progress-card','Train photo progress'],['.training-rest','Train photo rest'],['.training-exercise[open]','Train photo logger'],['.session-footer','Train photo footer']]){const el=page.locator(selector).first();await el.evaluate(x=>x.scrollIntoView({block:'start',behavior:'instant'}));await checkLayout(name);const jpg=await el.screenshot({type:'jpeg',quality:85,path:path.join(out,name.replaceAll(' ','-')+'-'+width+'.jpg')});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')});}assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),storageBefore,'Train photo review must preserve drafts');}
+  if(width===390){const storageBefore=await page.evaluate(key=>localStorage.getItem(key),key);for(const [selector,name] of [['.training-header','Train photo header'],['.workout-progress-card','Train photo progress'],['.training-exercise[open]','Train photo logger'],['.session-footer','Train photo footer']]){const el=page.locator(selector).first();await el.evaluate(x=>x.scrollIntoView({block:'start',behavior:'instant'}));await checkLayout(name);const jpg=await el.screenshot({type:'jpeg',quality:85,path:path.join(out,name.replaceAll(' ','-')+'-'+width+'.jpg')});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')});}assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),storageBefore,'Train photo review must preserve drafts');}
   await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');assert(await page.locator('[data-set-done="0-0"]').isChecked());
   if(expectUpgrade){await page.waitForFunction(()=>{const b=document.querySelector('[data-set-done="0-0"]')?.getBoundingClientRect();return b&&b.width>=44&&b.height>=44});assert((await page.locator('.set-previous').first().innerText()).includes('18 kg'),'Previous set comparison');const finish=await page.locator('.session-footer').boundingBox(),nav=await page.locator('.nav').boundingBox();assert(finish.y+finish.height<=nav.y+1,'Finish bar overlaps navigation')}
   await page.locator('[data-action="finish"]').click();await page.waitForFunction(()=>document.body.dataset.view==='progress');assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.length,key),25);await checkLayout('Progress');await capture('Progress');
@@ -266,16 +266,16 @@ try{
   await page.locator('[data-set-reps="0-0"]').fill('8');
   assert((await page.locator('#workout-progress-label').innerText()).startsWith('1 of'));
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer,key),null,'Automatic timer is opt-in');
-  await page.locator('.training-rest-options>summary').click();await page.locator('[data-auto-rest]').check();
+  await page.locator('[data-rest-options]').click();await page.locator('.training-rest-options>summary').click();await page.locator('[data-auto-rest]').check();await page.locator('[data-rest-options-close]').click();
   await page.locator('[data-set-done="0-1"]').check();
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.duration,key),120);
-  await page.locator('[data-action="pause-rest"]').click();assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key));
-  await page.locator('[data-action="pause-rest"]').click();assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key),false);
-  await page.locator('.rest-presets [data-rest-seconds="30"]').click();assert.equal(await page.locator('.training-rest-options').getAttribute('open'),null);
+  await page.locator('[data-footer-rest]').click();assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key));
+  await page.locator('[data-footer-rest]').click();assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key),false);
+  await page.locator('[data-rest-options]').click();if(!await page.locator('.training-rest-options').evaluate(x=>x.open))await page.locator('.training-rest-options>summary').click();await page.locator('.rest-presets [data-rest-seconds="30"]').click();await page.locator('[data-rest-options-close]').click();assert.equal(await page.locator('.training-rest-options').getAttribute('open'),null);
   await page.reload();await page.locator('[data-tab="train"]').click();
   assert.equal(await page.locator('[data-set-weight="0-1"]').inputValue(),'27.25');
   assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.duration===30,key));
-  assert.notEqual(await page.locator('#rest-clock').innerText(),'0:00');
+  assert.notEqual(await page.locator('#footer-rest-clock').innerText(),'0:00');
   await page.locator('[data-exercise-jump="3"]').click();
   assert.equal(await page.locator('[data-training-card="3"]').getAttribute('open'),'');assert.equal(await page.locator('[data-training-card][open]').count(),1);
   await page.locator('[data-set-reps="3-0"]').fill('12');
