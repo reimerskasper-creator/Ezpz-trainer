@@ -40,3 +40,7 @@ Official isolation reference: https://supabase.com/docs/guides/database/postgres
 ## Release gates still outstanding
 
 Actual two-account authorization and Google callback test; phone loss/restore; airplane-mode reopen; installed Android timer/resume; TalkBack/large-text checks; final privacy/support page with the owner's contact; Android signing and private tester distribution; Health Connect permission/revocation and metric mapping. No Play Store release until these pass.
+
+## Owner project received — 22 October 2026
+
+Owner created project `uwfetvlddswsmqcitgzy` and supplied its public app URL/publishable key. Public values are prepared in `fitness-app/account-config.json` with `enabled: false`. It is not loaded by the live app yet. No personal records have been uploaded. Next owner action: open Supabase SQL Editor to apply `backend/001_optional_backup.sql`; then verify anonymous denial and two-account isolation before enabling optional sign-in. Google provider configuration remains pending.
