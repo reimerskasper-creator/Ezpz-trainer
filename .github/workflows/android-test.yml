@@ -9,6 +9,8 @@ jobs:
   android:
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    env:
+      EZPZ_TEST_KEYSTORE: ${{ github.workspace }}/native/.test-signing/debug.keystore
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
@@ -38,8 +40,14 @@ jobs:
           node tests/native-package-mobile.cjs
       - uses: actions/cache@v4
         with:
-          path: ~/.android/debug.keystore
-          key: ezpz-fitness-debug-signing-v1
+          path: native/.test-signing/debug.keystore
+          key: ezpz-fitness-debug-signing-v2
+      - name: Prepare explicit test signing key
+        run: |
+          mkdir -p native/.test-signing
+          if [ ! -f "$EZPZ_TEST_KEYSTORE" ]; then
+            keytool -genkeypair -keystore "$EZPZ_TEST_KEYSTORE" -storepass android -keypass android -alias androiddebugkey -dname "CN=EZPZ Android Test" -keyalg RSA -keysize 2048 -validity 10000
+          fi
       - name: Build and test Android
         working-directory: native/android
         run: |
