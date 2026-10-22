@@ -58,6 +58,7 @@ async function run(name){
    if(name==='whoop-status'){whoopConnected=!!data?.connected;whoopMessage=whoopConnected?'WHOOP authorization is connected to your EZPZ account.':'WHOOP is not connected yet.';panel();return;}
    if(typeof data?.url!=='string')throw Error('Could not start WHOOP authorization.');
    const target=new URL(data.url);if(target.origin!=='https://api.prod.whoop.com'||target.pathname!=='/oauth/oauth2/auth')throw Error('Invalid WHOOP authorization URL.');
+   localStorage.setItem('ezpz-whoop-pending',JSON.stringify({ownerId:user.id,expiresAt:Date.now()+10*60000}));
    if(native)await nativeAccount.openAuth({url:target.href});else location.assign(target.href);
   }else if(name==='signout'){
    if(!confirm('Sign out and KEEP your records on this device? They will remain readable here. Their account ownership is retained so another account cannot upload them.'))return;
@@ -118,14 +119,20 @@ async function handleNativeCallback(value){
  try{
   app.open();
   if(url.hostname==='whoop'){
-   whoopMessage=url.searchParams.get('result')==='connected'?'WHOOP authorization completed. Tap Check WHOOP connection to verify.':'WHOOP authorization did not finish. Try Connect WHOOP again.';
-   panel();return;
+   if(url.searchParams.get('result')!=='authorized'){whoopStatus('WHOOP authorization did not finish. Try Connect WHOOP again.');return;}
+   const completion=url.searchParams.get('completion');if(!completion||!/^[a-f0-9]{64}$/.test(completion))throw Error('Invalid WHOOP return. Start Connect WHOOP again.');
+   const pending=JSON.parse(localStorage.getItem('ezpz-whoop-pending')||'null'),u=await verified();
+   if(!pending||pending.ownerId!==u.id||pending.expiresAt<Date.now())throw Error('Start Connect WHOOP from this app and try again.');
+   const {data,error}=await client.functions.invoke('whoop-connect',{body:{action:'finish',completion}});
+   if(error||data?.connected!==true)throw Error('WHOOP connection could not finish. Start again from this app.');
+   const confirmed=await verified();if(confirmed.id!==u.id)throw Error('Account changed. Check WHOOP connection after signing in again.');
+   localStorage.removeItem('ezpz-whoop-pending');whoopConnected=true;whoopStatus('WHOOP connected to your EZPZ account. You can now choose Sync WHOOP now.');return;
   }
   if(url.searchParams.get('error'))throw Error('Google sign-in did not finish. Try again.');
   const code=url.searchParams.get('code');if(!code)throw Error('Sign-in callback had no code. Try again.');
   const {error}=await client.auth.exchangeCodeForSession(code);if(error)throw Error('Sign-in could not finish. Start again from this app.');
   try{await verified();}catch(error){await client.auth.signOut({scope:'local'});user=null;throw error;}status('Signed in. Your device records were kept.');
- }catch(error){status(error.message||'Could not finish sign-in.');}
+ }catch(error){if(url.hostname==='whoop')whoopStatus(error.message||'Could not finish WHOOP connection.');else status(error.message||'Could not finish sign-in.');}
  finally{callbackBusy=false;}
 }
 async function init(){
@@ -140,7 +147,7 @@ async function init(){
   const {data,error:sessionError}=await client.auth.getSession();if(sessionError)throw sessionError;
   if(data?.session){const result=await client.auth.getUser();if(result.error)throw Error('Session could not be verified. Sign in again.');user=result.data.user;try{assertOwner(app.snapshot(),user.id);}catch(e){await client.auth.signOut({scope:'local'});user=null;throw e;}status('Signed in. No fitness records were uploaded or changed.');}
   if(nativeAccount){await nativeAccount.addListener('authCallback',data=>handleNativeCallback(data.url));const pending=await nativeAccount.getPendingUrl();if(pending?.url)await handleNativeCallback(pending.url);}
-  const whoopResult=new URL(location.href).searchParams.get('whoop');if(whoopResult){const clean=new URL(location.href);clean.searchParams.delete('whoop');history.replaceState(null,'',clean.pathname+clean.search+clean.hash);whoopMessage=whoopResult==='connected'?'WHOOP authorization completed. Tap Check WHOOP connection to verify.':'WHOOP authorization did not finish. Try again.';app.open();}
+  const whoopReturn=new URL(location.href),whoopResult=whoopReturn.searchParams.get('whoop');if(whoopResult){const completion=whoopReturn.searchParams.get('completion');whoopReturn.searchParams.delete('whoop');whoopReturn.searchParams.delete('completion');history.replaceState(null,'',whoopReturn.pathname+whoopReturn.search+whoopReturn.hash);await handleNativeCallback('ezpzfitness://whoop/callback?'+new URLSearchParams({result:whoopResult,completion:completion||''}));app.open();}
   client.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;remote=null;}else if(session?.user){user=session.user;}panel();});
  }catch(e){status(e.message||'Sign-in is unavailable. You can keep using EZPZ offline.');}finally{panel();}
 }

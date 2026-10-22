@@ -4,7 +4,7 @@ function wakeDate(sleep){
  if(!/^[-+]\d{2}:\d{2}$/.test(sleep.timezone_offset||''))return null;
  const end=stamp(sleep.end);if(!end)return null;
  const offset=sleep.timezone_offset,minutes=(Number(offset.slice(1,3))*60+Number(offset.slice(4)))*(offset[0]==='-'?-1:1);
- if(Math.abs(minutes)>14*60)return null;
+ if(Number(offset.slice(4))>59||Math.abs(minutes)>14*60)return null;
  return new Date(Date.parse(end)+minutes*60000).toISOString().slice(0,10);
 }
 export function mapWhoop(cycles,sleeps,from,through,observedAt){

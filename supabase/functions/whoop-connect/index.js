@@ -81,7 +81,7 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
    return {snapshot:mapWhoop(cycles,sleeps,from,day,new Date().toISOString())};
   }finally{await db('whoop_connections',owned,'PATCH',{sync_lock:null,sync_lock_expires_at:null})}
  };
- const redirect=(result,platform)=>new Response(null,{status:303,headers:{...headers,Location:platform==='android'?'ezpzfitness://whoop/callback?result='+result:APP+'?whoop='+result}});
+ const redirect=(result,platform,completion)=>new Response(null,{status:303,headers:{...headers,Location:(platform==='android'?'ezpzfitness://whoop/callback?result='+result:APP+'?whoop='+result)+(completion?'&completion='+completion:'')}});
  return async req=>{
   const url=new URL(req.url),origin=req.headers.get('Origin'),cors=origin&&ORIGINS.has(origin)?{'Access-Control-Allow-Origin':origin,Vary:'Origin'}:{};
   const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{...headers,...cors,'Content-Type':'application/json'}});
@@ -106,8 +106,9 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
     if(!scopes.includes('read:cycles')||!scopes.includes('read:sleep'))return redirect('failed',rows[0].return_platform);
     const user=rows[0].user_id;
     const sealed=await seal(user,{access_token:t.access_token,refresh_token:t.refresh_token,expires_at:new Date(Date.now()+t.expires_in*1000).toISOString(),scope:t.scope});
-    await db('whoop_connections','?on_conflict=user_id','POST',[{user_id:user,encrypted_tokens:sealed,connected_at:new Date().toISOString(),sync_lock:null,sync_lock_expires_at:null}]);
-    return redirect('connected',rows[0].return_platform);
+    const completion=random();
+    await db('whoop_pending_connections','','POST',[{completion_hash:await hash(completion),user_id:user,encrypted_tokens:sealed,expires_at:new Date(Date.now()+10*60000).toISOString()}]);
+    return redirect('authorized',rows[0].return_platform,completion);
    }
    if(req.method==='GET')return json({service:'EZPZ WHOOP connection',callbackReady:true,credentialsConfigured:ready()});
    if(req.method!=='POST')return json({error:'Method not allowed'},405);
@@ -120,6 +121,13 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
    if(Number(req.headers.get('Content-Length'))>2048)return json({error:'Request too large'},413);
    const raw=await req.text();if(raw.length>2048)return json({error:'Request too large'},413);
    let body;try{body=JSON.parse(raw)}catch{return json({error:'Invalid request'},400)}
+   if(body.action==='finish'){
+    if(typeof body.completion!=='string'||!/^[a-f0-9]{64}$/.test(body.completion))return json({error:'Invalid completion request.'},400);
+    const rows=await db('whoop_pending_connections','?completion_hash=eq.'+await hash(body.completion)+'&user_id=eq.'+user+'&expires_at=gt.'+encodeURIComponent(new Date().toISOString()),'DELETE');
+    if(rows.length!==1)return json({error:'Connection request expired or belongs to another account. Start again.'},400);
+    await db('whoop_connections','?on_conflict=user_id','POST',[{user_id:user,encrypted_tokens:rows[0].encrypted_tokens,connected_at:new Date().toISOString(),sync_lock:null,sync_lock_expires_at:null}]);
+    return json({connected:true});
+   }
    if(body.action==='status'){
     const rows=await db('whoop_connections','?select=connected_at&user_id=eq.'+user);
     return json({configured:ready(),connected:rows.length===1,connectedAt:rows[0]?.connected_at||null});
@@ -129,6 +137,7 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
    if(!ready())return json({error:'WHOOP setup is not complete yet.'},503);
    // Starting again invalidates older pending attempts for this user.
    await db('whoop_oauth_states','?user_id=eq.'+user,'DELETE');
+   await db('whoop_pending_connections','?user_id=eq.'+user,'DELETE');
    const state=random(),now=Date.now(),platform=body.platform==='android'?'android':'web';
    await db('whoop_oauth_states','','POST',[{state_hash:await hash(state),user_id:user,return_platform:platform,expires_at:new Date(now+10*60000).toISOString()}]);
    const authorization=new URL('https://api.prod.whoop.com/oauth/oauth2/auth');
