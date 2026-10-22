@@ -38,15 +38,15 @@ await page.locator('.foundation-steps').screenshot({path:path.join(out,'steps-ca
 await page.evaluate(()=>{state=JSON.parse(window.beforeStepVisual);render()});
 await page.locator('.foundation-steps').click();await page.waitForFunction(()=>tab==='movement');
 await page.evaluate(()=>{tab='movement';render()});
-assert((await page.locator('#screen').innerText()).includes('WHOOP reporting period'));
-assert((await page.locator('#screen').innerText()).includes('Total daily calories were not shared for this date.'));
+await page.locator('.measurement-source-details > summary').first().click();assert((await page.locator('#screen').innerText()).includes('WHOOP reporting period'));
+assert((await page.locator('.movement-totals').innerText()).includes('Total calories'));
 assert((await page.locator('#screen').innerText()).includes('may not cover all daily movement'));
 assert(!(await page.locator('#screen').innerText()).includes('2,608'));
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 await page.screenshot({path:path.join(out,'native-step-period.jpg'),type:'jpeg',quality:85,fullPage:true});
 await page.evaluate(()=>{tab='connected-apps';render()});
 assert((await page.locator('.native-health-card').innerText()).includes('Imports saved'));
-assert(!(await page.locator('.connection-list').innerText()).includes('Not connected'));
+assert.equal(await page.locator('.connection-heading').count(),0);
 await page.evaluate(()=>{window.testStepReport={date:foodDate(),total:8061,text:'EZPZ step check v2\nSource filter: com.whoop.android only\nHealth Connect local-day steps: 7478\nWHOOP reporting-period steps: 8061'};window.beforeStepCheck=JSON.stringify(state)});
 await page.locator('.native-health-details > summary').click();await page.locator('.native-health-details > details > summary').first().click();await page.locator('[data-native-health="check-steps"]').click();await page.waitForFunction(()=>!document.getElementById('native-step-report').hidden);
 assert((await page.locator('#native-step-report-text').inputValue()).includes('EZPZ saved WHOOP steps'));assert.equal(await page.evaluate(()=>JSON.stringify(state)===window.beforeStepCheck),true);assert.equal(await page.evaluate(()=>window.testNativeCalls.includes('checkSteps')),true);
