@@ -10778,7 +10778,20 @@ document.addEventListener('click',event=>{
  const rect=event.target.getBoundingClientRect();
  if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)event.target.close();
 });
-</script></body></html>
+</script><script>
+/* Main-tab gestures share the bottom navigation path; forms and nested views stay local. */
+(()=>{
+ const tabs=['home','train','eat','progress','more'];let gesture=null,suppressClickUntil=0;
+ function blocked(target){if(!(target instanceof Element)||target.closest('input,textarea,select,button,a,label,summary,[contenteditable]:not([contenteditable="false"]),dialog,video,audio,[role="slider"],.nav'))return true;for(let el=target;el&&el!==document.body;el=el.parentElement){const style=getComputedStyle(el);if(el.scrollWidth>el.clientWidth+2&&/(auto|scroll)/.test(style.overflowX))return true}return false}
+ function available(){return state.profile&&tabs.includes(tab)&&document.body.dataset.view===tab&&!document.querySelector('dialog[open]')&&!window.getSelection()?.toString()}
+ document.addEventListener('touchstart',event=>{gesture=null;if(event.touches.length!==1||!available()||blocked(event.target))return;const t=event.touches[0];if(t.clientX<24||t.clientX>innerWidth-24)return;gesture={id:t.identifier,x:t.clientX,y:t.clientY,scroll:scrollY,view:tab,time:performance.now()}}, {passive:true});
+ document.addEventListener('touchmove',event=>{if(!gesture)return;if(event.touches.length!==1||!available()||tab!==gesture.view){gesture=null;return}const t=event.touches[0],dx=t.clientX-gesture.x,dy=t.clientY-gesture.y;if(t.identifier!==gesture.id||Math.abs(scrollY-gesture.scroll)>12||Math.abs(dy)>Math.max(14,Math.abs(dx)*.65)){gesture=null;return}if(Math.abs(dx)>20&&Math.abs(dx)>Math.abs(dy)*2){const next=tabs.indexOf(tab)+(dx<0?1:-1);if(next<0||next>=tabs.length){gesture=null;return}if(event.cancelable)event.preventDefault()}},{passive:false});
+ document.addEventListener('touchcancel',()=>{gesture=null},{passive:true});
+ document.addEventListener('touchend',event=>{const g=gesture;gesture=null;if(!g||event.touches.length||!available()||tab!==g.view||performance.now()-g.time>900||Math.abs(scrollY-g.scroll)>12)return;const t=Array.from(event.changedTouches).find(t=>t.identifier===g.id);if(!t)return;const dx=t.clientX-g.x,dy=t.clientY-g.y;if(Math.abs(dx)<Math.max(64,Math.min(90,innerWidth*.18))||Math.abs(dx)<Math.abs(dy)*2||Math.abs(dy)>45)return;const next=tabs[tabs.indexOf(tab)+(dx<0?1:-1)],button=document.querySelector('.nav [data-tab="'+next+'"]');if(!button)return;button.click();suppressClickUntil=performance.now()+350;if(!matchMedia('(prefers-reduced-motion: reduce)').matches)screen.animate([{opacity:.8,transform:'translateX('+(dx<0?18:-18)+'px)'},{opacity:1,transform:'translateX(0)'}],{duration:160,easing:'ease-out'})},{passive:true});
+ document.addEventListener('click',event=>{if(performance.now()<suppressClickUntil&&event.isTrusted){event.preventDefault();event.stopImmediatePropagation()}},true);
+})();
+</script>
+</body></html>
 
 
 

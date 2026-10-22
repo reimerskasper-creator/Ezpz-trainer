@@ -448,3 +448,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ## Compact Home introduction — 21 October 2026
 - Removed the calendar/date from Home at user request and tightened greeting, method banner and workout spacing. Banner now has a compact 76px minimum height, with 12px spacing between adjacent sections; same readable copy, artwork and dialog behavior.
+
+## Main-tab swipe navigation — 21 October 2026
+- Added touch swipes in bottom-nav order Home → Train → Eat → Progress → More. Left advances and right returns; ends do not wrap. Swipes use the existing nav handlers, preserve saved drafts and selected workouts, and reset scroll like a tab tap. A subtle 160ms entrance respects reduced motion.
+- Only clear, short-duration horizontal gestures navigate. Inputs/buttons/links/labels/summary controls, nested horizontal scrollers, open dialogs, setup/nested views, selections, multi-touch, cancellation and browser-edge gestures are excluded. Vertical movement/scroll cancels navigation; touchmove is prevented only after a valid horizontal direction is established. Brief ghost-click suppression follows navigation.
+- New swipe-mobile suite uses native Chromium touch input at 320/390/430px across all tabs, verifies boundaries/nav selection, draft preservation through swipe/reload and unchanged stored data, plus vertical/short/edge/cancelled gestures, form controls, dialogs, carousels and nested views. Included in hosted mobile workflow.

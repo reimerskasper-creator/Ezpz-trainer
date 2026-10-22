@@ -28,6 +28,7 @@ jobs:
           node tests/foundation-week.cjs
           node tests/foundation-week-mobile.cjs
           node tests/branding-mobile.cjs
+          node tests/swipe-mobile.cjs
           node tests/daily-refinement.cjs
           node tests/daily-refinement-mobile.cjs
           node tests/personal-welcome.cjs
