@@ -14,7 +14,7 @@ if(typeof module==='object'&&module.exports){module.exports={validBackup,assertO
 const app=root.EzpzAccountAdapter;if(!app)return;
 const cap=root.Capacitor,native=!!(cap?.isNativePlatform?.()&&cap?.isPluginAvailable?.('EzpzAccount')),nativeAccount=native?cap.registerPlugin('EzpzAccount'):null;
 let whoopConnected=false,whoopMessage='Connect separately to authorize access to your WHOOP data.',callbackBusy=false;
-const whoopPanel=()=>'<h3>WHOOP connection</h3><p>'+esc(whoopMessage)+'</p>'+(user?'<button data-account="whoop-connect" '+(busy?'disabled':'')+'>Connect WHOOP</button><button data-account="whoop-status" '+(busy?'disabled':'')+'>Check WHOOP connection</button><button data-account="whoop-sync" '+(busy?'disabled':'')+'>Sync WHOOP now</button><button data-account="whoop-disconnect" '+(busy?'disabled':'')+'>Disconnect WHOOP</button>':'<p>Sign in to EZPZ above before connecting WHOOP.</p>');
+const whoopPanel=()=>'<p>'+esc(whoopMessage)+'</p><button data-go="connected-apps">Manage connected apps →</button>';
 root.EzpzWhoopAccount={open:()=>{app.open();panel();}};
 
 let client=null,user=null,config=null,busy=false,message='Sign-in is optional. Your records stay on this device until you choose to save them.',remote=null;

@@ -11,7 +11,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
  assert.equal(await page.evaluate(()=>selectedWellnessRecord('steps',foodDate()).value),99);
  await page.locator('[data-account="whoop-sync"]').click();await page.waitForFunction(()=>document.getElementById('whoop-sync-status').textContent.includes('No new records'));
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
- await page.locator('[data-go="movement"]').click();await page.locator('#wellness-source-steps').selectOption('whoop');assert((await page.locator('.movement-totals').innerText()).includes('1,234'));assert((await page.locator('#screen').innerText()).includes('WHOOP cycle calories'));
+ await page.locator('[data-go="movement"]').click();assert.equal(await page.locator('.measurement-source-details').first().getAttribute('open'),null);await page.locator('.measurement-source-details > summary').first().click();await page.locator('#wellness-source-steps').selectOption('whoop');assert((await page.locator('.movement-totals').innerText()).includes('1,234'));assert((await page.locator('#screen').innerText()).includes('Cycle calories'));
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  if(width===390)await page.screenshot({path:path.join(out,'whoop-direct-movement.jpg'),type:'jpeg',quality:85});
  await page.locator('[data-tab="sleep"]').click();assert.equal(await page.locator('.sleep-stage-grid').count(),1);assert((await page.locator('.sleep-stage-grid').innerText()).includes('1h'));

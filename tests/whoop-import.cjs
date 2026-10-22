@@ -11,7 +11,7 @@ const cycle={cycleStart:new Date(Date.now()-86400000).toISOString(),cycleOpen:tr
 const records=[row('steps',1200,cycle),row('totalCalories',2000,cycle),row('sleep',420,{deepMinutes:60,remMinutes:120})];
 let summary=api.applyDirectWhoopSnapshot(snap(records),user);assert.equal(summary.added,3);assert.equal(api.selectedWellnessRecord('steps',date).value,99);assert.equal(api.state.accountBackup.ownerId,user);
 summary=api.applyDirectWhoopSnapshot(snap(records.map(r=>({...r,updatedAt:new Date(Date.now()+10000).toISOString()}))),user);assert.equal(summary.unchanged,3);assert.equal(summary.updated,0);
-api.movementPage();assert(screen.innerHTML.includes('WHOOP cycle calories'));assert(api.sleepImportDetails(date).includes('sleep-stage-grid'));
+api.movementPage();assert(screen.innerHTML.includes('Cycle calories'));assert(api.sleepImportDetails(date).includes('sleep-stage-grid'));
 let before=JSON.stringify(api.state);assert.throws(()=>api.applyDirectWhoopSnapshot(snap([{...records[0],value:-1}]),user));assert.equal(JSON.stringify(api.state),before);
 assert.throws(()=>api.applyDirectWhoopSnapshot(snap(records),'22222222-2222-4222-8222-222222222222'));assert.equal(JSON.stringify(api.state),before);
 fail=true;assert.throws(()=>api.applyDirectWhoopSnapshot(snap([{...records[0],value:1300}]),user));assert.equal(JSON.stringify(api.state),before);fail=false;
