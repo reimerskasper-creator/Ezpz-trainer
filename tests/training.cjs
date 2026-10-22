@@ -1,0 +1,50 @@
+// Run: node tests/training.cjs
+const fs=require('node:fs'),path=require('node:path'),source=fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8');
+const screen={innerHTML:''},listeners={},document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener:(n,f)=>(listeners[n]??=[]).push(f)};
+let stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2});
+const script=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');
+const api=new Function('document','window','localStorage','fetch','console','alert','confirm',script+'\nreturn {home,train,upcomingWorkouts,homeNextWorkout,foodDate,datePlus,workoutCover,planWorkout,trainingStats,copyPreviousExercise,repeatEnteredSet,activeTrainingExercise,rememberExercise,restTimerState,startRestTimer,pauseRestTimer,lastPerformance,restoredState,get state(){return state},set state(v){state=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>stored=v},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
+const assert=(v,m)=>{if(!v)throw Error(m)},equal=(a,b,m)=>assert(JSON.stringify(a)===JSON.stringify(b),m);
+const today=api.foodDate(),d=n=>api.datePlus(today,n);
+api.state.workoutSchedule={[d(6)]:'leg-a',[d(1)]:'pull-a',[d(0)]:'push-a',[d(2)]:'rest',[d(4)]:'core-a',[d(-1)]:'push-b'};
+api.state.logs=[{date:new Date().toISOString(),workoutId:'push-a',planDate:today}];
+equal(api.upcomingWorkouts().map(x=>[x.date,x.workout.id]),[[d(1),'pull-a'],[d(4),'core-a'],[d(6),'leg-a']],'Upcoming order excludes completed, past and rest');
+api.home();for(const id of ['pull-a','core-a','leg-a']){const w=api.planWorkout(id);assert(screen.innerHTML.includes('data-preview-workout="'+id+'"'),'Upcoming workout '+id);assert(screen.innerHTML.includes('src="'+api.workoutCover(w).src+'"'),'Matching thumbnail '+id)}
+const before=JSON.stringify(api.state);api.home();assert(JSON.stringify(api.state)===before,'Home must not create a schedule');
+api.state.workoutSchedule={};api.home();assert((screen.innerHTML.match(/class="upcoming-empty"/g)||[]).length===2,'Empty plan has honest placeholders');
+api.state.selectedWorkout='push-a';api.state.workoutDrafts={'push-a':{'sr0-0':'10','sw0-0':'25'}};
+const exercise={name:'Barbell Bench Press',unit:'reps',sets:[{reps:'8',kg:'20',done:true},{reps:'9',kg:'22.5',done:true},{reps:'10',kg:'25',done:true}]};
+api.state.logs=[{date:new Date().toISOString(),exercises:[exercise]},{date:new Date().toISOString(),exercises:[{name:'Barbell Bench Press',unit:'reps',sets:[{reps:'',kg:'',done:false}]}]}];
+assert(api.lastPerformance('Barbell Bench Press').sets[0].reps==='8','Empty logs must not hide previous results');
+assert(api.copyPreviousExercise(0)>0,'Use previous fills blanks');
+equal(api.state.workoutDrafts['push-a'],{'sr0-0':'10','sw0-0':'25','sr0-1':'9','sw0-1':'22.5','sr0-2':'10','sw0-2':'25'},'Previous values never overwrite entered fields or mark sets done');
+api.state.workoutDrafts['push-a']={'sr0-0':'11','sw0-0':'27.25','sw0-1':'30'};
+assert(api.repeatEnteredSet(0),'Repeat first entered set');
+assert(api.state.workoutDrafts['push-a']['sr0-1']==='11'&&api.state.workoutDrafts['push-a']['sw0-1']==='30','Repeat respects entered weight');
+assert(api.repeatEnteredSet(0),'Repeat next set');
+assert(!api.repeatEnteredSet(0),'Repeat stops at full exercise');
+api.state.workoutDrafts['push-a']['sd0-0']=true;api.state.workoutDrafts['push-a']['sd0-1']=true;api.state.workoutDrafts['push-a']['sr0-1']='';
+assert(api.trainingStats().done===1,'Checked empty result must not count');
+api.state.workoutDrafts['push-a']['sr0-1']='11';api.state.workoutDrafts['push-a']['sd0-2']=true;
+assert(api.trainingStats().done===3&&api.trainingStats().complete===1,'Completed exercise count');
+assert(api.activeTrainingExercise()===1,'Resume first unfinished exercise');
+api.rememberExercise(4);assert(api.activeTrainingExercise()===4,'Remember explicitly selected exercise');
+api.state.trainingCompactAll=false;api.train();assert((screen.innerHTML.match(/data-training-card="\d+" open/g)||[]).length===1,'Focus opens one exercise');
+api.state.trainingCompactAll=true;api.train();assert((screen.innerHTML.match(/data-training-card="\d+" open/g)||[]).length===6,'All view opens whole workout');
+assert(!/undefined|NaN/.test(screen.innerHTML),'Valid training content');
+api.startRestTimer(90);let timer=api.restTimerState();assert(timer.left>=89&&timer.left<=90,'Deadline countdown');
+api.pauseRestTimer();timer=api.restTimerState();assert(timer.paused&&timer.left<=90,'Pause timer');
+api.pauseRestTimer();assert(!api.restTimerState().paused,'Resume timer');
+api.state.restTimer.endsAt=Date.now()-1000;assert(api.restTimerState().left===0,'Elapsed timer remains truthful');
+const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);equal(restored.restTimer,backup.restTimer,'Timer survives backup');assert(restored.trainingCompactAll===true,'Training preference survives backup');
+const old=api.state.restTimer;api.startRestTimer(-1);equal(api.state.restTimer,old,'Invalid rest duration ignored');
+api.state.restTimer={duration:90,workoutId:'missing',endsAt:Date.now(),remaining:90};assert(api.restTimerState()===null,'Invalid timer ignored');
+
+api.state.selectedWorkout='full-body';api.state.logs=[];api.state.draft={variant:'A',equipment:'home','sr0-0':'10'};api.state.autoRest=true;api.state.restTimer=null;
+for(const listener of listeners.change)listener({target:{id:'',dataset:{setDone:'0-0'},value:'',checked:true}});
+assert(api.state.restTimer?.duration===60,'Rotating plan uses its default automatic rest period');
+api.state.selectedWorkout='hiit-a';api.state.workoutDrafts['hiit-a']={'sr0-0':'5'};api.state.restTimer=null;
+for(const listener of listeners.change)listener({target:{id:'',dataset:{setDone:'0-0'},value:'',checked:true}});
+assert(api.state.restTimer===null,'Zero-rest warm-up must not trigger automatic rest');
+
+console.log('PASS: ordered upcoming workouts and matching photos, honest empty plans, previous/ repeat results, no accidental completion, progress validity, focus/all views, resume selection and persistent deadline rest timer');
