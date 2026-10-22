@@ -467,3 +467,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ## Dark recipe category menu — 21 October 2026
 - Restyled the four meal-category tiles as dark forest green cards with white labels, muted readable counts and preserved dish thumbnails. Active category uses a richer green surface and clear mint border; keyboard focus and pressed feedback remain distinct. Existing selection/filtering, counts, recipes and photos unchanged.
+
+## Set completion and next exercise access — 21 October 2026
+- Moved Next exercise directly below set validation/last set, ahead of Next weight, Swap and Technique panels. Last exercise note follows the same position. Increased Next action to 48px.
+- Added an explicit high-contrast SVG checkmark to checked set controls, restoring a clear completion symbol after dark-card background styling had reset the previous background image. Existing checkbox semantics, validation and draft saving unchanged.
