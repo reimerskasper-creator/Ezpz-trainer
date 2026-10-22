@@ -1,0 +1,11 @@
+{
+  "appId": "com.ezpz.fitness",
+  "appName": "EZPZ Fitness",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "allowMixedContent": false
+  }
+}
