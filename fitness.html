@@ -10799,6 +10799,37 @@ document.addEventListener('click',event=>{
  document.addEventListener('click',event=>{if(performance.now()<suppressClickUntil&&event.isTrusted){event.preventDefault();event.stopImmediatePropagation()}},true);
 })();
 </script>
+
+<style id="training-dark-exercise-cards">
+body[data-view=train] .training-exercise{background:#152c24;border-color:#385747;border-radius:18px;box-shadow:0 4px 16px #0c241313}
+body[data-view=train] .training-exercise[open]{border-color:#5d9475!important}
+body[data-view=train] .training-exercise>.session-exercise{position:relative;isolation:isolate;background:#152c24;background-image:none;border-top:1px solid #395345;color:#eff8f1;padding:14px 12px}
+body[data-view=train] .training-exercise>.session-exercise:after{content:'';position:absolute;right:0;bottom:0;width:120px;height:80px;background:linear-gradient(90deg,#152c24,transparent),url('./train-images/hinge.jpg') center/cover;opacity:.14;pointer-events:none;z-index:-1;border-radius:0 0 16px 0}
+body[data-view=train] .exercise-logging-tools>button{background:#28573e;color:#e6ffef;border:1px solid #4c8763;font-size:10px}
+body[data-view=train] .exercise-logging-tools>button:nth-child(2){background:#69552c;border-color:#aa8c48;color:#fff0c4}
+body[data-view=train] .exercise-logging-tools>button:nth-child(3){background:#294e65;border-color:#5786a1;color:#e4f5ff}
+body[data-view=train] .exercise-logging-tools>button:disabled{background:#263c31;border-color:#40564a;color:#b2c2b8;opacity:1}
+body[data-view=train] .set-head{color:#d3e3d8;font-size:10px}
+body[data-view=train] .set-row{background:#1d352a;border-color:#3b5445;border-radius:12px}
+body[data-view=train] .set-row .set-index{color:#f0faf3;font-weight:650}
+body[data-view=train] .set-row .set-previous,body[data-view=train] .set-rest{color:#b9cec1}
+body[data-view=train] .set-row input:not([type=checkbox]){background:#f6faf7;border-color:#c6d7cb;color:#153523;box-shadow:none}
+body[data-view=train] .set-row input::placeholder{color:#66796d;opacity:1}
+body[data-view=train] .set-row input[type=checkbox]{background:#2c4939;border:1px solid #6e927d}
+body[data-view=train] .set-row input[type=checkbox]:checked{background:#21bd76;border-color:#6de1a5}
+body[data-view=train] .set-row.set-complete{background:#204b35;border-color:#4bb17a}
+body[data-view=train] .set-row.set-invalid{background:#514326;border-color:#d6b25e}
+body[data-view=train] .set-validation{color:#ffe09b}
+body[data-view=train] .progression-hint{background:#203d30;background-image:none;border-color:#466a55;border-left-color:#6ddda1;border-radius:13px}
+body[data-view=train] .progression-hint strong{color:#f0fff5}
+body[data-view=train] .progression-hint p{color:#deeee3}
+body[data-view=train] .progression-hint small{color:#b6cebf}
+body[data-view=train] .exercise-swap{background:#203a49;background-image:none;border-color:#476779;border-radius:13px;padding:12px}
+body[data-view=train] .quick-guide,body[data-view=train] .quick-guide[open]{background:#3e3928;background-image:none;border-color:#746747;border-radius:13px}
+body[data-view=train] .next-exercise-button{background:#28533c;background-image:none;border-color:#4d8263;color:#effff4}
+body[data-view=train] .last-exercise-note{color:#c5dfce}
+@media(max-width:360px){body[data-view=train] .exercise-logging-tools>button{font-size:8px}}
+</style>
 </body></html>
 
 

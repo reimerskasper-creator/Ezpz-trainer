@@ -457,3 +457,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Visible nutrition targets — 21 October 2026
 - Replaced the small collapsed Nutrition targets disclosure with a prominent photo-backed card immediately below Log food, above Today’s food and favourites/recent meals. It displays actual current calories and protein/carbs/fat goals in matching colored tiles; “Adjust targets ›” and the whole card open the existing editor in one tap.
 - Calculations, manual/calculator forms, recipes, logs and saved-data schema remain unchanged. Target math, recipe protection and daily-use unit checks passed; phone suite covers displayed goals, editor access, no record changes and responsive layout.
+
+## Dark exercise cards — 21 October 2026
+- Replaced the translucent pale green set logger with an opaque deep charcoal-green surface. Related header photographs remain; one faint equipment accent sits in the bottom corner away from inputs. Solid high-contrast set rows and light numeric fields retain clear completed/invalid/unchecked states.
+- Logging actions now use richer green/gold/blue. Next weight, Swap and Technique panels use restrained solid colors instead of competing full photographs; all handlers, draft saving and workout data are unchanged.
