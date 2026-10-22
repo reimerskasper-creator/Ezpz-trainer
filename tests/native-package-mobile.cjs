@@ -12,8 +12,14 @@ await page.locator('[data-native-health="permissions"]').click();await page.wait
 await page.evaluate(()=>{window.testAllowed=['steps'];const date=foodDate();window.testPayload={version:1,from:date,through:date,metrics:['steps'],records:[{metric:'steps',value:8061,stepBasis:'whoop-period',periodStart:new Date(Date.now()-25*3600000).toISOString(),periodEnd:new Date(Date.now()-3600000).toISOString(),date,source:'whoop-health-connect',externalId:'native-package-'+date,unit:'count',updatedAt:new Date().toISOString()}]}});
 await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('Imported 1'));
 assert.equal(await page.evaluate(()=>selectedWellnessRecord('steps',foodDate()).value),8061);assert.deepEqual(errors,[]);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+// Simulate an old unsupported aggregate, then a successful native read with no raw total.
+await page.evaluate(()=>{const date=foodDate(),stamp=new Date().toISOString();applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['totalCalories'],records:[{metric:'totalCalories',value:2608.2169,date,source:'whoop-health-connect',externalId:'old-total-'+date,unit:'kcal',updatedAt:stamp}]});applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['totalCalories','activeCalories'],records:[{metric:'activeCalories',value:465.882,date,source:'whoop-health-connect',externalId:'activity-'+date,unit:'kcal',updatedAt:stamp}]})});
+assert.equal(await page.evaluate(()=>selectedWellnessRecord('totalCalories',foodDate())),null);
 await page.evaluate(()=>{tab='movement';render()});
 assert((await page.locator('#screen').innerText()).includes('WHOOP reporting period'));
+assert((await page.locator('#screen').innerText()).includes('Total daily calories: Not available from WHOOP'));
+assert((await page.locator('#screen').innerText()).includes('may not include all daily movement'));
+assert(!(await page.locator('#screen').innerText()).includes('2,608'));
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 await page.screenshot({path:path.join(out,'native-step-period.jpg'),type:'jpeg',quality:85,fullPage:true});
 await page.evaluate(()=>{tab='connected-apps';render()});

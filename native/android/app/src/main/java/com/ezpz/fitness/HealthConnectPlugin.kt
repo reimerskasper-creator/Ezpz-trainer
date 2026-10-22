@@ -202,6 +202,18 @@ class HealthConnectPlugin : Plugin() {
                 }
                 val periods = if ("steps" in metrics) stepPeriods(readWhoopSteps(hc,
                     first.minusDays(2).atStartOfDay(zone).toInstant(), now), zone, now) else null
+                val rawTotals = mutableListOf<RawTotalCalories.Record>()
+                if ("totalCalories" in metrics) {
+                    var token: String? = null
+                    do {
+                        val page = hc.readRecords(ReadRecordsRequest(TotalCaloriesBurnedRecord::class,
+                            TimeRangeFilter.between(first.minusDays(2).atStartOfDay(zone).toInstant(), now),
+                            dataOriginFilter = origin, pageSize = 1000, pageToken = token))
+                        rawTotals.addAll(page.records.map { RawTotalCalories.Record(it.startTime,it.endTime,it.energy.inKilocalories) })
+                        token=page.pageToken?.takeIf { it.isNotBlank() }
+                        check(rawTotals.size <= 10000) { "Too many calorie records. Saved records were kept." }
+                    } while (token != null)
+                }
                 for (offset in 0L..6L) {
                     val day = first.plusDays(offset)
                     val (start, dayEnd) = StepDays.bounds(day, zone)
@@ -224,8 +236,9 @@ class HealthConnectPlugin : Plugin() {
                         r[ActiveCaloriesBurnedRecord.ACTIVE_CALORIES_TOTAL]?.let { add("activeCalories", day, it.inKilocalories) }
                     }
                     if ("totalCalories" in metrics) {
-                        val r = hc.aggregate(AggregateRequest(setOf(TotalCaloriesBurnedRecord.ENERGY_TOTAL), range, origin))
-                        r[TotalCaloriesBurnedRecord.ENERGY_TOTAL]?.let { add("totalCalories", day, it.inKilocalories) }
+                        // Aggregate totals may exist without any WHOOP total-calorie record.
+                        // Only explicit, complete, nonoverlapping raw totals can be imported.
+                        RawTotalCalories.complete(rawTotals,start,end)?.let { add("totalCalories", day, it) }
                     }
                 }
                 if ("sleep" in metrics) {

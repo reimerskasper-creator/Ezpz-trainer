@@ -19,6 +19,14 @@ const sleep={metric:'sleep',value:411,date,unit:'minutes',source:'whoop-health-c
 api.applyNativeHealthSnapshot(snapshot([{...sleep,deepMinutes:0,remMinutes:0}],['sleep']));
 api.applyNativeHealthSnapshot(snapshot([{...sleep,updatedAt:new Date(Date.parse(stamp)+1).toISOString()}],['sleep']));
 const detail=api.sleepImportDetails(date);assert(detail.includes('Not shared by WHOOP'));assert(!detail.includes('sleep-stage-grid'));assert.equal(api.selectedWellnessRecord('sleep',date).value,411);assert.equal(api.selectedWellnessRecord('sleep',date).deepMinutes,undefined);
+// A successful empty raw-total snapshot clears unsupported native totals, preserving manual/other records.
+api.applyNativeHealthSnapshot(snapshot([row('totalCalories',2608.2169)],['totalCalories']));
+api.applyNativeHealthSnapshot(snapshot([],['totalCalories']));
+assert.equal(api.state.wellnessRecords.some(r=>r.metric==='totalCalories'&&r.source==='whoop-health-connect'),false);
+assert.equal(api.state.wellnessRecords.find(r=>r.metric==='activeCalories').value,250);
+assert(api.saveManualMovement(date,{steps:'',activeCalories:'',totalCalories:'2274',stepGoal:'8000'}));
+api.applyNativeHealthSnapshot(snapshot([],['totalCalories']));
+assert.equal(api.selectedWellnessRecord('totalCalories',date).value,2274);
 // A corrected WHOOP period replaces its old calendar total and survives normalization/restore.
 const period={...row('steps',8061),stepBasis:'whoop-period',periodStart:new Date(Date.parse(stamp)-25*3600000).toISOString(),periodEnd:new Date(Date.parse(stamp)-3600000).toISOString()};
 api.applyNativeHealthSnapshot(snapshot([period]));
