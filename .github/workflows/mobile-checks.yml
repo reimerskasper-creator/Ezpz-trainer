@@ -38,6 +38,8 @@ jobs:
           node tests/daily-use.cjs
           node tests/privacy.cjs
           node tests/habits.cjs
+          node tests/wellness.cjs
+          node tests/wellness-mobile.cjs
           node tests/sleep.cjs
           node tests/zone.cjs
           node tests/overall.cjs
