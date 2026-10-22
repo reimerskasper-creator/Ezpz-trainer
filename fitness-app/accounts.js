@@ -12,12 +12,17 @@ function payloadFor(data,id){validBackup(data);assertOwner(data,id);const copy=J
 function attached(data,id,revision){return {...data,accountBackup:{ownerId:id,revision}};}
 if(typeof module==='object'&&module.exports){module.exports={validBackup,assertOwner,payloadFor,attached};return;}
 const app=root.EzpzAccountAdapter;if(!app)return;
+const cap=root.Capacitor,native=!!(cap?.isNativePlatform?.()&&cap?.isPluginAvailable?.('EzpzAccount')),nativeAccount=native?cap.registerPlugin('EzpzAccount'):null;
+let whoopConnected=false,whoopMessage='Connect separately to authorize access to your WHOOP data.',callbackBusy=false;
+const whoopPanel=()=>'<h3>WHOOP connection</h3><p>'+esc(whoopMessage)+'</p>'+(user?'<button data-account="whoop-connect">Connect WHOOP</button><button data-account="whoop-status">Check WHOOP connection</button>':'<p>Sign in to EZPZ above before connecting WHOOP.</p>');
+root.EzpzWhoopAccount={open:()=>{app.open();panel();}};
+
 let client=null,user=null,config=null,busy=false,message='Sign-in is optional. Your records stay on this device until you choose to save them.',remote=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function panel(){
  const box=document.getElementById('fitness-account-panel');if(!box)return;
  const action=(name,label)=>'<button data-account="'+name+'" '+(busy?'disabled':'')+'>'+label+'</button>';
- box.innerHTML='<span class="section-kicker">YOUR PROGRESS, YOUR CHOICE</span><h3>Save my progress</h3><p>Keep using EZPZ without an account, or sign in with Google.</p>'+(user?'<p>Signed in as <strong>'+esc(user.email||'Google account')+'</strong></p><p>Signing in does not upload or replace your records.</p>'+action('review','Check cloud backup')+(config?.backupEnabled?'<div class="account-actions">'+action('save','Save device progress to cloud')+action('restore','Restore cloud progress')+'</div>':'<p>Cloud Save and Restore are being checked before activation. Keep a downloaded backup for now.</p>')+action('signout','Sign out — keep device records')+'<p class="note">Keeping records leaves them readable on this device. Use Delete records from this device below when using a shared device.</p>':action('signin','Continue with Google'))+'<p role="status" aria-live="polite">'+esc(message)+'</p><details><summary>Account & privacy</summary><p>Google supplies your account identity and email. Supabase holds your sign-in session and, only after an explicit Save, your fitness backup. No wearable access is granted. Fitness backups can include measurements, food, sleep, steps, workout records and photos.</p><p>This is a private backup test. Cloud saves and restores happen only when you choose them. To request deletion of your test account, contact reimerskasper@gmail.com. Device deletion below does not delete a cloud account.</p><p><a href="./fitness-privacy.html">Privacy and deletion information</a></p>'+(user&&config?.accountDeletionEnabled?'<p>Deleting your cloud account permanently removes its cloud backup. Device records and downloaded copies remain.</p>'+action('delete-account','Delete my cloud account and backup'):'')+'</details>';
+ box.innerHTML='<span class="section-kicker">YOUR PROGRESS, YOUR CHOICE</span><h3>Save my progress</h3><p>Keep using EZPZ without an account, or sign in with Google.</p>'+(user?'<p>Signed in as <strong>'+esc(user.email||'Google account')+'</strong></p><p>Signing in does not upload or replace your records.</p>'+action('review','Check cloud backup')+(config?.backupEnabled?'<div class="account-actions">'+action('save','Save device progress to cloud')+action('restore','Restore cloud progress')+'</div>':'<p>Cloud Save and Restore are being checked before activation. Keep a downloaded backup for now.</p>')+action('signout','Sign out — keep device records')+'<p class="note">Keeping records leaves them readable on this device. Use Delete records from this device below when using a shared device.</p>':action('signin','Continue with Google'))+'<p role="status" aria-live="polite">'+esc(message)+'</p><details><summary>Account & privacy</summary><p>Google supplies your account identity and email. Supabase holds your sign-in session and, only after an explicit Save, your fitness backup. Google sign-in alone does not grant wearable access. WHOOP requires separate authorization. Fitness backups can include measurements, food, sleep, steps, workout records and photos.</p><p>This is a private backup test. Cloud saves and restores happen only when you choose them. To request deletion of your test account, contact reimerskasper@gmail.com. Device deletion below does not delete a cloud account.</p><p><a href="./fitness-privacy.html">Privacy and deletion information</a></p>'+(user&&config?.accountDeletionEnabled?'<p>Deleting your cloud account permanently removes its cloud backup. Device records and downloaded copies remain.</p>'+action('delete-account','Delete my cloud account and backup'):'')+'</details><section class="account-whoop">'+whoopPanel()+'</section>';
 }
 function status(text){message=text;panel();}
 async function verified(){const {data,error}=await client.auth.getUser();if(error||!data?.user)throw Error('Your session has expired. Sign in again.');if(user&&data.user.id!==user.id)throw Error('Account changed. Reload before continuing.');user=data.user;assertOwner(app.snapshot(),user.id);return user;}
@@ -31,7 +36,16 @@ async function run(name){
    if(app.hasActiveWorkout()&&!confirm('Your workout is saved on this device. Leave it briefly to sign in with Google?'))return;
    // Confirm browser storage works before leaving for PKCE. Never touch fitness records here.
    const probe='ezpz-fitness-auth-probe';localStorage.setItem(probe,'1');localStorage.removeItem(probe);
-   const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:RETURN_URL,scopes:'openid email profile',queryParams:{prompt:'select_account'}}});if(error)throw error;
+   const {data,error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:native?'ezpzfitness://auth/callback':RETURN_URL,...(native?{skipBrowserRedirect:true}:{}),scopes:'openid email profile',queryParams:{prompt:'select_account'}}});if(error)throw error;
+   if(native){if(!data?.url)throw Error('Could not start sign-in.');await nativeAccount.openAuth({url:data.url});status('Finish Google sign-in in your browser, then return to EZPZ.');}
+  }else if(name==='whoop-connect'||name==='whoop-status'){
+   await verified();
+   const {data,error}=await client.functions.invoke('whoop-connect',{body:{action:name==='whoop-connect'?'start':'status',platform:native?'android':'web'}});
+   if(error)throw Error('WHOOP connection could not be checked. Confirm you are signed in and try again.');
+   if(name==='whoop-status'){whoopConnected=!!data?.connected;whoopMessage=whoopConnected?'WHOOP authorization is connected to your EZPZ account.':'WHOOP is not connected yet.';panel();return;}
+   if(typeof data?.url!=='string')throw Error('Could not start WHOOP authorization.');
+   const target=new URL(data.url);if(target.origin!=='https://api.prod.whoop.com'||target.pathname!=='/oauth/oauth2/auth')throw Error('Invalid WHOOP authorization URL.');
+   if(native)await nativeAccount.openAuth({url:target.href});else location.assign(target.href);
   }else if(name==='signout'){
    if(!confirm('Sign out and KEEP your records on this device? They will remain readable here. Their account ownership is retained so another account cannot upload them.'))return;
    const {error}=await client.auth.signOut({scope:'local'});if(error)throw Error('Could not sign out. Try again online.');user=null;remote=null;status('Signed out. Device records were kept.');
@@ -81,8 +95,26 @@ async function run(name){
   }
  }catch(e){status(e.message||'Account action failed. Device records are unchanged.');}finally{busy=false;panel();}
 }
-document.addEventListener('click',e=>{const b=e.target.closest('[data-account]');if(b){e.preventDefault();run(b.dataset.account);}});
+document.addEventListener('click',e=>{if(e.target.closest('[data-open-whoop]')){e.preventDefault();app.open();panel();document.getElementById('fitness-account-panel')?.scrollIntoView?.({behavior:'smooth',block:'start'});return;}const b=e.target.closest('[data-account]');if(b){e.preventDefault();run(b.dataset.account);}});
 new MutationObserver(()=>{const p=document.getElementById('fitness-account-panel');if(p&&!p.children.length)panel();}).observe(document.getElementById('screen'),{childList:true});
+async function handleNativeCallback(value){
+ if(callbackBusy||typeof value!=='string')return;
+ let url;try{url=new URL(value)}catch{return}
+ if(url.protocol!=='ezpzfitness:'||url.pathname!=='/callback'||!['auth','whoop'].includes(url.hostname))return;
+ callbackBusy=true;
+ try{
+  app.open();
+  if(url.hostname==='whoop'){
+   whoopMessage=url.searchParams.get('result')==='connected'?'WHOOP authorization completed. Tap Check WHOOP connection to verify.':'WHOOP authorization did not finish. Try Connect WHOOP again.';
+   panel();return;
+  }
+  if(url.searchParams.get('error'))throw Error('Google sign-in did not finish. Try again.');
+  const code=url.searchParams.get('code');if(!code)throw Error('Sign-in callback had no code. Try again.');
+  const {error}=await client.auth.exchangeCodeForSession(code);if(error)throw Error('Sign-in could not finish. Start again from this app.');
+  try{await verified();}catch(error){await client.auth.signOut({scope:'local'});user=null;throw error;}status('Signed in. Your device records were kept.');
+ }catch(error){status(error.message||'Could not finish sign-in.');}
+ finally{callbackBusy=false;}
+}
 async function init(){
  try{
   const response=await fetch('./fitness-app/account-config.json',{cache:'no-store'});if(!response.ok)throw Error('Account settings unavailable.');config=await response.json();if(!config.enabled){status('Account sign-in is not activated yet.');return;}
@@ -94,6 +126,8 @@ async function init(){
   if(code){const {error:exchangeError}=await client.auth.exchangeCodeForSession(code);if(exchangeError)throw Error('Sign-in could not finish. Use the same browser and try again.');}
   const {data,error:sessionError}=await client.auth.getSession();if(sessionError)throw sessionError;
   if(data?.session){const result=await client.auth.getUser();if(result.error)throw Error('Session could not be verified. Sign in again.');user=result.data.user;try{assertOwner(app.snapshot(),user.id);}catch(e){await client.auth.signOut({scope:'local'});user=null;throw e;}status('Signed in. No fitness records were uploaded or changed.');}
+  if(nativeAccount){await nativeAccount.addListener('authCallback',data=>handleNativeCallback(data.url));const pending=await nativeAccount.getPendingUrl();if(pending?.url)await handleNativeCallback(pending.url);}
+  const whoopResult=new URL(location.href).searchParams.get('whoop');if(whoopResult){const clean=new URL(location.href);clean.searchParams.delete('whoop');history.replaceState(null,'',clean.pathname+clean.search+clean.hash);whoopMessage=whoopResult==='connected'?'WHOOP authorization completed. Tap Check WHOOP connection to verify.':'WHOOP authorization did not finish. Try again.';app.open();}
   client.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;remote=null;}else if(session?.user){user=session.user;}panel();});
  }catch(e){status(e.message||'Sign-in is unavailable. You can keep using EZPZ offline.');}finally{panel();}
 }

@@ -22,7 +22,7 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
   const encrypted=await cryptoApi.subtle.encrypt({name:'AES-GCM',iv,additionalData:bytes(user)},key,bytes(JSON.stringify(tokens)));
   return {version:1,iv:hex(iv),ciphertext:hex(encrypted)};
  };
- const redirect=result=>new Response(null,{status:303,headers:{...headers,Location:APP+'?whoop='+result}});
+ const redirect=(result,platform)=>new Response(null,{status:303,headers:{...headers,Location:platform==='android'?'ezpzfitness://whoop/callback?result='+result:APP+'?whoop='+result}});
  return async req=>{
   const url=new URL(req.url),origin=req.headers.get('Origin'),cors=origin&&ORIGINS.has(origin)?{'Access-Control-Allow-Origin':origin,Vary:'Origin'}:{};
   const json=(data,status=200)=>new Response(JSON.stringify(data),{status,headers:{...headers,...cors,'Content-Type':'application/json'}});
@@ -36,19 +36,19 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
     const digest=await hash(state);
     const rows=await db('whoop_oauth_states','?state_hash=eq.'+digest+'&expires_at=gt.'+encodeURIComponent(new Date().toISOString()),'DELETE');
     if(rows.length!==1)return json({error:'Invalid or expired connection request. Start again in EZPZ.'},400);
-    if(url.searchParams.has('error'))return redirect('cancelled');
+    if(url.searchParams.has('error'))return redirect('cancelled',rows[0].return_platform);
     const code=url.searchParams.get('code');
     if(!ready()||!code||code.length>4096)return json({error:'Connection setup is incomplete. Start again after setup.'},503);
     const response=await fetcher(TOKEN_URL,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'authorization_code',code,redirect_uri:callback,client_id:env.WHOOP_CLIENT_ID,client_secret:env.WHOOP_CLIENT_SECRET}),signal:AbortSignal.timeout(15000)});
-    if(!response.ok)return redirect('failed');
+    if(!response.ok)return redirect('failed',rows[0].return_platform);
     const t=await response.json();
-    if(typeof t.access_token!=='string'||!t.access_token||typeof t.refresh_token!=='string'||!t.refresh_token||!Number.isFinite(t.expires_in)||t.expires_in<=0)return redirect('failed');
+    if(typeof t.access_token!=='string'||!t.access_token||typeof t.refresh_token!=='string'||!t.refresh_token||!Number.isFinite(t.expires_in)||t.expires_in<=0)return redirect('failed',rows[0].return_platform);
     const scopes=typeof t.scope==='string'?t.scope.split(/\s+/):[];
-    if(!scopes.includes('read:cycles')||!scopes.includes('read:sleep'))return redirect('failed');
+    if(!scopes.includes('read:cycles')||!scopes.includes('read:sleep'))return redirect('failed',rows[0].return_platform);
     const user=rows[0].user_id;
     const sealed=await seal(user,{access_token:t.access_token,refresh_token:t.refresh_token,expires_at:new Date(Date.now()+t.expires_in*1000).toISOString(),scope:t.scope});
     await db('whoop_connections','?on_conflict=user_id','POST',[{user_id:user,encrypted_tokens:sealed,connected_at:new Date().toISOString()}]);
-    return redirect('connected');
+    return redirect('connected',rows[0].return_platform);
    }
    if(req.method==='GET')return json({service:'EZPZ WHOOP connection',callbackReady:true,credentialsConfigured:ready()});
    if(req.method!=='POST')return json({error:'Method not allowed'},405);
@@ -69,8 +69,8 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
    if(!ready())return json({error:'WHOOP setup is not complete yet.'},503);
    // Starting again invalidates older pending attempts for this user.
    await db('whoop_oauth_states','?user_id=eq.'+user,'DELETE');
-   const state=random(),now=Date.now();
-   await db('whoop_oauth_states','','POST',[{state_hash:await hash(state),user_id:user,expires_at:new Date(now+10*60000).toISOString()}]);
+   const state=random(),now=Date.now(),platform=body.platform==='android'?'android':'web';
+   await db('whoop_oauth_states','','POST',[{state_hash:await hash(state),user_id:user,return_platform:platform,expires_at:new Date(now+10*60000).toISOString()}]);
    const authorization=new URL('https://api.prod.whoop.com/oauth/oauth2/auth');
    authorization.search=new URLSearchParams({client_id:env.WHOOP_CLIENT_ID,redirect_uri:callback,response_type:'code',scope:'read:cycles read:sleep offline',state}).toString();
    return json({url:authorization.href});

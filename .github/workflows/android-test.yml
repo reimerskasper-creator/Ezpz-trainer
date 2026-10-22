@@ -27,6 +27,9 @@ jobs:
         run: |
           node tests/wellness.cjs
           node tests/native-health.cjs
+          node tests/accounts.cjs
+          node tests/native-accounts.cjs
+          node tests/whoop-connect.mjs
       - name: Package current canonical app
         working-directory: native
         run: |

@@ -7,10 +7,6 @@ let html=fs.readFileSync(path.join(root,'fitness.html'),'utf8');
 html=html.replace('<head>','<head><script src="./capacitor-runtime.js"></script>');
 // Package the canonical interface; never load remote pages inside a privileged bridge.
 html=html.replace("if('serviceWorker' in navigator&&window.isSecureContext)","if(!window.Capacitor?.isNativePlatform()&&'serviceWorker' in navigator&&window.isSecureContext)");
-// Browser OAuth returns to the website, not this app. Enable only after a native callback is tested.
-html=html.replace(/<script defer src="\.\/fitness-app\/accounts.js"><\/script>/g,'');
-html+='<script>document.addEventListener("DOMContentLoaded",()=>{const note=()=>{const el=document.getElementById("fitness-account-panel");if(el)el.innerHTML="<h3>Android connection test</h3><p>Google sign-in remains available in the browser app. Use your downloaded backup to restore existing progress here. This test app stores records separately on this phone.</p>"};new MutationObserver(note).observe(document.getElementById("screen"),{childList:true});});</script>';
-// Avoid a self-triggering observer: the account panel is populated only by the page render.
-html=html.replace('if(el)el.innerHTML=', 'if(el&&!el.dataset.nativeNote){el.dataset.nativeNote="1";el.innerHTML=').replace('separately on this phone.</p>"};','separately on this phone.</p>"}};');
+// Native account callbacks return to this app; accounts.js retains PKCE verification here.
 fs.writeFileSync(path.join(out,'index.html'),html);fs.writeFileSync(path.join(out,'fitness.html'),html);
 console.log('Packaged canonical fitness.html and local assets.');

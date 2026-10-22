@@ -35,6 +35,8 @@ assert.equal(connections[0].user_id,id);const encrypted=JSON.stringify(connectio
 assert(!encrypted.includes('access-test-only'));assert(!encrypted.includes('refresh-test-only'));
 assert.equal((await h(new Request(root+'?code=example&state='+state))).status,400);assert.equal(exchanges,1);
 const status=await (await post({action:'status'})).json();assert.equal(status.connected,true);assert(!JSON.stringify(status).includes('ciphertext'));
+const nativeStart=await (await post({action:'start',platform:'android'})).json(),nativeState=new URL(nativeStart.url).searchParams.get('state');
+assert.equal((await h(new Request(root+'?error=access_denied&state='+nativeState))).headers.get('Location'),'ezpzfitness://whoop/callback?result=cancelled');
 const start2=await (await post({action:'start'})).json(),state2=new URL(start2.url).searchParams.get('state');
 states[0].expires_at='2000-01-01T00:00:00Z';assert.equal((await h(new Request(root+'?code=x&state='+state2))).status,400);
 failStorage=true;assert.equal((await post({action:'status'})).status,502);
@@ -44,7 +46,7 @@ console.log('PASS: authentication, origin gating, hashed expiring single-use sta
 
 if(process.env.WHOOP_SMOKE_URL){
  const root=process.env.WHOOP_SMOKE_URL;
- const health=await fetch(root);assert.equal(health.status,200);const data=await health.json();assert.equal(data.callbackReady,true);
+ const health=await fetch(root);assert.equal(health.status,200);const data=await health.json();assert.equal(data.callbackReady,true);assert.equal(data.credentialsConfigured,true);
  assert.equal((await fetch(root,{method:'POST',headers:{'Content-Type':'application/json'},body:'{"action":"start"}'})).status,401);
  assert.equal((await fetch(root+'?code=invalid&state=invalid')).status,400);
  console.log('PASS: deployed health endpoint, unauthorized start rejection and invalid callback rejection.');
