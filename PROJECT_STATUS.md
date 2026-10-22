@@ -471,3 +471,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Set completion and next exercise access — 21 October 2026
 - Moved Next exercise directly below set validation/last set, ahead of Next weight, Swap and Technique panels. Last exercise note follows the same position. Increased Next action to 48px.
 - Added an explicit high-contrast SVG checkmark to checked set controls, restoring a clear completion symbol after dark-card background styling had reset the previous background image. Existing checkbox semantics, validation and draft saving unchanged.
+
+## Footer rest timer and profile panel — 21 October 2026
+- Added a compact countdown between Session progress and Finish workout. It shares the existing deadline timer and saved state: tap to start the current exercise rest duration, pause while running, resume while paused, or restart when ready. Updates immediately on Train render and every existing timer tick; no second timer or completion changes.
+- Profile & preferences now uses a dark photo-backed summary, lighter labels and clear chevron, matching More’s existing cards. The expandable settings and controls remain unchanged.
