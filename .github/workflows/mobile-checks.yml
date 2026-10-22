@@ -27,6 +27,8 @@ jobs:
         run: |
           node tests/accounts.cjs
           node tests/native-accounts.cjs
+          node tests/whoop-import.cjs
+          node tests/whoop-mobile.cjs
           node tests/account-deletion.cjs
           node tests/release-readiness.cjs
           node tests/release-readiness-mobile.cjs

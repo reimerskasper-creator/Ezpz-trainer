@@ -1,3 +1,4 @@
+import {mapWhoop} from './mapping.js';
 const APP = 'https://reimerskasper-creator.github.io/Ezpz-trainer/fitness.html';
 const ORIGINS = new Set(['https://reimerskasper-creator.github.io','https://localhost','http://localhost','capacitor://localhost']);
 const TOKEN_URL = 'https://api.prod.whoop.com/oauth/oauth2/token';
@@ -21,6 +22,64 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
   const iv=cryptoApi.getRandomValues(new Uint8Array(12));
   const encrypted=await cryptoApi.subtle.encrypt({name:'AES-GCM',iv,additionalData:bytes(user)},key,bytes(JSON.stringify(tokens)));
   return {version:1,iv:hex(iv),ciphertext:hex(encrypted)};
+ };
+ const openTokens=async(user,sealed)=>{
+  if(sealed?.version!==1||typeof sealed.iv!=='string'||!/^[a-f0-9]{24}$/.test(sealed.iv)||typeof sealed.ciphertext!=='string'||!/^(?:[a-f0-9]{2})+$/.test(sealed.ciphertext))throw Error('Invalid credential storage');
+  const unhex=value=>Uint8Array.from(value.match(/../g),v=>parseInt(v,16));
+  const digest=await cryptoApi.subtle.digest('SHA-256',bytes('ezpz-whoop-tokens-v1:'+service));
+  const key=await cryptoApi.subtle.importKey('raw',digest,'AES-GCM',false,['decrypt']);
+  return JSON.parse(new TextDecoder().decode(await cryptoApi.subtle.decrypt({name:'AES-GCM',iv:unhex(sealed.iv),additionalData:bytes(user)},key,unhex(sealed.ciphertext))));
+ };
+ const syncWhoop=async(user,body)=>{
+  const utcToday=new Date().toISOString().slice(0,10),day=body.through;
+  if(typeof day!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(day)||!Number.isFinite(Date.parse(day+'T00:00:00Z'))||new Date(day+'T00:00:00Z').toISOString().slice(0,10)!==day||Math.abs(Date.parse(day+'T00:00:00Z')-Date.parse(utcToday+'T00:00:00Z'))>86400000)throw Error('Invalid sync date');
+  const lease=random(),now=new Date().toISOString(),expiry=new Date(Date.now()+120000).toISOString();
+  const lockQuery='?user_id=eq.'+user+'&or='+encodeURIComponent('(sync_lock.is.null,sync_lock_expires_at.lt.'+now+')');
+  const locked=await db('whoop_connections',lockQuery,'PATCH',{sync_lock:lease,sync_lock_expires_at:expiry});
+  if(locked.length!==1)throw Error('Connect WHOOP first, or wait for your other sync to finish.');
+  const owned='?user_id=eq.'+user+'&sync_lock=eq.'+lease;
+  try{
+   let tokens=await openTokens(user,locked[0].encrypted_tokens);
+   const refresh=async()=>{
+    const r=await fetcher(TOKEN_URL,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({grant_type:'refresh_token',refresh_token:tokens.refresh_token,client_id:env.WHOOP_CLIENT_ID,client_secret:env.WHOOP_CLIENT_SECRET,scope:'offline'}),signal:AbortSignal.timeout(12000)});
+    if(!r.ok)throw Error('WHOOP permission expired. Reconnect WHOOP.');
+    const t=await r.json();
+    if(typeof t.access_token!=='string'||!t.access_token||typeof t.refresh_token!=='string'||!t.refresh_token||!Number.isFinite(t.expires_in)||t.expires_in<=0)throw Error('Invalid refresh response');
+    tokens={access_token:t.access_token,refresh_token:t.refresh_token,expires_at:new Date(Date.now()+t.expires_in*1000).toISOString(),scope:t.scope||tokens.scope};
+    const saved=await db('whoop_connections',owned,'PATCH',{encrypted_tokens:await seal(user,tokens)});
+    if(saved.length!==1)throw Error('Connection changed during sync. Try again.');
+   };
+   if(!Number.isFinite(Date.parse(tokens.expires_at))||Date.parse(tokens.expires_at)<Date.now()+60000)await refresh();
+   const call=async(path,method='GET')=>{
+    const send=()=>fetcher('https://api.prod.whoop.com/developer/v2/'+path,{method,headers:{Authorization:'Bearer '+tokens.access_token},signal:AbortSignal.timeout(10000)});
+    let r=await send();if(r.status===401){await refresh();r=await send()}
+    if(!r.ok)throw Error(r.status===429?'WHOOP is busy. Try syncing again shortly.':'WHOOP data could not be read. Try again.');
+    return method==='DELETE'?null:r.json();
+   };
+   if(body.action==='disconnect'){
+    await call('user/access','DELETE');
+    const removed=await db('whoop_connections',owned,'DELETE');if(removed.length!==1)throw Error('Connection changed. Check status.');
+    return {disconnected:true};
+   }
+   const from=new Date(Date.parse(day+'T00:00:00Z')-6*86400000).toISOString().slice(0,10);
+   const start=new Date(Date.parse(from+'T00:00:00Z')-2*86400000).toISOString();
+   const collection=async(path)=>{
+    const items=[],seen=new Set();let next;
+    for(let page=0;page<4;page++){
+     const query=new URLSearchParams({limit:'25',start});if(next)query.set('nextToken',next);
+     const data=await call(path+'?'+query);
+     if(!Array.isArray(data.records)||data.records.length>25)throw Error('Invalid WHOOP data');
+     items.push(...data.records);
+     if(!data.next_token)return items;
+     if(typeof data.next_token!=='string'||data.next_token.length>2048||seen.has(data.next_token))throw Error('Invalid WHOOP page');
+     next=data.next_token;seen.add(next);
+    }
+    throw Error('Too many WHOOP records. No partial import was saved.');
+   };
+   // Read sequentially so retries cannot race rotating refresh tokens.
+   const cycles=await collection('cycle'),sleeps=await collection('activity/sleep');
+   return {snapshot:mapWhoop(cycles,sleeps,from,day,new Date().toISOString())};
+  }finally{await db('whoop_connections',owned,'PATCH',{sync_lock:null,sync_lock_expires_at:null})}
  };
  const redirect=(result,platform)=>new Response(null,{status:303,headers:{...headers,Location:platform==='android'?'ezpzfitness://whoop/callback?result='+result:APP+'?whoop='+result}});
  return async req=>{
@@ -47,7 +106,7 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
     if(!scopes.includes('read:cycles')||!scopes.includes('read:sleep'))return redirect('failed',rows[0].return_platform);
     const user=rows[0].user_id;
     const sealed=await seal(user,{access_token:t.access_token,refresh_token:t.refresh_token,expires_at:new Date(Date.now()+t.expires_in*1000).toISOString(),scope:t.scope});
-    await db('whoop_connections','?on_conflict=user_id','POST',[{user_id:user,encrypted_tokens:sealed,connected_at:new Date().toISOString()}]);
+    await db('whoop_connections','?on_conflict=user_id','POST',[{user_id:user,encrypted_tokens:sealed,connected_at:new Date().toISOString(),sync_lock:null,sync_lock_expires_at:null}]);
     return redirect('connected',rows[0].return_platform);
    }
    if(req.method==='GET')return json({service:'EZPZ WHOOP connection',callbackReady:true,credentialsConfigured:ready()});
@@ -65,6 +124,7 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
     const rows=await db('whoop_connections','?select=connected_at&user_id=eq.'+user);
     return json({configured:ready(),connected:rows.length===1,connectedAt:rows[0]?.connected_at||null});
    }
+   if(body.action==='sync'||body.action==='disconnect'){if(!ready())return json({error:'WHOOP setup is incomplete.'},503);try{return json(await syncWhoop(user,body))}catch(error){const allowed=['Connect WHOOP first, or wait for your other sync to finish.','WHOOP permission expired. Reconnect WHOOP.','WHOOP is busy. Try syncing again shortly.','WHOOP data could not be read. Try again.'];return json({error:allowed.includes(error.message)?error.message:'WHOOP sync could not finish. No device records were changed. Try again.'},502)}}
    if(body.action!=='start')return json({error:'Unknown action'},400);
    if(!ready())return json({error:'WHOOP setup is not complete yet.'},503);
    // Starting again invalidates older pending attempts for this user.
