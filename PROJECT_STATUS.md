@@ -509,3 +509,19 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Four pillar PNGs are exact crops of approved brand/ezpz-wordmark-banner.png, not the inaccurate legacy SVG. Eat uses fork-E; Sleep crescent-Z; Train arrow-P; Zone wave-Z. Text labels retained for clarity/accessibility; Home unchanged. Train only receives its title lettermark.
 - Removed Eat top quick-action banner; retained one diary Log food button opening recipe/custom-food logging. Recipes, portions, macros, existing record schema, Sleep/Zone save rules and controls unchanged. Updated old entry-point tests; expanded pillar unit tests and three-width mobile tests for images, labels, disclosure/read-only state, single logging entry and responsive layout.
 - Preview visually inspected Sleep/Zone; sleep save and Zone explicit check-in tested through CUA. Relevant local suites passed. Full Mobile app checks 39772192096 succeeded on runtime source 9886ca0c696a4426ffb639d41603ebfd119b88e6, including 320/390/430px. Pages deployment 39772191673 succeeded. Live HTML and all eight new assets match local bytes. This full successful run also covers the previous diary update whose browser check was pending. No known release blocker.
+
+
+## Pillar navigation and Sleep field harmony — 22 October 2026
+- Footer uses the original E / crescent-Z / arrow-P / wave-Z artwork with clear Eat / Sleep / Progress / Zone text labels; Home retains its icon. The training route remains internal `train` while its user-facing header says Progress. Sleep stays spelled Sleep.
+- Sleep date, hours, minutes and goal inputs use the same opaque forest-green field styling as Eat's date panel. Taller logo navigation has a matching finish-bar offset, including safe-area padding.
+
+
+## Wearable preparation — 22 October 2026
+- Home foundations includes a compact Steps today row with an adjustable personal goal; no fifth ring. Steps & calories supports dated manual daily totals, real zero versus missing, seven-day history and persistence.
+- Progress/training has a small Active calories today shortcut. Active and total daily energy remain separate and never alter Eat targets or workout completion.
+- More → Connected apps honestly reports no automatic connections. Provider cards are preparation only; no OAuth, tokens, background sync, fake Connect action or demonstration user records.
+- Version 1 normalized daily import boundary accepts steps, sleep minutes with optional deep/REM minutes, active kcal and optional total kcal. Atomic validation, idempotent updates, stale-revision rejection, corrected-date moves, explicit per-day source choice, preserved manual logs, import timestamps and backup restore are implemented. Manual data wins by default; sources are never summed. Sleep summaries, rings and history use the selected source without replacing original manual logs. Deep/REM only appear when supplied; no inferred stages.
+- See docs/wellness-imports.md for the adapter contract and remaining secure authentication/consent/provider mapping work. Actual wearable connections require a later implementation.
+- Added tests/wellness.cjs and tests/wellness-mobile.cjs to hosted checks. Updated native swipe surface search to avoid horizontal exercise scrollers, matching existing app gesture exclusions. Fixed the workout finish bar offset for the taller logo navigation.
+
+- Validation: all current local non-browser workflow suites pass. Full hosted Mobile app checks **39780800805** succeeded on source **aeea92968d51abc4278d1ff4bd9aad840cc75572**, covering wellness data and three-width phone flows plus the complete existing app/backup suite. Pages **39780798487** succeeded. This passing full run supersedes pending or failed intermediate checks for the footer and wellness work; no known release blocker.
