@@ -31,6 +31,8 @@ jobs:
           node tests/release-readiness-mobile.cjs
           node tests/compact-training-mobile.cjs
           node tests/wellness.cjs
+          node tests/native-health.cjs
+          node tests/native-health-mobile.cjs
           node tests/wellness-mobile.cjs
           node tests/pillar-pages.cjs
           node tests/foundation-week.cjs
