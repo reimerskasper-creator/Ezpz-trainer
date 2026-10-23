@@ -124,23 +124,23 @@ body[data-view=progress] .progress-empty{text-align:center;padding:16px 5px}
 body[data-view=progress] .progress-empty>svg{width:28px;height:28px;color:#8cbea0;margin-bottom:6px}
 body[data-view=progress] .progress-empty h3{font-size:15px;margin:8px 0}
 body[data-view=progress] .progress-empty p{font-size:12px;max-width:260px;margin:8px auto 16px;color:#91a496}
-body[data-view=progress] .history-heading{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
-body[data-view=progress] .history-heading>small{font-size:10px}
-body[data-view=progress] .history-heading h3{font-size:17px;color:#365940}
-body[data-view=progress] .history-session{border:1px solid #e3ece5;border-radius:14px;background:#fff;margin-bottom:9px}
-body[data-view=progress] .history-session>summary{display:flex;align-items:center;gap:12px;padding:14px 12px;list-style:none;cursor:pointer}
-body[data-view=progress] .history-date{flex:0 0 38px;display:flex;flex-direction:column;align-items:center;border-radius:9px;background:#f0f7f2;padding:7px 2px}
-body[data-view=progress] .history-date>strong{font-size:16px;color:#4e8864}
-body[data-view=progress] .history-date>small{font-size:8px;margin-top:3px;color:#8fa796}
-body[data-view=progress] .history-title{flex:1;min-width:0}
-body[data-view=progress] .history-title>strong{display:block;font-size:13px;color:#37583f;line-height:1.35}
-body[data-view=progress] .history-title>small{display:block;font-size:10px;margin-top:6px;color:#96a99b}
-body[data-view=progress] .history-session>summary>b{font-weight:400;color:#9fb2a5}
-body[data-view=progress] .history-details{padding:0 14px 5px}
-body[data-view=progress] .history-details>div{padding:12px 0;border-top:1px solid #edf2ee}
-body[data-view=progress] .history-details strong{font-size:12px}
-body[data-view=progress] .history-details p{font-size:11px;line-height:1.6}
-body[data-view=progress] .history-more{min-height:44px;font-size:12px;border-color:#dcebe1;background:#eff8f2;color:#40815a}
+body:is([data-view=progress],[data-view=workout-history]) .history-heading{display:flex;justify-content:space-between;align-items:center;margin:24px 0 12px}
+body:is([data-view=progress],[data-view=workout-history]) .history-heading>small{font-size:10px}
+body:is([data-view=progress],[data-view=workout-history]) .history-heading h3{font-size:17px;color:#365940}
+body:is([data-view=progress],[data-view=workout-history]) .history-session{border:1px solid #e3ece5;border-radius:14px;background:#fff;margin-bottom:9px}
+body:is([data-view=progress],[data-view=workout-history]) .history-session>summary{display:flex;align-items:center;gap:12px;padding:14px 12px;list-style:none;cursor:pointer}
+body:is([data-view=progress],[data-view=workout-history]) .history-date{flex:0 0 38px;display:flex;flex-direction:column;align-items:center;border-radius:9px;background:#f0f7f2;padding:7px 2px}
+body:is([data-view=progress],[data-view=workout-history]) .history-date>strong{font-size:16px;color:#4e8864}
+body:is([data-view=progress],[data-view=workout-history]) .history-date>small{font-size:8px;margin-top:3px;color:#8fa796}
+body:is([data-view=progress],[data-view=workout-history]) .history-title{flex:1;min-width:0}
+body:is([data-view=progress],[data-view=workout-history]) .history-title>strong{display:block;font-size:13px;color:#37583f;line-height:1.35}
+body:is([data-view=progress],[data-view=workout-history]) .history-title>small{display:block;font-size:10px;margin-top:6px;color:#96a99b}
+body:is([data-view=progress],[data-view=workout-history]) .history-session>summary>b{font-weight:400;color:#9fb2a5}
+body:is([data-view=progress],[data-view=workout-history]) .history-details{padding:0 14px 5px}
+body:is([data-view=progress],[data-view=workout-history]) .history-details>div{padding:12px 0;border-top:1px solid #edf2ee}
+body:is([data-view=progress],[data-view=workout-history]) .history-details strong{font-size:12px}
+body:is([data-view=progress],[data-view=workout-history]) .history-details p{font-size:11px;line-height:1.6}
+body:is([data-view=progress],[data-view=workout-history]) .history-more{min-height:44px;font-size:12px;border-color:#dcebe1;background:#eff8f2;color:#40815a}
 body[data-view=more] .more-plan{padding:19px;background:#183d2c;color:#fff;border-radius:18px;margin-bottom:24px}
 body[data-view=more] .more-plan-top{display:flex;align-items:center;gap:8px;font-size:9px;letter-spacing:1.3px;color:#a3cbb3}
 body[data-view=more] .more-plan-top svg{width:17px;height:17px}
@@ -789,17 +789,17 @@ body[data-view=progress] .weight-entry{border-top-color:#ccded1}
 body[data-view=progress] .weight-entry>summary{color:#256243}
 body[data-view=progress] .weight-entry label{color:#456550}
 body[data-view=progress] .weight-entry input{background:#fff;border-color:#cbded1}
-body[data-view=progress] .history-session{overflow:hidden;border-color:#d1e0d6;box-shadow:0 3px 13px #193d2308}
-body[data-view=progress] .history-session>summary{background-color:#173c2b;background-image:linear-gradient(90deg,#0b2a1fea,#0b2a1fc4 60%,#0b2a1f80),var(--history-photo);background-size:cover;background-position:center,center 38%;min-height:86px}
-body[data-view=progress] .history-title>strong{color:#f0fff5}
-body[data-view=progress] .history-title>small,body[data-view=progress] .history-session>summary>b{color:#cce7d7}
-body[data-view=progress] .history-date{background:#e1f8e91c;border:1px solid #e1f8e92b}
-body[data-view=progress] .history-date>strong{color:#b8f4d1}
-body[data-view=progress] .history-date>small{color:#d4edde}
-body[data-view=progress] .history-details{background:#f8fcf9}
-body[data-view=progress] .history-list>.progress-empty{background-color:#173c2b;background-image:linear-gradient(110deg,#0c2b20ee,#0c2b20b8),url('./train-images/finish.jpg');background-size:cover;background-position:center;color:#f0fff6;padding:24px 17px}
-body[data-view=progress] .history-list>.progress-empty h3{color:#f0fff6}
-body[data-view=progress] .history-list>.progress-empty p{color:#cce7d7}
+body:is([data-view=progress],[data-view=workout-history]) .history-session{overflow:hidden;border-color:#d1e0d6;box-shadow:0 3px 13px #193d2308}
+body:is([data-view=progress],[data-view=workout-history]) .history-session>summary{background-color:#173c2b;background-image:linear-gradient(90deg,#0b2a1fea,#0b2a1fc4 60%,#0b2a1f80),var(--history-photo);background-size:cover;background-position:center,center 38%;min-height:86px}
+body:is([data-view=progress],[data-view=workout-history]) .history-title>strong{color:#f0fff5}
+body:is([data-view=progress],[data-view=workout-history]) .history-title>small,body:is([data-view=progress],[data-view=workout-history]) .history-session>summary>b{color:#cce7d7}
+body:is([data-view=progress],[data-view=workout-history]) .history-date{background:#e1f8e91c;border:1px solid #e1f8e92b}
+body:is([data-view=progress],[data-view=workout-history]) .history-date>strong{color:#b8f4d1}
+body:is([data-view=progress],[data-view=workout-history]) .history-date>small{color:#d4edde}
+body:is([data-view=progress],[data-view=workout-history]) .history-details{background:#f8fcf9}
+body:is([data-view=progress],[data-view=workout-history]) .history-list>.progress-empty{background-color:#173c2b;background-image:linear-gradient(110deg,#0c2b20ee,#0c2b20b8),url('./train-images/finish.jpg');background-size:cover;background-position:center;color:#f0fff6;padding:24px 17px}
+body:is([data-view=progress],[data-view=workout-history]) .history-list>.progress-empty h3{color:#f0fff6}
+body:is([data-view=progress],[data-view=workout-history]) .history-list>.progress-empty p{color:#cce7d7}
 body[data-view=train] .training-view-switch{background-image:linear-gradient(100deg,#e8f2ecd9,#e8f2eceb),url('./train-images/guide.jpg');background-size:cover;background-position:center;border-color:#d0e1d6}
 body[data-view=train] .exercise-jump-list button{background-color:#204534;background-image:linear-gradient(110deg,#102f23e6,#102f23a6),var(--jump-photo);background-size:cover;background-position:center;border-color:#3b614d}
 body[data-view=train] .exercise-jump-list button>small{color:#f0fff5}
@@ -1456,7 +1456,28 @@ body[data-view=more] .readiness-panel button.primary,#fitness-account-panel butt
 body[data-view=more] .readiness-panel :is(a,input),#fitness-account-panel a{color:#c2e8cf}
 body[data-view=more] .readiness-panel input{background:#244e3d;border-color:#719580;color-scheme:dark}
 body[data-view=more] .readiness-panel .danger-action,#fitness-account-panel .danger-action{background:#623e31;color:#ffeadc;border-color:#b38c72}
-</style><style>.imported-workout{border-top:1px solid #72958055;margin-top:12px}.imported-workout summary{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 0;min-height:48px;cursor:pointer}.imported-workout summary strong,.imported-workout summary small{display:block}.imported-workout summary small{color:#c8dece;margin-top:5px}.imported-workout summary>span:last-child{color:#91deb0;font-size:24px}</style><style>.wellness-card button[data-account],.wellness-card button[data-whoop-upgrade]{background:#315b45;color:#f1f8ef;border:1px solid #729580}.wellness-card button[data-whoop-upgrade]{background:#ade1bf;color:#143e2b}.progress-workout-count button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:0;border:0;background:transparent;color:inherit;text-align:left;height:100%}.progress-workout-count button:focus-visible{outline:3px solid #91deb0;outline-offset:6px}body[data-view=workout-history] .history-details{background:#143e30;color:#f1f8ef}body[data-view=workout-history] .history-details p{color:#d0e5d6}body[data-view=workout-history] .history-details button,.removed-workouts button{background:#315b45;color:#f1f8ef;border-color:#729580}.remove-connected-workout{background:#624332!important;color:#ffe8d8!important;border-color:#a88970!important}.removed-workouts summary{min-height:48px;padding:12px 0;cursor:pointer}</style></head><body>
+</style><style>.imported-workout{border-top:1px solid #72958055;margin-top:12px}.imported-workout summary{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:14px 0;min-height:48px;cursor:pointer}.imported-workout summary strong,.imported-workout summary small{display:block}.imported-workout summary small{color:#c8dece;margin-top:5px}.imported-workout summary>span:last-child{color:#91deb0;font-size:24px}</style><style>.wellness-card button[data-account],.wellness-card button[data-whoop-upgrade]{background:#315b45;color:#f1f8ef;border:1px solid #729580}.wellness-card button[data-whoop-upgrade]{background:#ade1bf;color:#143e2b}.progress-workout-count button{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;padding:0;border:0;background:transparent;color:inherit;text-align:left;height:100%}.progress-workout-count button:focus-visible{outline:3px solid #91deb0;outline-offset:6px}body[data-view=workout-history] .history-details{background:#143e30;color:#f1f8ef}body[data-view=workout-history] .history-details p{color:#d0e5d6}body[data-view=workout-history] .history-details button,.removed-workouts button{background:#315b45;color:#f1f8ef;border-color:#729580}.remove-connected-workout{background:#624332!important;color:#ffe8d8!important;border-color:#a88970!important}.removed-workouts summary{min-height:48px;padding:12px 0;cursor:pointer}</style>
+<style id="workout-history-layout">
+body[data-view=workout-history] .history-list{display:grid;gap:12px;margin:18px 0 24px}
+body[data-view=workout-history] .history-session{margin:0;border-color:#557664;background:#143e30;border-radius:18px}
+body[data-view=workout-history] .history-session>summary{padding:16px;gap:14px;min-height:94px;list-style:none}
+body[data-view=workout-history] .history-session>summary::-webkit-details-marker{display:none}
+body[data-view=workout-history] .history-session>summary::marker{content:""}
+body[data-view=workout-history] .history-date{flex-basis:42px;padding:9px 3px}
+body[data-view=workout-history] .history-date>strong{font-size:20px;line-height:1.1}
+body[data-view=workout-history] .history-date>small{font-size:10px;margin-top:5px}
+body[data-view=workout-history] .history-title>strong{font-size:15px;overflow-wrap:anywhere}
+body[data-view=workout-history] .history-title>small{font-size:11px;line-height:1.6;margin-top:6px}
+body[data-view=workout-history] .history-session>summary>b{flex:0 0 18px;text-align:center;font-size:20px}
+body[data-view=workout-history] .history-session[open]>summary>b{transform:rotate(180deg)}
+body[data-view=workout-history] .history-details{padding:16px;background:#143e30;color:#f1f8ef;border-top:1px solid #ffffff24}
+body[data-view=workout-history] .history-details p{font-size:13px;line-height:1.6;margin:0 0 12px;color:#d0e5d6}
+body[data-view=workout-history] .history-details>div{border-color:#ffffff24}
+body[data-view=workout-history] .history-details button{min-height:44px;border-radius:12px;font-size:13px}
+body[data-view=workout-history] .history-details .history-exercise-chart{color:#b8f4d1;background:transparent;text-align:left}
+body[data-view=workout-history] .history-session>summary:focus-visible{outline:3px solid #91deb0;outline-offset:-4px;border-radius:18px}
+</style>
+</head><body>
 <header class="row"><div class="brand-lockup"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div></div><button class="header-more" data-tab="more" aria-label="More tools and settings">☰ <span>More</span></button></header>
 <main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol nav-home-solid" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.7 2.5a2 2 0 0 1 2.6 0l8 6.8a2 2 0 0 1 .7 1.5V20a2 2 0 0 1-2 2h-4.2a.8.8 0 0 1-.8-.8V16a3 3 0 0 0-6 0v5.2a.8.8 0 0 1-.8.8H4a2 2 0 0 1-2-2v-9.2a2 2 0 0 1 .7-1.5z"/></svg><span>Home</span></button><button data-tab="eat"><img class="nav-letter" src="./brand/pillar-eat.png" alt="" width="28" height="28"><span>Eat</span></button><button data-tab="sleep"><img class="nav-letter" src="./brand/pillar-sleep-clean.png" alt="" width="28" height="28"><span>Sleep</span></button><button data-tab="train"><img class="nav-letter" src="./brand/pillar-train-clean.png" alt="" width="28" height="28"><span>Progress</span></button><button data-tab="zone"><img class="nav-letter" src="./brand/pillar-zone-clean.png" alt="" width="28" height="28"><span>Zone</span></button></nav>
 <script>
