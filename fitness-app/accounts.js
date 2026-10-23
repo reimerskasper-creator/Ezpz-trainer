@@ -139,9 +139,11 @@ async function handleNativeCallback(value){
  finally{callbackBusy=false;if(user)scheduleWhoopSync(true);}
 }
 
-let lastAutoAttempt=0,lastAutoUser='';
+let lastAutoAttempt=0,lastAutoUser='',scheduledAuto=0;
 function scheduleWhoopSync(force=false){
+ const ticket=++scheduledAuto;
  setTimeout(async()=>{
+  if(ticket!==scheduledAuto)return;
   if(!client||busy||callbackBusy||document.visibilityState==='hidden'||root.navigator?.onLine===false)return;
   if(!user){try{const result=await client.auth.getSession();if(!result.data?.session)return;await verified();}catch{return;}}
   if(!force&&lastAutoUser===user.id&&Date.now()-lastAutoAttempt<120000)return;

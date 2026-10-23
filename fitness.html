@@ -11313,7 +11313,7 @@ body[data-view=train] .compact-training-header{background-image:linear-gradient(
 window.EzpzAccountAdapter={
  snapshot:()=>JSON.parse(JSON.stringify(state)),
  importWhoop:(payload,userId)=>applyDirectWhoopSnapshot(payload,userId),
- refreshImports:()=>{if(!['home','progress','movement','sleep','connected-apps'].includes(tab)||document.activeElement?.matches?.('input,select,textarea')||document.querySelector('dialog[open]'))return;const y=window.scrollY;render();window.scrollTo(0,y)},
+ refreshImports:()=>{if(!['home','progress','movement','sleep'].includes(tab)||document.activeElement?.matches?.('input,select,textarea,summary')||document.querySelector('dialog[open]'))return;const y=window.scrollY;render();window.scrollTo(0,y)},
  today:()=>foodDate(),
  diskMatches:()=>localStorage.getItem(KEY)===JSON.stringify(state),
  hasActiveWorkout:()=>!!state.restTimer||Object.values(state.workoutDrafts||{}).some(d=>d&&Object.keys(d).length>0)||Object.keys(state.draft||{}).length>0,
