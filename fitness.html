@@ -1512,12 +1512,13 @@ button:focus-visible,summary:focus-visible{outline:3px solid #4b926b;outline-off
 .workout-filter-options>button{display:flex;justify-content:space-between;gap:6px;align-items:center;text-align:left;font-size:12px;line-height:1.4;min-height:44px;padding:9px 8px;background:transparent;color:#f0f4e7;border:1px solid transparent;border-radius:8px}
 .workout-filter-options>button[aria-pressed=true]{background:#375e43;color:#c7f3d6;border-color:#91bd94}
 #workout-chooser .workout-filters>button{align-self:start;margin-top:22px;background:#c3d4bf;border:1px solid #9eb899;color:#294c34;min-height:44px}
-#workout-chooser .workout-level-badge{background:#d9e8d4;color:#28573b}
+#workout-chooser .program-badges span{background:#d9e8d4;color:#28573b}
+#workout-chooser .program-badges span+span{background:#e1e4d8;color:#4b6251}
 #workout-chooser .chooser-body{scrollbar-color:#8aa78e var(--ez-page)}
 body :is(.planner-back,.compact-picker-label){background:#d7e2d3;color:#214732;border-color:#b0c6ab}
 body :is(.set-row input[type=number],.exercise-progress-card select){background-color:var(--ez-cream);color:var(--ez-ink);border-color:#b7cdb4}
 #planner-picker .plan-picker-body{background:var(--ez-page)}
-#planner-picker :is(.plan-picker-category,.plan-picker-workout,.own-category-tile){background-color:var(--ez-cream);border-color:var(--ez-line);color:var(--ez-ink)}
+#planner-picker :is(.plan-picker-categories>button,.picker-workout,.picker-choice,.picker-day-actions>button,.picker-mine){background-color:var(--ez-cream);border-color:var(--ez-line);color:var(--ez-ink)}
 @media(max-width:360px){.workout-filter-menu>summary,.workout-filter-options>button{font-size:11px;padding-left:8px;padding-right:8px}.workout-filter-field{font-size:11px}}
 </style>
 </head><body>
