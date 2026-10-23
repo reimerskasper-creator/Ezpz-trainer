@@ -36,6 +36,17 @@ try{
   await page.locator('.overview-actions [data-go="custom-food"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'custom-food');
   await page.locator('[data-tab="home"]').click();await page.locator('[data-overview-workout]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'train');
   await page.locator('[data-tab="home"]').click();
+  assert(await page.locator('.header-foundations').isVisible(),'Foundations discoverable in header');
+  assert(await page.locator('.header-foundations').evaluate(el=>{const a=el.getBoundingClientRect(),b=document.querySelector('.header-more').getBoundingClientRect();return a.right<=b.left&&a.width>=44&&a.height>=44}),'Header controls fit without overlap');
+  const mealPlanBefore=await page.evaluate(()=>JSON.stringify({plan:state.mealPlan,food:state.foodLog}));
+  assert.equal(await page.locator('.home-meals .meal-upcoming-row').count(),2);
+  assert((await page.locator('.home-meals .meal-upcoming-row').first().innerText()).includes('Lunch'));
+  await page.locator('[data-home-meals="week"]').click();assert.equal(await page.locator('.meal-upcoming-day').count(),7);
+  await page.locator('.home-meals .meal-upcoming-row').first().click();assert.equal(await page.locator('body').getAttribute('data-view'),'planner');
+  assert.equal(await page.locator('[data-schedule-portion="lunch"]').inputValue(),'1.5');
+  assert.equal(await page.evaluate(()=>JSON.stringify({plan:state.mealPlan,food:state.foodLog})),mealPlanBefore,'Opening upcoming meal preserves plan and food diary');
+  await page.locator('[data-tab="home"]').click();await page.locator('[data-home-meals="next"]').click();await checkLayout('Upcoming meals');
+  if(width===390)await page.locator('.home-meals').screenshot({path:path.join(out,'home-next-meals.jpg'),type:'jpeg',quality:85});
   const methodBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   await page.locator('[data-ezpz-method="open"]').click();
   assert(await page.locator('#ezpz-method').evaluate(d=>d.open),'Method opens as a modal');
