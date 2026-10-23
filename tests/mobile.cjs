@@ -9,12 +9,14 @@ const today=new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'})
 const fixture={profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:Array.from({length:24},(_,i)=>({date:new Date(Date.now()-(24-i)*86400000).toISOString(),workoutId:'push-a',title:'Push Day A',type:'home',setting:'Gym',variant:'A',exercises:[{name:'Barbell Bench Press',unit:'reps',sets:[{reps:'8',kg:'18',done:true}]}]})),weights:[{date:new Date(Date.now()-86400000*7).toISOString(),kg:81},{date:new Date().toISOString(),kg:80}],shopping:['Tomatoes (raw) — 100 g'],checkedShopping:{'Tomatoes (raw)':true},foodLog:[{id:'existing-meal',date:today,name:'Chicken rice bowl',servings:1,macros:[622,55,62,17]}],mealPlan:{[today]:{lunch:1,lunchPortion:1.5,dinner:48,dinnerPortion:1}},mealPlanOffset:0,selectedWorkout:'push-a',workoutDrafts:{'glutes-foundation':{'sr0-0':'12','sd0-0':true},'pull-a':{'sr0-0':'9','sw0-0':'15','sd0-0':true}},draft:{variant:'A',equipment:'home','sr0-0':'8','sd0-0':true},workoutLayoutVersion:2};
 
 async function choosePlannedWorkout(page,id){
+ await page.locator('[data-plan-mode=day]').click();
  await page.locator('#planned-workout').click();await page.locator('#planner-picker').waitFor({state:'visible'});
  if(id==='rest'||id===''){await page.locator('[data-plan-picker-action="'+(id==='rest'?'rest':'clear')+'"]').click();return}
  await page.locator('#planner-picker-search').fill(id);await page.locator('[data-plan-pick-workout="'+id+'"]').click();
  await page.locator('#planner-picker').waitFor({state:'hidden'});
 }
 async function choosePlannedMeal(page,slot,index){
+ await page.locator('[data-plan-mode=day]').click();
  await page.locator('[data-open-meal-picker="'+slot+'"]').click();await page.locator('#planner-picker').waitFor({state:'visible'});
  if(index===null){await page.locator('[data-plan-picker-action="clear"]').click();return}
  await page.locator('[data-plan-picker-filter="all"]').click();await page.locator('[data-plan-pick-meal="'+index+'"]').click();
@@ -180,7 +182,7 @@ try{
   if(expectUpgrade){await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('.more-backups>summary').click();await page.locator('.data-tools summary').click();await page.locator('#restore-file').setInputFiles({name:'ezpz-backup.json',mimeType:'application/json',buffer:Buffer.from(JSON.stringify(fixture))});await page.locator('[data-action="restore"]').click();await page.waitForFunction(()=>document.body.dataset.view==='home');const restored=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);assert.deepEqual(restored.foodLog,fixture.foodLog);assert.deepEqual(restored.mealPlan,fixture.mealPlan);assert.deepEqual(restored.checkedShopping,fixture.checkedShopping);assert.deepEqual(restored.draft,fixture.draft);assert.deepEqual(restored.workoutDrafts,fixture.workoutDrafts);assert.equal(restored.logs.length,24)}
 
   // Plan single days through four weeks using the real UI.
-  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('[data-go="planner"]').click();
+  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('[data-go="planner"]').click();await page.locator('[data-plan-mode=day]').click();
   for(const span of [1,7,14,21,28]){
    await page.locator('#planner-span').evaluate(el=>{const d=el.closest("details");if(d)d.open=true});await page.locator('#planner-span').selectOption(String(span));
    assert.equal(await page.locator('[data-planner-offset]').count(),Math.min(7,span));
@@ -205,7 +207,7 @@ try{
   await page.locator('[data-action="planner-shop-range"]').evaluate(el=>{const d=el.closest("details");if(d)d.open=true});await page.locator('[data-action="planner-shop-range"]').click();
   assert(await page.locator('.shopping-item').count()>1);await checkLayout('Plan shopping');
   // Build a reusable custom session, preserve fields while adding exercises, and schedule it.
-  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('[data-go="planner"]').click();
+  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('[data-go="planner"]').click();await page.locator('[data-plan-mode=day]').click();
   await page.locator('[data-action="new-workout"]').click();
   await page.locator('#builder-title').fill("Kasper's strength & balance");
   await page.locator('.own-workout-settings>summary').click();
@@ -316,7 +318,7 @@ try{
 
 
   // Planner photo pickers replace the long native workout/recipe lists.
-  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('[data-go="planner"]').click();
+  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('[data-go="planner"]').click();await page.locator('[data-plan-mode=day]').click();
   await page.locator('#planner-start').evaluate(el=>{const d=el.closest("details");if(d)d.open=true});await page.locator('#planner-start').fill(today);await page.locator('#planner-start').dispatchEvent('change');
   if(await page.locator('[data-plan-week="0"]').count())await page.locator('[data-plan-week="0"]').click();
   await page.locator('[data-planner-offset="3"]').click();
@@ -498,7 +500,8 @@ try{
  for(const width of [320,390,430]){
   const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
   const initial={...fixture,plannerStart:today,plannerDays:28,plannerOffset:0,workoutSchedule:{[today]:'pull-a'},mealPlan:{[today]:{breakfast:0,breakfastPortion:1.5,lunch:48,lunchPortion:2,dinner:36,dinnerPortion:1}},nutritionTargets:{protein:190,carbs:230,fat:80,calories:2400,source:'manual'}};
-  await context.addInitScript(({key,initial})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(initial))},{key,initial});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(base+'/fitness.html');if(await page.locator('body').getAttribute('data-view')==='train')await page.locator('.training-options>summary').click();await page.locator('[data-go="planner"]').first().click();
+  await context.addInitScript(({key,initial})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(initial))},{key,initial});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));page.on('dialog',d=>d.accept());await page.goto(base+'/fitness.html');if(await page.locator('body').getAttribute('data-view')==='train')await page.locator('.training-options>summary').click();await page.locator('[data-go="planner"]').first().click();await page.locator('[data-plan-mode=day]').click();
+  await page.locator('[data-plan-mode=day]').click();
   const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'My Plan layout '+width);
   const picture=async selector=>page.locator(selector).first().evaluate(x=>getComputedStyle(x).backgroundImage);
   await fits();const before=await page.evaluate(key=>localStorage.getItem(key),key);
@@ -520,7 +523,7 @@ try{
   const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'More / planner back layout '+width);
   for(const origin of ['home','train','eat','more']){
    await page.locator('[data-tab="'+origin+'"]').click();
-   const before=await page.evaluate(key=>localStorage.getItem(key),key);if(await page.locator('body').getAttribute('data-view')==='train')await page.locator('.training-options>summary').click();await page.locator('[data-go="planner"]').first().click();assert.equal(await page.locator('body').getAttribute('data-view'),'planner');const back=page.locator('.planner-back'),rect=await back.boundingBox();assert(rect.y>=0&&rect.y+rect.height<150,'Back is visible at the top');assert(rect.height>=44,'Back touch target');assert.equal(await back.getAttribute('data-go'),origin,'Back returns to entry section');await fits();
+   const before=await page.evaluate(key=>localStorage.getItem(key),key);if(await page.locator('body').getAttribute('data-view')==='train')await page.locator('.training-options>summary').click();await page.locator('[data-go="planner"]').first().click();await page.locator('[data-plan-mode=day]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'planner');const back=page.locator('.planner-back'),rect=await back.boundingBox();assert(rect.y>=0&&rect.y+rect.height<150,'Back is visible at the top');assert(rect.height>=44,'Back touch target');assert.equal(await back.getAttribute('data-go'),origin,'Back returns to entry section');await fits();
    if(width===390&&origin==='more'){const jpg=await page.screenshot({type:'jpeg',quality:85,path:path.join(out,'planner-back.jpg')});captures.push({name:'More My Plan back',src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
    await back.click();assert.equal(await page.locator('body').getAttribute('data-view'),origin);assert.equal(await page.evaluate(()=>scrollY),0);assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before,'Back navigation preserves saved data');
   }

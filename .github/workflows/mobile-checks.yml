@@ -27,6 +27,7 @@ jobs:
         env:
           EZPZ_VISUAL_LOG: ${{ contains(github.event.head_commit.message, '[visual-review]') && '1' || '0' }}
         run: |
+          node tests/photo-calendar-mobile.cjs
           node tests/accounts.cjs
           node tests/native-accounts.cjs
           node tests/whoop-auto.cjs
