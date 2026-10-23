@@ -97,7 +97,7 @@ try{
   await page.locator('[data-home-diary]').scrollIntoViewIfNeeded();
   await page.screenshot({path:path.join(out,'Logged-food-'+width+'.jpg'),type:'jpeg',quality:85});
 
-  await page.locator('[data-tab="train"]').click();
+  await page.evaluate(()=>{tab='train';render()});
   assert.equal(await page.locator('.training-options[open]').count(),0,'Secondary controls start closed');
   assert.equal(await page.locator('.exercise-jump-list').count(),0,'Exercise picker replaces the carousel');
   assert(await page.locator('[data-set-reps="0-0"]').isVisible(),'Current exercise is directly usable');
@@ -153,15 +153,15 @@ try{
   }
   // New programs preserve their own draft alongside existing A/B drafts.
   await page.locator('[data-set-reps="0-0"]').fill('11');await page.locator('[data-set-done="0-0"]').check();
-  await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'11');
-  await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-workout>img').getAttribute('src'),'./workout-images/neutral-kettlebell-2.jpg');await page.locator('.home-workout>img').evaluate(x=>x.decode());await capture('Selected workout');await page.locator('[data-tab="train"]').click();
+  await page.reload();await page.evaluate(()=>{tab='train';render()});assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'11');
+  await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-workout>img').getAttribute('src'),'./workout-images/neutral-kettlebell-2.jpg');await page.locator('.home-workout>img').evaluate(x=>x.decode());await capture('Selected workout');await page.evaluate(()=>{tab='train';render()});
   if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();await page.locator('[data-workout-category="Push"]').click();await page.locator('[data-workout-pick="push-a"]').click();
   await page.locator('[data-set-reps="0-0"]').fill('10');await page.locator('[data-set-weight="0-0"]').fill('20');await page.locator('[data-set-done="0-0"]').check();await capture('Train');
   assert((await page.locator('.training-header').evaluate(el=>getComputedStyle(el).backgroundImage)).includes('/workout-images/neutral-push-1.jpg'),'Train hero follows chosen workout');
   if(width===390){const storageBefore=await page.evaluate(key=>localStorage.getItem(key),key);for(const [selector,name] of [['.training-header','Train photo header'],['.workout-progress-card','Train photo progress'],['.training-exercise[open]','Train photo logger'],['.session-footer','Train photo footer']]){const el=page.locator(selector).first();await el.evaluate(x=>x.scrollIntoView({block:'start',behavior:'instant'}));await checkLayout(name);const jpg=await el.screenshot({type:'jpeg',quality:85,path:path.join(out,name.replaceAll(' ','-')+'-'+width+'.jpg')});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')});}assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),storageBefore,'Train photo review must preserve drafts');}
-  await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');assert(await page.locator('[data-set-done="0-0"]').isChecked());
+  await page.reload();await page.evaluate(()=>{tab='train';render()});assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');assert(await page.locator('[data-set-done="0-0"]').isChecked());
   if(expectUpgrade){await page.waitForFunction(()=>{const b=document.querySelector('[data-set-done="0-0"]')?.getBoundingClientRect();return b&&b.width>=44&&b.height>=44});await page.locator('#exercise-tools-0>summary').click();assert((await page.locator('#exercise-tools-0 .previous-results').innerText()).includes('18 kg'),'Previous set comparison');await page.locator('#exercise-tools-0>summary').click();const finish=await page.locator('.session-footer').boundingBox(),nav=await page.locator('.nav').boundingBox();assert(finish.y+finish.height<=nav.y+1,'Finish bar overlaps navigation')}
-  await page.locator('[data-action="finish"]').click();await page.waitForFunction(()=>document.body.dataset.view==='progress');assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.length,key),25);await checkLayout('Progress');await capture('Progress');
+  await page.locator('[data-action="finish"]').click();await page.waitForFunction(()=>document.body.dataset.view==='progress');assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.length,key),25);await checkLayout('Progress');await capture('Progress');await page.locator('.progress-archive>summary').click();
   const progressBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   const summaryPhotos=await page.locator('.progress-summary>section').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundImage));assert.equal(new Set(summaryPhotos).size,3,'Distinct relevant Progress metric photos');assert(summaryPhotos.every(x=>x.includes('url(')),'Progress metrics have photos');
   assert((await page.locator('.history-session').first().evaluate(x=>getComputedStyle(x.querySelector('summary')).backgroundImage)).includes('/workout-images/neutral-push-1.jpg'),'History photo matches the logged workout');
@@ -231,7 +231,7 @@ try{
   assert.equal(await page.locator('.preview-exercises li').count(),2);
   await page.locator('[data-start-workout="'+custom.id+'"]').click();
   await page.locator('[data-set-reps="0-0"]').fill('8');await page.locator('[data-set-done="0-0"]').check();
-  await page.reload();await page.locator('[data-tab="train"]').click();
+  await page.reload();await page.evaluate(()=>{tab='train';render()});
   assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'8');
   await page.locator('[data-action="finish"]').click();
   const customBackup=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
@@ -265,7 +265,7 @@ try{
   const upcomingJpg=await page.screenshot({path:path.join(out,'Upcoming-workouts-'+width+'.jpg'),type:'jpeg',quality:85});
   if(width===390)captures.push({name:'Upcoming workouts',src:'data:image/jpeg;base64,'+upcomingJpg.toString('base64')});
   // Focused training, reusable results and truthful progress.
-  await page.locator('[data-tab="train"]').click();
+  await page.evaluate(()=>{tab='train';render()});
   assert.equal(await page.locator('[data-training-card][open]').count(),1);
   assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'');
   await page.locator('#exercise-tools-0>summary').click();await page.locator('[data-copy-previous="0"]').click();
@@ -288,7 +288,7 @@ try{
   await page.locator('[data-footer-rest]').click();assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key));
   await page.locator('[data-footer-rest]').click();assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.paused,key),false);
   await page.locator('[data-rest-options]').click();if(!await page.locator('.training-rest-options').evaluate(x=>x.open))await page.locator('.training-rest-options>summary').click();await page.locator('.rest-presets [data-rest-seconds="30"]').click();await page.locator('[data-rest-options-close]').click();assert.equal(await page.locator('.training-rest-options').getAttribute('open'),null);
-  await page.reload();await page.locator('[data-tab="train"]').click();
+  await page.reload();await page.evaluate(()=>{tab='train';render()});
   assert.equal(await page.locator('[data-set-weight="0-1"]').inputValue(),'27.25');
   assert(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer.duration===30,key));
   assert.notEqual(await page.locator('#footer-rest-clock').innerText(),'0:00');
@@ -314,7 +314,7 @@ try{
   await page.waitForFunction(()=>document.body.dataset.view==='progress');
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.at(-1).exercises[0].sets.filter(s=>s.done).length,key),3);
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).restTimer,key),null);
-  await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'','A new session starts at the first exercise');
+  await page.evaluate(()=>{tab='train';render()});assert.equal(await page.locator('[data-training-card="0"]').getAttribute('open'),'','A new session starts at the first exercise');
 
 
   // Planner photo pickers replace the long native workout/recipe lists.
@@ -393,7 +393,7 @@ try{
 
 
   // Freely named workouts use the same saved-session and training paths.
-  await page.locator('[data-tab="train"]').click();
+  await page.evaluate(()=>{tab='train';render()});
   if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();
   await page.locator('[data-action="create-my-workout"]').click();
   assert.equal(await page.locator('body').getAttribute('data-view'),'builder');
@@ -422,12 +422,12 @@ try{
   await page.locator('[data-set-reps="0-0"]').fill('10');
   await page.locator('[data-set-weight="0-0"]').fill('12');
   await page.locator('[data-set-done="0-0"]').check();
-  await page.reload();await page.locator('[data-tab="train"]').click();
+  await page.reload();await page.evaluate(()=>{tab='train';render()});
   assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');
   assert.equal(await page.locator('[data-set-weight="0-0"]').inputValue(),'12');
   await capture('Train your own');
   await page.locator('[data-action="finish"]').click();
-  await page.locator('[data-tab="train"]').click();
+  await page.evaluate(()=>{tab='train';render()});
   if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();
   await page.locator('[data-action="create-my-workout"]').click();
   await page.locator('#builder-title').fill('My quick session');
@@ -522,7 +522,7 @@ try{
   const context=await browser.newContext({viewport:{width,height:844},deviceScaleFactor:1,isMobile:true,hasTouch:true,timezoneId:'America/New_York'});await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
   const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'More / planner back layout '+width);
   for(const origin of ['home','train','eat','more']){
-   await page.locator('[data-tab="'+origin+'"]').click();
+   if(origin==='train')await page.evaluate(()=>{tab='train';render()});else await page.locator('[data-tab="'+origin+'"]').click();
    if(await page.locator('body').getAttribute('data-view')==='train')await page.locator('.training-options>summary').click();await page.locator('[data-go="planner"]').first().click();if(await page.locator('[data-plan-mode=day]').isVisible())await page.locator('[data-plan-mode=day]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'planner');const before=await page.evaluate(key=>localStorage.getItem(key),key);const back=page.locator('.day-return'),rect=await back.boundingBox();assert(rect.y>=0&&rect.y+rect.height<150,'Back is visible at the top');assert(rect.height>=44,'Back touch target');assert.equal(await back.getAttribute('data-go'),origin,'Back returns to entry section');await fits();
    if(width===390&&origin==='more'){const jpg=await page.screenshot({type:'jpeg',quality:85,path:path.join(out,'planner-back.jpg')});captures.push({name:'More My Plan back',src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
    await back.click();assert.equal(await page.locator('body').getAttribute('data-view'),origin);assert.equal(await page.evaluate(()=>scrollY),0);assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before,'Back navigation preserves saved data');
@@ -538,9 +538,9 @@ try{
   const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
   await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture});
   const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');
-  assert.equal(await page.locator('.habit-rings .habit-item').count(),4);assert.equal(await page.locator('.overall-ring').count(),1);assert.equal(await page.locator('.sleep-open').count(),0);assert.equal(await page.locator('.home-week-days,.home-week-meter').count(),0);
+  assert.equal(await page.locator('.habit-rings .habit-item').count(),5);assert.equal(await page.locator('.overall-ring').count(),1);assert.equal(await page.locator('.sleep-open').count(),0);assert.equal(await page.locator('.home-week-days,.home-week-meter').count(),0);
   const prior=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
-  assert.deepEqual(await page.locator('.habit-rings .habit-item>strong').allTextContents(),['Eat','Sleep','Train','Zone']);
+  assert.deepEqual(await page.locator('.habit-rings .habit-item>strong').allTextContents(),['Eat','Sleep','Train','Zone','Steps']);
   assert.equal(await page.locator('.foundation-paths').count(),0);
   assert(await page.locator('.foundation-map').evaluate(map=>{const items=[...map.querySelectorAll('.habit-rings>.habit-item')].map(x=>x.getBoundingClientRect()),overall=map.querySelector('.overall-ring .habit-ring').getBoundingClientRect();return items.every(x=>Math.abs(x.top-items[0].top)<1)&&overall.bottom<=Math.min(...items.map(x=>x.top))&&Math.abs((overall.left+overall.right)/2-(map.getBoundingClientRect().left+map.getBoundingClientRect().right)/2)<2}),'Overall centered above the four pillar rings');
 
@@ -575,7 +575,7 @@ try{
   const context=await browser.newContext({viewport:{width,height:844},isMobile:true,hasTouch:true,timezoneId:'America/New_York'});
   const habitFixture={...fixture,sleepGoal:420,sleepLog:{[today]:210}};
   await context.addInitScript(({key,fixture})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(fixture))},{key,fixture:habitFixture});
-  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();
+  const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));await page.goto(base+'/fitness.html');await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();await page.locator('.progress-archive').evaluate(el=>{el.open=true;el.dispatchEvent(new Event('toggle'))});
   const before=await page.evaluate(key=>localStorage.getItem(key),key);
   for(const metric of ['training','macros','sleep']){
    await page.locator('[data-habit-metric="'+metric+'"]').click();assert.equal(await page.locator('[data-habit-metric="'+metric+'"]').getAttribute('aria-pressed'),'true');
@@ -598,12 +598,12 @@ try{
   const before=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);
   await page.locator('.home-weight-card [data-hide-weight]').click();assert.equal(await page.locator('.home-weight-row').count(),0);
   await page.reload();assert.equal(await page.locator('.home-weight-row').count(),0);await page.getByRole('button',{name:'Show weight',exact:true}).click();assert.equal(await page.locator('.home-weight-row').count(),1);await page.locator('.home-weight-card [data-hide-weight]').click();
-  await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();assert.equal(await page.locator('.weight-trend-card').count(),0);assert.equal(await page.locator('.progress-summary section').count(),2);
+  await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();await page.locator('.progress-archive').evaluate(el=>{el.open=true;el.dispatchEvent(new Event('toggle'))});assert.equal(await page.locator('.weight-trend-card').count(),0);assert.equal(await page.locator('.progress-summary section').count(),2);
   await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);assert.equal(await page.locator('.weight-preferences button').getAttribute('aria-pressed'),'false');
   assert(await page.locator('.weight-preferences').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
   if(width===390){await page.locator('.weight-preferences').scrollIntoViewIfNeeded();const jpg=await page.locator('.weight-preferences').screenshot({type:'jpeg',quality:85,path:path.join(out,'weight-preferences.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_WEIGHT_PREFERENCE_DATA '+b.slice(i,i+4000))}
   await page.locator('.weight-preferences button').click();assert.equal(await page.locator('.weight-preferences button').getAttribute('aria-pressed'),'true');
-  await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();assert.equal(await page.locator('.progress-summary section').count(),3);await page.locator('.weight-trend-card [data-hide-weight]').click();assert.equal(await page.locator('.weight-trend-card').count(),0);await page.getByRole('button',{name:'Show weight',exact:true}).click();assert.equal(await page.locator('.weight-trend-card').count(),1);
+  await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();await page.locator('.progress-archive').evaluate(el=>{el.open=true;el.dispatchEvent(new Event('toggle'))});assert.equal(await page.locator('.progress-summary section').count(),3);await page.locator('.weight-trend-card [data-hide-weight]').click();assert.equal(await page.locator('.weight-trend-card').count(),0);await page.getByRole('button',{name:'Show weight',exact:true}).click();assert.equal(await page.locator('.weight-trend-card').count(),1);
   const after=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['weights','logs','foodLog','mealPlan','workoutDrafts'])assert.deepEqual(after[name],before[name]);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await context.close();
  }
@@ -627,7 +627,7 @@ try{
   await page.locator('.diary-log-next').click();await page.locator('#custom-food-name').fill('Past day snack');for(const [key,value] of [['protein','30'],['carbs','40'],['fat','10']])await page.locator('#custom-food-'+key).fill(value);await page.locator('.custom-food-photo-choice').evaluate(x=>x.open=true);await page.locator('[name="photoKey"][value="yogurt"]').check();await page.locator('.custom-food-submit').click();assert.equal(await page.locator('.food-log-entry').count(),3);const snackId=await page.evaluate(()=>foodEntries().at(-1).id);assert.equal(await page.evaluate(()=>foodEntries().at(-1).date),yesterday);
   await page.locator('[data-diary-today]').click();assert.equal(await page.locator('.food-log-entry').count(),1);
   await page.reload();await page.locator('[data-tab="eat"]').click();await page.locator('.quick-meals>summary').click();await page.locator('[data-quick-view="favourites"]').click();assert.equal(await page.locator('[data-quick-recipe="0"]').count(),1);await page.locator('[data-quick-view="recent"]').click();await page.locator('[data-repeat-food="'+snackId+'"]').click();assert.equal(await page.evaluate(()=>foodEntries().at(-1).date),today);
-  await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();assert.equal(await page.locator('.macro-history').count(),3);assert.equal(await page.locator('#progress-exercise').count(),1);await page.locator('#progress-exercise-metric').selectOption('reps');assert.equal(await page.locator('.exercise-chart').count(),1);
+  await page.locator('[data-tab="home"]').click();await page.locator('[data-go="progress"]').first().click();await page.locator('.progress-archive').evaluate(el=>{el.open=true;el.dispatchEvent(new Event('toggle'))});assert.equal(await page.locator('.macro-history').count(),3);assert.equal(await page.locator('#progress-exercise').count(),1);await page.locator('#progress-exercise-metric').selectOption('reps');assert.equal(await page.locator('.exercise-chart').count(),1);
   if(width===390){for(const [selector,marker] of [['.macro-progress-card','MACROS'],['.exercise-progress-card','EXERCISE']]){const jpg=await page.locator(selector).screenshot({type:'jpeg',quality:82,path:path.join(out,'daily-'+marker+'.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_DAILY_'+marker+'_DATA '+b.slice(i,i+4000))}}
   await page.locator('.history-session').first().locator('summary').click();await page.locator('[data-edit-history]').first().click();assert.equal(await page.locator('body').getAttribute('data-view'),'history-edit');await page.locator('#history-edit-form [name="r0-0"]').fill('11');await page.locator('#history-edit-form [name="w0-0"]').fill('21');
   if(width===390){const jpg=await page.locator('#history-edit-form').screenshot({type:'jpeg',quality:82,path:path.join(out,'daily-history-editor.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_DAILY_HISTORY_DATA '+b.slice(i,i+4000))}
@@ -665,17 +665,17 @@ try{
   const context=await browser.newContext({viewport:{width,height:900},deviceScaleFactor:1,isMobile:true,hasTouch:true});
   const initial=JSON.parse(JSON.stringify(fixture));initial.logs=Array.from({length:2},(_,i)=>({date:new Date(Date.now()-(2-i)*86400000).toISOString(),workoutId:'push-a',title:'Push',exercises:[{name:'Barbell Bench Press',unit:'reps',sets:Array.from({length:3},()=>({reps:'12',kg:'40',done:true}))}]}));initial.workoutDrafts={};initial.units='imperial';initial.workoutSchedule={[new Date(Date.now()+86400000).toLocaleDateString('en-CA')]:'leg-a'};
   await context.addInitScript(({key,initial})=>{if(!localStorage.getItem(key))localStorage.setItem(key,JSON.stringify(initial))},{key,initial});const page=await context.newPage();page.on('pageerror',e=>errors.push(e.message));
-  await page.goto(base+'/fitness.html');await page.locator('[data-tab="train"]').click();
+  await page.goto(base+'/fitness.html');await page.evaluate(()=>{tab='train';render()});
   await page.locator('#exercise-tools-0>summary').click();assert((await page.locator('#training-exercise-0 .progression-hint').innerText()).includes('last two sessions'));assert((await page.locator('#training-exercise-0 .progression-hint').innerText()).includes('lb'));
   await page.locator('#training-exercise-0 .exercise-swap>summary').click();await page.locator('#swap-0').selectOption('Dumbbell Bench Press');assert.equal(await page.locator('#exercise-name-0').innerText(),'Dumbbell Bench Press');
   await page.locator('[data-set-reps="0-0"]').fill('10');await page.locator('[data-set-weight="0-0"]').fill('100');await page.locator('[data-set-done="0-0"]').check();
   let saved=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);assert(Math.abs(Number(saved.workoutDrafts['push-a']['sw0-0'])-45.359237)<1e-6);assert(saved.workoutDrafts['push-a'].startedAt>0);
-  await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('#exercise-name-0').innerText(),'Dumbbell Bench Press');assert.equal(await page.locator('[data-set-weight="0-0"]').inputValue(),'100');assert(await page.locator('#swap-0').isDisabled());
-  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);assert.equal(await page.locator('.more-reference[open]').count(),0);assert.equal(await page.locator('.more-backups[open]').count(),0);await page.locator('#body-units').selectOption('metric');await page.locator('[data-tab="train"]').click();assert(Math.abs(Number(await page.locator('[data-set-weight="0-0"]').inputValue())-45.359237)<1e-6);
-  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('#body-units').selectOption('imperial');await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-weight="0-0"]').inputValue(),'100');
+  await page.reload();await page.evaluate(()=>{tab='train';render()});assert.equal(await page.locator('#exercise-name-0').innerText(),'Dumbbell Bench Press');assert.equal(await page.locator('[data-set-weight="0-0"]').inputValue(),'100');assert(await page.locator('#swap-0').isDisabled());
+  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);assert.equal(await page.locator('.more-reference[open]').count(),0);assert.equal(await page.locator('.more-backups[open]').count(),0);await page.locator('#body-units').selectOption('metric');await page.evaluate(()=>{tab='train';render()});assert(Math.abs(Number(await page.locator('[data-set-weight="0-0"]').inputValue())-45.359237)<1e-6);
+  await page.locator('[data-tab="more"]').click();await page.locator('.profile-preferences').evaluate(x=>x.open=true);await page.locator('#body-units').selectOption('imperial');await page.evaluate(()=>{tab='train';render()});assert.equal(await page.locator('[data-set-weight="0-0"]').inputValue(),'100');
   await page.locator('[data-action="finish"]').click();await page.locator('.session-recap').waitFor();assert((await page.locator('.session-recap').innerText()).includes('sets completed'));assert((await page.locator('.recap-next').innerText()).includes('Leg'));assert(await page.locator('.session-recap').isVisible());
   saved=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);assert.equal(saved.logs.length,3);assert.equal(saved.logs[2].exercises[0].name,'Dumbbell Bench Press');assert(Math.abs(Number(saved.logs[2].exercises[0].sets[0].kg)-45.359237)<1e-6);assert(!saved.workoutDrafts['push-a']);
-  await page.locator('[data-dismiss-recap]').click();assert.equal(await page.locator('.session-recap').count(),0);await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('#exercise-name-0').innerText(),'Barbell Bench Press');
+  await page.locator('[data-dismiss-recap]').click();assert.equal(await page.locator('.session-recap').count(),0);await page.evaluate(()=>{tab='train';render()});assert.equal(await page.locator('#exercise-name-0').innerText(),'Barbell Bench Press');
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));await context.close();
  }
 

@@ -1,6 +1,6 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const html=fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8');
-const nav=html.match(/<nav class="nav"[\s\S]*?<\/nav>/)[0];assert.deepEqual([...nav.matchAll(/data-tab="([^"]+)"/g)].map(x=>x[1]),['home','eat','sleep','train','zone']);assert(html.includes('class="header-more" data-tab="more"'));
+const nav=html.match(/<nav class="nav"[\s\S]*?<\/nav>/)[0];assert.deepEqual([...nav.matchAll(/data-tab="([^"]+)"/g)].map(x=>x[1]),['home','eat','sleep','progress','zone']);assert(html.includes('class="header-more" data-tab="more"'));
 const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');const screen={innerHTML:''};
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
 const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {sleepPage,zonePage,eat,train,foodDate,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2}),setItem(){}},()=>new Promise(()=>{}),{error(){}},()=>{});

@@ -19,9 +19,9 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
  await gesture('.home-greeting',[[250,110],[150,110],[50,110]],{cancel:true});assert.equal(await view(),'home');
  await page.locator('.method-trigger').click();await gesture('#ezpz-method-title',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'home');await page.keyboard.press('Escape');
  await page.evaluate(()=>{const el=document.createElement('div');el.id='swipe-carousel';el.style='width:100px;overflow-x:auto';el.innerHTML='<span style="display:block;width:500px">Carousel</span>';screen.prepend(el)});await gesture('#swipe-carousel span',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'home','Nested horizontal carousel keeps gesture');
- await page.locator('[data-tab="train"]').click();const input=page.locator('[data-set-reps="0-0"]');await input.fill('9');await gesture('[data-set-reps="0-0"]',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'train','Input gesture does not navigate');await input.blur();
+ await page.evaluate(()=>{tab='train';render()});const input=page.locator('[data-set-reps="0-0"]');await input.fill('9');await gesture('[data-set-reps="0-0"]',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'train','Input gesture does not navigate');await input.blur();
  await nativeSwipe(false);assert.equal(await view(),'sleep');await nativeSwipe(true);assert.equal(await view(),'train');assert.equal(await input.inputValue(),'9','Draft survives swipe round trip');
- await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await input.inputValue(),'9','Draft survives reload');
+ await page.reload();await page.evaluate(()=>{tab='train';render()});assert.equal(await input.inputValue(),'9','Draft survives reload');
  await page.evaluate(()=>{tab='shopping';render()});await gesture('.shopping-head',[[250,110],[150,110],[50,110]]);assert.equal(await view(),'shopping','Nested view does not swipe away');
  assert.deepEqual(errors,[]);await context.close();console.log('PASS swipe navigation '+width);
  }}finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});
