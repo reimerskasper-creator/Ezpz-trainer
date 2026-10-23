@@ -11253,7 +11253,7 @@ document.addEventListener('click',event=>{
 </script><script>
 /* Main-tab gestures share the bottom navigation path; forms and nested views stay local. */
 (()=>{
- const tabs=['home','eat','sleep','train','zone'];let gesture=null,suppressClickUntil=0;
+ const tabs=['home','eat','sleep','progress','zone'];let gesture=null,suppressClickUntil=0;
  function blocked(target){if(!(target instanceof Element)||target.closest('input,textarea,select,button,a,label,summary,[contenteditable]:not([contenteditable="false"]),dialog,video,audio,[role="slider"],.nav'))return true;for(let el=target;el&&el!==document.body;el=el.parentElement){const style=getComputedStyle(el);if(el.scrollWidth>el.clientWidth+2&&/(auto|scroll)/.test(style.overflowX))return true}return false}
  function available(){return state.profile&&tabs.includes(tab)&&document.body.dataset.view===tab&&!document.querySelector('dialog[open]')&&!window.getSelection()?.toString()}
  document.addEventListener('touchstart',event=>{gesture=null;if(event.touches.length!==1||!available()||blocked(event.target))return;const t=event.touches[0];if(t.clientX<24||t.clientX>innerWidth-24)return;gesture={id:t.identifier,x:t.clientX,y:t.clientY,scroll:scrollY,view:tab,time:performance.now()}}, {passive:true});
