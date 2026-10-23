@@ -16,7 +16,7 @@ draft.title="Kasper's own session";draft.category='Arms';draft.exercises=[{name:
 const scheduleBefore=JSON.stringify(api.state.workoutSchedule),id=api.saveOwnWorkout(draft,'saved');
 assert(id&&api.state.customWorkouts.length===1,'Save own session');
 assert(JSON.stringify(api.state.workoutSchedule)===scheduleBefore&&api.state.selectedWorkout==='push-a','Save later never schedules or changes active session');
-assert(screen.innerHTML.includes('data-own-start="'+id+'"')&&screen.innerHTML.includes('workout-images/arms.png'),'Saved session has cover and start action');
+assert(screen.innerHTML.includes('data-own-start="'+id+'"')&&screen.innerHTML.includes('workout-images/neutral-arms-1.jpg'),'Saved session has cover and start action');
 equal(api.state.workoutDrafts['push-a'],{'sr0-0':'9'},'Existing draft preserved');
 api.setTab('train');api.startBuilder(null);const runId=api.saveOwnWorkout({...draft,title:'Start now'},'train');
 assert(document.body.dataset.view==='train'&&api.state.selectedWorkout===runId,'Save and start runs in normal Train');

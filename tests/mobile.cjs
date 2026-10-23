@@ -136,17 +136,17 @@ try{
   // New programs preserve their own draft alongside existing A/B drafts.
   await page.locator('[data-set-reps="0-0"]').fill('11');await page.locator('[data-set-done="0-0"]').check();
   await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'11');
-  await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-workout>img').getAttribute('src'),'./program-images/kb-double-strength.jpg');await page.locator('.home-workout>img').evaluate(x=>x.decode());await capture('Selected workout');await page.locator('[data-tab="train"]').click();
+  await page.locator('[data-tab="home"]').click();assert.equal(await page.locator('.home-workout>img').getAttribute('src'),'./workout-images/neutral-kettlebell-2.jpg');await page.locator('.home-workout>img').evaluate(x=>x.decode());await capture('Selected workout');await page.locator('[data-tab="train"]').click();
   if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();await page.locator('[data-workout-category="Push"]').click();await page.locator('[data-workout-pick="push-a"]').click();
   await page.locator('[data-set-reps="0-0"]').fill('10');await page.locator('[data-set-weight="0-0"]').fill('20');await page.locator('[data-set-done="0-0"]').check();await capture('Train');
-  assert((await page.locator('.training-header').evaluate(el=>getComputedStyle(el).backgroundImage)).includes('/workout-images/push.jpg'),'Train hero follows chosen workout');
+  assert((await page.locator('.training-header').evaluate(el=>getComputedStyle(el).backgroundImage)).includes('/workout-images/neutral-push-1.jpg'),'Train hero follows chosen workout');
   if(width===390){const storageBefore=await page.evaluate(key=>localStorage.getItem(key),key);for(const [selector,name] of [['.training-header','Train photo header'],['.workout-progress-card','Train photo progress'],['.training-exercise[open]','Train photo logger'],['.session-footer','Train photo footer']]){const el=page.locator(selector).first();await el.evaluate(x=>x.scrollIntoView({block:'start',behavior:'instant'}));await checkLayout(name);const jpg=await el.screenshot({type:'jpeg',quality:85,path:path.join(out,name.replaceAll(' ','-')+'-'+width+'.jpg')});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')});}assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),storageBefore,'Train photo review must preserve drafts');}
   await page.reload();await page.locator('[data-tab="train"]').click();assert.equal(await page.locator('[data-set-reps="0-0"]').inputValue(),'10');assert(await page.locator('[data-set-done="0-0"]').isChecked());
   if(expectUpgrade){await page.waitForFunction(()=>{const b=document.querySelector('[data-set-done="0-0"]')?.getBoundingClientRect();return b&&b.width>=44&&b.height>=44});await page.locator('#exercise-tools-0>summary').click();assert((await page.locator('#exercise-tools-0 .previous-results').innerText()).includes('18 kg'),'Previous set comparison');await page.locator('#exercise-tools-0>summary').click();const finish=await page.locator('.session-footer').boundingBox(),nav=await page.locator('.nav').boundingBox();assert(finish.y+finish.height<=nav.y+1,'Finish bar overlaps navigation')}
   await page.locator('[data-action="finish"]').click();await page.waitForFunction(()=>document.body.dataset.view==='progress');assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).logs.length,key),25);await checkLayout('Progress');await capture('Progress');
   const progressBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   const summaryPhotos=await page.locator('.progress-summary>section').evaluateAll(xs=>xs.map(x=>getComputedStyle(x).backgroundImage));assert.equal(new Set(summaryPhotos).size,3,'Distinct relevant Progress metric photos');assert(summaryPhotos.every(x=>x.includes('url(')),'Progress metrics have photos');
-  assert((await page.locator('.history-session').first().evaluate(x=>getComputedStyle(x.querySelector('summary')).backgroundImage)).includes('/workout-images/push.jpg'),'History photo matches the logged workout');
+  assert((await page.locator('.history-session').first().evaluate(x=>getComputedStyle(x.querySelector('summary')).backgroundImage)).includes('/workout-images/neutral-push-1.jpg'),'History photo matches the logged workout');
   if(width===390){
    for(const [selector,name] of [['.progress-summary','Progress photo metrics'],['.consistency-card','Progress photo consistency'],['.weight-trend-card','Progress photo weight'],['.history-session','Progress photo history']]){const el=page.locator(selector).first();await el.scrollIntoViewIfNeeded();const jpg=await el.screenshot({type:'jpeg',quality:85});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')})}
   }
@@ -235,7 +235,7 @@ try{
   await page.reload();
   assert.equal(await page.locator('.home-next .upcoming-row').count(),3);
   assert.deepEqual(await page.locator('.home-next .upcoming-row').evaluateAll(xs=>xs.map(x=>x.dataset.previewWorkout)),['push-a','pull-a','leg-a']);
-  assert.deepEqual(await page.locator('.home-next .upcoming-row img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src'))),['./workout-images/push.jpg','./workout-images/pull.jpg','./workout-images/leg.jpg']);
+  assert.deepEqual(await page.locator('.home-next .upcoming-row img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src'))),['./workout-images/neutral-push-1.jpg','./workout-images/neutral-pull-2.jpg','./workout-images/neutral-leg-1.jpg']);
   const homeBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   await page.locator('[data-home-schedule="week"]').click();
   assert.equal(await page.locator('.upcoming-list>button').count(),7);
@@ -337,7 +337,7 @@ try{
   assert.equal(afterWorkoutPick.workoutSchedule[pickerDate],'full-body-home');
   assert.equal(afterWorkoutPick.selectedWorkout,pickerBefore.selectedWorkout);
   assert.deepEqual(afterWorkoutPick.workoutDrafts,pickerBefore.workoutDrafts);
-  assert.equal(await page.locator('#planned-workout img').getAttribute('src'),'./program-images/full-body-home.jpg');
+  assert.equal(await page.locator('#planned-workout img').getAttribute('src'),'./workout-images/neutral-full-body-4.jpg');
   await page.locator('[data-open-meal-picker="breakfast"]').click();
   await page.locator('[data-plan-picker-filter="all"]').click();
   assert.equal(await page.locator('[data-plan-pick-meal]').count(),157);
@@ -486,7 +486,7 @@ try{
   const fits=async()=>assert(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),'My Plan layout '+width);
   const picture=async selector=>page.locator(selector).first().evaluate(x=>getComputedStyle(x).backgroundImage);
   await fits();const before=await page.evaluate(key=>localStorage.getItem(key),key);
-  assert((await picture('.planner-hero')).includes('/home-images/planning.jpg'));assert((await picture('.plan-controls')).includes('/train-images/guide.jpg'));assert((await picture('.plan-days')).includes('/home-images/consistency.jpg'));assert((await picture('.plan-workout')).includes('/workout-images/pull.jpg'));
+  assert((await picture('.planner-hero')).includes('/home-images/planning.jpg'));assert((await picture('.plan-controls')).includes('/train-images/guide.jpg'));assert((await picture('.plan-days')).includes('/home-images/consistency.jpg'));assert((await picture('.plan-workout')).includes('/workout-images/neutral-pull-2.jpg'));
   for(const [slot,index]of [['breakfast',0],['lunch',48],['dinner',36]]){const photo=await page.evaluate(i=>recipes[i].photo||(i<6?'./meal-images/meal-'+i+'.jpg':null),index);assert((await picture('#planner-'+slot)).includes(photo.replace('./','/')),'Meal backdrop matches '+slot);assert.equal(await page.locator('#planner-'+slot+' img').getAttribute('src'),photo)}
   assert((await page.locator('.plan-nutrients').innerText()).includes('2400'));assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before,'Photographic planner rendering preserves saved plans');
   if(width===390){await page.evaluate(()=>scrollTo(0,0));const jpg=await page.screenshot({type:'jpeg',quality:85,path:path.join(out,'my-plan-top.jpg')});captures.push({name:'My Plan top',src:'data:image/jpeg;base64,'+jpg.toString('base64')});for(const [selector,name]of [['.plan-workout','My Plan workout'],['.plan-meals','My Plan meals'],['.plan-repeat','My Plan actions']]){const el=page.locator(selector);await el.scrollIntoViewIfNeeded();const jpg=await el.screenshot({type:'jpeg',quality:85});captures.push({name,src:'data:image/jpeg;base64,'+jpg.toString('base64')})}}
