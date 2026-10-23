@@ -1,5 +1,20 @@
 const finite=(value,max)=>typeof value==='number'&&Number.isFinite(value)&&value>=0&&value<=max;
 const stamp=value=>typeof value==='string'&&Number.isFinite(Date.parse(value))?new Date(value).toISOString():null;
+export function mapWorkouts(items,from,through,observedAt){
+ const byId=new Map();
+ for(const item of items){
+  const start=stamp(item.start),end=stamp(item.end),offset=item.timezone_offset;
+  if(!start||!end||Date.parse(end)<=Date.parse(start)||Date.parse(end)>Date.parse(observedAt)||Date.parse(end)-Date.parse(start)>86400000||!/^[-+]\d{2}:\d{2}$/.test(offset||''))continue;
+  const minutes=(Number(offset.slice(1,3))*60+Number(offset.slice(4)))*(offset[0]==='-'?-1:1);
+  if(Number(offset.slice(4))>59||Math.abs(minutes)>840||typeof item.id!=='string'||!/^[a-zA-Z0-9-]{1,100}$/.test(item.id))continue;
+  const date=new Date(Date.parse(start)+minutes*60000).toISOString().slice(0,10);if(date<from||date>through)continue;
+  const raw=typeof item.sport_name==='string'?item.sport_name.replace(/[_-]+/g,' ').trim():'';
+  const title=raw?raw.slice(0,80).replace(/\b\w/g,c=>c.toUpperCase()):'Workout';
+  const row={source:'whoop',externalId:'whoop-workout-'+item.id,date,start,end,title,durationMinutes:(Date.parse(end)-Date.parse(start))/60000,updatedAt:stamp(item.updated_at)||observedAt};
+  const old=byId.get(row.externalId);if(!old||row.updatedAt>=old.updatedAt)byId.set(row.externalId,row);
+ }
+ return [...byId.values()];
+}
 function wakeDate(sleep){
  if(!/^[-+]\d{2}:\d{2}$/.test(sleep.timezone_offset||''))return null;
  const end=stamp(sleep.end);if(!end)return null;
@@ -34,3 +49,4 @@ export function mapWhoop(cycles,sleeps,from,through,observedAt){
  }
  return {version:1,source:'whoop',from,through,metrics:['steps','sleep','totalCalories'],records:[...records.values()].map(x=>x.record),observedAt};
 }
+

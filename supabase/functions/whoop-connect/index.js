@@ -1,4 +1,4 @@
-import {mapWhoop} from './mapping.js';
+import {mapWhoop,mapWorkouts} from './mapping.js';
 const APP = 'https://reimerskasper-creator.github.io/Ezpz-trainer/fitness.html';
 const ORIGINS = new Set(['https://reimerskasper-creator.github.io','https://localhost','http://localhost','capacitor://localhost']);
 const TOKEN_URL = 'https://api.prod.whoop.com/oauth/oauth2/token';
@@ -33,7 +33,7 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
  const syncWhoop=async(user,body)=>{
   const utcToday=new Date().toISOString().slice(0,10),day=body.through;
   if(typeof day!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(day)||!Number.isFinite(Date.parse(day+'T00:00:00Z'))||new Date(day+'T00:00:00Z').toISOString().slice(0,10)!==day||Math.abs(Date.parse(day+'T00:00:00Z')-Date.parse(utcToday+'T00:00:00Z'))>86400000)throw Error('Invalid sync date');
-  const lease=random(),now=new Date().toISOString(),expiry=new Date(Date.now()+120000).toISOString();
+  const lease=random(),now=new Date().toISOString(),expiry=new Date(Date.now()+300000).toISOString();
   const lockQuery='?user_id=eq.'+user+'&or='+encodeURIComponent('(sync_lock.is.null,sync_lock_expires_at.lt.'+now+')');
   const locked=await db('whoop_connections',lockQuery,'PATCH',{sync_lock:lease,sync_lock_expires_at:expiry});
   if(locked.length!==1)throw Error('Connect WHOOP first, or wait for your other sync to finish.');
@@ -78,7 +78,11 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
    };
    // Read sequentially so retries cannot race rotating refresh tokens.
    const cycles=await collection('cycle'),sleeps=await collection('activity/sleep');
-   return {snapshot:mapWhoop(cycles,sleeps,from,day,new Date().toISOString())};
+   const workoutPermission=typeof tokens.scope==='string'&&tokens.scope.split(/\s+/).includes('read:workout');
+   const workouts=workoutPermission?await collection('activity/workout'):null;
+   const observedAt=new Date().toISOString(),snapshot=mapWhoop(cycles,sleeps,from,day,observedAt);
+   if(workouts!==null){snapshot.workouts=mapWorkouts(workouts,from,day,observedAt);snapshot.workoutsComplete=true;}
+   return {snapshot,workoutPermission};
   }finally{await db('whoop_connections',owned,'PATCH',{sync_lock:null,sync_lock_expires_at:null})}
  };
  const redirect=(result,platform,completion)=>new Response(null,{status:303,headers:{...headers,Location:(platform==='android'?'ezpzfitness://whoop/callback?result='+result:APP+'?whoop='+result)+(completion?'&completion='+completion:'')}});
@@ -141,9 +145,10 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
    const state=random(),now=Date.now(),platform=body.platform==='android'?'android':'web';
    await db('whoop_oauth_states','','POST',[{state_hash:await hash(state),user_id:user,return_platform:platform,expires_at:new Date(now+10*60000).toISOString()}]);
    const authorization=new URL('https://api.prod.whoop.com/oauth/oauth2/auth');
-   authorization.search=new URLSearchParams({client_id:env.WHOOP_CLIENT_ID,redirect_uri:callback,response_type:'code',scope:'read:cycles read:sleep offline',state}).toString();
+   authorization.search=new URLSearchParams({client_id:env.WHOOP_CLIENT_ID,redirect_uri:callback,response_type:'code',scope:'read:cycles read:sleep read:workout offline',state}).toString();
    return json({url:authorization.href});
   }catch{return json({error:'Connection could not finish. Your device records were not changed. Try again.'},502)}
  };
 }
 if(typeof Deno!=='undefined')Deno.serve(createHandler(Deno.env.toObject()));
+

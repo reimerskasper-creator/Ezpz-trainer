@@ -27,6 +27,7 @@ jobs:
         run: |
           node tests/accounts.cjs
           node tests/native-accounts.cjs
+          node tests/whoop-auto.cjs
           node tests/whoop-import.cjs
           node tests/whoop-mobile.cjs
           node tests/account-deletion.cjs
@@ -71,5 +72,6 @@ jobs:
           name: mobile-screenshots
           path: test-results/
           retention-days: 14
+
 
 

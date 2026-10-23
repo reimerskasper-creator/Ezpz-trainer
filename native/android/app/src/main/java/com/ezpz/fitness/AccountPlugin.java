@@ -28,6 +28,9 @@ public class AccountPlugin extends Plugin {
             notifyListeners("authCallback", result);
         } else pendingUrl = uri.toString();
     }
+    @Override protected void handleOnResume() {
+        notifyListeners("appResumed", new JSObject());
+    }
     @PluginMethod public void getPendingUrl(PluginCall call) {
         JSObject result = new JSObject();
         if (pendingUrl != null) result.put("url", pendingUrl);
@@ -47,3 +50,4 @@ public class AccountPlugin extends Plugin {
         catch (Exception error) { call.reject("Could not open your browser."); }
     }
 }
+

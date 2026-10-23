@@ -29,7 +29,7 @@ function whoopStatus(text){whoopMessage=text;panel();const out=document.getEleme
 async function verified(){const {data,error}=await client.auth.getUser();if(error||!data?.user)throw Error('Your session has expired. Sign in again.');if(user&&data.user.id!==user.id)throw Error('Account changed. Reload before continuing.');user=data.user;assertOwner(app.snapshot(),user.id);return user;}
 async function readRemote(){const u=await verified();const {data,error}=await client.from('fitness_backups').select('revision,updated_at,payload').eq('user_id',u.id).maybeSingle();if(error)throw Error('Cloud backup could not be read. Your device records are unchanged.');if(data){validBackup(data.payload);if(!Number.isSafeInteger(data.revision)||data.revision<1)throw Error('Invalid cloud revision.');}remote=data;return data;}
 function summary(data){return data.logs.length+' workout records · '+data.weights.length+' weight records';}
-async function run(name){
+async function run(name,automatic=false){
  if(busy)return;busy=true;panel();
  try{
   if(!config?.enabled||!client)throw Error('Sign-in needs internet. Please try again when connected.');
@@ -42,15 +42,18 @@ async function run(name){
   }else if(name==='whoop-sync'||name==='whoop-disconnect'){
    const u=await verified();
    if(!app.today||!app.importWhoop)throw Error('Update EZPZ before importing WHOOP data.');
+   if(automatic){const check=await client.functions.invoke('whoop-connect',{body:{action:'status'}});if(check.error)throw Error('Could not refresh the connection. Saved data is still available.');whoopConnected=!!check.data?.connected;if(!whoopConnected){whoopStatus('Connect a wearable to refresh your measurements automatically.');return;}}
    if(name==='whoop-disconnect'&&!confirm('Disconnect WHOOP? Saved measurements on this device will remain.'))return;
-   if(name==='whoop-sync'&&!app.snapshot().accountBackup?.ownerId&&!confirm('Link this device’s records to '+u.email+' and import WHOOP measurements? No device records will be uploaded.'))return;
    whoopStatus(name==='whoop-sync'?'Reading WHOOP measurements…':'Disconnecting WHOOP…');
    const {data,error}=await client.functions.invoke('whoop-connect',{body:{action:name==='whoop-sync'?'sync':'disconnect',through:app.today()}});
    if(error){let detail;try{detail=await error.context?.json()}catch{}throw Error(detail?.error||'WHOOP could not finish. Try again.');}
    const current=await verified();if(current.id!==u.id)throw Error('Account changed. No measurements were imported.');
    if(name==='whoop-disconnect'){if(!data?.disconnected)throw Error('Disconnect was not confirmed.');whoopConnected=false;whoopStatus('WHOOP disconnected. Saved measurements were kept.');return;}
    const summary=app.importWhoop(data?.snapshot,u.id),changed=summary.added+summary.updated;
-   whoopStatus((changed?'Imported '+changed+' new or updated measurement'+(changed===1?'':'s')+'.':summary.unchanged?'No new records. Your WHOOP measurements are up to date.':'No measurements were shared for the last seven days.')+(summary.removed?' '+summary.removed+' removed record'+(summary.removed===1?'':'s')+' reconciled.':'')+' Manual entries stay saved.');
+   whoopConnected=true;try{localStorage.setItem('ezpz-whoop-last-sync-'+u.id,new Date().toISOString())}catch{}
+   app.refreshImports?.();
+   const workoutCount=(summary.workoutsAdded||0)+(summary.workoutsUpdated||0);
+   whoopStatus((changed?'Imported '+changed+' new or updated measurement'+(changed===1?'':'s')+'.':summary.unchanged?'No new records. Your WHOOP measurements are up to date.':'No measurements were shared for the last seven days.')+(summary.removed?' '+summary.removed+' removed record'+(summary.removed===1?'':'s')+' reconciled.':'')+(workoutCount?' '+workoutCount+' workout'+(workoutCount===1?'':'s')+' updated.':'')+(data?.workoutPermission===false?' Reconnect WHOOP once to include workouts.':'')+' Manual entries stay saved.');
   }else if(name==='whoop-connect'||name==='whoop-status'){
    await verified();
    const {data,error}=await client.functions.invoke('whoop-connect',{body:{action:name==='whoop-connect'?'start':'status',platform:native?'android':'web'}});
@@ -110,7 +113,7 @@ async function run(name){
  }catch(e){if(name.startsWith('whoop-'))whoopStatus(e.message||'WHOOP action failed. Device records were kept.');else status(e.message||'Account action failed. Device records are unchanged.');}finally{busy=false;panel();}
 }
 document.addEventListener('click',e=>{if(e.target.closest('[data-open-whoop]')){e.preventDefault();app.open();panel();document.getElementById('fitness-account-panel')?.scrollIntoView?.({behavior:'smooth',block:'start'});return;}const b=e.target.closest('[data-account]');if(b){e.preventDefault();run(b.dataset.account);}});
-new MutationObserver(()=>{const p=document.getElementById('fitness-account-panel');if(p&&!p.children.length)panel();}).observe(document.getElementById('screen'),{childList:true});
+new MutationObserver(()=>{const p=document.getElementById('fitness-account-panel');if(p&&!p.children.length)panel();const out=document.getElementById('whoop-sync-status');if(out)out.textContent=whoopMessage;}).observe(document.getElementById('screen'),{childList:true});
 async function handleNativeCallback(value){
  if(callbackBusy||typeof value!=='string')return;
  let url;try{url=new URL(value)}catch{return}
@@ -126,15 +129,29 @@ async function handleNativeCallback(value){
    const {data,error}=await client.functions.invoke('whoop-connect',{body:{action:'finish',completion}});
    if(error||data?.connected!==true)throw Error('WHOOP connection could not finish. Start again from this app.');
    const confirmed=await verified();if(confirmed.id!==u.id)throw Error('Account changed. Check WHOOP connection after signing in again.');
-   localStorage.removeItem('ezpz-whoop-pending');whoopConnected=true;whoopStatus('WHOOP connected to your EZPZ account. You can now choose Sync WHOOP now.');return;
+   localStorage.removeItem('ezpz-whoop-pending');whoopConnected=true;whoopStatus('Connected. Your measurements will refresh automatically.');return;
   }
   if(url.searchParams.get('error'))throw Error('Google sign-in did not finish. Try again.');
   const code=url.searchParams.get('code');if(!code)throw Error('Sign-in callback had no code. Try again.');
   const {error}=await client.auth.exchangeCodeForSession(code);if(error)throw Error('Sign-in could not finish. Start again from this app.');
   try{await verified();}catch(error){await client.auth.signOut({scope:'local'});user=null;throw error;}status('Signed in. Your device records were kept.');
  }catch(error){if(url.hostname==='whoop')whoopStatus(error.message||'Could not finish WHOOP connection.');else status(error.message||'Could not finish sign-in.');}
- finally{callbackBusy=false;}
+ finally{callbackBusy=false;if(user)scheduleWhoopSync(true);}
 }
+
+let lastAutoAttempt=0,lastAutoUser='';
+function scheduleWhoopSync(force=false){
+ setTimeout(async()=>{
+  if(!client||busy||callbackBusy||document.visibilityState==='hidden'||root.navigator?.onLine===false)return;
+  if(!user){try{const result=await client.auth.getSession();if(!result.data?.session)return;await verified();}catch{return;}}
+  if(!force&&lastAutoUser===user.id&&Date.now()-lastAutoAttempt<120000)return;
+  lastAutoUser=user.id;lastAutoAttempt=Date.now();await run('whoop-sync',true);
+ },500);
+}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState!=='hidden')scheduleWhoopSync()});
+root.addEventListener?.('focus',()=>scheduleWhoopSync());
+root.addEventListener?.('online',()=>scheduleWhoopSync(true));
+
 async function init(){
  try{
   const response=await fetch('./fitness-app/account-config.json',{cache:'no-store'});if(!response.ok)throw Error('Account settings unavailable.');config=await response.json();if(!config.enabled){status('Account sign-in is not activated yet.');return;}
@@ -146,10 +163,11 @@ async function init(){
   if(code){const {error:exchangeError}=await client.auth.exchangeCodeForSession(code);if(exchangeError)throw Error('Sign-in could not finish. Use the same browser and try again.');}
   const {data,error:sessionError}=await client.auth.getSession();if(sessionError)throw sessionError;
   if(data?.session){const result=await client.auth.getUser();if(result.error)throw Error('Session could not be verified. Sign in again.');user=result.data.user;try{assertOwner(app.snapshot(),user.id);}catch(e){await client.auth.signOut({scope:'local'});user=null;throw e;}status('Signed in. No fitness records were uploaded or changed.');}
-  if(nativeAccount){await nativeAccount.addListener('authCallback',data=>handleNativeCallback(data.url));const pending=await nativeAccount.getPendingUrl();if(pending?.url)await handleNativeCallback(pending.url);}
+  if(nativeAccount){await nativeAccount.addListener('appResumed',()=>scheduleWhoopSync());await nativeAccount.addListener('authCallback',data=>handleNativeCallback(data.url));const pending=await nativeAccount.getPendingUrl();if(pending?.url)await handleNativeCallback(pending.url);}
   const whoopReturn=new URL(location.href),whoopResult=whoopReturn.searchParams.get('whoop');if(whoopResult){const completion=whoopReturn.searchParams.get('completion');whoopReturn.searchParams.delete('whoop');whoopReturn.searchParams.delete('completion');history.replaceState(null,'',whoopReturn.pathname+whoopReturn.search+whoopReturn.hash);await handleNativeCallback('ezpzfitness://whoop/callback?'+new URLSearchParams({result:whoopResult,completion:completion||''}));app.open();}
-  client.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;remote=null;}else if(session?.user){user=session.user;}panel();});
- }catch(e){status(e.message||'Sign-in is unavailable. You can keep using EZPZ offline.');}finally{panel();}
+  client.auth.onAuthStateChange((event,session)=>{if(event==='SIGNED_OUT'){user=null;remote=null;}else if(session?.user){user=session.user;scheduleWhoopSync();}panel();});
+ }catch(e){status(e.message||'Sign-in is unavailable. You can keep using EZPZ offline.');}finally{panel();if(user)scheduleWhoopSync();}
 }
 init();
 })(typeof window!=='undefined'?window:globalThis);
+

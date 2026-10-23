@@ -29,6 +29,7 @@ jobs:
           node tests/native-health.cjs
           node tests/accounts.cjs
           node tests/native-accounts.cjs
+          node tests/whoop-auto.cjs
           node tests/whoop-connect.mjs
           node tests/whoop-mapping.mjs
           node tests/whoop-sync.mjs
@@ -79,3 +80,4 @@ jobs:
             test-results/steps-card-*.jpg
           if-no-files-found: ignore
           retention-days: 14
+
