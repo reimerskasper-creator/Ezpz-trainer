@@ -1411,6 +1411,51 @@ body[data-view=foundation-history] .foundation-day-session p{font-size:13px;colo
 body[data-view=train] .training-options-body .compact-options-links{grid-template-columns:repeat(2,minmax(0,1fr))}.training-options-body .compact-options-links>*{min-width:0;overflow-wrap:anywhere}.training-options-body .activity-calories-mini{flex-wrap:wrap}
 @media(max-width:360px){body[data-view=train] .training-header.compact-training-header{margin-left:-13px;margin-right:-13px;padding-left:13px;padding-right:13px}}
 .readiness-panel{margin:16px 0;border:1px solid #718f7b;border-radius:18px;padding:18px;background:#d9e8dc;color:#193f2b}.readiness-panel h3{font-size:17px}.readiness-panel p,.readiness-panel label{color:#365a43}.readiness-panel button{margin-top:8px;background:#28523b;color:#f7f5e8;border-color:#577b62}.readiness-panel button.primary{background:#a9e4c2;color:#143a28}.readiness-panel .danger-action{background:#f3e1cc;color:#603924;border-color:#ad8b67}.readiness-panel a{color:#195339}.readiness-panel summary{min-height:44px;align-content:center;font-weight:700;cursor:pointer}.readiness-panel small{display:block;color:#486650}.readiness-panel .status-line{font-size:12px}.readiness-panel input{background:#edf5ed;color:#193f2b}
+</style><style>
+/* Progress and account surfaces share the app's forest palette. */
+body[data-view=progress] .weight-trend-card{
+ background-color:#143e30;
+ background-image:linear-gradient(105deg,rgba(12,49,37,.96),rgba(12,49,37,.78)),url('./home-images/weight.jpg');
+ border-color:#436754;color:#f1f8ef;box-shadow:0 8px 24px #102f2212
+}
+body[data-view=progress] .weight-trend-card h3{color:#f1f8ef}
+body[data-view=progress] .weight-trend-card .section-kicker{color:#b3cfba}
+body[data-view=progress] .weight-trend-card :is(.weight-delta,.weight-delta>small,.note,.progress-empty p,.weight-axis,.chart-dates){color:#c8dece}
+body[data-view=progress] .weight-trend-card .progress-empty svg{color:#a7dcb9}
+body[data-view=progress] :is(.weight-entry,.exercise-chart-controls,.weight-plot),
+body[data-view=progress] .exercise-chart{background:#0e3027cc;border:1px solid #71958055;color:#dcefe1}
+body[data-view=progress] .weight-entry{margin-top:18px}
+body[data-view=progress] .weight-entry :is(summary,label){color:#dbefdf}
+body[data-view=progress] :is(.weight-entry input,.weight-records input,.exercise-progress-card select){
+ background:#244e3d;color:#f0f8ef;border-color:#719580; color-scheme:dark
+}
+body[data-view=progress] :is(.weight-entry input,.weight-records input)::placeholder{color:#b8ccbf;opacity:1}
+body[data-view=progress] .exercise-progress-card select option{background:#244e3d;color:#f0f8ef}
+body[data-view=progress] .exercise-chart small{color:#c8dece}
+body[data-view=progress] .exercise-chart polyline{stroke:#91deb0}
+body[data-view=progress] .exercise-chart circle{fill:#a5e8bd;stroke:#173f30;stroke-width:2}
+body[data-view=progress] .trend-chart polyline{stroke:#91deb0}
+body[data-view=progress] .trend-chart path{stroke:#749c8255}
+body[data-view=progress] .weight-hide{color:#bfe6cc}
+body[data-view=progress] .weight-records form{border-color:#71958055}
+body[data-view=progress] .weight-entry button.primary{background:#ade1bf;color:#143e2b}
+body[data-view=more] .readiness-panel,#fitness-account-panel{
+ background:linear-gradient(110deg,#153e30f5,#153e30e8);
+ color:#f1f8ef;border-color:#547965;box-shadow:0 8px 24px #102f220c
+}
+body[data-view=more] .readiness-panel :is(p,label,small,.section-kicker),
+#fitness-account-panel :is(p,label,small,.section-kicker){color:#c8dece}
+body[data-view=more] .readiness-panel :is(h3,summary),
+#fitness-account-panel :is(h3,summary){color:#f1f8ef}
+body[data-view=more] .readiness-panel button,#fitness-account-panel button{
+ background:#315b45;color:#f1f8ef;border-color:#729580
+}
+body[data-view=more] .readiness-panel button.primary,#fitness-account-panel button.primary{
+ background:#ade1bf;color:#143e2b
+}
+body[data-view=more] .readiness-panel :is(a,input),#fitness-account-panel a{color:#c2e8cf}
+body[data-view=more] .readiness-panel input{background:#244e3d;border-color:#719580;color-scheme:dark}
+body[data-view=more] .readiness-panel .danger-action,#fitness-account-panel .danger-action{background:#623e31;color:#ffeadc;border-color:#b38c72}
 </style></head><body>
 <header class="row"><div class="brand-lockup"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div></div><button class="header-more" data-tab="more" aria-label="More tools and settings">☰ <span>More</span></button></header>
 <main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol nav-home-solid" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.7 2.5a2 2 0 0 1 2.6 0l8 6.8a2 2 0 0 1 .7 1.5V20a2 2 0 0 1-2 2h-4.2a.8.8 0 0 1-.8-.8V16a3 3 0 0 0-6 0v5.2a.8.8 0 0 1-.8.8H4a2 2 0 0 1-2-2v-9.2a2 2 0 0 1 .7-1.5z"/></svg><span>Home</span></button><button data-tab="eat"><img class="nav-letter" src="./brand/pillar-eat.png" alt="" width="28" height="28"><span>Eat</span></button><button data-tab="sleep"><img class="nav-letter" src="./brand/pillar-sleep-clean.png" alt="" width="28" height="28"><span>Sleep</span></button><button data-tab="train"><img class="nav-letter" src="./brand/pillar-train-clean.png" alt="" width="28" height="28"><span>Progress</span></button><button data-tab="zone"><img class="nav-letter" src="./brand/pillar-zone-clean.png" alt="" width="28" height="28"><span>Zone</span></button></nav>
