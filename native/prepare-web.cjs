@@ -1,0 +1,12 @@
+const fs=require('node:fs'),path=require('node:path');
+const root=path.resolve(__dirname,'..'),out=path.join(__dirname,'www');
+fs.rmSync(out,{recursive:true,force:true});fs.mkdirSync(out,{recursive:true});
+for(const name of ['fitness-app','brand','home-images','meal-images','workout-images','program-images','train-images','exercise-images','exercise-catalog.json','fitness-privacy.html'])if(fs.existsSync(path.join(root,name)))fs.cpSync(path.join(root,name),path.join(out,name),{recursive:true});
+fs.copyFileSync(require.resolve('@capacitor/core/dist/capacitor.js'),path.join(out,'capacitor-runtime.js'));
+let html=fs.readFileSync(path.join(root,'fitness.html'),'utf8');
+html=html.replace('<head>','<head><script src="./capacitor-runtime.js"></script>');
+// Package the canonical interface; never load remote pages inside a privileged bridge.
+html=html.replace("if('serviceWorker' in navigator&&window.isSecureContext)","if(!window.Capacitor?.isNativePlatform()&&'serviceWorker' in navigator&&window.isSecureContext)");
+// Native account callbacks return to this app; accounts.js retains PKCE verification here.
+fs.writeFileSync(path.join(out,'index.html'),html);fs.writeFileSync(path.join(out,'fitness.html'),html);
+console.log('Packaged canonical fitness.html and local assets.');

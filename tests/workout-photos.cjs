@@ -14,6 +14,8 @@ for(const old of baseline){const current=api.workoutTemplates.find(w=>w.id===old
 for(const [category,p]of Object.entries(api.workoutCovers)){assert(p.alt&&/\.(jpg|png)$/.test(p.src),'Photo metadata '+category);assert(fs.existsSync(path.join(__dirname,'..',p.src)),'Photo missing '+p.src)}
 assert(Object.keys(api.workoutCovers).length===12,'Every category has a related cover');
 assert(Object.keys(api.workoutProgramCovers).length===65,'Every built-in choice has an explicit photo');for(const [id,photo]of Object.entries(api.workoutProgramCovers)){assert(photo.alt.length>10,'Descriptive alt '+id);assert(fs.existsSync(path.join(__dirname,'..',photo.src)),'Program photo missing '+id+' '+photo.src)}
+assert(new Set([...Object.values(api.workoutCovers),...Object.values(api.workoutProgramCovers)].map(p=>p.src)).size>=58,'Broad equipment photo library');
+for(const p of [...Object.values(api.workoutCovers),...Object.values(api.workoutProgramCovers)])assert(p.src.startsWith('./workout-images/neutral-')||p.src.startsWith('./train-images/'),'People-free cover allowlist '+p.src);
 let count=0;
 for(const cat of api.workoutCategories){
  const plans=api.categoryPrograms(cat.id);assert(plans.length===(cat.id==='Kettlebell'?10:5),'Five choices in '+cat.id);count+=plans.length;

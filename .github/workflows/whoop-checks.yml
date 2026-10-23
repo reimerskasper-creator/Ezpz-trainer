@@ -1,0 +1,24 @@
+name: WHOOP callback checks
+on:
+  push:
+    branches: [android-health-connect]
+    paths: ['supabase/functions/whoop-connect/**', 'tests/whoop-*', '.github/workflows/whoop-checks.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  callback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Check callback and live rejection paths
+        env:
+          WHOOP_SMOKE_URL: https://uwfetvlddswsmqcitgzy.supabase.co/functions/v1/whoop-connect
+        run: |
+          node tests/whoop-connect.mjs
+          node tests/whoop-mapping.mjs
+          node tests/whoop-sync.mjs

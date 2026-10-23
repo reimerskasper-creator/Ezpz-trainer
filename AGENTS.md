@@ -1,0 +1,10 @@
+# EZPZ working agreement
+
+- Product goal: one clear, editable overview of Eat, Sleep, Progression and Zone, combining the user's chosen trackers with few taps to act. Kasper uses WHOOP, Cronometer, Withings and Lifesum; desired coverage also includes Strava, MyFitnessPal, Apple Health and Health Connect. These are roadmap targets, not claims of implemented integrations.
+- Current Android work is in `android-health-connect` in reimerskasper-creator/Ezpz-trainer, not `main`. Read its current head before editing. The older GitHub Pages app can lag behind the installed Android app. Preserve existing data, account, WHOOP and Health Connect behavior.
+- Home opens with today's overall score and four pillar rings. Training, food, sleep, movement and history follow, with obvious short routes to start/log. Preserve the forest/sage/mint palette and four pillar accents; use the approved people-free imagery.
+- Keep one continuously improved canonical app. Deliver tested Android updates through a Chrome-friendly GitHub artifact link; install over the existing app, never advise uninstalling to update.
+- Minimize usage: collect related requests, agree a bounded batch, inspect only relevant source, make one coherent commit and run appropriate checks once. Investigate actual failures; do not rebuild for every cosmetic adjustment. Avoid redundant screenshots, source dumps and duplicate CI runs.
+- Discuss online visual previews and a proper live-update mechanism as future workflow improvements. Do not silently replace the packaged native app with a remote website or claim Health Connect works in Chrome.
+- Maintain PROJECT_STATUS.md with current branch, commit, checks, delivery, next task and blockers. Before a long-chat handoff, provide a concise copy/paste resume prompt. There is no reliable assistant-visible chat-capacity meter; do not promise advance warning at a precise limit.
+- User does not want to buy additional ChatGPT usage now. Do not imply that downloads themselves consume most model usage or promise a numeric saving.

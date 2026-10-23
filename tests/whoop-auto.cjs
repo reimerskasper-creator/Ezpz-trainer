@@ -1,0 +1,21 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+(async()=>{
+ let timers=[],clock=1000000,syncs=0,imports=0,connected=true,fail=false,owner='a',activeUser='a',click,authChange;
+ const events={},nativeEvents={},data={},box={children:[1],innerHTML:''};
+ const sdk={auth:{getSession:async()=>({data:{session:{}}}),getUser:async()=>({data:{user:{id:activeUser,email:'test@example.test'}}}),onAuthStateChange:fn=>authChange=fn},functions:{invoke:async(_,args)=>{if(args.body.action==='status')return {data:{connected}};assert.equal(args.body.action,'sync');syncs++;return fail?{error:{}}:{data:{snapshot:{fixture:true},workoutPermission:true}}}}};
+ const DateMock=class extends Date{static now(){return clock}};
+ const root={navigator:{onLine:true},addEventListener:(name,fn)=>events[name]=fn,Capacitor:{isNativePlatform:()=>true,isPluginAvailable:()=>true,registerPlugin:()=>({addListener:async(name,fn)=>nativeEvents[name]=fn,getPendingUrl:async()=>({})})},EzpzAccountAdapter:{snapshot:()=>({accountBackup:{ownerId:owner},logs:[],weights:[],profile:null}),today:()=> '2026-10-23',importWhoop:(payload,id)=>{assert.equal(id,owner);assert(payload.fixture);imports++;return {added:1,updated:0,unchanged:0,removed:0}},refreshImports(){}},supabase:{createClient:()=>sdk}};
+ const document={visibilityState:'visible',getElementById:()=>box,addEventListener:(name,fn)=>{if(name==='click')click=fn;else events[name]=fn}};
+ const sandbox={window:root,document,MutationObserver:class{observe(){}},setTimeout:fn=>timers.push(fn),Date:DateMock,fetch:async()=>({ok:true,json:async()=>({enabled:true,projectUrl:'https://test.supabase.co',publishableKey:'public'})}),TextEncoder,URL,location:{href:'https://localhost/index.html'},history:{replaceState(){}},localStorage:{getItem:k=>data[k],setItem:(k,v)=>data[k]=v},confirm:()=>{throw Error('Automatic sync must not ask for confirmation')}};
+ const settle=async()=>{for(let i=0;i<30;i++)await new Promise(r=>setImmediate(r))};
+ const flush=async()=>{const pending=timers;timers=[];for(const fn of pending)await fn();await settle()};
+ vm.runInNewContext(fs.readFileSync('fitness-app/accounts.js','utf8'),sandbox);await settle();await flush();assert.equal(syncs,1);assert.equal(imports,1);
+ events.focus();events.visibilitychange();await flush();assert.equal(syncs,1,'foreground events are throttled');
+ clock+=120001;nativeEvents.appResumed();await flush();assert.equal(syncs,2);
+ fail=true;clock+=120001;events.focus();await flush();assert.equal(imports,2,'failed sync preserves data');
+ fail=false;events.online();await flush();assert.equal(imports,3,'online retries');
+ root.navigator.onLine=false;clock+=120001;events.focus();await flush();assert.equal(syncs,4,'offline does not request');root.navigator.onLine=true;
+ connected=false;events.online();await flush();assert.equal(syncs,4,'unconnected accounts do not sync');
+ connected=true;activeUser='b';clock+=120001;events.focus();await flush();assert.equal(imports,3,'account switch cannot import another account');
+ console.log('PASS: automatic launch/native resume, throttling, offline, reconnect, failure preservation and account isolation without prompts.');
+})().catch(e=>{console.error(e);process.exitCode=1});
