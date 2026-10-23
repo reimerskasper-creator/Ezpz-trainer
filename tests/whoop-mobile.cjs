@@ -16,6 +16,6 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
  if(width===390)await page.screenshot({path:path.join(out,'whoop-direct-movement.jpg'),type:'jpeg',quality:85});
  await page.locator('[data-tab="sleep"]').click();assert.equal(await page.locator('.sleep-stage-grid').count(),1);assert((await page.locator('.sleep-stage-grid').innerText()).includes('1h'));
  assert.deepEqual(errors,[]);if(width===390)await page.screenshot({path:path.join(out,'whoop-direct-sleep.jpg'),type:'jpeg',quality:85});
- await page.locator('[data-tab="progress"]').click();assert((await page.locator('.history-list').innerText()).includes('Weightlifting'));assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));if(width===390)await page.screenshot({path:path.join(out,'whoop-direct-workouts.jpg'),type:'jpeg',quality:85});await context.close();
+ await page.evaluate(()=>{tab='progress';render()});assert((await page.locator('.history-list').innerText()).includes('Weightlifting'));assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));if(width===390)await page.screenshot({path:path.join(out,'whoop-direct-workouts.jpg'),type:'jpeg',quality:85});await context.close();
 }console.log('PASS: direct WHOOP sync, repeated sync, manual source preservation, cycle labels and supplied stages at 320/390/430px.');}finally{await browser.close();await new Promise(r=>server.close(r))}})().catch(e=>{console.error(e);process.exitCode=1});
 
