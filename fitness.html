@@ -1477,6 +1477,49 @@ body[data-view=workout-history] .history-details button{min-height:44px;border-r
 body[data-view=workout-history] .history-details .history-exercise-chart{color:#b8f4d1;background:transparent;text-align:left}
 body[data-view=workout-history] .history-session>summary:focus-visible{outline:3px solid #91deb0;outline-offset:-4px;border-radius:18px}
 </style>
+
+<style id="ezpz-unified-palette">
+:root{--ez-cream:#f5f2e8;--ez-page:#edf0e7;--ez-forest:#153e30;--ez-ink:#203e30;--ez-sage:#d7e2d3;--ez-muted:#536b59;--ez-line:#bacbb7;--ez-mint:#8cdbb1}
+body{background-color:var(--ez-page)}
+button.primary,.program-copy>button{background-color:var(--ez-mint);color:var(--ez-forest);border-color:transparent}
+button:focus-visible,summary:focus-visible{outline:3px solid #4b926b;outline-offset:3px}
+#workout-chooser{background:var(--ez-page);color:var(--ez-ink)}
+#workout-chooser .chooser-head{background:var(--ez-forest);border-bottom:1px solid #527660}
+#workout-chooser .chooser-head h2{color:#f6f4e9}
+#workout-chooser .chooser-head p{color:#d4e3d3}
+#workout-chooser .chooser-eyebrow{color:#a6dbb8}
+#workout-chooser .chooser-grip{background:#91ad98}
+#workout-chooser .chooser-head button{background:#ffffff14;color:#eef4e7;border:1px solid #a6c2aa66}
+#workout-chooser :is(.category-tile,.program-card,.fullbody-choice,.workout-choice-card){background:var(--ez-cream);border-color:var(--ez-line);box-shadow:0 3px 12px #183e2d08}
+#workout-chooser :is(.category-copy strong,.program-copy h3){color:var(--ez-ink)}
+#workout-chooser :is(.category-copy small,.program-copy p,.program-copy>small,.workout-choice-meta,.chooser-footnote){color:var(--ez-muted)}
+#workout-chooser :is(.category-copy b,.program-meta,.chooser-back,.program-preview summary){color:#2c6947}
+#workout-chooser .program-preview{border-color:#c4d0bf}
+#workout-chooser .program-preview li{color:#294b37}
+#workout-chooser .program-preview li small{color:var(--ez-muted)}
+#workout-chooser .program-copy>button{background:var(--ez-mint);color:var(--ez-forest)}
+#workout-chooser .program-copy>button[aria-pressed=true]{background:#d4e6d3;color:#214d34}
+#workout-chooser :is(.category-tile,.program-card).is-selected{border-color:#397654;box-shadow:0 0 0 2px #75b98d55}
+#workout-chooser .workout-filters{background:var(--ez-sage);border:1px solid #bdcfb8;gap:10px;align-items:start}
+.workout-filter-field{min-width:0;color:#294b37;font-size:12px}
+.workout-filter-menu{margin-top:5px}
+.workout-filter-menu>summary{list-style:none;display:flex;justify-content:space-between;align-items:center;gap:6px;min-height:44px;padding:10px;border:1px solid #a9bea4;border-radius:11px;background:var(--ez-cream);color:var(--ez-ink);font-size:12px;cursor:pointer;line-height:1.45}
+.workout-filter-menu>summary::-webkit-details-marker{display:none}
+.workout-filter-menu>summary::marker{content:""}
+.workout-filter-menu>summary b{font-weight:400;flex:none}
+.workout-filter-menu[open]>summary{border-color:#397654}
+.workout-filter-options{display:grid;gap:4px;margin-top:6px;padding:5px;border-radius:12px;background:var(--ez-forest);border:1px solid #719177}
+.workout-filter-options>button{display:flex;justify-content:space-between;gap:6px;align-items:center;text-align:left;font-size:12px;line-height:1.4;min-height:44px;padding:9px 8px;background:transparent;color:#f0f4e7;border:1px solid transparent;border-radius:8px}
+.workout-filter-options>button[aria-pressed=true]{background:#375e43;color:#c7f3d6;border-color:#91bd94}
+#workout-chooser .workout-filters>button{align-self:start;margin-top:22px;background:#c3d4bf;border:1px solid #9eb899;color:#294c34;min-height:44px}
+#workout-chooser .workout-level-badge{background:#d9e8d4;color:#28573b}
+#workout-chooser .chooser-body{scrollbar-color:#8aa78e var(--ez-page)}
+body :is(.planner-back,.compact-picker-label){background:#d7e2d3;color:#214732;border-color:#b0c6ab}
+body :is(.set-row input[type=number],.exercise-progress-card select){background-color:var(--ez-cream);color:var(--ez-ink);border-color:#b7cdb4}
+#planner-picker .plan-picker-body{background:var(--ez-page)}
+#planner-picker :is(.plan-picker-category,.plan-picker-workout,.own-category-tile){background-color:var(--ez-cream);border-color:var(--ez-line);color:var(--ez-ink)}
+@media(max-width:360px){.workout-filter-menu>summary,.workout-filter-options>button{font-size:11px;padding-left:8px;padding-right:8px}.workout-filter-field{font-size:11px}}
+</style>
 </head><body>
 <header class="row"><div class="brand-lockup"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div></div><button class="header-more" data-tab="more" aria-label="More tools and settings">☰ <span>More</span></button></header>
 <main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol nav-home-solid" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.7 2.5a2 2 0 0 1 2.6 0l8 6.8a2 2 0 0 1 .7 1.5V20a2 2 0 0 1-2 2h-4.2a.8.8 0 0 1-.8-.8V16a3 3 0 0 0-6 0v5.2a.8.8 0 0 1-.8.8H4a2 2 0 0 1-2-2v-9.2a2 2 0 0 1 .7-1.5z"/></svg><span>Home</span></button><button data-tab="eat"><img class="nav-letter" src="./brand/pillar-eat.png" alt="" width="28" height="28"><span>Eat</span></button><button data-tab="sleep"><img class="nav-letter" src="./brand/pillar-sleep-clean.png" alt="" width="28" height="28"><span>Sleep</span></button><button data-tab="train"><img class="nav-letter" src="./brand/pillar-train-clean.png" alt="" width="28" height="28"><span>Progress</span></button><button data-tab="zone"><img class="nav-letter" src="./brand/pillar-zone-clean.png" alt="" width="28" height="28"><span>Zone</span></button></nav>
@@ -10400,9 +10443,19 @@ function categoryPrograms(category){
  const plans=workoutTemplates.filter(w=>w.category===category);
  return category==='Full Body'?[{id:'full-body',category:'Full Body',programName:workoutTitle(workoutPlan('full-body')),summary:state.profile?.equipment==='home'?'Beginner foundations with chair squats. Sets scale with your profile.':'Foundational gym strength. Sets scale with your profile.',equipment:state.profile?.equipment==='gym'?'Gym · your current equipment':'Home · your current equipment',minutes:'30–45',exercises:Array(6).fill({name:'Your current exercises'})},...plans]:plans
 }
+
+document.addEventListener('click',e=>{
+ const option=e.target.closest('[data-filter-choice]');if(!option)return;
+ const key=option.dataset.filterChoice,value=option.dataset.filterValue,allowed={equipment:['all','home','gym'],level:['all','Beginner','Intermediate','Advanced'],duration:['all','30','45']};
+ if(!allowed[key]?.includes(value))return;
+ const before=state.workoutFilters;state.workoutFilters={...workoutFilterSettings(),[key]:value};if(!save())state.workoutFilters=before;
+ const dialog=document.getElementById('workout-chooser');if(dialog){dialog.innerHTML=chooserContents();dialog.querySelector('[data-workout-filter="'+key+'"]')?.focus()}
+});
+document.addEventListener('toggle',e=>{const menu=e.target;if(!menu.matches?.('.workout-filter-menu')||!menu.open)return;document.querySelectorAll('.workout-filter-menu[open]').forEach(other=>{if(other!==menu)other.open=false})},true);
+
 function workoutFilterSettings(){const f=state.workoutFilters||{};return {equipment:['all','home','gym'].includes(f.equipment)?f.equipment:'all',level:['all','Beginner','Intermediate','Advanced'].includes(f.level)?f.level:'all',duration:['all','30','45'].includes(f.duration)?f.duration:'all'}}
 function filterWorkoutPrograms(plans){const f=workoutFilterSettings();return plans.filter(w=>{const p=w.id==='full-body'?planWorkout('full-body'):w,e=String(p.equipment||'').toLowerCase(),isGym=/gym|cable|machine|barbell|leg press/.test(e),minutes=Math.max(...(String(p.minutes||'').match(/\d+/g)||[]).map(Number));return (f.equipment==='all'||(f.equipment==='gym'?isGym:!isGym))&&(f.level==='all'||(p.level||'Beginner')===f.level)&&(f.duration==='all'||Number.isFinite(minutes)&&minutes>0&&minutes<=Number(f.duration))})}
-function workoutFilterMarkup(){const f=workoutFilterSettings();return '<div class="workout-filters">'+[['equipment','Equipment',[['all','All equipment'],['home','Home / minimal kit'],['gym','Gym']]],['level','Experience',[['all','All levels'],['Beginner','Beginner'],['Intermediate','Intermediate'],['Advanced','Advanced']]],['duration','Time available',[['all','Any duration'],['30','Up to 30 min'],['45','Up to 45 min']]]].map(([key,label,opts])=>'<label>'+label+'<select data-workout-filter="'+key+'">'+opts.map(([v,t])=>'<option value="'+v+'" '+(f[key]===v?'selected':'')+'>'+t+'</option>').join('')+'</select></label>').join('')+'<button type="button" data-clear-workout-filters>Reset filters</button></div>'}
+function workoutFilterMarkup(){const f=workoutFilterSettings();return '<div class="workout-filters">'+[['equipment','Equipment',[['all','All equipment'],['home','Home / minimal kit'],['gym','Gym']]],['level','Experience',[['all','All levels'],['Beginner','Beginner'],['Intermediate','Intermediate'],['Advanced','Advanced']]],['duration','Time available',[['all','Any duration'],['30','Up to 30 min'],['45','Up to 45 min']]]].map(([key,label,opts])=>'<div class="workout-filter-field"><span id="filter-label-'+key+'">'+label+'</span><details class="workout-filter-menu"><summary data-workout-filter="'+key+'" data-value="'+f[key]+'" aria-labelledby="filter-label-'+key+' filter-value-'+key+'"><span id="filter-value-'+key+'">'+safe(opts.find(([v])=>v===f[key])[1])+'</span><b aria-hidden="true">⌄</b></summary><div class="workout-filter-options" role="group" aria-label="'+label+'">'+opts.map(([v,t])=>'<button type="button" data-filter-choice="'+key+'" data-filter-value="'+v+'" aria-pressed="'+(f[key]===v)+'">'+safe(t)+'<span aria-hidden="true">'+(f[key]===v?'✓':'')+'</span></button>').join('')+'</div></details></div>').join('')+'<button type="button" data-clear-workout-filters>Reset filters</button></div>'}
 function chooserContents(){
  const id=activeWorkoutId(),cat=workoutCategories.find(c=>c.id===chooserCategory),plans=cat?filterWorkoutPrograms(categoryPrograms(cat.id)):[];
  return '<div class="chooser-head"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><span class="chooser-eyebrow">'+(cat?'CHOOSE YOUR SESSION':'MAKE YOUR NEXT MOVE')+'</span><h2 id="workout-chooser-title">'+(cat?safe(cat.label):'Find your workout')+'</h2></div><button type="button" data-action="close-workouts" aria-label="Close workout chooser" autofocus>×</button></div><p>'+(cat?(plans.length?plans.length+' matching session'+(plans.length===1?'':'s')+'. Find the one that fits today.':'Adjust your filters to find a session.'):'Choose a focus, or create a workout with your own exercises.')+'</p></div><div class="chooser-body">'+workoutFilterMarkup()+
