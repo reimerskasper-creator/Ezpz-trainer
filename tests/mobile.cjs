@@ -288,9 +288,9 @@ try{
   await page.locator('#training-exercise-1').scrollIntoViewIfNeeded();
   const focusedJpg=await page.screenshot({path:path.join(out,'Focused-training-'+width+'.jpg'),type:'jpeg',quality:85});
   if(width===390)captures.push({name:'Focused training',src:'data:image/jpeg;base64,'+focusedJpg.toString('base64')});
-  // Dismissing the finish confirmation must preserve entered but unchecked results.
+  // Dismissing partial-save confirmation preserves entered but unchecked results.
   page.removeAllListeners('dialog');page.once('dialog',d=>{assert(d.message().includes('not checked complete'));return d.dismiss()});
-  await page.locator('[data-action="finish"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'train');
+  await page.locator('.training-options>summary').click();await page.locator('[data-action="save-partial"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'train');
   assert.equal(await page.evaluate(key=>JSON.parse(localStorage.getItem(key)).workoutDrafts['push-a']['sr3-0'],key),'12');
   page.on('dialog',d=>d.accept());await page.locator('[data-action="finish"]').click();
   await page.waitForFunction(()=>document.body.dataset.view==='progress');
