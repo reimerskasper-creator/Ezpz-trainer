@@ -31,6 +31,11 @@ try{
   const checkLayout=async(label)=>{const ok=await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1);if(!ok){console.log('OVERFLOW_DIAGNOSTIC',label,JSON.stringify(await page.evaluate(()=>({innerWidth,clientWidth:document.documentElement.clientWidth,elements:[...document.querySelectorAll('body *')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>document.documentElement.clientWidth+1}).slice(0,25).map(e=>({tag:e.tagName,class:e.className,rect:e.getBoundingClientRect().toJSON(),text:e.textContent.slice(0,100)}))}))));const jpg=await page.screenshot({type:'jpeg',quality:80});const b=jpg.toString('base64');for(let i=0;i<b.length;i+=4000)console.log('EZPZ_VISUAL_DATA '+b.slice(i,i+4000))}assert(ok,'Horizontal overflow: '+width+' '+label)};
   const capture=async(name)=>{await page.evaluate(()=>window.scrollTo(0,0));await page.screenshot({path:path.join(out,name+'-'+width+'.jpg'),type:'jpeg',quality:80});if(width===390)captures.push({name,src:'data:image/jpeg;base64,'+fs.readFileSync(path.join(out,name+'-'+width+'.jpg')).toString('base64')})};
   await page.goto(base+'/fitness.html');await page.locator('[data-tab="home"]').waitFor();await checkLayout('Home');await capture('Home');
+  assert(await page.locator('.home-week-card').evaluate(el=>!!(el.compareDocumentPosition(document.querySelector('.home-workout'))&Node.DOCUMENT_POSITION_FOLLOWING)),'Overview precedes workout');
+  assert(await page.locator('.home-week-card .habit-rings').evaluate(el=>el.getBoundingClientRect().bottom<=innerHeight-80),'Four rings visible on opening');
+  await page.locator('.overview-actions [data-go="custom-food"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'custom-food');
+  await page.locator('[data-tab="home"]').click();await page.locator('[data-overview-workout]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'train');
+  await page.locator('[data-tab="home"]').click();
   const methodBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   await page.locator('[data-ezpz-method="open"]').click();
   assert(await page.locator('#ezpz-method').evaluate(d=>d.open),'Method opens as a modal');

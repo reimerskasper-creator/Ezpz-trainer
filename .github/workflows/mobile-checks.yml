@@ -10,6 +10,8 @@ permissions:
   contents: read
 jobs:
   mobile:
+    # This owned Android branch already runs the same suite on push.
+    if: github.event_name != 'pull_request' || github.head_ref != 'android-health-connect' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-24.04
     timeout-minutes: 12
     steps:
