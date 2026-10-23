@@ -19,13 +19,14 @@ const fetcher=async(url,opt={})=>{
  if(method==='DELETE'){if(table==='whoop_connections')connections=rows.filter(r=>!matched.includes(r));else if(table==='whoop_pending_connections')pending=rows.filter(r=>!matched.includes(r));else states=rows.filter(r=>!matched.includes(r));return response(matched)}
  if(method==='POST'){const data=JSON.parse(opt.body);if(table==='whoop_connections')connections=data;else if(table==='whoop_pending_connections')pending.push(...data);else states.push(...data);return response(data)}
  if(method==='PATCH'){const patch=JSON.parse(opt.body);matched.forEach(r=>Object.assign(r,patch));return response(matched)}
- return response(matched.map(r=>({connected_at:r.connected_at})));
+ return response(matched);
 };
 const h=createHandler(env,fetcher,webcrypto),root=env.SUPABASE_URL+'/functions/v1/whoop-connect';
 const post=(action,user='a',extra={})=>h(new Request(root,{method:'POST',headers:{Authorization:'Bearer user-'+user},body:JSON.stringify({action,through:today,...extra})}));
 const launch=await(await post('start')).json(),state=new URL(launch.url).searchParams.get('state');
 const callback=await h(new Request(root+'?code=test&state='+state));assert.equal(callback.status,303);
 const completion=new URL(callback.headers.get('Location')).searchParams.get('completion');assert.equal((await post('finish','a',{completion})).status,200);
+const capabilities=await(await post('status')).json();assert.equal(capabilities.workoutPermission,true);assert(!JSON.stringify(capabilities).includes('encrypted_tokens'));
 const synced=await post('sync'),data=await synced.json();assert.equal(synced.status,200);assert.equal(data.snapshot.records.length,3);assert.equal(refreshes,1);assert.equal(data.workoutPermission,true);assert.equal(data.snapshot.workouts.length,1);assert.equal(connections[0].sync_lock,null);assert(!JSON.stringify(data).includes('private-'));
 assert.equal((await post('sync','b')).status,502);assert.equal(connections.length,1);
 const concurrent=await Promise.all([post('sync'),post('sync')]);assert.deepEqual(concurrent.map(r=>r.status).sort(),[200,502]);

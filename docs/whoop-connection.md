@@ -19,3 +19,5 @@ Authorization now stages encrypted credentials in a server-only, expiring comple
 
 
 Workouts are kept separately from editable exercise-set logs. A completed imported workout counts as 100% toward the training ring on its provider-local start date. Stable source IDs prevent repeated imports; deleted workouts are reconciled only after a successful complete workout read. Missing workout permission preserves all saved workouts. No sets, reps, weights, or calories are inferred from the session. Cloud backup remains explicit.
+
+Connection status distinguishes a valid connection from read:workout permission by checking the stored grant server-side. The response contains only a capability boolean, never tokens. The history opens from the Train ring or the Workouts count; manual logs are editable/removable. Removing a connected workout stores an exclusion in EZPZ, so it no longer counts and cannot reappear on refresh. Exclusions are backed up and can be restored from workout history; the source wearable is never modified.

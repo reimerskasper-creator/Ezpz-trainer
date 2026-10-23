@@ -133,8 +133,10 @@ export function createHandler(env, fetcher = fetch, cryptoApi = crypto) {
     return json({connected:true});
    }
    if(body.action==='status'){
-    const rows=await db('whoop_connections','?select=connected_at&user_id=eq.'+user);
-    return json({configured:ready(),connected:rows.length===1,connectedAt:rows[0]?.connected_at||null});
+    const rows=await db('whoop_connections','?select=connected_at,encrypted_tokens&user_id=eq.'+user);
+    let workoutPermission=false;
+    if(rows.length===1){try{const tokens=await openTokens(user,rows[0].encrypted_tokens);workoutPermission=typeof tokens.scope==='string'&&tokens.scope.split(/\s+/).includes('read:workout');}catch{}}
+    return json({configured:ready(),connected:rows.length===1,workoutPermission,connectedAt:rows[0]?.connected_at||null});
    }
    if(body.action==='sync'||body.action==='disconnect'){if(!ready())return json({error:'WHOOP setup is incomplete.'},503);try{return json(await syncWhoop(user,body))}catch(error){const allowed=['Connect WHOOP first, or wait for your other sync to finish.','WHOOP permission expired. Reconnect WHOOP.','WHOOP is busy. Try syncing again shortly.','WHOOP data could not be read. Try again.'];return json({error:allowed.includes(error.message)?error.message:'WHOOP sync could not finish. No device records were changed. Try again.'},502)}}
    if(body.action!=='start')return json({error:'Unknown action'},400);
