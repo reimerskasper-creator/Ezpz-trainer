@@ -27,50 +27,11 @@ jobs:
         env:
           EZPZ_VISUAL_LOG: ${{ contains(github.event.head_commit.message, '[visual-review]') && '1' || '0' }}
         run: |
-          node tests/forest-theme-mobile.cjs
-          node tests/habit-trends.cjs
-          node tests/habit-trends-mobile.cjs
-          node tests/photo-calendar-mobile.cjs
-          node tests/accounts.cjs
-          node tests/native-accounts.cjs
-          node tests/whoop-auto.cjs
-          node tests/whoop-import.cjs
-          node tests/whoop-mobile.cjs
-          node tests/account-deletion.cjs
-          node tests/release-readiness.cjs
-          node tests/release-readiness-mobile.cjs
-          node tests/compact-training-mobile.cjs
-          node tests/wellness.cjs
-          node tests/native-health.cjs
-          node tests/native-health-mobile.cjs
-          node tests/wellness-mobile.cjs
-          node tests/pillar-pages.cjs
-          node tests/foundation-week.cjs
-          node tests/foundation-week-mobile.cjs
-          node tests/branding-mobile.cjs
-          node tests/swipe-mobile.cjs
-          node tests/daily-refinement.cjs
-          node tests/daily-refinement-mobile.cjs
-          node tests/personal-welcome.cjs
-          node tests/training-usability.cjs
-          node tests/units.cjs
-          node tests/daily-use.cjs
-          node tests/privacy.cjs
-          node tests/habits.cjs
-          node tests/sleep.cjs
-          node tests/zone.cjs
-          node tests/overall.cjs
-          node tests/home.cjs
-          node tests/recipes.cjs
-          node tests/custom-foods.cjs
-          node tests/nutrition-targets.cjs
-          node tests/app-review.cjs
-          node tests/workout-photos.cjs
-          node tests/planning.cjs
-          node tests/training.cjs
-          node tests/planner-picker.cjs
-          node tests/own-workouts.cjs
-          node tests/mobile.cjs
+          failed=0
+          for check in tests/forest-theme-mobile.cjs tests/habit-trends.cjs tests/habit-trends-mobile.cjs tests/photo-calendar-mobile.cjs tests/accounts.cjs tests/native-accounts.cjs tests/whoop-auto.cjs tests/whoop-import.cjs tests/whoop-mobile.cjs tests/account-deletion.cjs tests/release-readiness.cjs tests/release-readiness-mobile.cjs tests/compact-training-mobile.cjs tests/wellness.cjs tests/native-health.cjs tests/native-health-mobile.cjs tests/wellness-mobile.cjs tests/pillar-pages.cjs tests/foundation-week.cjs tests/foundation-week-mobile.cjs tests/branding-mobile.cjs tests/swipe-mobile.cjs tests/daily-refinement.cjs tests/daily-refinement-mobile.cjs tests/personal-welcome.cjs tests/training-usability.cjs tests/units.cjs tests/daily-use.cjs tests/privacy.cjs tests/habits.cjs tests/sleep.cjs tests/zone.cjs tests/overall.cjs tests/home.cjs tests/recipes.cjs tests/custom-foods.cjs tests/nutrition-targets.cjs tests/app-review.cjs tests/workout-photos.cjs tests/planning.cjs tests/training.cjs tests/planner-picker.cjs tests/own-workouts.cjs tests/mobile.cjs; do
+            node "$check" || failed=1
+          done
+          exit "$failed"
       - name: Save mobile screenshots and results
         uses: actions/upload-artifact@v4
         if: always()
