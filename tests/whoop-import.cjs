@@ -1,0 +1,39 @@
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const scripts=[...fs.readFileSync('fitness.html','utf8').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');
+let fail=false,disk=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[]});
+const screen={innerHTML:''},document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {applyDirectWhoopSnapshot,foodDate,datePlus,saveManualMovement,selectedWellnessRecord,movementPage,sleepImportDetails,dailyTrainingSummary,weeklyFoundationData,progressData,restoredState,importedWorkoutHistory,setImportedWorkoutHidden,activeImportedWorkouts,workoutHistoryPage,removeRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>disk,setItem:(_,v)=>{if(fail)throw Error('full');disk=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const user='11111111-1111-4111-8111-111111111111',date=api.foodDate(),stamp=new Date().toISOString();
+const row=(metric,value,extra={})=>({metric,value,date,source:'whoop',unit:metric==='sleep'?'minutes':metric==='steps'?'count':'kcal',externalId:'direct-'+metric,updatedAt:stamp,...extra});
+const snap=records=>({version:1,source:'whoop',from:api.datePlus(date,-6),through:date,metrics:['steps','sleep','totalCalories'],records});
+assert(api.saveManualMovement(date,{steps:'99',activeCalories:'',totalCalories:'',stepGoal:'8000'}));
+const cycle={cycleStart:new Date(Date.now()-86400000).toISOString(),cycleOpen:true};
+const records=[row('steps',1200,cycle),row('totalCalories',2000,cycle),row('sleep',420,{deepMinutes:60,remMinutes:120})];
+let summary=api.applyDirectWhoopSnapshot(snap(records),user);assert.equal(summary.added,3);assert.equal(api.selectedWellnessRecord('steps',date).value,99);assert.equal(api.state.accountBackup.ownerId,user);
+summary=api.applyDirectWhoopSnapshot(snap(records.map(r=>({...r,updatedAt:new Date(Date.now()+10000).toISOString()}))),user);assert.equal(summary.unchanged,3);assert.equal(summary.updated,0);
+api.movementPage();assert(screen.innerHTML.includes('Total calories'));assert(api.sleepImportDetails(date).includes('sleep-stage-grid'));
+let before=JSON.stringify(api.state);assert.throws(()=>api.applyDirectWhoopSnapshot(snap([{...records[0],value:-1}]),user));assert.equal(JSON.stringify(api.state),before);
+assert.throws(()=>api.applyDirectWhoopSnapshot(snap(records),'22222222-2222-4222-8222-222222222222'));assert.equal(JSON.stringify(api.state),before);
+fail=true;assert.throws(()=>api.applyDirectWhoopSnapshot(snap([{...records[0],value:1300}]),user));assert.equal(JSON.stringify(api.state),before);fail=false;
+summary=api.applyDirectWhoopSnapshot(snap([]),user);assert.equal(summary.removed,3);assert.equal(api.selectedWellnessRecord('steps',date).value,99);
+
+const finish=new Date(Date.now()-1000).toISOString(),begin=new Date(Date.now()-1801000).toISOString();
+const workout={source:'whoop',externalId:'whoop-workout-session1',date,start:begin,end:finish,title:'Weightlifting',durationMinutes:30,updatedAt:stamp};
+const withWorkouts=rows=>({...snap([]),workoutsComplete:true,workouts:rows});
+summary=api.applyDirectWhoopSnapshot(withWorkouts([workout]),user);assert.equal(summary.workoutsAdded,1);assert.equal(api.dailyTrainingSummary(new Date(),date).percent,100);assert.equal(api.state.logs.length,0,'no fabricated set logs');assert.equal(api.state.importedWorkouts.length,1);
+assert(api.importedWorkoutHistory().includes('Weightlifting'));assert.equal(api.restoredState(api.state).importedWorkouts.length,1);assert.equal(api.progressData().weeks.at(-1).days,1);
+summary=api.applyDirectWhoopSnapshot(withWorkouts([{...workout,updatedAt:new Date().toISOString()}]),user);assert.equal(summary.workoutsAdded,0);assert.equal(summary.workoutsUpdated,0);assert.equal(api.state.importedWorkouts.length,1);
+api.applyDirectWhoopSnapshot(snap([]),user);assert.equal(api.state.importedWorkouts.length,1,'missing permission never erases workouts');
+assert(api.setImportedWorkoutHidden('whoop|'+workout.externalId,true));assert.equal(api.dailyTrainingSummary(new Date(),date).percent,0);assert.equal(api.activeImportedWorkouts().length,0);
+api.applyDirectWhoopSnapshot(withWorkouts([workout]),user);assert.equal(api.activeImportedWorkouts().length,0,'sync cannot resurrect removed sessions');assert.equal(api.restoredState(api.state).workoutExclusions.length,1);
+api.workoutHistoryPage();assert(screen.innerHTML.includes('Restore workout'));assert(api.setImportedWorkoutHidden('whoop|'+workout.externalId,false));assert.equal(api.dailyTrainingSummary(new Date(),date).percent,100);
+api.workoutHistoryPage();assert(screen.innerHTML.includes('Remove from EZPZ'));assert(screen.innerHTML.includes('Weightlifting'));
+
+before=JSON.stringify(api.state);assert.throws(()=>api.applyDirectWhoopSnapshot(withWorkouts([{...workout,end:begin}]),user));assert.equal(JSON.stringify(api.state),before);
+fail=true;assert.throws(()=>api.applyDirectWhoopSnapshot(withWorkouts([]),user));assert.equal(JSON.stringify(api.state),before);fail=false;
+summary=api.applyDirectWhoopSnapshot(withWorkouts([]),user);assert.equal(summary.workoutsRemoved,1);assert.equal(api.dailyTrainingSummary(new Date(),date).percent,0);assert.equal(api.selectedWellnessRecord('steps',date).value,99);
+console.log('PASS: direct imports preserve manual choices, label cycles, retain supplied stages, ignore read timestamps, isolate accounts, reject invalid batches and roll back storage failures.');
+
+
+api.state.logs.push({date:new Date().toISOString(),title:'Practice session',exercises:[{name:'Squat',sets:[{reps:10,done:true}]}]});api.workoutHistoryPage();assert(screen.innerHTML.includes('Edit workout'));assert(screen.innerHTML.includes('Remove workout'));assert(api.removeRecord('logs',0,'Workout removed'));assert.equal(api.state.logs.length,0);
+console.log('PASS: accessible workout history, source details, manual removal, imported exclusion survives sync/restore, and ring recomputation.');

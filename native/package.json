@@ -1,0 +1,16 @@
+{
+  "name": "ezpz-fitness-android",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "prepare:web": "node prepare-web.cjs",
+    "sync": "npm run prepare:web && cap sync android"
+  },
+  "dependencies": {
+    "@capacitor/core": "8.5.3",
+    "@capacitor/android": "8.5.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.3"
+  }
+}

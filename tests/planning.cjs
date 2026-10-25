@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8'),scripts=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');
 const screen={innerHTML:''},listeners={},document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener:(n,f)=>(listeners[n]??=[]).push(f)};
 let stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2});
-const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {home,planner,planWorkout,previewWorkout,workoutBadges,planSettings,scheduleDays,scheduleWorkout,setPlannedRecipe,copyPlannedDay,repeatPlannedWeek,addPlannedShopping,plannedNutrition,nutrition,recipes,foods,cleanCustomWorkouts,restoredState,nextPlannedWorkout,foodDate,validPlanDate,datePlus,workoutTemplates,migratePracticalHiit,safe,get state(){return state},set state(v){state=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>stored=v},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
+const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {home,upcomingMeals,homeNextMeals,planner,planWorkout,previewWorkout,workoutBadges,planSettings,scheduleDays,scheduleWorkout,setPlannedRecipe,copyPlannedDay,repeatPlannedWeek,addPlannedShopping,plannedNutrition,nutrition,recipes,foods,cleanCustomWorkouts,restoredState,nextPlannedWorkout,foodDate,validPlanDate,datePlus,workoutTemplates,migratePracticalHiit,safe,get state(){return state},set state(v){state=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>stored=v},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
 const assert=(v,m)=>{if(!v)throw Error(m)},equal=(a,b,m)=>assert(JSON.stringify(a)===JSON.stringify(b),m);
 assert(api.safe("Kasper's <workout>")==="Kasper&#39;s &lt;workout&gt;",'Custom names escaped');
 assert(api.validPlanDate('2028-02-29')&&!api.validPlanDate('2026-02-30'),'Calendar validation');
@@ -47,3 +47,12 @@ assert(api.state.workoutDrafts['push-a']['sr0-0']==='8','Other workout draft unc
 const archived=api.restoredState(JSON.parse(JSON.stringify(api.state)));assert(archived.workoutDraftArchives['hiit-a'].draft['sr1-5']==='30','Archive survives restore');
 api.home();assert(screen.innerHTML.includes('Your next workout')&&!screen.innerHTML.includes('Plan your meals'),'New Home preview');
 console.log('PASS: 1/7/14/21/28-day planning, calendar boundaries, meal portions, rest days, day/week copy, range shopping, custom workouts, backup restore, difficulty, practical intervals and legacy draft archive');
+
+const mealOriginal=JSON.stringify(api.state),todayMeals=api.foodDate(),tomorrowMeals=api.datePlus(todayMeals,1);
+api.state={...api.state,mealPlan:{[api.datePlus(todayMeals,-1)]:{breakfast:2},[todayMeals]:{dinner:4,lunch:0,lunchPortion:1.5},[tomorrowMeals]:{breakfast:1,breakfastPortion:.5,lunch:99999},'bad-date':{breakfast:0}}};
+const mealSnapshot=JSON.stringify(api.state);
+equal(api.upcomingMeals().map(x=>[x.date,x.slot,x.index,x.portion]),[[todayMeals,'lunch',0,1.5],[todayMeals,'dinner',4,1],[tomorrowMeals,'breakfast',1,.5]],'Next meals sort by date then meal slot, preserving portions and omitting past/invalid recipes');
+const mealMarkup=api.homeNextMeals();assert(mealMarkup.includes(api.safe(api.recipes[0].name))&&mealMarkup.includes(api.nutrition(api.recipes[0].ingredients,1.5)[0]+' kcal'),'Next meal uses its exact recipe and portion calories');
+assert(mealMarkup.includes('data-home-meal-date="'+todayMeals+'"'),'Meal opens its planned date');equal(JSON.stringify(api.state),mealSnapshot,'Upcoming meal overview never logs food or edits the plan');
+api.state={...api.state,mealPlan:{}};assert(api.homeNextMeals().includes('No upcoming meals planned yet.'),'Empty meal plans show an honest planning action');api.state=JSON.parse(mealOriginal);
+console.log('PASS: ordered next meals, planned dates/portions/calories, invalid references, honest empty plans and read-only overview');

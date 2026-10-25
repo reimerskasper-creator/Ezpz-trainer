@@ -1,0 +1,83 @@
+name: Android Health Connect test
+on:
+  push:
+    branches: [android-health-connect]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      EZPZ_TEST_KEYSTORE: ${{ github.workspace }}/native/.test-signing/debug.keystore
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
+      - name: Validate import contracts
+        run: |
+          node tests/wellness.cjs
+          node tests/native-health.cjs
+          node tests/accounts.cjs
+          node tests/native-accounts.cjs
+          node tests/whoop-auto.cjs
+          node tests/whoop-connect.mjs
+          node tests/whoop-mapping.mjs
+          node tests/whoop-sync.mjs
+          node tests/whoop-import.cjs
+      - name: Package current canonical app
+        working-directory: native
+        run: |
+          npm ci --no-audit --no-fund
+          npm run sync
+      - name: Verify packaged app startup with actual Capacitor scripts
+        run: |
+          node tests/native-runtime.cjs
+          npm install --no-save --no-package-lock playwright@1.64.1
+          npx playwright install --only-shell chromium
+          node tests/native-package-mobile.cjs
+          node tests/whoop-mobile.cjs
+      - uses: actions/cache@v4
+        with:
+          path: native/.test-signing/debug.keystore
+          key: ezpz-fitness-debug-signing-v2
+      - name: Prepare explicit test signing key
+        run: |
+          mkdir -p native/.test-signing
+          if [ ! -f "$EZPZ_TEST_KEYSTORE" ]; then
+            keytool -genkeypair -keystore "$EZPZ_TEST_KEYSTORE" -storepass android -keypass android -alias androiddebugkey -dname "CN=EZPZ Android Test" -keyalg RSA -keysize 2048 -validity 10000
+          fi
+      - name: Build and test Android
+        working-directory: native/android
+        run: |
+          chmod +x gradlew
+          ./gradlew testDebugUnitTest assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EZPZ-Fitness-Android-test
+          path: native/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Android-startup-review
+          path: |
+            test-results/native-package-startup.jpg
+            test-results/native-step-check.jpg
+            test-results/native-step-period.jpg
+            test-results/native-calorie-check.jpg
+            test-results/native-backup-save.jpg
+            test-results/whoop-direct-*.jpg
+            test-results/steps-card-*.jpg
+          if-no-files-found: ignore
+          retention-days: 14
+
