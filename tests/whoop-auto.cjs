@@ -9,7 +9,7 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
  const sandbox={window:root,document,MutationObserver:class{observe(){}},setTimeout:fn=>timers.push(fn),Date:DateMock,fetch:async()=>({ok:true,json:async()=>({enabled:true,projectUrl:'https://test.supabase.co',publishableKey:'public'})}),TextEncoder,URL,location:{href:'https://localhost/index.html'},history:{replaceState(){}},localStorage:{getItem:k=>data[k],setItem:(k,v)=>data[k]=v},confirm:()=>{throw Error('Automatic sync must not ask for confirmation')}};
  const settle=async()=>{for(let i=0;i<30;i++)await new Promise(r=>setImmediate(r))};
  const flush=async()=>{const pending=timers;timers=[];for(const fn of pending)await fn();await settle()};
- vm.runInNewContext(fs.readFileSync('fitness-app/accounts.js','utf8'),sandbox);await settle();await flush();assert.equal(syncs,1);assert.equal(imports,1);
+ vm.runInNewContext(fs.readFileSync('fitness-app/accounts.js','utf8'),sandbox);await settle();await flush();assert.equal(syncs,1);assert.equal(imports,1);assert.equal(root.EzpzWhoopAccount.lastSync(),data['ezpz-whoop-last-sync-a']);
  events.focus();events.visibilitychange();await flush();assert.equal(syncs,1,'foreground events are throttled');
  clock+=120001;nativeEvents.appResumed();await flush();assert.equal(syncs,2);
  fail=true;clock+=120001;events.focus();await flush();assert.equal(imports,2,'failed sync preserves data');
@@ -17,5 +17,6 @@ const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/st
  root.navigator.onLine=false;clock+=120001;events.focus();await flush();assert.equal(syncs,4,'offline does not request');root.navigator.onLine=true;
  connected=false;events.online();await flush();assert.equal(syncs,4,'unconnected accounts do not sync');
  connected=true;activeUser='b';clock+=120001;events.focus();await flush();assert.equal(imports,3,'account switch cannot import another account');
+ authChange('SIGNED_OUT',null);assert.equal(root.EzpzWhoopAccount.lastSync(),null);
  console.log('PASS: automatic launch/native resume, throttling, offline, reconnect, failure preservation and account isolation without prompts.');
 })().catch(e=>{console.error(e);process.exitCode=1});

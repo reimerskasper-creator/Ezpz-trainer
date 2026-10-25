@@ -15,7 +15,7 @@ const app=root.EzpzAccountAdapter;if(!app)return;
 const cap=root.Capacitor,native=!!(cap?.isNativePlatform?.()&&cap?.isPluginAvailable?.('EzpzAccount')),nativeAccount=native?cap.registerPlugin('EzpzAccount'):null;
 let whoopConnected=false,whoopWorkoutAccess=null,whoopMessage='Connect separately to authorize access to your WHOOP data.',callbackBusy=false;
 const whoopPanel=()=>'<p>'+esc(whoopMessage)+'</p><button data-go="connected-apps">Manage connected apps →</button>';
-root.EzpzWhoopAccount={open:()=>{app.open();panel();const box=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(box)box.open=true;}};
+root.EzpzWhoopAccount={lastSync:()=>{try{return user?.id?localStorage.getItem('ezpz-whoop-last-sync-'+user.id):null}catch{return null}},open:()=>{app.open();panel();const box=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(box)box.open=true;}};
 
 let client=null,user=null,config=null,busy=false,message='Sign-in is optional. Your records stay on this device until you choose to save them.',remote=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
