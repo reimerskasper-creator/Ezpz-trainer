@@ -103,8 +103,8 @@ try{
   assert(await page.locator('[data-set-reps="0-0"]').isVisible(),'Current exercise is directly usable');
   assert((await page.locator('.compact-training-meta').innerText()).includes('exercises'));
   await checkLayout('Train color harmony');
-  if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser img').count(),13);
-  const coverSources=await page.locator('#workout-chooser img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
+  if(await page.locator('.training-options').count()&&!await page.locator('[data-action="open-workouts"]').isVisible())await page.locator('.training-options>summary').click();await page.locator('[data-action="open-workouts"]').click();assert.equal(await page.locator('#workout-chooser .category-grid img').count(),13);
+  const coverSources=await page.locator('#workout-chooser .category-grid img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src')));
   assert.equal(new Set(coverSources).size,12);for(const src of coverSources){const response=await context.request.get(new URL(src,base+'/fitness.html').href);assert.equal(response.status(),200,'Workout photo '+src)}
   await page.locator('#workout-chooser').evaluate(async dialog=>{for(const img of dialog.querySelectorAll('img')){img.loading='eager';await img.decode()}dialog.scrollTop=0});
   await checkLayout('Workout chooser');assert(await page.locator('#workout-chooser').evaluate(x=>x.scrollWidth<=x.clientWidth+1&&x.getBoundingClientRect().left>=-1&&x.getBoundingClientRect().right<=document.documentElement.clientWidth+1),'Chooser fits phone viewport');
@@ -128,7 +128,7 @@ try{
    if(id==='full-body-balanced'&&width===390){
     await page.locator('#workout-chooser').evaluate(async d=>{for(const img of d.querySelectorAll('img')){img.loading='eager';await img.decode()}});
     const buffer=await page.screenshot({path:path.join(out,'Full-body-programs.jpg'),type:'jpeg',quality:85});captures.push({name:'Full Body programs',src:'data:image/jpeg;base64,'+buffer.toString('base64')});
-    await page.locator('[data-action="workout-categories"]').click();assert.equal(await page.locator('[data-workout-category]').count(),12);await page.locator('[data-workout-category="Full Body"]').click();
+    await page.locator('[data-action="workout-categories"]').click();assert.equal(await page.locator('[data-workout-category]:not([data-workout-category=mine])').count(),12);await page.locator('[data-workout-category="Full Body"]').click();
    }
    if(id==='arms-balanced'&&width===390){
     await page.locator('.program-card').first().locator('summary').click();assert.equal(await page.locator('.program-card').first().locator('li').count(),6);

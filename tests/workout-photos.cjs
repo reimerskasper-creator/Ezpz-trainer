@@ -22,7 +22,7 @@ for(const cat of api.workoutCategories){
  const sources=plans.map(w=>api.workoutCover(w).src);assert(new Set(sources).size===plans.length,'Distinct covers within '+cat.id);
  const combinations=plans.filter(w=>w.id!=='full-body').map(w=>w.exercises.map(e=>e.name).sort().join('|'));
  assert(new Set(combinations).size===combinations.length,'Duplicate exercise lists in '+cat.id);
- api.setCategory(null);assert((api.workoutChooser().match(/data-workout-category=/g)||[]).length===12,'Category overview');
+ api.setCategory(null);assert((api.workoutChooser().match(/data-workout-category="(?!mine")/g)||[]).length===12,'Category overview');
  api.setCategory(cat.id);
  for(const plan of plans){
   assert(plan.exercises.filter(e=>!/Warm-up|Cooldown/.test(e.name)).length>=6,'Six main exercises: '+plan.id);
