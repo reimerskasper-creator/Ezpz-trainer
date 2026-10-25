@@ -36,7 +36,7 @@ await page.evaluate(()=>{state.wellnessRecords=state.wellnessRecords.filter(r=>r
 assert((await page.locator('.foundation-steps').innerText()).includes('Today · not logged'));
 await page.locator('.foundation-steps').screenshot({path:path.join(out,'steps-card-empty.jpg'),type:'jpeg',quality:90});
 await page.evaluate(()=>{state=JSON.parse(window.beforeStepVisual);render()});
-await page.locator('.foundation-steps').click();await page.waitForFunction(()=>tab==='progress'&&trendCategory==='steps');await page.locator('[data-go=movement]').click();await page.waitForFunction(()=>tab==='movement');
+if(await page.locator('.foundation-steps').getAttribute('aria-expanded')!=='true')await page.locator('.foundation-steps').click();await page.locator('[data-open-step-trend]').click();await page.waitForFunction(()=>tab==='progress'&&trendCategory==='steps');await page.locator('[data-go=movement]').click();await page.waitForFunction(()=>tab==='movement');
 await page.evaluate(()=>{tab='movement';render()});
 await page.locator('.measurement-source-details > summary').first().click();assert((await page.locator('#screen').innerText()).includes('WHOOP reporting period'));
 assert((await page.locator('.movement-totals').innerText()).includes('Total calories'));
