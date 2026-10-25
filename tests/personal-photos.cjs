@@ -12,3 +12,5 @@ const logCount=api.state.foodLog.length,mealId=api.saveCustomMeal({...food,name:
 const before=JSON.stringify(api.state);api.pending['photo-fail']=jpeg;fail=true;assert.equal(api.logCustomFood({...food,name:'Failed food',photoId:'photo-fail'},1,true),false);assert.equal(JSON.stringify(api.state),before);fail=false;
 assert.equal(api.plannedRecipe('cf-missing'),null);assert.equal(api.setPlannedRecipe(today,'lunch','cf-missing',1),false);
 console.log('PASS personal photo validation/deduplication, stable food/workout refs, custom planned meals/photos/macros, today-only logging, backup roundtrip and failed-write rollback');
+
+const manifest=fs.readFileSync(path.join(__dirname,'../native/android/app/src/main/AndroidManifest.xml'),'utf8');assert(manifest.includes('android.media.action.IMAGE_CAPTURE'));assert(manifest.includes('androidx.core.content.FileProvider'));assert(!manifest.includes('android.permission.CAMERA'));console.log('PASS delegated Android camera visibility and FileProvider without direct camera permission');
