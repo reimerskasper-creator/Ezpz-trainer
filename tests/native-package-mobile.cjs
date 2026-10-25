@@ -30,13 +30,13 @@ for(const width of [320,390,430]){
 await page.setViewportSize({width:390,height:844});
 await page.evaluate(()=>{const today=foodDate(),prior=datePlus(today,-1),r=state.wellnessRecords.find(r=>r.metric==='steps');state.wellnessRecords=state.wellnessRecords.filter(r=>r.metric!=='steps');state.wellnessRecords.push({...r,date:prior});render()});
 assert((await page.locator('.foundation-steps').innerText()).includes('Latest ·'));
-assert((await page.locator('.foundation-steps').innerText()).includes('No count shared for today yet.'));
+assert((await page.locator('.foundation-steps').getAttribute('aria-label')).includes('No count shared for today yet.'));
 await page.locator('.foundation-steps').screenshot({path:path.join(out,'steps-card-latest.jpg'),type:'jpeg',quality:90});
 await page.evaluate(()=>{state.wellnessRecords=state.wellnessRecords.filter(r=>r.metric!=='steps');render()});
 assert((await page.locator('.foundation-steps').innerText()).includes('Today · not logged'));
 await page.locator('.foundation-steps').screenshot({path:path.join(out,'steps-card-empty.jpg'),type:'jpeg',quality:90});
 await page.evaluate(()=>{state=JSON.parse(window.beforeStepVisual);render()});
-await page.locator('.foundation-steps').click();await page.waitForFunction(()=>tab==='movement');
+await page.locator('.foundation-steps').click();await page.waitForFunction(()=>tab==='progress'&&trendCategory==='steps');await page.locator('[data-go=movement]').click();await page.waitForFunction(()=>tab==='movement');
 await page.evaluate(()=>{tab='movement';render()});
 await page.locator('.measurement-source-details > summary').first().click();assert((await page.locator('#screen').innerText()).includes('WHOOP reporting period'));
 assert((await page.locator('.movement-totals').innerText()).includes('Total calories'));

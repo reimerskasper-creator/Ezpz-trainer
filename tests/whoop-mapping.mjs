@@ -27,3 +27,5 @@ assert.equal(mapWorkouts([{...workout,end:new Date(Date.now()+60000).toISOString
 console.log('PASS: completed workout mapping, stable IDs, duration, provider-local date, absent end and invalid offsets.');
 
 }
+
+const richSleep=structuredClone(sleep);richSleep.score.stage_summary.total_awake_time_milli=60*60000;const rich=mapWhoop([],[richSleep],from,through,observed).records[0];assert.equal(rich.lightMinutes,240);assert.equal(rich.awakeMinutes,60);assert.equal(rich.inBedMinutes,480);const missing=structuredClone(richSleep);delete missing.score.stage_summary.total_awake_time_milli;assert.equal(mapWhoop([],[missing],from,through,observed).records[0].awakeMinutes,undefined);richSleep.score.stage_summary.total_awake_time_milli=0;assert.equal(mapWhoop([],[richSleep],from,through,observed).records[0].awakeMinutes,0);console.log('PASS WHOOP Light/Awake/in-bed duration mapping, missing vs true zero and compatible existing totals');

@@ -36,7 +36,10 @@ export function mapWhoop(cycles,sleeps,from,through,observedAt){
   if(!names.every(k=>finite(stages[k],86400000)))continue;
   const sum=names.reduce((n,k)=>n+stages[k],0);if(sum>86400000)continue;
   const total=Math.floor(sum/60000),deep=Math.floor(stages.total_slow_wave_sleep_time_milli/60000),rem=Math.floor(stages.total_rem_sleep_time_milli/60000);
-  put({metric:'sleep',date,source:'whoop',externalId:'whoop-sleep-'+sleep.id,unit:'minutes',value:total,deepMinutes:deep,remMinutes:rem,updatedAt:observedAt},Date.parse(sleep.end));
+  const light=Math.floor(stages.total_light_sleep_time_milli/60000),extras={lightMinutes:light};
+  if(finite(stages.total_awake_time_milli,86400000))extras.awakeMinutes=Math.floor(stages.total_awake_time_milli/60000);
+  if(finite(stages.total_in_bed_time_milli,86400000)){const bed=Math.floor(stages.total_in_bed_time_milli/60000);if(bed>=total&&total+(extras.awakeMinutes||0)<=bed+1)extras.inBedMinutes=bed;}
+  put({metric:'sleep',date,source:'whoop',externalId:'whoop-sleep-'+sleep.id,unit:'minutes',value:total,deepMinutes:deep,remMinutes:rem,...extras,updatedAt:observedAt},Date.parse(sleep.end));
  }
  for(const cycle of cycles){
   const main=mainByCycle.get(String(cycle.id)),start=stamp(cycle.start),end=cycle.end==null?null:stamp(cycle.end);

@@ -266,10 +266,16 @@ class HealthConnectPlugin : Plugin() {
                         val stages = all.flatMap { it.stages }
                         val deep = SleepIntervals.reportedMinutes(stages.filter { it.stage == SleepSessionRecord.STAGE_TYPE_DEEP }.map { interval(it.startTime, it.endTime) })
                         val rem = SleepIntervals.reportedMinutes(stages.filter { it.stage == SleepSessionRecord.STAGE_TYPE_REM }.map { interval(it.startTime, it.endTime) })
-                        if ((deep ?: 0) + (rem ?: 0) <= duration) {
+                        val light = SleepIntervals.reportedMinutes(stages.filter { it.stage == SleepSessionRecord.STAGE_TYPE_LIGHT }.map { interval(it.startTime, it.endTime) })
+                        if ((deep ?: 0) + (rem ?: 0) + (light ?: 0) <= duration) {
                             if (deep != null) row.put("deepMinutes", deep)
                             if (rem != null) row.put("remMinutes", rem)
+                            if (light != null) row.put("lightMinutes", light)
                         }
+                        val bedMinutes = SleepIntervals.minutes(full)
+                        val awakeMinutes = SleepIntervals.reportedMinutes(awake)
+                        if (bedMinutes in duration..1440) row.put("inBedMinutes", bedMinutes)
+                        if (awakeMinutes != null && awakeMinutes in 0..1440) row.put("awakeMinutes", awakeMinutes)
                     }
                 }
                 // Permission loss during the read rejects the whole snapshot. Do not prune old data.
