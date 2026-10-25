@@ -256,7 +256,7 @@ try{
   assert.deepEqual(await page.locator('.home-next .upcoming-row img').evaluateAll(xs=>xs.map(x=>x.getAttribute('src'))),['./workout-images/neutral-push-1.jpg','./workout-images/neutral-pull-2.jpg','./workout-images/neutral-leg-1.jpg']);
   const homeBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   await page.locator('[data-home-schedule="week"]').click();
-  assert.equal(await page.locator('.upcoming-list>button').count(),7);
+  assert.equal(await page.locator('.upcoming-list>button,.upcoming-list>.home-log-row').count(),7);
   assert((await page.locator('.upcoming-list').innerText()).includes('Rest / recovery'));
   await checkLayout('Seven-day schedule');
   await page.locator('[data-home-schedule="next"]').click();
