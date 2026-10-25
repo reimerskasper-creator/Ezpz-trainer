@@ -38,8 +38,8 @@ try{
   await page.locator('.overview-actions [data-go="custom-food"]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'custom-food');
   await page.locator('[data-tab="home"]').click();await page.locator('[data-overview-workout]').click();assert.equal(await page.locator('body').getAttribute('data-view'),'train');
   await page.locator('[data-tab="home"]').click();
-  assert(await page.locator('.header-foundations').isVisible(),'Foundations discoverable in header');
-  assert(await page.locator('.header-foundations').evaluate(el=>{const a=el.getBoundingClientRect(),b=document.querySelector('.header-more').getBoundingClientRect();return a.right<=b.left&&a.width>=44&&a.height>=44}),'Header controls fit without overlap');
+  assert(await page.locator('.overview-foundations').isVisible(),'Foundations discoverable beside overview');
+  assert(await page.locator('.overview-foundations').evaluate(el=>{const a=el.getBoundingClientRect(),b=document.querySelector('[data-home-panel=overview]').getBoundingClientRect();return a.right<=b.left+1&&a.width>=44&&a.height>=44}),'Overview controls fit without overlap');
   const mealPlanBefore=await page.evaluate(()=>JSON.stringify({plan:state.mealPlan,food:state.foodLog}));
   assert.equal(await page.locator('.home-meals .meal-upcoming-row').count(),2);
   assert((await page.locator('.home-meals .meal-upcoming-row').first().innerText()).includes('Lunch'));
