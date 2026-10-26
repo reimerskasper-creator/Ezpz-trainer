@@ -1,0 +1,18 @@
+const fs=require('node:fs'),assert=require('node:assert/strict');
+const source=fs.readFileSync('fitness.html','utf8'),scripts=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');let fail=false;
+const document={body:{dataset:{}},getElementById:id=>id==='screen'?{innerHTML:''}:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+';return {foodDate,datePlus,foodSummary,foodDiary,macroCompletion,cleanImportedNutrition,applyNutritionSnapshot,restoredState,nutritionSourcePanel,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>JSON.stringify({profile:{goal:'maintain',weight:80,height:180,age:35,sex:'male',days:3,level:'Beginner',equipment:'home'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2}),setItem:()=>{if(fail)throw Error('full')}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const date=api.foodDate(),from=api.datePlus(date,-6),stamp=new Date().toISOString(),row={source:'com.cronometer.android.gold',date,macros:[2400,190,230,80],updatedAt:stamp},payload={version:1,from,through:date,records:[row]};
+api.state.foodLog=[{id:'local',name:'Local meal',date,servings:1,macros:[500,20,60,10]}];
+assert.equal(api.applyNutritionSnapshot(payload),1);assert.equal(api.foodSummary().totals[0],500,'imports do not silently change source');
+api.state.nutritionSource=row.source;assert.deepEqual(api.foodSummary().totals,row.macros);assert.equal(api.foodSummary().entries.length,1);assert(api.foodDiary().includes('Cronometer via Health Connect'));assert(!api.foodDiary().includes('data-edit-food="hc-food'));
+api.applyNutritionSnapshot(payload);assert.equal(api.state.importedNutrition.length,1);assert.equal(api.state.foodLog.length,1);
+api.applyNutritionSnapshot({...payload,records:[{...row,macros:[2200,180,210,70]},{...row,source:'com.myfitnesspal.android',macros:[1000,50,100,40]}]});assert.equal(api.foodSummary().totals[0],2200,'never sum apps');
+assert.equal(api.restoredState(JSON.parse(JSON.stringify(api.state))).importedNutrition.length,2);
+api.applyNutritionSnapshot({...payload,records:[{...row,macros:[0,null,0,0]}]});assert.equal(api.foodSummary().totals[0],0);assert.equal(api.foodSummary().missing[1],true);assert(api.foodDiary().includes('—g'));
+const before=JSON.stringify(api.state);
+for(const records of [[{...row,macros:[-1,0,0,0]}],[row,row],[{...row,date:'2999-01-01'}],[{...row,source:'<script>'}],[{...row,macros:[50000,0,0,0,0]}]]){assert.throws(()=>api.applyNutritionSnapshot({...payload,records}));assert.equal(JSON.stringify(api.state),before)}
+fail=true;assert.throws(()=>api.applyNutritionSnapshot({...payload,records:[]}));assert.equal(JSON.stringify(api.state),before);fail=false;
+api.applyNutritionSnapshot({...payload,records:[]});assert.equal(api.foodSummary().entries.length,0);api.state.nutritionSource='local';assert.equal(api.foodSummary().totals[0],500);
+assert(fs.readFileSync('native/android/app/src/main/AndroidManifest.xml','utf8').includes('android.permission.health.READ_NUTRITION'));
+console.log('PASS nutrition source isolation, corrected/deleted snapshots, missing versus zero, backup validation, atomic rollback and local log preservation');

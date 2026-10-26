@@ -27,6 +27,7 @@ jobs:
         run: |
           node tests/wellness.cjs
           node tests/native-health.cjs
+          node tests/nutrition-import.cjs
           node tests/accounts.cjs
           node tests/native-accounts.cjs
           node tests/whoop-auto.cjs

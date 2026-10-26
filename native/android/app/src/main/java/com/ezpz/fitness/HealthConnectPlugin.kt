@@ -285,5 +285,54 @@ class HealthConnectPlugin : Plugin() {
             } catch (e: Exception) { call.reject(if (e is SecurityException) "Health Connect permission was removed. Review access and try again." else e.message ?: "Sync failed. No records were changed.") }
         }
     }
+    /** Nutrition is independent of the WHOOP-only movement reader. Never combine app origins. */
+    private val nutritionPermission get() = HealthPermission.getReadPermission(NutritionRecord::class)
+    @PluginMethod fun requestNutritionPermissions(call: PluginCall) {
+        try {
+            client()
+            val intent = PermissionController.createRequestPermissionResultContract().createIntent(context, setOf(nutritionPermission))
+            startActivityForResult(call, intent, "nutritionPermissionResult")
+        } catch (_: Exception) { call.reject("Health Connect is unavailable. Install or update it in Android settings.") }
+    }
+    @ActivityCallback private fun nutritionPermissionResult(call: PluginCall?, result: ActivityResult) {
+        if (call != null) call.resolve()
+    }
+    @PluginMethod fun syncNutrition(call: PluginCall) {
+        scope.launch {
+            try {
+                val hc = client()
+                check(nutritionPermission in hc.permissionController.getGrantedPermissions()) { "Allow EZPZ nutrition access first." }
+                val now = Instant.now()
+                val zone = ZoneId.systemDefault()
+                val today = now.atZone(zone).toLocalDate()
+                val first = today.minusDays(6)
+                val records = mutableListOf<NutritionRecord>()
+                var token: String? = null
+                do {
+                    val page = hc.readRecords(ReadRecordsRequest(NutritionRecord::class,
+                        TimeRangeFilter.between(first.minusDays(1).atStartOfDay(zone).toInstant(), now), pageSize = 1000, pageToken = token))
+                    records.addAll(page.records)
+                    token = page.pageToken?.takeIf { it.isNotBlank() }
+                    check(records.size <= 20000) { "Too many food records. Saved nutrition was kept." }
+                } while (token != null)
+                val rows = JSArray()
+                // Food belongs to its recorded local start date. No splitting across midnight.
+                val groups = records.filter { it.startTime <= now }.groupBy {
+                    it.metadata.dataOrigin.packageName to it.startTime.atOffset(it.startZoneOffset ?: zone.rules.getOffset(it.startTime)).toLocalDate()
+                }
+                for ((key, group) in groups) {
+                    val (source, day) = key
+                    if (day < first || day > today) continue
+                    fun total(values: List<Double?>): Any = if (values.any { it == null }) org.json.JSONObject.NULL else values.sumOf { it!! }
+                    val macros = JSArray().put(total(group.map { it.energy?.inKilocalories }))
+                        .put(total(group.map { it.protein?.inGrams })).put(total(group.map { it.totalCarbohydrate?.inGrams }))
+                        .put(total(group.map { it.totalFat?.inGrams }))
+                    rows.put(JSObject().put("source", source).put("date", day.toString()).put("macros", macros).put("updatedAt", now.toString()))
+                }
+                check(nutritionPermission in hc.permissionController.getGrantedPermissions()) { "Nutrition access changed. Saved nutrition was kept." }
+                call.resolve(JSObject().put("version", 1).put("from", first.toString()).put("through", today.toString()).put("records", rows))
+            } catch (e: Exception) { call.reject(if (e is SecurityException) "Review EZPZ nutrition permission and try again." else e.message ?: "Nutrition sync failed. Saved nutrition was kept.") }
+        }
+    }
     override fun handleOnDestroy() { scope.cancel(); super.handleOnDestroy() }
 }
