@@ -45,7 +45,7 @@ assert(!(await page.locator('#screen').innerText()).includes('2,608'));
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 await page.screenshot({path:path.join(out,'native-step-period.jpg'),type:'jpeg',quality:85,fullPage:true});
 await page.evaluate(()=>{tab='connected-apps';render()});
-assert((await page.locator('.native-health-card').innerText()).includes('Imports saved'));
+assert((await page.locator('.native-health-card').filter({has:page.locator('[data-native-health="sync"]')}).innerText()).includes('Imports saved'));
 assert.equal(await page.locator('.connection-heading').count(),0);
 await page.evaluate(()=>{window.testStepReport={date:foodDate(),total:8061,text:'EZPZ step check v2\nSource filter: com.whoop.android only\nHealth Connect local-day steps: 7478\nWHOOP reporting-period steps: 8061'};window.beforeStepCheck=JSON.stringify(state)});
 await page.locator('.native-health-details > summary').click();await page.locator('.native-health-details > details > summary').first().click();await page.locator('[data-native-health="check-steps"]').click();await page.waitForFunction(()=>!document.getElementById('native-step-report').hidden);
