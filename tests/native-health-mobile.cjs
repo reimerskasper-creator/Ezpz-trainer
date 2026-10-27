@@ -8,7 +8,7 @@ const key='ezpz-fitness-pilot-1',fixture={profile:{goal:'maintain',level:'Beginn
  window.Capacitor={isNativePlatform:()=>true,isPluginAvailable:()=>true,registerPlugin:()=>bridge};
 },{key,fixture});await page.goto('http://127.0.0.1:'+server.address().port+'/fitness.html');
 await page.evaluate(()=>{tab='connected-apps';render()});
-await page.locator('.native-health-details > summary').click();
+await page.locator('[data-connection-settings=tracker-settings]').click();await page.locator('.native-health-details > summary').click();
 await page.locator('[data-native-health="permissions"]').click();await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('No EZPZ access'));
 await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>document.getElementById('native-health-status').textContent.includes('Tap Allow'));assert.equal(await page.evaluate(()=>window.testRead),0);
 await page.evaluate(()=>{window.testAllowed=['steps'];const date=foodDate();window.testPayload={version:1,from:date,through:date,metrics:['steps'],records:[{metric:'steps',value:4200,date,source:'whoop-health-connect',externalId:'native-test-'+date,unit:'count',updatedAt:new Date().toISOString()}]}});
@@ -16,7 +16,7 @@ await page.locator('[data-native-health="sync"]').click();await page.waitForFunc
 assert.equal(await page.evaluate(()=>selectedWellnessRecord('steps',foodDate()).value),4200);
 await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>!nativeHealthBusy);assert((await page.locator('#native-health-status').innerText()).includes('No new records'));assert.equal(await page.evaluate(()=>state.wellnessRecords.length),1);
 for(const source of ['samsung','fitbit','garmin','oura','polar','amazfit','xiaomi','withings'].map(s=>s+'-health-connect')){
- await page.selectOption('#native-tracker-source',source);
+ await page.locator('[data-open-tracker]').click();await page.locator('input[name=activity-tracker][value="'+source+'"]').check();await page.locator('[data-tracker-use]').click();
  await page.evaluate(source=>{const date=foodDate(),stamp=new Date().toISOString();window.testAllowed=['steps','sleep','activeCalories','totalCalories','workouts'];window.testPayload={version:1,source,from:date,through:date,metrics:window.testAllowed,records:[{metric:'steps',value:12000,date,source,externalId:'steps-'+date,unit:'count',updatedAt:stamp},{metric:'sleep',value:450,date,source,externalId:'sleep-'+date,unit:'minutes',updatedAt:stamp},{metric:'activeCalories',value:400,date,source,externalId:'active-'+date,unit:'kcal',updatedAt:stamp},{metric:'totalCalories',value:2200,date,source,externalId:'total-'+date,unit:'kcal',updatedAt:stamp}],workouts:[{source,externalId:'run-'+date,date,start:date+'T00:00:00Z',end:date+'T00:30:00Z',durationMinutes:30,title:'Morning run',updatedAt:stamp}]}},source);
  await page.locator('[data-native-health="sync"]').click();await page.waitForFunction(()=>!nativeHealthBusy);
  assert.equal(await page.evaluate(()=>window.testSource),source);
@@ -30,9 +30,9 @@ for(const source of ['samsung','fitbit','garmin','oura','polar','amazfit','xiaom
  const metrics=await page.locator('.foundation-map .ring-metric').allTextContents();assert.equal(metrics[1],'7h 30m');assert.equal(metrics[2],'1 workout');assert.equal(metrics[4],'12,000');
  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
  await page.evaluate(()=>{tab='connected-apps';render()});
- if(source==='withings-health-connect'){await page.locator('.native-health-details > summary').click();assert((await page.locator('#native-tracker-help').innerText()).includes('Withings+'));}
+ if(source==='withings-health-connect'){await page.locator('[data-connection-settings=tracker-settings]').click();await page.locator('.native-health-details > summary').click();assert((await page.locator('#native-tracker-help').innerText()).includes('Withings+'));}
 
 }
-await page.reload();await page.evaluate(()=>{tab='connected-apps';render()});assert.equal(await page.locator('#native-tracker-source').inputValue(),'withings-health-connect');
+await page.reload();await page.evaluate(()=>{tab='connected-apps';render()});assert.equal(await page.locator('#connection-tracker-title').innerText(),'Withings');
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.deepEqual(errors,[]);if(width===390)await page.screenshot({path:path.join(out,'native-health-connected.jpg'),type:'jpeg',quality:85});await context.close()}
 console.log('PASS: native permission denial, read gating, nine tracker imports and Home rings, tracker persistence, workout completion, repeated sync and responsive controls at 320/390/430px');}finally{await browser.close();await new Promise(r=>server.close(r))}})().catch(e=>{console.error(e);process.exitCode=1});

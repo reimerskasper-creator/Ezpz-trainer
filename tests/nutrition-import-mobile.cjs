@@ -11,7 +11,7 @@ const key='ezpz-fitness-pilot-1',fixture={profile:{goal:'maintain',level:'Beginn
 },{key,fixture});await page.goto('http://127.0.0.1:'+server.address().port+'/fitness.html');
 await page.evaluate(()=>{tab='connected-apps';render()});
 // One action requests permission, reads nutrition and chooses the sole shared app.
-await page.locator('.nutrition-import-card > [data-nutrition-import="connect"]').click();await page.waitForFunction(()=>nutritionSource()==='com.cronometer.android.gold');assert.equal(await page.evaluate(()=>window.testPermissions),1);
+await page.locator('.nutrition-import-card > .connection-actions [data-nutrition-import="connect"]').click();await page.waitForFunction(()=>nutritionSource()==='com.cronometer.android.gold');assert.equal(await page.evaluate(()=>window.testPermissions),1);
 await page.evaluate(()=>{tab='eat';render()});assert.equal(await page.evaluate(()=>foodSummary().totals[0]),72);
 // Reproduce the owner's flow: select a built-in recipe and press its actual Log button.
 const kcal=await page.evaluate(()=>nutrition(recipes[0].ingredients)[0]);await page.locator('[data-open-meal="0"]').first().click();await page.locator('[data-log-food="0"]').click();await page.evaluate(()=>{tab='eat';render()});

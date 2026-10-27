@@ -15,7 +15,7 @@ const app=root.EzpzAccountAdapter;if(!app)return;
 const cap=root.Capacitor,native=!!(cap?.isNativePlatform?.()&&cap?.isPluginAvailable?.('EzpzAccount')),nativeAccount=native?cap.registerPlugin('EzpzAccount'):null;
 let whoopConnected=false,whoopWorkoutAccess=null,whoopMessage='Connect separately to authorize access to your WHOOP data.',callbackBusy=false;
 const whoopPanel=()=>'<p>'+esc(whoopMessage)+'</p><button data-go="connected-apps">Manage connected apps →</button>';
-root.EzpzWhoopAccount={lastSync:()=>{try{return user?.id?localStorage.getItem('ezpz-whoop-last-sync-'+user.id):null}catch{return null}},open:()=>{app.open();panel();const box=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(box)box.open=true;}};
+root.EzpzWhoopAccount={connection:()=>({signedIn:!!user,connected:whoopConnected,workouts:whoopWorkoutAccess}),lastSync:()=>{try{return user?.id?localStorage.getItem('ezpz-whoop-last-sync-'+user.id):null}catch{return null}},open:()=>{app.open();panel();const box=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(box)box.open=true;}};
 
 let client=null,user=null,config=null,busy=false,message='Sign-in is optional. Your records stay on this device until you choose to save them.',remote=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -31,6 +31,7 @@ function paintWhoopConnection(){
  const out=document.getElementById('whoop-connection-status');
  if(out)out.textContent=!user?'Sign in to connect your wearable.':!whoopConnected?'Not connected yet.':whoopWorkoutAccess===true?'Connected · Steps, sleep, calories and workouts.':whoopWorkoutAccess===false?'Connected · Workout access needs updating.':'Connected · Checking workout access.';
  for(const button of document.querySelectorAll?.('[data-whoop-upgrade]')||[]){button.hidden=whoopConnected&&whoopWorkoutAccess===true;button.disabled=busy;button.textContent=whoopConnected?'Enable workout access':'Connect WHOOP';}
+ root.EzpzConnections?.paintWhoop?.();
 }
 
 function whoopStatus(text){whoopMessage=text;panel();const out=document.getElementById('whoop-sync-status');if(out)out.textContent=text;paintWhoopConnection();}
