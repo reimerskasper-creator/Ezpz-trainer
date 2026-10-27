@@ -982,3 +982,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ### Minor corrections — Android build delivery
 - Runtime f9e66a526b0b40bf7f53b3b4b762da0c40b88845, Android 1.0.42/versionCode 43. Android build/test 40571986862 succeeded, including packaged startup and native checks. Artifact 12766190648: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/40571986862/artifacts/12766190648 (ZIP SHA256 1dd93cbcd1eb171c0261c2307d07481833a43f1f33baaa84cda12204675bbce3). Full mobile regression 40571986855 was still running at handoff; do not claim full success until checked. Deliver artifact in Chrome, extract APK and install as Update over existing app. No duplicate build triggered. Library APK not replaced in this continuation.
+
+
+## Approved four nutrition chips — 27 October 2026
+- Final approved sketch: Calories (gold flame), Protein (mint amino chain), Carbs (gold wheat), Fat (blue oil drop). Four equally spaced translucent forest chips, matching activity row. At narrow 320px width symbols stack above labels as on activity chips to preserve readability. No data/connection behavior change.
+- Android 1.0.43/versionCode 44 prepared locally. Owner explicitly authorized GitHub publication and Android build. Hosted build/checks pending; do not claim shipped.
