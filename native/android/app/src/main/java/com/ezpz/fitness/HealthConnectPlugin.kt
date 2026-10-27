@@ -188,12 +188,7 @@ class HealthConnectPlugin : Plugin() {
             try {
                 val hc = client()
                 val source = call.getString("source") ?: "whoop-health-connect"
-                val packageName = when (source) {
-                    "whoop-health-connect" -> "com.whoop.android"
-                    "samsung-health-connect" -> "com.sec.android.app.shealth"
-                    "fitbit-health-connect" -> "com.fitbit.FitbitMobile"
-                    else -> error("Choose WHOOP, Samsung Health or Fitbit.")
-                }
+                val packageName = WearableSources.packageName(source)
                 val origin = setOf(DataOrigin(packageName))
                 val granted = hc.permissionController.getGrantedPermissions()
                 val metrics = permissionMetrics.filterKeys { it in granted }.values.toSet()

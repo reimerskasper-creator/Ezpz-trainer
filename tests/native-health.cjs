@@ -1,7 +1,7 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const scripts=[...fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),screen={innerHTML:''};let fail=false,writes=0,stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2});
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {nativeHealthImportStatus,chooseNativeTracker,cleanWellnessSettings,activeImportedWorkouts,dailyTrainingSummary,setImportedWorkoutHidden,sameWellnessMeasurement,movementMini,sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {nativeWearableSources,nativeTrackerHelp,trendData,stepCompletion,foodSummary,nativeHealthImportStatus,chooseNativeTracker,cleanWellnessSettings,activeImportedWorkouts,dailyTrainingSummary,setImportedWorkoutHidden,sameWellnessMeasurement,movementMini,sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 const date=api.foodDate(),stamp=new Date().toISOString();
 const sample={metric:'steps',value:100,date,source:'whoop-health-connect',externalId:'same-day',unit:'count',updatedAt:stamp};
 assert(api.sameWellnessMeasurement(sample,{...sample,updatedAt:new Date(Date.parse(stamp)+60000).toISOString(),syncedAt:stamp}));
@@ -78,6 +78,32 @@ for(const bad of [{...multi(fitbit,4),source:'other'},multi(fitbit,4,[workout(sa
 // Direct WHOOP and its HC copy use one source per date, never double-count.
 api.state.importedWorkouts=[workout('whoop','direct'),workout('whoop-health-connect','hc')];api.chooseNativeTracker('whoop-health-connect');assert.equal(api.activeImportedWorkouts().length,1);assert.equal(api.activeImportedWorkouts()[0].source,'whoop');
 api.state.wellnessRecords=[];api.state.importedWorkouts=[workout(fitbit)];assert(api.nativeHealthImportStatus().includes('Imports saved'));
+// Six more trackers use the same rings/trends, keeping brands isolated and food untouched.
+const addedSources=['garmin','oura','polar','amazfit','xiaomi','withings'].map(s=>s+'-health-connect');
+const nativeSources=fs.readFileSync(path.join(__dirname,'../native/android/app/src/main/java/com/ezpz/fitness/WearableSources.kt'),'utf8');
+const sourcePairs=[...nativeSources.matchAll(/"([a-z-]+-health-connect)" to "([A-Za-z0-9.]+)"/g)];
+assert.deepEqual(sourcePairs.map(m=>m[1]),api.nativeWearableSources,'native/UI allowlists must agree');
+assert.equal(new Set(sourcePairs.map(m=>m[2])).size,9);
+api.state.wellnessRecords=[];api.state.importedWorkouts=[];api.state.wellnessChoices={};api.state.sleepLog={};
+const foodBefore=JSON.stringify(api.foodSummary(date)),zoneBefore=JSON.stringify(api.state.zoneLog);
+for(const [i,source] of addedSources.entries()){
+ assert(api.chooseNativeTracker(source));
+ const rec=(metric,value,day=date)=>({...row(metric,value),metric,source,date:day,unit:{steps:'count',sleep:'minutes',activeCalories:'kcal',totalCalories:'kcal'}[metric],externalId:metric+'-'+day,updatedAt:new Date(Date.parse(stamp)+ ++sequence).toISOString()});
+ const records=[rec('steps',12000+i),rec('sleep',450+i),rec('activeCalories',400+i),rec('totalCalories',2200+i),rec('steps',8000+i,yesterday)];
+ const payload={version:1,source,from:yesterday,through:date,metrics:['steps','sleep','activeCalories','totalCalories','workouts'],records,workouts:[workout(source)]};
+ api.applyNativeHealthSnapshot(payload);api.applyNativeHealthSnapshot(payload);
+ assert.equal(api.selectedWellnessRecord('steps',date).value,12000+i);assert.equal(api.stepCompletion(date),100);
+ assert.equal(api.effectiveSleepLog()[date],450+i);assert.equal(api.selectedWellnessRecord('activeCalories',date).value,400+i);
+ assert.equal(api.selectedWellnessRecord('totalCalories',date).value,2200+i);
+ assert.equal(api.activeImportedWorkouts().length,1);assert.equal(api.activeImportedWorkouts()[0].source,source);assert.equal(api.dailyTrainingSummary().percent,100);
+ assert.equal(api.trendData('steps','week',0,date).value,8000+i,'completed-date chart follows tracker');
+ const restored=api.restoredState(JSON.parse(JSON.stringify(api.state)));assert.equal(restored.wellnessSettings.trackerSource,source);assert(restored.importedWorkouts.some(r=>r.source===source));
+ assert.equal(JSON.stringify(api.foodSummary(date)),foodBefore);assert.equal(JSON.stringify(api.state.zoneLog),zoneBefore);
+ const corrected=rec('steps',0);api.applyNativeHealthSnapshot({...payload,metrics:['steps'],records:[corrected],from:date});assert.equal(api.selectedWellnessRecord('steps',date).value,0);
+ api.applyNativeHealthSnapshot({...payload,metrics:['steps'],records:[],from:date});assert(!api.state.wellnessRecords.some(r=>r.source===source&&r.metric==='steps'&&r.date===date));assert(api.state.importedWorkouts.some(r=>r.source===source));
+ const unchanged=JSON.stringify(api.state);assert.throws(()=>api.applyNativeHealthSnapshot({...payload,records:[{...rec('steps',123),source:'fitbit-health-connect'}]}));assert.equal(JSON.stringify(api.state),unchanged);
+}
+assert(api.nativeTrackerHelp('withings-health-connect').includes('Withings+'));assert(api.nativeTrackerHelp('oura-health-connect').includes('membership'));assert(api.nativeTrackerHelp('garmin-health-connect').includes('Android 14'));
 before=JSON.stringify(api.state);
 fail=true;assert.throws(()=>api.applyNativeHealthSnapshot(snapshot([],['activeCalories'])));assert.equal(JSON.stringify(api.state),before);
-console.log('PASS: WHOOP/Samsung/Fitbit source isolation, tracker/backup persistence, workout completion and deduplication, deletions, exclusions, atomic validation and storage rollback.');
+console.log('PASS: Nine-tracker source/ring/trend integration, native/UI origin agreement, source isolation, tracker/backup persistence, workout completion and deduplication, deletions, exclusions, atomic validation and storage rollback.');
