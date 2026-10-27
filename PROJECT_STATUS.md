@@ -987,3 +987,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Approved four nutrition chips — 27 October 2026
 - Final approved sketch: Calories (gold flame), Protein (mint amino chain), Carbs (gold wheat), Fat (blue oil drop). Four equally spaced translucent forest chips, matching activity row. At narrow 320px width symbols stack above labels as on activity chips to preserve readability. No data/connection behavior change.
 - Android 1.0.43/versionCode 44 prepared locally. Owner explicitly authorized GitHub publication and Android build. Hosted build/checks pending; do not claim shipped.
+
+### Four-chip Android delivery
+- Runtime cd0a10459427d0d6c7b45c6cb422880c88cf25fa, Android 1.0.43/versionCode 44. Android build/test 40580264195 succeeded, including packaged startup. Local nutrition import, home-panel and inline JS syntax checks passed. Full mobile regression 40580264423 remains in progress at delivery; verify before claiming success.
+- Artifact 12770145379: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/40580264195/artifacts/12770145379 . ZIP SHA256 76aa841620b039f5fc19a94e7a7efb4ecc99e94c1d18a3faf8fd576a7ea67d05. Install as Update over existing app. Canonical Library APK was not replaced in this continuation.
