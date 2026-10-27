@@ -65,23 +65,23 @@ await page.keyboard.press('Escape');
 await page.evaluate(()=>{const date=foodDate();applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['sleep'],records:[{metric:'sleep',value:411,date,source:'whoop-health-connect',externalId:'generic-sleep-'+date,unit:'minutes',updatedAt:new Date().toISOString()}]});tab='sleep';render()});
 assert.equal(await page.locator('.sleep-stage-detail').count(),0);assert.equal(await page.locator('#wellness-source-sleep').count(),1);assert.equal(await page.evaluate(()=>selectedWellnessRecord('sleep',foodDate()).value),411);
 await page.screenshot({path:path.join(out,'native-package-startup.jpg'),type:'jpeg',quality:85});
-await page.evaluate(()=>{tab='more';render();window.beforeBackup=JSON.stringify(state);window.testBackupMode='cancel'});
-await page.locator('.readiness-panel [data-action="export"]').click();await page.waitForFunction(()=>document.getElementById('backup-status').textContent.includes('cancelled'));
+await page.evaluate(()=>{tab='more';render();window.beforeBackup=JSON.stringify(state);window.testBackupMode='cancel'});await page.locator('[data-open-backups]').click();
+await page.locator('.data-tools [data-action="export"]').click();await page.waitForFunction(()=>document.getElementById('backup-status').textContent.includes('cancelled'));
 assert.equal(await page.evaluate(()=>readDeviceSafety().lastExportVerifiedAt),undefined);
 for(const mode of ['failure','unverified']){
- await page.evaluate(mode=>window.testBackupMode=mode,mode);await page.locator('.readiness-panel [data-action="export"]').click();
+ await page.evaluate(mode=>window.testBackupMode=mode,mode);await page.locator('.data-tools [data-action="export"]').click();
  await page.waitForFunction(()=>!backupExportBusy);assert.equal(await page.evaluate(()=>readDeviceSafety().lastExportVerifiedAt),undefined);
  assert(!(await page.locator('#backup-status').innerText()).includes('saved and verified:'));
 }
-await page.evaluate(()=>{window.testBackupMode='pending'});await page.locator('.readiness-panel [data-action="export"]').click();
-assert.equal(await page.locator('.readiness-panel [data-action="export"]').isDisabled(),true);
+await page.evaluate(()=>{window.testBackupMode='pending'});await page.locator('.data-tools [data-action="export"]').click();
+assert.equal(await page.locator('.data-tools [data-action="export"]').isDisabled(),true);
 assert.equal(await page.evaluate(()=>readDeviceSafety().lastExportVerifiedAt),undefined);
 await page.evaluate(()=>{const call=window.testPendingBackup;window.Capacitor.fromNative({callbackId:call.callbackId,success:true,data:{saved:true,verified:true,bytes:new TextEncoder().encode(call.options.json).length,fileName:'ezpz-fitness-backup.json'}})});
 await page.waitForFunction(()=>document.getElementById('backup-status').textContent.includes('Backup saved and verified:'));
 assert.equal(await page.evaluate(()=>JSON.stringify(state)===window.beforeBackup),true);
 assert.equal(await page.evaluate(()=>JSON.stringify(JSON.parse(window.testExportJson))===JSON.stringify(state)),true);
 assert(await page.evaluate(()=>Number.isFinite(Date.parse(readDeviceSafety().lastExportVerifiedAt))));
-await page.locator('.readiness-panel').first().scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'native-backup-save.jpg'),type:'jpeg',quality:85});
+await page.locator('.data-tools').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(out,'native-backup-save.jpg'),type:'jpeg',quality:85});
 // Restore the exported bytes in this isolated browser; no real phone data is erased.
 const exported=await page.evaluate(()=>window.testExportJson);
 await page.evaluate(()=>{const el=document.getElementById('restore-file');for(let parent=el.parentElement;parent;parent=parent.parentElement)if(parent.tagName==='DETAILS')parent.open=true;window.beforeRestoreWellness=JSON.stringify(cleanWellnessRecords(state.wellnessRecords))});
