@@ -18,7 +18,7 @@ const before=JSON.stringify(api.state),d=api.progressData(now);assert(d.logs.len
 api.progress();assert((screen.innerHTML.match(/class="history-session"/g)||[]).length===12,'Initial history page');
 for(const fn of listeners.click||[])fn({target:{closest:s=>s==='[data-action]'?{dataset:{action:'more-history'}}:null}});
 assert((screen.innerHTML.match(/class="history-session"/g)||[]).length===24,'More workout history');
-api.more();assert(screen.innerHTML.includes('data-go="library"')&&screen.innerHTML.includes('data-go="shopping"')&&screen.innerHTML.includes('id="data-tools"'),'More destinations');
+api.more();assert(!screen.innerHTML.includes('data-go="library"')&&screen.innerHTML.includes('data-go="shopping"')&&screen.innerHTML.includes('id="data-tools"'),'More destinations');
 for(const dest of ['shopping','library']){api.setTab(dest);api.render();assert(nav.find(x=>x.dataset.tab==='more')['aria-current']==='page','More selected for '+dest)}
 assert(JSON.stringify(api.state)===before,'Browsing mutated saved data');
 const backup={...base,shopping:['Tomatoes (raw) — 100 g'],checkedShopping:{'Tomatoes (raw)':true},foodLog:[{id:'meal-1',date:'2026-10-20',name:'Chicken rice bowl',servings:1.5,macros:[933,83,93,26]}],mealPlan:{'2026-10-20':{breakfast:0,breakfastPortion:1,lunch:1,lunchPortion:1.5,dinner:48,dinnerPortion:2}},mealPlanOffset:2,draft:{variant:'A',equipment:'home','sr0-0':'10','sd0-0':true},selectedWorkout:'pull-a',workoutDrafts:{'pull-a':{'sr0-0':'8','sw0-0':'15','sd0-0':true}},workoutLayoutVersion:2};
