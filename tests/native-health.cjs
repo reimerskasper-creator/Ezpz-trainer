@@ -1,7 +1,7 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const scripts=[...fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),screen={innerHTML:''};let fail=false,writes=0,stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2});
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {sameWellnessMeasurement,movementMini,sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {chooseNativeTracker,cleanWellnessSettings,activeImportedWorkouts,dailyTrainingSummary,setImportedWorkoutHidden,sameWellnessMeasurement,movementMini,sleepImportDetails,applyNativeHealthSnapshot,nativeHealthPanel,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 const date=api.foodDate(),stamp=new Date().toISOString();
 const sample={metric:'steps',value:100,date,source:'whoop-health-connect',externalId:'same-day',unit:'count',updatedAt:stamp};
 assert(api.sameWellnessMeasurement(sample,{...sample,updatedAt:new Date(Date.parse(stamp)+60000).toISOString(),syncedAt:stamp}));
@@ -51,5 +51,32 @@ let before=JSON.stringify(api.state);
 for(const invalid of [snapshot([row('steps',-1)]),snapshot([{...row('steps',200),source:'manual'}]),snapshot([row('steps',200)],['sleep']),{...snapshot([]),metrics:[]},{...snapshot([]),through:'2999-01-01'}]){
  assert.throws(()=>api.applyNativeHealthSnapshot(invalid));assert.equal(JSON.stringify(api.state),before);
 }
+// Fitbit/Samsung snapshots reconcile only their own source, including completed workouts.
+const samsung='samsung-health-connect',fitbit='fitbit-health-connect';
+const workout=(source,id='w1')=>({source,externalId:id,date,start:date+'T00:00:00Z',end:date+'T00:30:00Z',durationMinutes:30,title:'Morning run',updatedAt:stamp});
+let sequence=0;
+const multi=(source,value,workouts=[workout(source)])=>({...snapshot([{...row('steps',value),source,updatedAt:new Date(Date.parse(stamp)+ ++sequence).toISOString()}],['steps','workouts']),source,workouts});
+assert(api.chooseNativeTracker(samsung));
+api.applyNativeHealthSnapshot(multi(samsung,12000));
+assert.equal(api.activeImportedWorkouts().length,1);assert.equal(api.dailyTrainingSummary().percent,100);
+assert(api.state.wellnessRecords.some(r=>r.source==='whoop-health-connect'));
+api.applyNativeHealthSnapshot(multi(fitbit,9000));
+assert.equal(api.activeImportedWorkouts().length,1);assert.equal(api.activeImportedWorkouts()[0].source,samsung);
+assert(api.chooseNativeTracker(fitbit));assert.equal(api.activeImportedWorkouts()[0].source,fitbit);
+assert.equal(api.selectedWellnessRecord('steps',date).value,100,'manual wins');
+assert(api.saveManualMovement(date,{steps:'',activeCalories:'1',totalCalories:'',stepGoal:'10000'}));
+assert.equal(api.cleanWellnessSettings(api.state.wellnessSettings).trackerSource,fitbit,'changing step goal retains tracker');
+assert(api.chooseWellnessSource('steps',date,fitbit));assert.equal(api.selectedWellnessRecord('steps',date).value,9000);
+assert(api.setImportedWorkoutHidden(fitbit+'|w1',true));
+api.applyNativeHealthSnapshot(multi(fitbit,9500));assert(!api.activeImportedWorkouts().some(r=>r.source===fitbit));
+assert(api.setImportedWorkoutHidden(fitbit+'|w1',false));
+api.applyNativeHealthSnapshot(multi(samsung,11000,[]));assert(api.state.importedWorkouts.some(r=>r.source===fitbit));
+api.applyNativeHealthSnapshot(multi(fitbit,9500));assert.equal(api.state.importedWorkouts.filter(r=>r.source===fitbit).length,1);
+const restore=api.restoredState(JSON.parse(JSON.stringify(api.state)));assert.equal(restore.wellnessSettings.trackerSource,fitbit);assert.equal(restore.importedWorkouts.length,1);
+const stable=JSON.stringify(api.state);
+for(const bad of [{...multi(fitbit,4),source:'other'},multi(fitbit,4,[workout(samsung)]),multi(fitbit,4,[workout(fitbit),workout(fitbit)]),{...multi(fitbit,4),workouts:undefined}]){assert.throws(()=>api.applyNativeHealthSnapshot(bad));assert.equal(JSON.stringify(api.state),stable)}
+// Direct WHOOP and its HC copy use one source per date, never double-count.
+api.state.importedWorkouts=[workout('whoop','direct'),workout('whoop-health-connect','hc')];api.chooseNativeTracker('whoop-health-connect');assert.equal(api.activeImportedWorkouts().length,1);assert.equal(api.activeImportedWorkouts()[0].source,'whoop');
+before=JSON.stringify(api.state);
 fail=true;assert.throws(()=>api.applyNativeHealthSnapshot(snapshot([],['activeCalories'])));assert.equal(JSON.stringify(api.state),before);
-console.log('PASS: native snapshots preserve manual entries, reconcile deletions only for granted metrics, reject invalid batches atomically and roll back failed storage.');
+console.log('PASS: WHOOP/Samsung/Fitbit source isolation, tracker/backup persistence, workout completion and deduplication, deletions, exclusions, atomic validation and storage rollback.');

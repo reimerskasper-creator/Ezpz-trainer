@@ -19,16 +19,16 @@ GitHub's **Android Health Connect test** workflow builds the APK on the developm
 
 1. Keep the existing browser app and a downloaded backup.
 2. Install the APK, restore the backup, and verify workouts, foods and preferences.
-3. More → Connected apps → Allow EZPZ access. WHOOP's permission is separate from EZPZ's permission.
-4. Choose Sync now. Check imported counts and values against Health Connect and WHOOP.
+3. Enable Health Connect sharing in WHOOP, Samsung Health or Fitbit. In EZPZ: More → Connected apps → choose Your activity tracker → Details & permissions → Allow EZPZ access. Include Workouts for completed training imports.
+4. Choose Sync now. Check imported counts and values against Health Connect and the selected tracker.
 5. Sync twice, revoke individual permissions, cancel consent, and retry offline. Existing manual records must stay intact.
 6. Verify backup export and restore on the phone before relying on the native app. Cloud login and native download handling are release blockers.
 
 ## Data contract
 
-The reader imports only records with Android data origin `com.whoop.android`. Cronometer is not read. Every successful sync is an authoritative snapshot of permitted types for the last seven local calendar days. It removes deleted WHOOP imports inside that window, preserves other sources/manual records, and does not upload data. Missing metrics remain missing, never fabricated zeros. Read grants are checked before and after each sync. There is no background job or history permission. Stages are optional wearable estimates.
+The activity reader imports one explicitly selected origin: WHOOP `com.whoop.android`, Samsung Health `com.sec.android.app.shealth`, or Fitbit `com.fitbit.FitbitMobile`. Nutrition is separate and supports sources such as Cronometer. Every successful sync is an authoritative snapshot of permitted types for the last seven local calendar days. It removes deleted imports from the selected source inside that window, preserves other sources/manual records, and does not upload data. Missing metrics remain missing, never fabricated zeros. Read grants are checked before and after each sync. There is no background job or history permission. Stages are optional wearable estimates.
 
-Active calories use Health Connect aggregation filtered to WHOOP; total calories require complete raw coverage (below). Steps use the rule below. Active and total energy are separate. Sleep is grouped by wake date using each record's end offset (current timezone fallback), unioned to avoid overlapping/duplicate sessions, and awake/out-of-bed intervals are subtracted. Unknown gaps count as session duration; this may differ from WHOOP's displayed sleep calculation. Stages are included only when available and internally consistent. No WHOOP recovery/strain/HRV or food macros are imported.
+Steps and active calories use Health Connect aggregation filtered to the selected origin; WHOOP retains its reporting-period step handling. total calories require complete raw coverage (below). Steps use the rule below. Active and total energy are separate. Sleep is grouped by wake date using each record's end offset (current timezone fallback), unioned to avoid overlapping/duplicate sessions, and awake/out-of-bed intervals are subtracted. Unknown gaps count as session duration; this may differ from WHOOP's displayed sleep calculation. Stages are included only when available and internally consistent. No recovery/strain/HRV or routes are read by the activity reader. Exercise sessions use their recorded local start date, stable Health Connect ID and end time; unfinished sessions are ignored. Imported workouts use one external source per date, preferring the selected tracker and direct WHOOP over its Health Connect copy. Local workouts remain independently editable. Source preferences survive backup/restore and step-goal changes.
 
 Remaining release work: real-device consent/read/export/restore verification, native Google login, stable signing, privacy policy review and Play health-data declarations. Do not describe this as working on a phone until the APK and permissions are verified there.
 

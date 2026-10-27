@@ -16,7 +16,7 @@ import com.getcapacitor.annotation.ActivityCallback
 import kotlinx.coroutines.*
 import java.time.*
 
-/** Explicit, read-only WHOOP snapshots. No worker, token, health upload or cross-source sum. */
+/** Explicit, read-only, single-origin snapshots. No worker or cross-source sum. */
 @CapacitorPlugin(name = "EzpzHealthConnect")
 class HealthConnectPlugin : Plugin() {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
@@ -25,7 +25,8 @@ class HealthConnectPlugin : Plugin() {
         HealthPermission.getReadPermission(StepsRecord::class) to "steps",
         HealthPermission.getReadPermission(SleepSessionRecord::class) to "sleep",
         HealthPermission.getReadPermission(ActiveCaloriesBurnedRecord::class) to "activeCalories",
-        HealthPermission.getReadPermission(TotalCaloriesBurnedRecord::class) to "totalCalories"
+        HealthPermission.getReadPermission(TotalCaloriesBurnedRecord::class) to "totalCalories",
+        HealthPermission.getReadPermission(ExerciseSessionRecord::class) to "workouts"
     )
     private fun client(): HealthConnectClient {
         check(HealthConnectClient.getSdkStatus(context) == HealthConnectClient.SDK_AVAILABLE) {
@@ -186,6 +187,14 @@ class HealthConnectPlugin : Plugin() {
         scope.launch {
             try {
                 val hc = client()
+                val source = call.getString("source") ?: "whoop-health-connect"
+                val packageName = when (source) {
+                    "whoop-health-connect" -> "com.whoop.android"
+                    "samsung-health-connect" -> "com.sec.android.app.shealth"
+                    "fitbit-health-connect" -> "com.fitbit.FitbitMobile"
+                    else -> error("Choose WHOOP, Samsung Health or Fitbit.")
+                }
+                val origin = setOf(DataOrigin(packageName))
                 val granted = hc.permissionController.getGrantedPermissions()
                 val metrics = permissionMetrics.filterKeys { it in granted }.values.toSet()
                 check(metrics.isNotEmpty()) { "Allow at least one EZPZ permission before syncing." }
@@ -194,13 +203,14 @@ class HealthConnectPlugin : Plugin() {
                 val today = now.atZone(zone).toLocalDate()
                 val first = today.minusDays(6)
                 val rows = JSArray()
+                val workouts = JSArray()
                 fun add(metric: String, day: LocalDate, value: Number) {
                     rows.put(JSObject().put("metric", metric).put("date", day.toString())
-                        .put("source", "whoop-health-connect").put("externalId", "whoop-hc-$metric-$day")
+                        .put("source", source).put("externalId", "$source-$metric-$day")
                         .put("unit", if (metric == "steps") "count" else if (metric == "sleep") "minutes" else "kcal")
                         .put("value", value).put("updatedAt", now.toString()))
                 }
-                val periods = if ("steps" in metrics) stepPeriods(readWhoopSteps(hc,
+                val periods = if (source == "whoop-health-connect" && "steps" in metrics) stepPeriods(readWhoopSteps(hc,
                     first.minusDays(2).atStartOfDay(zone).toInstant(), now), zone, now) else null
                 val rawTotals = mutableListOf<RawTotalCalories.Record>()
                 if ("totalCalories" in metrics) {
@@ -248,7 +258,7 @@ class HealthConnectPlugin : Plugin() {
                         val page = hc.readRecords(ReadRecordsRequest(SleepSessionRecord::class,
                             TimeRangeFilter.between(first.minusDays(1).atStartOfDay(zone).toInstant(), now),
                             dataOriginFilter = origin, pageSize = 1000, pageToken = token))
-                        sessions.addAll(page.records); token = page.pageToken
+                        sessions.addAll(page.records); token = page.pageToken?.takeIf { it.isNotBlank() }
                         check(sessions.size <= 10000) { "Too many sleep records. Try again with fewer records." }
                     } while (token != null)
                     val completed = sessions.filter { it.endTime <= now }.groupBy {
@@ -278,14 +288,41 @@ class HealthConnectPlugin : Plugin() {
                         if (awakeMinutes != null && awakeMinutes in 0..1440) row.put("awakeMinutes", awakeMinutes)
                     }
                 }
+                if ("workouts" in metrics) {
+                    var token: String? = null
+                    var count = 0
+                    do {
+                        val page = hc.readRecords(ReadRecordsRequest(ExerciseSessionRecord::class,
+                            TimeRangeFilter.between(first.minusDays(1).atStartOfDay(zone).toInstant(), now),
+                            dataOriginFilter = origin, pageSize = 1000, pageToken = token))
+                        count += page.records.size
+                        check(count <= 10000) { "Too many workouts. Saved records were kept." }
+                        for (r in page.records) {
+                            val day = r.startTime.atOffset(r.startZoneOffset ?: zone.rules.getOffset(r.startTime)).toLocalDate()
+                            if (day < first || day > today || r.endTime > now || r.endTime <= r.startTime || Duration.between(r.startTime, r.endTime) > Duration.ofDays(1)) continue
+                            val title = r.title?.takeIf { it.isNotBlank() }?.take(80) ?: when(r.exerciseType) {
+                                ExerciseSessionRecord.EXERCISE_TYPE_RUNNING -> "Running"
+                                ExerciseSessionRecord.EXERCISE_TYPE_BIKING -> "Cycling"
+                                ExerciseSessionRecord.EXERCISE_TYPE_WALKING -> "Walking"
+                                ExerciseSessionRecord.EXERCISE_TYPE_STRENGTH_TRAINING -> "Strength training"
+                                else -> "Workout"
+                            }
+                            workouts.put(JSObject().put("source", source).put("externalId", "hc-" + r.metadata.id)
+                                .put("date", day.toString()).put("start", r.startTime.toString()).put("end", r.endTime.toString())
+                                .put("durationMinutes", Duration.between(r.startTime, r.endTime).toMillis() / 60000.0)
+                                .put("title", title).put("updatedAt", now.toString()))
+                        }
+                        token = page.pageToken?.takeIf { it.isNotBlank() }
+                    } while (token != null)
+                }
                 // Permission loss during the read rejects the whole snapshot. Do not prune old data.
                 check(hc.permissionController.getGrantedPermissions().containsAll(permissionMetrics.filterValues { it in metrics }.keys)) { "Permissions changed. Sync again after reviewing them." }
                 call.resolve(JSObject().put("version", 1).put("records", rows).put("metrics", JSArray(metrics.toList()))
-                    .put("from", first.toString()).put("through", today.toString()))
+                    .put("from", first.toString()).put("through", today.toString()).put("source", source).put("workouts", workouts))
             } catch (e: Exception) { call.reject(if (e is SecurityException) "Health Connect permission was removed. Review access and try again." else e.message ?: "Sync failed. No records were changed.") }
         }
     }
-    /** Nutrition is independent of the WHOOP-only movement reader. Never combine app origins. */
+    /** Nutrition is independent of the selected wearable reader. Never combine app origins. */
     private val nutritionPermission get() = HealthPermission.getReadPermission(NutritionRecord::class)
     @PluginMethod fun requestNutritionPermissions(call: PluginCall) {
         try {
