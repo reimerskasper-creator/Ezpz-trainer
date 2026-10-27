@@ -1,0 +1,80 @@
+[
+  {
+    "name": "whoop",
+    "package": "com.whoop.android",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.whoop.android&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/R-7Z9KcEXvT0_aGq9Zm8b5-C3kVXtTErGRQE2wKi0Wr3qTcgjsyLMKvNo0gZ2q6WvgTNJ9E0UpJUuiSxoX-KhA=s0-br30"
+  },
+  {
+    "name": "samsung",
+    "package": "com.sec.android.app.shealth",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.sec.android.app.shealth&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/OS7TGfRDIg8sbKxzYpsAr6fcg8vWPBV6Wx85alc0EQivKZY4I6VQuFRNaFSyi07ZydngVcxFkmVUUkr32khBVg=s0-br30"
+  },
+  {
+    "name": "fitbit",
+    "package": "com.fitbit.FitbitMobile",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.fitbit.FitbitMobile&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/W1N5QAjSPsNwmwLo135MWqTnlCpkULVTVvf4eN_FekTOJ3gV53vi_lhxd3pk8oVXdUuqKPU8SkhA1iRnPzJeng=s0-br30"
+  },
+  {
+    "name": "garmin",
+    "package": "com.garmin.android.apps.connectmobile",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.garmin.android.apps.connectmobile&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/wQVBsxZBX7buxjAlBIsBTRth7hknBOcbOUbzxNprfH22T9_ejF6VO5QC3CrMpvNivFvkyHHKvmiTnFO9P39S=s0-br30"
+  },
+  {
+    "name": "oura",
+    "package": "com.ouraring.oura",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.ouraring.oura&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/5mz7MxEkUtzJzPlPrSFx4pboosI8vXSCQEGCwwoGQth8Vu8Bwu-dmmbmQK669T81O5B6UcJ2Yu7O-ny1KeWE6A=s0-br30"
+  },
+  {
+    "name": "polar",
+    "package": "fi.polar.polarflow",
+    "publisherListing": "https://play.google.com/store/apps/details?id=fi.polar.polarflow&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/ywq638XXnAndLxk3YiqGr0i-Cy6NcVa3pI6yAWSJZ_5N0PkmhRifo6a3KAkB1DqeQq36TkfvD8tEWncM_FXg-g=s0-br30"
+  },
+  {
+    "name": "amazfit",
+    "package": "com.huami.watch.hmwatchmanager",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.huami.watch.hmwatchmanager&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/pZcZu4czlvMK8Du5CAUOUVM8KuZtEQh3k62W3JxKw8oYJdF_UYjaJxqlWfB3eqELitHwftwvcZ4jIOtdAOXXsQ=s0-br30"
+  },
+  {
+    "name": "xiaomi",
+    "package": "com.xiaomi.wearable",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.xiaomi.wearable&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/hNcXKR6eZejHpeZxPun8T6yN5t-5FiLRKK-LMp3so2KTg04eDreIq0ed_N9Di7KKa1FZe9nsiXkKmD0_fGA7uTA=s0-br30"
+  },
+  {
+    "name": "withings",
+    "package": "com.withings.wiscale2",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.withings.wiscale2&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/u8C5cw4rbZZTCREw78xw0Obccqp57A9rbuPKAJr22onuEkhcV41oFLyAKK5qi58iPygGp-DW19OaylQjnXZ5LPk=s0-br30"
+  },
+  {
+    "name": "cronometer",
+    "package": "com.cronometer.android.gold",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.cronometer.android.gold&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/8bWVHZIajvfmDnnwm0K64_aGoUZ86sZVFftpssiPUtOOBYlM-YnCYFZuMyFUv5VqDInp5a8hqJ2Q0f88OtKAnA=s0-br30"
+  },
+  {
+    "name": "lifesum",
+    "package": "com.sillens.shapeupclub",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.sillens.shapeupclub&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/gMeT8cxzZOnlrCKwYIOPHT90C9kb9pPbE0mHlk2gixDIadJ_B9QmslnPkQ3Sc0y9KuS8KMxPDxFgsL_GLnXbsg=s0-br30"
+  },
+  {
+    "name": "myfitnesspal",
+    "package": "com.myfitnesspal.android",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.myfitnesspal.android&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/iGPZDsKZoF58BABAEIebIQk_X1sdYHviEJAwUyoYyJO4L-bN8XA6yWiXuBJcVJwIEc4wHSvxWjbFU23Y7cn1sMo=s0-br30"
+  },
+  {
+    "name": "loseit",
+    "package": "com.fitnow.loseit",
+    "publisherListing": "https://play.google.com/store/apps/details?id=com.fitnow.loseit&hl=en_US",
+    "iconUrl": "https://play-lh.googleusercontent.com/FSvMmSFbhs8vmtBzWt-px-dm_zthNTtOmPGQQ6bnCfPbTvnf1ostr0qFmDnx7NL8XL7cBrb4N659vIrBGJ4yPYk=s0-br30"
+  }
+]
