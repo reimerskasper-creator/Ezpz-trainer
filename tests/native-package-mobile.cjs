@@ -65,7 +65,7 @@ await page.keyboard.press('Escape');
 await page.evaluate(()=>{const date=foodDate();applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['sleep'],records:[{metric:'sleep',value:411,date,source:'whoop-health-connect',externalId:'generic-sleep-'+date,unit:'minutes',updatedAt:new Date().toISOString()}]});tab='sleep';render()});
 assert.equal(await page.locator('.sleep-stage-detail').count(),0);assert.equal(await page.locator('#wellness-source-sleep').count(),1);assert.equal(await page.evaluate(()=>selectedWellnessRecord('sleep',foodDate()).value),411);
 await page.screenshot({path:path.join(out,'native-package-startup.jpg'),type:'jpeg',quality:85});
-await page.evaluate(()=>{tab='more';render();window.beforeBackup=JSON.stringify(state);window.testBackupMode='cancel'});await page.locator('[data-open-backups]').click();
+await page.evaluate(()=>{tab='more';render();window.beforeBackup=JSON.stringify(state);window.testBackupMode='cancel'});await page.locator('.more-backups>summary').click();
 await page.locator('.data-tools [data-action="export"]').click();await page.waitForFunction(()=>document.getElementById('backup-status').textContent.includes('cancelled'));
 assert.equal(await page.evaluate(()=>readDeviceSafety().lastExportVerifiedAt),undefined);
 for(const mode of ['failure','unverified']){
