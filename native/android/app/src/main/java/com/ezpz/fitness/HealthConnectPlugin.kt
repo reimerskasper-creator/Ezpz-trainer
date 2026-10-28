@@ -232,7 +232,12 @@ class HealthConnectPlugin : Plugin() {
                                     .put("periodStart", it.start.toString()).put("periodEnd", it.end.toString())
                             }
                         } else {
-                            val r = hc.aggregate(AggregateRequest(setOf(StepsRecord.COUNT_TOTAL), range, origin))
+                            // Samsung writes its current daily count in a midnight-to-midnight record.
+                            // Clipping today's query to now prorates that count (82 becomes 46 at 13:43).
+                            // Read the complete local date, retaining the selected provider filter and
+                            // Health Connect aggregation so overlapping records are not added twice.
+                            val stepRange = TimeRangeFilter.between(start, dayEnd)
+                            val r = hc.aggregate(AggregateRequest(setOf(StepsRecord.COUNT_TOTAL), stepRange, origin))
                             r[StepsRecord.COUNT_TOTAL]?.let { add("steps", day, it) }
                         }
                     }
