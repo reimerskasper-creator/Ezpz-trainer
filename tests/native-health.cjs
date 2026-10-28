@@ -75,6 +75,13 @@ api.applyNativeHealthSnapshot(multi(fitbit,9500));assert.equal(api.state.importe
 const restore=api.restoredState(JSON.parse(JSON.stringify(api.state)));assert.equal(restore.wellnessSettings.trackerSource,fitbit);assert.equal(restore.importedWorkouts.length,1);
 const stable=JSON.stringify(api.state);
 for(const bad of [{...multi(fitbit,4),source:'other'},multi(fitbit,4,[workout(samsung)]),multi(fitbit,4,[workout(fitbit),workout(fitbit)]),{...multi(fitbit,4),workouts:undefined}]){assert.throws(()=>api.applyNativeHealthSnapshot(bad));assert.equal(JSON.stringify(api.state),stable)}
+// Switching to a tracker with no sleep/workouts never borrows another band's records.
+const keep=JSON.parse(JSON.stringify(api.state));
+api.state.wellnessRecords=[{...sleep,source:'whoop'}];api.state.importedWorkouts=[workout('whoop','kept-whoop')];api.state.sleepLog={};api.state.wellnessChoices={["sleep|"+date]:'whoop'};
+api.chooseNativeTracker('samsung-health-connect');assert.equal(api.selectedWellnessRecord('sleep',date),null);assert.equal(api.effectiveSleepLog()[date],undefined);assert.equal(api.activeImportedWorkouts().length,0);assert.equal(api.dailyTrainingSummary().percent,0);
+assert.equal(api.state.importedWorkouts.length,1,'WHOOP history stays saved');assert.equal(api.state.wellnessRecords.length,1);
+api.state.sleepLog={[date]:400};api.state.wellnessChoices={["sleep|"+date]:'manual'};api.chooseNativeTracker('fitbit-health-connect');assert.equal(api.effectiveSleepLog()[date],400,'Manual sleep remains selected');
+Object.assign(api.state,keep);
 // Direct WHOOP and its HC copy use one source per date, never double-count.
 api.state.importedWorkouts=[workout('whoop','direct'),workout('whoop-health-connect','hc')];api.chooseNativeTracker('whoop-health-connect');assert.equal(api.activeImportedWorkouts().length,1);assert.equal(api.activeImportedWorkouts()[0].source,'whoop');
 api.state.wellnessRecords=[];api.state.importedWorkouts=[workout(fitbit)];assert(api.nativeHealthImportStatus().includes('Imports saved'));

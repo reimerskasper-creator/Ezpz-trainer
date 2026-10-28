@@ -15,7 +15,7 @@ const app=root.EzpzAccountAdapter;if(!app)return;
 const cap=root.Capacitor,native=!!(cap?.isNativePlatform?.()&&cap?.isPluginAvailable?.('EzpzAccount')),nativeAccount=native?cap.registerPlugin('EzpzAccount'):null;
 let whoopConnected=false,whoopWorkoutAccess=null,whoopMessage='Connect separately to authorize access to your WHOOP data.',callbackBusy=false;
 const whoopPanel=()=>'<p>'+esc(whoopMessage)+'</p><button data-go="connected-apps">Manage connected apps →</button>';
-root.EzpzWhoopAccount={connection:()=>({signedIn:!!user,connected:whoopConnected,workouts:whoopWorkoutAccess}),lastSync:()=>{try{return user?.id?localStorage.getItem('ezpz-whoop-last-sync-'+user.id):null}catch{return null}},open:()=>{app.open();panel();const box=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(box)box.open=true;}};
+root.EzpzWhoopAccount={sync:async()=>{if(await run('whoop-sync')!==true)throw Error(whoopMessage||'WHOOP refresh is unavailable.');},connection:()=>({signedIn:!!user,connected:whoopConnected,workouts:whoopWorkoutAccess}),lastSync:()=>{try{return user?.id?localStorage.getItem('ezpz-whoop-last-sync-'+user.id):null}catch{return null}},open:()=>{app.open();panel();const box=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(box)box.open=true;}};
 
 let client=null,user=null,config=null,busy=false,message='Sign-in is optional. Your records stay on this device until you choose to save them.',remote=null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -63,6 +63,7 @@ async function run(name,automatic=false){
    app.refreshImports?.();
    const workoutCount=(summary.workoutsAdded||0)+(summary.workoutsUpdated||0);
    whoopStatus((changed?'Imported '+changed+' new or updated measurement'+(changed===1?'':'s')+'.':summary.unchanged?'No new records. Your WHOOP measurements are up to date.':'No measurements were shared for the last seven days.')+(summary.removed?' '+summary.removed+' removed record'+(summary.removed===1?'':'s')+' reconciled.':'')+(workoutCount?' '+workoutCount+' workout'+(workoutCount===1?'':'s')+' updated.':'')+(data?.workoutPermission===false?' Reconnect WHOOP once to include workouts.':'')+' Manual entries stay saved.');
+   return true;
   }else if(name==='whoop-connect'||name==='whoop-status'){
    await verified();
    const {data,error}=await client.functions.invoke('whoop-connect',{body:{action:name==='whoop-connect'?'start':'status',platform:native?'android':'web'}});
@@ -154,6 +155,7 @@ function scheduleWhoopSync(force=false){
  setTimeout(async()=>{
   if(ticket!==scheduledAuto)return;
   if(!client||busy||callbackBusy||document.visibilityState==='hidden'||root.navigator?.onLine===false)return;
+  const tracker=app.snapshot().wellnessSettings?.trackerSource;if(tracker&&tracker!=='whoop-health-connect')return;
   if(!user){try{const result=await client.auth.getSession();if(!result.data?.session)return;await verified();}catch{return;}}
   if(!force&&lastAutoUser===user.id&&Date.now()-lastAutoAttempt<120000)return;
   lastAutoUser=user.id;lastAutoAttempt=Date.now();await run('whoop-sync',true);
