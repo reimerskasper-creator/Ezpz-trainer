@@ -25,13 +25,11 @@ jobs:
         run: npx playwright install --only-shell chromium
       - name: Verify sleep overview and pillar Progress
         run: |
-          node tests/sleep-overview.cjs
-          node tests/sleep-overview-mobile.cjs
-          node tests/home-burned-mobile.cjs
-          node tests/progress-context-mobile.cjs
-          node tests/clarity-dialogs-mobile.cjs
-          node tests/rest-overhaul-mobile.cjs
-          node tests/foundation-week-mobile.cjs
+          failed=0
+          for check in tests/sleep-overview.cjs tests/sleep-overview-mobile.cjs tests/home-burned-mobile.cjs tests/progress-context-mobile.cjs tests/clarity-dialogs-mobile.cjs tests/rest-overhaul-mobile.cjs tests/foundation-week-mobile.cjs; do
+            node "$check" || failed=1
+          done
+          exit "$failed"
       - name: Verify compact Home layout
         run: node tests/personal-home-mobile.cjs
       - name: Run app and mobile checks
