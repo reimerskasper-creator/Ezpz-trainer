@@ -4,7 +4,7 @@
  const defaultPhoto='./home-images/zone-woodland.jpg';
  function preview(){
   if(!dialog)return;const b=cleanHomeBackground(draft),src=personalPhoto(b.photoId)||defaultPhoto,el=dialog.querySelector('.home-background-preview');
-  el.style.backgroundImage='linear-gradient(105deg,#062b20b8,#062b2088),url("'+src+'")';el.style.backgroundPosition=b.x+'% '+b.y+'%';el.style.backgroundSize=b.zoom===1?'cover':(b.zoom*100)+'% auto';
+  el.style.backgroundImage='linear-gradient(105deg,#062b20d9,#062b20b8),url("'+src+'")';el.style.backgroundPosition=b.x+'% '+b.y+'%';el.style.backgroundSize=b.zoom===1?'cover':(b.zoom*100)+'% auto';
   dialog.querySelector('[data-background-crop]').hidden=!b.photoId;
  }
  function close(){if(!dialog)return;const old=dialog;dialog=null;old.close();old.remove();for(const id of temporary)delete pendingPersonalPhotos[id];temporary.clear();draft=null;opener?.focus({preventScroll:true})}

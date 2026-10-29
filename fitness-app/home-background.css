@@ -18,3 +18,4 @@ body[data-view] #screen>.own-back{position:static;display:inline-flex;align-item
 @media(max-width:360px){#home-background-dialog{padding:16px}.home-background-heading h2{font-size:18px}#planner-picker .plan-picker-categories>button>strong{font-size:14px}#planner-picker .plan-picker-categories>button>small{font-size:11px;margin-left:10px;margin-right:10px;padding:5px 6px}.home-background-preview{height:180px}}
 
 body[data-view] #workout-builder .personal-photo-actions :is(label,button){background:#204f3c!important;color:#effff5!important;border-color:#739680!important}
+body[data-view=home] .home-week-card[data-folded=true]>.home-background-open{display:none}

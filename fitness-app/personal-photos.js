@@ -38,7 +38,7 @@
     const id='photo-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
     if(!cleanPersonalPhotos({[id]:photo})[id]){dialog.querySelector('.personal-crop-status').textContent='Could not prepare this photo. Try another image.';return}
     pendingPersonalPhotos[id]=photo;
-    if(apply(box,id)){notice(box,box.dataset.photoKind.startsWith('saved-')?'Photo saved.':'Photo ready. Save your item to keep it.');close()}
+    if(apply(box,id)){notice(box,box.dataset.photoKind==='home'?'Photo ready. Save background to keep it.':box.dataset.photoKind.startsWith('saved-')?'Photo saved.':'Photo ready. Save your item to keep it.');close()}
     else{delete pendingPersonalPhotos[id];dialog.querySelector('.personal-crop-status').textContent='Photo was not saved. Close and try again.'}
    });dialog.showModal();notice(box,'');
   }catch{URL.revokeObjectURL(url);notice(box,'This photo could not be opened. Try a JPEG, PNG or WebP photo.');}
