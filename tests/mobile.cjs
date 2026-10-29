@@ -557,12 +557,12 @@ try{
   assert((await page.locator('[data-zone="open"]').getAttribute('aria-label')).includes('Take a moment'));
   const zoneAfter=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['logs','foodLog','weights','workoutDrafts','mealPlan'])assert.deepEqual(zoneAfter[name],prior[name],'Zone preserves '+name);
 
-  await page.locator('.habit-rings [data-go="sleep"]').click();await page.locator('#sleep-hours').fill('3');await page.locator('#sleep-minutes').fill('30');await page.locator('.sleep-goal-settings>summary').click();await page.locator('#sleep-goal-hours').fill('7');await page.locator('#sleep-goal-minutes').fill('0');
+  await page.locator('.habit-rings [data-go="sleep"]').click();await page.locator('[data-open-sleep-editor]').click();await page.locator('#sleep-hours').fill('3');await page.locator('#sleep-minutes').fill('30');await page.locator('.sleep-goal-settings>summary').click();await page.locator('#sleep-goal-hours').fill('7');await page.locator('#sleep-goal-minutes').fill('0');
   assert(await page.locator('#sleep-form').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
   if(width===390){await page.locator('.sleep-summary-hero').scrollIntoViewIfNeeded();const jpg=await page.screenshot({type:'jpeg',quality:80,path:path.join(out,'sleep-form.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_SLEEP_FORM_DATA '+b.slice(i,i+4000))}
   await page.locator('#sleep-form button').click();assert.equal(await page.locator('.habit-rings .habit-item').nth(1).locator('b').innerText(),'50%');
   await page.reload();assert.equal(await page.locator('.habit-rings .habit-item').nth(1).locator('b').innerText(),'50%');
-  await page.locator('.habit-rings .habit-item').nth(1).click();await page.locator('#sleep-hours').fill('7');await page.locator('#sleep-minutes').fill('0');await page.locator('#sleep-form button').click();
+  await page.locator('.habit-rings .habit-item').nth(1).click();await page.locator('[data-open-sleep-editor]').click();await page.locator('#sleep-hours').fill('7');await page.locator('#sleep-minutes').fill('0');await page.locator('#sleep-form button').click();
   assert.equal(await page.locator('.habit-rings .habit-item').nth(1).locator('b').innerText(),'100%');
   const after=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['logs','foodLog','weights','workoutDrafts','mealPlan'])assert.deepEqual(after[name],prior[name],'Sleep preserves '+name);
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
@@ -587,7 +587,7 @@ try{
    assert.equal(await page.evaluate(key=>localStorage.getItem(key),key),before);
    if(width===390&&metric!=='training'){await page.locator('.habit-progress').evaluate(el=>el.scrollIntoView({block:'start'}));const jpg=await page.locator('.habit-progress').screenshot({type:'jpeg',quality:85,path:path.join(out,'habit-progress-'+metric+'.jpg')});const b=jpg.toString('base64');if(process.env.EZPZ_VISUAL_LOG==='1')for(let i=0;i<b.length;i+=4000)console.log('EZPZ_HABIT_'+metric.toUpperCase()+'_DATA '+b.slice(i,i+4000))}
   }
-  await page.locator('.habit-progress [data-go="sleep"]').click();await page.locator('#sleep-form').waitFor({state:'visible'});
+  await page.locator('.habit-progress [data-go="sleep"]').click();assert.equal(await page.locator('#sleep-form').isVisible(),false);await page.locator('[data-open-sleep-editor]').click();await page.locator('#sleep-form').waitFor({state:'visible'});
   await context.close();
  }
 
