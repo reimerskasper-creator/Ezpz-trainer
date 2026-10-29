@@ -53,7 +53,7 @@ for(const invalid of [snapshot([row('steps',-1)]),snapshot([{...row('steps',200)
 }
 // Fitbit/Samsung snapshots reconcile only their own source, including completed workouts.
 const samsung='samsung-health-connect',fitbit='fitbit-health-connect';
-const workout=(source,id='w1')=>({source,externalId:id,date,start:date+'T00:00:00Z',end:date+'T00:30:00Z',durationMinutes:30,title:'Morning run',updatedAt:stamp});
+const workout=(source,id='w1')=>({source,externalId:id,date,start:new Date(Date.parse(stamp)-30*60000).toISOString(),end:stamp,durationMinutes:30,title:'Morning run',updatedAt:stamp});
 let sequence=0;
 const multi=(source,value,workouts=[workout(source)])=>({...snapshot([{...row('steps',value),source,updatedAt:new Date(Date.parse(stamp)+ ++sequence).toISOString()}],['steps','workouts']),source,workouts});
 assert(api.chooseNativeTracker(samsung));
