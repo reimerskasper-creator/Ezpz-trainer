@@ -70,3 +70,6 @@ body[data-view=zone] .zone-space .affirmation-next{margin:10px auto 0;min-height
 #zone-activity-dialog :focus-visible,.zone-space button:focus-visible{outline:2px solid #dfc4ff;outline-offset:4px}
 @media(prefers-reduced-motion:reduce){.zone-breath-circle:before{transition:none!important;transform:none!important}}
 @media(max-width:360px){.zone-space .zone-activities h3{font-size:18px}.zone-space .zone-activity-choices button{font-size:12px!important;padding:16px 3px!important;min-height:120px!important}.zone-space .zone-feelings button{font-size:10px!important}.zone-feelings svg{width:29px;height:29px}#zone-activity-dialog{padding:17px}.zone-breath-circle{width:155px;height:155px}.zone-breath-circle span{font-size:19px}.zone-space .zone-moments h3{font-size:17px}}
+/* Override shared status/selected-button colors inside the lavender activity. */
+#zone-activity-dialog .zone-breath-circle [data-breath-phase]{color:#251c35!important}
+#zone-activity-dialog [data-breath-duration][aria-pressed=true]{background:#ccb5ed!important;color:#251c35!important;border-color:#ccb5ed!important}
