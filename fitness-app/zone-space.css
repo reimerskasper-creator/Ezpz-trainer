@@ -91,3 +91,24 @@ body[data-view=zone] .zone-space .zone-daily-thought .affirmation-orbit{width:14
 .zone-space .zone-daily-thought .affirmation-orbit svg{width:64px;height:64px;filter:drop-shadow(0 0 10px #d2a6f144)}
 @media(max-width:360px){body[data-view=zone] .zone-space .zone-check-copy strong{font-size:14px}.zone-check-copy small{font-size:10px}.zone-check-target{width:30px;height:30px}}
 @media(max-width:360px){.zone-space .zone-activities h3{font-size:18px}.zone-space .zone-activity-choices button{font-size:12px!important;padding:13px 3px!important;min-height:106px!important}#zone-activity-dialog{padding:17px}.zone-breath-circle{width:155px;height:155px}.zone-breath-circle span{font-size:19px}.zone-space .zone-moments h3{font-size:17px}}
+
+/* Approved botanical glass scene: static artwork, live accessible controls above it. */
+body[data-view=zone] .zone-space .zone-botanical-panel{position:relative;isolation:isolate;overflow:hidden;margin:16px 0 18px;padding:16px 12px 12px;border:1px solid #cca4eea6;border-radius:26px;background:#0a3029;box-shadow:inset 0 1px 0 #f1dcff55,inset 0 -1px 0 #bf8ce855,0 10px 24px #021b1555,0 0 18px #b78bd71a}
+.zone-botanical-panel:before{content:'';position:absolute;z-index:-2;inset:0;pointer-events:none;background:url('../home-images/zone-botanical.jpg') center/cover no-repeat}
+.zone-botanical-panel:after{content:'';position:absolute;z-index:-1;inset:0;pointer-events:none;background:linear-gradient(180deg,#123c3320 0%,#062b2305 40%,#05251e12 53%,#031f1966 72%,#03241b88 100%);box-shadow:inset 0 0 34px #d3b0ec18}
+body[data-view=zone] .zone-space .zone-botanical-panel .zone-activities{margin:0;padding:0}
+body[data-view=zone] .zone-space .zone-botanical-panel h3{margin:0 0 14px;font-size:17px;color:#fbfff9;text-shadow:0 2px 10px #001c15}
+body[data-view=zone] .zone-space .zone-botanical-panel .zone-activity-choices{gap:8px}
+body[data-view=zone] .zone-space .zone-botanical-panel .zone-activity-choices button{background:linear-gradient(140deg,#b4d4cc26,#75aca01a)!important;border:1px solid #e0d9f06b;border-radius:18px;box-shadow:inset 0 1px 2px #f0fff438,0 5px 14px #001e1d26;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px);text-shadow:0 1px 6px #031e18;min-width:0;color:#fffdf6!important}
+.zone-botanical-panel .zone-activity-choices svg{color:#e0b9ff;filter:drop-shadow(0 0 8px #ce9ff149)}
+body[data-view=zone] .zone-space .zone-botanical-panel .zone-daily-thought{margin:18px 0 0!important;padding:0 0 2px!important;border-radius:0;background:transparent!important}
+.zone-botanical-panel .zone-eyebrow{display:block;font-size:10px;letter-spacing:.22em;color:#def1e4;text-shadow:0 1px 6px #03251c;margin:22px 0 0}
+body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-orbit{width:160px;height:160px;margin:18px auto 22px}
+.zone-botanical-panel .affirmation-orbit:before{content:'';position:absolute;width:98px;height:98px;border-radius:50%;background:#062d2466;box-shadow:0 0 28px #062d2477}
+.zone-botanical-panel .affirmation-orbit i{border-color:#e0b3ff99!important;box-shadow:0 0 22px #b988e23b,inset 0 0 20px #c899ea1c!important}
+.zone-botanical-panel .affirmation-orbit svg{position:relative;color:#dfb0ff;filter:drop-shadow(0 0 7px #ddadff55)!important}
+body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-copy{font:30px/1.22 Georgia,serif;margin:10px auto 14px;max-width:280px;color:#fffdf0!important;text-shadow:0 2px 7px #001d18,0 0 22px #00291f,0 1px 2px #001d18}
+.zone-botanical-panel .zone-reflection-prompt{font:16px/1.4 Georgia,serif;color:#eff7e8;text-shadow:0 1px 8px #001d18,0 0 20px #001d18;margin:12px 0 18px}
+body[data-view=zone] .zone-space .zone-botanical-panel .primary{background:linear-gradient(110deg,#94edc3,#70dcb3)!important;color:#123b2c!important;box-shadow:inset 0 1px 0 #c6ffe5aa,0 3px 16px #4ac7a42b;font-weight:700}
+body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-next{color:#e4c3ff!important;text-shadow:0 1px 8px #05251b}
+@media(max-width:360px){body[data-view=zone] .zone-space .zone-botanical-panel{padding:14px 10px 10px;border-radius:23px}body[data-view=zone] .zone-space .zone-botanical-panel h3{font-size:16px}body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-copy{font-size:28px}}

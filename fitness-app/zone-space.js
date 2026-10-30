@@ -22,6 +22,7 @@ zonePage=function(){
  const stats=root.querySelector('.rest-dashboard-stats');const detail=document.createElement('details');detail.className='zone-week-details';detail.innerHTML='<summary>Weekly details</summary>';detail.append(stats);week.append(detail);
  const past=document.createElement('details');past.className='rest-collapse zone-reflections';past.innerHTML='<summary>Past reflections <span>'+space.entries.length+'</span></summary><p class="note">Saved with your app data, including backups and account sync when enabled.</p>'+(space.entries.length?space.entries.slice().reverse().map(e=>'<article class="zone-reflection-entry"><small>'+safe(planDayLabel(e.date))+' · '+(e.kind==='clear'?'Clear my head':'Reflect')+'</small><p>'+safe(e.text)+'</p><div><button data-zone-edit="'+e.id+'">Edit</button><button data-zone-delete="'+e.id+'">Delete</button></div></article>').join(''):'<p>Your saved thoughts will appear here.</p>');
  week.after(past);
+ const scene=document.createElement('section');scene.className='zone-botanical-panel';scene.setAttribute('aria-label','Zone activities and today’s thought');activities.before(scene);scene.append(activities,thought);
 };
 let activity=null,tick=null,audio=null,sound=false,opener=null;
 function stopTick(){if(tick)clearInterval(tick);tick=null;if(audio?.state==='running')audio.suspend().catch(()=>{})}
