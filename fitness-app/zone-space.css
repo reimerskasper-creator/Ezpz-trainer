@@ -114,13 +114,13 @@ body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-next{color:#
 @media(max-width:360px){body[data-view=zone] .zone-space .zone-botanical-panel{padding:14px 10px 10px;border-radius:23px}body[data-view=zone] .zone-space .zone-botanical-panel h3{font-size:16px}body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-copy{font-size:28px}}
 
 /* Approved Zone submenu art and translucent controls. */
-#zone-activity-dialog[data-zone-kind]{min-height:min(720px,calc(100dvh - 28px));max-height:calc(100dvh - 28px);padding:20px;border:1px solid #d6b3f4b3;border-radius:27px;background-color:#06281f;background-image:linear-gradient(180deg,#03271e22,#05251e38 68%,#05251e12),url('../home-images/zone-writing.jpg');background-position:center;background-size:cover;box-shadow:inset 0 1px 2px #f0dfff70,inset 0 -1px 0 #dfb9ff66,0 16px 60px #00181199,0 0 26px #bb8ee327}
-#zone-activity-dialog[data-zone-kind=breathe]{background-image:linear-gradient(180deg,#05281e12,#06251d0a 48%,#042a204d 74%,#05251d0a),url('../home-images/zone-breathe.jpg')}
+#zone-activity-dialog[data-zone-kind]{min-height:min(720px,calc(100dvh - 28px));max-height:calc(100dvh - 28px);padding:20px;border:1px solid #d6b3f4b3;border-radius:27px;background-color:#06281f!important;background-image:linear-gradient(180deg,#03271e22,#05251e38 68%,#05251e12),url('../home-images/zone-writing.jpg')!important;border-color:#d6b3f4b3!important;background-position:center!important;background-size:cover!important;box-shadow:inset 0 1px 2px #f0dfff70,inset 0 -1px 0 #dfb9ff66,0 16px 60px #00181199,0 0 26px #bb8ee327}
+#zone-activity-dialog[data-zone-kind=breathe]{background-image:linear-gradient(180deg,#05281e12,#06251d0a 48%,#042a204d 74%,#05251d0a),url('../home-images/zone-breathe.jpg')!important}
 #zone-activity-dialog[data-zone-kind] .zone-dialog-heading>span{font-size:9px;letter-spacing:.15em;color:#dfbdff;text-shadow:0 1px 8px #001f18}
 #zone-activity-dialog[data-zone-kind] .zone-dialog-heading button{color:#f0e2ff;border-radius:50%}
 #zone-activity-dialog[data-zone-kind] h2{font:27px/1.22 Georgia,serif;color:#fffced;text-shadow:0 2px 9px #02291e;margin:12px 0 22px}
 #zone-activity-dialog[data-zone-kind] label{font:18px/1.45 Georgia,serif;text-align:center;color:#f7f9eb;text-shadow:0 1px 8px #03271e;margin:0 0 18px}
-#zone-activity-dialog[data-zone-kind] textarea{height:clamp(180px,28dvh,250px);min-height:180px;max-height:42dvh;border:1px solid #cf9ff0bb;border-radius:19px;background:linear-gradient(140deg,#102f2be0,#18352bc2);box-shadow:inset 0 1px 0 #f2dbff1f,0 6px 18px #011f1733;color:#fbfff6;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);font:16px/1.6 system-ui,sans-serif}
+#zone-activity-dialog[data-zone-kind] textarea{height:clamp(180px,28dvh,250px);min-height:180px;max-height:42dvh;border:1px solid #cf9ff0bb;border-radius:19px;background:linear-gradient(140deg,#102f2be0,#18352bc2)!important;border-color:#cf9ff0bb!important;box-shadow:inset 0 1px 0 #f2dbff1f,0 6px 18px #011f1733;color:#fbfff6;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);font:16px/1.6 system-ui,sans-serif}
 #zone-activity-dialog[data-zone-kind] textarea::placeholder{color:#d0dfd1}
 #zone-activity-dialog[data-zone-kind] .zone-writing-count{color:#e2d5ef;font-size:10px;margin:5px 3px 10px;text-shadow:0 1px 6px #05271d}
 #zone-activity-dialog[data-zone-kind] .zone-writing-notice{font-size:11px;text-align:center;color:#e0e8d9;text-shadow:0 1px 8px #04271d;margin:10px 0 4px}
@@ -130,7 +130,7 @@ body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-next{color:#
 #zone-activity-dialog[data-zone-kind] .zone-writing-actions{display:grid;grid-template-columns:1fr;gap:8px}
 #zone-activity-dialog[data-zone-kind] .zone-writing-actions button{display:flex;justify-content:center;align-items:center;gap:9px;border-radius:28px;min-height:48px;margin:0}
 .zone-writing-actions svg{width:19px;height:19px;flex:none}
-#zone-activity-dialog[data-zone-kind] [data-zone-discard]{background:linear-gradient(135deg,#ced8dd30,#a5bfbc24);border:1px solid #d4d1e17a;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#f0e7fb;box-shadow:inset 0 1px 0 #f1e1ff26}
+#zone-activity-dialog[data-zone-kind] [data-zone-discard]{background:linear-gradient(135deg,#ced8dd30,#a5bfbc24)!important;border:1px solid #d4d1e17a;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);color:#f0e7fb;box-shadow:inset 0 1px 0 #f1e1ff26}
 #zone-activity-dialog[data-zone-kind] .primary{background:linear-gradient(110deg,#aff3c9,#82e5b5)!important;color:#103725!important;box-shadow:inset 0 1px 0 #e4ffe3aa,0 3px 12px #061e1c4d;border-radius:28px;min-height:48px}
 .zone-dialog-sprout{display:grid;place-items:center;margin:-8px auto 16px;color:#d7aff8;filter:drop-shadow(0 0 8px #c18fe844)}
 .zone-dialog-sprout svg{width:31px;height:31px}
@@ -145,8 +145,8 @@ body[data-view=zone] .zone-space .zone-botanical-panel .affirmation-next{color:#
 #zone-activity-dialog[data-zone-kind=breathe] [data-breath-phase]{z-index:1;font:22px/1.25 Georgia,serif;max-width:140px;text-shadow:none;color:#251c35!important}
 #zone-activity-dialog[data-zone-kind=breathe] .zone-breath-clock{font:25px/1.2 Georgia,serif;color:#fff8e9;margin:20px 0;text-shadow:0 1px 9px #042d21}
 #zone-activity-dialog[data-zone-kind=breathe] .zone-duration-choices{margin:14px 0 12px}
-#zone-activity-dialog[data-zone-kind=breathe] .zone-duration-choices button{background:#204b3d4d;border:1px solid #e2d4ed77;box-shadow:inset 0 1px 0 #e8f9e322;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
-#zone-activity-dialog[data-zone-kind=breathe] .zone-sound{background:#0a2e234d;border:1px solid #c9c9e452;color:#e7e5db;border-radius:24px;font-size:12px;margin-top:16px}
+#zone-activity-dialog[data-zone-kind=breathe] .zone-duration-choices button:not([aria-pressed=true]){background:#204b3d4d!important;border:1px solid #e2d4ed77;box-shadow:inset 0 1px 0 #e8f9e322;backdrop-filter:blur(3px);-webkit-backdrop-filter:blur(3px)}
+#zone-activity-dialog[data-zone-kind=breathe] .zone-sound{background:#0a2e234d!important;border:1px solid #c9c9e452;color:#e7e5db;border-radius:24px;font-size:12px;margin-top:16px}
 #zone-activity-dialog[data-zone-kind=breathe] .zone-breath-help{font-size:11px;color:#e3e9d9;line-height:1.5;margin:12px 3px 17px;text-shadow:0 1px 8px #05251c}
 @media(prefers-reduced-motion:reduce){#zone-activity-dialog .zone-breath-circle:after{transition:none!important;transform:none!important}}
 @media(max-width:360px){#zone-activity-dialog[data-zone-kind]{padding:17px}#zone-activity-dialog[data-zone-kind] h2{font-size:25px}#zone-activity-dialog[data-zone-kind=breathe] .zone-breath-circle{width:170px;height:170px;margin-top:32px}#zone-activity-dialog[data-zone-kind=breathe] [data-breath-phase]{font-size:21px}}
