@@ -19,7 +19,7 @@
    if(event.target.closest('[data-background-default]')){draft=cleanHomeBackground(null);resetSliders();preview();return}
    if(!event.target.closest('[data-background-save]'))return;
    if(!(category?saveProgressBackground(category,draft):saveHomeBackground(draft))){dialog.querySelector('.home-background-status').textContent='Could not save. Your previous background is kept.';return}
-   const scroll=window.scrollY,wasProgress=category;close();if(wasProgress){progress();window.scrollTo(0,scroll);document.querySelector('[data-progress-background]')?.focus({preventScroll:true})}else if(tab==='home'){home();window.scrollTo(0,scroll);document.querySelector('[data-home-background]')?.focus({preventScroll:true})}
+   const scroll=window.scrollY,wasProgress=category;close();if(wasProgress){if(tab==='progress')progress();else render();window.scrollTo(0,scroll);document.querySelector('[data-progress-background]')?.focus({preventScroll:true})}else if(tab==='home'){home();window.scrollTo(0,scroll);document.querySelector('[data-home-background]')?.focus({preventScroll:true})}
   });dialog.showModal();
  }
  function resetSliders(){dialog.querySelectorAll('[data-background-field]').forEach(input=>{input.value=draft[input.dataset.backgroundField]})}
