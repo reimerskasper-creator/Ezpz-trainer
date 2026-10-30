@@ -13,6 +13,8 @@ assert.equal(api.nativeHealthPanel(),'');
 const yesterday=new Date(Date.parse(date+'T12:00:00Z')-86400000).toISOString().slice(0,10);
 assert(api.movementMini().includes('steps-footprints'));assert(api.movementMini().includes('Today · not logged'));
 api.applyNativeHealthSnapshot({version:1,from:yesterday,through:date,metrics:['steps'],records:[{...row('steps',8061),date:yesterday,externalId:'steps-'+yesterday}]});
+assert(Number.isFinite(Date.parse(api.state.trackerSyncTimes['whoop-health-connect'])),'Successful sync records check time independently of record dates');assert.equal(api.restoredState(JSON.parse(stored)).trackerSyncTimes['whoop-health-connect'],api.state.trackerSyncTimes['whoop-health-connect'],'Sync time survives backup/reload');
+
 const unchanged=JSON.stringify(api.state),latestCard=api.movementMini();
 assert(latestCard.includes('Latest · '));assert(latestCard.includes('8,061'));assert(latestCard.includes('No count shared for today yet.'));assert(latestCard.includes('Goal met'));assert.equal(JSON.stringify(api.state),unchanged);
 api.applyNativeHealthSnapshot(snapshot([row('steps',0)]));const zeroCard=api.movementMini();assert(!zeroCard.includes('Latest ·'));assert(zeroCard.includes('0<small> steps'));assert(!zeroCard.includes('steps-footprints'));

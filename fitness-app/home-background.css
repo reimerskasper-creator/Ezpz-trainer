@@ -28,3 +28,5 @@ body[data-view=home] .home-arrange-toolbar>button.primary{background:#8ee2b4!imp
 body[data-view=home] .home-arranging .home-arrange-handle{display:flex!important;align-items:center;gap:8px;touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab;position:relative;z-index:3;width:100%;min-height:40px;padding:7px 12px!important;margin:0 0 8px!important;border:1px dashed #a4cebaaa!important;border-radius:10px!important;background:#10372de8!important;color:#e0f7e8!important;font-size:11px!important;text-align:left;box-sizing:border-box}
 .home-arrange-handle>span:first-child{font-size:23px;line-height:1}.home-section-dragging{user-select:none!important;overscroll-behavior:none;overflow-anchor:none}
 body[data-view=home] .home-arranging .home-section-moving{outline:2px solid #a2ecc5;outline-offset:3px;box-shadow:0 8px 28px #041a13aa!important;opacity:.9}
+
+body[data-view=home] .home-arranging,body[data-view=home] .home-arranging *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none}
