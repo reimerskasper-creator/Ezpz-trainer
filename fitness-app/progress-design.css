@@ -36,3 +36,5 @@ body[data-view=eat] .food-diary-overview{position:relative}
 body[data-view=eat] .eat-intake-heading{padding-right:40px;min-height:36px}
 body[data-view=progress] .progress-zone-days .zone-date-label{display:flex;flex-direction:column;gap:2px;align-items:center;line-height:1.35;white-space:nowrap}
 body[data-view=progress] .progress-zone-days .zone-date-label>span{font-size:10px}
+/* A selected check-in uses its circular halo, independent of generic selected buttons. */
+body[data-view=progress] .soft-progress-detail .progress-zone-days button[data-trend-point][aria-pressed]{background:transparent!important;color:#ecfff2!important;border-color:transparent!important;box-shadow:none!important}
