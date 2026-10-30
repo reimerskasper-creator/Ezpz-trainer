@@ -2,26 +2,14 @@ body[data-view=zone] .zone-space{--zone-lilac:#d6b3fa;gap:16px}
 body[data-view=zone] .zone-space .zone-summary-hero{overflow:hidden;border:0!important;border-radius:22px!important;box-shadow:0 10px 28px #031a1333}
 body[data-view=zone] .zone-space .rest-photo-heading{min-height:clamp(310px,78vw,340px)!important;justify-content:flex-end;padding:52px 20px 22px!important;background-image:linear-gradient(0deg,#082d22ed 0%,#082d224d 35%,#082d2200 68%),url('../home-images/zone-sunlit-coast.jpg')!important;background-position:center!important;background-size:cover!important}
 body[data-view=zone] .zone-space .rest-photo-heading p{font:18px/1.3 Georgia,serif!important;margin:6px 0 0!important;color:#fff8e9!important;text-shadow:0 1px 8px #031a1380}
-body[data-view=zone] .zone-space .rest-today-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:5px;padding:12px 14px;margin:16px 0 0;border:1px solid #ba96e255;border-radius:17px;background:linear-gradient(115deg,#8d64b82e,#233b34);box-shadow:inset 0 1px 0 #edd6ff12}
-.zone-space .zone-today-message{display:flex;align-items:center;gap:10px;font:14px/1.4 Georgia,serif;color:#e6d4fa}.zone-today-message svg{width:24px;height:24px;flex-shrink:0;color:#d4b1f4}
-body[data-view=zone] .zone-space .zone-check-button{width:auto!important;min-height:44px;margin:0;padding:6px 4px;background:transparent!important;color:#d4bff0!important;border:0;font-size:12px}
 .zone-space .zone-activities{padding:0 4px;margin:18px 0 0}
 .zone-space .zone-activities h3{font-size:18px;margin:4px 0 12px;font-weight:600}
 .zone-space .zone-activity-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
 body[data-view=zone] .zone-space .zone-activity-choices button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;border:1px solid #c2b5dc4a;border-radius:17px;background:radial-gradient(ellipse at 45% 0%,#b28bd22c,transparent 80%),linear-gradient(145deg,#2d4c3e,#12362a);padding:15px 4px;min-height:110px;color:#fff8ee;font-size:12px;font-weight:500;line-height:1.3;box-shadow:inset 0 1px 0 #fff8f01a,0 5px 12px #00181020}
 .zone-activity-choices svg{width:38px;height:38px;color:#d6b3fa;filter:drop-shadow(0 0 6px #c7a0e64d)}
-.zone-space .zone-feelings{border:0;border-top:1px solid #85a79540;margin:16px 0 0;padding:14px 0 0;min-width:0}
-.zone-space .zone-feelings legend{float:left;width:100%;margin-bottom:10px;font-size:15px;color:#f2eee4}
-.zone-feelings legend small{font:12px system-ui,sans-serif;color:#b7cfc0;margin-left:12px}
-.zone-feelings>div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;clear:both}
-body[data-view=zone] .zone-space .zone-feelings button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:7px 1px;min-height:68px;border:1px solid transparent;border-radius:14px;background:transparent!important;color:#cfdfd4;font-size:10px}
-.zone-feelings svg{width:30px;height:30px;color:#e3d8ef}
-body[data-view=zone] .zone-space .zone-feelings button[aria-pressed=true]{background:#ccb5ed20!important;border-color:#ccb5ed;color:#e5d4fb}
-.zone-space .zone-feeling-status{font-size:10px;color:#b5ccbe;min-height:16px;margin:4px 0 0}
 body[data-view=zone] .zone-space .zone-daily-thought{background:transparent!important;border:0!important;box-shadow:none;padding:18px 8px 12px;text-align:center;margin:8px 0 12px}
 .zone-eyebrow{font-size:10px;letter-spacing:.22em;color:#cbddd2}
 body[data-view=zone] .zone-space .zone-daily-thought .affirmation-copy{font:28px/1.22 Georgia,serif;margin:14px auto 10px;max-width:280px;color:#fff9ec}
-.zone-thought-leaf{display:block;margin:8px auto;color:#d3adf4;line-height:1}.zone-thought-leaf svg{display:block;width:30px;height:30px;margin:auto}
 .zone-space .zone-reflection-prompt{font:16px/1.4 Georgia,serif;margin:12px 0 16px;color:#e8e8d8}
 body[data-view=zone] .zone-space .zone-daily-thought .primary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:45px;font-size:14px;box-shadow:0 3px 14px #7fe1ad16}
 body[data-view=zone] .zone-space .affirmation-next{margin:4px auto 0;min-height:44px}
@@ -69,18 +57,37 @@ body[data-view=zone] .zone-space .affirmation-next{margin:4px auto 0;min-height:
 .zone-activity-status{font:13px/1.5 system-ui,sans-serif;color:#e1cef6;min-height:20px;margin-bottom:0}
 #zone-activity-dialog :focus-visible,.zone-space button:focus-visible{outline:2px solid #dfc4ff;outline-offset:4px}
 @media(prefers-reduced-motion:reduce){.zone-breath-circle:before{transition:none!important;transform:none!important}}
-@media(max-width:360px){.zone-space .zone-activities h3{font-size:18px}.zone-space .zone-activity-choices button{font-size:12px!important;padding:13px 3px!important;min-height:106px!important}.zone-space .zone-feelings button{font-size:10px!important}.zone-feelings svg{width:29px;height:29px}#zone-activity-dialog{padding:17px}.zone-breath-circle{width:155px;height:155px}.zone-breath-circle span{font-size:19px}.zone-space .zone-moments h3{font-size:17px}}
 /* Override shared status/selected-button colors inside the lavender activity. */
 #zone-activity-dialog .zone-breath-circle [data-breath-phase]{color:#251c35!important}
 #zone-activity-dialog [data-breath-duration][aria-pressed=true]{background:#ccb5ed!important;color:#251c35!important;border-color:#ccb5ed!important}
 
 /* Match the approved airy, warm photographic composition. */
 body[data-view=zone] .zone-space .rest-photo-heading h2{font:italic 700 36px/1.05 Georgia,serif!important;letter-spacing:-.02em;margin:0!important;color:#e2c5ff!important;text-shadow:0 2px 12px #041e1680}
-body[data-view=zone] .zone-space .rest-photo-heading .pillar-title{color:inherit!important;gap:0}
-body[data-view=zone] .zone-space .rest-photo-heading .pillar-title img{display:none}
+body[data-view=zone] .zone-space .rest-photo-heading .pillar-title{color:inherit!important;gap:10px}
+body[data-view=zone] .zone-space .rest-photo-heading .pillar-title img{display:block!important;width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 2px 8px #08261950)}
 .zone-space .zone-daily-thought .primary svg{width:18px;height:18px;flex-shrink:0}
 body[data-view=zone] .zone-space .zone-moments{background:linear-gradient(135deg,#284b3b,#13382b)!important;border-color:#82a48b66;box-shadow:inset 0 1px 0 #e0f4df0b;padding:14px!important}
 body[data-view=zone] .zone-space .zone-day-rings .is-done{background:linear-gradient(145deg,#dfc0fc,#bb96e4)!important;box-shadow:0 1px 8px #b28ad72b;color:#263b30!important}
 .zone-space .zone-reflections>summary:after{content:'›';margin-left:auto;color:#dfcef0}
 body[data-view=zone] .zone-space .rest-collapse{margin:10px 0!important;border-color:#84a38c66;background:linear-gradient(120deg,#234734,#14392b)!important}
 @media(max-width:360px){body[data-view=zone] .zone-space .zone-daily-thought .affirmation-copy{font-size:26px}.zone-space .zone-reflection-prompt{font-size:15px}}
+
+/* Approved check-in is directly below the photo; all of the strip is easy to tap. */
+body[data-view=zone] .zone-space .zone-checkin-strip{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 0;padding:8px 12px;border:1px solid #c5a0ed;border-radius:17px;background:linear-gradient(125deg,#8165a15e,#453c625e);box-shadow:inset 0 1px 0 #e9d4ff25,0 4px 16px #061a1826}
+body[data-view=zone] .zone-space .zone-check-button{display:flex;align-items:center;gap:12px;flex:1;width:auto;min-width:0;min-height:54px;padding:3px 0!important;border:0!important;background:transparent!important;color:#f8f2ff!important;text-align:left;box-shadow:none!important;border-radius:8px}
+.zone-check-target{display:grid;place-items:center;width:34px;height:34px;border:2px solid #d5b2f7;border-radius:50%;flex:none;color:#fff}
+.zone-check-target svg{width:24px;height:24px}
+.zone-check-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+body[data-view=zone] .zone-space .zone-check-copy strong{font:600 16px/1.25 system-ui,sans-serif;color:#fcf7ff!important}
+.zone-check-copy small{font:11px/1.35 system-ui,sans-serif;color:#dbc2f2}
+.zone-checkin-strip.is-checked .zone-check-target{background:linear-gradient(145deg,#d2a5f6,#ae82dd);border-color:#d7b4f9;box-shadow:0 0 10px #c5a0ed2e}
+body[data-view=zone] .zone-space .zone-check-undo{width:auto;min-width:44px;min-height:44px;padding:5px 0 5px 8px;border:0;background:transparent!important;color:#e3bafa!important;font-size:12px;box-shadow:none!important}
+.zone-page-status{width:100%;margin:0;font:12px/1.5 system-ui,sans-serif;color:#ecd9ff}
+.zone-page-status:empty{display:none}
+body[data-view=zone] .zone-space .zone-daily-thought .affirmation-orbit{width:144px;height:144px;margin:12px auto 8px;color:#ddb7ff}
+.zone-space .zone-daily-thought .affirmation-orbit i{width:94px;height:94px;border-color:#d1a7f17d;box-shadow:0 0 22px #b586dd27,inset 0 0 20px #c69ee923}
+.zone-space .zone-daily-thought .affirmation-orbit i:nth-child(2){width:120px;height:120px;border-color:#cba8e75c}
+.zone-space .zone-daily-thought .affirmation-orbit i:nth-child(3){width:142px;height:142px;border-color:#cba8e738}
+.zone-space .zone-daily-thought .affirmation-orbit svg{width:64px;height:64px;filter:drop-shadow(0 0 10px #d2a6f144)}
+@media(max-width:360px){body[data-view=zone] .zone-space .zone-check-copy strong{font-size:14px}.zone-check-copy small{font-size:10px}.zone-check-target{width:30px;height:30px}}
+@media(max-width:360px){.zone-space .zone-activities h3{font-size:18px}.zone-space .zone-activity-choices button{font-size:12px!important;padding:13px 3px!important;min-height:106px!important}#zone-activity-dialog{padding:17px}.zone-breath-circle{width:155px;height:155px}.zone-breath-circle span{font-size:19px}.zone-space .zone-moments h3{font-size:17px}}

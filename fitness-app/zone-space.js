@@ -3,25 +3,25 @@
 'use strict';
 zoneAffirmationIndex=1;
 const prompts=['What is one small thing you appreciated today?','What can you leave until tomorrow?','What would make tomorrow a little lighter?','What do you want to make room for?','What went well, however small?','What can you be gentle with today?'];
-const moods=[['calm','Calm','M7 15q5 5 10 0M7 9h1m8 0h1'],['okay','Okay','M8 16q4 2 8 0M7 9h1m8 0h1'],['restless','Restless','M8 16h8M7 9h1m8 0h1'],['stressed','Stressed','M8 17q4-4 8 0M6 8l3 2m6 0 3-2'],['tired','Tired','M6 10h4m4 0h4M9 17q3-2 6 0']];
 const icons={leaf:'<path d="M24 42V22M24 32C10 32 7 21 8 17c11-1 17 5 16 15ZM24 26C23 14 33 8 41 8c1 12-6 22-17 22ZM24 22c-8-4-10-12-6-18 7 4 10 11 6 18Z"/>',breathe:'<circle cx="24" cy="24" r="17"/>',clear:'<path d="M4 19q10-12 20 0t20 0M4 30q10-12 20 0t20 0"/>',reflect:'<path d="M30 8H8v34h27V28M14 18h12M14 26h8M27 32l4-10L41 12l5 5-10 10Z"/>'};
 const icon=key=>'<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+icons[key]+'</svg>';
 const oldZone=zonePage;
 zonePage=function(){
  oldZone();const root=screen.querySelector('.zone-dashboard');if(!root)return;root.classList.add('zone-space');
  const heading=root.querySelector('.rest-photo-heading');heading.querySelector('p').textContent='A little space for yourself.';if(heading.style.backgroundImage)heading.style.setProperty('background-image','linear-gradient(0deg,#082d22ed 0%,#082d224d 35%,#082d2200 68%),'+heading.style.backgroundImage.slice(heading.style.backgroundImage.indexOf('url(')),'important');
- const done=cleanZoneLog(state.zoneLog)[foodDate()]===true,card=root.querySelector('.rest-today-card');
- card.classList.add('zone-completion-banner');card.innerHTML='<span class="zone-today-message">'+(done?icon('leaf')+'You made space for yourself today.':'A little time, just for you.')+'</span><button class="zone-check-button" data-zone="open" aria-haspopup="dialog" aria-controls="zone-checkin">'+(done?'Edit check-in':'I made time today →')+'</button>';
- const space=cleanZoneSpace(state.zoneSpace),selected=space.feelings[foodDate()];
+ const date=foodDate(),done=cleanZoneLog(state.zoneLog)[date]===true,card=root.querySelector('.rest-today-card');
+ card.className='zone-checkin-strip'+(done?' is-checked':'');
+ card.innerHTML='<button type="button" class="zone-check-button" data-zone-today="check" data-zone-today-date="'+date+'" aria-pressed="'+done+'"><span class="zone-check-target" aria-hidden="true">'+(done?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="m5 12 5 5L20 6"/></svg>':'')+'</span><span class="zone-check-copy"><strong>'+(done?'You made time today':'I made time today')+'</strong><small>'+(done?'A moment for yourself, recorded.':'Tap to check in')+'</small></span></button>'+(done?'<button type="button" class="zone-check-undo" data-zone-today="undo" data-zone-today-date="'+date+'">Undo</button>':'')+'<p class="zone-page-status" role="status"></p>';
+ const space=cleanZoneSpace(state.zoneSpace);
  const activities=document.createElement('section');activities.className='zone-activities';activities.setAttribute('aria-labelledby','zone-need');
- activities.innerHTML='<h3 id="zone-need">What do you need right now?</h3><div class="zone-activity-choices">'+[['breathe','Breathe'],['clear','Clear my head'],['reflect','Reflect']].map(([key,label])=>'<button type="button" data-zone-activity="'+key+'">'+icon(key)+'<span>'+label+'</span></button>').join('')+'</div><fieldset class="zone-feelings"><legend>How are you arriving? <small>Optional</small></legend><div>'+moods.map(([id,label,face])=>'<button type="button" data-zone-feeling="'+id+'" aria-pressed="'+(selected===id)+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="'+face+'"/></svg><span>'+label+'</span></button>').join('')+'</div><p class="zone-feeling-status" role="status">'+(selected?'Saved for today · tap again to clear':'Only what you choose to share with yourself.')+'</p></fieldset>';
- root.querySelector('.zone-summary-hero').after(activities);
- const thought=root.querySelector('.zone-affirmation-card');thought.classList.add('zone-daily-thought');thought.innerHTML='<span class="zone-eyebrow">TODAY’S THOUGHT</span><p id="zone-affirmation" class="affirmation-copy" aria-live="polite">'+safe(zoneAffirmations[zoneAffirmationIndex])+'</p><span class="zone-thought-leaf" aria-hidden="true">'+icon('leaf')+'</span><p class="zone-reflection-prompt">'+prompts[zoneAffirmationIndex%prompts.length]+'</p><button class="primary" data-zone-activity="reflect">'+icon('reflect')+' Write a thought</button><button class="affirmation-next" data-next-affirmation>Another thought ↻</button>';
+ activities.innerHTML='<h3 id="zone-need">What do you need right now?</h3><div class="zone-activity-choices">'+[['breathe','Breathe'],['clear','Clear my head'],['reflect','Reflect']].map(([key,label])=>'<button type="button" data-zone-activity="'+key+'">'+icon(key)+'<span>'+label+'</span></button>').join('')+'</div>';
+ root.querySelector('.zone-summary-hero').after(card);card.after(activities);
+ const flower=root.querySelector('.affirmation-orbit').outerHTML,thought=root.querySelector('.zone-affirmation-card');thought.classList.add('zone-daily-thought');thought.innerHTML='<span class="zone-eyebrow">TODAY’S THOUGHT</span>'+flower+'<p id="zone-affirmation" class="affirmation-copy" aria-live="polite">'+safe(zoneAffirmations[zoneAffirmationIndex])+'</p><p class="zone-reflection-prompt">'+prompts[zoneAffirmationIndex%prompts.length]+'</p><button class="primary" data-zone-activity="reflect">'+icon('reflect')+' Write a thought</button><button class="affirmation-next" data-next-affirmation>Another thought ↻</button>';
  activities.after(thought);
  const week=root.querySelector('.zone-moments');week.querySelector('h3').textContent='Your week of moments';week.querySelector('small').textContent=zonePageData().count+' moments · Last 7 days';
  const stats=root.querySelector('.rest-dashboard-stats');const detail=document.createElement('details');detail.className='zone-week-details';detail.innerHTML='<summary>Weekly details</summary>';detail.append(stats);week.append(detail);
  const past=document.createElement('details');past.className='rest-collapse zone-reflections';past.innerHTML='<summary>Past reflections <span>'+space.entries.length+'</span></summary><p class="note">Saved with your app data, including backups and account sync when enabled.</p>'+(space.entries.length?space.entries.slice().reverse().map(e=>'<article class="zone-reflection-entry"><small>'+safe(planDayLabel(e.date))+' · '+(e.kind==='clear'?'Clear my head':'Reflect')+'</small><p>'+safe(e.text)+'</p><div><button data-zone-edit="'+e.id+'">Edit</button><button data-zone-delete="'+e.id+'">Delete</button></div></article>').join(''):'<p>Your saved thoughts will appear here.</p>');
- week.after(past);root.append(card);
+ week.after(past);
 };
 let activity=null,tick=null,audio=null,sound=false,opener=null;
 function stopTick(){if(tick)clearInterval(tick);tick=null;if(audio?.state==='running')audio.suspend().catch(()=>{})}
@@ -51,13 +51,19 @@ function openActivity(kind,id=''){
 }
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseBreathing()});window.addEventListener('pagehide',pauseBreathing);
 document.addEventListener('input',e=>{if(e.target.id==='zone-thought-input')document.querySelector('.zone-writing-count').textContent=e.target.value.length+' / 2,000'});
-document.addEventListener('submit',e=>{if(e.target.id!=='zone-reflection-form')return;e.preventDefault();const text=e.target.elements.thought.value;if(!saveZoneReflection(activity.date,text,activity.kind,activity.id)){document.querySelector('.zone-activity-status').textContent='Could not save. Keep this window open and check storage. Up to 200 reflections can be saved.';return}closeActivity(true);zonePage();const message=document.querySelector('.zone-feeling-status');if(message)message.textContent='Your thought is saved. Record a moment whenever you’re ready.'});
+document.addEventListener('submit',e=>{if(e.target.id!=='zone-reflection-form')return;e.preventDefault();const text=e.target.elements.thought.value;if(!saveZoneReflection(activity.date,text,activity.kind,activity.id)){document.querySelector('.zone-activity-status').textContent='Could not save. Keep this window open and check storage. Up to 200 reflections can be saved.';return}closeActivity(true);zonePage();const message=document.querySelector('.zone-page-status');if(message)message.textContent='Your thought is saved. Record a moment whenever you’re ready.'});
 document.addEventListener('click',e=>{
  const button=e.target.closest('button');if(!button)return;
  if(button.hasAttribute('data-zone-activity')){openActivity(button.dataset.zoneActivity);return}
  if(button.hasAttribute('data-zone-edit')){const entry=cleanZoneSpace(state.zoneSpace).entries.find(x=>x.id===button.dataset.zoneEdit);if(entry)openActivity(entry.kind,entry.id);return}
  if(button.hasAttribute('data-zone-delete')){if(confirm('Delete this reflection?')&&deleteZoneReflection(button.dataset.zoneDelete)){zonePage();document.querySelector('.zone-reflections').open=true}return}
- if(button.hasAttribute('data-zone-feeling')){const date=foodDate(),mood=button.dataset.zoneFeeling,current=cleanZoneSpace(state.zoneSpace).feelings[date];if(saveZoneFeeling(date,current===mood?'':mood)){zonePage();document.querySelector('[data-zone-feeling='+mood+']')?.focus({preventScroll:true})}return}
+ if(button.hasAttribute('data-zone-today')){
+  const date=button.dataset.zoneTodayDate,undo=button.dataset.zoneToday==='undo';
+  if(date!==foodDate()){zonePage();document.querySelector('.zone-page-status').textContent='A new day has started. Tap to check in for today.';return}
+  if(!undo&&cleanZoneLog(state.zoneLog)[date]===true)return;
+  if(!saveZone(date,!undo)){document.querySelector('.zone-page-status').textContent='Could not save. Your previous check-in was kept. Please try again.';return}
+  const y=window.scrollY;zonePage();window.scrollTo(0,y);document.querySelector('.zone-check-button')?.focus({preventScroll:true});return
+ }
  if(button.hasAttribute('data-next-affirmation')){const p=document.querySelector('.zone-reflection-prompt');if(p)p.textContent=prompts[zoneAffirmationIndex%prompts.length];return}
  if(button.hasAttribute('data-zone-activity-close')){closeActivity();return}
  if(button.hasAttribute('data-zone-discard')){closeActivity(true);return}
