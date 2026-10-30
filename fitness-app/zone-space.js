@@ -3,7 +3,7 @@
 'use strict';
 zoneAffirmationIndex=1;
 const prompts=['What is one small thing you appreciated today?','What can you leave until tomorrow?','What would make tomorrow a little lighter?','What do you want to make room for?','What went well, however small?','What can you be gentle with today?'];
-const icons={leaf:'<path d="M24 42V22M24 32C10 32 7 21 8 17c11-1 17 5 16 15ZM24 26C23 14 33 8 41 8c1 12-6 22-17 22ZM24 22c-8-4-10-12-6-18 7 4 10 11 6 18Z"/>',breathe:'<circle cx="24" cy="24" r="17"/>',clear:'<path d="M4 19q10-12 20 0t20 0M4 30q10-12 20 0t20 0"/>',reflect:'<path d="M30 8H8v34h27V28M14 18h12M14 26h8M27 32l4-10L41 12l5 5-10 10Z"/>'};
+const icons={book:'<path d="M24 12c-5-5-12-6-19-4v29c8-2 14-1 19 3 5-4 11-5 19-3V8c-7-2-14-1-19 4ZM24 12v28M10 4v27c5-1 9 0 14 4 5-4 9-5 14-4V4"/>',history:'<circle cx="24" cy="24" r="17"/><path d="m16 24 6 6 12-14"/>',leaf:'<path d="M24 42V22M24 32C10 32 7 21 8 17c11-1 17 5 16 15ZM24 26C23 14 33 8 41 8c1 12-6 22-17 22ZM24 22c-8-4-10-12-6-18 7 4 10 11 6 18Z"/>',breathe:'<circle cx="24" cy="24" r="17"/>',clear:'<path d="M4 19q10-12 20 0t20 0M4 30q10-12 20 0t20 0"/>',reflect:'<path d="M30 8H8v34h27V28M14 18h12M14 26h8M27 32l4-10L41 12l5 5-10 10Z"/>'};
 const icon=key=>'<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+icons[key]+'</svg>';
 const oldZone=zonePage;
 zonePage=function(){
@@ -20,8 +20,13 @@ zonePage=function(){
  activities.after(thought);
  const week=root.querySelector('.zone-moments');week.querySelector('h3').textContent='Your week of moments';week.querySelector('small').textContent=zonePageData().count+' moments · Last 7 days';
  const stats=root.querySelector('.rest-dashboard-stats');const detail=document.createElement('details');detail.className='zone-week-details';detail.innerHTML='<summary>Weekly details</summary>';detail.append(stats);week.append(detail);
- const past=document.createElement('details');past.className='rest-collapse zone-reflections';past.innerHTML='<summary>Past reflections <span>'+space.entries.length+'</span></summary><p class="note">Saved with your app data, including backups and account sync when enabled.</p>'+(space.entries.length?space.entries.slice().reverse().map(e=>'<article class="zone-reflection-entry"><small>'+safe(planDayLabel(e.date))+' · '+(e.kind==='clear'?'Clear my head':'Reflect')+'</small><p>'+safe(e.text)+'</p><div><button data-zone-edit="'+e.id+'">Edit</button><button data-zone-delete="'+e.id+'">Delete</button></div></article>').join(''):'<p>Your saved thoughts will appear here.</p>');
+ const past=document.createElement('details');past.className='rest-collapse zone-reflections';past.innerHTML='<summary>'+icon('book')+'<span class="zone-summary-label">Past reflections</span><span class="zone-reflection-count">'+space.entries.length+'</span></summary><p class="note">Saved with your app data, including backups and account sync when enabled.</p>'+(space.entries.length?space.entries.slice().reverse().map(e=>'<article class="zone-reflection-entry"><small>'+safe(planDayLabel(e.date))+' · '+(e.kind==='clear'?'Clear my head':'Reflect')+'</small><p>'+safe(e.text)+'</p><div><button data-zone-edit="'+e.id+'">Edit</button><button data-zone-delete="'+e.id+'">Delete</button></div></article>').join(''):'<p>Your saved thoughts will appear here.</p>');
  week.after(past);
+ const recent=[...root.querySelectorAll('details.rest-collapse')].find(el=>el.querySelector('summary')?.textContent==='Recent check-ins');
+ if(recent){recent.classList.add('zone-recent-moments');recent.querySelector('summary').innerHTML=icon('history')+'<span>Recent check-ins</span>';const note=recent.querySelector('.note');if(note)note.textContent='Time for yourself, not a measure of calm.'}
+ const ideas=[...root.querySelectorAll('details.rest-collapse')].find(el=>el.querySelector('summary')?.textContent==='Ideas for a pause');
+ if(ideas){ideas.classList.add('zone-pause-ideas');ideas.querySelector('summary').innerHTML=icon('leaf')+'<span>Ideas for a pause</span>'}
+
  const scene=document.createElement('section');scene.className='zone-botanical-panel';scene.setAttribute('aria-label','Zone activities and today’s thought');activities.before(scene);scene.append(activities,thought);
 };
 let activity=null,tick=null,audio=null,sound=false,opener=null;
