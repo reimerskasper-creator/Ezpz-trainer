@@ -25,6 +25,14 @@ jobs:
         run: npx playwright install --only-shell chromium
       - name: Verify approved Zone activities and reflections
         run: node tests/zone.cjs && node tests/zone-space-mobile.cjs
+      - name: Save Zone design review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Zone-design-review
+          path: test-results/zone-space*.jpg
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Verify independent category photos and approved progress design
         run: node tests/progress-design-mobile.cjs
       - name: Verify sleep overview and pillar Progress
