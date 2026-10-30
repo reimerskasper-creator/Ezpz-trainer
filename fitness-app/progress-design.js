@@ -11,3 +11,5 @@ const categoryEatView=eat;eat=function(){categoryEatView();applyCategoryBackgrou
 const categorySleepView=sleepPage;sleepPage=function(){categorySleepView();applyCategoryBackground('sleep','.sleep-summary-hero')};
 const categoryZoneView=zonePage;zonePage=function(){categoryZoneView();applyCategoryBackground('zone','.zone-summary-hero')};
 const categoryTrainView=train;train=function(){categoryTrainView();applyCategoryBackground('training','.training-header')};
+// Choosing a menu action dismisses the overlay even when its confirmation is cancelled.
+document.addEventListener('click',event=>{if(event.target.closest('.training-options-body [data-action="save-partial"]')){const menu=document.querySelector('.training-options');if(menu)menu.open=false}},true);
