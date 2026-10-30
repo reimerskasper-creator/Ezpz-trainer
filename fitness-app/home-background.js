@@ -36,7 +36,7 @@
  function clean(value){const list=Array.isArray(value)?value:[];return [...new Set(list.filter(id=>ids.includes(id))),...ids.filter(id=>!list.includes(id))]}
  let editing=false,draft=null,drag=null,frame=0;
  const originalHome=home,originalMore=more;
- function items(){return sections.map(([id,selector,label])=>({id,label,node:screen.querySelector(selector)})).filter(x=>x.node?.parentElement===screen)}
+ function items(){const children=Array.from(screen.children);return sections.map(([id,selector,label])=>({id,label,node:screen.querySelector(selector)})).filter(x=>x.node?.parentElement===screen).sort((a,b)=>children.indexOf(a.node)-children.indexOf(b.node))}
  function arrange(order){const cards=items(),anchor=screen.querySelector('.home-edit-plan');if(!anchor)return;for(const id of clean(order)){const item=cards.find(x=>x.id===id);if(item)screen.insertBefore(item.node,anchor)}}
  function announce(message){const live=screen.querySelector('.home-arrange-status');if(live)live.textContent=message}
  function current(){const nodes=Array.from(screen.children);return items().sort((a,b)=>nodes.indexOf(a.node)-nodes.indexOf(b.node)).map(x=>x.id)}
