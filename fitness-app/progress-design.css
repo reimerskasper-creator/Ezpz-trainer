@@ -52,3 +52,24 @@ body[data-view=sleep] .sleep-overview .sleep-history .row{border-color:#8fa7b22e
 body[data-view=sleep] .sleep-overview .rest-goal-ring{filter:drop-shadow(0 0 5px #81b5db18)}
 body[data-view=sleep] .sleep-overview .rest-periods{background:#25464788!important;border-color:#7897a54d!important}
 body[data-view=sleep] .sleep-overview .rest-story-body{background:#12392ef5!important}
+
+/* Carry the same evening atmosphere into the editor and secondary controls. */
+body[data-view=sleep] .sleep-overview :is(.sleep-manual-actions,.sleep-overview-sync){background:linear-gradient(105deg,#0d302bea,#102f2bc2),url('../home-images/sleep-evening.jpg') center/cover!important;border-color:#799bad55!important;box-shadow:inset 0 1px 0 #c9e9fb08}
+body[data-view=sleep] .sleep-overview .measurement-source-details{border-color:#8fa7b235!important}
+body[data-view=sleep] .sleep-overview .tracker-freshness{background:transparent!important;border:0!important}
+body[data-view=sleep] .rest-dashboard #sleep-editor{background:linear-gradient(110deg,#0c2d29ed,#10312ac2),url('../home-images/sleep-evening.jpg') center/cover!important;border-color:#8eabbc80!important;box-shadow:0 -8px 45px #081d2060,inset 0 1px 0 #c9e9fb14!important;max-height:calc(100dvh - 32px);overflow-y:auto!important;padding:20px 17px max(28px,calc(var(--safe-area-inset-bottom,env(safe-area-inset-bottom,0px)) + 18px))!important;scroll-padding-bottom:28px}
+body[data-view=sleep] #sleep-editor::backdrop{background:#041c18ad;backdrop-filter:blur(7px)}
+body[data-view=sleep] #sleep-editor #sleep-form{background:transparent!important;border:0!important;box-shadow:none!important}
+body[data-view=sleep] #sleep-editor :is(input,select){background:#233f43bc!important;color:#f1fff5!important;border:1px solid #8eabbc75!important;box-shadow:inset 0 1px 0 #d8effd09!important;color-scheme:dark}
+body[data-view=sleep] #sleep-editor .sleep-goal-settings{background:#143b3566!important;border-color:#8eabbc3d!important}
+body[data-view=sleep] #sleep-editor .app-dialog-heading>button{background:#25474a99!important;border-color:#8eabbc60!important;color:#d0e6f3!important}
+/* Reserve room for the complete percentage, including values over 100%. */
+body[data-view=sleep] .sleep-overview .rest-goal-ring{width:104px;height:104px;flex:0 0 104px;background:#10352e9c!important}
+body[data-view=sleep] .sleep-overview .rest-goal-ring>span{inset:18%;gap:5px}
+body[data-view=sleep] .sleep-overview .rest-goal-ring b{display:flex!important;align-items:baseline;justify-content:center;gap:1px;font-size:26px!important;line-height:1.1!important;letter-spacing:-.5px;max-width:100%}
+body[data-view=sleep] .sleep-overview .rest-goal-ring b small{display:inline!important;font-size:11px!important;line-height:1!important}
+body[data-view=sleep] .sleep-overview .rest-goal-ring[data-digits="4"] b{font-size:21px!important}
+body[data-view=sleep] .sleep-overview .rest-goal-ring em{font-size:10px;line-height:1.1;white-space:nowrap}
+body[data-view=sleep] .sleep-overview-source .connection-brand{width:28px;height:28px;min-width:28px;flex:0 0 28px;object-fit:contain}
+body[data-view=sleep] .sleep-overview-source .connection-brand[src$="/whoop.png"]{background:transparent!important;border:0!important;border-radius:0;box-shadow:none!important;padding:0!important}
+@media(max-width:360px){body[data-view=sleep] .sleep-overview .rest-goal-ring{width:96px;height:96px;flex-basis:96px}body[data-view=sleep] .sleep-overview .rest-goal-ring b{font-size:23px!important}body[data-view=sleep] .sleep-overview .rest-goal-ring[data-digits="4"] b{font-size:18px!important}}
