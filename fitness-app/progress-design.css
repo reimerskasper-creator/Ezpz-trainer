@@ -21,3 +21,18 @@ body[data-view=progress] .habit-trend-detail.soft-progress-detail{padding:14px!i
 .soft-progress-detail .is-contextual [data-trend-point]>text{display:none}
 body[data-view=progress] .progress-zone-days button{background:transparent!important;box-shadow:none!important}
 body[data-view=train] .training-options-body{max-height:calc(100dvh - 310px)}
+
+/* Approved larger photo areas and discreet, accessible camera controls. */
+body[data-view=progress] .soft-progress-detail:has([data-progress-background="sleep"]) .progress-photo-hero,
+body[data-view=progress] .soft-progress-detail:has([data-progress-background="zone"]) .progress-photo-hero{min-height:clamp(260px,80vw,330px)}
+body[data-view=sleep] .sleep-overview .rest-photo-heading,
+body[data-view=zone] .zone-summary-hero .rest-photo-heading{min-height:clamp(260px,80vw,330px)!important;padding:60px 18px 22px!important}
+body[data-view] .photo-camera-control{position:absolute;top:10px;right:12px;z-index:2;width:36px!important;height:36px!important;min-width:36px!important;min-height:36px!important;padding:8px!important;margin:0!important;border:1px solid #e2f3e04d!important;border-radius:50%!important;display:grid!important;place-items:center;background:#113b2b99!important;color:#ecfff3!important;box-shadow:none!important;opacity:.85}
+body[data-view] .photo-camera-control::after{content:"";position:absolute;inset:-4px;border-radius:50%}
+body[data-view] .photo-camera-control svg{width:18px;height:18px;display:block}
+body[data-view] .photo-camera-control:hover,body[data-view] .photo-camera-control:focus-visible{opacity:1;background:#1d503ee6!important}
+body[data-view=train] .training-options-body>.photo-camera-control{position:relative;top:auto;right:auto;margin:8px 0 0 auto!important}
+body[data-view=eat] .food-diary-overview{position:relative}
+body[data-view=eat] .eat-intake-heading{padding-right:40px;min-height:36px}
+body[data-view=progress] .progress-zone-days .zone-date-label{display:flex;flex-direction:column;gap:2px;align-items:center;line-height:1.35;white-space:nowrap}
+body[data-view=progress] .progress-zone-days .zone-date-label>span{font-size:10px}
