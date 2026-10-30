@@ -52,6 +52,16 @@ jobs:
             test-results/sleep-overview-samsung-390.jpg
           if-no-files-found: ignore
           retention-days: 14
+      - name: Verify Home section arrangement
+        run: node tests/home-arrange-mobile.cjs
+      - name: Save Home arrangement review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Home-arrange-review
+          path: test-results/home-arrange*.jpg
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Verify compact Home layout
         run: node tests/personal-home-mobile.cjs
       - name: Run app and mobile checks

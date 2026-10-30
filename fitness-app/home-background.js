@@ -28,3 +28,45 @@
  window.EZPZProgressBackground={select(id){if(!category)return false;return window.EZPZHomeBackground.select(id)}};
  document.addEventListener('click',event=>{const button=event.target.closest('[data-home-background],[data-progress-background]');if(button)open(button)});
 })();
+
+/* Arrange the existing Home nodes; their contents and actions stay owned by Home. */
+(()=>{
+ const sections=[['todayWorkout','.home-workout','Today’s workout'],['nutrition','.home-nutrition','Today’s nutrition'],['steps','.home-steps-panel','Steps'],['workouts','.home-next','Your next workouts'],['meals','.home-meals','Your next meals'],['week','.foundation-week','Your week'],['weight','.home-weight-card,.weight-show','Bodyweight']];
+ const ids=sections.map(s=>s[0]);
+ function clean(value){const list=Array.isArray(value)?value:[];return [...new Set(list.filter(id=>ids.includes(id))),...ids.filter(id=>!list.includes(id))]}
+ let editing=false,draft=null,drag=null,frame=0;
+ const originalHome=home,originalMore=more;
+ function items(){return sections.map(([id,selector,label])=>({id,label,node:screen.querySelector(selector)})).filter(x=>x.node?.parentElement===screen)}
+ function arrange(order){const cards=items(),anchor=screen.querySelector('.home-edit-plan');if(!anchor)return;for(const id of clean(order)){const item=cards.find(x=>x.id===id);if(item)screen.insertBefore(item.node,anchor)}}
+ function announce(message){const live=screen.querySelector('.home-arrange-status');if(live)live.textContent=message}
+ function current(){const nodes=Array.from(screen.children);return items().sort((a,b)=>nodes.indexOf(a.node)-nodes.indexOf(b.node)).map(x=>x.id)}
+ function move(id,to){const order=clean(draft),from=order.indexOf(id);if(from<0||to<0||to>=order.length||from===to)return;order.splice(from,1);order.splice(to,0,id);draft=order;arrange(draft);announce(sections.find(s=>s[0]===id)[2]+' moved to position '+(to+1))}
+ function decorate(){
+  screen.classList.toggle('home-arranging',editing);if(!editing)return;
+  const bar=document.createElement('section');bar.className='home-arrange-toolbar';bar.setAttribute('aria-label','Arrange homepage');bar.innerHTML='<div><strong>Arrange homepage</strong><small>Hold a handle to move a section</small></div><button type="button" data-home-arrange-cancel>Cancel</button><button type="button" class="primary" data-home-arrange-done>Done</button><p class="home-arrange-status" role="status" aria-live="polite"></p>';
+  screen.querySelector('.home-heading')?.after(bar);
+  for(const item of items()){item.node.dataset.homeOrderId=item.id;const handle=document.createElement('button');handle.type='button';handle.className='home-arrange-handle';handle.dataset.homeArrangeHandle=item.id;handle.setAttribute('aria-label','Move '+item.label+'. Hold and drag, or use the up and down arrow keys.');handle.innerHTML='<span aria-hidden="true">⠿</span><span>Move '+item.label+'</span>';if(item.node.tagName==='BUTTON'){item.node.before(handle);handle.dataset.homeArrangeStandalone=item.id}else item.node.prepend(handle)}
+ }
+ // Keep the standalone hidden-weight control with its existing button when moved.
+ const reorder=arrange;arrange=function(order){reorder(order);for(const handle of screen.querySelectorAll('[data-home-arrange-standalone]')){const item=items().find(x=>x.id===handle.dataset.homeArrangeStandalone);if(item)item.node.before(handle)}};
+ home=function(){stopDrag(false);originalHome();if(state.homeSectionOrder||editing)arrange(editing?draft:state.homeSectionOrder);decorate()};
+ more=function(){editing=false;draft=null;stopDrag(false);screen.classList.remove('home-arranging');originalMore();const group=screen.querySelector('.more-daily');if(group){const button=document.createElement('button');button.type='button';button.className='more-link';button.dataset.homeArrangeOpen='';button.innerHTML=homeIcon('settings')+'<span><strong>Arrange homepage</strong><small>Move your existing sections</small></span><b aria-hidden="true">›</b>';group.append(button)}};
+ function finish(commit){stopDrag(false);if(commit){const had=Object.hasOwn(state,'homeSectionOrder'),before=state.homeSectionOrder;state.homeSectionOrder=clean(draft);if(!save()){if(had)state.homeSectionOrder=before;else delete state.homeSectionOrder;announce('Could not save. Your previous order is kept. Try again or Cancel.');return}}editing=false;draft=null;home();scrollTo(0,0)}
+ function stopDrag(rollback){if(!drag)return;clearTimeout(drag.timer);cancelAnimationFrame(frame);if(rollback&&drag.active){draft=drag.before;arrange(draft)}drag.node?.classList.remove('home-section-moving');drag=null;document.body.classList.remove('home-section-dragging')}
+ function tick(){if(!drag?.active)return;const edge=90,dy=drag.y<edge?-Math.ceil((edge-drag.y)/6):drag.y>innerHeight-edge?Math.ceil((drag.y-innerHeight+edge)/6):0;if(dy)scrollBy(0,Math.max(-18,Math.min(18,dy)));const target=items().filter(x=>x.id!==drag.id).find(x=>{const r=x.node.getBoundingClientRect();return drag.y<r.top+r.height/2});const visible=current().filter(id=>id!==drag.id),to=target?visible.indexOf(target.id):visible.length;const next=[...visible];next.splice(to,0,drag.id);const order=clean(next);if(JSON.stringify(order)!==JSON.stringify(clean(draft))){draft=order;arrange(draft)}frame=requestAnimationFrame(tick)}
+ document.addEventListener('click',event=>{
+  if(event.target.closest('[data-home-arrange-open]')){editing=true;draft=clean(state.homeSectionOrder);tab='home';render();scrollTo(0,0);screen.querySelector('[data-home-arrange-done]')?.focus();return}
+  if(event.target.closest('[data-home-arrange-done]'))return finish(true);
+  if(event.target.closest('[data-home-arrange-cancel]'))return finish(false);
+  if(event.target.closest('[data-home-arrange-handle]')){event.preventDefault();event.stopImmediatePropagation();return}
+  if(editing&&event.target.closest('[data-tab],[data-go]')){stopDrag(false);editing=false;draft=null;screen.classList.remove('home-arranging')}
+ },true);
+ document.addEventListener('keydown',event=>{const handle=event.target.closest('[data-home-arrange-handle]');if(!editing||!handle||!['ArrowUp','ArrowDown'].includes(event.key))return;event.preventDefault();move(handle.dataset.homeArrangeHandle,clean(draft).indexOf(handle.dataset.homeArrangeHandle)+(event.key==='ArrowUp'?-1:1));handle.focus({preventScroll:true})});
+ document.addEventListener('pointerdown',event=>{const handle=event.target.closest('[data-home-arrange-handle]');if(!editing||!handle||event.button!==0)return;stopDrag(false);const item=items().find(x=>x.id===handle.dataset.homeArrangeHandle);if(!item)return;drag={id:item.id,node:item.node,pointer:event.pointerId,x:event.clientX,y:event.clientY,startY:event.clientY,before:clean(draft),active:false};drag.timer=setTimeout(()=>{if(!drag)return;drag.active=true;drag.node.classList.add('home-section-moving');document.body.classList.add('home-section-dragging');announce('Moving '+item.label);frame=requestAnimationFrame(tick)},250)});
+ document.addEventListener('pointermove',event=>{if(!drag||event.pointerId!==drag.pointer)return;if(!drag.active&&Math.hypot(event.clientX-drag.x,event.clientY-drag.startY)>12){stopDrag(false);return}drag.y=event.clientY;if(drag.active)event.preventDefault()},{passive:false});
+ document.addEventListener('pointerup',event=>{if(drag&&event.pointerId===drag.pointer){if(drag.active)announce('Section moved. Tap Done to save.');stopDrag(false)}});
+ document.addEventListener('pointercancel',()=>stopDrag(true));
+ window.addEventListener('blur',()=>stopDrag(true));
+})();
+// The core page can render before this enhancement loads.
+if(tab==='home'&&state.profile&&state.homeSectionOrder)home();
