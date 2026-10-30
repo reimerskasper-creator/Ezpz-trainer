@@ -42,6 +42,16 @@ jobs:
             node "$check" || failed=1
           done
           exit "$failed"
+      - name: Save Sleep design review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Sleep-design-review
+          path: |
+            test-results/sleep-mood*.jpg
+            test-results/sleep-overview-samsung-390.jpg
+          if-no-files-found: ignore
+          retention-days: 14
       - name: Verify compact Home layout
         run: node tests/personal-home-mobile.cjs
       - name: Run app and mobile checks

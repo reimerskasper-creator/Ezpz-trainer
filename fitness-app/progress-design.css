@@ -38,3 +38,17 @@ body[data-view=progress] .progress-zone-days .zone-date-label{display:flex;flex-
 body[data-view=progress] .progress-zone-days .zone-date-label>span{font-size:10px}
 /* A selected check-in uses its circular halo, independent of generic selected buttons. */
 body[data-view=progress] .soft-progress-detail .progress-zone-days button[data-trend-point][aria-pressed]{background:transparent!important;color:#ecfff2!important;border-color:transparent!important;box-shadow:none!important}
+
+/* Sleep keeps its established layout; dim photography adds a quieter evening mood. */
+body[data-view=sleep]{background-color:#0d2c21!important;background-image:radial-gradient(ellipse at 95% 15%,#52738d20,transparent 55%),radial-gradient(ellipse at 0 65%,#b1834c0c,transparent 50%)!important}
+body[data-view=sleep] .sleep-overview .sleep-summary-hero{border-color:#7894a458!important;box-shadow:0 0 22px #6f9ec00a;background:#103429!important}
+body[data-view=sleep] .sleep-overview .rest-photo-heading{background-image:linear-gradient(0deg,#082d22ce,#082d2200 65%),url('../home-images/sleep-bedroom.jpg');background-size:cover;background-position:center 54%}
+body[data-view=sleep] .sleep-overview .rest-today-card{background:linear-gradient(100deg,#0a3029f0,#102e29a8),url('../home-images/sleep-bedroom.jpg') center 64%/cover!important;border-color:#799bad52!important;box-shadow:inset 0 1px 0 #c9e9fb0a,0 0 18px #86badd09}
+body[data-view=sleep] .sleep-overview :is(.sleep-stage-card,.rest-trend-card,.rest-collapse){background:linear-gradient(105deg,#0d302be6,#102f2bb3),url('../home-images/sleep-evening.jpg')!important;background-size:cover!important;background-position:center!important;border-color:#799bad48!important;box-shadow:inset 0 1px 0 #c9e9fb08,0 3px 15px #021a1420}
+body[data-view=sleep] .sleep-overview .rest-dashboard-stats>div{background:linear-gradient(145deg,#294a4e70,#14392c)!important;border-color:#799bad40!important}
+body[data-view=sleep] .sleep-overview .sleep-stage-grid>div{background:#2243498c!important;border-color:#799bad40!important}
+body[data-view=sleep] .sleep-overview .sleep-history{background:transparent!important;box-shadow:none!important}
+body[data-view=sleep] .sleep-overview .sleep-history .row{border-color:#8fa7b22e!important}
+body[data-view=sleep] .sleep-overview .rest-goal-ring{filter:drop-shadow(0 0 5px #81b5db18)}
+body[data-view=sleep] .sleep-overview .rest-periods{background:#25464788!important;border-color:#7897a54d!important}
+body[data-view=sleep] .sleep-overview .rest-story-body{background:#12392ef5!important}
