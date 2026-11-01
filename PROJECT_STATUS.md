@@ -1310,3 +1310,5 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 - Owner reviewed the homepage sketch and explicitly authorized applying the emerald-glass effect while the removal build was finishing. The combined unreleased update remains **1.0.74** (code 75). Adds scoped, restrained mint rims/soft glow to the existing overview and workout photo card, glass secondary actions, mint primary action and glass workout badge/collapse controls. No new sections, layout or function changes; custom photo backgrounds and ring accent colors are preserved.
 - Supersedes the removal-only APK from source 6cb918f; do not deliver that artifact as the combined update. A final combined-source build and full checks are required. Phone test now checks glass styles and captures overview/workout screenshots.
+
+- Initial combined phone check caught an existing late Home theme rule overriding the new overview border. Increased specificity only for the new Home accents so the approved glass styles win without touching other theme rules; rerun required.
