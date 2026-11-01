@@ -31,9 +31,9 @@
 
 /* Arrange the existing Home nodes; their contents and actions stay owned by Home. */
 (()=>{
- const sections=[['insights','.home-insights','EZPZ Insights'],['todayWorkout','.home-workout','Today’s workout'],['nutrition','.home-nutrition','Today’s nutrition'],['steps','.home-steps-panel','Steps'],['workouts','.home-next','Your next workouts'],['meals','.home-meals','Your next meals'],['week','.foundation-week','Your week'],['weight','.home-weight-card,.weight-show','Bodyweight']];
+ const sections=[['todayWorkout','.home-workout','Today’s workout'],['nutrition','.home-nutrition','Today’s nutrition'],['steps','.home-steps-panel','Steps'],['workouts','.home-next','Your next workouts'],['meals','.home-meals','Your next meals'],['week','.foundation-week','Your week'],['weight','.home-weight-card,.weight-show','Bodyweight']];
  const ids=sections.map(s=>s[0]);
- function clean(value){const list=Array.isArray(value)?[...value]:[];if(!list.includes('insights'))list.unshift('insights');return [...new Set(list.filter(id=>ids.includes(id))),...ids.filter(id=>!list.includes(id))]}
+ function clean(value){const list=Array.isArray(value)?[...value]:[];return [...new Set(list.filter(id=>ids.includes(id))),...ids.filter(id=>!list.includes(id))]}
  let editing=false,draft=null,drag=null,frame=0;
  const originalHome=home,originalMore=more;
  function items(){const children=Array.from(screen.children);return sections.map(([id,selector,label])=>({id,label,node:screen.querySelector(selector)})).filter(x=>x.node?.parentElement===screen).sort((a,b)=>children.indexOf(a.node)-children.indexOf(b.node))}

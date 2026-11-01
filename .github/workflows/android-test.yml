@@ -25,7 +25,7 @@ jobs:
           packages: 'platform-tools platforms;android-36 build-tools;36.0.0'
       - name: Validate import contracts
         run: |
-          node tests/insights.cjs
+          node tests/home-simplified.cjs
           node tests/wellness.cjs
           node tests/native-health.cjs
           node tests/nutrition-import.cjs
@@ -46,7 +46,7 @@ jobs:
           node tests/native-runtime.cjs
           npm install --no-save --no-package-lock playwright@1.64.1
           npx playwright install --only-shell chromium
-          node tests/insights-mobile.cjs
+          node tests/home-simplified-mobile.cjs
           node tests/home-arrange-mobile.cjs
           node tests/native-package-mobile.cjs
           node tests/whoop-mobile.cjs
@@ -75,7 +75,7 @@ jobs:
         with:
           name: Android-startup-review
           path: |
-            test-results/insights-*.jpg
+            test-results/home-simplified*.jpg
             test-results/native-package-startup.jpg
             test-results/native-step-check.jpg
             test-results/native-step-period.jpg

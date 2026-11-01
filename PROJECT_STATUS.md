@@ -1300,3 +1300,10 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 - Verified runtime source **ac491d3f567762db593f706b1af4eee4a3193840**. Android build **41314238782** and full Mobile app checks **41314238792** both succeeded, including 320/390/430px Insights metrics/macros/empty states/details/periods/navigation, existing Home arrangement and full regressions. Top and lower page screenshots visually inspected. Existing ezpz-fitness-debug-signing-v2 signing key restored successfully.
 - Delivery: Android **1.0.73** (code 74), APK artifact **13086790906**: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/41314238782/artifacts/13086790906 . Open in Chrome, download/extract ZIP, install app-debug.apk over the existing app. No uninstall or new setup. Owner phone confirmation is the next step; no known functional blockers. Documentation-only follow-up skips CI to avoid a redundant APK build.
+
+
+## Remove EZPZ Insights — 1 November 2026
+- Owner rejected the feature and explicitly requested deletion. Android 1.0.74 (code 75), canonical android-health-connect based on 9fc5b46. Removed the homepage card, dedicated page, rules engine, presentation code, related styles and navigation. Existing Progress trend observations remain intact.
+- Homepage reordering ignores the removed Insights ID while preserving all remaining sections/order. Old collapse preferences do not affect remaining controls; old Insights navigation falls back to styled Home. No tracking records, scores, histories, source selections, permissions or integration logic deleted/changed.
+- Replaced feature tests with simplified-Home/legacy-order tests; restored seven-section arrangement checks. Local home-simplified, home-panels and home suites pass. Hosted Android/mobile checks pending source push.
+- Emerald-glass alternatives on existing homepage sections are a sketch only; no replacement feature or additional homepage styling implemented without owner review. Next: deliver tested removal APK plus visual proposal.
