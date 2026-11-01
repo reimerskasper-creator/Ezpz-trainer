@@ -30,3 +30,23 @@ body[data-view=home] .home-arranging .home-arrange-handle{display:flex!important
 body[data-view=home] .home-arranging .home-section-moving{outline:2px solid #a2ecc5;outline-offset:3px;box-shadow:0 8px 28px #041a13aa!important;opacity:.9}
 
 body[data-view=home] .home-arranging,body[data-view=home] .home-arranging *{-webkit-user-select:none!important;user-select:none!important;-webkit-touch-callout:none}
+
+/* Insights adds one compact card; existing Home sections retain their styling. */
+.home-insights{position:relative;margin:12px 0 16px;padding:15px 17px;border:1px solid #81c69b47;border-radius:18px;background:linear-gradient(115deg,#173e2f,#0b2d24);box-shadow:0 0 18px #76d89c0d;color:#edf5e9}
+.home-insights .home-panel-heading{gap:8px;margin:0;align-items:center}
+.home-insights h3{font:inherit;font-size:16px;font-weight:700;margin:0;flex:1}
+.home-insights h3>span{color:#bcebc6;margin-right:5px}
+.home-insights .insights-today{font-size:11px;color:#c6dacb}
+.home-insights .home-collapse-control{position:static!important;flex:none;min-width:38px;min-height:38px;margin:0}
+.home-insights .insights-copy{font-size:14px;line-height:1.55;margin:8px 0;color:#e0eddf}
+.home-insights .home-text-link{min-height:40px;color:#bcebc6}
+.insights-periods{display:flex;gap:7px;margin:16px 0;flex-wrap:wrap}
+.insights-periods button{flex:1;min-height:44px;padding:9px 12px}
+.insights-periods button[aria-pressed=true]{background:#8ee2b4;color:#153d2d;border-color:#8ee2b4}
+.insights-detail p,.insights-intro p{line-height:1.6}
+.insights-detail h3{margin-top:0}
+.insights-method{padding:0 8px;line-height:1.6}
+@media(max-width:360px){.home-insights{padding:12px 13px}.home-insights h3{font-size:14px}}
+body[data-view=home] .home-insights .home-panel-heading{padding-right:0!important}
+body[data-view=home] .home-insights .home-panel-heading h3{font-size:16px;min-width:0}
+@media(max-width:360px){body[data-view=home] .home-insights .home-panel-heading h3{font-size:14px}}
