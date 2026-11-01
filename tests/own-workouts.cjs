@@ -1,6 +1,7 @@
 // Run: node tests/own-workouts.cjs
 const fs=require('node:fs'),path=require('node:path'),source=fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8'),screen={innerHTML:''};
-let stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2,selectedWorkout:'push-a',workoutSchedule:{'2026-11-01':'pull-a'},workoutDrafts:{'push-a':{'sr0-0':'9'}}}),fail=false;
+const untouchedDay=new Date(Date.now()+14*86400000).toLocaleDateString('en-CA');
+let stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2,selectedWorkout:'push-a',workoutSchedule:{[untouchedDay]:'pull-a'},workoutDrafts:{'push-a':{'sr0-0':'9'}}}),fail=false;
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}},script=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),alerts=[];
 const api=new Function('document','window','localStorage','fetch','console','alert','confirm',script+'\nreturn {showWorkoutCategory,startBuilder,emptyOwnWorkout,saveOwnWorkout,workoutChooser,ownWorkoutTile,workoutBuilder,workoutPlan,cleanCustomWorkouts,restoredState,planSettings,get state(){return state},get draft(){return builderDraft},get origin(){return builderOrigin},setTab(v){tab=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('Full');stored=v}},()=>new Promise(()=>{}),{error(){}},m=>alerts.push(m),()=>true);
 const assert=(v,m)=>{if(!v)throw Error(m)},equal=(a,b,m)=>assert(JSON.stringify(a)===JSON.stringify(b),m);
@@ -24,7 +25,7 @@ equal(api.workoutPlan().exercises.map(x=>x.name),draft.exercises.map(x=>x.name),
 assert((screen.innerHTML.match(/data-set-reps=/g)||[]).length===4,'Custom set logger uses requested set counts');
 assert(JSON.stringify(api.state.workoutSchedule)===scheduleBefore,'Starting never invents a schedule');
 api.setTab('planner');api.startBuilder(null);const target=api.planSettings().date,planId=api.saveOwnWorkout({...draft,title:'Plan this day'},'plan');
-assert(api.state.workoutSchedule[target]===planId&&api.state.workoutSchedule['2026-11-01']==='pull-a','Planner save targets only selected day');
+assert(api.state.workoutSchedule[target]===planId&&api.state.workoutSchedule[untouchedDay]==='pull-a','Planner save targets only selected day');
 const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);
 equal(restored.customWorkouts,backup.customWorkouts,'Own sessions survive backup');
 equal(restored.workoutSchedule,backup.workoutSchedule,'Schedule survives backup');
