@@ -61,7 +61,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Home-arrange-review
-          path: test-results/home-arrange*.jpg
+          path: |
+            test-results/home-arrange*.jpg
+            test-results/home-appearance*.jpg
           if-no-files-found: ignore
           retention-days: 14
       - name: Verify compact Home layout
