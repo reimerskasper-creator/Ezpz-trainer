@@ -56,3 +56,32 @@ body[data-view=home] #screen .home-nutrition .home-macro-row>div :is(strong,smal
 body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row>div{background:transparent!important;border:0!important;box-shadow:none}
 body[data-view=home] #screen :is(.home-nutrition-bottom,.home-nutrition>.row,.home-next>.row,.home-weight-row,.steps-expanded){background:transparent!important}
 body[data-view=home] #screen :is(.home-week-card,.home-workout,.home-nutrition,.home-steps-panel,.home-next,.home-meals,.foundation-week,.home-weight-card) :is(p,small,.note){color:#e4f3e9!important}
+
+/* Ring canvas: percentage positions adapt to each phone's card width. */
+body[data-view=home] #screen .ring-canvas{display:block;position:relative;height:clamp(320px,94vw,420px);margin:4px 0 0!important;padding:0!important;width:100%;isolation:isolate}
+body[data-view=home] #screen .ring-canvas>.habit-rings{display:contents!important}
+body[data-view=home] #screen .ring-canvas .habit-item{position:absolute!important;transform:translate(-50%,-50%);min-height:44px!important;min-width:44px!important;margin:0!important;padding:0!important;display:flex!important;flex-direction:column;align-items:center;justify-content:flex-start!important;gap:3px!important;pointer-events:auto;overflow:visible;box-sizing:border-box;border:0!important;background:transparent!important;order:0}
+body[data-view=home] #screen .ring-canvas .habit-item .habit-ring{width:var(--ring-diameter)!important;height:var(--ring-diameter)!important;flex:none!important;box-shadow:none}
+body[data-view=home] #screen .ring-canvas .habit-ring b{font-size:var(--ring-number)!important;white-space:nowrap}
+body[data-view=home] #screen .ring-canvas .habit-ring b small{font-size:10px!important}
+body[data-view=home] #screen .ring-canvas .habit-item>strong{font-size:11px!important;line-height:1.3}
+body[data-view=home] #screen .ring-canvas .overall-ring>strong{font-size:15px!important}
+body[data-view=home] #screen .ring-canvas .habit-item>.ring-metric{display:block!important;font-size:10px!important;line-height:1.35;white-space:normal;max-width:100%;text-align:center}
+body[data-view=home] #screen .ring-canvas.ring-details-hidden .habit-item>.ring-metric{display:none!important}
+body[data-view=home] #screen .ring-canvas.ring-editing .habit-item{touch-action:none;cursor:grab;border-radius:12px}
+body[data-view=home] #screen .ring-canvas.ring-editing .ring-selected{outline:1px dashed #a4e6c7;outline-offset:3px}
+body[data-view=home] #screen .ring-canvas.ring-editing .habit-item:focus-visible{outline:2px solid #b9ffe0;outline-offset:4px}
+body[data-view=home] #screen .home-source-badge{display:inline-flex;min-height:44px;width:auto;font-size:10px;padding:5px 9px;margin:0;background:#103a2bb0!important;color:#e7f7ee;border:1px solid #799f8b;border-radius:20px}
+body[data-view=home] #screen .home-week-footer{justify-content:flex-end;margin-top:0;min-height:44px;pointer-events:none}
+body[data-view=home] #screen .home-week-footer button{pointer-events:auto;font-size:11px}
+body[data-view=home] #screen .home-appearance-panel{margin:12px 0 18px;padding:4px 14px;border:1px solid #799f8b;border-radius:20px;background:linear-gradient(135deg,#153d31f2,#0b2c23f5);color:#ecfff3;box-shadow:inset 0 1px 0 #ffffff14}
+.home-appearance-panel details+details{border-top:1px solid #799f8b55}.home-appearance-panel summary{min-height:48px;display:flex;align-items:center;cursor:pointer;font-size:14px;font-weight:650}.home-appearance-panel summary:after{content:'⌄';margin-left:auto}.home-appearance-panel details[open]>summary:after{content:'⌃'}
+.home-appearance-panel label{display:block;font-size:12px;color:#e0f2e6;margin:10px 0}.home-appearance-panel input[type=range]{display:block;width:100%;min-height:44px;padding:0;accent-color:#8ee2b4;border:0;background:none}
+body[data-view=home] #screen .home-appearance-panel button{min-height:44px;width:auto;padding:8px 12px;background:#234d3b!important;color:#effff4!important;border:1px solid #799f8b;font-size:12px;border-radius:12px}
+.home-appearance-panel .ring-mode{display:flex;gap:6px}.home-appearance-panel .ring-mode button{flex:1}
+body[data-view=home] #screen .home-appearance-panel .ring-mode button[aria-pressed=true]{background:#8ee2b4!important;color:#103a29!important}
+.home-appearance-panel p{font-size:11px;margin:10px 0}.home-appearance-panel label.home-display-toggle{display:flex;align-items:center;justify-content:space-between;min-height:44px}.home-display-toggle input{width:22px;min-height:22px;accent-color:#8ee2b4}
+.home-sync-dialog{width:min(420px,calc(100% - 32px));margin:auto;padding:22px;border:1px solid #799f8b;border-radius:22px;background:#12382d;color:#effff4}.home-sync-dialog::backdrop{background:#001b13b3}.home-sync-dialog h2{font-size:20px}.home-sync-dialog .home-tracker-note{font-size:13px;line-height:1.7;color:#dcf1e4}.home-sync-dialog .home-tracker-note small{display:none}.home-sync-dialog button{width:auto;min-height:44px;margin:12px 8px 0 0;background:#27513e;color:#effff4;border-color:#799f8b}.home-sync-dialog [data-home-sync-result]{font-size:12px}
+body[data-view=home] #screen .home-heading[hidden]{display:none}
+
+body[data-view=home] #screen .home-source-badge+.home-week-footer{margin-top:-44px}.home-source-badge .connection-brand{width:26px!important;height:26px!important;flex:0 0 26px!important;object-fit:contain;background:transparent!important;border:0;padding:0!important}
