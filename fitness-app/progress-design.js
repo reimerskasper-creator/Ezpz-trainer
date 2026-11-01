@@ -18,7 +18,7 @@ document.addEventListener('click',event=>{if(event.target.closest('.training-opt
 
 /* Independent photo surfaces for the six Progress overview cards. */
 function progressCardPhotoLabel(id){return ({overall:'Overall',calories:'Eat',sleep:'Sleep',training:'Train',zone:'Zone',steps:'Steps'})[id]||'Progress'}
-function progressCardDefaultPhoto(id){return id==='zone'?'./home-images/zone-glass-leaves.jpg':progressDefaultPhoto(id)}
+function progressCardDefaultPhoto(id){return id==='zone'?'./home-images/progress-zone.jpg':progressDefaultPhoto(id)}
 function progressCardVeil(dim){return 'linear-gradient(90deg,rgba(4,28,20,'+Math.min(.94,dim+.23)+'),rgba(4,28,20,'+Math.max(.15,dim-.20)+')),linear-gradient(0deg,rgba(4,28,20,'+Math.min(.94,dim+.12)+'),transparent 75%)'}
 (()=>{
  let editing=false;
