@@ -85,3 +85,5 @@ body[data-view=home] #screen .home-appearance-panel .ring-mode button[aria-press
 body[data-view=home] #screen .home-heading[hidden]{display:none}
 
 body[data-view=home] #screen .home-source-badge+.home-week-footer{margin-top:-44px}.home-source-badge .connection-brand{width:26px!important;height:26px!important;flex:0 0 26px!important;object-fit:contain;background:transparent!important;border:0;padding:0!important}
+/* Selection uses the mint outline; global pressed-button colors must not dim ring labels. */
+body[data-view=home] #screen .ring-canvas.ring-editing .habit-item>strong,body[data-view=home] #screen .ring-canvas.ring-editing .habit-item>.ring-metric{color:#f0fff4!important}
