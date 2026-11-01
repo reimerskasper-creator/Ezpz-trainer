@@ -1,25 +1,26 @@
 /* Overview photo changes stay in a dialog draft until Save background. */
 (()=>{
- let dialog=null,draft=null,opener=null,category=null;const temporary=new Set();
+ let dialog=null,draft=null,opener=null,category=null,cardCategory=false,draftDim=.65;const temporary=new Set();
  const defaultPhoto='./home-images/zone-woodland.jpg';
  function preview(){
-  if(!dialog)return;const b=cleanHomeBackground(draft),src=personalPhoto(b.photoId)||(category?progressDefaultPhoto(category):defaultPhoto),el=dialog.querySelector('.home-background-preview');
-  el.style.backgroundImage=(category?'linear-gradient(105deg,#062b20d9,#062b20b8),url("':'linear-gradient(105deg,#08261bb8,#08261ba6),url("')+src+'")';el.style.backgroundPosition=b.x+'% '+b.y+'%';el.style.backgroundSize=b.zoom===1?'cover':(b.zoom*100)+'% auto';
-  dialog.querySelector('[data-background-crop]').hidden=!b.photoId;
+  if(!dialog)return;const b=cleanHomeBackground(draft),src=personalPhoto(b.photoId)||(cardCategory?progressCardDefaultPhoto(category):category?progressDefaultPhoto(category):defaultPhoto),el=dialog.querySelector('.home-background-preview');
+  el.style.backgroundImage=cardCategory?progressCardVeil(draftDim)+',url("'+src+'")':(category?'linear-gradient(105deg,#062b20d9,#062b20b8),url("':'linear-gradient(105deg,#08261bb8,#08261ba6),url("')+src+'")';el.style.backgroundPosition=b.x+'% '+b.y+'%';el.style.backgroundSize=b.zoom===1?'cover':(b.zoom*100)+'% auto';
+  dialog.querySelector('[data-background-crop]').hidden=!b.photoId&&!cardCategory;
  }
  function close(){if(!dialog)return;const old=dialog;dialog=null;old.close();old.remove();for(const id of temporary)delete pendingPersonalPhotos[id];temporary.clear();draft=null;opener?.focus({preventScroll:true})}
  function open(button){
-  if(dialog)return;opener=button;category=button.dataset.progressBackground||null;draft=cleanHomeBackground(category?cleanProgressBackgrounds(state.progressBackgrounds)[category]:state.homeBackground);dialog=document.createElement('dialog');dialog.id='home-background-dialog';dialog.setAttribute('aria-labelledby','home-background-title');
+  if(dialog)return;opener=button;category=button.dataset.progressBackground||null;cardCategory=button.hasAttribute('data-progress-card');draftDim=cardCategory?progressCardBackground(category).dim:.65;draft=cleanHomeBackground(cardCategory?progressCardBackground(category):category?cleanProgressBackgrounds(state.progressBackgrounds)[category]:state.homeBackground);dialog=document.createElement('dialog');dialog.id='home-background-dialog';dialog.setAttribute('aria-labelledby','home-background-title');
   dialog.innerHTML='<span class="sheet-handle" aria-hidden="true"></span><div class="home-background-heading"><h2 id="home-background-title">Overview background</h2><button type="button" data-background-close aria-label="Close background settings">×</button></div><p class="home-background-help">Your photo. Your daily view.</p><div class="home-background-preview"><strong>Today’s overview</strong><span>White text stays readable</span></div><div class="personal-photo-controls" data-photo-kind="home"><label class="home-background-upload">↑ Upload photo<input type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" data-personal-photo-input></label><p class="personal-photo-status" role="status"></p></div><details data-background-crop><summary>Adjust crop</summary><label>Zoom<input type="range" data-background-field="zoom" min="1" max="2" step="0.05"></label><label>Move left / right<input type="range" data-background-field="x" min="0" max="100" step="1"></label><label>Move up / down<input type="range" data-background-field="y" min="0" max="100" step="1"></label></details><p class="home-background-status" role="status"></p><div class="home-background-actions"><button type="button" data-background-default>Restore default</button><button type="button" class="primary" data-background-save>Save background</button></div>';
   if(category){dialog.querySelector('#home-background-title').textContent='Your photo';dialog.querySelector('.home-background-preview strong').textContent=progressPhotoLabel(category);dialog.querySelector('.personal-photo-controls').dataset.photoKind='progress'}
   if(category)dialog.querySelector('.home-background-help').textContent='Changes apply to this photo only.';
+  if(cardCategory){dialog.querySelector('#home-background-title').textContent=progressCardPhotoLabel(category)+' card photo';dialog.querySelector('.home-background-preview strong').textContent=progressCardPhotoLabel(category);dialog.querySelector('.home-background-help').textContent='Only this Progress card changes.';dialog.querySelector('[data-background-crop]').insertAdjacentHTML('afterend','<label class="progress-card-dimming">Photo dimming<input type="range" data-background-dim min="0.35" max="0.85" step="0.05" value="'+draftDim+'"></label>')}
   document.body.append(dialog);resetSliders();preview();dialog.addEventListener('cancel',event=>{event.preventDefault();close()});
-  dialog.addEventListener('input',event=>{const field=event.target.dataset.backgroundField;if(!field)return;draft[field]=Number(event.target.value);preview()});
+  dialog.addEventListener('input',event=>{if(event.target.matches('[data-background-dim]')){draftDim=Number(event.target.value);preview();return}const field=event.target.dataset.backgroundField;if(!field)return;draft[field]=Number(event.target.value);preview()});
   dialog.addEventListener('click',event=>{
    if(event.target.closest?.('[data-background-close]'))return close();
-   if(event.target.closest?.('[data-background-default]')){draft=cleanHomeBackground(null);resetSliders();preview();return}
+   if(event.target.closest?.('[data-background-default]')){draft=cleanHomeBackground(null);draftDim=.65;if(cardCategory)dialog.querySelector('[data-background-dim]').value=draftDim;resetSliders();preview();return}
    if(!event.target.closest?.('[data-background-save]'))return;
-   if(!(category?saveProgressBackground(category,draft):saveHomeBackground(draft))){dialog.querySelector('.home-background-status').textContent='Could not save. Your previous background is kept.';return}
+   if(!(cardCategory?saveProgressCardBackground(category,{...draft,dim:draftDim}):category?saveProgressBackground(category,draft):saveHomeBackground(draft))){dialog.querySelector('.home-background-status').textContent='Could not save. Your previous background is kept.';return}
    const scroll=window.scrollY,wasProgress=category;close();if(wasProgress){if(tab==='progress')progress();else render();window.scrollTo(0,scroll);document.querySelector('[data-progress-background="'+wasProgress+'"]')?.focus({preventScroll:true})}else if(tab==='home'){home();window.scrollTo(0,scroll);document.querySelector('[data-home-background]')?.focus({preventScroll:true})}
   });dialog.showModal();
  }

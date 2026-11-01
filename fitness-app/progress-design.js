@@ -15,3 +15,28 @@ const categoryZoneView=zonePage;zonePage=function(){categoryZoneView();applyCate
 const categoryTrainView=train;train=function(){categoryTrainView();applyCategoryBackground('training','.training-header')};
 // Choosing a menu action dismisses the overlay even when its confirmation is cancelled.
 document.addEventListener('click',event=>{if(event.target.closest('.training-options-body [data-action="save-partial"]')){const menu=document.querySelector('.training-options');if(menu)menu.open=false}},true);
+
+/* Independent photo surfaces for the six Progress overview cards. */
+function progressCardPhotoLabel(id){return ({overall:'Overall',calories:'Eat',sleep:'Sleep',training:'Train',zone:'Zone',steps:'Steps'})[id]||'Progress'}
+function progressCardDefaultPhoto(id){return id==='zone'?'./home-images/zone-glass-leaves.jpg':progressDefaultPhoto(id)}
+function progressCardVeil(dim){return 'linear-gradient(90deg,rgba(4,28,20,'+Math.min(.94,dim+.23)+'),rgba(4,28,20,'+Math.max(.15,dim-.20)+')),linear-gradient(0deg,rgba(4,28,20,'+Math.min(.94,dim+.12)+'),transparent 75%)'}
+(()=>{
+ let editing=false;
+ const previous=progress;
+ progress=function(){
+  previous();const grid=screen.querySelector('.ezpz-progress-grid');if(!grid)return;
+  const heading=screen.querySelector('.habit-progress-heading');heading.classList.add('progress-photo-heading');
+  heading.insertAdjacentHTML('beforeend','<button type="button" class="progress-photo-edit" data-edit-progress aria-pressed="'+editing+'">'+(editing?'Done':'Edit Progress')+'</button>');
+  if(editing)heading.insertAdjacentHTML('afterend','<p class="progress-photo-edit-note">Tap a card to change its photo.</p>');
+  grid.classList.toggle('progress-photos-editing',editing);
+  for(const card of grid.querySelectorAll('[data-trend-category]')){
+   const id=card.dataset.trendCategory,b=progressCardBackground(id),photo=personalPhoto(b.photoId)||progressCardDefaultPhoto(id);
+   const img=document.createElement('img');img.className='progress-card-photo';img.src=photo;img.alt='';img.style.objectPosition=b.x+'% '+b.y+'%';img.style.transform='scale('+b.zoom+')';
+   const veil=document.createElement('span');veil.className='progress-card-veil';veil.setAttribute('aria-hidden','true');veil.style.background=progressCardVeil(b.dim);card.prepend(img,veil);
+   if(editing){card.dataset.progressBackground=id;card.dataset.progressCard=id;card.removeAttribute('data-trend-category');card.setAttribute('aria-label','Change '+progressCardPhotoLabel(id)+' Progress card photo');card.setAttribute('aria-haspopup','dialog');card.querySelector('.progress-card-arrow').textContent='▧'}
+  }
+ };
+ document.addEventListener('click',event=>{if(event.target.closest?.('[data-edit-progress]')){editing=!editing;const y=scrollY;progress();scrollTo(0,y);screen.querySelector('[data-edit-progress]')?.focus({preventScroll:true});return}if(editing&&event.target.closest?.('[data-tab],[data-go]'))editing=false},true);
+ // Refresh a Progress screen that was rendered before this enhancement loaded.
+ if(tab==='progress'&&state.profile)progress();
+})();
