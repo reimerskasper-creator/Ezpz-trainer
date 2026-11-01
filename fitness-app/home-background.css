@@ -50,3 +50,16 @@ body[data-view=home] .home-arranging,body[data-view=home] .home-arranging *{-web
 body[data-view=home] .home-insights .home-panel-heading{padding-right:0!important}
 body[data-view=home] .home-insights .home-panel-heading h3{font-size:16px;min-width:0}
 @media(max-width:360px){body[data-view=home] .home-insights .home-panel-heading h3{font-size:14px}}
+
+/* Approved emerald-glass Insights: static highlights stay visible when folded. */
+body[data-view=home] .home-insights{isolation:isolate;border:1px solid #69efb5;border-radius:20px;background:radial-gradient(ellipse at 0 0,#91f8be4d,transparent 48%),radial-gradient(ellipse at 100% 100%,#11df9b36,transparent 48%),linear-gradient(115deg,#0c493bdc,#033b2ee8 60%,#044032e8);box-shadow:0 0 22px #3bf1a92b,0 0 5px #66ffc53d,inset 0 1px 0 #d6ffe966,inset 0 -1px 10px #24f4aa1c;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.home-insights::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(125deg,#e4fff014,transparent 34%);pointer-events:none;z-index:-1}
+body[data-view=home] .home-insights h3>span{color:#d7ffea;text-shadow:0 0 5px #75ffc9,0 0 14px #26f4a6;filter:drop-shadow(0 0 4px #59ffbd);font-size:22px;vertical-align:middle}
+body[data-view=home] .home-insights .insights-copy{margin:12px 0 10px;font-size:14px;line-height:1.55}
+.insights-copy>strong,.insights-copy>span{display:block}
+body[data-view] .insights-copy>strong{font-weight:700;color:#f1fff5;line-height:1.45}
+.insights-copy>span{margin-top:7px;font-size:13px;font-weight:400;line-height:1.55}
+body[data-view=home] .home-insights .home-text-link{display:inline-flex;align-items:center;gap:6px;min-height:44px;width:auto;border-radius:13px;padding:7px 12px!important;background:#08785433!important;color:#d9ffec!important;font-size:12px;font-weight:600}
+.insights-calculation{margin:12px 0;font-size:12px;border-top:1px solid #72b39440;padding-top:10px}
+.insights-calculation summary{min-height:44px;align-content:center;cursor:pointer;color:#b7dccc}
+.insights-calculation p{line-height:1.6;margin:6px 0 12px}
