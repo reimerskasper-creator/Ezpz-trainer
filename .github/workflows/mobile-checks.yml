@@ -51,6 +51,8 @@ jobs:
           node tests/home.cjs
           node tests/recipes.cjs
           node tests/custom-foods.cjs
+          node tests/ingredients.cjs
+          node tests/ingredients-mobile.cjs
           node tests/nutrition-targets.cjs
           node tests/app-review.cjs
           node tests/workout-photos.cjs
