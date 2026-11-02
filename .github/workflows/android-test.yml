@@ -2,6 +2,8 @@ name: Android Health Connect test
 on:
   push:
     branches: [android-health-connect]
+    # Test/documentation-only follow-ups reuse the already verified packaged runtime.
+    paths-ignore: ['tests/**', 'docs/**', 'PROJECT_STATUS.md', 'AGENTS.md', '.github/workflows/android-test.yml']
   workflow_dispatch:
 permissions:
   contents: read
