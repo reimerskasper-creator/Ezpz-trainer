@@ -26,6 +26,8 @@ jobs:
           EZPZ_VISUAL_LOG: ${{ contains(github.event.head_commit.message, '[visual-review]') && '1' || '0' }}
         run: |
           node tests/photo-food-flow-mobile.cjs
+          node tests/ingredients-mobile.cjs
+          node tests/mobile.cjs
           node tests/barcode.cjs
           node tests/barcode-mobile.cjs
           node tests/accounts.cjs
@@ -55,7 +57,6 @@ jobs:
           node tests/recipes.cjs
           node tests/custom-foods.cjs
           node tests/ingredients.cjs
-          node tests/ingredients-mobile.cjs
           node tests/nutrition-targets.cjs
           node tests/app-review.cjs
           node tests/workout-photos.cjs
@@ -63,7 +64,6 @@ jobs:
           node tests/training.cjs
           node tests/planner-picker.cjs
           node tests/own-workouts.cjs
-          node tests/mobile.cjs
       - name: Save mobile screenshots and results
         uses: actions/upload-artifact@v4
         if: always()
