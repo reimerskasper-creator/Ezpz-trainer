@@ -15,6 +15,6 @@ document.addEventListener('cancel',e=>{if(e.target.id==='app-appearance-dialog')
 document.addEventListener('close',e=>{if(e.target.id==='app-appearance-dialog'){appAppearanceDraft=null;applyAppAppearance(state.appAppearance)}},true);
 document.addEventListener('keydown',e=>{const button=e.target.closest?.('[data-appearance-mode],[data-appearance-accent]');if(!button||!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown','Home','End'].includes(e.key))return;e.preventDefault();const group=[...button.parentElement.querySelectorAll('[role=radio]')],index=group.indexOf(button),next=e.key==='Home'?0:e.key==='End'?group.length-1:(index+(['ArrowLeft','ArrowUp'].includes(e.key)?-1:1)+group.length)%group.length;group[next].click();group[next].focus()});
 appearanceMedia?.addEventListener?.('change',()=>applyAppAppearance());
-function refreshAppAppearance(){applyAppAppearance();for(const el of document.querySelectorAll('#screen *')){if(getComputedStyle(el).backgroundImage.includes('url('))el.setAttribute('data-app-photo','')}}
+function refreshAppAppearance(){applyAppAppearance();if(!document.documentElement.hasAttribute('data-app-custom')){document.querySelectorAll('[data-app-photo]').forEach(el=>el.removeAttribute('data-app-photo'));return}for(const el of document.querySelectorAll('#screen *')){if(getComputedStyle(el).backgroundImage.includes('url('))el.setAttribute('data-app-photo','')}}
 window.EzpzAppearance={refresh:refreshAppAppearance};
 buildAppearancePalette();refreshAppAppearance();
