@@ -7,6 +7,7 @@
 - Continue this existing app. Do not create a replacement or parallel version.
 
 ## User preferences and boundaries
+- On 3 November 2026, the owner explicitly approved uploading this and future requested EZPZ source updates to the existing public GitHub repository. Do not ask again for routine source uploads within that scope. This does not authorize uploading credentials or personal data.
 - Preserve all saved browser data and existing functionality.
 - The food section is approved: do not redesign it or change its recipes, grams, macros, photography, diary, meal planner or shopping behavior without a new request.
 - Visual direction: green primary actions, dark green header/navigation, light backgrounds, rounded white cards, realistic workout photographs, simple mobile navigation.
@@ -570,3 +571,9 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Corrected search ranking to ignore long parenthetical descriptions when ordering matches, so plain nonfat Greek yogurt appears within result limit.
 - Local ingredients, custom-foods, recipes, daily-use, release-readiness and nutrition-targets checks pass. Added three-width browser flow to CI, but local Playwright Chromium download failed; browser tests have NOT run and UI is not visually verified.
 - Public branch push was rejected by automatic approval review because public upload was not explicitly authorized. No remote update or APK delivered. Await owner approval to upload the test branch/open a PR and run hosted browser checks. Do not claim this is installed or published. Native wrapper/build files are absent from this checkout.
+
+## Photo-free emerald food logging — 3 November 2026
+- User approved a photo-free redesign of food search and details. Removed decorative food wallpapers, reduced the identity header to actual name/source plus a common outline food icon, moved manual entry above results, and applied restrained emerald surfaces and readable fields. Recipe and saved-meal photos retained.
+- Portion preview labels the actual amount and g/mL basis, with monochrome macro icons ordered Carbs/Protein/Fat. Calculations, scanner, search, logging, draft behavior and saved records unchanged. Public asset cache version bumped.
+- Local ingredient, barcode, custom-food, recipe, daily-use, release-readiness and script syntax checks passed. Local Chromium download is unavailable; hosted phone checks and screenshot review remain required before deployment.
+- Native Android build source is absent from this repository; no APK has been rebuilt by this change.
