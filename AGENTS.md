@@ -8,3 +8,5 @@
 - Discuss online visual previews and a proper live-update mechanism as future workflow improvements. Do not silently replace the packaged native app with a remote website or claim Health Connect works in Chrome.
 - Maintain PROJECT_STATUS.md with current branch, commit, checks, delivery, next task and blockers. Before a long-chat handoff, provide a concise copy/paste resume prompt. There is no reliable assistant-visible chat-capacity meter; do not promise advance warning at a precise limit.
 - User does not want to buy additional ChatGPT usage now. Do not imply that downloads themselves consume most model usage or promise a numeric saving.
+
+- On 3 November 2026, Kasper explicitly approved uploading this and future requested EZPZ source updates to this existing public repository. Routine source uploads within that scope do not require renewed approval; credentials and personal records remain excluded.
