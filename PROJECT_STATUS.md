@@ -1471,3 +1471,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 ### Android 1.0.86 — complete regression verification
 - Full hosted Mobile run41881229816 succeeded on test-only47456998b936305bff5b0c86dd676f080bc1172f, completed4Nov2026 at18:01UTC. This clears the earlier pending note. Android41878797418 and the delivered1.0.86APK remain unchanged and verified; no reinstall/new download required for verification. All agreed trainer/menu/navigation/prefill changes are ready. Owner reviewing a new workout-cover-as-exercise-card-background sketch only; do not implement that new visual until approved.
+
+
+## Approved workout-cover exercise cards — Android 1.0.87/code88
+- Owner approved the photographic exercise-card sketch and requested completing all work. Each exercise card now uses the same workoutCover source as the selected workout/menu/builder, including custom uploaded photos. Dark emerald gradient protects text; reps/weight fields, unchecked completion controls and info button stay solid green. Outer gym scenery and independent workout/exercise background overrides remain separate; whole-image exercise references/media are unchanged.
+- One presentation-only decoration and scoped stylesheet; no saved-data schema or logging behavior changed. Local trainer media/schema, training and training-usability checks pass. Packaged compact phone checks passed320x700/358x738/390x844/430x900, including long set lists, whole reference photos, previous/next/reload, precise prefill, keyboard, themes, custom cover carryover and opaque fields. Hosted complete Mobile and Android builds/package/signature verification pending. Deliver only the verified new1.0.87artifact and preserve the installed app.
