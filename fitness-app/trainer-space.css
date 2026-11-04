@@ -4,6 +4,8 @@
 body[data-view=train] .trainer-scene{display:block}
 body[data-view=train] #screen{position:relative;z-index:1;max-width:500px;margin-inline:auto;padding-inline:22px;background:none!important;min-height:calc(100dvh - 180px);padding-bottom:180px}
 body[data-view=train] header.row,body[data-view=train] .nav{background:#0a281ee8!important;backdrop-filter:blur(12px)}
+body[data-view=train]>header.row{position:relative;z-index:2}
+body[data-view=train] .training-options:not([open])>.training-options-body{display:none!important}
 body[data-view=train] .compact-training-header{margin:12px 0 18px;padding:12px 0 14px;background:none!important;border:0!important;border-radius:0;box-shadow:none;min-height:130px}
 body[data-view=train] .compact-training-header>h2{font-size:23px!important;text-align:center;margin-top:18px}
 body[data-view=train] .compact-training-meta{text-align:center;color:#e4f3e9!important;font-size:12px}
