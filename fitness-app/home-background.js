@@ -1,33 +1,44 @@
+function homeBannerVeil(dim){return 'linear-gradient(90deg,rgba(4,28,20,'+Math.min(.94,dim+.23)+'),rgba(4,28,20,'+Math.max(.15,dim-.20)+')),linear-gradient(0deg,rgba(4,28,20,'+Math.min(.94,dim+.12)+'),transparent 75%)'}
 /* Overview photo changes stay in a dialog draft until Save background. */
 (()=>{
- let dialog=null,draft=null,opener=null,category=null,cardCategory=false,draftDim=.65;const temporary=new Set();
+ let dialog=null,draft=null,opener=null,category=null,cardCategory=false,banner=null,restoreBanner=false,draftDim=.65;const temporary=new Set();
  const defaultPhoto='./home-images/zone-woodland.jpg';
  function preview(){
-  if(!dialog)return;const b=cleanHomeBackground(draft),src=personalPhoto(b.photoId)||(cardCategory?progressCardDefaultPhoto(category):category?progressDefaultPhoto(category):defaultPhoto),el=dialog.querySelector('.home-background-preview');
-  el.style.backgroundImage=cardCategory?progressCardVeil(draftDim)+',url("'+src+'")':(category?'linear-gradient(105deg,#062b20d9,#062b20b8),url("':'linear-gradient(105deg,#08261bb8,#08261ba6),url("')+src+'")';el.style.backgroundPosition=b.x+'% '+b.y+'%';el.style.backgroundSize=b.zoom===1?'cover':(b.zoom*100)+'% auto';
-  dialog.querySelector('[data-background-crop]').hidden=!b.photoId&&!cardCategory;
+  if(!dialog)return;const b=cleanHomeBackground(draft),src=personalPhoto(b.photoId)||(banner?window.EZPZHomeBanners.photo(banner):cardCategory?progressCardDefaultPhoto(category):category?progressDefaultPhoto(category):defaultPhoto),el=dialog.querySelector('.home-background-preview');
+  el.style.backgroundImage=(cardCategory||banner)?(banner?homeBannerVeil(draftDim):progressCardVeil(draftDim))+',url("'+src+'")':(category?'linear-gradient(105deg,#062b20d9,#062b20b8),url("':'linear-gradient(105deg,#08261bb8,#08261ba6),url("')+src+'")';el.style.backgroundPosition=b.x+'% '+b.y+'%';el.style.backgroundSize=b.zoom===1?'cover':(b.zoom*100)+'% auto';
+  dialog.querySelector('[data-background-crop]').hidden=!b.photoId&&!cardCategory&&!banner;
  }
  function close(){if(!dialog)return;const old=dialog;dialog=null;old.close();old.remove();for(const id of temporary)delete pendingPersonalPhotos[id];temporary.clear();draft=null;opener?.focus({preventScroll:true})}
  function open(button){
-  if(dialog)return;opener=button;category=button.dataset.progressBackground||null;cardCategory=button.hasAttribute('data-progress-card');draftDim=cardCategory?progressCardBackground(category).dim:.65;draft=cleanHomeBackground(cardCategory?progressCardBackground(category):category?cleanProgressBackgrounds(state.progressBackgrounds)[category]:state.homeBackground);dialog=document.createElement('dialog');dialog.id='home-background-dialog';dialog.setAttribute('aria-labelledby','home-background-title');
+  if(dialog)return;opener=button;banner=button.dataset.homeBannerBackground||null;restoreBanner=false;category=button.dataset.progressBackground||null;cardCategory=button.hasAttribute('data-progress-card');draftDim=banner?(cleanHomeBannerBackgrounds(state.homeBannerBackgrounds)[banner]?.dim??.65):cardCategory?progressCardBackground(category).dim:.65;draft=cleanHomeBackground(banner?cleanHomeBannerBackgrounds(state.homeBannerBackgrounds)[banner]:cardCategory?progressCardBackground(category):category?cleanProgressBackgrounds(state.progressBackgrounds)[category]:state.homeBackground);dialog=document.createElement('dialog');dialog.id='home-background-dialog';dialog.setAttribute('aria-labelledby','home-background-title');
   dialog.innerHTML='<span class="sheet-handle" aria-hidden="true"></span><div class="home-background-heading"><h2 id="home-background-title">Overview background</h2><button type="button" data-background-close aria-label="Close background settings">×</button></div><p class="home-background-help">Your photo. Your daily view.</p><div class="home-background-preview"><strong>Today’s overview</strong><span>White text stays readable</span></div><div class="personal-photo-controls" data-photo-kind="home"><label class="home-background-upload">↑ Upload photo<input type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" data-personal-photo-input></label><p class="personal-photo-status" role="status"></p></div><details data-background-crop><summary>Adjust crop</summary><label>Zoom<input type="range" data-background-field="zoom" min="1" max="2" step="0.05"></label><label>Move left / right<input type="range" data-background-field="x" min="0" max="100" step="1"></label><label>Move up / down<input type="range" data-background-field="y" min="0" max="100" step="1"></label></details><p class="home-background-status" role="status"></p><div class="home-background-actions"><button type="button" data-background-default>Restore default</button><button type="button" class="primary" data-background-save>Save background</button></div>';
   if(category){dialog.querySelector('#home-background-title').textContent='Your photo';dialog.querySelector('.home-background-preview strong').textContent=progressPhotoLabel(category);dialog.querySelector('.personal-photo-controls').dataset.photoKind='progress'}
   if(category)dialog.querySelector('.home-background-help').textContent='Changes apply to this photo only.';
-  if(cardCategory){dialog.querySelector('#home-background-title').textContent=progressCardPhotoLabel(category)+' card photo';dialog.querySelector('.home-background-preview strong').textContent=progressCardPhotoLabel(category);dialog.querySelector('.home-background-help').textContent='Only this Progress card changes.';dialog.querySelector('[data-background-crop]').insertAdjacentHTML('afterend','<label class="progress-card-dimming">Photo dimming<input type="range" data-background-dim min="0.35" max="0.85" step="0.05" value="'+draftDim+'"></label>')}
+  if(banner){const label=window.EZPZHomeBanners.label(banner);dialog.querySelector('#home-background-title').textContent=label+' background';dialog.querySelector('.home-background-preview strong').textContent=label;dialog.querySelector('.home-background-help').textContent='Choose the photo for this homepage banner.';}
+  if(cardCategory||banner){if(cardCategory)dialog.querySelector('#home-background-title').textContent=progressCardPhotoLabel(category)+' card photo';if(cardCategory){dialog.querySelector('.home-background-preview strong').textContent=progressCardPhotoLabel(category);dialog.querySelector('.home-background-help').textContent='Only this Progress card changes.';}dialog.querySelector('[data-background-crop]').insertAdjacentHTML('afterend','<label class="progress-card-dimming">Photo dimming<input type="range" data-background-dim min="0.35" max="0.85" step="0.05" value="'+draftDim+'"></label>')}
   document.body.append(dialog);resetSliders();preview();dialog.addEventListener('cancel',event=>{event.preventDefault();close()});
-  dialog.addEventListener('input',event=>{if(event.target.matches('[data-background-dim]')){draftDim=Number(event.target.value);preview();return}const field=event.target.dataset.backgroundField;if(!field)return;draft[field]=Number(event.target.value);preview()});
+  dialog.addEventListener('input',event=>{if(event.target.matches('[data-background-dim]')){draftDim=Number(event.target.value);restoreBanner=false;preview();return}const field=event.target.dataset.backgroundField;if(!field)return;draft[field]=Number(event.target.value);restoreBanner=false;preview()});
   dialog.addEventListener('click',event=>{
    if(event.target.closest?.('[data-background-close]'))return close();
-   if(event.target.closest?.('[data-background-default]')){draft=cleanHomeBackground(null);draftDim=.65;if(cardCategory)dialog.querySelector('[data-background-dim]').value=draftDim;resetSliders();preview();return}
+   if(event.target.closest?.('[data-background-default]')){draft=cleanHomeBackground(null);draftDim=.65;restoreBanner=!!banner;if(cardCategory||banner)dialog.querySelector('[data-background-dim]').value=draftDim;resetSliders();preview();return}
    if(!event.target.closest?.('[data-background-save]'))return;
-   if(!(cardCategory?saveProgressCardBackground(category,{...draft,dim:draftDim}):category?saveProgressBackground(category,draft):saveHomeBackground(draft))){dialog.querySelector('.home-background-status').textContent='Could not save. Your previous background is kept.';return}
-   const scroll=window.scrollY,wasProgress=category;close();if(wasProgress){if(tab==='progress')progress();else render();window.scrollTo(0,scroll);document.querySelector('[data-progress-background="'+wasProgress+'"]')?.focus({preventScroll:true})}else if(tab==='home'){home();window.scrollTo(0,scroll);document.querySelector('[data-home-background]')?.focus({preventScroll:true})}
+   if(!(banner?saveHomeBannerBackground(banner,restoreBanner?null:{...draft,dim:draftDim}):cardCategory?saveProgressCardBackground(category,{...draft,dim:draftDim}):category?saveProgressBackground(category,draft):saveHomeBackground(draft))){dialog.querySelector('.home-background-status').textContent='Could not save. Your previous background is kept.';return}
+   const scroll=window.scrollY,wasProgress=category;close();if(wasProgress){if(tab==='progress')progress();else render();window.scrollTo(0,scroll);document.querySelector('[data-progress-background="'+wasProgress+'"]')?.focus({preventScroll:true})}else if(tab==='home'){home();window.scrollTo(0,scroll);document.querySelector(banner?'[data-home-banner-background="'+banner+'"]':'[data-home-background]')?.focus({preventScroll:true})}
   });dialog.showModal();
  }
  function resetSliders(){dialog.querySelectorAll('[data-background-field]').forEach(input=>{input.value=draft[input.dataset.backgroundField]})}
- window.EZPZHomeBackground={select(id){if(!dialog?.isConnected)return false;if(id&&!personalPhoto(id))return false;if(pendingPersonalPhotos[id])temporary.add(id);draft=cleanHomeBackground({photoId:id});resetSliders();preview();return true}};
+ window.EZPZHomeBackground={select(id){if(!dialog?.isConnected)return false;if(id&&!personalPhoto(id))return false;if(pendingPersonalPhotos[id])temporary.add(id);restoreBanner=false;draft=cleanHomeBackground({photoId:id});resetSliders();preview();return true}};
  window.EZPZProgressBackground={select(id){if(!category)return false;return window.EZPZHomeBackground.select(id)}};
- document.addEventListener('click',event=>{const button=event.target.closest?.('[data-home-background],[data-progress-background]');if(button)open(button)});
+ document.addEventListener('click',event=>{const button=event.target.closest?.('[data-home-background],[data-progress-background],[data-home-banner-background]');if(button)open(button)});
+})();
+
+/* Each Home banner owns an optional photo override; selected workout covers remain the default. */
+(()=>{
+ const specs=[['todayWorkout','.home-workout','Today’s workout',''],['nutrition','.home-nutrition','Today’s nutrition','./home-images/nutrition.jpg'],['steps','.home-steps-panel','Steps','./home-images/zone-woodland.jpg'],['workouts','.home-next','Your next workouts','./home-images/planning.jpg'],['meals','.home-meals','Your next meals','./home-images/nutrition.jpg'],['week','.foundation-week','Your week','./home-images/consistency.jpg'],['weight','.home-weight-card','Bodyweight','./home-images/weight.jpg']];
+ function photo(id){const spec=specs.find(x=>x[0]===id);return id==='todayWorkout'?(screen.querySelector('.home-workout>img')?.getAttribute('src')||'./home-images/planning.jpg'):spec?.[3]||'./home-images/planning.jpg'}
+ function paint(){const own=cleanHomeBannerBackgrounds(state.homeBannerBackgrounds);for(const [id,selector] of specs){const node=screen.querySelector(selector),b=own[id];if(!node||!b)continue;const src=personalPhoto(b.photoId)||photo(id);node.classList.add('home-banner-custom');node.style.setProperty('background-image',homeBannerVeil(b.dim)+',url("'+src+'")','important');node.style.setProperty('background-position','center,center,'+b.x+'% '+b.y+'%','important');node.style.setProperty('background-size','cover,cover,'+(b.zoom===1?'cover':b.zoom*100+'% auto'),'important');}}
+ function decorate(){for(const [id,selector,label] of specs){const node=screen.querySelector(selector);if(!node)continue;const button=document.createElement('button');button.type='button';button.className='home-banner-photo-button';button.dataset.homeBannerBackground=id;button.setAttribute('aria-label','Change '+label+' background');button.textContent='▧ Change background';node.prepend(button)}}
+ const previous=home;home=function(){previous();paint()};window.EZPZHomeBanners={photo,label:id=>specs.find(x=>x[0]===id)?.[2]||'Banner',paint,decorate};
 })();
 
 /* Arrange the existing Home nodes; their contents and actions stay owned by Home. */
@@ -46,7 +57,7 @@
   screen.classList.toggle('home-arranging',editing);if(!editing)return;
   const bar=document.createElement('section');bar.className='home-arrange-toolbar';bar.setAttribute('aria-label','Arrange homepage');bar.innerHTML='<div><strong>Edit homepage</strong><small>Hold a handle to move a section</small></div><button type="button" data-home-arrange-cancel>Cancel</button><button type="button" class="primary" data-home-arrange-done>Done</button><p class="home-arrange-status" role="status" aria-live="polite"></p>';
   screen.querySelector('.home-heading')?.after(bar);
-  window.EZPZHomeEditor?.decorate();
+  window.EZPZHomeEditor?.decorate();window.EZPZHomeBanners?.decorate();
   for(const item of items()){item.node.dataset.homeOrderId=item.id;const handle=document.createElement('button');handle.type='button';handle.className='home-arrange-handle';handle.dataset.homeArrangeHandle=item.id;handle.setAttribute('aria-label','Move '+item.label+'. Hold and drag, or use the up and down arrow keys.');handle.innerHTML='<span aria-hidden="true">⠿</span><span>Move '+item.label+'</span>';if(item.node.tagName==='BUTTON'){item.node.before(handle);handle.dataset.homeArrangeStandalone=item.id}else item.node.prepend(handle)}
  }
  // Keep the standalone hidden-weight control with its existing button when moved.
@@ -82,13 +93,14 @@ if(tab==='home'&&state.profile&&state.homeSectionOrder)home();
  const prefs=()=>draft||cleanHomeAppearance(state.homeAppearance);
  const frame=()=>screen.querySelector('.home-week-card .foundation-map');
  function nodes(){const f=frame();return f?Array.from(f.querySelectorAll('.habit-item')):[]}
+ function area(p=prefs()){const f=frame();if(p.ringArea!=='photo')return {x:0,y:0,w:f.clientWidth,h:f.clientHeight};const card=f.closest('.home-week-card'),a=card.getBoundingClientRect(),b=f.getBoundingClientRect();return {x:a.left-b.left+5,y:a.top-b.top+5,w:a.width-10,h:a.height-10}}
  function geometry(id,p=prefs()){
-  const f=frame(),w=f.clientWidth,h=f.clientHeight,r=p.rings[id],diameter=Math.max(44,w*(id==='overall'?.32:.175)*r.size),height=diameter+(id==='overall'?29:p.details?44:24),width=diameter+4;
-  return {width,height,diameter,x:Math.max(width/2,Math.min(w-width/2,w*r.x/100)),y:Math.max(height/2,Math.min(h-height/2,h*r.y/100))};
+  const f=frame(),a=area(p),w=f.clientWidth,h=a.h,r=p.rings[id],diameter=Math.max(44,w*(id==='overall'?.32:.175)*r.size),height=diameter+(id==='overall'?29:p.details?44:24),width=diameter+4;
+  return {width,height,diameter,x:a.x+Math.max(width/2,Math.min(a.w-width/2,a.w*r.x/100)),y:a.y+Math.max(height/2,Math.min(h-height/2,h*r.y/100))};
  }
  function paint(){
   if(tab!=='home')return;
-  const f=frame(),p=prefs();if(!f)return;
+  const f=frame();if(!f)return;if(draft&&draft.ringArea!=='photo'){const old=Object.fromEntries(keys.map(id=>[id,geometry(id,draft)]));draft.ringArea='photo';const a=area(draft);for(const id of keys){draft.rings[id].x=(old[id].x-a.x)/a.w*100;draft.rings[id].y=(old[id].y-a.y)/a.h*100}}const p=prefs();
   const expanded=f.closest('.home-week-card').dataset.folded!=='true';f.classList.toggle('ring-canvas',expanded);f.classList.toggle('ring-editing',!!draft&&!!screen.querySelector('[data-ring-controls][open]'));
   screen.querySelector('.home-heading').hidden=!p.greeting&&!draft;
   f.classList.toggle('ring-details-hidden',!p.details);
@@ -120,10 +132,10 @@ if(tab==='home'&&state.profile&&state.homeSectionOrder)home();
   panel.querySelector('[data-ring-controls]').addEventListener('toggle',paint);
  }
  function translate(ids,dx,dy,base){
-  const f=frame(),gs=ids.map(id=>geometry(id,base));
-  dx=Math.max(Math.max(...gs.map(g=>g.width/2-g.x)),Math.min(Math.min(...gs.map(g=>f.clientWidth-g.width/2-g.x)),dx));
-  dy=Math.max(Math.max(...gs.map(g=>g.height/2-g.y)),Math.min(Math.min(...gs.map(g=>f.clientHeight-g.height/2-g.y)),dy));
-  ids.forEach((id,i)=>{draft.rings[id].x=(gs[i].x+dx)/f.clientWidth*100;draft.rings[id].y=(gs[i].y+dy)/f.clientHeight*100});paint();
+  const f=frame(),a=area(base),gs=ids.map(id=>geometry(id,base));
+  dx=Math.max(Math.max(...gs.map(g=>a.x+g.width/2-g.x)),Math.min(Math.min(...gs.map(g=>a.x+a.w-g.width/2-g.x)),dx));
+  dy=Math.max(Math.max(...gs.map(g=>a.y+g.height/2-g.y)),Math.min(Math.min(...gs.map(g=>a.y+a.h-g.height/2-g.y)),dy));
+  ids.forEach((id,i)=>{draft.rings[id].x=(gs[i].x+dx-a.x)/a.w*100;draft.rings[id].y=(gs[i].y+dy-a.y)/a.h*100});paint();
  }
  function stop(rollback=false){if(!drag)return;if(rollback){draft=drag.before;paint()}drag=null}
  window.EZPZHomeEditor={begin(){draft=cleanHomeAppearance(state.homeAppearance);mode='together';selected='overall';groupSize=1},cancel(){stop();draft=null},stage(){if(draft&&JSON.stringify(draft)!==JSON.stringify(cleanHomeAppearance(state.homeAppearance)))state.homeAppearance=cleanHomeAppearance(draft)},paint,decorate};

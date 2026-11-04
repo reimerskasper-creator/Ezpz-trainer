@@ -87,3 +87,8 @@ body[data-view=home] #screen .home-heading[hidden]{display:none}
 body[data-view=home] #screen .home-source-badge+.home-week-footer{margin-top:-44px}.home-source-badge .connection-brand{width:26px!important;height:26px!important;flex:0 0 26px!important;object-fit:contain;background:transparent!important;border:0;padding:0!important}
 /* Selection uses the mint outline; global pressed-button colors must not dim ring labels. */
 body[data-view=home] #screen .ring-canvas.ring-editing .habit-item>strong,body[data-view=home] #screen .ring-canvas.ring-editing .habit-item>.ring-metric{color:#f0fff4!important}
+
+body[data-view=home] #screen .home-banner-photo-button{display:block;position:relative;z-index:4;width:auto;min-height:44px;margin:0 0 8px auto;padding:8px 12px;border:1px solid #8fae9c;border-radius:12px;background:#153c30ed!important;color:#f0fff5!important;font-size:12px}
+body[data-view=home] #screen .home-workout.home-banner-custom>img{visibility:hidden}
+body[data-view=home] #screen .home-workout.home-banner-custom::after{background:none!important}
+body[data-view=home] #screen .home-week-card :is(.home-overview-heading,.home-source-badge,.home-week-footer){position:relative;z-index:3}

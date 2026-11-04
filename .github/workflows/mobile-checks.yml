@@ -69,7 +69,7 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
       - name: Verify Home section arrangement
-        run: node tests/home-appearance-mobile.cjs && node tests/home-arrange-mobile.cjs
+        run: node tests/home-appearance-mobile.cjs && node tests/home-banner-mobile.cjs && node tests/home-arrange-mobile.cjs
       - name: Save Home arrangement review
         if: always()
         uses: actions/upload-artifact@v4
@@ -78,6 +78,7 @@ jobs:
           path: |
             test-results/home-arrange*.jpg
             test-results/home-appearance*.jpg
+            test-results/home-banner*.jpg
             test-results/progress-card*.jpg
           if-no-files-found: ignore
           retention-days: 14
