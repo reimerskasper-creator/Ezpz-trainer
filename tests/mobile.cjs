@@ -388,6 +388,7 @@ try{
   await page.locator('#planned-workout').click();await page.mouse.click(5,5);
   await page.locator('#planner-picker').waitFor({state:'hidden'});
   await page.locator('#planned-workout').click();await page.locator('[data-plan-picker-action="build"]').click();
+  if(await page.locator('[data-own-section="saved"][aria-pressed="true"]').count())await page.locator('[data-own-section="build"]').click();
   await page.locator('#workout-builder').waitFor();await page.locator('[data-action="cancel-builder"]').first().click();
   await checkLayout('Photo-based planner');
 
