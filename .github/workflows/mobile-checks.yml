@@ -25,6 +25,8 @@ jobs:
         run: npx playwright install --only-shell chromium
       - name: Verify saved plans and three-month packages
         run: node tests/plan-packages.cjs && node tests/plan-packages-mobile.cjs
+      - name: Verify compact workout screen and details popup
+        run: node tests/compact-workout-screen-mobile.cjs
       - name: Verify immersive trainer and references
         run: node tests/trainer-space.cjs && node tests/trainer-space-mobile.cjs
       - name: Verify app appearance settings

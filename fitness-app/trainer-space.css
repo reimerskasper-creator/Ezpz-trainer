@@ -43,3 +43,84 @@ body[data-view=train] .trainer-background-tool{margin:12px 0;min-height:44px;bac
 @media(prefers-reduced-motion:reduce){.trainer-scene>div{animation:none!important}.trainer-page-turn:after{display:none}}
 
 html[data-app-custom] body[data-view=train] #screen,html[data-app-custom] body[data-view=train] :is(header.row,.nav){--ui-text:#f1fff5;--ui-muted:#c2ddcd;--ui-page:#0d2c21;--ui-card:#153d2d;--ui-field:#234b38;--ui-border:#658670}
+
+/* Active workout: one compact header and a viewport-sized reference, without hiding overflow. */
+body[data-view=train]{padding:env(safe-area-inset-top,0px) 12px 0;min-height:100dvh}
+body[data-view=train]>header.row{display:none!important}
+body[data-view=train] #screen{padding:8px 0 calc(140px + env(safe-area-inset-bottom));min-height:0;max-width:500px}
+body[data-view=train] .compact-training-header{min-height:0;margin:0 0 6px;padding:0}
+body[data-view=train] .compact-training-title{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center;min-height:44px}
+body[data-view=train] .compact-training-title h2{font-size:16px!important;line-height:1.2;text-align:center;margin:0!important;overflow-wrap:anywhere;color:#f1fff5!important}
+body[data-view=train] .trainer-back,body[data-view=train] .training-options>summary{display:grid;place-items:center;box-sizing:border-box;width:44px;height:44px;min-height:44px;margin:0;padding:0!important;border:1px solid #789b87!important;border-radius:12px;background:#153e2ee8!important;color:#effff5!important;font-size:22px;list-style:none;cursor:pointer}
+body[data-view=train] .training-options>summary::-webkit-details-marker{display:none}
+body[data-view=train] .training-options{position:static}
+body[data-view=train] .compact-training-meta{display:none}
+body[data-view=train] .workout-progress-card{display:flex;align-items:center;gap:12px;min-height:30px;margin:6px 0 0;padding:5px 10px;border-radius:10px}
+body[data-view=train] #workout-progress-label{font-size:11px;white-space:nowrap}
+body[data-view=train] .workout-progress-card progress{width:auto;min-width:30px;flex:1;margin:0;height:5px}
+body[data-view=train] .compact-exercise-picker{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}
+body[data-view=train] .compact-exercise-picker>span,body[data-view=train] .compact-picker-label{display:flex;align-items:center;justify-content:center;font-size:12px;padding:6px;min-height:44px;margin:0}
+body[data-view=train] .training-exercise{margin:0 0 8px;border-radius:16px}
+body[data-view=train] .training-exercise>summary{min-height:0;padding:10px 10px 7px!important}
+body[data-view=train] .session-exercise-head{gap:8px;margin:0}
+body[data-view=train] .session-exercise-head>div{min-width:0}
+body[data-view=train] .session-exercise-head h3{font-size:19px!important;line-height:1.15!important;margin:0!important;overflow-wrap:anywhere}
+body[data-view=train] .session-exercise-head p{font-size:11px!important;line-height:1.4;margin:4px 0 0}
+body[data-view=train] .exercise-tools-button{width:44px;min-width:44px;height:44px;min-height:44px;padding:0;font-size:23px!important;border-radius:12px}
+body[data-view=train] .session-exercise{padding:0 10px 8px!important}
+body[data-view=train] .trainer-media{margin:0 0 6px}
+body[data-view=train] .trainer-media.has-reference{gap:0!important;padding:5px!important;border-radius:12px}
+body[data-view=train] .trainer-reference .trainer-expanded-photo,body[data-view=train] .trainer-reference[open] .trainer-expanded-photo{height:var(--trainer-photo-height,160px)!important;min-height:0}
+body[data-view=train] .trainer-reference img,body[data-view=train] .trainer-reference[open] img{width:100%;height:100%;max-height:none;object-fit:contain!important}
+body[data-view=train] .trainer-media-actions,body[data-view=train] .has-reference>.trainer-media-actions{gap:8px;margin:3px 0 0;padding-top:3px}
+body[data-view=train] .set-head{margin:5px 0 1px;font-size:11px}
+body[data-view=train] .set-row{margin:0;padding:2px 0;min-height:48px;gap:8px}
+body[data-view=train] .set-row input:not([type=checkbox]){min-height:44px;height:44px;padding:5px;font-size:18px}
+body[data-view=train] .set-row input[type=checkbox]{min-width:44px;width:44px;min-height:44px;height:44px}
+body[data-view=train] .set-row[hidden]{display:none!important}
+body[data-view=train] .compact-save-note{display:none}
+body[data-view=train] .set-validation:empty,body[data-view=train] .training-action-message:empty{display:none}
+body[data-view=train] .next-exercise-button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50px;margin:6px 0 0;padding:6px 10px;gap:3px;border-radius:12px}
+body[data-view=train] .next-exercise-button strong{font-size:15px;line-height:1.2}
+body[data-view=train] .next-exercise-button small{font-size:11px;font-weight:500;line-height:1.2;max-width:100%;overflow-wrap:anywhere}
+body[data-view=train] .last-exercise-note{font-size:12px;margin:7px 0;line-height:1.3;color:#d4e9dc}
+body[data-view=train] .session-footer{grid-template-columns:1fr 1fr;gap:10px;padding:8px 12px;min-height:64px;height:auto;background-image:none!important}
+body[data-view=train] .session-footer>div:first-child:not(.footer-rest-group){display:none}
+body[data-view=train] .session-footer .footer-rest-group{min-height:48px}
+body[data-view=train] .session-footer .footer-rest{min-height:48px;padding:3px 5px}
+body[data-view=train] .session-footer .footer-rest strong{font-size:24px}
+body[data-view=train] .session-footer .footer-rest-settings{width:44px;min-width:44px;min-height:48px}
+body[data-view=train] .session-footer>button.primary{min-height:48px;font-size:13px;padding:6px 8px;background:transparent!important;color:#eafff1!important;border:1px solid #8ee2b4!important;border-radius:12px}
+body[data-view=train] .session-footer>button.trainer-final-action{background:#8ee2b4!important;color:#123425!important}
+.trainer-set-pages{display:grid;grid-template-columns:44px 1fr 44px;gap:8px;align-items:center;margin:4px 0}
+.trainer-set-pages span{font-size:12px;text-align:center;color:#eafff1}
+body[data-view=train] .trainer-set-pages button{min-height:44px;height:44px;padding:0;font-size:22px;background:#234b38;color:#f1fff5;border:1px solid #789b87}
+.trainer-tools-dialog{width:min(94vw,440px);max-height:85dvh}
+.trainer-tools-dialog .exercise-details{display:block;margin:0;padding:0;border:0;background:transparent}
+.trainer-tools-dialog .exercise-details>summary{display:none!important}
+.trainer-tools-dialog .training-options-body{display:block!important;position:static!important;max-height:none!important;padding:0!important;border:0!important;background:transparent!important;box-shadow:none!important;width:auto!important}
+.trainer-tools-dialog .training-options-body>button{display:block;width:100%;margin:8px 0}
+.trainer-tools-dialog .previous-results{padding:12px;margin:8px 0 12px;background:#153d2d;border:1px solid #658670;border-radius:12px}
+.trainer-tools-dialog .previous-results h3{font-size:16px;margin:0 0 8px;color:#f1fff5}
+.trainer-last-sets>div{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0;font-size:13px;border-top:1px solid #ffffff18}
+.trainer-tools-dialog .exercise-logging-tools{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.trainer-tools-dialog .exercise-logging-tools button{background:#234b38!important;color:#f1fff5!important;border-color:#789b87!important;min-height:44px;font-size:12px;padding:8px}
+.trainer-tools-dialog .progression-hint,.trainer-tools-dialog .quick-guide,.trainer-tools-dialog .exercise-swap{background:#153d2d!important;background-image:none!important;border:1px solid #658670!important;border-radius:12px;padding:12px;margin:12px 0;color:#f1fff5!important}
+.trainer-tools-dialog .quick-guide>summary,.trainer-tools-dialog .exercise-swap>summary{min-height:44px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;color:#f1fff5!important;font-size:14px}
+.trainer-tools-dialog .quick-guide li{font-size:13px;line-height:1.6;color:#d4e9dc}
+.trainer-tools-dialog .trainer-weight-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.trainer-weight-heading details>summary{display:grid;place-items:center;min-width:44px;min-height:44px;cursor:pointer;font-size:22px;list-style:none}
+.trainer-weight-heading details[open]{flex:1}
+.trainer-weight-heading details[open]>summary{margin-left:auto}
+.trainer-active-options{margin:10px 0 15px;padding:12px;border:1px solid #658670;border-radius:12px}
+.trainer-active-options>strong{display:block;font-size:14px;margin-bottom:8px;color:#f1fff5}
+.trainer-active-options button{display:block;width:100%;margin-top:8px}
+.trainer-detail-name,.trainer-rest-prescription{font-size:12px;color:#d4e9dc}
+@media(max-width:360px){body[data-view=train] #screen{padding-inline:0}body[data-view=train] .session-exercise-head h3{font-size:17px!important}body[data-view=train] .set-row{gap:6px}body[data-view=train] .compact-training-title h2{font-size:14px!important}}
+/* All-exercises view and larger text retain normal document scrolling. */
+body[data-view=train]:has(.workout-exercises.is-all) .trainer-reference .trainer-expanded-photo{height:180px!important}
+
+body[data-view=train] .next-exercise-button :is(strong,small){color:#123425!important}
+body[data-view=train] .exercise-tools-button{display:grid;place-items:center}
+
+body[data-view=train] .workout-exercises.is-focus{overflow-x:clip}

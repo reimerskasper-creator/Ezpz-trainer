@@ -52,6 +52,7 @@ jobs:
           npx playwright install --only-shell chromium
           node tests/plan-packages.cjs
           node tests/plan-packages-mobile.cjs
+          node tests/compact-workout-screen-mobile.cjs
           node tests/trainer-space.cjs
           node tests/trainer-space-mobile.cjs
           node tests/app-appearance.cjs
@@ -91,6 +92,7 @@ jobs:
           name: Android-startup-review
           path: |
             test-results/plan-*.jpg
+            test-results/compact-workout*.jpg
             test-results/trainer-space*.jpg
             test-results/app-appearance*.jpg
             test-results/photo-food*.jpg
