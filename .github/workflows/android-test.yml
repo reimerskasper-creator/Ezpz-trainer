@@ -52,6 +52,7 @@ jobs:
           npx playwright install --only-shell chromium
           node tests/flexible-day.cjs
           node tests/flexible-day-mobile.cjs
+          node tests/saved-workout-planning-mobile.cjs
           node tests/plan-packages.cjs
           node tests/plan-packages-mobile.cjs
           node tests/compact-workout-screen-mobile.cjs
