@@ -13,7 +13,7 @@ jobs:
     # This owned Android branch already runs the same suite on push.
     if: github.event_name != 'pull_request' || github.head_ref != 'android-health-connect' || github.event.pull_request.head.repo.full_name != github.repository
     runs-on: ubuntu-24.04
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
