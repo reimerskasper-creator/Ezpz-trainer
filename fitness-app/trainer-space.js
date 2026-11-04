@@ -62,7 +62,7 @@
  })}
 
  function menuIcon(kind){const paths={next:'m9 5 7 7-7 7',save:'M5 3h12l4 4v14H3V3Zm2 0v6h10V3M7 21v-8h10v8',plan:'M5 5h14v16H5ZM8 2v6m8-6v6M5 11h14',guide:'m2 8 10-5 10 5-10 5Zm4 3v6l6 3 6-3v-6',library:'m3 7 9-4 9 4-9 4Zm0 5 9 4 9-4m-18 5 9 4 9-4',clear:'M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7'};return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="'+paths[kind]+'"/></svg>'}
- function refineOptions(){const body=screen.querySelector('#trainer-options-dialog .training-options-body');if(!body)return;
+ function refineOptions(){const body=screen.querySelector('#trainer-options-dialog .training-options-body');if(!body)return;body.querySelectorAll('.trainer-menu-label').forEach(el=>el.remove());for(const group of body.querySelectorAll('.trainer-session-actions')){body.append(...group.children);group.remove()}
   const overview=body.querySelector('.session-overview'),active=body.querySelector('.trainer-active-options'),links=body.querySelector('.compact-options-links'),view=body.querySelector('.training-view-switch');
   if(!overview||!links||!view)return;
   overview.querySelector('summary').textContent='Session details';
