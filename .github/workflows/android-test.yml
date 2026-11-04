@@ -50,6 +50,8 @@ jobs:
           node tests/ingredients.cjs
           npm install --no-save --no-package-lock playwright@1.64.1
           npx playwright install --only-shell chromium
+          node tests/plan-packages.cjs
+          node tests/plan-packages-mobile.cjs
           node tests/trainer-space.cjs
           node tests/trainer-space-mobile.cjs
           node tests/app-appearance.cjs
@@ -88,6 +90,7 @@ jobs:
         with:
           name: Android-startup-review
           path: |
+            test-results/plan-*.jpg
             test-results/trainer-space*.jpg
             test-results/app-appearance*.jpg
             test-results/photo-food*.jpg

@@ -1,0 +1,26 @@
+.plan-management>summary,.plan-reset>summary{min-height:44px;cursor:pointer;display:flex;align-items:center;font-weight:650}
+.plan-management-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+.plan-management button,.plan-share-tools button{min-height:44px;font-size:12px;overflow-wrap:anywhere}
+.plan-management .note,.plan-share-tools p,.plan-reset p{font-size:12px;line-height:1.5}
+.plan-current-name{font-size:12px!important;overflow-wrap:anywhere}
+.saved-plan-list article{padding:14px 0;border-top:1px solid var(--ui-border,#658670)}
+.saved-plan-list article>strong,.saved-plan-list article>small{display:block;overflow-wrap:anywhere;margin-bottom:7px}
+.saved-plan-list article>div{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.plan-reset{margin-top:14px;border-top:1px solid var(--ui-border,#658670)}
+body[data-view=planner] .plan-weeks{flex-wrap:wrap}
+body[data-view=planner] .plan-weeks button{flex:0 0 calc(25% - 4px);min-height:44px}
+#plan-manager-dialog{box-sizing:border-box;width:min(94vw,440px);max-height:90dvh;overflow:auto;padding:20px;background:var(--ui-card,#153d2d);color:var(--ui-text,#f1fff5);border:1px solid var(--ui-border,#789b87);border-radius:20px}
+#plan-manager-dialog::backdrop{background:#0009}
+.plan-dialog-heading{display:flex;align-items:flex-start;gap:12px;justify-content:space-between}
+.plan-dialog-heading h2{font-size:22px;margin:0 0 14px;overflow-wrap:anywhere}
+#plan-manager-dialog button{min-height:44px;font-size:13px}
+#plan-manager-dialog .plan-dialog-heading button{width:44px;flex:0 0 44px;font-size:24px;padding:0}
+#plan-manager-dialog p,#plan-manager-dialog label{font-size:13px;line-height:1.5}
+#plan-manager-dialog input:not([type=checkbox]){box-sizing:border-box;min-height:44px;width:100%;max-width:100%;font-size:16px;padding:10px}
+#plan-manager-dialog input[type=file]{font-size:13px}
+.plan-dialog-actions{display:grid;grid-template-columns:1fr 1.5fr;gap:8px;margin-top:18px}
+.plan-replace-choice:not([hidden]){display:flex;align-items:center;gap:10px}
+.plan-replace-choice input{width:24px;height:24px;flex:0 0 24px}
+.plan-dialog-status:empty{display:none}
+.plan-dialog-status{overflow-wrap:anywhere}
+#plan-manager-dialog :is(input,button):focus-visible{outline:3px solid var(--ui-accent,#8ee2b4);outline-offset:2px}

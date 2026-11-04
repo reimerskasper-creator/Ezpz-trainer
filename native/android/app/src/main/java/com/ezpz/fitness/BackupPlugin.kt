@@ -32,6 +32,26 @@ class BackupPlugin : Plugin() {
             startActivityForResult(call, intent, "backupDestination")
         } catch (_: Exception) { busy = false; call.reject("Could not open backup save. Your app data was kept.") }
     }
+    @PluginMethod fun exportPlan(call: PluginCall) {
+        if (busy) { call.reject("A file save is already open."); return }
+        try {
+            val json = call.getString("json") ?: error("Missing plan data")
+            check(json.toByteArray(Charsets.UTF_8).size <= 2000000) { "Plan exceeds the export limit." }
+            val data = JSONObject(json)
+            check(data.optString("format") == "ezpz-plan" && data.optInt("version") == 1 && data.optJSONArray("entries") != null) { "Invalid EZPZ plan" }
+            check(!data.has("logs") && !data.has("weights") && !data.has("profile")) { "Personal backup is not a plan" }
+            val fileName = call.getString("fileName") ?: "ezpz-plan-my-plan.json"
+            check(Regex("ezpz-plan-[a-z0-9-]{0,60}\\.json").matches(fileName)) { "Invalid plan filename" }
+            busy = true
+            val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "application/json"
+                putExtra(Intent.EXTRA_TITLE, fileName)
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            }
+            startActivityForResult(call, intent, "backupDestination")
+        } catch (_: Exception) { busy = false; call.reject("Could not open plan save. Your app data was kept.") }
+    }
     @ActivityCallback private fun backupDestination(call: PluginCall?, result: ActivityResult) {
         if (call == null) { busy = false; return }
         if (result.resultCode != Activity.RESULT_OK) {
@@ -48,7 +68,7 @@ class BackupPlugin : Plugin() {
                     val resolver = context.contentResolver
                     val bytes = json.toByteArray(Charsets.UTF_8)
                     val size = BackupFile.save(bytes, { resolver.openOutputStream(uri,"wt") }, { resolver.openInputStream(uri) })
-                    var name = "ezpz-fitness-backup.json"
+                    var name = call.getString("fileName") ?: "ezpz-fitness-backup.json"
                     try {
                         resolver.query(uri,arrayOf(OpenableColumns.DISPLAY_NAME),null,null,null)?.use {
                             if (it.moveToFirst()) name = it.getString(0) ?: name
