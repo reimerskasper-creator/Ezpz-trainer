@@ -38,7 +38,7 @@ class BackupPlugin : Plugin() {
             val json = call.getString("json") ?: error("Missing plan data")
             check(json.toByteArray(Charsets.UTF_8).size <= 2000000) { "Plan exceeds the export limit." }
             val data = JSONObject(json)
-            check(data.optString("format") == "ezpz-plan" && data.optInt("version") == 1 && data.optJSONArray("entries") != null) { "Invalid EZPZ plan" }
+            check(data.optString("format") == "ezpz-plan" && data.optInt("version") in 1..2 && data.optJSONArray("entries") != null) { "Invalid EZPZ plan" }
             check(!data.has("logs") && !data.has("weights") && !data.has("profile")) { "Personal backup is not a plan" }
             val fileName = call.getString("fileName") ?: "ezpz-plan-my-plan.json"
             check(Regex("ezpz-plan-[a-z0-9-]{0,60}\\.json").matches(fileName)) { "Invalid plan filename" }
