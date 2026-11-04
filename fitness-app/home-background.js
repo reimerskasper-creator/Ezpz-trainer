@@ -88,7 +88,7 @@ if(tab==='home'&&state.profile&&state.homeSectionOrder)home();
 
 /* Overview appearance is a single draft shared with the section-order editor. */
 (()=>{
- let draft=null,mode='together',selected='overall',drag=null,groupSize=1;
+ let draft=null,mode='together',selected='overall',drag=null,groupSize=1,baseline=null;
  const keys=['eat','sleep','train','zone','steps','overall'];
  const prefs=()=>draft||cleanHomeAppearance(state.homeAppearance);
  const frame=()=>screen.querySelector('.home-week-card .foundation-map');
@@ -100,7 +100,7 @@ if(tab==='home'&&state.profile&&state.homeSectionOrder)home();
  }
  function paint(){
   if(tab!=='home')return;
-  const f=frame();if(!f)return;if(draft&&draft.ringArea!=='photo'){const old=Object.fromEntries(keys.map(id=>[id,geometry(id,draft)]));draft.ringArea='photo';const a=area(draft);for(const id of keys){draft.rings[id].x=(old[id].x-a.x)/a.w*100;draft.rings[id].y=(old[id].y-a.y)/a.h*100}}const p=prefs();
+  const f=frame();if(!f)return;if(draft&&draft.ringArea!=='photo'){const old=Object.fromEntries(keys.map(id=>[id,geometry(id,draft)]));draft.ringArea='photo';const a=area(draft);for(const id of keys){draft.rings[id].x=(old[id].x-a.x)/a.w*100;draft.rings[id].y=(old[id].y-a.y)/a.h*100}baseline=JSON.stringify(draft)}const p=prefs();
   const expanded=f.closest('.home-week-card').dataset.folded!=='true';f.classList.toggle('ring-canvas',expanded);f.classList.toggle('ring-editing',!!draft&&!!screen.querySelector('[data-ring-controls][open]'));
   screen.querySelector('.home-heading').hidden=!p.greeting&&!draft;
   f.classList.toggle('ring-details-hidden',!p.details);
@@ -138,7 +138,7 @@ if(tab==='home'&&state.profile&&state.homeSectionOrder)home();
   ids.forEach((id,i)=>{draft.rings[id].x=(gs[i].x+dx-a.x)/a.w*100;draft.rings[id].y=(gs[i].y+dy-a.y)/a.h*100});paint();
  }
  function stop(rollback=false){if(!drag)return;if(rollback){draft=drag.before;paint()}drag=null}
- window.EZPZHomeEditor={begin(){draft=cleanHomeAppearance(state.homeAppearance);mode='together';selected='overall';groupSize=1},cancel(){stop();draft=null},stage(){if(draft&&JSON.stringify(draft)!==JSON.stringify(cleanHomeAppearance(state.homeAppearance)))state.homeAppearance=cleanHomeAppearance(draft)},paint,decorate};
+ window.EZPZHomeEditor={begin(){draft=cleanHomeAppearance(state.homeAppearance);baseline=JSON.stringify(draft);mode='together';selected='overall';groupSize=1},cancel(){stop();draft=null},stage(){if(draft&&JSON.stringify(draft)!==baseline)state.homeAppearance=cleanHomeAppearance(draft)},paint,decorate};
  // Section order wrapper has already rendered before this module is defined.
  if(tab==='home'&&state.profile)paint();
  window.addEventListener('resize',()=>{stop(true);paint()});window.addEventListener('load',paint);
