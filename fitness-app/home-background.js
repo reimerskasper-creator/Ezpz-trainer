@@ -100,8 +100,9 @@ if(tab==='home'&&state.profile&&state.homeSectionOrder)home();
  }
  function paint(){
   if(tab!=='home')return;
-  const f=frame();if(!f)return;if(draft&&draft.ringArea!=='photo'){const old=Object.fromEntries(keys.map(id=>[id,geometry(id,draft)]));draft.ringArea='photo';const a=area(draft);for(const id of keys){draft.rings[id].x=(old[id].x-a.x)/a.w*100;draft.rings[id].y=(old[id].y-a.y)/a.h*100}baseline=JSON.stringify(draft)}const p=prefs();
+  const f=frame();if(!f)return;const p=prefs();
   const expanded=f.closest('.home-week-card').dataset.folded!=='true';f.classList.toggle('ring-canvas',expanded);f.classList.toggle('ring-editing',!!draft&&!!screen.querySelector('[data-ring-controls][open]'));
+  if(expanded){if(draft&&draft.ringArea!=='photo'){const old=Object.fromEntries(keys.map(id=>[id,geometry(id,draft)]));draft.ringArea='photo';const a=area(draft);for(const id of keys){draft.rings[id].x=(old[id].x-a.x)/a.w*100;draft.rings[id].y=(old[id].y-a.y)/a.h*100}baseline=JSON.stringify(draft)}}
   screen.querySelector('.home-heading').hidden=!p.greeting&&!draft;
   f.classList.toggle('ring-details-hidden',!p.details);
   nodes().forEach((node,i)=>{
