@@ -1541,3 +1541,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 ## Home colored macro squares — 4 November 2026
 - User approved keeping existing Home macro squares, matching Eat green/gold/blue glass fills. Updated only Home macro backgrounds/borders and progress accents; all tile sizes, text, data, background photos, rings and actions retained. Collapsed behavior unchanged. Android1.0.92/code93.
 - Hosted Android/mobile checks and screenshot review pending.
+
+### Verified Home macro color delivery
+- Runtime b9c3572f49843dbaf8081477718712f52f65a5a5; Android41949129524 succeeded, including packaged phone checks and Android build/tests. Home nutrition screenshot reviewed: existing squares show green/gold/blue glass with readable pale text; layout/photos/actions unchanged. Packaged home-background.css matches source exactly.
+- Android1.0.92/code93 APK51482034bytes SHA2568ec10ce6265bcd12735d44e81cbe675e0b71e0febd30af9c771110e1e22cce95. Artifact13380531369: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/41949129524/artifacts/13380531369 . Existing Library APK replaced version75; metadata applied. Install as Update over existing app. Full broader Mobile41949129448 status at checkpoint: [{"status":"in_progress","conclusion":null}]. Next: owner phone review.
