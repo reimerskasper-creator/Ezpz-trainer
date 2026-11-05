@@ -12,3 +12,9 @@ assert.equal(vm.runInContext('nativeHealthBridge()',ctx),null,'Raw native bridge
 vm.runInContext(fs.readFileSync(path.join(native,'www/capacitor-runtime.js'),'utf8'),ctx);
 assert.equal(vm.runInContext('typeof Capacitor.registerPlugin',ctx),'function');
 (async()=>{for(const method of methods)await vm.runInContext('nativeHealthBridge().'+method+'()',ctx);assert.deepEqual(calls,methods.map(m=>['EzpzHealthConnect',m]));assert(vm.runInContext('nativeHealthBridge()===nativeHealthBridge()',ctx));vm.runInContext(source.slice(source.indexOf('let nativeBackupPlugin=null'),source.indexOf('function releaseReadinessPanel()')),ctx);await vm.runInContext('nativeBackupBridge().exportBackup({json:"{}"})',ctx);assert.deepEqual(calls.at(-1),['EzpzBackup','exportBackup']);assert(fs.readFileSync(path.join(native,'android/app/src/main/java/com/ezpz/fitness/MainActivity.java'),'utf8').includes('registerPlugin(BackupPlugin.class)'));console.log('PASS: packaged runtime loads before app, missing runtime is safe, real Capacitor registration routes all native methods and reuses one proxy');})().catch(e=>{console.error(e);process.exitCode=1});
+
+const backupSource=fs.readFileSync(path.join(native,'android/app/src/main/java/com/ezpz/fitness/BackupPlugin.kt'),'utf8');
+const stage=backupSource.slice(backupSource.indexOf('private fun stageExport'),backupSource.indexOf('@PluginMethod fun importDocument'));
+assert(stage.indexOf('call.data.remove("json")')>stage.indexOf('pendingExport = staged'));
+assert(stage.indexOf('call.data.remove("json")')<stage.indexOf('startActivityForResult'));
+console.log('PASS: large backup options are removed before Android persists file-picker activity state');

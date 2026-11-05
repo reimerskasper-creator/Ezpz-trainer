@@ -62,6 +62,9 @@ class BackupPlugin : Plugin() {
                     }
                 }
                 pendingExport = staged
+                // Capacitor persists call options into Android's size-limited saved-state Bundle.
+                // Photos can make this payload many MB; keep only metadata before opening SAF.
+                call.data.remove("json")
                 startActivityForResult(call, intent, "backupDestination")
             } catch (_: Exception) {
                 pendingExport?.delete(); pendingExport = null; busy = false
