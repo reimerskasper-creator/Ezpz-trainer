@@ -34,4 +34,26 @@ class BackupFileTest {
             } catch (_: IOException) { }
         }
     }
+    @Test fun emptyAndOversizedDocumentsAreRejectedAndClosed() {
+        for (data in listOf(byteArrayOf(), ByteArray(33))) {
+            var closed = false
+            val stream = object : ByteArrayInputStream(data) { override fun close() { closed = true; super.close() } }
+            try { BackupFile.read({ stream }, 32); fail("must reject empty or oversized files") } catch (_: IOException) { }
+            assertTrue(closed)
+        }
+    }
+    @Test fun boundedReadPreservesExactBytesAndHandlesReadErrors() {
+        assertArrayEquals(bytes, BackupFile.read({ ByteArrayInputStream(bytes) }, bytes.size))
+        try { BackupFile.read({ null }, 100); fail("must reject missing stream") } catch (_: IOException) { }
+        var closed = false
+        val stream = object : InputStream() {
+            override fun read(): Int { throw IOException("provider read failed") }
+            override fun close() { closed = true }
+        }
+        try { BackupFile.read({ stream }, 100); fail("must reject failed reads") } catch (_: IOException) { }
+        assertTrue(closed)
+    }
+    @Test fun emptyExportNeverOpensDestination() {
+        try { BackupFile.save(byteArrayOf(), { fail("must not create empty file"); null }, { null }); fail("must reject") } catch (_: IOException) { }
+    }
 }

@@ -4,7 +4,7 @@ assert(html.indexOf('src="./capacitor-runtime.js"')>=0);
 assert(html.includes('data-home-scan'),'Home scanner shortcut is packaged');assert(html.includes('function showIngredientAmount'),'Food amount flow is packaged');for(const f of ['fitness-app/usda-foods.json','fitness-app/vendor/zxing-browser.min.js'])assert(fs.existsSync(path.join(native,'www',f)),'Packaged scanner asset '+f);
 assert(html.indexOf('src="./capacitor-runtime.js"')<html.indexOf('<script>'));
 const methods=['status','requestPermissions','sync','openSettings','checkSteps','checkCalories'],calls=[];
-const ctx=vm.createContext({console,androidBridge:{},Capacitor:{isNativePlatform:()=>true,isPluginAvailable:()=>true,PluginHeaders:[{name:'EzpzBackup',methods:[{name:'exportBackup',rtype:'promise'}]},{name:'EzpzHealthConnect',methods:methods.map(name=>({name,rtype:'promise'}))}],nativePromise:async(plugin,method)=>{calls.push([plugin,method]);return {available:true,metrics:[]}}}});ctx.window=ctx;
+const ctx=vm.createContext({console,document:{addEventListener(){}},androidBridge:{},Capacitor:{isNativePlatform:()=>true,isPluginAvailable:()=>true,PluginHeaders:[{name:'EzpzBackup',methods:[{name:'exportBackup',rtype:'promise'}]},{name:'EzpzHealthConnect',methods:methods.map(name=>({name,rtype:'promise'}))}],nativePromise:async(plugin,method)=>{calls.push([plugin,method]);return {available:true,metrics:[]}}}});ctx.window=ctx;
 const source=fs.readFileSync(path.join(root,'fitness.html'),'utf8');
 const bridgeCode=source.slice(source.indexOf('let nativeHealthPlugin=null;'),source.indexOf('let nativeHealthBusy=false;'));
 vm.runInContext(bridgeCode,ctx);
