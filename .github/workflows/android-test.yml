@@ -51,6 +51,7 @@ jobs:
           npm install --no-save --no-package-lock playwright@1.64.1
           npx playwright install --only-shell chromium
           node tests/flexible-day.cjs
+          node tests/day-card-polish-mobile.cjs
           node tests/flexible-day-mobile.cjs
           node tests/saved-workout-planning-mobile.cjs
           node tests/plan-packages.cjs
@@ -95,6 +96,7 @@ jobs:
         with:
           name: Android-startup-review
           path: |
+            test-results/day-card-polish*.jpg
             test-results/flexible-day-*.jpg
             test-results/plan-*.jpg
             test-results/compact-workout*.jpg

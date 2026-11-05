@@ -1,0 +1,18 @@
+/* Larger original photos fade into the right-side details. */
+body[data-view=planner] #screen .planner-day-view .plan-photo-trigger{display:flex;min-height:104px;padding:12px 12px 32px 47%;background:#003e2d!important;isolation:isolate;overflow:hidden}
+body[data-view=planner] #screen .planner-day-view .planned-workout-preview{display:contents}
+body[data-view=planner] #screen .planner-day-view .plan-photo-trigger>img,body[data-view=planner] #screen .planner-day-view .planned-workout-preview>img{position:absolute;inset:0 auto 0 0;width:48%;height:100%;max-height:none;border:0;border-radius:0;object-fit:cover;mask-image:linear-gradient(to right,#000 65%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 65%,transparent 100%);z-index:-1}
+body[data-view=planner] #screen .planner-day-view .plan-trigger-icon{position:absolute;left:8px;top:8px;bottom:8px;width:39%;height:auto;min-height:0;border-radius:10px;background:#ffffff0c;border:1px solid #71917e66;font-size:30px}
+body[data-view=planner] #screen .planner-day-view .plan-photo-trigger>b{right:12px;bottom:10px}
+body[data-view=planner] #screen .planner-day-view .plan-photo-trigger strong{font-size:13px;line-height:1.35}
+body[data-view=planner] #screen .extra-workout-card .plan-photo-trigger{padding-top:54px;min-height:140px}
+html body[data-view=eat] #screen .meal-focus-grid>button[aria-pressed=true]{background:#215a42!important;border:2px solid #8ee2b4!important;box-shadow:0 0 0 1px #8ee2b433!important}
+html body[data-view=eat] #screen .meal-focus-grid>button[aria-pressed=true] :is(strong,small,span){color:#f1fff5!important}
+body[data-view=eat] #screen .food-log-actions>summary{display:flex;align-items:center;justify-content:center;width:36px;min-height:44px;padding:0;border:0;background:transparent!important;border-radius:8px;list-style:none;color:#d9f2e3!important}
+body[data-view=eat] #screen .food-log-actions>summary::-webkit-details-marker{display:none}
+.food-log-actions>summary svg{width:20px;height:20px}
+body[data-view=eat] #screen .food-log-actions .nutrition-duplicate{margin:0;width:100%;text-align:left;white-space:normal;min-height:44px;color:#e5fff0!important;background:#153d2d!important;border:0;border-radius:0;padding:10px}
+body[data-view=eat] #screen .food-action-options{min-width:165px;z-index:5}
+body[data-view=eat] #screen .eat-diary-heading{gap:8px;align-items:center}
+body[data-view=eat] #screen .eat-diary-heading>.nutrition-source-panel{flex:0 1 auto;min-width:0;margin:0}
+body[data-view=eat] #screen .eat-diary-heading>.nutrition-source-panel>summary{min-height:44px;display:flex;align-items:center;gap:5px;padding:4px;font-size:12px;white-space:nowrap}
