@@ -16,3 +16,5 @@ body[data-view=eat] #screen .food-action-options{min-width:165px;z-index:5}
 body[data-view=eat] #screen .eat-diary-heading{gap:8px;align-items:center}
 body[data-view=eat] #screen .eat-diary-heading>.nutrition-source-panel{flex:0 1 auto;min-width:0;margin:0}
 body[data-view=eat] #screen .eat-diary-heading>.nutrition-source-panel>summary{min-height:44px;display:flex;align-items:center;gap:5px;padding:4px;font-size:12px;white-space:nowrap}
+/* Leave room for Start without covering workout titles. */
+body[data-view=planner] #screen .day-plan-card:has(>.day-start-workout) .plan-photo-trigger{padding-top:54px;min-height:140px}
