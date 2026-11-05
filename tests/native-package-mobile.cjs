@@ -98,7 +98,7 @@ page.once('dialog',d=>d.accept());await page.locator('[data-action="restore"]').
 assert.equal(await page.evaluate(()=>JSON.stringify(cleanWellnessRecords(state.wellnessRecords))===window.beforeRestoreWellness),true);
 assert.equal(await page.evaluate(()=>state.profile.age),35);assert.deepEqual(errors,[]);
 // Plan import uses the same native reader, then previews before any schedule changes.
-await page.evaluate(()=>{tab='planner';render();scheduleWorkout(foodDate(),'full-body-home');window.planImportSnapshot=JSON.stringify(state);window.testPlanText=JSON.stringify(capturePlanPackage('Transfer test',true))});
+await page.evaluate(()=>{tab='planner';render();scheduleWorkout(foodDate(),'full-body-home');window.expectedPlanExercises=planWorkout('full-body-home').exercises.map(x=>({name:x.name,sets:x.sets,reps:String(x.reps)}));window.planImportSnapshot=JSON.stringify(state);window.testPlanText=JSON.stringify(capturePlanPackage('Transfer test',true))});
 await page.locator('.plan-management>summary').click();await page.locator('[data-plan-manage="import"]').first().click();
 for(const text of ['', 'broken JSON', exported]){
  await page.evaluate(text=>{window.testImportResult={cancelled:false,text}},text);
@@ -109,5 +109,5 @@ for(const text of ['', 'broken JSON', exported]){
 await page.evaluate(()=>window.testImportResult={cancelled:false,text:window.testPlanText});await page.locator('#plan-import-file').click();await page.waitForSelector('#plan-import-start');
 assert.equal(await page.evaluate(()=>JSON.stringify(state)===window.planImportSnapshot),true);
 await page.locator('#plan-import-start').fill('2027-03-10');await page.locator('#plan-import-start').dispatchEvent('change');await page.locator('#plan-manager-dialog button[type=submit]').click();await page.waitForFunction(()=>planSettings().start==='2027-03-10');
-assert.equal(await page.evaluate(()=>state.workoutSchedule['2027-03-10']),'full-body-home');assert.deepEqual(errors,[]);
+assert.deepEqual(await page.evaluate(()=>planWorkout(state.workoutSchedule['2027-03-10']).exercises.map(x=>({name:x.name,sets:x.sets,reps:String(x.reps)}))),await page.evaluate(()=>window.expectedPlanExercises));assert.deepEqual(errors,[]);
 console.log('PASS: actual packaged HTML boots setup/home and uses unmodified Capacitor native bridge + runtime for permission and sync calls. Only Android transport responses are simulated.');await context.close();}finally{await browser.close();await new Promise(r=>server.close(r))}})().catch(e=>{console.error(e);process.exitCode=1});

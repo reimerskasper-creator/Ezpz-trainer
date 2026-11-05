@@ -79,3 +79,6 @@ Capacitor otherwise serializes those options into Android's size-limited activit
 saved state, including photos. Only closed, byte-verified destination files count
 as successful exports. Physical-device retesting is required for the reported S23
 crash; automated transport checks cannot substitute for that confirmation.
+
+Portable-plan regression compares scheduled exercise names, sets and reps after
+import: workout IDs are intentionally remapped to independent client copies.
