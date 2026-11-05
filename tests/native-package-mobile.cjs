@@ -99,7 +99,7 @@ assert.equal(await page.evaluate(()=>JSON.stringify(cleanWellnessRecords(state.w
 assert.equal(await page.evaluate(()=>state.profile.age),35);assert.deepEqual(errors,[]);
 // Plan import uses the same native reader, then previews before any schedule changes.
 await page.evaluate(()=>{tab='planner';render();scheduleWorkout(foodDate(),'full-body-home');window.planImportSnapshot=JSON.stringify(state);window.testPlanText=JSON.stringify(capturePlanPackage('Transfer test',true))});
-await page.locator('[data-plan-manage="import"]').first().click();
+await page.locator('.plan-management>summary').click();await page.locator('[data-plan-manage="import"]').first().click();
 for(const text of ['', 'broken JSON', exported]){
  await page.evaluate(text=>{window.testImportResult={cancelled:false,text}},text);
  await page.locator('#plan-import-file').click();await page.waitForFunction(()=>document.querySelector('.plan-dialog-status').textContent.length>0);

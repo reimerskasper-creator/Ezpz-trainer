@@ -69,3 +69,13 @@ Official WHOOP v2 docs reviewed Oct 22, 2026 expose cycle step_count (including 
 Nine selectable sources share the same daily measurement and workout contract. All activity reads use only the selected publisher package; changing source never sums trackers or deletes other-source imports. The six added sources feed existing Sleep/Train/Steps rings and Progress; Eat remains food intake and Zone stays a manual check-in. No new permissions, weight reader, wearable-specific scores or per-brand OAuth.
 
 Source setup stays inside Details & permissions. Garmin Health Connect sharing requires Android 14+. Oura Gen3+ requires its active membership. Withings accounts created after October 13, 2026 require Withings+ for exports; older accounts retain prior access. Xiaomi support here is Mi Fitness, not Zepp Life. Sources: publisher Google Play pages, Polar Health Connect support, Oura Health Connect support, Google Health partner documentation and Withings export support, checked 27 October 2026. Device models/app versions and granted/shared types determine availability; real manufacturer-device testing is still required.
+
+Android 1.0.93 uses EzpzBackup.importDocument for backup and plan JSON selection.
+It bounds reads (16 MB backups / 2 MB plans), rejects empty or malformed documents,
+and returns cancellation without changing records. Android uses native selection
+buttons; browser imports retain file inputs. Exports stage UTF-8 in private cache
+and remove the large `json` option before launching ACTION_CREATE_DOCUMENT:
+Capacitor otherwise serializes those options into Android's size-limited activity
+saved state, including photos. Only closed, byte-verified destination files count
+as successful exports. Physical-device retesting is required for the reported S23
+crash; automated transport checks cannot substitute for that confirmation.
