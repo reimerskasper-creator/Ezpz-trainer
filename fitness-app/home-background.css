@@ -51,7 +51,9 @@ body[data-view=home] #screen .overview-actions>button.primary{background:linear-
 body[data-view=home] #screen .home-collapsible :is(.upcoming-list,.meal-upcoming-list,.upcoming-tabs,.meal-upcoming-tabs){background:#0a231955!important;border-color:#a0b9ab66!important;box-shadow:inset 0 1px 0 #d9ffea10;backdrop-filter:blur(2px)}
 body[data-view=home] #screen .home-collapsible :is(.upcoming-row,.meal-upcoming-row,.home-log-row){background:transparent!important;box-shadow:none!important}
 body[data-view=home] #screen .home-collapsible :is(.upcoming-empty,.meal-plan-empty,.upcoming-day){background:#0a23192e!important}
-body[data-view=home] #screen .home-nutrition .home-macro-row>div{background:#0a231966!important;border-color:#a0b9ab55!important;box-shadow:inset 0 1px 0 #d9ffea10;backdrop-filter:blur(2px)}
+body[data-view=home] #screen .home-nutrition .home-macro-row>div{--macro-fill:#80e8b5;background:#005d45bf!important;border-color:#6dd6a580!important;box-shadow:inset 0 1px 0 #d9ffea10;backdrop-filter:blur(2px)}
+body[data-view=home] #screen .home-nutrition .home-macro-row>div:nth-child(2){--macro-fill:#efd17b;background:#7a613dbd!important;border-color:#b8a36f80!important}
+body[data-view=home] #screen .home-nutrition .home-macro-row>div:nth-child(3){--macro-fill:#9dcbef;background:#365f7bc4!important;border-color:#8cb6d680!important}
 body[data-view=home] #screen .home-nutrition .home-macro-row>div :is(strong,small,span){color:#e5f2e9!important}
 body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row>div{background:transparent!important;border:0!important;box-shadow:none}
 body[data-view=home] #screen :is(.home-nutrition-bottom,.home-nutrition>.row,.home-next>.row,.home-weight-row,.steps-expanded){background:transparent!important}
