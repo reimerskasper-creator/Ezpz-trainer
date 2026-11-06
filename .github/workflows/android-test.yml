@@ -69,6 +69,7 @@ jobs:
           node tests/photo-food-flow-mobile.cjs
           node tests/barcode-mobile.cjs
           node tests/ingredients-mobile.cjs
+          node tests/method-guide-mobile.cjs
           node tests/native-package-mobile.cjs
           node tests/whoop-mobile.cjs
       - uses: actions/cache@v4
@@ -108,6 +109,7 @@ jobs:
             test-results/home-appearance*.jpg
             test-results/home-banner*.jpg
             test-results/progress-card*.jpg
+            test-results/method-guide-*.jpg
             test-results/native-package-startup.jpg
             test-results/native-step-check.jpg
             test-results/native-step-period.jpg
