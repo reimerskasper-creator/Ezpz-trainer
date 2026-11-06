@@ -25,3 +25,28 @@
  window.addEventListener('resize',schedule);document.addEventListener('focusin',schedule);document.addEventListener('focusout',schedule);
  schedule();
 })();
+
+// Estimated macro energy shares, not a replacement for labelled calories or daily targets.
+function foodMacroShares(protein,carbs,fat){
+ const energy=[carbs*4,protein*4,fat*9];
+ if(energy.some(v=>!Number.isFinite(v)||v<0))return null;
+ const total=energy.reduce((a,b)=>a+b,0);if(!total)return null;
+ const exact=energy.map(v=>v/total*100),percent=exact.map(Math.floor);
+ const order=exact.map((v,i)=>({i,remainder:v-percent[i]})).sort((a,b)=>b.remainder-a.remainder||a.i-b.i);
+ const left=100-percent.reduce((a,b)=>a+b,0);for(let n=0;n<left;n++)percent[order[n].i]++;
+ return {shares:energy.map(v=>v/total),percent};
+}
+(()=>{
+ const preview=previewIngredientAmount;
+ previewIngredientAmount=function(){
+  preview();const panel=document.getElementById('ingredient-amount-preview'),input=document.getElementById('ingredient-amount');
+  if(!panel||!input||!ingredientSelected)return;panel.classList.remove('has-macro-ring');
+  const totals=ingredientTotals([{food:ingredientSelected,grams:Number(input.value)}]);if(!totals)return;
+  const result=foodMacroShares(...totals.slice(1));if(!result)return;
+  const labels=['Carbs','Protein','Fat'],colors=['#d8b75e','#9bcce2','#91dbb2'];let offset=0;
+  const circles=result.shares.map((share,i)=>{const circle='<circle cx="50" cy="50" r="39" pathLength="100" fill="none" stroke="'+colors[i]+'" stroke-width="12" stroke-dasharray="'+(share*100)+' '+(100-share*100)+'" stroke-dashoffset="'+(-offset)+'" transform="rotate(-90 50 50)"/>';offset+=share*100;return circle}).join('');
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('class','food-macro-ring');svg.setAttribute('role','img');svg.setAttribute('aria-label','Estimated macro energy split: '+labels.map((label,i)=>label+' '+result.percent[i]+'%').join(', '));svg.innerHTML=circles+'<text x="50" y="47" text-anchor="middle">Macro<tspan x="50" dy="13">split</tspan></text>';
+  panel.append(svg);panel.classList.add('has-macro-ring');
+  panel.querySelectorAll(':scope>div>span').forEach((tile,i)=>{const percent=document.createElement('small');percent.className='food-macro-percent';percent.textContent=result.percent[i]+'%';tile.append(percent)});
+ };
+})();

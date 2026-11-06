@@ -32,6 +32,7 @@ jobs:
           node tests/native-health.cjs
           node tests/nutrition-import.cjs
           node tests/package-labels.cjs
+          node tests/food-macro-ring.cjs
           node tests/accounts.cjs
           node tests/native-accounts.cjs
           node tests/whoop-auto.cjs
@@ -73,6 +74,7 @@ jobs:
           node tests/home-banner-mobile.cjs
           node tests/home-arrange-mobile.cjs
           node tests/food-flow-design-mobile.cjs
+          node tests/food-macro-ring-mobile.cjs
           node tests/photo-food-flow-mobile.cjs
           node tests/barcode-mobile.cjs
           node tests/package-labels-mobile.cjs
@@ -115,6 +117,7 @@ jobs:
             test-results/app-appearance*.jpg
             test-results/photo-food*.jpg
             test-results/barcode-scanner.jpg
+            test-results/food-macro-ring-*.jpg
             test-results/home-workout-banner-*.jpg
             test-results/home-simplified*.jpg
             test-results/home-appearance*.jpg

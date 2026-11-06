@@ -56,3 +56,17 @@ body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>strong{
 body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>div>span{padding:6px 2px}
 body[data-view=custom-food].food-keyboard #food-flow .food-amount-actions{padding:7px 10px;bottom:calc(var(--food-keyboard-inset,0px) + 5px)}
 @media(max-width:360px){body[data-view=custom-food] #food-flow .food-amount-card{grid-template-columns:minmax(0,1fr) 64px 100px;padding:8px;gap:6px}body[data-view=custom-food] #food-flow .food-detail-hero h3{font-size:20px}body[data-view=custom-food] #food-flow .food-macro-preview>div{gap:5px}}
+body[data-view=custom-food] #food-flow .food-macro-preview.has-macro-ring{position:relative}
+body[data-view=custom-food] #food-flow .has-macro-ring>.food-nutrition-basis{display:block;padding-right:88px}
+body[data-view=custom-food] #food-flow .has-macro-ring>strong{min-height:45px;padding-right:88px;display:flex;align-items:center;font-size:clamp(25px,7vw,34px);overflow-wrap:anywhere}
+body[data-view=custom-food] #food-flow .food-macro-preview>svg.food-macro-ring{position:absolute;right:12px;top:10px;width:82px;height:82px;margin:0;color:var(--ui-text,#effff4)}
+body[data-view=custom-food] #food-flow .food-macro-ring text{font-size:11px;fill:currentColor}
+body[data-view=custom-food] #food-flow .food-macro-percent{display:block;font-size:12px;line-height:1.4;margin-top:3px;color:#102f23!important}
+body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>.food-nutrition-basis{padding-right:63px}
+body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>strong{min-height:33px;padding-right:63px;font-size:25px}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>svg.food-macro-ring{width:60px;height:60px;right:8px;top:7px}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-percent{font-size:10px;line-height:1.2;margin-top:1px}
+body[data-view=custom-food] #food-flow .food-macro-ring text{stroke:none!important;stroke-width:0!important;font-weight:500;text-shadow:none;filter:none}
+body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>strong{min-height:0}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-percent{display:none}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>svg.food-macro-ring{width:56px;height:56px}

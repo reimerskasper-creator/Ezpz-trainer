@@ -36,7 +36,7 @@ jobs:
       - name: Verify Progress card photos
         run: node tests/progress-card-photos-mobile.cjs
       - name: Verify reviewed barcode label corrections
-        run: node tests/package-labels.cjs && node tests/package-labels-mobile.cjs
+        run: node tests/package-labels.cjs && node tests/package-labels-mobile.cjs && node tests/food-macro-ring.cjs && node tests/food-macro-ring-mobile.cjs
       - name: Verify homepage photo editing
         run: node tests/home-background-mobile.cjs
       - name: Verify simplified homepage
