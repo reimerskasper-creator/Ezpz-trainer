@@ -1,0 +1,58 @@
+/* Approved gold/emerald food screens; preserve the canonical Eat logo and all data controls. */
+body[data-view=custom-food]{background:var(--ui-page,#082e22)}
+body[data-view=custom-food] #screen{padding:10px 14px 0;max-width:760px}
+body[data-view=custom-food] #food-flow{--food-nav-height:86px;--food-dock-height:120px;min-height:calc(100dvh - 190px);box-sizing:border-box;border:0;border-radius:0;padding:12px 2px calc(var(--food-nav-height) + var(--food-dock-height) + 24px);background:radial-gradient(ellipse at 98% 0%,#d9ad3829,transparent 34%),var(--ui-page,#06271f);overflow:visible}
+body[data-view=custom-food] #food-flow .food-flow-heading{display:flex;gap:10px;align-items:center;margin:0 0 18px;padding:0;min-height:44px}
+body[data-view=custom-food] #food-flow .food-flow-heading>button{flex:0 0 36px;width:36px;min-height:44px;margin:0;font-size:25px}
+body[data-view=custom-food] #food-flow .food-flow-heading h2{font-size:24px;text-align:left;margin:0;line-height:1.2}
+body[data-view=custom-food] #food-flow .food-search-row{gap:10px}
+body[data-view=custom-food] #food-flow #ingredient-search{font-size:16px;min-height:50px;padding:12px}
+body[data-view=custom-food] #food-flow .food-scan-icon{width:50px;height:50px;flex-basis:50px;padding:11px}
+body[data-view=custom-food] #food-flow .food-flow-tabs{margin:12px 0 8px}
+body[data-view=custom-food] #food-flow .food-flow-tabs [aria-selected=true]{border-color:#efd17b;color:#efd17b!important}
+body[data-view=custom-food] #food-flow .food-manual-link{min-height:44px;font-size:14px;margin:8px 0 12px}
+body[data-view=custom-food] #food-flow #food-results-slot{border:0;background:transparent;box-shadow:none;backdrop-filter:none;padding:0}
+body[data-view=custom-food] #food-flow #ingredient-results{max-height:none;padding:0 3px;overflow:visible}
+body[data-view=custom-food] #food-flow #ingredient-results .note{padding:20px 4px;font-size:13px}
+body[data-view=custom-food] #food-flow #ingredient-results button{position:relative;padding:14px 25px 14px 3px}
+body[data-view=custom-food] #food-flow #ingredient-results button::after{content:'›';position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:25px;color:#b9dfc8}
+body[data-view=custom-food] #food-flow .food-meal-tray,body[data-view=custom-food] #food-flow .food-amount-actions{position:fixed;z-index:35;left:14px;right:14px;max-width:704px;margin:0 auto;bottom:calc(var(--food-nav-height) + var(--food-keyboard-inset,0px) + 8px);padding:12px;box-sizing:border-box;border:1px solid #648e75;border-radius:18px;background:var(--ui-card,#103c2e);box-shadow:0 -6px 22px #00180d55}
+body[data-view=custom-food] #food-flow #food-meal-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13px;margin:0 0 9px}
+body[data-view=custom-food] #food-flow .food-meal-energy{white-space:nowrap}
+body[data-view=custom-food] #food-flow .food-meal-tray .primary,body[data-view=custom-food] #food-flow .food-amount-actions .primary{margin:0;min-height:48px;font-size:16px}
+body[data-view=custom-food]:has(#food-flow[data-mode=amount])>header{display:none}
+body[data-view=custom-food] #food-flow .food-detail-hero{display:block;min-height:0;padding:12px 14px;margin:0 0 12px;border:1px solid #638c74;border-radius:17px;background:var(--ui-card,#153e2d)}
+body[data-view=custom-food] #food-flow .food-identity-icon{display:none}
+body[data-view=custom-food] #food-flow .food-detail-hero h3{font-size:22px;line-height:1.25;margin:0}
+body[data-view=custom-food] #food-flow .food-source-info{margin:7px 0 0;font-size:11px}
+body[data-view=custom-food] #food-flow .food-source-info summary{min-height:28px;padding:4px 0}
+body[data-view=custom-food] #food-flow .food-amount-card{display:grid;grid-template-columns:minmax(0,1fr) 76px 112px;gap:8px;padding:10px 12px;border-radius:17px}
+body[data-view=custom-food] #food-flow .food-amount-card label{font-size:14px}
+body[data-view=custom-food] #food-flow .food-amount-card input{min-width:0;min-height:48px;font-size:22px;padding:8px}
+body[data-view=custom-food] #food-flow .food-basis-toggle{grid-column:auto;gap:0;border:1px solid #7da58a;border-radius:13px;overflow:hidden}
+body[data-view=custom-food] #food-flow .food-basis-toggle button{min-height:44px;border:0;border-radius:11px;padding:6px;font-size:15px;line-height:28px}
+body[data-view=custom-food] #food-flow .food-macro-preview{margin:12px 0 0;padding:14px;border-radius:17px}
+body[data-view=custom-food] #food-flow .food-nutrition-basis{font-size:12px;display:block}
+body[data-view=custom-food] #food-flow .food-macro-preview>strong{font-size:32px;text-align:left;line-height:1.2;margin:5px 0 12px}
+body[data-view=custom-food] #food-flow .food-macro-preview>div{gap:8px;border:0;padding:0}
+body[data-view=custom-food] #food-flow .food-macro-preview>div>span{border:0;border-radius:12px;padding:10px 3px;font-size:12px;color:#102f23!important;background:#d8b75e!important}
+body[data-view=custom-food] #food-flow .food-macro-preview>div>span:nth-child(2){background:#9bcce2!important}
+body[data-view=custom-food] #food-flow .food-macro-preview>div>span:nth-child(3){background:#91dbb2!important}
+body[data-view=custom-food] #food-flow .food-macro-preview b{font-size:20px;line-height:1.25;color:#102f23!important;margin-top:5px}
+body[data-view=custom-food] #food-flow .food-macro-preview svg{width:15px;height:15px;vertical-align:middle;margin-right:3px;color:#102f23}
+body[data-view=custom-food] #ingredient-amount-error:empty{display:none}
+body[data-view=custom-food].food-keyboard>.nav,body[data-view=custom-food].food-keyboard>header{display:none}
+body[data-view=custom-food].food-keyboard #screen{padding-top:3px}
+body[data-view=custom-food].food-keyboard #food-flow{padding-top:2px;min-height:0}
+body[data-view=custom-food].food-keyboard #food-flow .food-flow-heading{min-height:34px;margin-bottom:6px}
+body[data-view=custom-food].food-keyboard #food-flow .food-flow-heading h2{font-size:20px}
+body[data-view=custom-food].food-keyboard #food-flow .food-detail-hero{padding:7px 10px;margin-bottom:7px}
+body[data-view=custom-food].food-keyboard #food-flow .food-detail-hero h3{font-size:17px}
+body[data-view=custom-food].food-keyboard #food-flow .food-source-info{margin-top:2px}
+body[data-view=custom-food].food-keyboard #food-flow .food-source-info summary{min-height:22px;padding:1px 0}
+body[data-view=custom-food].food-keyboard #food-flow .food-amount-card{padding:6px 8px}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview{margin-top:7px;padding:9px}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>strong{font-size:27px;margin:2px 0 6px}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>div>span{padding:6px 2px}
+body[data-view=custom-food].food-keyboard #food-flow .food-amount-actions{padding:7px 10px;bottom:calc(var(--food-keyboard-inset,0px) + 5px)}
+@media(max-width:360px){body[data-view=custom-food] #food-flow .food-amount-card{grid-template-columns:minmax(0,1fr) 64px 100px;padding:8px;gap:6px}body[data-view=custom-food] #food-flow .food-detail-hero h3{font-size:20px}body[data-view=custom-food] #food-flow .food-macro-preview>div{gap:5px}}

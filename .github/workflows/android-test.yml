@@ -71,6 +71,7 @@ jobs:
           node tests/home-appearance-mobile.cjs
           node tests/home-banner-mobile.cjs
           node tests/home-arrange-mobile.cjs
+          node tests/food-flow-design-mobile.cjs
           node tests/photo-food-flow-mobile.cjs
           node tests/barcode-mobile.cjs
           node tests/ingredients-mobile.cjs
