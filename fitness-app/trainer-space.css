@@ -173,3 +173,6 @@ body[data-view=train] .training-exercise.trainer-workout-photo .set-row input:no
 body[data-view=train] .training-exercise.trainer-workout-photo .set-row input[type=checkbox]:not(:checked){background-color:#153e2e!important;border-color:#87ad97!important}
 body[data-view=train] .training-exercise.trainer-workout-photo .set-row input:focus-visible{outline:3px solid #8ee2b4!important;outline-offset:1px}
 body[data-view=train] .training-exercise.trainer-workout-photo .exercise-tools-button{background:#153e2e!important;color:#effff5!important}
+
+/* Menu photo controls stay in flow when the optional activity card is absent. */
+#trainer-options-dialog .photo-camera-control{position:relative!important;top:auto!important;right:auto!important;display:block;margin:8px 0!important}
