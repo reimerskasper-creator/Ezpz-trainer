@@ -1,0 +1,19 @@
+body[data-view] #food-flow .food-identity-copy{display:flex;align-items:center;flex-wrap:wrap;gap:3px 8px}
+body[data-view] #food-flow .food-identity-copy h3{flex:1 0 100%}
+body[data-view] #food-flow .food-identity-copy .food-source-info{flex:1;min-width:0;margin:0}
+body[data-view] #food-flow .food-identity-copy .food-source-info[open]{flex-basis:100%}
+body[data-view] #food-flow .package-label-open{min-height:32px;margin:0;padding:4px 8px;font-size:11px;border:1px solid #789b86;border-radius:9px;background:var(--ui-field,#234b38)!important;color:var(--ui-text,#f1fff5)!important}
+#package-label-dialog{width:min(440px,94vw);max-height:88dvh;box-sizing:border-box;overflow:auto;padding:18px;border:1px solid #91b99c;border-radius:20px;background:#123d2e;color:#f1fff5}
+#package-label-dialog::backdrop{background:#001b12b8}
+#package-label-dialog .package-label-heading{display:flex;align-items:center;gap:8px;justify-content:space-between}
+#package-label-dialog h2{font-size:22px;margin:0;color:#f1fff5!important}
+#package-label-dialog p{font-size:13px;line-height:1.5;color:#d8eddf!important}
+#package-label-dialog button{width:100%;min-height:44px;margin:7px 0;background:#214c37!important;color:#f1fff5!important;border:1px solid #83b293;border-radius:12px;font-size:14px}
+#package-label-dialog .package-label-heading button{width:44px;flex:0 0 44px;font-size:24px;margin:0}
+#package-label-dialog .primary{background:#9ae4bb!important;color:#123b29!important;font-weight:750}
+#package-label-dialog label{display:block;font-size:13px;line-height:1.4;margin:7px 0;color:#f1fff5!important}
+#package-label-dialog input:not([type=checkbox]),#package-label-dialog select,#package-label-dialog option{box-sizing:border-box;width:100%;min-width:0;min-height:44px;margin:4px 0 0;background:#234b38!important;color:#f1fff5!important;border:1px solid #83b293;border-radius:9px;padding:8px;font-size:16px;color-scheme:dark}
+#package-label-dialog .package-label-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#package-label-dialog .package-label-confirm{display:flex;align-items:center;gap:10px;padding:10px 0}
+#package-label-dialog input[type=checkbox]{flex:0 0 24px;width:24px;height:24px;accent-color:#9ae4bb}
+#package-label-dialog [hidden]{display:none!important}

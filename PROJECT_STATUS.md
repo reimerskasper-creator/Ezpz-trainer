@@ -2,7 +2,7 @@
 
 ## Canonical app
 - Repository: reimerskasper-creator/Ezpz-trainer
-- Branch: main
+- Branch: android-health-connect (canonical Android; older Pages main may lag)
 - Live: https://reimerskasper-creator.github.io/Ezpz-trainer/fitness.html
 - Continue this existing app. Do not create a replacement or parallel version.
 
@@ -1703,3 +1703,10 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Artifact13537250216: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/42282822929/artifacts/13537250216 . ZIP SHA25634e4003143153b5e8ac1c6c25d54bcf44628582fcbd290cb64ec8aa9b4d2ba25; APK51518649bytes SHA256094d1c37f0b087563b25cd019b1d3419b36a13abf11a6ed50c8dc3d0a367b0d6.
 - Verified cryptographic APKv2 signature/content digest, known update signer aff9b047133e210e827b62dcaedc49e40a2ae2248cea0e89656fa7ca8b918a65, ZIP integrity, version1.0.105/code106, canonical packaged HTML and exact new food-flow-design.css/js plus plan assets. Install as Update without uninstalling. Physical Samsung keyboard review is next; browser keyboard simulations do not replace that device check.
 - Existing APK itemlibfile_545dd90f73f4819197110900611a1827 replaced as version88/file_00000000fb08821287fa21085dfda97d; local metadata applied. Owner should test food search/amount and Samsung numeric keyboard on the installed update.
+
+## Free package-label reader and saved barcode corrections — 6 November 2026, Android1.0.106/code107
+- Owner requested a reliable scanner at zero paid API cost after OFF records differed from three package labels. Keep free barcode lookup; clearly mark database entries as unchecked. Bundle Google ML Kit Latin text recognition16.0.1 in the APK: label photos processed on device, no paid API/key/account or cloud OCR service. Explicit user review remains necessary; no promise all database records or OCR results are correct.
+- Food details offers Read / correct label. A photo fills a draft serving amount/unit/calories/P/C/F; uncertain, missing or multi-column values remain blank. Saving requires every value and the package-confirmation checkbox. Save per canonical barcode, support UPC/EAN equivalence, use saved values before network, preserve historical logs and include validated corrections in full backups. Unknown/unavailable barcodes can also be completed from their package. Storage failure rolls back. No label image or recognized text retained in state.
+- Built-in photographed-package corrections: salmon09661989662256g=70/12/1/2; NuttZo89469700218433g=180/6/8/15; Genoa01111099836157g=230/10/2/20 (kcal/P/C/F). Full precision normalized values avoid serving drift. User corrections take precedence. Existing logs/drafts are not silently rewritten.
+- Local pure tests pass label parsing/validation, checksum/aliases, known serving arithmetic, overrides, backup cleaning and quota rollback. Phone tests cover320/390/430, photo draft bridge simulation, explicit review/save, failed persistence rollback, reload/offline lookup, backup, old-history retention and logging. Android instrumentation separately runs actual bundled OCR against three generated labels with emulator Wi-Fi/data disabled; hosted result pending. No private package photos are published.
+- Native compile, full packaged checks, actual OCR emulator run and APK signer verification pending hosted build. Canonical source upload authorized by existing agreement. Prior delivered APK1.0.105/code106 remains current until verified replacement.

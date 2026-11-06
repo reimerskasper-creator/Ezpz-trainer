@@ -9,8 +9,8 @@ android {
         applicationId "com.ezpz.fitness"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 106
-        versionName "1.0.105"
+        versionCode 107
+        versionName "1.0.106"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -43,6 +43,7 @@ repositories {
 }
 
 dependencies {
+    implementation "com.google.mlkit:text-recognition:16.0.1"
     implementation "androidx.health.connect:connect-client:1.1.0"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2"
     implementation fileTree(include: ['*.jar'], dir: 'libs')
