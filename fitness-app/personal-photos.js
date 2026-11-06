@@ -7,6 +7,7 @@
  function apply(box,id){
   if(!box.isConnected)return false;
   const kind=box.dataset.photoKind,item=box.dataset.photoItem;
+  if(kind==='saved-plan'){return window.EZPZPlans?.setCover(item,id)===true}
   if(kind==='progress'){return window.EZPZProgressBackground?.select(id)===true}
   if(kind==='home'){return window.EZPZHomeBackground?.select(id)===true}
   if(kind==='workout'){

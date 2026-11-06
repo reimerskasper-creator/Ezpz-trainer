@@ -35,3 +35,30 @@ body[data-view=planner] #screen .plan-management .plan-clear{margin-top:16px;pad
 body[data-view=planner] #screen .plan-management [data-plan-manage=clear]{color:var(--ui-text,#f1fff5)!important;border:1px solid var(--ui-border,#a57e76);background:var(--ui-control,#ffffff0c);font-weight:700}
 body[data-view=planner] #screen .plan-management .plan-clear p{margin:9px 0 0;font-size:12px;line-height:1.6}
 #plan-manager-dialog :is(h2,h3,p,label,strong){color:var(--ui-text,#f1fff5)!important}
+
+/* Personal plan library and preview, using the existing photo-card language. */
+.plan-library-open{margin-top:10px;min-height:44px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5);border-color:var(--ui-border,#658670)}
+#plan-manager-dialog :is(.plan-library-intro,.plan-preview-counts){margin:0 0 16px;color:var(--ui-muted,#c2ddcd)!important}
+.plan-library-list{display:grid;gap:12px;margin:18px 0}
+.plan-library-card{position:relative;overflow:hidden;border:1px solid var(--ui-border,#658670);border-radius:18px;background:var(--ui-card,#153d2d)}
+#plan-manager-dialog .plan-library-card-open{display:flex;position:relative;isolation:isolate;align-items:center;text-align:left;padding:18px 30px 18px 43%;min-height:140px;width:100%;border:0;border-radius:0;background:none;color:var(--ui-text,#f1fff5)}
+.plan-library-card-open>img{position:absolute;inset:0 auto 0 0;width:45%;height:100%;object-fit:cover;z-index:-2}
+.plan-library-card-open::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,transparent 20%,var(--ui-card,#153d2d) 47%)}
+.plan-card-copy{min-width:0;display:flex;flex-direction:column;gap:6px;font-size:11px;font-weight:400;line-height:1.4}
+.plan-card-copy>strong{font-size:16px;line-height:1.25;overflow-wrap:anywhere}
+#plan-manager-dialog .plan-library-badge{align-self:flex-start;border-radius:8px;padding:3px 7px;background:var(--ui-accent,#8ee2b4);color:var(--ui-on-accent,#153d2d)!important;font-size:9px;font-weight:750;text-transform:uppercase}
+.plan-card-arrow{position:absolute;right:11px;font-size:27px}
+#plan-manager-dialog .plan-cover-button{position:absolute;top:9px;left:9px;z-index:2;width:44px;height:44px;padding:10px;border:1px solid #c2ddcd88;border-radius:50%;background:#0d2c21a6;color:#f1fff5;backdrop-filter:blur(4px)}
+.plan-cover-button svg{display:block;width:22px;height:22px}
+.plan-preview-cover{position:relative;margin-bottom:16px}.plan-preview-cover>img{width:100%;height:190px;object-fit:cover;border-radius:16px;display:block}.plan-preview-cover .plan-cover-button{left:auto!important;right:9px}
+#plan-manager-dialog .plan-preview-name{font-size:23px;line-height:1.2;margin:8px 0 10px;overflow-wrap:anywhere}
+.plan-inside-heading{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ui-muted,#c2ddcd);margin:22px 0 10px}
+.plan-inside{border:1px solid var(--ui-border,#658670);border-radius:13px;margin-bottom:9px;padding:0 12px}
+#plan-manager-dialog .plan-inside>summary{display:flex;align-items:center;gap:12px;min-height:62px;color:var(--ui-text,#f1fff5)!important;cursor:pointer}
+.plan-inside summary svg{width:25px;height:25px;flex:none}.plan-inside summary>span{display:flex;flex-direction:column;gap:5px;font-size:15px;font-weight:700}.plan-inside small{font-size:11px;font-weight:400}
+.plan-inside ul{list-style:none;padding:0;margin:0 0 10px}.plan-inside li{display:grid;grid-template-columns:50px 1fr;gap:8px;font-size:12px;line-height:1.6;border-top:1px solid var(--ui-border,#658670);padding:10px 0;overflow-wrap:anywhere}
+.plan-preview-dialog form{margin-top:20px}.plan-preview-dialog .plan-dialog-actions{grid-template-columns:1fr 1.35fr}
+.plan-preview-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}.plan-preview-actions button{background:none;border-color:transparent;color:var(--ui-text,#f1fff5)}
+#plan-manager-dialog .plan-replace-choice[hidden]{display:none!important}.plan-replace-choice{align-items:flex-start!important;font-size:12px!important;line-height:1.6;margin:14px 0}.plan-replace-choice input{margin:0}
+.plan-library-empty{padding:24px 0;text-align:center}.plan-library-empty h3{font-size:20px}
+@media(max-width:360px){#plan-manager-dialog .plan-library-card-open{padding-left:39%;min-height:148px}.plan-card-copy>strong{font-size:15px}.plan-library-card-open>img{width:42%}.plan-library-card-open::after{background:linear-gradient(90deg,transparent 12%,var(--ui-card,#153d2d) 42%)}.plan-card-copy{font-size:10px}.plan-preview-cover>img{height:160px}}
