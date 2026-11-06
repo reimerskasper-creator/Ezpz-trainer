@@ -59,6 +59,7 @@ jobs:
           node tests/plan-packages-mobile.cjs
           node tests/clear-plan-mobile.cjs
           node tests/plan-library-mobile.cjs
+          node tests/review-polish-mobile.cjs
           node tests/compact-workout-screen-mobile.cjs
           node tests/trainer-space.cjs
           node tests/trainer-space-mobile.cjs
