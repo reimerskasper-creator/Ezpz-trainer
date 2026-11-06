@@ -12,6 +12,8 @@ const beforeEdit=await page.evaluate(()=>JSON.stringify(state));
 await page.locator('[data-action="reset"]').click();
 await page.locator('#edit-plan-dialog').waitFor({state:'visible'});
 assert.equal(await page.locator('#edit-plan-dialog').evaluate(e=>getComputedStyle(e).backgroundColor),'rgb(18, 61, 48)');
+for(const width of [320,390,430]){await page.setViewportSize({width,height:844});assert(await page.locator('#edit-plan-dialog').evaluate(e=>{const r=e.getBoundingClientRect();return r.left>=0&&r.right<=innerWidth}));}
+await page.setViewportSize({width:390,height:844});await page.screenshot({path:path.join(out,'edit-goals-dialog.jpg'),type:'jpeg',quality:90});
 await page.locator('[data-edit-plan-cancel]').click();
 assert.equal(await page.evaluate(()=>JSON.stringify(state)),beforeEdit);
 await page.locator('[data-action="reset"]').click();await page.keyboard.press('Escape');

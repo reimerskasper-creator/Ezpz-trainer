@@ -164,7 +164,7 @@ body[data-view=train] .trainer-exercise-nav .last-exercise-note{align-self:cente
 #trainer-options-dialog .trainer-active-options{margin:10px 0;padding:10px}
 #trainer-options-dialog .trainer-active-options button{font-size:12px}
 @media(max-height:740px){#trainer-options-dialog{padding:12px}#trainer-options-dialog .trainer-dialog-heading{margin-bottom:8px}#trainer-options-dialog .training-options-body .workout-picker-trigger{height:88px;min-height:88px!important;margin-bottom:8px!important}#trainer-options-dialog .trainer-menu-label{margin-top:6px}#trainer-options-dialog .trainer-menu-row{min-height:44px;padding-block:6px!important}#trainer-options-dialog .trainer-clear-entries{margin-top:8px!important}}
-#trainer-options-dialog .session-overview>.category-background-open{position:static!important;margin:8px 0;min-width:44px;min-height:44px}
+#trainer-options-dialog .session-overview>.category-background-open{position:relative!important;top:auto!important;right:auto!important;margin:8px 0;min-width:44px;min-height:44px}
 
 /* The selected workout's cover carries into its exercise cards; reference photos stay separate. */
 body[data-view=train] .training-exercise.trainer-workout-photo{background-color:#103626!important;background-image:linear-gradient(180deg,rgba(3,35,25,.72) 0%,rgba(3,35,25,.46) 30%,rgba(3,35,25,.79) 54%,rgba(3,35,25,.95) 100%),var(--trainer-workout-cover)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border-color:#8cbaa1!important}
@@ -174,5 +174,3 @@ body[data-view=train] .training-exercise.trainer-workout-photo .set-row input[ty
 body[data-view=train] .training-exercise.trainer-workout-photo .set-row input:focus-visible{outline:3px solid #8ee2b4!important;outline-offset:1px}
 body[data-view=train] .training-exercise.trainer-workout-photo .exercise-tools-button{background:#153e2e!important;color:#effff5!important}
 
-/* Menu photo controls stay in flow when the optional activity card is absent. */
-#trainer-options-dialog .photo-camera-control{position:relative!important;top:auto!important;right:auto!important;display:block;margin:8px 0!important}
