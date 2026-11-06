@@ -65,3 +65,10 @@ body[data-view=planner] #screen .plan-management .plan-clear p{margin:9px 0 0;fo
 
 body[data-view=planner] .plan-library-entry{margin:18px 0;padding:14px;border:1px solid var(--ui-border,#658670);border-radius:14px;background:var(--ui-card,#153d2d)}
 body[data-view=planner] #screen .plan-library-entry p{margin:10px 0 0;color:var(--ui-muted,#c2ddcd)!important;font-size:12px;line-height:1.6}
+
+/* One shared collapsed layout for all three plan tools. */
+body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.plan-management,.plan-repeat){box-sizing:border-box;width:100%;padding:0 13px;margin:0 0 10px;border:1px solid var(--ui-border,#40634e);border-radius:12px}
+body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.plan-management,.plan-repeat)>summary{display:flex;align-items:center;gap:8px;box-sizing:border-box;min-height:48px;padding:12px 0;margin:0;font-size:12px;line-height:24px;font-weight:650;list-style:none;cursor:pointer}
+body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.plan-management,.plan-repeat)>summary::-webkit-details-marker{display:none}
+body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.plan-management,.plan-repeat)>summary::before{content:'▸';flex:0 0 10px;font-size:12px}
+body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.plan-management,.plan-repeat)[open]>summary::before{content:'▾'}
