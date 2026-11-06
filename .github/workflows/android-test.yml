@@ -62,6 +62,7 @@ jobs:
           node tests/app-appearance.cjs
           node tests/app-appearance-mobile.cjs
           node tests/progress-card-photos-mobile.cjs
+          node tests/home-workout-banner-mobile.cjs
           node tests/home-simplified-mobile.cjs
           node tests/home-appearance-mobile.cjs
           node tests/home-banner-mobile.cjs
@@ -105,6 +106,7 @@ jobs:
             test-results/app-appearance*.jpg
             test-results/photo-food*.jpg
             test-results/barcode-scanner.jpg
+            test-results/home-workout-banner-*.jpg
             test-results/home-simplified*.jpg
             test-results/home-appearance*.jpg
             test-results/home-banner*.jpg
