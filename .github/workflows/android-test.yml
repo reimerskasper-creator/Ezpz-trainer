@@ -56,6 +56,7 @@ jobs:
           node tests/saved-workout-planning-mobile.cjs
           node tests/plan-packages.cjs
           node tests/plan-packages-mobile.cjs
+          node tests/clear-plan-mobile.cjs
           node tests/compact-workout-screen-mobile.cjs
           node tests/trainer-space.cjs
           node tests/trainer-space-mobile.cjs
@@ -101,6 +102,7 @@ jobs:
             test-results/day-card-polish*.jpg
             test-results/flexible-day-*.jpg
             test-results/plan-*.jpg
+            test-results/clear-plan-*.jpg
             test-results/compact-workout*.jpg
             test-results/trainer-space*.jpg
             test-results/app-appearance*.jpg

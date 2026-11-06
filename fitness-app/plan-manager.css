@@ -24,3 +24,14 @@ body[data-view=planner] .plan-weeks button{flex:0 0 calc(25% - 4px);min-height:4
 .plan-dialog-status:empty{display:none}
 .plan-dialog-status{overflow-wrap:anywhere}
 #plan-manager-dialog :is(input,button):focus-visible{outline:3px solid var(--ui-accent,#8ee2b4);outline-offset:2px}
+
+/* Plan tools use explicit theme-aware foregrounds on their existing card. */
+body[data-view=planner] #screen .plan-management>summary{color:var(--ui-text,#f1fff5)!important;font-size:14px;gap:9px;list-style:none}
+body[data-view=planner] #screen .plan-management>summary::-webkit-details-marker{display:none}
+body[data-view=planner] #screen .plan-management>summary::before{content:'▸';display:inline-block;color:inherit;transition:transform .15s}
+body[data-view=planner] #screen .plan-management[open]>summary::before{transform:rotate(90deg)}
+body[data-view=planner] #screen .plan-management :is(p,strong,small){color:var(--ui-text,#f1fff5)!important}
+body[data-view=planner] #screen .plan-management .plan-clear{margin-top:16px;padding-top:16px;border-top:1px solid var(--ui-border,#658670)}
+body[data-view=planner] #screen .plan-management [data-plan-manage=clear]{color:var(--ui-text,#f1fff5)!important;border:1px solid var(--ui-border,#a57e76);background:var(--ui-control,#ffffff0c);font-weight:700}
+body[data-view=planner] #screen .plan-management .plan-clear p{margin:9px 0 0;font-size:12px;line-height:1.6}
+#plan-manager-dialog :is(h2,h3,p,label,strong){color:var(--ui-text,#f1fff5)!important}
