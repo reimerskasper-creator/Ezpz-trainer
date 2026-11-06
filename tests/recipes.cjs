@@ -8,7 +8,7 @@ let query='',writes=0;
 const initial={profile:{weight:80,height:180,age:35,sex:'male',days:3,goal:'maintain',level:'Beginner',equipment:'home'},logs:[],weights:[],shopping:['Tomatoes (raw) — 100 g'],foodLog:[],mealPlan:{saved:{breakfast:0,lunch:4,dinner:5}},workoutLayoutVersion:2};
 let stored=JSON.stringify(initial);
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:id==='recipe-search'?{value:query}:null,querySelectorAll:s=>s==='[data-recipe-card]'?cards:[],querySelector:s=>fields[s]||null,addEventListener:(n,f)=>(listeners[n]??=[]).push(f)};
-const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,loggedRecipeIndex,foodDiary,restoredState,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v},setFocus(v){mealFocus=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
+const api=new Function('document','window','localStorage','fetch','console','alert','confirm',scripts+'\nreturn {recipes,foods,nutrition,eat,mealDetail,updateRecipe,mealPhoto,recipeCategory,loggedRecipeIndex,foodDiary,restoredState,filterRecipes,mealPlanner,get state(){return state},setFilter(v){mealFilter=v},setFocus(v){mealFocus=v},showAll(){mealVisibleCount=200;filterRecipes(false)}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>{throw Error(m)},()=>true);
 assert(api.recipes.length===157,'Expected 157 recipes');
 const approved=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/approved-food.json'),'utf8'));
 for(const [name,body] of Object.entries(approved.foodFunctions||{}))if(!['eat','filterRecipes'].includes(name))assert(source.includes(body),'Approved food function changed: '+name);
@@ -42,7 +42,7 @@ api.eat();assert((screen.innerHTML.match(/data-recipe-card /g)||[]).length===157
 assert(api.mealPlanner().includes('value="156"'),'New recipes unavailable in planner');
 api.setFilter('dinner');query='chickpea';api.filterRecipes();
 assert(cards.filter(x=>!x.hidden).map(x=>Number(x.dataset.recipeIndex)).join(',')==='47','Search and category must combine');
-for(const focus of ['protein','carbs','fat']){api.setFocus(focus);api.setFilter('all');query='';api.filterRecipes();assert(cards.filter(x=>!x.hidden).length===31,'Focus filtering '+focus)}api.setFocus('balanced');api.setFilter('dinner');query='garlic';api.filterRecipes();assert(cards.some(x=>!x.hidden),'Search ingredients');
+for(const focus of ['protein','carbs','fat']){api.setFocus(focus);api.setFilter('all');query='';api.filterRecipes();assert(cards.filter(x=>!x.hidden).length===8,'Initial focus page '+focus);api.showAll();assert(cards.filter(x=>!x.hidden).length===31,'All focus recipes still reachable '+focus)}api.setFocus('balanced');api.setFilter('dinner');query='garlic';api.filterRecipes();assert(cards.some(x=>!x.hidden),'Search ingredients');
 assert(writes===0&&stored===JSON.stringify(initial),'Browsing changed saved data');
 // Exercise the existing food-log and shopping handlers using the final added recipe.
 const click=selector=>{const key=selector==='[data-log-food]'?'logFood':'recipe',node={dataset:{[key]:'48'}};for(const listener of listeners.click||[])listener({target:{closest:s=>s===selector?node:null}})};
