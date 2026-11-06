@@ -19,6 +19,27 @@ import static org.junit.Assert.assertTrue;
 /** Real bundled OCR on generated fixtures, not a mocked native bridge or package photos. */
 @RunWith(AndroidJUnit4.class)
 public class LabelReaderOcrTest {
+    @Test public void cameraUsesFullResolutionOutputAndDecodesRotatedPhoto() throws Exception {
+        android.content.Context context = androidx.test.platform.app.InstrumentationRegistry.getInstrumentation().getTargetContext();
+        java.io.File photo = java.io.File.createTempFile("ezpz-label-", ".jpg", context.getCacheDir());
+        Bitmap source = Bitmap.createBitmap(4000, 2000, Bitmap.Config.ARGB_8888);
+        try {
+            android.content.Intent intent = LabelReaderPlugin.cameraIntent(context, photo);
+            org.junit.Assert.assertEquals(android.provider.MediaStore.ACTION_IMAGE_CAPTURE, intent.getAction());
+            android.net.Uri output = intent.getParcelableExtra(android.provider.MediaStore.EXTRA_OUTPUT);
+            org.junit.Assert.assertEquals("content", output.getScheme());
+            org.junit.Assert.assertEquals(context.getPackageName() + ".fileprovider", output.getAuthority());
+            assertTrue((intent.getFlags() & android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION) != 0);
+            try (java.io.OutputStream stream = context.getContentResolver().openOutputStream(output)) {
+                assertTrue(source.compress(Bitmap.CompressFormat.JPEG, 90, stream));
+            }
+            android.media.ExifInterface exif = new android.media.ExifInterface(photo.getPath());
+            exif.setAttribute(android.media.ExifInterface.TAG_ORIENTATION, "6"); exif.saveAttributes();
+            Bitmap decoded = LabelReaderPlugin.decodeCameraPhoto(photo);
+            try { org.junit.Assert.assertEquals(1000, decoded.getWidth()); org.junit.Assert.assertEquals(2000, decoded.getHeight()); }
+            finally { decoded.recycle(); }
+        } finally { source.recycle(); photo.delete(); }
+    }
     @Test public void readsThreeSingleColumnLabelsWithoutModelDownload() throws Exception {
         String[][] fixtures = {
             {"56", "70", "2", "1", "12"},
