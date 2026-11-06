@@ -8,3 +8,9 @@ for(const v of [null,'',NaN,-1,Infinity,101]){const d=structuredClone(product);d
 const zero=structuredClone(product);zero.product.nutriments.fat_100g=0;assert.equal(parse(zero,'012345678905')[5],0);assert.equal(parse({status:0},'012345678905'),null);
 const kj=structuredClone(product);delete kj.product.nutriments['energy-kcal_100g'];kj.product.nutriments.energy_100g=246.856;assert.equal(parse(kj,'012345678905')[2],59);kj.product.serving_quantity_unit='ml';assert.equal(parse(kj,'012345678905')[6],'ml');
 console.log('PASS barcode checksums, product mapping, missing versus zero nutrients, invalid values, kJ conversion and liquid basis');
+
+// Exact photographed package vs the erroneous live OFF response; do not rescale unrelated products.
+const salmon={status:1,product:{product_name:'Alaskan Smoked Sockeye Salmon',brands:'Kirkland Signature',nutrition_data_per:'100g',serving_quantity:56,nutriments:{'energy-kcal_100g':223.214285714286,proteins_100g:38.2653061224489,carbohydrates_100g:3.18877551020409,fat_100g:6.37755102040816}}};
+for(const code of ['0096619896622','096619896622']){const food=parse(salmon,code);assert.equal(food[8],'package-label');for(const [grams,expected] of [[56,[70,12,1,2]],[112,[140,24,2,4]],[28,[35,6,.5,1]]])assert.deepEqual(food.slice(2,6).map(v=>Math.round(v*grams/100*10)/10),expected);}
+assert.equal(parse(salmon,'012345678905')[2],223.21,'Never apply the label correction to another barcode');
+console.log('PASS photographed salmon label, UPC/EAN equivalence, full/half/double servings and unrelated barcode isolation');
