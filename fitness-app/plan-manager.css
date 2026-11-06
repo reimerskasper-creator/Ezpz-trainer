@@ -37,7 +37,7 @@ body[data-view=planner] #screen .plan-management .plan-clear p{margin:9px 0 0;fo
 #plan-manager-dialog :is(h2,h3,p,label,strong){color:var(--ui-text,#f1fff5)!important}
 
 /* Personal plan library and preview, using the existing photo-card language. */
-.plan-library-open{margin-top:10px;min-height:44px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5);border-color:var(--ui-border,#658670)}
+.plan-library-open{width:100%;margin:0;min-height:44px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5);border-color:var(--ui-border,#658670)}
 #plan-manager-dialog :is(.plan-library-intro,.plan-preview-counts){margin:0 0 16px;color:var(--ui-muted,#c2ddcd)!important}
 .plan-library-list{display:grid;gap:12px;margin:18px 0}
 .plan-library-card{position:relative;overflow:hidden;border:1px solid var(--ui-border,#658670);border-radius:18px;background:var(--ui-card,#153d2d)}
@@ -62,3 +62,6 @@ body[data-view=planner] #screen .plan-management .plan-clear p{margin:9px 0 0;fo
 #plan-manager-dialog .plan-replace-choice[hidden]{display:none!important}.plan-replace-choice{align-items:flex-start!important;font-size:12px!important;line-height:1.6;margin:14px 0}.plan-replace-choice input{margin:0}
 .plan-library-empty{padding:24px 0;text-align:center}.plan-library-empty h3{font-size:20px}
 @media(max-width:360px){#plan-manager-dialog .plan-library-card-open{padding-left:39%;min-height:148px}.plan-card-copy>strong{font-size:15px}.plan-library-card-open>img{width:42%}.plan-library-card-open::after{background:linear-gradient(90deg,transparent 12%,var(--ui-card,#153d2d) 42%)}.plan-card-copy{font-size:10px}.plan-preview-cover>img{height:160px}}
+
+body[data-view=planner] .plan-library-entry{margin:18px 0;padding:14px;border:1px solid var(--ui-border,#658670);border-radius:14px;background:var(--ui-card,#153d2d)}
+body[data-view=planner] #screen .plan-library-entry p{margin:10px 0 0;color:var(--ui-muted,#c2ddcd)!important;font-size:12px;line-height:1.6}
