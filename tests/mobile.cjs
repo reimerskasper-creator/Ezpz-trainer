@@ -52,9 +52,9 @@ try{
   const methodBefore=await page.evaluate(key=>localStorage.getItem(key),key);
   await page.locator('[data-ezpz-method="open"]').click();
   assert(await page.locator('#ezpz-method').evaluate(d=>d.open),'Method opens as a modal');
-  assert.deepEqual(await page.locator('.method-pillar h3').allTextContents(),['Eat','Sleep','Progression','Zone']);
+  assert.deepEqual(await page.locator('.method-pillar h3').allTextContents(),['Eat','Sleep','Progress','Zone']);
   assert(await page.locator('#ezpz-method').evaluate(d=>d.scrollWidth<=d.clientWidth+1),'Method fits phone width');
-  assert((await page.locator('.method-explainer').first().innerText()).includes('Each pillar supports the others'));
+  assert((await page.locator('.method-explainer').first().innerText()).includes('It creates space to support the other pillars'));
   assert((await page.locator('.method-system').innerText()).includes('reduces the decisions'));
   if(width===390){await page.screenshot({path:path.join(out,'ezpz-method.jpg'),type:'jpeg',quality:85})}
   await page.keyboard.press('Escape');assert.equal(await page.locator('#ezpz-method').evaluate(d=>d.open),false);
