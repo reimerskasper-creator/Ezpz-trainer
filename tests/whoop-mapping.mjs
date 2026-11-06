@@ -18,7 +18,7 @@ console.log('PASS: sleep-only duration, stage values, zero versus missing, cycle
 
 
 {
-const observed=new Date().toISOString(),end=new Date(Date.now()-1000).toISOString(),start=new Date(Date.now()-3601000).toISOString(),date=start.slice(0,10);
+const now=Date.now(),observed=new Date(now).toISOString(),end=new Date(now-1000).toISOString(),start=new Date(now-3601000).toISOString(),date=start.slice(0,10);
 const workout={id:'session1',start,end,timezone_offset:'+00:00',sport_name:'weightlifting',updated_at:observed};
 const sessions=mapWorkouts([workout,workout,{...workout,id:'unfinished',end:null}],date,date,observed);
 assert.equal(sessions.length,1);assert.equal(sessions[0].durationMinutes,60);assert.equal(sessions[0].title,'Weightlifting');assert.equal(sessions[0].date,date);
