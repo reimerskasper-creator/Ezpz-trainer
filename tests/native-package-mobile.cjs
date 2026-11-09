@@ -56,7 +56,7 @@ await page.evaluate(()=>{state=JSON.parse(window.beforeStepVisual);render()});
 if(await page.locator('.foundation-steps').getAttribute('aria-expanded')!=='true')await page.locator('.foundation-steps').click();await page.locator('[data-open-step-trend]').click();await page.waitForFunction(()=>tab==='progress'&&trendCategory==='steps');await page.locator('[data-go=movement]').click();await page.waitForFunction(()=>tab==='movement');
 await page.evaluate(()=>{tab='movement';render()});
 await page.locator('.measurement-source-details > summary').first().click();assert((await page.locator('#screen').innerText()).includes('WHOOP reporting period'));
-assert(!(await page.locator('.movement-totals').innerText()).includes('calories'));
+assert(!(await page.locator('.steps-hero-ring').innerText()).includes('calories'));
 assert.equal(await page.locator('#movement-activeCalories,#movement-totalCalories').count(),0);
 assert(!(await page.locator('#screen').innerText()).includes('2,608'));
 assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
