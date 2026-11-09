@@ -1,7 +1,7 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const scripts=[...fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),screen={innerHTML:''};let fail=false,writes=0,stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2});
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {stepBankLedger,stepSettingsWithGoal,stepCompletion,movementMini,saveSleep,foodDate,home,sleepPage,movementPage,connectedAppsPage,restoredState,importWellnessBatch,previewWellnessImport,selectedWellnessRecord,effectiveSleepLog,chooseWellnessSource,saveManualMovement,normalizeWellnessRecord,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');writes++;stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 const date=api.foodDate(),older='2026-01-01T12:00:00Z',newer='2026-01-02T12:00:00Z';
 const rec=(metric,value,extra={})=>({metric,date,source:'whoop',externalId:metric+'-'+date,unit:{steps:'count',sleep:'minutes',activeCalories:'kcal',totalCalories:'kcal'}[metric],value,updatedAt:older,...extra});
 const batch=(...records)=>({version:1,records});
@@ -24,3 +24,35 @@ assert(api.importWellnessBatch(batch(rec('steps',2000,{source:'garmin',externalI
 snapshot=JSON.stringify(api.state);n=writes;api.home();api.sleepPage();api.movementPage();api.connectedAppsPage();assert.equal(JSON.stringify(api.state),snapshot);assert.equal(writes,n);
 assert.equal(api.importWellnessBatch(batch(rec('steps',1),rec('steps',2))).ok,false);assert.equal(api.importWellnessBatch(batch(rec('steps',1,{externalId:'same',date:past}),rec('steps',1,{externalId:'same'}))).ok,false);assert.equal(api.normalizeWellnessRecord(rec('steps',1,{updatedAt:'2026-01-01T12:00:00'})),null);assert.equal(api.saveManualMovement(date,null),false);
 console.log('PASS: wellness totals, optional stages, missing versus zero, source choices, manual preservation, revised imports, idempotency, atomic validation, backup, read-only views and storage rollback');
+
+// Bank only completed dates, apply explicit credit and reconcile late source updates.
+const dayBeforePast=new Date(past+'T12:00:00Z');
+dayBeforePast.setUTCDate(dayBeforePast.getUTCDate()-1);
+const start=dayBeforePast.toISOString().slice(0,10);
+api.state.wellnessSettings={stepGoal:10000};
+assert.equal(api.stepBankLedger().enabled,false);
+assert(!api.movementMini().includes('data-open-step-bank'));
+api.state.wellnessSettings={stepGoal:10000,stepBank:{rules:{[start]:{goal:10000,enabled:true}},requests:{}}};
+assert(api.saveManualMovement(start,{steps:15000,stepGoal:10000}));
+assert(api.saveManualMovement(past,{steps:12000,stepGoal:10000}));
+assert(api.saveManualMovement(date,{steps:5999,stepGoal:10000}));
+assert.equal(api.stepBankLedger().balance,7000);
+assert.equal(api.stepBankLedger().available,0);
+assert(api.saveManualMovement(date,{steps:6000,stepGoal:10000}));
+assert.equal(api.stepBankLedger().available,4000);
+api.state.wellnessSettings.stepBank.requests[date]=4000;
+assert.equal(api.stepBankLedger().balance,3000);
+assert.equal(api.stepCompletion(),100);
+assert.equal(api.selectedWellnessRecord('steps',date).value,6000);
+assert(api.movementMini().includes('3,000 banked'));
+assert(api.saveManualMovement(date,{steps:8000,stepGoal:10000}));
+assert.equal(api.stepBankLedger().applied[date],2000);
+assert.equal(api.stepBankLedger().balance,5000);
+assert.deepEqual(api.restoredState(JSON.parse(stored)).wellnessSettings,api.state.wellnessSettings);
+assert(api.saveManualMovement(date,{steps:12000,stepGoal:10000}));
+assert.equal(api.stepBankLedger().balance,7000);
+assert.equal(api.stepBankLedger().applied[date],undefined);
+api.state.wellnessSettings=api.stepSettingsWithGoal(10000,false);
+assert(!api.movementMini().includes('data-open-step-bank'));
+assert.equal(api.stepBankLedger().balance,7000);
+console.log('PASS: Step Bank opt-in, prior-day deposits, 40% daily cap, sync reconciliation, backup and Home badge');
