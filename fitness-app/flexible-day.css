@@ -44,3 +44,7 @@ body[data-view=planner] .extra-workout-card .day-start-workout{position:absolute
 body[data-view=planner] .day-meal-list .day-plan-card{position:relative}
 body[data-view=planner] .extra-entry-menu{display:block;min-width:44px;min-height:44px;width:44px;margin:0 7px 5px auto;padding:0;border:0;background:transparent!important;color:#e5fff0!important;font-size:22px}
 body[data-view=planner] .extra-workout-card .extra-entry-menu{margin-top:0}
+body[data-view=progress] .exercise-progress-card .flex-length-trigger{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:44px;background:#234b38!important;color:#f1fff5!important;border:1px solid #789b87!important;text-align:left;padding:10px 12px}
+body[data-view=progress] .exercise-progress-card select[hidden],#flex-day-dialog .progress-picker-list button[hidden]{display:none!important}
+#flex-day-dialog .progress-picker-list{max-height:50dvh;overflow:auto}
+#flex-day-dialog .progress-picker-list>button[aria-pressed=true]{background:#234b38!important;border-radius:9px;color:#8ee2b4!important}

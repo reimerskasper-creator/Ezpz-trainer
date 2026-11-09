@@ -1744,3 +1744,7 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Branch: android-health-connect. This source update adds the Steps hero, standalone goal editor, Overall switch and opt-in Step Bank, with a Home badge in both states of the Steps banner.
 - Bank credit uses selected daily totals from completed dates after opt-in. Withdrawals are explicit and capped at 40% of the applicable daily goal. Late syncs reconcile credit without altering walked totals.
 - Local checks: wellness, Home, native-health and whitespace checks. Android delivery: Android Health Connect test workflow for this source commit. Next: verify packaged APK and test the interaction on Android.
+
+## Exercise progress pickers — Android 1.0.110 / code 111
+- Android branch: android-health-connect. Exercise and Show use the existing app dialog style. Exercise supports search; the selected value has a checkmark. Chart logic and Zone are untouched.
+- Local checks: overall, wellness, script syntax and diff whitespace. Android delivery pending the test workflow. Next: verify the Android picker interaction.
