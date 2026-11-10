@@ -82,6 +82,9 @@ jobs:
           node tests/package-labels-mobile.cjs
           node tests/ingredients-mobile.cjs
           node tests/method-guide-mobile.cjs
+          node tests/foundation-week-mobile.cjs
+          node tests/zone-space-mobile.cjs
+          node tests/wellness-mobile.cjs
           node tests/native-package-mobile.cjs
           node tests/whoop-mobile.cjs
       - uses: actions/cache/restore@v4
