@@ -6709,8 +6709,12 @@ document.addEventListener('submit',e=>{
  e.preventDefault();
  const goal=Number(new FormData(e.target).get('stepGoal'));
  if(!Number.isInteger(goal)||goal<1||goal>200000)return;
- if(wellnessTransaction({wellnessSettings:stepSettingsWithGoal(goal)}))movementPage();
- else document.getElementById('step-settings-status').textContent='Could not save your step goal.';
+ const draft=document.getElementById('movement-steps')?.value;
+ if(wellnessTransaction({wellnessSettings:stepSettingsWithGoal(goal)})){
+  movementPage();
+  const input=document.getElementById('movement-steps');
+  if(input&&draft!==undefined)input.value=draft;
+ }else document.getElementById('step-settings-status').textContent='Could not save your step goal.';
 });
 document.addEventListener('change',e=>{
  if(!e.target.matches?.('[data-step-bank-toggle]'))return;
