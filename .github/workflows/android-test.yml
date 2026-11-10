@@ -1,7 +1,7 @@
 name: Android Health Connect test
 on:
   push:
-    branches: [android-health-connect]
+    branches: [android-health-connect, feature/fatsecret-barcode-evaluation]
     # Test and documentation follow-ups can reuse the existing APK. Workflow edits trigger a build.
     paths-ignore: ['tests/**', 'native/android/app/src/androidTest/**', '.github/workflows/label-reader.yml', 'docs/**', 'PROJECT_STATUS.md', 'AGENTS.md']
   workflow_dispatch:
