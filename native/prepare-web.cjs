@@ -7,6 +7,9 @@ let html=fs.readFileSync(path.join(root,'fitness.html'),'utf8');
 html=html.replace('<head>','<head><script src="./capacitor-runtime.js"></script>');
 // Package the canonical interface; never load remote pages inside a privileged bridge.
 html=html.replace("if('serviceWorker' in navigator&&window.isSecureContext)","if(!window.Capacitor?.isNativePlatform()&&'serviceWorker' in navigator&&window.isSecureContext)");
+// Wait until the packaged UI has applied its saved appearance before uncovering it.
+fs.copyFileSync(path.join(__dirname,'startup.js'),path.join(out,'startup.js'));
+html+='\n<script src="./startup.js"></script>\n';
 // Native account callbacks return to this app; accounts.js retains PKCE verification here.
 fs.writeFileSync(path.join(out,'index.html'),html);fs.writeFileSync(path.join(out,'fitness.html'),html);
 console.log('Packaged canonical fitness.html and local assets.');

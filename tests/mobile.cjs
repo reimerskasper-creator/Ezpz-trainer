@@ -550,12 +550,16 @@ try{
   assert(await page.locator('.foundation-map').evaluate(map=>{const rings=[...map.querySelectorAll('.habit-ring')].map(r=>r.getBoundingClientRect());return rings.every((a,i)=>rings.every((b,j)=>i===j||a.right<=b.left||b.right<=a.left||a.bottom<=b.top||b.bottom<=a.top))}),'Five ring visuals do not overlap');
   assert(await page.locator('.foundation-map .habit-rings>.habit-item').evaluateAll(bs=>bs.every(b=>{const r=b.getBoundingClientRect();return r.width>=44&&r.height>=44})),'Corner touch targets');
 
-  await page.locator('[data-zone="open"]').click();assert(await page.locator('#zone-checkin').evaluate(d=>d.open));
-  assert(await page.locator('#zone-checkin').evaluate(d=>d.scrollWidth<=d.clientWidth+1));
-  await page.locator('[data-zone="save"]').click();assert((await page.locator('[data-zone="open"]').getAttribute('aria-label')).includes('Time for yourself ✓'));
-  await page.reload();assert((await page.locator('[data-zone="open"]').getAttribute('aria-label')).includes('Time for yourself ✓'));
-  await page.locator('[data-zone="open"]').click();await page.locator('[data-zone="undo"]').click();
-  assert((await page.locator('[data-zone="open"]').getAttribute('aria-label')).includes('Take a moment'));
+  const zoneRing=page.locator('.habit-rings [data-go="zone"]');
+  await zoneRing.click();assert.equal(await page.locator('body').getAttribute('data-view'),'zone');
+  assert.equal(await page.locator('#zone-checkin').evaluate(d=>d.open),false);
+  await page.locator('[data-zone-today="check"]').click();
+  await page.locator('[data-tab="home"]').click();
+  assert((await zoneRing.getAttribute('aria-label')).includes('Time for yourself ✓'));
+  await page.reload();assert((await zoneRing.getAttribute('aria-label')).includes('Time for yourself ✓'));
+  await zoneRing.click();await page.locator('[data-zone-today="undo"]').click();
+  await page.locator('[data-tab="home"]').click();
+  assert((await zoneRing.getAttribute('aria-label')).includes('Take a moment'));
   const zoneAfter=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)),key);for(const name of ['logs','foodLog','weights','workoutDrafts','mealPlan'])assert.deepEqual(zoneAfter[name],prior[name],'Zone preserves '+name);
 
   await page.locator('.habit-rings [data-go="sleep"]').click();await page.locator('[data-open-sleep-editor]').click();await page.locator('#sleep-hours').fill('3');await page.locator('#sleep-minutes').fill('30');await page.locator('.sleep-goal-settings>summary').click();await page.locator('#sleep-goal-hours').fill('7');await page.locator('#sleep-goal-minutes').fill('0');

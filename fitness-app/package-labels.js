@@ -25,7 +25,81 @@ function packageLabelValues(raw){const amount=Number(raw.amount),values=['calori
  };
  function foodForBarcode(raw){const code=labelBarcode(raw);if(!code)return null;const own=cleanBarcodeLabels(state.barcodeLabels)[code],known=builtin[code],row=own||known&&{name:known.name,unit:'g',macros:known.values.map(v=>v*100/known.amount)};return row?['off-'+code,row.name,...row.macros,row.unit,'off','package-label']:null}
  function saveLabel(code,row){const key=labelBarcode(code),clean=cleanBarcodeLabels({[key]:row});if(!key||!clean[key])return false;const before=state.barcodeLabels,had=Object.hasOwn(state,'barcodeLabels'),rows=cleanBarcodeLabels(before);if(!rows[key]&&Object.keys(rows).length>=500)return false;state.barcodeLabels={...rows,...clean};if(save())return true;if(had)state.barcodeLabels=before;else delete state.barcodeLabels;return false}
- const lookup=lookupFoodBarcode;lookupFoodBarcode=async function(raw){const food=foodForBarcode(raw);if(barcodeBusy)return;document.querySelector('[data-label-unknown]')?.remove();if(food){stopBarcodeCamera();showIngredientAmount(food);return}const pending=lookup(raw),session=barcodeSession;await pending;const code=labelBarcode(raw),panel=document.getElementById('barcode-panel');if(!code||session!==barcodeSession||!panel?.isConnected||panel.hidden)return;const button=document.createElement('button');button.type='button';button.dataset.labelUnknown='';button.textContent='📷 Scan nutrition label';button.onclick=()=>openEditor(['off-'+code,'',0,0,0,0,'g','off'],button,true,true);document.getElementById('barcode-status')?.after(button)};
+function parseFatSecret(data, code) {
+  const food = data?.food;
+  const entries = food?.servings?.serving;
+  for (const serving of Array.isArray(entries) ? entries : entries ? [entries] : []) {
+    const unit = serving.metric_serving_unit;
+    const amount = Number(serving.metric_serving_amount);
+    if (!['g', 'ml'].includes(unit) || !Number.isFinite(amount) || amount <= 0) continue;
+    const values = ['calories', 'protein', 'carbohydrate', 'fat'].map(key => {
+      const value = serving[key];
+      return typeof value === 'number' || (typeof value === 'string' && value.trim())
+        ? Number(value) * 100 / amount
+        : null;
+    });
+    const result = parseBarcodeProduct({
+      status: 1,
+      product: {
+        product_name: food.food_name,
+        brands: food.brand_name,
+        nutrition_data_per: unit === 'ml' ? '100ml' : '100g',
+        nutriments: Object.fromEntries(
+          ['energy-kcal_100g', 'proteins_100g', 'carbohydrates_100g', 'fat_100g']
+            .map((key, index) => [key, values[index]])
+        ),
+      },
+    }, '');
+    if (result) return ['fatsecret-' + code, ...result.slice(1, 7), 'fatsecret'];
+  }
+  return null;
+}
+
+ const lookup=lookupFoodBarcode;
+ lookupFoodBarcode=async function(raw){
+  if(barcodeBusy)return;
+  document.querySelector('[data-label-unknown]')?.remove();
+  const food=foodForBarcode(raw);
+  if(food){stopBarcodeCamera();showIngredientAmount(food);return}
+  const pending=lookup(raw),session=barcodeSession;
+  await pending;
+  const code=labelBarcode(raw),panel=document.getElementById('barcode-panel');
+  const current=()=>session===barcodeSession&&panel?.isConnected&&!panel.hidden;
+  if(!code||!current())return;
+  const status=document.getElementById('barcode-status');
+  const rawCode=normalizeFoodBarcode(raw);
+  const missed=/^(Product not found|This product has incomplete)/.test(status?.textContent||'');
+  if(missed&&rawCode&&!(rawCode.length===14&&!rawCode.startsWith('0'))&&window.Capacitor?.isNativePlatform?.()&&window.EzpzFatSecretLookup){
+   const abort=new AbortController();
+   barcodeAbort=abort;
+   barcodeBusy=true;
+   const timeout=setTimeout(()=>abort.abort(),8000);
+   try{
+    const result=parseFatSecret(await window.EzpzFatSecretLookup(code,abort.signal),code);
+    if(!current())return;
+    if(result){
+     status.textContent=result[1]+' · '+result[2]+' kcal · Protein '+result[3]+' g · Carbs '+result[4]+' g · Fat '+result[5]+' g per 100 '+(result[6]==='ml'?'mL':'g')+'. Compare with the package and scan the nutrition label to log it. ';
+     const credit=document.createElement('a');
+     credit.href='https://www.fatsecret.com/';
+     credit.target='_blank';
+     credit.rel='noopener noreferrer';
+     credit.textContent='Powered by fatsecret';
+     status.append(credit);
+    }
+   }catch{if(current())barcodeStatus('Backup lookup unavailable. Scan the nutrition label or use food search.')}
+   finally{
+    clearTimeout(timeout);
+    if(barcodeAbort===abort){barcodeAbort=null;barcodeBusy=false}
+   }
+  }
+  if(!current())return;
+  const button=document.createElement('button');
+  button.type='button';
+  button.dataset.labelUnknown='';
+  button.textContent='📷 Scan nutrition label';
+  button.onclick=()=>openEditor(['off-'+code,'',0,0,0,0,'g','off'],button,true,true);
+  status?.after(button);
+ };
  const restore=restoredState;restoredState=function(data){const result=restore(data);if(Object.hasOwn(data||{},'barcodeLabels'))result.barcodeLabels=cleanBarcodeLabels(data.barcodeLabels);return result};
  function reader(){const cap=window.Capacitor;return cap?.isNativePlatform?.()?cap.Plugins?.EzpzLabelReader||cap.registerPlugin?.('EzpzLabelReader'):null}
  const show=showIngredientAmount;showIngredientAmount=function(food){show(food);if(food[7]!=='off')return;const hero=document.querySelector('#ingredient-amount-panel .food-detail-hero');if(!hero)return;hero.parentElement.querySelectorAll('[data-ingredient-basis]').forEach(button=>{button.disabled=button.dataset.ingredientBasis!==food[6];if(button.disabled)button.title='No weight-to-volume conversion is available. Use the label unit or correct the package label.'});const summary=hero.querySelector('.food-source-info>summary');if(summary)summary.textContent=food[8]==='package-label'?'Package label ⓘ':'Database · unchecked ⓘ';const button=document.createElement('button');button.type='button';button.className='package-label-open';button.textContent='📷 Scan nutrition label';button.onclick=()=>openEditor(food,button,false,true);hero.querySelector('.food-identity-copy').append(button)};

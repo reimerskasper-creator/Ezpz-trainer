@@ -18,6 +18,12 @@ const whoopPanel=()=>'<p>'+esc(whoopMessage)+'</p><button data-go="connected-app
 root.EzpzWhoopAccount={sync:async()=>{if(await run('whoop-sync')!==true)throw Error(whoopMessage||'WHOOP refresh is unavailable.');},connection:()=>({signedIn:!!user,connected:whoopConnected,workouts:whoopWorkoutAccess}),lastSync:()=>{try{return user?.id?localStorage.getItem('ezpz-whoop-last-sync-'+user.id):null}catch{return null}},open:()=>{app.open();panel();const box=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(box)box.open=true;}};
 
 let client=null,user=null,config=null,busy=false,message='Sign-in is optional. Your records stay on this device until you choose to save them.',remote=null;
+root.EzpzFatSecretLookup=async (barcode,signal)=>{
+ if(!client||!user)return null;
+ const {data,error}=await client.functions.invoke('fatsecret-barcode',{body:{barcode},signal});
+ if(error){if(error.context?.status===404)return null;throw error;}
+ return data;
+};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function panel(){
  const box=document.getElementById('fitness-account-panel');if(!box)return;

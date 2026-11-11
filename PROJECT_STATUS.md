@@ -15,6 +15,11 @@
 - Minimum six main exercises per workout.
 - The user wants meaningful named variations, organized by category, rather than only A/B labels.
 
+## Android startup sweep — 11 November 2026
+- Built on the Android 1.0.113 test source in `zone-navigation-steps-polish` (base `309b842`, PR #9). Android test version is now 1.0.114, version code 115.
+- The Android launch screen and app cover share the existing EZPZ wordmark on charcoal. A single emerald sweep can play while the packaged app initializes. The cover fades after the WebView can draw the initialized screen, including the saved Home hero photo when available. Reopening the existing Activity does not replay it. Tracker sync remains independent.
+- Local Capacitor packaging and native runtime, Home, appearance, Health Connect, account, and startup readiness checks passed. The Android workflow provides the signed test APK. Verify the cold launch and warm resume on the S23 Ultra after installing over 1.0.113.
+
 ## Latest update — welcome questionnaire and personal greeting, 21 October 2026
 - First-time setup now has a gym-photo welcome hero, green/gold/blue habit pills, and three photo-backed panels for personal preferences, training choices and starting body details. Same one-page questionnaire, existing choices, body units and calculations; every form field has an explicit label. Setup branding matches Home. Completion scrolls Home to the top.
 - Optional firstName is collected at setup; existing users can add/edit/remove it in More → What should we call you? Home's heading says “[name], you’ve got this!” or “You’ve got this!” when blank. No name is hardcoded or inferred for other users.
