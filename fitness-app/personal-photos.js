@@ -7,6 +7,11 @@
  function apply(box,id){
   if(!box.isConnected)return false;
   const kind=box.dataset.photoKind,item=box.dataset.photoItem;
+  if(kind==='scanned-food'){
+   if(!saveScannedFoodPhoto(item,id))return false;
+   box.dispatchEvent(new CustomEvent('scanned-photo-saved'));
+   return true;
+  }
   if(kind==='saved-plan'){return window.EZPZPlans?.setCover(item,id)===true}
   if(kind==='progress'){return window.EZPZProgressBackground?.select(id)===true}
   if(kind==='home'){return window.EZPZHomeBackground?.select(id)===true}
@@ -40,11 +45,11 @@
     const id='photo-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);
     if(!cleanPersonalPhotos({[id]:photo})[id]){dialog.querySelector('.personal-crop-status').textContent='Could not prepare this photo. Try another image.';return}
     pendingPersonalPhotos[id]=photo;
-    if(apply(box,id)){notice(box,['home','progress'].includes(box.dataset.photoKind)?'Photo ready. Save background to keep it.':box.dataset.photoKind.startsWith('saved-')?'Photo saved.':'Photo ready. Save your item to keep it.');close()}
+    if(apply(box,id)){notice(box,['home','progress'].includes(box.dataset.photoKind)?'Photo ready. Save background to keep it.':box.dataset.photoKind==='scanned-food'?'':box.dataset.photoKind.startsWith('saved-')?'Photo saved.':'Photo ready. Save your item to keep it.');close()}
     else{delete pendingPersonalPhotos[id];dialog.querySelector('.personal-crop-status').textContent='Photo was not saved. Close and try again.'}
    });dialog.showModal();notice(box,'');
   }catch{URL.revokeObjectURL(url);notice(box,'This photo could not be opened. Try a JPEG, PNG or WebP photo.');}
  }
  document.addEventListener('change',e=>{if(e.target.matches('[data-personal-photo-input]'))choose(e.target)});
- document.addEventListener('click',e=>{const button=e.target.closest('[data-remove-personal-photo]');if(button){const box=button.closest('.personal-photo-controls');if(apply(box,''))notice(box,'Default photo selected.')}});
+ document.addEventListener('click',e=>{const button=e.target.closest('[data-remove-personal-photo]');if(button){const box=button.closest('.personal-photo-controls');if(apply(box,''))notice(box,box.dataset.photoKind==='scanned-food'?'':'Default photo selected.')}});
 })();

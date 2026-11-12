@@ -16,6 +16,8 @@ public class MainActivity extends BridgeActivity {
     private WebView startupWebView;
     private final Runnable startupTimeout = this::revealApp;
     private boolean revealingApp;
+    private boolean splashExited;
+    private boolean appReady;
     private int previousAccessibility;
 
     @Override public void onCreate(Bundle savedInstanceState) {
@@ -39,9 +41,11 @@ public class MainActivity extends BridgeActivity {
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         splash.setOnExitAnimationListener(provider -> {
             provider.remove();
+            splashExited = true;
             if (savedInstanceState == null && !revealingApp && launchCover != null) {
-                launchCover.startSweep();
+                launchCover.startSweep(this::revealAfterSweep);
             }
+            revealAfterSweep();
         });
         // A broken WebView or a missing asset must not leave the launch screen up forever.
         launchCover.postDelayed(startupTimeout, 5000);
@@ -51,9 +55,16 @@ public class MainActivity extends BridgeActivity {
         if (launchCover == null || revealingApp) return;
         startupWebView.postVisualStateCallback(0, new WebView.VisualStateCallback() {
             @Override public void onComplete(long requestId) {
-                revealApp();
+                appReady = true;
+                revealAfterSweep();
             }
         });
+    }
+
+    private void revealAfterSweep() {
+        if (splashExited && appReady && launchCover != null && !launchCover.isSweeping()) {
+            revealApp();
+        }
     }
 
     private void revealApp() {

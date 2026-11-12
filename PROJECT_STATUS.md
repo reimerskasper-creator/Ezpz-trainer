@@ -1754,3 +1754,9 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Barcode details show the food illustration and live portion macros alongside the amount field. Gram-based labels use a scale, volume-based labels use a measuring jug. Package corrections still use the existing camera and review flow.
 - Bundled reusable food illustrations and a neutral plate for uncertain matches. The illustrations are generic and selected conservatively from the product name. No external photo service is needed.
 - The Android workflow includes a three-width regression for gram and mL scans, live totals, keyboard geometry, illustration fallback and adding a portion. Verify the signed APK before delivery.
+
+## Android 1.0.116 — scanned product photos and startup lighting
+
+- Food details can pick, crop, replace or remove a personal product photo. Barcode aliases share the photo. Ingredient review shows it, and single-product diary entries and saved foods inherit it unless an explicit meal photo is selected.
+- The startup wordmark is larger. A full-screen emerald highlight travels diagonally from lower left to upper right before the app fades in. Android's animation preference and startup timeout still apply.
+- Build and delivery are tracked by the Android Health Connect workflow on the canonical Android branch.

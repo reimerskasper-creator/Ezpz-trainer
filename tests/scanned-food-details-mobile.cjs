@@ -32,13 +32,13 @@ async function check(page, width) {
   },
  }}));
  await page.goto('http://127.0.0.1:' + server.address().port + '/fitness.html');
- const scan = () => page.evaluate(async () => {
+ const scan = (barcode='012345678905') => page.evaluate(async barcode => {
   state.profile = {goal:'maintain', level:'Beginner', equipment:'home', days:3, age:35, weight:80, height:180, sex:'male'};
   tab = 'custom-food';
   render();
   openBarcodeScanner();
-  await lookupFoodBarcode('012345678905');
- });
+  await lookupFoodBarcode(barcode);
+ }, barcode);
  const input = page.locator('#ingredient-amount');
  const preview = page.locator('#ingredient-amount-preview');
  await scan();
@@ -78,6 +78,38 @@ async function check(page, width) {
  unit = 'g';
  await scan();
  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /plate\.webp$/);
+ if (width === 390) {
+  await page.reload();
+  await scan();
+  const photo = await page.evaluate(() => {
+   const canvas = document.createElement('canvas');
+   canvas.width = canvas.height = 32;
+   const context = canvas.getContext('2d');
+   context.fillStyle = '#ab3232';
+   context.fillRect(0, 0, 32, 32);
+   return canvas.toDataURL().split(',')[1];
+  });
+  await page.getByLabel('Add food photo').setInputFiles({
+   name:'tomatoes.png', mimeType:'image/png', buffer:Buffer.from(photo, 'base64'),
+  });
+  await page.getByRole('button', {name:'Use photo',exact:true}).click();
+  await page.waitForFunction(() => document.querySelector('.scanned-food-art').src.startsWith('data:image/jpeg'));
+  await page.reload();
+  await scan('0012345678905');
+  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /^data:image\/jpeg/);
+  await scan('3017620422003');
+  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /plate\.webp$/);
+  await scan();
+  await input.fill('100');
+  await page.locator('[data-ingredient-confirm]').click();
+  await page.locator('[data-food-review]').click();
+  assert.match(await page.locator('.scanned-ingredient-thumb').getAttribute('src'), /^data:image\/jpeg/);
+  await page.locator('.custom-food-submit').click();
+  assert(await page.evaluate(() => customFoodImage(state.foodLog.at(-1)).startsWith('data:image/jpeg')));
+  await scan();
+  await page.getByRole('button',{name:'Remove food photo'}).click();
+  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /plate\.webp$/);
+ }
  assert.deepEqual(errors, []);
 }
 

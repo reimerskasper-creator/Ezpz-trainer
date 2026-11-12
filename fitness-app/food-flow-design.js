@@ -94,7 +94,29 @@ function scannedFoodIllustration(name) {
    '<h4 id="scanned-food-title">Food</h4><img class="scanned-food-art" alt="" width="144" height="112">' +
    '</section>';
   const art = split.querySelector('img');
-  art.src = imageRoot + scannedFoodIllustration(food[1]) + '.webp';
+  const illustration = imageRoot + scannedFoodIllustration(food[1]) + '.webp';
+  const barcode = scannedFoodBarcode(food);
+  if (barcode) {
+   art.insertAdjacentHTML('afterend', '<div class="personal-photo-controls scanned-photo-controls" data-photo-kind="scanned-food">' +
+    '<label class="scanned-photo-picker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">' +
+    '<path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="3"/></svg>' +
+    '<input type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" aria-label="Add food photo" data-personal-photo-input></label>' +
+    '<button type="button" aria-label="Remove food photo" data-remove-personal-photo>×</button>' +
+    '<p class="personal-photo-status" role="status"></p></div>');
+   const controls = split.querySelector('.scanned-photo-controls');
+   controls.dataset.photoItem = barcode;
+   const refresh = () => {
+    const photo = personalPhoto(scannedFoodPhoto(food));
+    art.src = photo || illustration;
+    art.classList.toggle('scanned-user-photo', Boolean(photo));
+    controls.querySelector('input').setAttribute('aria-label', photo ? 'Change food photo' : 'Add food photo');
+    controls.querySelector('button').hidden = !photo;
+   };
+   controls.addEventListener('scanned-photo-saved', refresh);
+   refresh();
+  } else {
+   art.src = illustration;
+  }
 
   amountCard.insertAdjacentElement('beforebegin', split);
   split.firstElementChild.append(panel.querySelector('#ingredient-amount-preview'));
