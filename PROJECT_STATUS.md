@@ -1749,8 +1749,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Android branch: android-health-connect. Exercise and Show use the existing app dialog style. Exercise supports search; the selected value has a checkmark. Chart logic and Zone are untouched.
 - Local checks: overall, wellness, script syntax and diff whitespace. Android delivery pending the test workflow. Next: verify the Android picker interaction.
 
-## Scanned food details — Android 1.0.114 / code 115
-- Canonical Android branch: android-health-connect. The working baseline matches the packaged 1.0.113 APK, including the FatSecret fallback and Steps fixes that were absent from the previous branch head.
+## Scanned food details — Android 1.0.115 / code 116
+- Canonical Android branch: android-health-connect. Carries forward the packaged 1.0.114 startup sweep from commit 8ea413a and the preceding FatSecret fallback and Steps fixes.
 - Barcode details show the food illustration and live portion macros alongside the amount field. Gram-based labels use a scale, volume-based labels use a measuring jug. Package corrections still use the existing camera and review flow.
 - Bundled reusable food illustrations and a neutral plate for uncertain matches. The illustrations are generic and selected conservatively from the product name. No external photo service is needed.
 - The Android workflow includes a three-width regression for gram and mL scans, live totals, keyboard geometry, illustration fallback and adding a portion. Verify the signed APK before delivery.
