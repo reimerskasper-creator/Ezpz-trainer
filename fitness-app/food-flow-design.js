@@ -50,3 +50,82 @@ function foodMacroShares(protein,carbs,fat){
   panel.querySelectorAll(':scope>div>span').forEach((tile,i)=>{const percent=document.createElement('small');percent.className='food-macro-percent';percent.textContent=result.percent[i]+'%';tile.append(percent)});
  };
 })();
+
+// Use the product name only. Brand names and uncertain matches use the neutral plate.
+function scannedFoodIllustration(name) {
+ const product = name.split(' · ')[0].trim().toLowerCase();
+ const illustrations = [
+  ['pizza', /^(?:classic crust )?pepperoni pizza$/],
+  ['yogurt', /^(?:plain greek yogurt|greek yogurt[, -]+plain)$/],
+  ['penne', /^(?:(?:dry|uncooked) )?penne(?: pasta)?$/],
+  ['water', /^(?:(?:plain|unflavored) )?(?:sparkling|carbonated) (?:mineral )?water$/],
+  ['apple', /^(?:fresh )?(?:red |gala |fuji )?apples?$/],
+  ['banana', /^(?:fresh )?bananas?$/],
+  ['bread', /^(?:white|whole wheat|wheat|sourdough) bread$/],
+  ['eggs', /^(?:(?:large|fresh) )?(?:white |brown )?eggs?$/],
+  ['oats', /^(?:plain )?(?:old fashioned |rolled )oats$/],
+  ['cheese', /^(?:mild |sharp )?cheddar cheese$/],
+  ['nuts', /^(?:unsalted )?mixed nuts$/],
+  ['milk', /^(?:whole|skim|2%|1%) milk$/],
+  ['orange', /^(?:fresh |navel )?oranges?$/],
+ ];
+ return illustrations.find(([, pattern]) => pattern.test(product))?.[0] || 'plate';
+}
+
+(() => {
+ const show = showIngredientAmount;
+ const preview = previewIngredientAmount;
+ const imageRoot = './fitness-app/food-details/';
+
+ showIngredientAmount = function(food) {
+  show(food);
+  if (food[7] !== 'off') return;
+
+  const panel = document.getElementById('ingredient-amount-panel');
+  if (!panel) return;
+  const amountCard = panel.querySelector('.food-amount-card');
+  const input = panel.querySelector('#ingredient-amount');
+  const unit = food[6] === 'ml' ? 'mL' : 'g';
+
+  const split = document.createElement('div');
+  split.className = 'scanned-food-split';
+  split.dataset.unit = unit;
+  split.innerHTML = '<section class="scanned-food-card" aria-labelledby="scanned-food-title">' +
+   '<h4 id="scanned-food-title">Food</h4><img class="scanned-food-art" alt="" width="144" height="112">' +
+   '</section>';
+  const art = split.querySelector('img');
+  art.src = imageRoot + scannedFoodIllustration(food[1]) + '.webp';
+
+  amountCard.insertAdjacentElement('beforebegin', split);
+  split.firstElementChild.append(panel.querySelector('#ingredient-amount-preview'));
+  split.append(amountCard);
+  const field = document.createElement('div');
+  field.className = 'scanned-amount-field';
+  field.innerHTML = '<img class="scanned-measure-art" alt="" width="144" height="112">' +
+   '<span class="scanned-amount-unit" aria-hidden="true">' + unit + '</span>';
+  field.querySelector('img').src = imageRoot + (unit === 'mL' ? 'jug' : 'scale') + '.webp';
+  input.before(field);
+  field.append(input);
+  input.setAttribute('aria-label', 'Amount in ' + (unit === 'mL' ? 'milliliters' : 'grams'));
+  amountCard.querySelector('label').textContent = 'Amount';
+  previewIngredientAmount();
+ };
+
+ previewIngredientAmount = function() {
+  const split = document.querySelector('.scanned-food-split');
+  if (!split || !ingredientSelected) return preview();
+  const input = split.querySelector('#ingredient-amount');
+  const output = split.querySelector('#ingredient-amount-preview');
+  const amount = input.valueAsNumber;
+  const valid = Number.isFinite(amount) && amount > 0 && amount <= 10000;
+  const totals = ingredientTotals([{food: ingredientSelected, grams: valid ? amount : 100}]);
+  const unit = split.dataset.unit;
+  output.innerHTML = '<small class="food-nutrition-basis">' + (valid ? 'For this amount' : 'Per 100 ' + unit) +
+   '</small><strong>' + totals[0] + ' kcal</strong><div>' +
+   [['Protein', 1, 'protein'], ['Carbs', 2, 'carbs'], ['Fat', 3, 'fat']].map(([label, index, icon]) =>
+    '<span>' + foodNutrientIcon(icon) + label + '<b>' + totals[index] + ' g</b></span>'
+   ).join('') + '</div>';
+  const error = document.getElementById('ingredient-amount-error');
+  error.textContent = input.value && !valid ? 'Enter an amount over 0 and up to 10,000 ' + unit + '.' : '';
+ };
+})();
