@@ -96,7 +96,7 @@ body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.pl
 #plan-manager-dialog .plan-draft-picker :is(.primary,[aria-pressed=true]),.plan-picker-slots input:checked+span{background:var(--ui-accent,#8ee2b4);color:var(--ui-on-accent,#153d2d)}
 .plan-draft-picker fieldset{min-width:0;margin:12px 0;padding:0;border:0}
 .plan-picker-slots label{position:relative;margin:0}
-.plan-picker-slots input[type=radio]{position:absolute;opacity:0;width:1px;height:1px;min-height:0;padding:0}
+#plan-manager-dialog .plan-picker-slots input[type=radio]{position:absolute;opacity:0;width:1px;height:1px;min-height:0;padding:0;pointer-events:none}
 .plan-picker-slots span{display:grid;place-items:center;min-height:44px;border:1px solid var(--ui-border,#789b87);border-radius:10px;text-align:center}
 .plan-picker-slots input:focus-visible+span{outline:2px solid var(--ui-accent,#8ee2b4);outline-offset:2px}
 .plan-portion{display:grid;grid-template-columns:44px minmax(32px,56px) 44px;align-items:center;width:max-content;text-align:center;margin:6px 0}
