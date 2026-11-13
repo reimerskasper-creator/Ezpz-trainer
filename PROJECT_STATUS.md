@@ -1780,3 +1780,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 - Android launcher resources use the approved wing. The startup asset combines the wing and EZPZ Fitness lettering. Existing launch animation code continues to draw the new asset.
 - The signed test APK is produced by the Android Health Connect workflow on the canonical Android branch.
+
+## Android 1.0.121 — C1 swirl and split-letter branding
+
+- The approved C1 swirl is the Android launcher mark. The full C1 and split-letter wordmark appears in the Home header and on startup with the existing diagonal sweep.
+- The signed test APK is built by the canonical Android Health Connect workflow.

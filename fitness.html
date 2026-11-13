@@ -1572,7 +1572,7 @@ body[data-view=movement] .steps-bank [data-use-step-bank]{width:100%;min-height:
 body[data-view=home] .home-steps-panel .steps-bank-badge{display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 40px);min-height:44px;margin:-10px 20px 12px;padding:6px 12px;background:#103b2bed!important;color:#f1fff5!important;border:1px solid #9ac1a777;border-radius:24px;font-size:13px}
 </style>
 </head><body>
-<header class="row"><div class="brand-lockup"><div><span class="tag">EZPZ</span><h1>Fitness</h1></div></div><button class="header-more" data-tab="more" aria-label="More tools and settings">☰ <span>More</span></button></header>
+<header class="row"><div class="brand-lockup"><img class="home-brand-logo" src="./brand/ezpz-c1-lockup.png" alt=""><div><span class="tag">EZPZ</span><h1>Fitness</h1></div></div><button class="header-more" data-tab="more" aria-label="More tools and settings">☰ <span>More</span></button></header>
 <main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol nav-home-solid" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.7 2.5a2 2 0 0 1 2.6 0l8 6.8a2 2 0 0 1 .7 1.5V20a2 2 0 0 1-2 2h-4.2a.8.8 0 0 1-.8-.8V16a3 3 0 0 0-6 0v5.2a.8.8 0 0 1-.8.8H4a2 2 0 0 1-2-2v-9.2a2 2 0 0 1 .7-1.5z"/></svg><span>Home</span></button><button data-tab="eat"><img class="nav-letter" src="./brand/pillar-eat-clear.svg" alt="" width="28" height="28"><span>Eat</span></button><button data-tab="sleep"><img class="nav-letter" src="./brand/pillar-sleep-clean.png" alt="" width="28" height="28"><span>Sleep</span></button><button data-tab="progress"><img class="nav-letter" src="./brand/pillar-train-clean.png" alt="" width="28" height="28"><span>Progress</span></button><button data-tab="zone"><img class="nav-letter" src="./brand/pillar-zone-wave.svg" alt="" width="28" height="28"><span>Zone</span></button></nav>
 <script>
 window.addEventListener('error',function(e){const el=document.getElementById('screen');if(el){el.innerHTML='<section class="card"><h2>Unable to start EZPZ Fitness</h2><p>Something prevented the app from loading. Your saved workout data has not been deleted.</p><p class="note" id="startup-error"></p><button onclick="location.reload()">Reload app</button></section>';const m=document.getElementById('startup-error');if(m)m.textContent=String(e.message||'Unknown startup error').slice(0,220)}});
@@ -13099,6 +13099,10 @@ body[data-view=home] .home-collapsible[data-folded=true] .home-upcoming-tools{po
 </style>
 
 <style id="home-simple-wordmark-match">
+header .home-brand-logo{display:none}
+body[data-view=home]>header.row .home-brand-logo{display:block;width:clamp(116px,38vw,172px);height:auto}
+body[data-view=home]>header.row .brand-lockup>div{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
 body[data-view=home]>header .tag{font-size:25px;letter-spacing:-1px}
 body[data-view=home]>header h1{font-size:14px;font-style:italic;line-height:1.1;letter-spacing:-.4px;font-weight:700;text-transform:none;color:white}
 .overview-foundations>svg{width:14px;height:14px;flex:none}.home-logging-help>svg{width:17px;height:17px}
