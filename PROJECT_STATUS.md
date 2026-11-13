@@ -1760,3 +1760,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 - Food details can pick, crop, replace or remove a personal product photo. Barcode aliases share the photo. Ingredient review shows it, and single-product diary entries and saved foods inherit it unless an explicit meal photo is selected.
 - The startup wordmark is larger. A full-screen emerald highlight travels diagonally from lower left to upper right before the app fades in. Android's animation preference and startup timeout still apply.
 - Build and delivery are tracked by the Android Health Connect workflow on the canonical Android branch.
+
+## Android 1.0.117 — consistent pillar lettering
+
+- The four marks have a common visible height in the Method guide, navigation and pillar headings. The Home and Android startup wordmarks use the same four marks, including the approved two-wave purple Zone Z.
+- Delivery is tracked by the Android Health Connect workflow on the canonical Android branch.
