@@ -1,3 +1,8 @@
+## 2026-11-13 — Android reviewer access
+
+- Canonical Android branch adds a dedicated reviewer password sign-in in Save my progress. Android version 1.0.124.
+- Provision and verify the isolated reviewer account before submitting the App access declaration.
+
 ## 2026-11-13 — Privacy disclosure and Android 1.0.123
 
 - Canonical branch: `android-health-connect`. Updated the bundled policy for Health Connect, FatSecret barcode lookups, on-device label recognition and account deletion.

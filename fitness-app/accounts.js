@@ -28,8 +28,11 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function panel(){
  const box=document.getElementById('fitness-account-panel');if(!box)return;
  const expanded=box.querySelector?.('.account-backup')?.open===true;
+ const reviewerSignIn=native&&!user&&config?.enabled
+  ? '<details><summary>Reviewer sign-in</summary><form data-reviewer-signin><label>Email <input name="email" type="email" autocomplete="username" required></label><label>Password <input name="password" type="password" autocomplete="current-password" required></label><button type="submit" '+(busy?'disabled':'')+'>Sign in</button></form></details>'
+  : '';
  const action=(name,label)=>'<button data-account="'+name+'" '+(busy?'disabled':'')+'>'+label+'</button>';
- box.innerHTML='<details class="account-backup" '+(expanded?'open':'')+'><summary><h3>Save my progress</h3><small>'+esc(busy?'Working…':user?'Signed in · Backup & account':'Optional · Google sign-in')+'</small></summary><div class="account-backup-body"><p>Cloud backup is optional. Your device records stay here.</p>'+(user?'<p>Signed in as <strong>'+esc(user.email||'Google account')+'</strong></p><p>Signing in does not upload or replace your records.</p>'+action('review','Check cloud backup')+(config?.backupEnabled?'<div class="account-actions">'+action('save','Save device progress to cloud')+action('restore','Restore cloud progress')+'</div>':'<p>Cloud Save and Restore are being checked before activation. Keep a downloaded backup for now.</p>')+action('signout','Sign out — keep device records')+'<p class="note">Keeping records leaves them readable on this device. Use Delete records from this device below when using a shared device.</p>':action('signin','Continue with Google'))+'<p role="status" aria-live="polite">'+esc(message)+'</p><details><summary>Account & privacy</summary><p>Google supplies your account identity and email. Supabase holds your sign-in session and, only after an explicit Save, your fitness backup. Google sign-in alone does not grant wearable access. WHOOP requires separate authorization. Fitness backups can include measurements, food, sleep, steps, workout records and photos.</p><p>This is a private backup test. Cloud saves and restores happen only when you choose them. To request deletion of your test account, contact reimerskasper@gmail.com. Device deletion below does not delete a cloud account.</p><p><a href="./fitness-privacy.html">Privacy and deletion information</a></p>'+(user&&config?.accountDeletionEnabled?'<p>Deleting your cloud account permanently removes its cloud backup. Device records and downloaded copies remain.</p>'+action('delete-account','Delete my cloud account and backup'):'')+'</details><section class="account-whoop">'+whoopPanel()+'</section></div></details>';
+ box.innerHTML='<details class="account-backup" '+(expanded?'open':'')+'><summary><h3>Save my progress</h3><small>'+esc(busy?'Working…':user?'Signed in · Backup & account':'Optional · Google sign-in')+'</small></summary><div class="account-backup-body"><p>Cloud backup is optional. Your device records stay here.</p>'+(user?'<p>Signed in as <strong>'+esc(user.email||'Google account')+'</strong></p><p>Signing in does not upload or replace your records.</p>'+action('review','Check cloud backup')+(config?.backupEnabled?'<div class="account-actions">'+action('save','Save device progress to cloud')+action('restore','Restore cloud progress')+'</div>':'<p>Cloud Save and Restore are being checked before activation. Keep a downloaded backup for now.</p>')+action('signout','Sign out — keep device records')+'<p class="note">Keeping records leaves them readable on this device. Use Delete records from this device below when using a shared device.</p>':action('signin','Continue with Google')+reviewerSignIn)+'<p role="status" aria-live="polite">'+esc(message)+'</p><details><summary>Account & privacy</summary><p>Google supplies your account identity and email when you use Google sign-in. For reviewer sign-in, Supabase verifies the reviewer credentials. Supabase holds your sign-in session and, only after an explicit Save, your fitness backup. Google sign-in alone does not grant wearable access. WHOOP requires separate authorization. Fitness backups can include measurements, food, sleep, steps, workout records and photos.</p><p>This is a private backup test. Cloud saves and restores happen only when you choose them. To request deletion of your test account, contact reimerskasper@gmail.com. Device deletion below does not delete a cloud account.</p><p><a href="./fitness-privacy.html">Privacy and deletion information</a></p>'+(user&&config?.accountDeletionEnabled?'<p>Deleting your cloud account permanently removes its cloud backup. Device records and downloaded copies remain.</p>'+action('delete-account','Delete my cloud account and backup'):'')+'</details><section class="account-whoop">'+whoopPanel()+'</section></div></details>';
 }
 function status(text){message=text;panel();const out=document.getElementById('whoop-sync-status');if(out)out.textContent=whoopMessage;}
 
@@ -44,7 +47,7 @@ function whoopStatus(text){whoopMessage=text;panel();const out=document.getEleme
 async function verified(){const {data,error}=await client.auth.getUser();if(error||!data?.user)throw Error('Your session has expired. Sign in again.');if(user&&data.user.id!==user.id)throw Error('Account changed. Reload before continuing.');user=data.user;assertOwner(app.snapshot(),user.id);return user;}
 async function readRemote(){const u=await verified();const {data,error}=await client.from('fitness_backups').select('revision,updated_at,payload').eq('user_id',u.id).maybeSingle();if(error)throw Error('Cloud backup could not be read. Your device records are unchanged.');if(data){validBackup(data.payload);if(!Number.isSafeInteger(data.revision)||data.revision<1)throw Error('Invalid cloud revision.');}remote=data;return data;}
 function summary(data){return data.logs.length+' workout records · '+data.weights.length+' weight records';}
-async function run(name,automatic=false){
+async function run(name,automatic=false,credentials){
  if(busy)return;busy=true;panel();
  try{
   if(!config?.enabled||!client)throw Error('Sign-in needs internet. Please try again when connected.');
@@ -54,6 +57,11 @@ async function run(name,automatic=false){
    const probe='ezpz-fitness-auth-probe';localStorage.setItem(probe,'1');localStorage.removeItem(probe);
    const {data,error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:native?'ezpzfitness://auth/callback':RETURN_URL,...(native?{skipBrowserRedirect:true}:{}),scopes:'openid email profile',queryParams:{prompt:'select_account'}}});if(error)throw error;
    if(native){if(!data?.url)throw Error('Could not start sign-in.');await nativeAccount.openAuth({url:data.url});status('Finish Google sign-in in your browser, then return to EZPZ.');}
+  }else if(name==='reviewer-signin'){
+   const {error}=await client.auth.signInWithPassword(credentials);
+   if(error)throw Error('Reviewer sign-in failed. Check the email and password and try again.');
+   try{await verified();}catch(error){await client.auth.signOut({scope:'local'});user=null;throw error;}
+   status('Signed in. Your device records were kept.');
   }else if(name==='whoop-sync'||name==='whoop-disconnect'){
    const u=await verified();
    if(!app.today||!app.importWhoop)throw Error('Update EZPZ before importing WHOOP data.');
@@ -129,6 +137,13 @@ async function run(name,automatic=false){
  }catch(e){if(name.startsWith('whoop-'))whoopStatus(e.message||'WHOOP action failed. Device records were kept.');else status(e.message||'Account action failed. Device records are unchanged.');}finally{busy=false;panel();paintWhoopConnection();}
 }
 document.addEventListener('click',e=>{if(e.target.closest('[data-open-whoop]')){e.preventDefault();app.open();panel();const disclosure=document.getElementById('fitness-account-panel')?.querySelector?.('.account-backup');if(disclosure)disclosure.open=true;document.getElementById('fitness-account-panel')?.scrollIntoView?.({behavior:'smooth',block:'start'});return;}const b=e.target.closest('[data-account]');if(b){e.preventDefault();run(b.dataset.account);}});
+document.addEventListener('submit',event=>{
+ const form=event.target.closest('[data-reviewer-signin]');
+ if(!form)return;
+ event.preventDefault();
+ const fields=new FormData(form);
+ run('reviewer-signin',false,{email:String(fields.get('email')).trim(),password:String(fields.get('password'))});
+});
 new MutationObserver(()=>{const p=document.getElementById('fitness-account-panel');if(p&&!p.children.length)panel();const out=document.getElementById('whoop-sync-status');if(out)out.textContent=whoopMessage;paintWhoopConnection();}).observe(document.getElementById('screen'),{childList:true});
 async function handleNativeCallback(value){
  if(callbackBusy||typeof value!=='string')return;
