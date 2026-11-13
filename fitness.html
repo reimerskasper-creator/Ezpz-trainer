@@ -1399,7 +1399,10 @@ body[data-view=foundation-history] .foundation-day-hero{background:linear-gradie
 body[data-view=foundation-history] .foundation-day-hero p{color:#deeee3}
 body[data-view=foundation-history] .foundation-day-session p{font-size:13px;color:#3c5b47;line-height:1.6}
 </style><style>.recipe-log-picker{background:#163d30;color:#f5f7ed;border:1px solid #42644e;border-radius:22px}.recipe-log-picker summary{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:50px;font-size:17px;cursor:pointer;font-weight:700}.recipe-log-picker summary span{font-size:12px;color:#d6e5d9}.recipe-log-picker>p,.recipe-log-picker>label{color:#d6e5d9;line-height:1.5}.recipe-log-picker input{background:#f7faf4;color:#183e2d;margin:8px 0 14px}.recipe-log-list{max-height:400px;overflow-y:auto;overscroll-behavior:contain;display:grid;gap:10px}.recipe-log-choice{display:flex;align-items:center;gap:12px;text-align:left;padding:10px;background:#ffffff0d;color:#f4f7ed;border:1px solid #ffffff26;border-radius:14px}.recipe-log-choice[hidden]{display:none}.recipe-log-choice img{width:64px;height:64px;object-fit:cover;border-radius:10px;flex:none}.recipe-log-choice>span{min-width:0;display:grid;gap:5px}.recipe-log-choice strong{overflow-wrap:anywhere;font-size:13px}.recipe-log-choice small{font-size:10px;color:#d2e3d5}.recipe-log-choice small:last-child{color:#efd17b}.recipe-log-choice:focus-visible{outline:3px solid #efd17b;outline-offset:2px}
-</style><style id="solid-home-navigation">.nav .nav-home-solid{width:28px;height:28px}.nav button[data-tab="home"][aria-current="page"]{color:#f8f5e9}</style><style id="green-exercise-picker">
+</style><style id="home-swirl-navigation">
+.nav .nav-home-swirl{display:block;width:30px;height:30px;object-fit:contain;margin-block:-1px;border-radius:50%}
+.nav button[aria-current="page"] .nav-home-swirl{box-shadow:0 0 0 4px #8ee2b426}
+</style><style id="green-exercise-picker">
 .training-exercise-dialog{width:calc(100% - 32px);max-width:398px;max-height:80dvh;padding:0;border:1px solid #608573;border-radius:22px;background:#173e2f;color:#f8f5e9;box-shadow:0 18px 64px #0006}
 .training-exercise-dialog::backdrop{background:#071b13aa}
 .exercise-dialog-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;border-bottom:1px solid #426453}
@@ -1572,8 +1575,8 @@ body[data-view=movement] .steps-bank [data-use-step-bank]{width:100%;min-height:
 body[data-view=home] .home-steps-panel .steps-bank-badge{display:flex;align-items:center;gap:8px;width:max-content;max-width:calc(100% - 40px);min-height:44px;margin:-10px 20px 12px;padding:6px 12px;background:#103b2bed!important;color:#f1fff5!important;border:1px solid #9ac1a777;border-radius:24px;font-size:13px}
 </style>
 </head><body>
-<header class="row"><div class="brand-lockup"><img class="home-brand-logo" src="./brand/ezpz-c1-lockup.png" alt=""><div><span class="tag">EZPZ</span><h1>Fitness</h1></div></div><button class="header-more" data-tab="more" aria-label="More tools and settings">☰ <span>More</span></button></header>
-<main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><svg class="nav-symbol nav-home-solid" viewBox="0 0 24 24" width="28" height="28" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M10.7 2.5a2 2 0 0 1 2.6 0l8 6.8a2 2 0 0 1 .7 1.5V20a2 2 0 0 1-2 2h-4.2a.8.8 0 0 1-.8-.8V16a3 3 0 0 0-6 0v5.2a.8.8 0 0 1-.8.8H4a2 2 0 0 1-2-2v-9.2a2 2 0 0 1 .7-1.5z"/></svg><span>Home</span></button><button data-tab="eat"><img class="nav-letter" src="./brand/pillar-eat-clear.svg" alt="" width="28" height="28"><span>Eat</span></button><button data-tab="sleep"><img class="nav-letter" src="./brand/pillar-sleep-clean.png" alt="" width="28" height="28"><span>Sleep</span></button><button data-tab="progress"><img class="nav-letter" src="./brand/pillar-train-clean.png" alt="" width="28" height="28"><span>Progress</span></button><button data-tab="zone"><img class="nav-letter" src="./brand/pillar-zone-wave.svg" alt="" width="28" height="28"><span>Zone</span></button></nav>
+<header class="row"><div class="brand-lockup"><img class="header-brand-logo" src="./brand/ezpz-c1-lockup.png" alt=""><div><span class="tag">EZPZ</span><h1>Fitness</h1></div></div><button class="header-more" data-tab="more" aria-label="More tools and settings">☰ <span>More</span></button></header>
+<main id="screen"><section class="card hero"><h2>Welcome to EZPZ Fitness</h2><p>Preparing your fitness dashboard…</p><p class="note">If this message remains, reload the page.</p></section></main><nav class="nav" aria-label="Main navigation"><button data-tab="home"><img class="nav-home-swirl" src="./brand/ezpz-c1-swirl.png" alt=""><span>Home</span></button><button data-tab="eat"><img class="nav-letter" src="./brand/pillar-eat-clear.svg" alt="" width="28" height="28"><span>Eat</span></button><button data-tab="sleep"><img class="nav-letter" src="./brand/pillar-sleep-clean.png" alt="" width="28" height="28"><span>Sleep</span></button><button data-tab="progress"><img class="nav-letter" src="./brand/pillar-train-clean.png" alt="" width="28" height="28"><span>Progress</span></button><button data-tab="zone"><img class="nav-letter" src="./brand/pillar-zone-wave.svg" alt="" width="28" height="28"><span>Zone</span></button></nav>
 <script>
 window.addEventListener('error',function(e){const el=document.getElementById('screen');if(el){el.innerHTML='<section class="card"><h2>Unable to start EZPZ Fitness</h2><p>Something prevented the app from loading. Your saved workout data has not been deleted.</p><p class="note" id="startup-error"></p><button onclick="location.reload()">Reload app</button></section>';const m=document.getElementById('startup-error');if(m)m.textContent=String(e.message||'Unknown startup error').slice(0,220)}});
 window.addEventListener('unhandledrejection',function(e){const el=document.getElementById('screen');if(el&&!el.innerHTML.trim()){el.innerHTML='<section class="card"><h2>Connection problem</h2><p>Please reload the app.</p><button onclick="location.reload()">Reload app</button></section>'}});
@@ -13098,10 +13101,11 @@ body[data-view=home] .home-collapsible[data-folded=true] .home-upcoming-tools{po
 @media(max-width:360px){body[data-view=home] .home-week-card>.home-overview-heading{gap:5px;padding-right:44px!important}body[data-view=home] .home-overview-heading>h3{font-size:15px}body[data-view=home] .home-overview-heading>.overview-foundations{flex-basis:66px;width:66px;max-width:66px;gap:4px}.overview-foundations>img{width:48px;height:22px}.overview-foundations>span{font-size:12px}}
 </style>
 
-<style id="home-simple-wordmark-match">
-header .home-brand-logo{display:none}
-body[data-view=home]>header.row .home-brand-logo{display:block;width:clamp(116px,38vw,172px);height:auto}
-body[data-view=home]>header.row .brand-lockup>div{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+<style id="shared-header-wordmark">
+header.row .header-brand-logo{display:block;width:clamp(96px,30vw,140px);height:auto}
+body[data-view=home]>header.row .header-brand-logo{width:clamp(116px,38vw,172px)}
+header.row .brand-lockup>div{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+header.row .header-more{flex:none}
 
 body[data-view=home]>header .tag{font-size:25px;letter-spacing:-1px}
 body[data-view=home]>header h1{font-size:14px;font-style:italic;line-height:1.1;letter-spacing:-.4px;font-weight:700;text-transform:none;color:white}
