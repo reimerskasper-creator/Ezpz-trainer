@@ -1,3 +1,8 @@
+## 2026-11-13 — Privacy disclosure and Android 1.0.123
+
+- Canonical branch: `android-health-connect`. Updated the bundled policy for Health Connect, FatSecret barcode lookups, on-device label recognition and account deletion.
+- Delivery: Android test workflow builds the update with the existing test signing certificate. Play release bundle and upload signing still need verification.
+
 # EZPZ Fitness — continuation notes
 
 ## Canonical app
