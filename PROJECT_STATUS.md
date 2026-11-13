@@ -1775,3 +1775,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 - The draft editor opens saved workouts and meals first when available, with separate searchable EZPZ lists. Meal slots and half-portion controls are in-app. The native day selector uses a light popup palette.
 - Existing plan packages, export and activation remain compatible. Mobile coverage exercises saved and built-in entries, search, picker dismissal, meal slots, portions and active schedule isolation.
+
+## Android 1.0.120 — approved four-color wing
+
+- Android launcher resources use the approved wing. The startup asset combines the wing and EZPZ Fitness lettering. Existing launch animation code continues to draw the new asset.
+- The signed test APK is produced by the Android Health Connect workflow on the canonical Android branch.
