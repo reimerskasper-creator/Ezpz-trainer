@@ -1765,3 +1765,8 @@ User approved all ten review recommendations plus the two smaller fixes. Continu
 
 - The four marks have a common visible height in the Method guide, navigation and pillar headings. The Home and Android startup wordmarks use the same four marks, including the approved two-wave purple Zone Z.
 - Delivery is tracked by the Android Health Connect workflow on the canonical Android branch.
+
+## Android 1.0.118 — create and edit plans in Plan library
+
+- Create a plan opens a separate 1–93-day draft with numbered days, available workouts and meals, portions and extra entries. Saved plans can be edited in place. Saving commits the library entry independently of the active schedule.
+- The existing library preview handles export and explicit date-based activation. Local planning, package and library regression checks pass. The Android workflow runs the create/edit/export/activate flow at three phone widths and packages the signed test APK.

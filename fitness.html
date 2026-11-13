@@ -11250,15 +11250,34 @@ function validatePlanPackage(raw,withPhotos=false){
  return p;
 }
 function cleanSavedPlans(items){return (Array.isArray(items)?items:[]).slice(0,20).flatMap(v=>{try{if(!v||typeof v.id!=='string'||!/^plan-[a-z0-9-]{1,80}$/.test(v.id))return [];return [{id:v.id,...validatePlanPackage(v),...(v.origin==='imported'?{origin:'imported'}:{})}]}catch{return []}}).filter((p,i,a)=>a.findIndex(v=>v.id===p.id)===i)}
+function planPackageCatalog(pack){
+ const {workouts,meals,media,backgrounds}=pack,workoutMap=new Map(),mealMap=new Map(),allMedia=cleanTrainerMedia(state.trainerMedia),allBackgrounds=cleanTrainerBackgrounds(state.trainerBackgrounds);
+ function nextId(prefix,items){let i=items.length;while(items.some(item=>item.id===prefix+i))i++;return prefix+i}
+ function addWorkout(wid){if(wid==='rest')return 'rest';const w=planWorkout(wid);if(!w)throw Error('A scheduled workout is unavailable. Check your plan before exporting.');if(!workoutMap.has(wid)){const id=nextId('custom-plan-',workouts);workoutMap.set(wid,id);workouts.push(planWorkoutDefinition(w,id));for(const x of w.exercises){const m=allMedia[wid+'|'+x.name];if(m)media[id+'|'+x.name]={...m}}if(allBackgrounds[wid])backgrounds[id]=allBackgrounds[wid]}return workoutMap.get(wid)}
+ function addMeal(ref){if(!mealMap.has(ref)){const id=nextId('meal-',meals);if(Number.isInteger(ref)&&recipes[ref])meals.push({id,kind:'recipe',index:ref,signature:JSON.stringify(recipes[ref])});else{const f=cleanCustomFoods(state.customFoods).find(f=>f.id===ref);if(!f)throw Error('A planned meal is unavailable. Check your plan before exporting.');meals.push({id,kind:'custom',food:f})}mealMap.set(ref,id)}return mealMap.get(ref)}
+ return {addWorkout,addMeal};
+}
 function capturePlanPackage(name=state.planName||'My plan',includePhotos=false){
- const p=planSettings(),workouts=[],meals=[],workoutMap=new Map(),mealMap=new Map(),media={},backgrounds={},allMedia=cleanTrainerMedia(state.trainerMedia),allBackgrounds=cleanTrainerBackgrounds(state.trainerBackgrounds);
- function addWorkout(wid){if(wid==='rest')return 'rest';const w=planWorkout(wid);if(!w)throw Error('A scheduled workout is unavailable. Check your plan before exporting.');if(!workoutMap.has(wid)){const id='custom-plan-'+workouts.length;workoutMap.set(wid,id);workouts.push(planWorkoutDefinition(w,id));for(const x of w.exercises){const m=allMedia[wid+'|'+x.name];if(m)media[id+'|'+x.name]={...m}}if(allBackgrounds[wid])backgrounds[id]=allBackgrounds[wid]}return workoutMap.get(wid)}
- function addMeal(ref){if(!mealMap.has(ref)){const id='meal-'+meals.length;if(Number.isInteger(ref)&&recipes[ref])meals.push({id,kind:'recipe',index:ref,signature:JSON.stringify(recipes[ref])});else{const f=cleanCustomFoods(state.customFoods).find(f=>f.id===ref);if(!f)throw Error('A planned meal is unavailable. Check your plan before exporting.');meals.push({id,kind:'custom',food:f})}mealMap.set(ref,id)}return mealMap.get(ref)}
+ const p=planSettings(),workouts=[],meals=[],media={},backgrounds={}, {addWorkout,addMeal}=planPackageCatalog({workouts,meals,media,backgrounds});
  const entries=scheduleDays().map(date=>{const entry={meals:{}},wid=state.workoutSchedule?.[date];if(wid)entry.workout=addWorkout(wid);const extras=dayExtraWorkouts(date);if(extras.length)entry.extraWorkouts=extras.map(x=>({slot:x.slot,workout:addWorkout(x.workoutId),label:x.label}));const day=plannedMeals()[date]||{};for(const slot of planMealSlots(day)){const ref=day[slot];if(!plannedRecipe(ref))continue;entry.meals[slot]={id:addMeal(ref),portion:planPortion(day,slot)};if(validExtraSlot(slot))entry.meals[slot].label=planSlotLabel(slot,day)}return entry});
  const version=entries.some(e=>e.extraWorkouts?.length||Object.keys(e.meals).some(validExtraSlot))?2:1;
  const pack=validatePlanPackage({format:'ezpz-plan',version,name:String(name).trim(),days:p.days,entries,workouts,meals,media,backgrounds,...(cleanPhotoId(state.planCoverPhotoId)?{coverPhotoId:state.planCoverPhotoId}:{})});if(includePhotos){pack.photos={};for(const id of planPhotoRefs(pack)){const data=personalPhoto(id);if(!data)throw Error('A plan photo is missing. Replace it before exporting.');pack.photos[id]=data}}return pack;
 }
 function commitPlanChange(change){const before=JSON.parse(JSON.stringify(state));try{change();if(!save())throw Error('Could not save this plan. Your previous data was kept.');return true}catch(e){state=before;throw e}}
+function saveLibraryPlanDraft(raw,id=''){
+ const workoutIds=new Set(raw.entries.flatMap(entry=>[entry.workout,...(entry.extraWorkouts||[]).map(item=>item.workout)]));
+ const mealIds=new Set(raw.entries.flatMap(entry=>Object.values(entry.meals).map(item=>item.id)));
+ const pack=validatePlanPackage({...raw,workouts:raw.workouts.filter(item=>workoutIds.has(item.id)),meals:raw.meals.filter(item=>mealIds.has(item.id)),media:Object.fromEntries(Object.entries(raw.media).filter(([key])=>workoutIds.has(key.split('|')[0]))),backgrounds:Object.fromEntries(Object.entries(raw.backgrounds).filter(([key])=>workoutIds.has(key)))});
+ const savedId=id||newLibraryPlanId();
+ commitPlanChange(()=>{
+  const plans=cleanSavedPlans(state.savedPlans);
+  if(!id&&plans.length>=20)throw Error('Your plan library is full. Export or delete a plan first.');
+  if(id&&!plans.some(plan=>plan.id===id))throw Error('This saved plan is no longer available.');
+  const updated={...plans.find(plan=>plan.id===id),...pack,id:savedId};
+  state.savedPlans=id?plans.map(plan=>plan.id===id?updated:plan):[...plans,updated];
+ });
+ return savedId;
+}
 function saveNamedPlan(name){const pack=capturePlanPackage(name),id='plan-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);commitPlanChange(()=>{const saved=cleanSavedPlans(state.savedPlans);if(saved.length>=20)throw Error('You have 20 saved plans. Export or delete one before saving another.');state.savedPlans=[...saved,{id,...pack}];state.planName=pack.name;state.activeSavedPlanId=id});return id}
 function startNewNamedPlan(name){const old=capturePlanPackage(state.planName||'My previous plan'),dates=scheduleDays(),id='plan-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);if(!String(name).trim()||String(name).trim().length>80)throw Error('Enter a plan name up to 80 characters.');commitPlanChange(()=>{const saved=cleanSavedPlans(state.savedPlans);if(saved.length>=20)throw Error('You have 20 saved plans. Export or delete one first.');state.savedPlans=[...saved,{id,...old}];state.workoutSchedule={...state.workoutSchedule};state.mealPlan={...plannedMeals()};for(const date of dates){delete state.workoutSchedule[date];delete state.mealPlan[date];if(state.extraWorkouts)delete state.extraWorkouts[date]}state.planName=String(name).trim();delete state.activeSavedPlanId;delete state.planCoverPhotoId;state.plannerOffset=0});}
 function clearUpcomingPlan(){const dates=scheduleDays().filter(date=>date>=foodDate());commitPlanChange(()=>{state.workoutSchedule={...state.workoutSchedule};state.mealPlan={...plannedMeals()};for(const date of dates){delete state.workoutSchedule[date];delete state.mealPlan[date];if(state.extraWorkouts)delete state.extraWorkouts[date]}})}
