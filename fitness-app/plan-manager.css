@@ -83,3 +83,21 @@ body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.pl
 .plan-draft-item{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--ui-border,#658670)}
 .plan-draft-item strong{display:block;overflow-wrap:anywhere}
 .plan-draft-item select{max-width:90px}
+
+/* Keep the remaining native day selector on the Android light popup palette. */
+#plan-manager-dialog select[data-draft-day]{color-scheme:light}
+#plan-manager-dialog select[data-draft-day] option{background:#fff;color:#17382b}
+#plan-manager-dialog .plan-draft-picker{box-sizing:border-box;width:min(94vw,440px);max-height:86dvh;overflow:auto;padding:18px;border:1px solid var(--ui-border,#789b87);border-radius:20px;background:var(--ui-card,#153d2d);color:var(--ui-text,#f1fff5)}
+.plan-draft-picker::backdrop{background:#0009}
+.plan-picker-sources,.plan-picker-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0 14px}
+.plan-picker-results{display:grid;gap:6px;margin:12px 0}
+#plan-manager-dialog .plan-picker-results button{text-align:left;white-space:normal;overflow-wrap:anywhere}
+#plan-manager-dialog .plan-draft-picker button{color:var(--ui-text,#f1fff5);background:var(--ui-field,#234b38);border:1px solid var(--ui-border,#789b87)}
+#plan-manager-dialog .plan-draft-picker :is(.primary,[aria-pressed=true]),.plan-picker-slots input:checked+span{background:var(--ui-accent,#8ee2b4);color:var(--ui-on-accent,#153d2d)}
+.plan-draft-picker fieldset{min-width:0;margin:12px 0;padding:0;border:0}
+.plan-picker-slots label{position:relative;margin:0}
+.plan-picker-slots input[type=radio]{position:absolute;opacity:0;width:1px;height:1px;min-height:0;padding:0}
+.plan-picker-slots span{display:grid;place-items:center;min-height:44px;border:1px solid var(--ui-border,#789b87);border-radius:10px;text-align:center}
+.plan-picker-slots input:focus-visible+span{outline:2px solid var(--ui-accent,#8ee2b4);outline-offset:2px}
+.plan-portion{display:grid;grid-template-columns:44px minmax(32px,56px) 44px;align-items:center;width:max-content;text-align:center;margin:6px 0}
+.plan-draft-picker [data-picker-add]{width:100%;margin-top:12px}

@@ -7,7 +7,7 @@
  planner=function(){originalPlanner();if(builderDraft)return;const hero=screen.querySelector('.planner-hero');if(hero){const tag=document.createElement('p');tag.className='plan-current-name';tag.textContent=state.planName||'Build your routine · up to 3 months';hero.append(tag)}const anchor=screen.querySelector('.plan-settings');if(anchor){anchor.insertAdjacentHTML('beforebegin','<section class="plan-library-entry" aria-label="Plan library"><button type="button" class="plan-library-open" data-plan-manage="library">Plan library →</button><p>Save, browse and activate plans. My plan shows your current schedule.</p></section>');anchor.insertAdjacentHTML('afterend',tools())}window.EzpzAppearance?.refresh()};
  dataTools=function(){return originalDataTools()+'<section class="card plan-share-tools"><h3>Share a plan</h3><p>Meals, workouts, exercise photos and video links. Personal logs and connected accounts stay on your device.</p><div class="plan-management-actions">'+action('export','Export current plan')+action('import','Import a plan')+'</div></section>'};
  function close(){sequence++;const d=document.getElementById('plan-manager-dialog');const trigger=d?._opener;if(d){d.close();d.remove()}if(trigger?.isConnected)trigger.focus({preventScroll:true})}
- function dialog(title,body,trigger){close();const d=document.createElement('dialog');d.id='plan-manager-dialog';d._opener=trigger;d.setAttribute('aria-labelledby','plan-manager-title');d.innerHTML='<div class="plan-dialog-heading"><h2 id="plan-manager-title">'+safe(title)+'</h2><button type="button" data-plan-dialog-close aria-label="Close">×</button></div>'+body+'<p class="plan-dialog-status" role="status" aria-live="polite"></p>';d.addEventListener('cancel',e=>{e.preventDefault();if(!busy){if(d._discard)d._discard();else close()}});document.body.append(d);d.showModal();return d}
+ function dialog(title,body,trigger){close();const d=document.createElement('dialog');d.id='plan-manager-dialog';d._opener=trigger;d.setAttribute('aria-labelledby','plan-manager-title');d.innerHTML='<div class="plan-dialog-heading"><h2 id="plan-manager-title">'+safe(title)+'</h2><button type="button" data-plan-dialog-close aria-label="Close">×</button></div>'+body+'<p class="plan-dialog-status" role="status" aria-live="polite"></p>';d.addEventListener('cancel',e=>{if(e.target!==d)return;e.preventDefault();if(!busy){if(d._discard)d._discard();else close()}});document.body.append(d);d.showModal();return d}
  const status=(d,text)=>{if(d?.isConnected)d.querySelector('.plan-dialog-status').textContent=text};
  function refreshed(message){plannerNotice=message;render()}
  function naming(kind,trigger,back=false){const fresh=kind==='new',d=dialog(fresh?'Start a new plan':'Save current plan','<p>'+safe(range())+' · '+planSettings().days+' days</p><p>'+(fresh?'Your current plan will be saved first. The scheduled meals and workouts in these dates will be cleared. Completed logs and saved content stay.':'Save a reusable copy of these dates, including the exercise photos and links.')+'</p><form><label for="plan-name">Plan name</label><input id="plan-name" maxlength="80" required value="'+safe(fresh?'':state.planName||'My plan')+'" placeholder="e.g. 12-week strength"><div class="plan-dialog-actions"><button type="button" data-plan-dialog-close>Cancel</button><button class="primary" type="submit">'+(fresh?'Save old & start new':'Save plan')+'</button></div></form>',trigger);d.querySelector('form').onsubmit=e=>{e.preventDefault();try{const name=d.querySelector('input').value.trim();if(fresh)startNewNamedPlan(name);else saveNamedPlan(name);close();refreshed(fresh?'Previous plan saved. Your new plan is empty and ready to build.':'Plan saved with its exercise photos and links.');if(back)library(document.querySelector('[data-plan-manage=library]'))}catch(error){status(d,error.message)}}}
@@ -36,10 +36,17 @@
   d.classList.add('plan-draft-dialog');
   d._discard=()=>{if(!confirm('Discard changes to this plan?'))return;library(document.querySelector('[data-plan-manage=library]')||trigger)};
   const daySelect=d.querySelector('[data-draft-day]'),content=d.querySelector('[data-draft-content]');
-  const workoutOptions=[['full-body',planWorkout('full-body').programName],...allWorkouts().filter(w=>w.id!=='full-body').map(w=>[w.id,workoutTitle(w)])];
-  const mealOptions=[...recipes.map((recipe,i)=>[i,recipe.name]),...cleanCustomFoods(state.customFoods).map(food=>[food.id,food.name])];
-  const options=items=>items.map(([value,label])=>'<option value="'+safe(value)+'">'+safe(label)+'</option>').join('');
-  const portions=value=>[.5,1,1.5,2,2.5,3].map(n=>'<option value="'+n+'" '+(n===value?'selected':'')+'>'+n+'</option>').join('');
+  const savedWorkouts=cleanCustomWorkouts(state.customWorkouts).map(w=>[w.id,workoutTitle(w)]);
+  const savedMeals=cleanCustomFoods(state.customFoods).map(f=>[f.id,f.name]);
+  const portionControl=(value,slot='')=>'<div class="plan-portion" role="group" aria-label="Portions" data-portion-slot="'+safe(slot)+'"><button type="button" data-portion-step="-0.5" aria-label="Decrease portions" '+(value<=.5?'disabled':'')+'>−</button><output aria-live="polite">'+value+'</output><button type="button" data-portion-step="0.5" aria-label="Increase portions" '+(value>=3?'disabled':'')+'>+</button></div>';
+  function changePortion(button){
+   const control=button.closest('.plan-portion'),output=control.querySelector('output');
+   const value=Math.min(3,Math.max(.5,Number(output.value)+Number(button.dataset.portionStep)));
+   output.value=value;
+   control.firstElementChild.disabled=value===.5;
+   control.lastElementChild.disabled=value===3;
+   return value;
+  }
   const slotId=()=> 'extra-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9);
   const remove=(kind,slot)=>'<button type="button" data-draft-remove="'+kind+':'+safe(slot)+'">Remove</button>';
   function showDay(){
@@ -51,33 +58,73 @@
    d.querySelector('[data-draft-shift="1"]').disabled=day===pack.days-1;
    const workouts=[...(entry.workout?[['main',entry.workout,'']]:[]),...extras.map(x=>[x.slot,x.workout,x.label])];
    content.innerHTML='<section class="plan-draft-section"><h3>Workouts</h3>'+workouts.map(([slot,wid,label])=>'<div class="plan-draft-item"><strong>'+safe((label?label+' · ':'')+title(wid))+'</strong>'+remove('workout',slot)+'</div>').join('')+
-    (extras.length>=10?'':'<form data-draft-add="workout"><label>Workout<select name="item" required><option value="">Choose workout</option>'+(!entry.workout&&!extras.length?'<option value="rest">Recovery day</option>':'')+options(workoutOptions)+'</select></label><button type="submit">Add workout</button></form>')+
-    '</section><section class="plan-draft-section"><h3>Meals</h3>'+planMealSlots(entry.meals).filter(slot=>entry.meals[slot]).map(slot=>{const meal=entry.meals[slot];return '<div class="plan-draft-item"><div><strong>'+safe(planSlotLabel(slot,{[slot+'Label']:meal.label})+' · '+mealName(meal.id))+'</strong><label>Portions<select data-draft-portion="'+slot+'">'+portions(meal.portion)+'</select></label></div>'+remove('meal',slot)+'</div>'}).join('')+
-    (Object.keys(entry.meals).length>=23?'':'<form data-draft-add="meal"><label>Meal<select name="item" required><option value="">Choose meal</option>'+options(mealOptions)+'</select></label><label>Meal slot<select name="slot">'+options([['breakfast','Breakfast'],['lunch','Lunch'],['dinner','Dinner'],...(Object.keys(entry.meals).filter(validExtraSlot).length<20?[['extra','Extra meal']]:[])])+'</select></label><label>Portions<select name="portion">'+portions(1)+'</select></label><button type="submit">Add meal</button></form>')+'</section>';
+    (extras.length>=10?'':'<button type="button" data-draft-add="workout">+ Add workout</button>')+
+    '</section><section class="plan-draft-section"><h3>Meals</h3>'+planMealSlots(entry.meals).filter(slot=>entry.meals[slot]).map(slot=>{const meal=entry.meals[slot];return '<div class="plan-draft-item"><div><strong>'+safe(planSlotLabel(slot,{[slot+'Label']:meal.label})+' · '+mealName(meal.id))+'</strong>'+portionControl(meal.portion,slot)+'</div>'+remove('meal',slot)+'</div>'}).join('')+
+    (Object.keys(entry.meals).length>=23?'':'<button type="button" data-draft-add="meal">+ Add meal</button>')+'</section>';
   }
-  d.addEventListener('change',e=>{
-   if(e.target===daySelect){day=Number(daySelect.value);status(d,'');showDay()}
-   if(e.target.dataset.draftPortion)pack.entries[day].meals[e.target.dataset.draftPortion].portion=Number(e.target.value);
-  });
-  d.addEventListener('submit',e=>{
-   const kind=e.target.dataset.draftAdd;if(!kind)return;
-   e.preventDefault();
-   if(owner!==state){status(d,'Your app data changed. Reopen the plan to continue.');return}
-   const fields=new FormData(e.target),item=String(fields.get('item')),entry=pack.entries[day];
-   try{
-    if(kind==='workout'){
-     const workout=addWorkout(item);
-     if(!entry.workout||entry.workout==='rest')entry.workout=workout;
-     else (entry.extraWorkouts??=[]).push({slot:slotId(),workout,label:'Extra workout'});
-    }else{
-     const slot=String(fields.get('slot')),ref=/^\d+$/.test(item)?Number(item):item;
-     if(entry.meals[slot]&&!confirm('Replace the planned '+slot+' on Day '+(day+1)+'?'))return;
-     entry.meals[slot==='extra'?slotId():slot]={id:addMeal(ref),portion:Number(fields.get('portion')),...(slot==='extra'?{label:'Extra meal'}:{})};
+  function pick(kind,opener){
+   const meal=kind==='meal',entry=pack.entries[day],mine=meal?savedMeals:savedWorkouts;
+   const builtIn=meal?recipes.map((r,i)=>[i,r.name]):[['full-body',planWorkout('full-body').programName],...workoutTemplates.filter(w=>w.id!=='full-body').map(w=>[w.id,workoutTitle(w)])];
+   const sources=[mine,builtIn];
+   let source=mine.length?0:1,selected=null;
+   const picker=document.createElement('dialog');
+   picker.className='plan-draft-picker';
+   picker.setAttribute('aria-labelledby','plan-draft-picker-title');
+   picker.innerHTML='<div class="plan-dialog-heading"><h2 id="plan-draft-picker-title">Add '+kind+' · Day '+(day+1)+'</h2><button type="button" data-picker-close aria-label="Close picker">×</button></div><div data-picker-body></div><p class="plan-dialog-status" role="status"></p>';
+   d.append(picker);
+   const body=picker.querySelector('[data-picker-body]'),message=picker.querySelector('[role=status]');
+   function browse(){
+    selected=null;
+    body.innerHTML='<div class="plan-picker-sources" role="group" aria-label="Source"><button type="button" data-picker-source="0">'+(meal?'My meals':'My workouts')+'</button><button type="button" data-picker-source="1">'+(meal?'EZPZ recipes':'EZPZ workouts')+'</button></div><label>Search '+(meal?'meals':'workouts')+'<input type="search" data-picker-search></label><div class="plan-picker-results" data-picker-results></div>'+(!meal&&!entry.workout&&!entry.extraWorkouts?.length?'<button type="button" data-picker-rest>Recovery day</button>':'');
+    results();
+   }
+   function results(){
+    const query=body.querySelector('[data-picker-search]').value.trim().toLowerCase();
+    const items=sources[source].filter(([,name])=>name.toLowerCase().includes(query));
+    body.querySelectorAll('[data-picker-source]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.pickerSource)===source)));
+    body.querySelector('[data-picker-results]').innerHTML=items.map(([id,name])=>'<button type="button" data-picker-item="'+safe(id)+'">'+safe(name)+'</button>').join('')||'<p>'+(query?'No matches.':meal?'No saved meals yet.':'No saved workouts yet.')+'</p>';
+   }
+   function add(item,slot,portion){
+    if(owner!==state){message.textContent='Your app data changed. Reopen the plan to continue.';return}
+    try{
+     if(meal){
+      if(entry.meals[slot]&&!confirm('Replace the planned '+slot+' on Day '+(day+1)+'?'))return;
+      entry.meals[slot==='extra'?slotId():slot]={id:addMeal(item),portion,...(slot==='extra'?{label:'Extra meal'}:{})};
+     }else{
+      const workout=addWorkout(item);
+      if(!entry.workout||entry.workout==='rest')entry.workout=workout;
+      else (entry.extraWorkouts??=[]).push({slot:slotId(),workout,label:'Extra workout'});
+     }
+     picker.close();showDay();content.querySelector('[data-draft-add="'+kind+'"]')?.focus({preventScroll:true});
+    }catch(error){message.textContent=error.message}
+   }
+   picker.addEventListener('close',()=>{picker.remove();if(opener.isConnected)opener.focus({preventScroll:true})});
+   picker.addEventListener('input',e=>{if(e.target.matches('[data-picker-search]'))results()});
+   picker.addEventListener('click',e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.hasAttribute('data-picker-close'))picker.close();
+    if(b.hasAttribute('data-picker-back')){browse();body.querySelector('[data-picker-search]').focus()}
+    if(b.hasAttribute('data-picker-source')){source=Number(b.dataset.pickerSource);results()}
+    if(b.hasAttribute('data-picker-rest'))add('rest');
+    if(b.hasAttribute('data-portion-step'))changePortion(b);
+    if(b.hasAttribute('data-picker-item')){
+     selected=sources[source].find(([id])=>String(id)===b.dataset.pickerItem);
+     if(!meal){add(selected[0]);return}
+     const slots=['breakfast','lunch','dinner',...(Object.keys(entry.meals).filter(validExtraSlot).length<20?['extra']:[])];
+     const initial=slots.find(slot=>!entry.meals[slot])||slots[0];
+     body.innerHTML='<button type="button" data-picker-back>← Choose another meal</button><h3>'+safe(selected[1])+'</h3><fieldset><legend>Meal slot</legend><div class="plan-picker-slots">'+slots.map(slot=>'<label><input type="radio" name="draft-meal-slot" value="'+slot+'" '+(slot===initial?'checked':'')+'><span>'+(slot==='extra'?'Extra meal':planSlotLabel(slot))+'</span></label>').join('')+'</div></fieldset><p>Portions</p>'+portionControl(1)+'<button class="primary" type="button" data-picker-add>Add to Day '+(day+1)+'</button>';
+     body.querySelector('input:checked').focus({preventScroll:true});
     }
-    status(d,'');showDay();
-   }catch(error){status(d,error.message)}
-  });
+    if(b.hasAttribute('data-picker-add'))add(selected[0],body.querySelector('input:checked').value,Number(body.querySelector('output').value));
+   });
+   browse();picker.showModal();body.querySelector('[data-picker-source="'+source+'"]').focus({preventScroll:true});
+  }
+  daySelect.onchange=()=>{day=Number(daySelect.value);status(d,'');showDay()};
   d.addEventListener('click',e=>{
+   if(e.target.closest('.plan-draft-picker'))return;
+   const add=e.target.closest('[data-draft-add]'),step=e.target.closest('[data-portion-step]');
+   if(add){pick(add.dataset.draftAdd,add);return}
+   if(step){pack.entries[day].meals[step.closest('.plan-portion').dataset.portionSlot].portion=changePortion(step);return}
    const shift=e.target.closest('[data-draft-shift]'),removed=e.target.closest('[data-draft-remove]');
    if(shift){day+=Number(shift.dataset.draftShift);status(d,'');showDay()}
    if(removed){
