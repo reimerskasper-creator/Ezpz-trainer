@@ -46,7 +46,7 @@ function panel(){
  const date=savedAt&&Number.isFinite(savedAt.getTime())?savedAt.toLocaleString():'';
  const backup='<div class="account-backup-status"><div><strong>'+label+'</strong>'+(date?'<small>'+esc(date)+'</small>':'')+'</div>'+action('review','Check status','account-check')+'</div>'+
   (config?.backupEnabled?action('save','Back up now','primary')+action('restore','Restore backup')+'<p>Cloud saves happen when you tap Back up now.</p>':'<p>Cloud backup and restore are currently unavailable. You can download a backup in Device data.</p>');
- box.innerHTML='<details class="account-backup" '+(expanded?'open':'')+'><summary><h3>Save my progress</h3><small>'+(user?'Signed in · Manual cloud backup':'Optional · Google sign-in')+'</small></summary><div class="account-backup-body">'+
+ box.innerHTML='<details class="account-backup" '+(expanded?'open':'')+'><summary>'+(app.icon?.('cloud')||'')+'<div><h3>Save my progress</h3><small>'+(user?'Signed in · Manual cloud backup':'Optional · Google sign-in')+'</small></div></summary><div class="account-backup-body">'+
   (user?backup:'<p>Sign in to make an optional cloud backup. Your records are saved on this device.</p>'+action('signin','Continue with Google','primary')+reviewerSignIn)+feedback+'</div></details>';
 }
 function status(text){message=text;panel();const out=document.getElementById('whoop-sync-status');if(out)out.textContent=whoopMessage;}

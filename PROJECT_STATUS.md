@@ -1,3 +1,8 @@
+## 2026-11-14 — More banner layout and picker contrast
+
+- Android 1.0.131 places Everyday tools first on More and adds four themed photo banners under Backup & settings. The backup and account operations use the existing handlers.
+- Native select options use a light popup palette. Trainer, planner, progress, wearable, nutrition source and plan draft picker labels use paired surface and text colors. Android CI builds the signed in-place update.
+
 ## 2026-11-14 — Simplify backup and privacy navigation
 
 - Android 1.0.130 on the canonical Android branch groups manual cloud backup on More and links to Account & privacy, Device data, and Connected apps. Existing backup, restore, deletion, and import handlers back the new paths.

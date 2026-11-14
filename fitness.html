@@ -7056,7 +7056,7 @@ document.addEventListener('click',e=>{
 });
 document.addEventListener('submit',e=>{const food=e.target.dataset?.editFoodForm,weight=e.target.dataset?.weightEdit;if(food!==undefined){e.preventDefault();const data=new FormData(e.target);if(editFoodEntry(food,Number(data.get('servings')),String(data.get('date')))){diarySelectedDate=String(data.get('date'));foodEditId=null;refreshDiary()}return}if(weight!==undefined){e.preventDefault();if(editWeightRecord(Number(weight),inputBodyWeight(new FormData(e.target).get('kg'))))render();return}if(e.target.id==='history-edit-form'){e.preventDefault();const data=new FormData(e.target),old=state.logs[historyEditIndex];if(!old)return;const exercises=(old.exercises||[]).map((ex,i)=>({sets:historicalSets(ex).map((_,j)=>({reps:data.get('r'+i+'-'+j)||'',kg:loadFromEdited(data.get('w'+i+'-'+j)||'',historicalSets(ex)[j]?.kg),done:data.get('d'+i+'-'+j)==='on'}))}));if(editHistoryWorkout(historyEditIndex,exercises)){tab='progress';render();window.scrollTo(0,0)}else document.getElementById('history-edit-error').textContent='Check completed sets: positive reps/duration, weight 0–'+loadText(1000)+' '+loadUnit()+', and at least one completed set.'}});
 
-function homeIcon(name){const paths={palette:'M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-4c-1-.5-1-2 1-2h2a4 4 0 0 0 4-4c0-5-4-8-9-8ZM7 9h.01M11 6h.01M16 7h.01M6 14h.01',layout:'M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z',shield:'M12 3 3 7v5c0 5 9 9 9 9s9-4 9-9V7Z',person:'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21v-2a8 6 0 0 1 16 0v2Z',calendar:'M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2ZM7 2v5m10-5v5M3 10h18',workout:'M3 9v6m3-9v12m12-12v12m3-9v6M6 12h12',arrow:'M5 12h14m-6-6 6 6-6 6',food:'M5 3v7m3-7v7M3 7h7m-4 3v11M17 3v18m0-18c-4 4-4 8 0 8',scale:'M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2m3 4a6 6 0 0 1 8 0m-4 4 2-4',cart:'M2 3h3l3 12h11l3-8H6m3 13h.01M18 20h.01',chart:'M4 18 10 12l4 3 6-9M15 6h5v5',change:'M4 7h16M4 17h16M8 4v6m8 4v6',check:'m5 12 4 4L19 6',settings:'M4 7h16M4 17h16M8 4v6m8 4v6'};return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(paths[name]||paths.arrow)+'"/></svg>'}
+function homeIcon(name){const paths={cloud:'M7 17H6a4 4 0 1 1 1-7.9 5 5 0 0 1 9.8-.1H18a4 4 0 0 1 0 8h-1m-5 3v-8m-3 3 3-3 3 3',device:'M5 6c0-4 14-4 14 0s-14 4-14 0Zm0 0v12c0 4 14 4 14 0V6M5 12c0 4 14 4 14 0',palette:'M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-4c-1-.5-1-2 1-2h2a4 4 0 0 0 4-4c0-5-4-8-9-8ZM7 9h.01M11 6h.01M16 7h.01M6 14h.01',layout:'M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z',shield:'M12 3 3 7v5c0 5 9 9 9 9s9-4 9-9V7Z',person:'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21v-2a8 6 0 0 1 16 0v2Z',calendar:'M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2ZM7 2v5m10-5v5M3 10h18',workout:'M3 9v6m3-9v12m12-12v12m3-9v6M6 12h12',arrow:'M5 12h14m-6-6 6 6-6 6',food:'M5 3v7m3-7v7M3 7h7m-4 3v11M17 3v18m0-18c-4 4-4 8 0 8',scale:'M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2m3 4a6 6 0 0 1 8 0m-4 4 2-4',cart:'M2 3h3l3 12h11l3-8H6m3 13h.01M18 20h.01',chart:'M4 18 10 12l4 3 6-9M15 6h5v5',change:'M4 7h16M4 17h16M8 4v6m8 4v6',check:'m5 12 4 4L19 6',settings:'M4 7h16M4 17h16M8 4v6m8 4v6'};return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(paths[name]||paths.arrow)+'"/></svg>'}
 function homeSession(){
  const selected=workoutPlan(),draft=workoutDraft(selected),started=Object.entries(draft).some(([k,v])=>/^(sr|sw|sd)\d+-\d+$/.test(k)&&(v===true||typeof v==='number'&&Number.isFinite(v)||typeof v==='string'&&v.trim()!=='')),date=foodDate(),id=state.workoutSchedule?.[date];
  if(started)return {plan:selected,resume:true,date:state.activePlanItem?.date||(state.activePlanDate===date&&id===selected.id?date:null)};
@@ -11221,7 +11221,7 @@ function deviceDataPage(){
 }
 function more(){
  const p=state.profile;
- screen.innerHTML='<div class="ez-section-heading more-hero"><h2>More</h2></div><section class="readiness-panel" id="fitness-account-panel"></section><div class="more-group account-overview">'+moreAccountRow('account-privacy','shield','Account &amp; privacy','Sign out, privacy and cloud deletion')+moreAccountRow('device-data','shield','Device data','Backup files and device records')+moreAccountRow('connected-apps','change','Connected apps','Manage wearables and see import results')+'</div><div class="more-group more-daily"><h3>Your everyday tools</h3><button class="more-link" data-go="planner">'+homeIcon('calendar')+'<span><strong>My plan</strong><small>Workouts, meals and your next week</small></span><b aria-hidden="true">›</b></button><button class="more-link" data-go="shopping">'+homeIcon('cart')+'<span><strong>Shopping list</strong><small>Ingredients from your meal plan</small></span><b aria-hidden="true">›</b></button><details class="profile-preferences"><summary>'+homeIcon('person')+'<span class="profile-summary-copy"><strong>Profile & preferences</strong><small>Name · units · weight display</small></span><b aria-hidden="true">⌄</b></summary>'+namePreferences()+weightPreferences()+'</details><details class="more-personalize"><summary class="more-link">'+homeIcon('palette')+'<span><strong>Personalize your app</strong><small>Theme, colors and homepage</small></span><b aria-hidden="true">›</b></summary><div class="more-personalize-options"><button type="button" class="more-setting-row" data-appearance-open>'+homeIcon('palette')+'<span><strong>Appearance</strong><small>Theme and accent color</small></span><b aria-hidden="true">›</b></button><button type="button" class="more-setting-row" data-home-arrange-open>'+homeIcon('layout')+'<span><strong>Homepage layout</strong><small>Sections, rings and photos</small></span><b aria-hidden="true">›</b></button></div></details></div><section class="more-plan"><div class="more-plan-top">'+homeIcon('settings')+'<span>MY TRAINING PLAN</span></div><h3>'+(p.goal==='lose'?'Lose fat':p.goal==='gain'?'Build muscle':'Build fitness')+'</h3><p>'+safe(p.level)+' · '+(p.equipment==='home'?'Home training':'Gym training')+' · '+safe(p.days)+' days a week</p><button data-action="reset">Edit goals & plan '+homeIcon('arrow')+'</button></section>'+'<p class="more-footer">EZPZ FITNESS<br>Simple habits. Lasting progress.</p>'
+ screen.innerHTML='<div class="ez-section-heading more-hero"><h2>More</h2></div><div class="more-group more-daily"><h3>Your everyday tools</h3><button class="more-link" data-go="planner">'+homeIcon('calendar')+'<span><strong>My plan</strong><small>Workouts, meals and your next week</small></span><b aria-hidden="true">›</b></button><button class="more-link" data-go="shopping">'+homeIcon('cart')+'<span><strong>Shopping list</strong><small>Ingredients from your meal plan</small></span><b aria-hidden="true">›</b></button><details class="profile-preferences"><summary>'+homeIcon('person')+'<span class="profile-summary-copy"><strong>Profile & preferences</strong><small>Name · units · weight display</small></span><b aria-hidden="true">⌄</b></summary>'+namePreferences()+weightPreferences()+'</details><details class="more-personalize"><summary class="more-link">'+homeIcon('palette')+'<span><strong>Personalize your app</strong><small>Theme, colors and homepage</small></span><b aria-hidden="true">›</b></summary><div class="more-personalize-options"><button type="button" class="more-setting-row" data-appearance-open>'+homeIcon('palette')+'<span><strong>Appearance</strong><small>Theme and accent color</small></span><b aria-hidden="true">›</b></button><button type="button" class="more-setting-row" data-home-arrange-open>'+homeIcon('layout')+'<span><strong>Homepage layout</strong><small>Sections, rings and photos</small></span><b aria-hidden="true">›</b></button></div></details></div><div class="more-group account-overview"><h3>Backup &amp; settings</h3><section class="readiness-panel" id="fitness-account-panel"></section>'+moreAccountRow('account-privacy','shield','Account &amp; privacy','Sign out, privacy and cloud deletion')+moreAccountRow('device-data','device','Device data','Backup files and device records')+moreAccountRow('connected-apps','change','Connected apps','Manage wearables and see import results')+'</div><section class="more-plan"><div class="more-plan-top">'+homeIcon('settings')+'<span>MY TRAINING PLAN</span></div><h3>'+(p.goal==='lose'?'Lose fat':p.goal==='gain'?'Build muscle':'Build fitness')+'</h3><p>'+safe(p.level)+' · '+(p.equipment==='home'?'Home training':'Gym training')+' · '+safe(p.days)+' days a week</p><button data-action="reset">Edit goals & plan '+homeIcon('arrow')+'</button></section>'+'<p class="more-footer">EZPZ FITNESS<br>Simple habits. Lasting progress.</p>'
 }
 
 /* Flexible plan entries share existing recipe/workout photos and nutrition. */
@@ -12316,6 +12316,7 @@ body[data-view=train] .compact-training-header{background-image:linear-gradient(
 
 <script>
 window.EzpzAccountAdapter={
+ icon:homeIcon,
  snapshot:()=>JSON.parse(JSON.stringify(state)),
  importWhoop:(payload,userId)=>applyDirectWhoopSnapshot(payload,userId),
  refreshImports:()=>{if(!['home','progress','movement','sleep'].includes(tab)||document.activeElement?.matches?.('input,select,textarea,summary')||document.querySelector('dialog[open]'))return;const y=window.scrollY;render();window.scrollTo(0,y)},
@@ -12701,9 +12702,25 @@ body[data-view] .account-backup-status small,.account-signout small{display:bloc
 body[data-view] #fitness-account-panel .account-check{width:auto;flex-shrink:0;background:none;border:0;text-decoration:underline;color:#b8f4d3}
 .account-feedback:empty{display:none}
 body[data-view=more] .account-overview{margin-bottom:14px}
-body[data-view=more] .account-overview .more-link{width:100%;max-width:100%;background-image:none;min-height:58px;padding:10px 12px}
+body[data-view=more] .account-overview :is(.more-link,.account-backup>summary){--banner-veil:linear-gradient(90deg,#0b2d21fa,#0b2d21e0 48%,#0b2d2145);background-image:var(--banner-veil),var(--more-photo);background-size:cover;background-position:center;min-height:78px}
+body[data-view=more] .account-overview .more-link{width:100%;max-width:100%;padding:12px}
+body[data-view=more] .account-overview [data-go=account-privacy]{--more-photo:url('./home-images/more-privacy.jpg')}
+body[data-view=more] .account-overview [data-go=device-data]{--more-photo:url('./home-images/more-device.jpg')}
+body[data-view=more] .account-overview [data-go=connected-apps]{--more-photo:url('./home-images/more-wearables.jpg')}
+body[data-view=more] .account-overview #fitness-account-panel{margin:0 0 11px!important;overflow:hidden}
+body[data-view=more] .account-overview .account-backup-body{background:var(--ui-card);color:var(--ui-text)}
+body[data-view=more] .account-overview .account-backup>summary{--more-photo:url('./home-images/more-backup.jpg');display:flex;align-items:center;gap:12px;padding:12px 35px 12px 12px}
+body[data-view=more] .account-overview .account-backup>summary>svg{width:24px;height:24px;flex:0 0 24px;color:#c9e9d6}
+body[data-view=more] .account-overview .account-backup>summary h3{padding:0}
+body[data-view=more] .account-overview .account-backup>summary:after{top:50%;transform:translateY(-50%)}
+body[data-view=more] .account-overview .account-backup[open]>summary:after{transform:translateY(-50%) rotate(90deg)}
+html[data-app-custom] body[data-view=more] .account-overview .account-backup>summary small{color:#c2ddcd!important}
 body[data-view=more] .account-overview .more-link>svg{flex:0 0 24px;width:24px;height:24px}
 body[data-view=more] #screen .more-hero{min-height:0;padding:14px 18px}
+body[data-view=more] .more-group>h3{margin:5px 0 12px}
+body[data-view=more] .more-daily{margin:0 0 14px}
+body[data-view=more] #screen .more-daily :is(button.more-link,.profile-preferences>summary,.more-personalize>summary.more-link){min-height:76px;padding:12px}
+body[data-view=more] #screen .more-daily .profile-preferences{margin-top:0}
 body[data-view=more] #screen .more-hero h2{margin:0}
 .account-privacy-body{padding:6px 15px 15px}
 .account-privacy-body p{overflow-wrap:anywhere}
@@ -13404,3 +13421,28 @@ body[data-view=movement] .steps-bank>.steps-switch{border-bottom:1px solid #a4cc
 
 <link rel="stylesheet" href="./fitness-app/package-labels.css">
 <script src="./fitness-app/package-labels.js"></script>
+
+
+<style id="picker-contrast">
+/* Android presents native select choices on its light popup palette. Keep the
+   closed field themed and define both colors for browser-rendered choices. */
+html body[data-view] select{color-scheme:light!important}
+html body[data-view] select :is(option,optgroup){background:#fff!important;color:#17382b!important}
+html body[data-view] select option:disabled{color:#52685c!important}
+
+/* These pickers use forest surfaces in every app theme. Pair copy and action
+   colors with those surfaces, including nested labels and selection states. */
+html body[data-view] :is(#planner-picker,#workout-chooser,#training-exercise-dialog,#flex-day-dialog,#tracker-picker,#nutrition-picker,#plan-manager-dialog .plan-draft-picker){
+ --ui-text:#f1fff5;--ui-muted:#c2ddcd;--ui-field:#234b38;--ui-card:#153d2d;--ui-border:#658670;
+ --ui-accent:#8ee2b4;--ui-on-accent:#153d2d;
+}
+html body[data-view] :is(#planner-picker,#workout-chooser) :is(.plan-picker-head,.plan-picker-body,.chooser-head,.chooser-body){background:#153d2d!important;color:#f1fff5!important}
+html body[data-view] :is(#planner-picker,#workout-chooser) :is(.picker-workout,.fullbody-choice,.workout-choice-card,.picker-mine,.picker-day-actions>button,.plan-picker-filters button,.picker-back,.plan-picker-close){background:#234b38!important;border-color:#658670!important;color:#f1fff5!important}
+html body[data-view] :is(#planner-picker,#workout-chooser,#training-exercise-dialog,#flex-day-dialog,#tracker-picker,#nutrition-picker,#plan-manager-dialog .plan-draft-picker) :is(h2,h3,h4,legend,label,.program-preview li,.workout-choice-meta,.picker-current,.tracker-option strong,.workout-filter-field){color:#f1fff5!important}
+html body[data-view] :is(#planner-picker,#workout-chooser,#training-exercise-dialog,#flex-day-dialog,#tracker-picker,#nutrition-picker,#plan-manager-dialog .plan-draft-picker) :is(p,small,.chooser-footnote){color:#c2ddcd!important}
+html body[data-view] :is(#planner-picker,#workout-chooser,#training-exercise-dialog,#flex-day-dialog,#tracker-picker,#nutrition-picker,#plan-manager-dialog .plan-draft-picker) :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true],button.primary){
+ background:#8ee2b4!important;border-color:#8ee2b4!important;color:#153d2d!important;
+}
+html body[data-view] :is(#planner-picker,#workout-chooser,#training-exercise-dialog,#flex-day-dialog,#tracker-picker,#nutrition-picker,#plan-manager-dialog .plan-draft-picker) :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true],button.primary) :is(strong,small,b,span,em){color:inherit!important}
+html body[data-view] :is(#planner-picker,#workout-chooser) :is(.picker-choice,.program-card,.category-tile) :is(.program-badges span,.meal-macro-pills em){background:#234b38!important;color:#e5f6eb!important}
+</style>

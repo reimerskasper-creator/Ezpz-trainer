@@ -29,7 +29,7 @@ const chooseWorkout=()=>d().locator('[data-draft-add=workout]').click();
 await chooseWorkout();
 await page.keyboard.press('Escape');
 await picker.waitFor({state:'detached'});
-assert(await d().locator('[data-draft-day]').isVisible());
+assert(await d().locator('[data-draft-day]').isVisible());assert.deepEqual(await d().locator('[data-draft-day]').evaluate(el=>{const option=getComputedStyle(el.options[0]);return [getComputedStyle(el).colorScheme,option.color,option.backgroundColor]}),['light','rgb(23, 56, 43)','rgb(255, 255, 255)']);
 await chooseWorkout();
 assert.equal(await picker.getByRole('button',{name:'My workouts'}).getAttribute('aria-pressed'),'true');
 await picker.getByRole('searchbox').fill('saved session');
