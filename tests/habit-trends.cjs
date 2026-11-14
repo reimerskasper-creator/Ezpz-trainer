@@ -1,4 +1,4 @@
-const fs=require('node:fs'),assert=require('node:assert/strict');const source=fs.readFileSync('fitness.html','utf8'),scripts=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');const screen={innerHTML:''};let fail=false;const fixture={profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2};let stored=JSON.stringify(fixture);const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};const a=new Function('document','window','localStorage','fetch','console','alert',scripts+';return {trendComparisonContext,trendComparisonData,trendInsight,trendSummaryMarkup,trendBars,trendPointMarkup,trendUnitValue,trendWindow,trendData,trendValue,trendDayData,trendChange,setStepsInOverall,stepCompletion,foundationCompletion,foundationScore,restoredState,progress,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const fs=require('node:fs'),assert=require('node:assert/strict');const source=fs.readFileSync('fitness.html','utf8'),scripts=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');const screen={innerHTML:''};let fail=false;const fixture={profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2};let stored=JSON.stringify(fixture);const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};const a=new Function('document','window','localStorage','fetch','console','alert',scripts+';return {trendMethod,homeCompactTracker,trendComparisonContext,trendComparisonData,trendInsight,trendSummaryMarkup,trendBars,trendPointMarkup,trendUnitValue,trendWindow,trendData,trendValue,trendDayData,trendChange,setStepsInOverall,stepCompletion,foundationCompletion,foundationScore,restoredState,progress,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 assert.equal(a.trendWindow('month',0,'2026-03-01').start,'2026-01-30');assert.equal(a.trendWindow('month',0,'2026-03-01').end,'2026-02-28');assert.equal(a.trendWindow('week',1,'2026-03-01').end,'2026-02-21');assert.equal(a.trendWindow('6months',0,'2026-03-01').dates.length,180);
 const date='2026-10-22',previous='2026-10-15';a.state.sleepLog={[date]:480,[previous]:360};a.state.zoneLog={[date]:true};a.state.foodLog=[{id:'f',date,name:'meal',servings:1,macros:[1000,100,100,20]}];a.state.wellnessRecords=[{externalId:'manual-steps-'+date,unit:'count',metric:'steps',source:'manual',date,value:0,updatedAt:date+'T12:00:00Z'}];let d=a.trendData('sleep','week',0,'2026-10-23');assert.equal(d.value,480);assert.equal(d.priorValue,360);assert.equal(d.recorded,1);assert.equal(d.points.filter(x=>x.value===null).length,6);assert.equal(d.end,date);assert(a.trendChange(d).startsWith('+33%'));assert.equal(a.trendData('steps','week',0,'2026-10-23').value,0,'Real zero is included');assert.equal(a.trendData('calories','week',0,'2026-10-23').value,1000);assert.equal(a.trendData('training','week',0,'2026-10-23').value,null,'No fabricated workouts');assert.equal(a.trendData('zone','week',0,'2026-10-23').value,1);
 a.state.logs=[{date:date+'T12:00:00',exercises:[{name:'A',sets:[{done:true,reps:'8'}]}]}];assert.equal(a.trendData('training','week',0,'2026-10-23').value,1);a.state.foodLog.push({id:'future',date:'2026-10-23',name:'today',servings:1,macros:[500,1,1,1]});assert.equal(a.trendData('calories','week',0,'2026-10-23').value,1000,'Today excluded');
@@ -37,3 +37,23 @@ for(const category of ['calories','sleep','steps','training','zone','overall'])f
  assert(a.trendComparisonContext({...d,priorValue:null}).includes('No record'));
 }
 console.log('PASS visible prior averages/totals, count averages, unequal coverage, missing previous records and read-only comparison context');
+
+// The preferred connection can change without changing saved record attribution.
+const samsung='samsung-health-connect';
+const samsungDate='2026-10-23';
+a.state.wellnessSettings={trackerSource:samsung};
+a.state.wellnessRecords=[provider('steps',8061,cycle),provider('steps',9000,{source:samsung,date:samsungDate,externalId:'samsung-steps'}),provider('sleep',450,{source:samsung,date:samsungDate,externalId:'samsung-sleep'})];
+a.state.wellnessChoices={};
+a.progress();
+assert(!screen.innerHTML.includes('WHOOP'),'The overview is device-neutral even with a saved WHOOP record');
+assert(a.homeCompactTracker().includes('Tracker sync details for Samsung Health'));
+assert(!a.homeCompactTracker().includes('connection-brand'),'The sync action uses a neutral icon');
+const samsungSteps=a.trendData('steps','week',0,'2026-10-24');
+assert.equal(samsungSteps.points.at(-1).source,'Samsung Health via Health Connect');
+assert(!a.trendMethod(samsungSteps).includes('WHOOP'));
+assert.equal(a.trendData('sleep','week',0,'2026-10-24').points.at(-1).source,'Samsung Health via Health Connect');
+a.state.wellnessChoices={['steps|'+date]:'whoop'};
+const mixed=a.trendData('steps','week',0,'2026-10-24');
+assert.equal(mixed.points.find(p=>p.date===date).source,'WHOOP');
+assert.equal(mixed.points.at(-1).source,'Samsung Health via Health Connect');
+assert(a.trendMethod(mixed).includes('WHOOP'));

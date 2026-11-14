@@ -1,3 +1,8 @@
+## 2026-11-14 — Wearable attribution
+
+- Canonical branch: `android-health-connect`. Android 1.0.126 uses a neutral tracker sync action on Home, shows record sources in Progress details, and limits the WHOOP cycle explanation to relevant records.
+- Checked Progress, tracker switching and origin isolation, sleep, Steps and Step Bank, workout history, and Home with the local regression suites. Live wearable sync can be checked on Android after installing the signed update.
+
 ## 2026-11-14 — Food details polish
 
 - Canonical branch: `android-health-connect`. Android 1.0.125 refines the existing macro ring and adds a projected daily calories and macros card using actual diary totals, targets and the meal draft.
