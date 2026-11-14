@@ -1,3 +1,7 @@
+## 2026-11-14 — Restore Home tracker badge
+
+- Android 1.0.127 restores the selected tracker logo and original sync dialog copy on Home. Progress still attributes readings to their saved sources.
+
 ## 2026-11-14 — Wearable attribution
 
 - Canonical branch: `android-health-connect`. Android 1.0.126 uses a neutral tracker sync action on Home, shows record sources in Progress details, and limits the WHOOP cycle explanation to relevant records.

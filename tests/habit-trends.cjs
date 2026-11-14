@@ -46,8 +46,9 @@ a.state.wellnessRecords=[provider('steps',8061,cycle),provider('steps',9000,{sou
 a.state.wellnessChoices={};
 a.progress();
 assert(!screen.innerHTML.includes('WHOOP'),'The overview is device-neutral even with a saved WHOOP record');
-assert(a.homeCompactTracker().includes('Tracker sync details for Samsung Health'));
-assert(!a.homeCompactTracker().includes('connection-brand'),'The sync action uses a neutral icon');
+assert(a.homeCompactTracker().includes('Samsung Health: sync details'));
+assert(a.homeCompactTracker().includes('brand/connections/samsung.png'),'Home sync shows the selected tracker logo');
+assert(!a.homeCompactTracker().includes('whoop.png'),'Saved WHOOP history does not change the selected tracker logo');
 const samsungSteps=a.trendData('steps','week',0,'2026-10-24');
 assert.equal(samsungSteps.points.at(-1).source,'Samsung Health via Health Connect');
 assert(!a.trendMethod(samsungSteps).includes('WHOOP'));
