@@ -36,29 +36,34 @@ function foodMacroShares(protein,carbs,fat){
  const left=100-percent.reduce((a,b)=>a+b,0);for(let n=0;n<left;n++)percent[order[n].i]++;
  return {shares:energy.map(v=>v/total),percent};
 }
+function foodMacroRing(totals,showLabel=true){
+ const result=foodMacroShares(...totals.slice(1));if(!result)return;
+ const labels=['Carbs','Protein','Fat'],colors=['#d8b75e','#9bcce2','#91dbb2'];
+ const segmented=result.shares.filter(Boolean).length>1;
+ let offset=0;
+ const circles=result.shares.map((share,i)=>{
+  if(!share)return '';
+  const length=share*100,gap=segmented?Math.min(.7,length*.4):0,start=offset+gap/2;
+  offset+=length;
+  return '<circle cx="50" cy="50" r="42" pathLength="100" fill="none" stroke="'+colors[i]+'" stroke-width="9" stroke-dasharray="'+(length-gap)+' '+(100-length+gap)+'" stroke-dashoffset="'+(-start)+'" transform="rotate(-90 50 50)"/>';
+ }).join('');
+ const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('class','food-macro-ring');svg.setAttribute('role','img');svg.setAttribute('aria-label','Estimated macro energy split: '+labels.map((label,i)=>label+' '+result.percent[i]+'%').join(', '));svg.innerHTML=circles+(showLabel?'<text x="50" y="47" text-anchor="middle">Macro<tspan x="50" dy="13">split</tspan></text>':'');
+ return {svg,percent:result.percent};
+}
 (()=>{
  const preview=previewIngredientAmount;
  previewIngredientAmount=function(){
   preview();const panel=document.getElementById('ingredient-amount-preview'),input=document.getElementById('ingredient-amount');
   if(!panel||!input||!ingredientSelected)return;panel.classList.remove('has-macro-ring');
   const totals=ingredientTotals([{food:ingredientSelected,grams:input.valueAsNumber}]);if(!totals)return;
-  const result=foodMacroShares(...totals.slice(1));if(!result)return;
-  const labels=['Carbs','Protein','Fat'],colors=['#d8b75e','#9bcce2','#91dbb2'];
-  const segmented=result.shares.filter(Boolean).length>1;
-  let offset=0;
-  const circles=result.shares.map((share,i)=>{
-   if(!share)return '';
-   const length=share*100,gap=segmented?Math.min(.7,length*.4):0,start=offset+gap/2;
-   offset+=length;
-   return '<circle cx="50" cy="50" r="42" pathLength="100" fill="none" stroke="'+colors[i]+'" stroke-width="9" stroke-dasharray="'+(length-gap)+' '+(100-length+gap)+'" stroke-dashoffset="'+(-start)+'" transform="rotate(-90 50 50)"/>';
-  }).join('');
-  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('class','food-macro-ring');svg.setAttribute('role','img');svg.setAttribute('aria-label','Estimated macro energy split: '+labels.map((label,i)=>label+' '+result.percent[i]+'%').join(', '));svg.innerHTML=circles+'<text x="50" y="47" text-anchor="middle">Macro<tspan x="50" dy="13">split</tspan></text>';
+  const ring=foodMacroRing(totals);if(!ring)return;
+  const {svg,percent:shares}=ring;
   panel.append(svg);panel.classList.add('has-macro-ring');
-  panel.querySelectorAll(':scope>div>span').forEach((tile,i)=>{const percent=document.createElement('small');percent.className='food-macro-percent';percent.textContent=result.percent[i]+'%';tile.append(percent)});
+  panel.querySelectorAll(':scope>div>span').forEach((tile,i)=>{const percent=document.createElement('small');percent.className='food-macro-percent';percent.textContent=shares[i]+'%';tile.append(percent)});
  };
 })();
 
-// Use the product name only. Brand names and uncertain matches use the neutral plate.
+// Use the product name only. Uncertain matches offer a photo upload.
 function scannedFoodIllustration(name) {
  const product = name.split(' · ')[0].trim().toLowerCase();
  const illustrations = [
@@ -76,7 +81,7 @@ function scannedFoodIllustration(name) {
   ['milk', /^(?:whole|skim|2%|1%) milk$/],
   ['orange', /^(?:fresh |navel )?oranges?$/],
  ];
- return illustrations.find(([, pattern]) => pattern.test(product))?.[0] || 'plate';
+ return illustrations.find(([, pattern]) => pattern.test(product))?.[0] || '';
 }
 
 (() => {
@@ -97,46 +102,63 @@ function scannedFoodIllustration(name) {
   const split = document.createElement('div');
   split.className = 'scanned-food-split';
   split.dataset.unit = unit;
-  split.innerHTML = '<section class="scanned-food-card" aria-labelledby="scanned-food-title">' +
-   '<h4 id="scanned-food-title">Food</h4><img class="scanned-food-art" alt="" width="144" height="112">' +
-   '</section>';
-  const art = split.querySelector('img');
-  const illustration = imageRoot + scannedFoodIllustration(food[1]) + '.webp';
   const barcode = scannedFoodBarcode(food);
+  const illustration = scannedFoodIllustration(food[1]);
   if (barcode) {
-   art.insertAdjacentHTML('afterend', '<div class="personal-photo-controls scanned-photo-controls" data-photo-kind="scanned-food">' +
-    '<label class="scanned-photo-picker"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">' +
-    '<path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="3"/></svg>' +
-    '<input type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" aria-label="Add food photo" data-personal-photo-input></label>' +
-    '<button type="button" aria-label="Remove food photo" data-remove-personal-photo>×</button>' +
-    '<p class="personal-photo-status" role="status"></p></div>');
-   const controls = split.querySelector('.scanned-photo-controls');
+   const controls = document.createElement('div');
+   controls.className = 'personal-photo-controls scanned-photo-controls';
+   controls.dataset.photoKind = 'scanned-food';
    controls.dataset.photoItem = barcode;
-   const refresh = () => {
-    const photo = personalPhoto(scannedFoodPhoto(food));
-    art.src = photo || illustration;
-    art.classList.toggle('scanned-user-photo', Boolean(photo));
-    controls.querySelector('input').setAttribute('aria-label', photo ? 'Change food photo' : 'Add food photo');
-    controls.querySelector('button').hidden = !photo;
+   controls.innerHTML = '<button type="button" class="scanned-photo-tile" aria-haspopup="dialog">' +
+    '<img class="scanned-food-art" alt="" hidden>' +
+    '<span class="scanned-photo-prompt"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="3"/></svg><span>Add photo</span></span></button>' +
+    '<dialog class="personal-photo-dialog scanned-photo-menu" aria-label="Food photo"><h2>Food photo</h2>' +
+    '<div class="personal-photo-actions"><button type="button" data-photo-source="camera">Take photo</button>' +
+    '<button type="button" data-photo-source="gallery">Choose from Photos</button>' +
+    '<button type="button" data-remove-personal-photo>Remove food photo</button>' +
+    '<button type="button" data-photo-source="cancel">Cancel</button></div></dialog>' +
+    '<input type="file" hidden accept="image/*" capture="environment" aria-label="Take food photo" data-personal-photo-input>' +
+    '<input type="file" hidden accept="image/jpeg,image/png,image/webp,image/heic,image/heif" aria-label="Choose food photo" data-personal-photo-input>' +
+    '<p class="personal-photo-status" role="status"></p>';
+   const tile=controls.querySelector('.scanned-photo-tile'),menu=controls.querySelector('dialog'),art=controls.querySelector('img');
+   const refresh=()=>{
+    const photo=personalPhoto(scannedFoodPhoto(food)),url=photo||(illustration?imageRoot+illustration+'.webp':'');
+    if(url)art.src=url;else art.removeAttribute('src');
+    art.hidden=!url;
+    tile.querySelector('.scanned-photo-prompt').hidden=Boolean(url);
+    tile.setAttribute('aria-label',photo?'Change food photo':'Add food photo');
+    menu.querySelector('[data-remove-personal-photo]').hidden=!photo;
    };
-   controls.addEventListener('scanned-photo-saved', refresh);
+   tile.onclick=()=>menu.showModal();
+   menu.addEventListener('click',event=>{
+    const source=event.target.closest('[data-photo-source]')?.dataset.photoSource;
+    if(!source)return;
+    menu.close();
+    if(source!=='cancel')controls.querySelector(source==='camera'?'input[capture]':'input:not([capture])').click();
+   });
+   controls.addEventListener('scanned-photo-saved',()=>{if(menu.open)menu.close();refresh()});
    refresh();
-  } else {
-   art.src = illustration;
+   split.append(controls);
   }
 
-  amountCard.insertAdjacentElement('beforebegin', split);
-  split.firstElementChild.append(panel.querySelector('#ingredient-amount-preview'));
+  amountCard.before(split);
   split.append(amountCard);
   const field = document.createElement('div');
   field.className = 'scanned-amount-field';
-  field.innerHTML = '<img class="scanned-measure-art" alt="" width="144" height="112">' +
-   '<span class="scanned-amount-unit" aria-hidden="true">' + unit + '</span>';
-  field.querySelector('img').src = imageRoot + (unit === 'mL' ? 'jug' : 'scale') + '.webp';
+  field.innerHTML = '<span class="scanned-amount-unit" aria-hidden="true">' + unit + '</span>';
   input.before(field);
   field.append(input);
   input.setAttribute('aria-label', 'Amount in ' + (unit === 'mL' ? 'milliliters' : 'grams'));
   amountCard.querySelector('label').textContent = 'Amount';
+  const portion=Number.isFinite(food[9])?food[9]:100;
+  const shortcut=document.createElement('button');
+  shortcut.type='button';
+  shortcut.className='scanned-portion';
+  shortcut.textContent=portion===100?'100 '+unit:'Label portion · '+portion+' '+unit;
+  shortcut.onclick=()=>{input.value=portion;previewIngredientAmount()};
+  amountCard.append(shortcut);
+  panel.querySelector('#ingredient-amount-preview').classList.add('scanned-nutrition-preview');
+  split.after(panel.querySelector('#ingredient-amount-preview'));
   previewIngredientAmount();
  };
 
@@ -144,16 +166,18 @@ function scannedFoodIllustration(name) {
   const split = document.querySelector('.scanned-food-split');
   if (!split || !ingredientSelected) return preview();
   const input = split.querySelector('#ingredient-amount');
-  const output = split.querySelector('#ingredient-amount-preview');
+  const output = document.getElementById('ingredient-amount-preview');
   const amount = input.valueAsNumber;
   const valid = Number.isFinite(amount) && amount > 0 && amount <= 10000;
   const totals = ingredientTotals([{food: ingredientSelected, grams: valid ? amount : 100}]);
   const unit = split.dataset.unit;
   output.innerHTML = '<small class="food-nutrition-basis">' + (valid ? 'For this amount' : 'Per 100 ' + unit) +
-   '</small><strong>' + totals[0] + ' kcal</strong><div>' +
+   '</small><div class="scanned-nutrition-body"><div class="scanned-energy"><span><strong>' + totals[0] + '</strong> <small>kcal</small></span></div><div class="scanned-nutrients">' +
    [['Protein', 1, 'protein'], ['Carbs', 2, 'carbs'], ['Fat', 3, 'fat']].map(([label, index, icon]) =>
     '<span>' + foodNutrientIcon(icon) + label + '<b>' + totals[index] + ' g</b></span>'
-   ).join('') + '</div>';
+   ).join('') + '</div></div>';
+  const ring=foodMacroRing(totals,false);
+  if(ring)output.querySelector('.scanned-energy').prepend(ring.svg);
   const error = document.getElementById('ingredient-amount-error');
   error.textContent = input.value && !valid ? 'Enter an amount over 0 and up to 10,000 ' + unit + '.' : '';
  };
@@ -173,8 +197,8 @@ function renderFoodDayProjection(){
 
  const summary=foodSummary(date),goals=target();
  const rows=[
-  ['Calories',0,'calories','kcal'],['Carbs',2,'carbs','g'],
-  ['Protein',1,'protein','g'],['Fat',3,'fat','g']
+  ['Calories',0,'calories','kcal'],['Protein',1,'protein','g'],
+  ['Carbs',2,'carbs','g'],['Fat',3,'fat','g']
  ];
  const format=new Intl.NumberFormat(undefined,{maximumFractionDigits:1});
  card.querySelector('h4').textContent=date===foodDate()?'Today after adding':'After adding · '+date;

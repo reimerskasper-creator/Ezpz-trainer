@@ -42,20 +42,22 @@ async function check(page, width) {
  const input = page.locator('#ingredient-amount');
  const preview = page.locator('#ingredient-amount-preview');
  await scan();
- assert.match(await preview.innerText(), /Per 100 g.*260 kcal/s);
+ assert.match(await preview.innerText(), /Per 100 g.*260\s+kcal/s);
  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /pizza\.webp$/);
- assert.match(await page.locator('.scanned-measure-art').getAttribute('src'), /scale\.webp$/);
+ assert.equal(await page.locator('.scanned-measure-art').count(),0);
+ await page.getByRole('button',{name:'100 g',exact:true}).click();
+ assert.equal(await input.inputValue(),'100');
  assert(await page.locator('.package-label-open').isVisible());
  await page.waitForFunction(() => [...document.querySelectorAll('.scanned-food-split img')].every(img => img.naturalWidth > 0));
  assert(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1));
  await input.fill('150');
- assert.match(await preview.innerText(), /For this amount.*390 kcal/s);
+ assert.match(await preview.innerText(), /For this amount.*390\s+kcal/s);
  assert.deepEqual(await preview.locator('b').allTextContents(), ['18 g', '39 g', '18 g']);
  await page.setViewportSize({width, height:440});
  await page.waitForFunction(() => document.body.classList.contains('food-keyboard'));
  const macros = await preview.boundingBox();
  const dock = await page.locator('.food-amount-actions').boundingBox();
- assert(macros.y + macros.height <= dock.y, 'Portion macros remain above the action with the keyboard open');
+ assert(macros.y + macros.height <= dock.y, 'The action follows the nutrition preview');
  await page.setViewportSize({width, height:844});
  await page.waitForFunction(() => !document.body.classList.contains('food-keyboard'));
  await input.fill('0');
@@ -68,16 +70,17 @@ async function check(page, width) {
  unit = 'ml';
  await scan();
  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /water\.webp$/);
- assert.match(await page.locator('.scanned-measure-art').getAttribute('src'), /jug\.webp$/);
+ assert.equal(await page.locator('.scanned-measure-art').count(),0);
  assert.equal(await input.getAttribute('aria-label'), 'Amount in milliliters');
  assert(await page.locator('[data-ingredient-basis=g]').isDisabled());
  await input.fill('50');
- assert.match(await preview.innerText(), /For this amount.*0 kcal/s);
+ assert.match(await preview.innerText(), /For this amount.*0\s+kcal/s);
 
  productName = 'Pepperoni Pizza Rolls';
  unit = 'g';
  await scan();
- assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /plate\.webp$/);
+ assert(await page.getByRole('button',{name:'Add food photo'}).isVisible());
+  assert(await page.locator('.scanned-food-art').isHidden());
  if (width === 390) {
   await page.reload();
   await scan();
@@ -89,7 +92,11 @@ async function check(page, width) {
    context.fillRect(0, 0, 32, 32);
    return canvas.toDataURL().split(',')[1];
   });
-  await page.getByLabel('Add food photo').setInputFiles({
+  await page.getByRole('button',{name:'Add food photo'}).click();
+  assert(await page.getByRole('button',{name:'Take photo',exact:true}).isVisible());
+  assert.equal(await page.getByLabel('Take food photo').getAttribute('capture'),'environment');
+  const [chooser]=await Promise.all([page.waitForEvent('filechooser'),page.getByRole('button',{name:'Choose from Photos'}).click()]);
+  await chooser.setFiles({
    name:'tomatoes.png', mimeType:'image/png', buffer:Buffer.from(photo, 'base64'),
   });
   await page.getByRole('button', {name:'Use photo',exact:true}).click();
@@ -98,7 +105,8 @@ async function check(page, width) {
   await scan('0012345678905');
   assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /^data:image\/jpeg/);
   await scan('3017620422003');
-  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /plate\.webp$/);
+  assert(await page.getByRole('button',{name:'Add food photo'}).isVisible());
+  assert(await page.locator('.scanned-food-art').isHidden());
   await scan();
   await input.fill('100');
   await page.locator('[data-ingredient-confirm]').click();
@@ -107,8 +115,10 @@ async function check(page, width) {
   await page.locator('.custom-food-submit').click();
   assert(await page.evaluate(() => customFoodImage(state.foodLog.at(-1)).startsWith('data:image/jpeg')));
   await scan();
+  await page.getByRole('button',{name:'Change food photo'}).click();
   await page.getByRole('button',{name:'Remove food photo'}).click();
-  assert.match(await page.locator('.scanned-food-art').getAttribute('src'), /plate\.webp$/);
+  assert(await page.getByRole('button',{name:'Add food photo'}).isVisible());
+  assert(await page.locator('.scanned-food-art').isHidden());
  }
  assert.deepEqual(errors, []);
 }

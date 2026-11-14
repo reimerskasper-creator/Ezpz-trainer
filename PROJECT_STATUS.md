@@ -1,3 +1,8 @@
+## 2026-11-14 — Food details and tracker badge
+
+- Android 1.0.128 replaces the empty plate and scale with photo and portion controls, adds Camera and Photos choices, and removes the green backing from the Home tracker logo.
+- Verified nutrition and saved label handling locally. Android CI runs the mobile layout, photo picker, and signed package checks.
+
 ## 2026-11-14 — Restore Home tracker badge
 
 - Android 1.0.127 restores the selected tracker logo and original sync dialog copy on Home. Progress still attributes readings to their saved sources.

@@ -71,192 +71,103 @@ body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>strong{min-
 body[data-view=custom-food].food-keyboard #food-flow .food-macro-percent{display:none}
 body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>svg.food-macro-ring{width:56px;height:56px}
 
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-amount-actions {
+ position:static;
+ margin:12px 0 0;
+ padding:0;
+ border:0;
+ background:transparent;
+ box-shadow:none;
+}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) {--food-dock-height:0px!important}
 body[data-view=custom-food] #food-flow .scanned-food-split {
  display:grid;
- grid-template-columns:repeat(2,minmax(0,1fr));
+ grid-template-columns:minmax(80px,1fr) minmax(0,2.25fr);
  gap:8px;
 }
-body[data-view=custom-food] #food-flow .scanned-food-split > * {
- display:flex;
- flex-direction:column;
- align-items:stretch;
- min-width:0;
- margin:0;
+body[data-view=custom-food] #food-flow .scanned-food-split .food-amount-card {
+ display:grid;
+ grid-template-columns:minmax(0,1fr);
+ gap:6px;
  padding:10px;
- border:1px solid #638c74;
- border-radius:16px;
- background:var(--ui-card,#153e2d);
+ margin:0;
 }
-#food-flow .scanned-food-card h4,
-body[data-view=custom-food] #food-flow .scanned-food-split .food-amount-card label {
- margin:0 0 4px;
- font-size:17px;
- font-weight:700;
- color:var(--ui-text,#effff4);
-}
-#food-flow .scanned-food-art,
-#food-flow .scanned-measure-art {
- display:block;
- width:100%;
- height:clamp(68px,24vw,144px);
- object-fit:contain;
-}
-#food-flow .scanned-amount-field {
- position:relative;
- padding-bottom:49px;
-}
+#food-flow .scanned-food-split .food-amount-card:only-child {grid-column:1/-1}
+#food-flow .scanned-amount-field {position:relative}
 body[data-view=custom-food] #food-flow .scanned-amount-field input {
- position:absolute;
- bottom:0;
- left:0;
  width:100%;
  min-height:48px;
  margin:0;
- padding:5px 30px 5px 6px;
- box-sizing:border-box;
+ padding:6px 36px 6px 12px;
  text-align:center;
+ font-size:24px;
+ font-variant-numeric:tabular-nums;
  color:#102f23!important;
  background:#bbdfc3!important;
- border:2px solid #628f72;
- border-radius:10px;
  appearance:textfield;
 }
 #food-flow .scanned-amount-field input::-webkit-inner-spin-button,
-#food-flow .scanned-amount-field input::-webkit-outer-spin-button {
- appearance:none;
- margin:0;
-}
-#food-flow .scanned-amount-field input::placeholder {
- color:#3b644b;
- opacity:1;
-}
+#food-flow .scanned-amount-field input::-webkit-outer-spin-button {appearance:none;margin:0}
 #food-flow .scanned-amount-unit {
  position:absolute;
- z-index:1;
- bottom:14px;
- right:8px;
+ inset-inline-end:12px;
+ top:50%;
+ transform:translateY(-50%);
  color:#244c35;
  font-size:13px;
  font-weight:700;
  pointer-events:none;
 }
-body[data-view=custom-food] #food-flow .scanned-food-split .food-basis-toggle {
- margin-top:4px;
-}
-body[data-view=custom-food] #food-flow .scanned-food-split .food-macro-preview {
- display:block;
- background:none;
- border:0;
- box-shadow:none;
- padding:0;
- margin:0;
- text-align:left;
-}
-body[data-view=custom-food] #food-flow .scanned-food-split .food-macro-preview > strong {
- font-size:clamp(18px,5vw,25px);
- margin:3px 0;
-}
-body[data-view=custom-food] #food-flow .scanned-food-split .food-macro-preview > div {
- display:grid;
- grid-template-columns:minmax(0,1fr);
- gap:0;
-}
-body[data-view=custom-food] #food-flow .scanned-food-split .food-macro-preview > div > span {
- display:flex;
- align-items:center;
- gap:3px;
- padding:3px 0;
- border-radius:0;
- border-bottom:1px solid #638c7477;
- background:none!important;
- color:var(--ui-text,#effff4)!important;
- text-align:left;
-}
-body[data-view=custom-food] #food-flow .scanned-food-split .food-macro-preview b {
- margin:0 0 0 auto;
- font-size:12px;
- text-align:right;
- color:inherit!important;
-}
-body[data-view=custom-food] #food-flow .scanned-food-split .food-macro-preview svg {
- flex:0 0 12px;
- width:12px;
- height:12px;
- color:inherit;
-}
-#food-flow .scanned-food-split + .package-label-open {
- width:100%;
- min-height:44px;
- margin-top:10px;
-}
-#food-flow .scanned-food-split[data-unit=g] .scanned-amount-field {
- padding-bottom:30px;
-}
-body.food-keyboard #food-flow .scanned-food-split .scanned-amount-field {
- padding-bottom:48px;
-}
-body.food-keyboard #food-flow .scanned-food-split img {
- display:none;
-}
-
-#food-flow .scanned-food-card {
+#food-flow .scanned-portion {justify-self:start;min-height:44px;margin:0;padding:5px 10px}
+#food-flow .scanned-photo-controls {position:relative;min-width:0}
+body[data-view=custom-food] #food-flow .scanned-photo-tile {
  position:relative;
-}
-#food-flow .scanned-food-art.scanned-user-photo {
- object-fit:cover;
- border-radius:10px;
-}
-#food-flow .scanned-photo-controls {
- position:absolute;
- top:4px;
- right:4px;
- display:flex;
- gap:2px;
- margin:0;
- padding:0;
- border:0;
- background:none;
-}
-#food-flow .scanned-photo-picker,
-#food-flow .scanned-photo-controls button {
  display:grid;
  place-items:center;
- position:relative;
- width:44px;
- height:44px;
- min-height:44px;
- margin:0;
- padding:0;
- color:var(--ui-text,#effff4);
- background:var(--ui-card,#153e2d);
- border:1px solid #638c74;
- border-radius:12px;
-}
-#food-flow .scanned-photo-controls button[hidden] {display:none}
-#food-flow .scanned-photo-picker svg {width:20px;height:20px}
-#food-flow .scanned-photo-picker input {
- position:absolute;
- inset:0;
  width:100%;
  height:100%;
- opacity:0;
- cursor:pointer;
+ min-height:96px;
+ margin:0;
+ padding:8px;
+ overflow:hidden;
+ border:1px solid #638c74;
+ border-radius:16px;
+ background:var(--ui-card,#153e2d)!important;
 }
-#food-flow .scanned-photo-picker:focus-within {outline:2px solid #b3edca;outline-offset:1px}
-#food-flow .scanned-photo-controls .personal-photo-status:not(:empty) {
- position:absolute;
- top:100%;
- right:0;
- width:130px;
- padding:4px 6px;
- border-radius:6px;
- background:var(--ui-card,#153e2d);
- z-index:1;
+#food-flow .scanned-photo-prompt {display:grid;justify-items:center;gap:6px;font-size:13px}
+#food-flow .scanned-photo-prompt svg {width:24px;height:24px}
+#food-flow .scanned-photo-tile img {position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#food-flow .scanned-photo-tile [hidden],#food-flow .scanned-photo-menu [hidden] {display:none!important}
+#food-flow .scanned-photo-menu .personal-photo-actions {display:grid;grid-template-columns:1fr}
+body[data-view=custom-food] #food-flow .scanned-nutrition-preview {
+ display:block;
+ margin:8px 0 0;
+ padding:10px 12px;
+ text-align:left;
 }
-#food-flow .scanned-food-card:has(.scanned-photo-controls) h4 {min-height:36px}
-#food-flow .scanned-photo-controls button {position:absolute;top:46px;right:0}
-#food-flow .scanned-ingredient-thumb {vertical-align:middle;object-fit:cover;border-radius:6px;margin-right:6px}
-body.food-keyboard #food-flow .scanned-photo-controls {display:none}
+body[data-view=custom-food] #food-flow .scanned-nutrition-preview .scanned-nutrition-body {
+ display:grid;
+ grid-template-columns:minmax(75px,1fr) minmax(0,1.5fr);
+ gap:14px;
+ align-items:center;
+}
+#food-flow .scanned-energy {display:grid;place-items:center;font-variant-numeric:tabular-nums;min-height:72px}
+#food-flow .scanned-energy>* {grid-area:1/1}
+#food-flow .scanned-energy>span {display:grid;text-align:center;border:0}
+#food-flow .scanned-energy strong {font-size:clamp(14px,5vw,23px)}
+#food-flow .scanned-energy .food-macro-ring {width:min(100%,108px);height:auto;margin:0}
+#food-flow .scanned-nutrients>span {
+ display:flex;
+ align-items:center;
+ gap:5px;
+ padding:5px 0;
+ border-bottom:1px solid #638c7466;
+ font-size:13px;
+}
+#food-flow .scanned-nutrients>span:last-child {border-bottom:0}
+#food-flow .scanned-nutrients b {margin-left:auto;font-size:14px;font-variant-numeric:tabular-nums}
+#food-flow .scanned-nutrients svg {flex:0 0 13px;width:13px;height:13px}
+#food-flow .scanned-nutrition-preview + .package-label-open {width:100%;min-height:44px;margin-top:10px}
 
 body[data-view=custom-food] #food-flow .food-day-projection {
  margin:12px 0 0;
