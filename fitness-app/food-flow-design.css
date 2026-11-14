@@ -79,7 +79,39 @@ body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-amount-act
  background:transparent;
  box-shadow:none;
 }
-body[data-view=custom-food] #food-flow:has(.scanned-food-split) {--food-dock-height:0px!important}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) {
+ --detail-space:clamp(5px,1.1svh,9px);
+ min-height:0;
+ padding:4px 2px calc(var(--food-nav-height) + 6px);
+ background:var(--ui-page,#06271f);
+}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-flow-heading {margin-bottom:var(--detail-space)}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-detail-hero {
+ padding:var(--detail-space) 12px;
+ margin:0 0 var(--detail-space);
+}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-detail-hero h3 {font-size:clamp(17px,5vw,23px);overflow-wrap:anywhere}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-source-info {margin-top:2px}
+body[data-view=custom-food] #food-flow .scanned-portion-controls {
+ display:grid;
+ grid-template-columns:minmax(0,1fr) auto;
+ gap:7px;
+ align-items:center;
+}
+body[data-view=custom-food] #food-flow .scanned-portion-controls button {
+ min-height:44px;
+ padding:4px 6px;
+ margin:0;
+ font-size:13px;
+ line-height:1.15;
+}
+#food-flow .scanned-portion-controls .scanned-portion {border-radius:22px;white-space:nowrap}
+body[data-view=custom-food] #food-flow .scanned-portion-controls .food-basis-toggle {min-width:0}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-day-projection {margin-top:var(--detail-space);padding:var(--detail-space) 12px}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-day-rows {gap:3px}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-day-row {line-height:1.3}
+body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-amount-actions {margin-top:var(--detail-space)}
+
 body[data-view=custom-food] #food-flow .scanned-food-split {
  display:grid;
  grid-template-columns:minmax(80px,1fr) minmax(0,2.25fr);
@@ -141,8 +173,10 @@ body[data-view=custom-food] #food-flow .scanned-photo-tile {
 #food-flow .scanned-photo-menu .personal-photo-actions {display:grid;grid-template-columns:1fr}
 body[data-view=custom-food] #food-flow .scanned-nutrition-preview {
  display:block;
- margin:8px 0 0;
- padding:10px 12px;
+ margin:var(--detail-space) 0 0;
+ padding:var(--detail-space) 12px;
+ border-radius:17px;
+ color:var(--ui-text,#effff4);
  text-align:left;
 }
 body[data-view=custom-food] #food-flow .scanned-nutrition-preview .scanned-nutrition-body {
@@ -153,9 +187,10 @@ body[data-view=custom-food] #food-flow .scanned-nutrition-preview .scanned-nutri
 }
 #food-flow .scanned-energy {display:grid;place-items:center;font-variant-numeric:tabular-nums;min-height:72px}
 #food-flow .scanned-energy>* {grid-area:1/1}
-#food-flow .scanned-energy>span {text-align:center;border:0;white-space:nowrap;padding:0}
+#food-flow .scanned-energy>span {display:grid;text-align:center;border:0;white-space:nowrap;padding:0;line-height:1.15}
 #food-flow .scanned-energy strong {font-size:clamp(12px,3.6vw,19px)}
-#food-flow .scanned-energy .food-macro-ring {width:min(100%,108px);height:auto;margin:0}
+#food-flow .scanned-energy .food-macro-ring {width:min(100%,clamp(69px,13svh,108px));height:auto;aspect-ratio:1;margin:0}
+#food-flow .scanned-nutrients {border-inline-start:1px solid #638c7466;padding-inline-start:10px;color:inherit}
 #food-flow .scanned-nutrients>span {
  display:flex;
  align-items:center;
@@ -167,7 +202,7 @@ body[data-view=custom-food] #food-flow .scanned-nutrition-preview .scanned-nutri
 #food-flow .scanned-nutrients>span:last-child {border-bottom:0}
 #food-flow .scanned-nutrients b {margin-left:auto;font-size:14px;font-variant-numeric:tabular-nums}
 #food-flow .scanned-nutrients svg {flex:0 0 13px;width:13px;height:13px}
-#food-flow .scanned-nutrition-preview + .package-label-open {width:100%;min-height:44px;margin-top:10px}
+#food-flow .scanned-nutrition-preview + .package-label-open {width:100%;min-height:44px;margin:var(--detail-space) 0 0}
 
 body[data-view=custom-food] #food-flow .food-day-projection {
  margin:12px 0 0;

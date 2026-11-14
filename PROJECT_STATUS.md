@@ -1,3 +1,7 @@
+## 2026-11-14 — Fit the approved Food Details sketch
+
+- Android 1.0.129 fits the scan details above the navigation, with units and the portion shortcut on one row, a larger calorie ring, and readable macro values. Mobile regression checks cover the full stack at phone widths.
+
 ## 2026-11-14 — Food details and tracker badge
 
 - Android 1.0.128 replaces the empty plate and scale with photo and portion controls, adds Camera and Photos choices, and removes the green backing from the Home tracker logo.

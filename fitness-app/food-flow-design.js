@@ -154,11 +154,17 @@ function scannedFoodIllustration(name) {
   const shortcut=document.createElement('button');
   shortcut.type='button';
   shortcut.className='scanned-portion';
-  shortcut.textContent=portion===100?'100 '+unit:'Label portion · '+portion+' '+unit;
+  shortcut.textContent=portion+' '+unit;
+  if(portion!==100)shortcut.setAttribute('aria-label','Label portion, '+portion+' '+unit);
   shortcut.onclick=()=>{input.value=portion;previewIngredientAmount()};
-  amountCard.append(shortcut);
-  panel.querySelector('#ingredient-amount-preview').classList.add('scanned-nutrition-preview');
-  split.after(panel.querySelector('#ingredient-amount-preview'));
+  const controls=document.createElement('div');
+  controls.className='scanned-portion-controls';
+  controls.append(amountCard.querySelector('.food-basis-toggle'),shortcut);
+  amountCard.append(controls);
+  const nutrition=panel.querySelector('#ingredient-amount-preview');
+  nutrition.classList.replace('food-macro-preview','scanned-nutrition-preview');
+  split.after(nutrition);
+  window.scrollTo(0,0);
   previewIngredientAmount();
  };
 

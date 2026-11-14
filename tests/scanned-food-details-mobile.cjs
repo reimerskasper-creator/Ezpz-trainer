@@ -53,6 +53,24 @@ async function check(page, width) {
  await input.fill('150');
  assert.match(await preview.innerText(), /For this amount.*390\s+kcal/s);
  assert.deepEqual(await preview.locator('b').allTextContents(), ['18 g', '39 g', '18 g']);
+ await input.blur();
+ await page.evaluate(()=>window.scrollTo(0,0));
+ await page.waitForFunction(()=>document.querySelector('.food-macro-ring').getBoundingClientRect().width>=65);
+ const fit=await page.evaluate(()=>{
+  const bounds=selector=>document.querySelector(selector).getBoundingClientRect();
+  return {
+   heading:bounds('#food-amount-view h2').top,
+   footer:bounds('.food-amount-actions').bottom,
+   nav:bounds('.nav').top,
+   units:bounds('.food-basis-toggle').top,
+   portion:bounds('.scanned-portion').top,
+   totals:document.querySelectorAll('.food-day-row').length,
+  };
+ });
+ assert(fit.heading>=0 && fit.footer<=fit.nav, 'Food details fit above the navigation without scrolling');
+ assert(Math.abs(fit.units-fit.portion)<=3, 'Units and portion shortcut share one row');
+ assert.equal(fit.totals,4);
+ await input.focus();
  await page.setViewportSize({width, height:440});
  await page.waitForFunction(() => document.body.classList.contains('food-keyboard'));
  const macros = await preview.boundingBox();
