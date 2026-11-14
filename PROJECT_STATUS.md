@@ -1,3 +1,8 @@
+## 2026-11-14 — Edit exercises in Today’s Workout
+
+- Android 1.0.134 adds a Home workout exercise editor with the existing picker styles, catalog search, custom names, set counts, removal, and today-only or plan-scoped future changes.
+- Local workout edit, Trainer, plan package, and flexible day logic checks passed. Browser and signed Android validation run in CI.
+
 ## 2026-11-14 — Progress detail chart polish
 
 - Android 1.0.133 on `android-health-connect` updates the six Progress detail charts with wider filled columns, distinct goal and average lines, clearer Zone checkmarks, and one value label for the selected bar.
