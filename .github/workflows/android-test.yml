@@ -54,6 +54,7 @@ jobs:
           node tests/ingredients.cjs
           npm install --no-save --no-package-lock playwright@1.64.1
           npx playwright install --only-shell chromium
+          node tests/progress-context-mobile.cjs
           node tests/flexible-day.cjs
           node tests/day-card-polish-mobile.cjs
           node tests/flexible-day-mobile.cjs
@@ -88,7 +89,6 @@ jobs:
           node tests/wellness-mobile.cjs
           node tests/native-package-mobile.cjs
           node tests/whoop-mobile.cjs
-          node tests/progress-context-mobile.cjs
           node tests/release-readiness-mobile.cjs
       - uses: actions/cache/restore@v4
         with:
