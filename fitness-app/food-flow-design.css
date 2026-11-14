@@ -106,6 +106,7 @@ body[data-view=custom-food] #food-flow .scanned-portion-controls button {
  line-height:1.15;
 }
 #food-flow .scanned-portion-controls .scanned-portion {border-radius:22px;white-space:nowrap}
+#food-flow .scanned-photo-tile:focus-visible {outline:2px solid var(--ui-accent,#9ae4bb);outline-offset:-3px}
 body[data-view=custom-food] #food-flow .scanned-portion-controls .food-basis-toggle {min-width:0}
 body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-day-projection {margin-top:var(--detail-space);padding:var(--detail-space) 12px}
 body[data-view=custom-food] #food-flow:has(.scanned-food-split) .food-day-rows {gap:3px}
