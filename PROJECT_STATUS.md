@@ -1,3 +1,8 @@
+## 2026-11-14 — Simplify backup and privacy navigation
+
+- Android 1.0.130 on the canonical Android branch groups manual cloud backup on More and links to Account & privacy, Device data, and Connected apps. Existing backup, restore, deletion, and import handlers back the new paths.
+- Local account, deletion, and WHOOP contract checks pass. The Android workflow owns mobile validation and the signed APK. Next step after the build is an in-place phone update.
+
 ## 2026-11-14 — Fit the approved Food Details sketch
 
 - Android 1.0.129 fits the scan details above the navigation, with units and the portion shortcut on one row, a larger calorie ring, and readable macro values. Mobile regression checks cover the full stack at phone widths.

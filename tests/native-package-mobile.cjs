@@ -73,7 +73,7 @@ await page.keyboard.press('Escape');
 await page.evaluate(()=>{const date=foodDate();applyNativeHealthSnapshot({version:1,from:date,through:date,metrics:['sleep'],records:[{metric:'sleep',value:411,date,source:'whoop-health-connect',externalId:'generic-sleep-'+date,unit:'minutes',updatedAt:new Date().toISOString()}]});tab='sleep';render()});
 assert.equal(await page.locator('.sleep-stage-detail').count(),0);assert.equal(await page.locator('#wellness-source-sleep').count(),1);assert.equal(await page.evaluate(()=>selectedWellnessRecord('sleep',foodDate()).value),411);
 await page.screenshot({path:path.join(out,'native-package-startup.jpg'),type:'jpeg',quality:85});
-await page.evaluate(()=>{tab='more';render();window.beforeBackup=JSON.stringify(state);window.testBackupMode='cancel'});await page.locator('.more-backups>summary').click();
+await page.evaluate(()=>{tab='more';render();window.beforeBackup=JSON.stringify(state);window.testBackupMode='cancel'});await page.locator('[data-go="device-data"]').click();
 await page.locator('.data-tools [data-action="export"]').click();await page.waitForFunction(()=>document.getElementById('backup-status').textContent.includes('cancelled'));
 assert.equal(await page.evaluate(()=>readDeviceSafety().lastExportVerifiedAt),undefined);
 for(const mode of ['failure','unverified']){
@@ -107,7 +107,7 @@ assert.equal(await page.evaluate(()=>JSON.stringify(cleanWellnessRecords(state.w
 assert.equal(await page.evaluate(()=>state.profile.age),35);assert.deepEqual(errors,[]);
 // Plan import uses the same native reader, then previews before any schedule changes.
 await page.evaluate(()=>{tab='planner';render();scheduleWorkout(foodDate(),'full-body-home');window.expectedPlanExercises=planWorkout('full-body-home').exercises.map(x=>({name:x.name,sets:x.sets,reps:String(x.reps)}));window.planImportSnapshot=JSON.stringify(state);window.testPlanText=JSON.stringify(capturePlanPackage('Transfer test',true));tab='more';render();window.planImportSnapshot=JSON.stringify(state)});
-await page.locator('.more-backups>summary').click();await page.locator('.plan-share-tools [data-plan-manage="import"]').click();
+await page.locator('[data-go="device-data"]').click();await page.locator('.plan-share-tools [data-plan-manage="import"]').click();
 for(const text of ['', 'broken JSON', exported]){
  await page.evaluate(text=>{window.testImportResult={cancelled:false,text}},text);
  await page.locator('#plan-import-file').click();await page.waitForFunction(()=>document.querySelector('.plan-dialog-status').textContent.length>0);
