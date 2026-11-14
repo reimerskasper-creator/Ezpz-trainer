@@ -88,8 +88,8 @@ jobs:
           node tests/wellness-mobile.cjs
           node tests/native-package-mobile.cjs
           node tests/whoop-mobile.cjs
-          node tests/release-readiness-mobile.cjs
           node tests/progress-context-mobile.cjs
+          node tests/release-readiness-mobile.cjs
       - uses: actions/cache/restore@v4
         with:
           path: native/.test-signing/debug.keystore
