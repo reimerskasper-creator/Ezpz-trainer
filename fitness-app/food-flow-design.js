@@ -41,10 +41,17 @@ function foodMacroShares(protein,carbs,fat){
  previewIngredientAmount=function(){
   preview();const panel=document.getElementById('ingredient-amount-preview'),input=document.getElementById('ingredient-amount');
   if(!panel||!input||!ingredientSelected)return;panel.classList.remove('has-macro-ring');
-  const totals=ingredientTotals([{food:ingredientSelected,grams:Number(input.value)}]);if(!totals)return;
+  const totals=ingredientTotals([{food:ingredientSelected,grams:input.valueAsNumber}]);if(!totals)return;
   const result=foodMacroShares(...totals.slice(1));if(!result)return;
-  const labels=['Carbs','Protein','Fat'],colors=['#d8b75e','#9bcce2','#91dbb2'];let offset=0;
-  const circles=result.shares.map((share,i)=>{const circle='<circle cx="50" cy="50" r="39" pathLength="100" fill="none" stroke="'+colors[i]+'" stroke-width="12" stroke-dasharray="'+(share*100)+' '+(100-share*100)+'" stroke-dashoffset="'+(-offset)+'" transform="rotate(-90 50 50)"/>';offset+=share*100;return circle}).join('');
+  const labels=['Carbs','Protein','Fat'],colors=['#d8b75e','#9bcce2','#91dbb2'];
+  const segmented=result.shares.filter(Boolean).length>1;
+  let offset=0;
+  const circles=result.shares.map((share,i)=>{
+   if(!share)return '';
+   const length=share*100,gap=segmented?Math.min(.7,length*.4):0,start=offset+gap/2;
+   offset+=length;
+   return '<circle cx="50" cy="50" r="42" pathLength="100" fill="none" stroke="'+colors[i]+'" stroke-width="9" stroke-dasharray="'+(length-gap)+' '+(100-length+gap)+'" stroke-dashoffset="'+(-start)+'" transform="rotate(-90 50 50)"/>';
+  }).join('');
   const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('viewBox','0 0 100 100');svg.setAttribute('class','food-macro-ring');svg.setAttribute('role','img');svg.setAttribute('aria-label','Estimated macro energy split: '+labels.map((label,i)=>label+' '+result.percent[i]+'%').join(', '));svg.innerHTML=circles+'<text x="50" y="47" text-anchor="middle">Macro<tspan x="50" dy="13">split</tspan></text>';
   panel.append(svg);panel.classList.add('has-macro-ring');
   panel.querySelectorAll(':scope>div>span').forEach((tile,i)=>{const percent=document.createElement('small');percent.className='food-macro-percent';percent.textContent=result.percent[i]+'%';tile.append(percent)});
@@ -149,5 +156,54 @@ function scannedFoodIllustration(name) {
    ).join('') + '</div>';
   const error = document.getElementById('ingredient-amount-error');
   error.textContent = input.value && !valid ? 'Enter an amount over 0 and up to 10,000 ' + unit + '.' : '';
+ };
+})();
+
+// Project the complete draft meal using the same portions and diary date as the logger.
+function renderFoodDayProjection(){
+ const panel=document.getElementById('ingredient-amount-panel');
+ const input=panel?.querySelector('#ingredient-amount');
+ const card=panel?.querySelector('.food-day-projection');
+ if(!card||!input||!ingredientSelected)return;
+
+ const draft=ingredientTotals([...ingredientRows,{food:ingredientSelected,grams:input.valueAsNumber}]);
+ const date=diaryDay();
+ card.hidden=!draft||Boolean(customMealPlanContext);
+ if(card.hidden)return;
+
+ const summary=foodSummary(date),goals=target();
+ const rows=[
+  ['Calories',0,'calories','kcal'],['Carbs',2,'carbs','g'],
+  ['Protein',1,'protein','g'],['Fat',3,'fat','g']
+ ];
+ const format=new Intl.NumberFormat(undefined,{maximumFractionDigits:1});
+ card.querySelector('h4').textContent=date===foodDate()?'Today after adding':'After adding · '+date;
+ card.querySelector('.food-day-rows').innerHTML=rows.map(([label,index,key,unit])=>{
+  const logged=summary.entries.reduce((sum,entry)=>{
+   const amount=entry.macros?.[index];
+   return Number.isFinite(amount)?sum+amount:sum;
+  },0);
+  const goal=goals[key],projected=logged+draft[index];
+  const before=goal>0?Math.min(100,logged/goal*100):0;
+  const added=goal>0?Math.min(100-before,draft[index]/goal*100):0;
+  return '<div class="food-day-row food-day-'+key+'"><span>'+label+'</span>'+
+   '<div class="food-day-track" aria-hidden="true"><span style="width:'+before+'%"></span>'+
+   '<span style="width:'+added+'%"></span></div><span class="food-day-value"><b>'+
+   (summary.missing[index]?'≥':'')+format.format(projected)+'</b>'+
+   (goal>0?' / '+format.format(goal):'')+' '+unit+'</span></div>';
+ }).join('');
+}
+
+(()=>{
+ const show=showIngredientAmount,preview=previewIngredientAmount;
+ showIngredientAmount=function(food){
+  show(food);
+  const actions=document.querySelector('#ingredient-amount-panel .food-amount-actions');
+  actions?.insertAdjacentHTML('beforebegin','<section class="food-glass food-day-projection" aria-labelledby="food-day-title" hidden><h4 id="food-day-title">Today after adding</h4><div class="food-day-rows" aria-live="polite"></div></section>');
+  renderFoodDayProjection();
+ };
+ previewIngredientAmount=function(){
+  preview();
+  renderFoodDayProjection();
  };
 })();

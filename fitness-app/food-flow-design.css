@@ -57,9 +57,9 @@ body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>div>spa
 body[data-view=custom-food].food-keyboard #food-flow .food-amount-actions{padding:7px 10px;bottom:calc(var(--food-keyboard-inset,0px) + 5px)}
 @media(max-width:360px){body[data-view=custom-food] #food-flow .food-amount-card{grid-template-columns:minmax(0,1fr) 64px 100px;padding:8px;gap:6px}body[data-view=custom-food] #food-flow .food-detail-hero h3{font-size:20px}body[data-view=custom-food] #food-flow .food-macro-preview>div{gap:5px}}
 body[data-view=custom-food] #food-flow .food-macro-preview.has-macro-ring{position:relative}
-body[data-view=custom-food] #food-flow .has-macro-ring>.food-nutrition-basis{display:block;padding-right:88px}
-body[data-view=custom-food] #food-flow .has-macro-ring>strong{min-height:45px;padding-right:88px;display:flex;align-items:center;font-size:clamp(25px,7vw,34px);overflow-wrap:anywhere}
-body[data-view=custom-food] #food-flow .food-macro-preview>svg.food-macro-ring{position:absolute;right:12px;top:10px;width:82px;height:82px;margin:0;color:var(--ui-text,#effff4)}
+body[data-view=custom-food] #food-flow .has-macro-ring>.food-nutrition-basis{display:block;padding-right:92px}
+body[data-view=custom-food] #food-flow .has-macro-ring>strong{min-height:45px;padding-right:92px;display:flex;align-items:center;font-size:clamp(25px,7vw,34px);overflow-wrap:anywhere}
+body[data-view=custom-food] #food-flow .food-macro-preview>svg.food-macro-ring{position:absolute;right:12px;top:10px;width:88px;height:88px;margin:0;color:var(--ui-text,#effff4)}
 body[data-view=custom-food] #food-flow .food-macro-ring text{font-size:11px;fill:currentColor}
 body[data-view=custom-food] #food-flow .food-macro-percent{display:block;font-size:12px;line-height:1.4;margin-top:3px;color:#102f23!important}
 body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>.food-nutrition-basis{padding-right:63px}
@@ -257,3 +257,33 @@ body.food-keyboard #food-flow .scanned-food-split img {
 #food-flow .scanned-photo-controls button {position:absolute;top:46px;right:0}
 #food-flow .scanned-ingredient-thumb {vertical-align:middle;object-fit:cover;border-radius:6px;margin-right:6px}
 body.food-keyboard #food-flow .scanned-photo-controls {display:none}
+
+body[data-view=custom-food] #food-flow .food-day-projection {
+ margin:12px 0 0;
+ padding:12px 14px;
+ border-radius:17px;
+ color:var(--ui-text,#effff4);
+}
+#food-flow .food-day-projection h4 {margin:0 0 8px;font-size:15px;color:inherit}
+#food-flow .food-day-rows {display:grid;gap:6px}
+#food-flow .food-day-row {
+ --food-day-fill:#50bc87;
+ display:grid;
+ grid-template-columns:4em minmax(0,1fr) minmax(8.8em,auto);
+ align-items:center;
+ gap:7px;
+ font-size:12px;
+}
+#food-flow .food-day-carbs {--food-day-fill:#d8b75e}
+#food-flow .food-day-protein {--food-day-fill:#76bfdc}
+#food-flow .food-day-fat {--food-day-fill:#63cfa0}
+#food-flow .food-day-track {
+ display:flex;
+ height:5px;
+ overflow:hidden;
+ border-radius:5px;
+ background:color-mix(in srgb,currentColor 17%,transparent);
+}
+#food-flow .food-day-track span {background:var(--food-day-fill)}
+#food-flow .food-day-track span:first-child {opacity:.55}
+#food-flow .food-day-value {text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}

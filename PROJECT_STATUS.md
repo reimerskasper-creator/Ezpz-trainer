@@ -1,3 +1,8 @@
+## 2026-11-14 — Food details polish
+
+- Canonical branch: `android-health-connect`. Android 1.0.125 refines the existing macro ring and adds a projected daily calories and macros card using actual diary totals, targets and the meal draft.
+- Checks: local macro ring, ingredients, barcode and projection checks. The Android test workflow builds the signed update and runs the mobile checks.
+
 ## 2026-11-13 — Android reviewer access
 
 - Canonical Android branch adds a dedicated reviewer password sign-in in Save my progress. Android version 1.0.124.
