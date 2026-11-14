@@ -1,3 +1,8 @@
+## 2026-11-14 — Progress detail chart polish
+
+- Android 1.0.133 on `android-health-connect` updates the six Progress detail charts with wider filled columns, distinct goal and average lines, clearer Zone checkmarks, and one value label for the selected bar.
+- The existing chart selection updates the label for touch, keyboard and the date picker. Zero remains visible and missing records have no value label. Trend and wellness checks pass locally. The Android workflow runs mobile interaction checks and produces the signed update.
+
 ## 2026-11-14 — Progress date picker
 
 - Android 1.0.132 uses the existing in-app Progress picker for dates and grouped chart periods. Local trend checks passed. The Android workflow runs the date selection checks and builds the signed update.
