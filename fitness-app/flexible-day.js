@@ -19,7 +19,7 @@
   const select=document.getElementById(opener.dataset.progressPicker);
   if(!select)return;
   const searchable=select.id==='progress-exercise';
-  const title=searchable?'Choose exercise':'Show on chart';
+  const title=searchable?'Choose exercise':select.id==='trend-point-picker'?opener.labels[0].textContent:'Show on chart';
   const search=searchable?'<label for="progress-picker-search">Search exercises</label><input id="progress-picker-search" type="search" autocomplete="off">':'';
   const options=[...select.options];
   const d=dialog(title,search+'<div class="flex-length-list progress-picker-list" role="group" aria-label="'+title+'">'+options.map((option,i)=>'<button type="button" aria-pressed="'+option.selected+'" data-progress-option="'+i+'"><span>'+safe(option.textContent)+'</span><b aria-hidden="true">'+(option.selected?'✓':'')+'</b></button>').join('')+'</div><p data-progress-no-match hidden role="status">No exercises match your search.</p>',opener);

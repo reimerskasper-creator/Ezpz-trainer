@@ -1,3 +1,7 @@
+## 2026-11-14 — Progress date picker
+
+- Android 1.0.132 uses the existing in-app Progress picker for dates and grouped chart periods. Local trend checks passed. The Android workflow runs the date selection checks and builds the signed update.
+
 ## 2026-11-14 — More banner layout and picker contrast
 
 - Android 1.0.131 places Everyday tools first on More and adds four themed photo banners under Backup & settings. The backup and account operations use the existing handlers.
