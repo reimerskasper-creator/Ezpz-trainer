@@ -1,3 +1,7 @@
+## 2026-11-16 — Empty Home workout card
+
+- Android 1.0.140 shows Choose workout on Home without an eligible plan entry, an explicit same-day pick, or an unfinished session. The empty card and quick action open the workout picker.
+- Ad-hoc choices stay on Home for that day without adding a plan entry. Today’s scheduled workouts, recovery days and real unfinished sessions have dedicated states.
 ## 2026-11-16 — Six-movement workouts and clear plan
 
 - Android 1.0.139 expands all 20 featured workouts and Coach Sample sessions to six distinct movements with bundled photos and demo links. Existing movement order and draft positions are preserved.

@@ -32,7 +32,7 @@ async function verify(){
   });
   await page.goto('http://127.0.0.1:'+server.address().port+'/'+(web===root?'fitness.html':'index.html'));
   await page.waitForFunction(()=>window.EZPZPlans&&window.EZPZTrainerSpace);
-  assert((await page.locator('.home-workout').innerText()).includes('Full Body A'));
+  assert(await page.locator('.home-workout-empty').isVisible());
   await page.evaluate(()=>{tab='library';render()});
   assert.equal(await page.locator('.library-tile').count(),41);
   assert.equal(await page.locator('.library-tile img').count(),41);
@@ -65,7 +65,35 @@ async function verify(){
   assert.deepEqual(result,{id:'guided-home-full-body-a',workouts:[],schedule:{},drafts:{},media:{}});
   assert.equal(await page.evaluate(()=>JSON.stringify([state.profile,state.logs,state.mealPlan,state.foodLog])),other);
   await page.reload();
-  assert((await page.locator('.home-workout').innerText()).includes('Full Body A'));
+  assert(await page.locator('.home-workout-empty').isVisible());
+  await page.locator('[data-overview-workout]').click();
+  const chooser=page.locator('#workout-chooser');
+  assert(await chooser.isVisible());
+  await chooser.locator('[data-workout-category="Core"]').click();
+  assert.equal(await chooser.locator('[data-workout-pick][aria-pressed=true]').count(),0);
+  await chooser.locator('[data-workout-pick="guided-home-core-a"]').click();
+  assert((await page.locator('.home-workout').innerText()).includes('Core A'));
+  assert.equal(await page.evaluate(()=>state.workoutSchedule[foodDate()]),undefined);
+  await page.evaluate(()=>{
+   state.homeWorkoutChoice.date=datePlus(foodDate(),-1);
+   state.workoutSchedule={[foodDate()]:'guided-home-legs-a'};
+   state.planName='Scheduled plan';tab='home';render();
+  });
+  assert((await page.locator('.home-workout').innerText()).includes('Legs A'));
+  await page.evaluate(()=>{tab='planner';render()});
+  await page.getByRole('button',{name:'Clear current plan',exact:true}).click();
+  await page.locator('[data-confirm-plan]').click();
+  await page.evaluate(()=>{tab='home';render()});
+  assert(await page.locator('.home-workout-empty').isVisible());
+  await page.evaluate(()=>{state.workoutSchedule={[foodDate()]:'rest'};render()});
+  assert((await page.locator('.home-workout').innerText()).includes('Make room for recovery'));
+  await page.evaluate(()=>{
+   state.workoutSchedule={};
+   state.selectedWorkout='guided-home-legs-a';
+   state.workoutDrafts={'guided-home-legs-a':{'sr0-0':'8'}};
+   render();
+  });
+  assert(await page.locator('.home-workout').getByRole('button',{name:'Resume workout'}).isVisible());
   assert.deepEqual(failures,[]);
   console.log('PASS: covered library, personal workout blocked until photo and video, and persistent workout-only reset.');
  }finally{await browser.close();server.close()}
