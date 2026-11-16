@@ -47,16 +47,37 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           npm run sync
-      - name: Verify packaged app startup with actual Capacitor scripts
+      - name: Verify packaged startup and required workout media
         run: |
           node tests/native-runtime.cjs
           node tests/barcode.cjs
           node tests/ingredients.cjs
           npm install --no-save --no-package-lock playwright@1.64.1
           npx playwright install --only-shell chromium
+          node tests/workout-photos.cjs
+          node tests/workout-media-rule-mobile.cjs
+      - uses: actions/cache/restore@v4
+        with:
+          path: native/.test-signing/debug.keystore
+          key: ezpz-fitness-debug-signing-v2
+      - name: Require existing Android signing key
+        run: |
+          test -f "$EZPZ_TEST_KEYSTORE" || { echo 'Existing Android signing key unavailable'; exit 1; }
+          keytool -exportcert -keystore "$EZPZ_TEST_KEYSTORE" -storepass android -alias androiddebugkey | sha256sum | grep -q '^aff9b047133e210e827b62dcaedc49e40a2ae2248cea0e89656fa7ca8b918a65 '
+      - name: Build and test Android
+        working-directory: native/android
+        run: |
+          chmod +x gradlew
+          ./gradlew testDebugUnitTest assembleDebug --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: EZPZ-Fitness-Android-test
+          path: native/android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
+      - name: Run broader mobile regression checks
+        run: |
           node tests/progress-context-mobile.cjs
           node tests/flexible-day.cjs
-          node tests/workout-photos.cjs
           node tests/day-card-polish-mobile.cjs
           node tests/flexible-day-mobile.cjs
           node tests/saved-workout-planning-mobile.cjs
@@ -91,24 +112,6 @@ jobs:
           node tests/native-package-mobile.cjs
           node tests/whoop-mobile.cjs
           node tests/release-readiness-mobile.cjs
-      - uses: actions/cache/restore@v4
-        with:
-          path: native/.test-signing/debug.keystore
-          key: ezpz-fitness-debug-signing-v2
-      - name: Require existing Android signing key
-        run: |
-          test -f "$EZPZ_TEST_KEYSTORE" || { echo 'Existing Android signing key unavailable'; exit 1; }
-          keytool -exportcert -keystore "$EZPZ_TEST_KEYSTORE" -storepass android -alias androiddebugkey | sha256sum | grep -q '^aff9b047133e210e827b62dcaedc49e40a2ae2248cea0e89656fa7ca8b918a65 '
-      - name: Build and test Android
-        working-directory: native/android
-        run: |
-          chmod +x gradlew
-          ./gradlew testDebugUnitTest assembleDebug --no-daemon
-      - uses: actions/upload-artifact@v4
-        with:
-          name: EZPZ-Fitness-Android-test
-          path: native/android/app/build/outputs/apk/debug/app-debug.apk
-          retention-days: 14
       - uses: actions/upload-artifact@v4
         if: always()
         with:

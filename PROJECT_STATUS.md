@@ -1,3 +1,7 @@
+## 2026-11-16 — Require exercise photos and demos
+
+- Android 1.0.138 limits exercise browsing and suggestions to available photo and video pairs. Incomplete personal workouts open a media-repair screen before the logger. Incomplete saved plans stay editable and require covered workouts before activation.
+- Device data includes a workout-only reset for saved workout definitions, scheduling, drafts and trainer media. Existing logs, food, saved plan packages and other records remain available.
 ## 2026-11-16 — Home and Gym workout collection
 
 - Android 1.0.137 presents 20 guided sessions across Full Body, Push, Pull, Legs and Core, with separate Home/Gym A/B choices and exact equipment lists.
