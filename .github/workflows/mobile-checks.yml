@@ -25,6 +25,8 @@ jobs:
         run: npx playwright install --only-shell chromium
       - name: Verify flexible day entries and bodyweight averages
         run: node tests/flexible-day.cjs && node tests/flexible-day-mobile.cjs
+      - name: Verify saved workout scheduling and media repair
+        run: node tests/saved-workout-planning-mobile.cjs
       - name: Verify saved plans and three-month packages
         run: node tests/plan-packages.cjs && node tests/plan-packages-mobile.cjs
       - name: Verify compact workout screen and details popup
