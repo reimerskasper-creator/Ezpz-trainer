@@ -12185,7 +12185,7 @@ function cueWorkoutStart(){
   }
   if(sounds&&!native&&(!skipped||dialog.open))playBrowserWorkoutCue([550]);
   if(sounds&&native&&skipped)native.workoutStarted().catch(()=>{});
-  dialog.close();dialog.remove();
+  dialog.remove();
  }
  dialog.querySelector('button').onclick=()=>finish(true);
  dialog.addEventListener('close',()=>{
