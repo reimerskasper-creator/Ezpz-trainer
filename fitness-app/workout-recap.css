@@ -1,0 +1,36 @@
+.exercise-thumbnail{display:block;flex:0 0 54px;width:54px;height:38px;box-sizing:border-box;object-fit:contain;background:#0c251c;border:1px solid #aac7b340;border-radius:7px}
+.exercise-thumbnail-empty{display:grid;place-items:center;color:#a8c6b4}
+.exercise-thumbnail-empty svg{width:20px;height:20px}
+.exercise-thumb-row{display:flex;align-items:center;gap:9px;min-width:0;overflow-wrap:anywhere}
+body[data-view=home] #screen .home-workout .home-exercise-preview li{grid-template-columns:minmax(0,1fr) auto 16px 50px;gap:6px;padding:6px 0}
+.home-exercise-preview .exercise-thumbnail{width:50px;height:36px}
+.exercise-dialog-list [data-exercise-pick],#workout-edit-dialog [data-edit-index]{gap:8px;padding:7px 9px}
+.exercise-dialog-list [data-exercise-pick]>span:not([class]),#workout-edit-dialog [data-edit-index]>span:not([class]){min-width:0;overflow-wrap:anywhere}
+#workout-edit-dialog [data-edit-results] button:has(.exercise-media-label){display:grid;grid-template-columns:54px minmax(0,1fr);column-gap:9px}
+#workout-edit-dialog [data-edit-results] button .exercise-thumbnail{grid-row:span 2}
+#workout-edit-dialog [data-edit-results] button .exercise-media-label{grid-column:2}
+.exercise-swap-choices{display:grid;gap:5px}
+.exercise-swap-choices button{width:100%;text-align:left}
+.exercise-swap-choices button[aria-pressed=true]{outline:1px solid #8ce2b5}
+.preview-exercises .exercise-thumb-row small{display:block}
+body[data-view=progress] .workout-recap{padding:clamp(12px,4vw,22px);border-radius:19px;background:#10362a!important;color:#f0fff5!important}
+.workout-recap h2{margin:6px 0 14px;font-size:clamp(18px,5vw,26px);line-height:1.18}
+.workout-recap h3{margin:14px 0 9px}
+.workout-recap .section-kicker{color:#8ce2b5!important}
+.workout-recap .recap-numbers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:0 0 16px;text-align:left}
+.workout-recap .recap-numbers>div{min-width:0;padding:8px 5px;background:#174236;border-radius:8px}
+.workout-recap .recap-numbers strong{font-size:clamp(13px,4vw,23px);line-height:1.15;overflow-wrap:anywhere}
+.workout-recap .recap-numbers small{display:block;margin-top:4px;font-size:11px;color:#c7e1d3!important}
+.recap-anatomy{position:relative;aspect-ratio:500/551;background:#082720;border-radius:14px;overflow:hidden}
+.recap-anatomy-layer{position:absolute;inset:0;background-image:url('./workout-muscle-atlas.webp');background-size:100% 1200%;background-position:center var(--atlas-y,0%);pointer-events:none}
+.recap-anatomy-layer[hidden]{display:none}
+.recap-anatomy-labels{text-align:center;display:grid;grid-template-columns:repeat(2,1fr);font-size:12px;margin-top:5px;color:#c7e1d3}
+.recap-muscle-choices{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+body[data-view=progress] .recap-muscle-choices button{width:auto;min-height:44px;margin:0;padding:4px 9px;font-size:12px;background:#164637!important;color:#f0fff5!important;border:1px solid #5d8674!important}
+body[data-view=progress] .recap-muscle-choices button[aria-pressed=true]{background:#8ce2b5!important;color:#0b2d20!important}
+.recap-completed{margin:10px 0 14px}
+.recap-completed summary{min-height:44px;padding:10px;border-radius:10px;background:#174236;color:#f0fff5;cursor:pointer}
+.recap-completed ul{padding:0;list-style:none}
+.recap-completed li{padding:6px 0;border-bottom:1px solid #7caa953d}
+.recap-completed small{display:block;margin-top:4px}
+.workout-recap .recap-muscle-note{font-size:12px;color:#c7e1d3!important}

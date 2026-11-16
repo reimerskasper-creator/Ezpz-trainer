@@ -1,3 +1,9 @@
+## 2026-11-16 — Exercise thumbnails and workout recap
+
+- Android 1.0.146 adds exercise thumbnails in Home, Trainer, swap choices, workout previews and history. Personal workout photos take precedence.
+- Workout recap shows completed sets, elapsed time, lifting volume and selectable front/back muscle highlights using the approved anatomy artwork.
+- Branch: android-health-connect. Android build and responsive verification run on the canonical branch.
+
 ## 2026-11-16 — Trainer gauges, workout sounds and plan scanner
 
 - Android 1.0.145 puts a synchronized progress gauge on every exercise photo. The left rail shows the set fraction and the right rail keeps the media controls.
