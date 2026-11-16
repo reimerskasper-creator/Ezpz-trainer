@@ -2,7 +2,8 @@
 
 - Android 1.0.142 adds Scan food barcode to Day meal pickers. Use the camera or enter the barcode, confirm the amount and save to the selected date and meal slot. Planned food stays separate from the diary.
 - Planner and diary ingredient drafts are isolated. Canceling restores the meal picker’s filter and search.
-- Local planner, barcode and ingredient checks passed. Mobile coverage and signed delivery run on the canonical Android branch.
+- Android branch build 43929004200 at 83d818bf passed unit tests, packaged the signed 1.0.142 APK and passed the planned barcode flow at 320, 390 and 430 px. Guided swap and calculator tests passed. APK certificate matches 1.0.140.
+- Broader browser checks still fail in saved-workout planning and the Trainer video editor. Android camera operation on a physical phone remains to be verified.
 
 ## 2026-11-16 — Guided swap search and calculator protein adjustment
 
