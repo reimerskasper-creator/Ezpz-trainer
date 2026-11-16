@@ -59,7 +59,6 @@ jobs:
           node tests/workout-media-rule-mobile.cjs
           node tests/plan-library.cjs
           node tests/clear-plan-mobile.cjs
-          node tests/planner-custom-meals-mobile.cjs
       - uses: actions/cache/restore@v4
         with:
           path: native/.test-signing/debug.keystore
@@ -80,6 +79,7 @@ jobs:
           retention-days: 14
       - name: Run broader mobile regression checks
         run: |
+          node tests/planner-custom-meals-mobile.cjs
           node tests/progress-context-mobile.cjs
           node tests/flexible-day.cjs
           node tests/day-card-polish-mobile.cjs
