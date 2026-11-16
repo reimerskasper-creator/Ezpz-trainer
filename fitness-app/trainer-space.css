@@ -174,3 +174,6 @@ body[data-view=train] .training-exercise.trainer-workout-photo .set-row input[ty
 body[data-view=train] .training-exercise.trainer-workout-photo .set-row input:focus-visible{outline:3px solid #8ee2b4!important;outline-offset:1px}
 body[data-view=train] .training-exercise.trainer-workout-photo .exercise-tools-button{background:#153e2e!important;color:#effff5!important}
 
+
+.exercise-media-label{display:block;color:var(--ui-muted,#c2ddcd);font-size:11px;font-weight:600;line-height:1.35}
+#workout-edit-dialog [data-edit-results] button:has(.exercise-media-label){display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:3px 8px}

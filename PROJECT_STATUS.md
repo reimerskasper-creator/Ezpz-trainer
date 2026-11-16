@@ -1,3 +1,8 @@
+## 2026-11-16 — Shared exercise photos and demos
+
+- Android 1.0.136 bundles references for 30 exact movements, including the four Coach Sample Plan movements, with original photos and external video links.
+- Workout previews identify sessions with full coverage. The exercise swap picker prioritizes complete references and Trainer applies them to the replacement. A workout-specific photo or link takes precedence independently.
+- Local Trainer, workout photo and plan package checks pass. Mobile swap and signed update validation run in Android CI.
 ## 2026-11-16 — Coach Sample Plan
 
 - Android 1.0.135 adds a built-in 14-day Plan Library example with a weekly preview, exercise photos and demo links, recipe portions, and daily plan macros.

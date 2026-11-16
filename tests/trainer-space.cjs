@@ -9,3 +9,19 @@ assert.deepEqual(api.cleanTrainerBackgrounds(JSON.parse('{"__proto__":"photo-bad
 api.state={...initial,trainerMedia:{'full-body|RDL':{photoId:'photo-own',backgroundId:'photo-back',videoUrl:'https://youtu.be/abc'}},trainerBackgrounds:{'full-body':'photo-room'},trainerSettings:{motion:false,photoExpanded:true},homeBackground:{photoId:'photo-home'}};for(const id of ['photo-own','photo-back','photo-room','photo-home'])api.pendingPersonalPhotos[id]='data:image/jpeg;base64,/9j/AA==';assert(api.save());const snapshot=JSON.parse(saved);assert.deepEqual(Object.keys(snapshot.personalPhotos).sort(),['photo-back','photo-home','photo-own','photo-room']);const restored=api.restoredState(snapshot);assert.deepEqual(restored.trainerMedia,snapshot.trainerMedia);assert.deepEqual(restored.trainerBackgrounds,snapshot.trainerBackgrounds);assert.deepEqual(restored.trainerSettings,snapshot.trainerSettings);assert.deepEqual(restored.profile,initial.profile);fail=true;const before=JSON.stringify(api.state.personalPhotos);assert.equal(api.save(),false);assert.equal(JSON.stringify(api.state.personalPhotos),before);assert.equal(saved,JSON.stringify(snapshot));
 assert(!fs.readFileSync('fitness-app/trainer-space.js','utf8').includes('<iframe'));assert(fs.readFileSync('fitness-app/trainer-space.css','utf8').includes('object-fit:contain!important'));
 console.log('PASS trainer media URL/schema validation, photo references/backup retention, restored preferences, existing records and quota rollback');
+
+
+const guidesWindow={};
+new Function('window',fs.readFileSync('fitness-app/coach-sample-photos.js','utf8')+fs.readFileSync('fitness-app/exercise-media.js','utf8'))(guidesWindow);
+const guides=guidesWindow.EzpzExerciseMedia;
+assert.equal(guides.names.length,30);
+assert.equal(guides.get('DB Romanian Deadlift'),guides.get('Dumbbell Romanian Deadlift'));
+assert.notEqual(guides.get('Dumbbell Bench Press'),guides.get('Incline Dumbbell Press'));
+assert.equal(guides.get('Incline Push-Up'),undefined);
+for(const name of guides.names){
+ const {photo,videoUrl}=guides.get(name);
+ assert(photo.startsWith('data:image/jpeg')||fs.existsSync(photo),name+' photo exists');
+ assert.match(videoUrl,/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]{11}$/);
+}
+assert.deepEqual(guides.choices(['Custom Row','Floor Press','Dumbbell Floor Press','DB Floor Press','Goblet Squat'],'Goblet Squat'),['Dumbbell Floor Press','Custom Row','Floor Press']);
+console.log('PASS shared exercise references use explicit aliases, include bundled photos and sort covered swaps first');
