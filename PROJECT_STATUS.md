@@ -3,7 +3,9 @@
 - Android 1.0.147 adds Done from recap to Home, blends the artwork into the recap and thickens muscle-button outlines.
 - Home keeps exercise editing and swapping available after logging. Trainer lists load before reps.
 - A visible five-second start countdown and spoken rest warning use available on-device English voices, with a device-default option.
-- Branch: android-health-connect. Android signing and mobile checks run on the canonical branch.
+- Branch: android-health-connect, source commit `6a6fe77`. Build 43978327733 signed the Android APK and passed saved-workout and Trainer checks, including the recap flows at 320, 390 and 430 px.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/43978327733/artifacts/14282671923
+- Physical Android and Bluetooth speech playback still need a device check.
 
 ## 2026-11-16 — Exercise thumbnails and workout recap
 
