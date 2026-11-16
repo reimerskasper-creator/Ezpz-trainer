@@ -77,6 +77,10 @@ jobs:
           name: EZPZ-Fitness-Android-test
           path: native/android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 14
+      - name: Verify saved workouts and Trainer
+        run: |
+          node tests/saved-workout-planning-mobile.cjs
+          node tests/trainer-space-mobile.cjs
       - name: Run broader mobile regression checks
         run: |
           node tests/planner-custom-meals-mobile.cjs
@@ -84,14 +88,12 @@ jobs:
           node tests/flexible-day.cjs
           node tests/day-card-polish-mobile.cjs
           node tests/flexible-day-mobile.cjs
-          node tests/saved-workout-planning-mobile.cjs
           node tests/plan-packages.cjs
           node tests/plan-packages-mobile.cjs
           node tests/plan-library-mobile.cjs
           node tests/review-polish-mobile.cjs
           node tests/compact-workout-screen-mobile.cjs
           node tests/trainer-space.cjs
-          node tests/trainer-space-mobile.cjs
           node tests/app-appearance.cjs
           node tests/app-appearance-mobile.cjs
           node tests/progress-card-photos-mobile.cjs

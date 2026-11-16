@@ -1,3 +1,9 @@
+## 2026-11-16 — Trainer layout and saved workout repair
+
+- Android 1.0.143 combines the exercise position and chooser, moves completed sets above the active exercise photo, and puts compact translucent media controls on the wider photo.
+- Saved workouts that need references retain their picked day and workout slot through media repair. Adding a repaired workout returns to Day. Guided and custom exercise video link editing is covered by the Trainer checks.
+- Branch: android-health-connect. Local planner, custom workout and Trainer contract checks passed. Signed build and responsive checks run in Android CI.
+
 ## 2026-11-16 — Scan food into a planned meal
 
 - Android 1.0.142 adds Scan food barcode to Day meal pickers. Use the camera or enter the barcode, confirm the amount and save to the selected date and meal slot. Planned food stays separate from the diary.

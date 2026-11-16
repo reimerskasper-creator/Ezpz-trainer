@@ -3,7 +3,27 @@ const root=path.resolve(__dirname,'..'),web=fs.existsSync(path.join(root,'native
 const server=http.createServer((req,res)=>{const f=path.resolve(web,'.'+new URL(req.url,'http://localhost').pathname);if(!f.startsWith(web+path.sep)){res.writeHead(403);return res.end()}fs.readFile(f,(e,b)=>{res.writeHead(e?404:200,{'Content-Type':f.endsWith('.html')?'text/html':f.endsWith('.js')?'text/javascript':f.endsWith('.css')?'text/css':f.endsWith('.json')?'application/json':'image/jpeg'});res.end(e?'Missing':b)})});
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch();try{for(const width of [320,390,430]){const context=await browser.newContext({viewport:{width,height:900},isMobile:true,hasTouch:true}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{if(!localStorage.getItem('ezpz-fitness-pilot-1'))localStorage.setItem('ezpz-fitness-pilot-1',JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'gym',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2}));window.alert=()=>{};window.confirm=()=>true});await page.goto('http://127.0.0.1:'+server.address().port+'/'+(web.endsWith('/www')?'index.html':'fitness.html'));await page.waitForFunction(()=>window.EZPZFlexibleDay);
 
-await page.evaluate(()=>{const d=datePlus(foodDate(),4);state.plannerStart=foodDate();state.plannerDays=7;state.plannerOffset=4;state.customWorkouts=[{...planWorkout('pull-a'),id:'custom-plan-test',title:'My saved routine',category:'Pull'}];state.workoutSchedule={};state.activePlanItem='extra-existing';save();tab='planner';render()});
+await page.evaluate(()=>{const d=datePlus(foodDate(),4);state.plannerStart=foodDate();state.plannerDays=7;state.plannerOffset=4;state.customWorkouts=[{...planWorkout('guided-gym-pull-a'),id:'custom-plan-test',title:'My saved routine',category:'Pull'}];state.workoutSchedule={};state.activePlanItem='extra-existing';save();tab='planner';render()});
 await page.locator('#planned-workout').click();await page.locator('[data-plan-picker-action="build"]').click();assert(await page.locator('[data-own-section="saved"]').getAttribute('aria-pressed')==='true');assert((await page.locator('[data-own-start="custom-plan-test"]').innerText()).includes('Add to '));await page.locator('[data-own-start="custom-plan-test"]').click();assert.equal(await page.evaluate(()=>state.workoutSchedule[datePlus(foodDate(),4)]),'custom-plan-test');assert(await page.locator('#planned-workout').isVisible());assert.equal(await page.evaluate(()=>state.activePlanItem),'extra-existing');assert.equal(await page.evaluate(()=>tab),'planner');
 await page.locator('[data-flex-add]').click();await page.locator('[data-flex-add-kind="workout"]').click();await page.locator('[data-plan-picker-action="build"]').click();await page.locator('[data-own-start="custom-plan-test"]').click();assert.equal(await page.evaluate(()=>dayExtraWorkouts(datePlus(foodDate(),4))[0].workoutId),'custom-plan-test');assert.equal(await page.evaluate(()=>state.workoutSchedule[datePlus(foodDate(),4)]),'custom-plan-test');assert(await page.locator('#planned-workout').isVisible());
+await page.evaluate(()=>{
+ const w=state.customWorkouts[0];
+ state.customWorkouts.push({...w,id:'custom-needs-media',title:'Missing video and photo',exercises:[{...w.exercises[0],name:'My personal pull exercise'}]});
+ save();
+});
+await page.locator('#planned-workout').click();
+await page.locator('[data-plan-picker-action="build"]').click();
+const priorSelection=await page.evaluate(()=>state.selectedWorkout);
+await page.locator('[data-own-start="custom-needs-media"]').click();
+assert(await page.locator('.workout-media-repair').isVisible());
+await page.locator('[data-trainer-photo="0"]').click();
+await page.locator('[data-trainer-file]').first().setInputFiles(path.join(root,'home-images/nutrition.jpg'));
+await page.locator('#trainer-dialog').waitFor({state:'detached'});
+await page.locator('[data-trainer-video="0"]').click();
+await page.locator('#trainer-video-url').fill('https://youtu.be/example');
+await page.locator('#trainer-video-form button[type=submit]').click();
+await page.locator('[data-finish-planned-media]').click();
+assert.equal(await page.evaluate(()=>state.workoutSchedule[datePlus(foodDate(),4)]),'custom-needs-media');
+assert.equal(await page.evaluate(()=>state.selectedWorkout),priorSelection);
+assert.equal(await page.evaluate(()=>tab),'planner');
 await page.evaluate(()=>{tab='train';startBuilder(null);builderSection='saved';workoutBuilder()});assert((await page.locator('[data-own-start="custom-plan-test"]').innerText()).includes('Start workout'));await page.locator('[data-own-start="custom-plan-test"]').click();assert.equal(await page.evaluate(()=>tab),'train');assert.deepEqual(errors,[]);await context.close();console.log('PASS saved workout planning '+width+': selected future date, automatic return, extra slot, normal training action')}}finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});
