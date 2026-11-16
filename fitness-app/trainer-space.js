@@ -5,7 +5,7 @@
  const settings=()=>cleanTrainerSettings(state.trainerSettings);
  const media=()=>cleanTrainerMedia(state.trainerMedia);
  const keyFor=(plan,x)=>plan.id+'|'+x.name;
- function context(i){const plan=workoutPlan(),x=plan.exercises[i];return x?{planId:plan.id,key:keyFor(plan,x),name:x.name,index:i,owner:state}:null}
+ function context(i,plan=workoutPlan()){const x=plan.exercises[i];return x?{planId:plan.id,key:keyFor(plan,x),name:x.name,index:i,owner:state}:null}
  function reference(c,entry=media()[c.key]||{}){
   const fallback=window.EzpzExerciseMedia?.get(c.name),ownPhoto=personalPhoto(entry.photoId),ownVideo=cleanTrainerVideoUrl(entry.videoUrl);
   return {photo:ownPhoto||fallback?.photo,videoUrl:ownVideo||fallback?.videoUrl,ownPhoto,ownVideo};
@@ -20,7 +20,7 @@
   screen.querySelectorAll('.trainer-media,.trainer-background-tool,.trainer-settings-open,.trainer-status').forEach(el=>el.remove());
   const status=document.createElement('p');status.className='trainer-status';status.setAttribute('role','status');screen.querySelector('.compact-exercise-picker')?.after(status);
   const options=screen.querySelector('.training-options-body');if(options){const b=document.createElement('button');b.type='button';b.className='trainer-settings-open';b.dataset.trainerSettings='';b.textContent='Workout appearance';options.append(b);options.parentElement.open=false}
-  for(const card of screen.querySelectorAll('[data-training-card]')){const i=Number(card.dataset.trainingCard),c=context(i),{photo,videoUrl,ownPhoto}=reference(c,all[c.key]||{}),body=card.querySelector('.session-exercise');
+  for(const card of screen.querySelectorAll('[data-training-card]')){const i=Number(card.dataset.trainingCard),c=context(i,plan),{photo,videoUrl,ownPhoto}=reference(c,all[c.key]||{}),body=card.querySelector('.session-exercise');
    card.classList.add('trainer-workout-photo');card.style.setProperty('--trainer-workout-cover','url('+JSON.stringify(new URL(workoutCover(plan).src,document.baseURI).href)+')');
    const box=document.createElement('div');box.className='trainer-media';box.dataset.trainerIndex=i;
    box.classList.toggle('has-reference',!!photo);
