@@ -39,7 +39,30 @@ const server=http.createServer((req,res)=>{
    const custom=await page.evaluate(()=>window.customThumb);
    assert.equal(await page.locator('.home-exercise-preview img').count(),6);
    assert.equal(await page.locator('.home-exercise-preview img').first().getAttribute('src'),custom);
+   await page.evaluate(()=>{
+    window.testSpeech=[];
+    const voice={name:'Test English',voiceURI:'test-en',lang:'en-US',localService:true};
+    Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{
+     getVoices:()=>[voice],speak:message=>window.testSpeech.push([message.text,message.voice?.voiceURI]),cancel:()=>{}
+    }});
+    window.SpeechSynthesisUtterance=class{constructor(text){this.text=text}};
+   });
    await page.locator('[data-home-start]').click();
+   const countdown=page.locator('.workout-countdown');
+   assert.equal(await countdown.locator('output').textContent(),'5');
+   assert.deepEqual(await page.evaluate(()=>window.testSpeech[0]),['Workout starts in five seconds.',null]);
+   await countdown.getByRole('button',{name:'Start now'}).click();
+   assert.equal(await countdown.count(),0);
+   assert.deepEqual(await page.locator('.set-head').first().locator('span').allTextContents(),['Set','Last time','kg','Reps','Done']);
+   const inputOrder=await page.locator('.set-row').first().locator('input').evaluateAll(inputs=>inputs.map(input=>Object.keys(input.dataset)[0]));
+   assert.deepEqual(inputOrder,['setWeight','setReps','setDone']);
+   await page.locator('[data-rest-options]').click();
+   await page.locator('.training-rest-options summary').click();
+   await page.locator('[data-workout-voice]').selectOption('test-en');
+   await page.locator('[data-rest-options-close]').click();
+   await page.evaluate(()=>startRestTimer(5));
+   await page.waitForFunction(()=>window.testSpeech.some(([text,voice])=>text==='Rest ends in five seconds.'&&voice==='test-en'));
+   await page.evaluate(()=>{state.restTimer=null;syncRestAudio()});
    await page.locator('[data-open-exercises]').click();
    assert.equal(await page.locator('[data-exercise-pick] img').count(),6);
    assert.equal(await page.locator('[data-exercise-pick] img').first().getAttribute('src'),custom);
@@ -71,6 +94,13 @@ const server=http.createServer((req,res)=>{
    assert.equal(await page.locator('.recap-completed img').first().getAttribute('src'),custom);
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
    if(width===390)await page.locator('.workout-recap').screenshot({path:'/tmp/ezpz-recap-mobile-test.jpg'});
+   await page.locator('[data-recap-done]').click();
+   assert.equal(await page.locator('body').getAttribute('data-view'),'home');
+   assert.equal(await page.locator('.home-exercise-sets').first().textContent(),'3 sets');
+   await page.locator('[data-edit-home-exercise="0"]').click();
+   await page.locator('[data-edit-swap]').click();
+   assert(await page.locator('#workout-edit-search').isVisible());
+   await page.keyboard.press('Escape');
    await page.close();
    console.log('PASS workout recap, photo precedence and muscle selection at '+width);
   }

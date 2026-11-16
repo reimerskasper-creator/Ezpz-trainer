@@ -1,3 +1,10 @@
+## 2026-11-16 — Workout completion and spoken countdowns
+
+- Android 1.0.147 adds Done from recap to Home, blends the artwork into the recap and thickens muscle-button outlines.
+- Home keeps exercise editing and swapping available after logging. Trainer lists load before reps.
+- A visible five-second start countdown and spoken rest warning use available on-device English voices, with a device-default option.
+- Branch: android-health-connect. Android signing and mobile checks run on the canonical branch.
+
 ## 2026-11-16 — Exercise thumbnails and workout recap
 
 - Android 1.0.146 adds exercise thumbnails in Home, Trainer, swap choices, workout previews and history. Personal workout photos take precedence.

@@ -21,12 +21,12 @@ body[data-view=progress] .workout-recap{padding:clamp(12px,4vw,22px);border-radi
 .workout-recap .recap-numbers>div{min-width:0;padding:8px 5px;background:#174236;border-radius:8px}
 .workout-recap .recap-numbers strong{font-size:clamp(13px,4vw,23px);line-height:1.15;overflow-wrap:anywhere}
 .workout-recap .recap-numbers small{display:block;margin-top:4px;font-size:11px;color:#c7e1d3!important}
-.recap-anatomy{position:relative;aspect-ratio:500/551;background:#082720;border-radius:14px;overflow:hidden}
+.recap-anatomy{position:relative;aspect-ratio:500/551;background:transparent;overflow:hidden}
 .recap-anatomy-layer{position:absolute;inset:0;background-image:url('./workout-muscle-atlas.webp');background-size:100% 1200%;background-position:center var(--atlas-y,0%);pointer-events:none}
 .recap-anatomy-layer[hidden]{display:none}
 .recap-anatomy-labels{text-align:center;display:grid;grid-template-columns:repeat(2,1fr);font-size:12px;margin-top:5px;color:#c7e1d3}
 .recap-muscle-choices{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
-body[data-view=progress] .recap-muscle-choices button{width:auto;min-height:44px;margin:0;padding:4px 9px;font-size:12px;background:#164637!important;color:#f0fff5!important;border:1px solid #5d8674!important}
+body[data-view=progress] .recap-muscle-choices button{width:auto;min-height:44px;margin:0;padding:4px 9px;font-size:12px;background:#164637!important;color:#f0fff5!important;border:2px solid #78a391!important}
 body[data-view=progress] .recap-muscle-choices button[aria-pressed=true]{background:#8ce2b5!important;color:#0b2d20!important}
 .recap-completed{margin:10px 0 14px}
 .recap-completed summary{min-height:44px;padding:10px;border-radius:10px;background:#174236;color:#f0fff5;cursor:pointer}
@@ -34,3 +34,17 @@ body[data-view=progress] .recap-muscle-choices button[aria-pressed=true]{backgro
 .recap-completed li{padding:6px 0;border-bottom:1px solid #7caa953d}
 .recap-completed small{display:block;margin-top:4px}
 .workout-recap .recap-muscle-note{font-size:12px;color:#c7e1d3!important}
+
+body[data-view=home] #screen .home-workout :is(.home-change-workout,[data-edit-home-exercise]){
+ background:transparent!important;border:0!important;box-shadow:none!important;color:#f0fff5!important
+}
+body[data-view=home] #screen .home-workout [data-edit-home-exercise]{
+ text-align:left;padding:2px 0;min-width:0;min-height:44px;font:inherit;font-weight:650;overflow-wrap:anywhere
+}
+body[data-view=home] #screen .home-workout .home-change-workout svg{background:transparent!important;box-shadow:none!important}
+.workout-recap .recap-done{width:100%;min-height:44px;margin-top:9px}
+.training-exercise-dialog.workout-countdown{max-width:300px;padding:20px;text-align:center}
+.workout-countdown h2{margin:0;font-size:19px;color:#f0fff5}
+.workout-countdown output{display:block;margin:10px auto;color:#a3ebc4;font-size:48px;font-weight:750;font-variant-numeric:tabular-nums}
+.workout-countdown button{width:100%;min-height:44px}
+.workout-voice-option select{max-width:100%}
