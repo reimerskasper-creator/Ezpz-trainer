@@ -1,3 +1,9 @@
+## 2026-11-16 — Scan food into a planned meal
+
+- Android 1.0.142 adds Scan food barcode to Day meal pickers. Use the camera or enter the barcode, confirm the amount and save to the selected date and meal slot. Planned food stays separate from the diary.
+- Planner and diary ingredient drafts are isolated. Canceling restores the meal picker’s filter and search.
+- Local planner, barcode and ingredient checks passed. Mobile coverage and signed delivery run on the canonical Android branch.
+
 ## 2026-11-16 — Guided swap search and calculator protein adjustment
 
 - Android 1.0.141 searches all guided exercises from the Home swap picker, with fitting suggestions first, equipment labels, and duplicate rows marked.
