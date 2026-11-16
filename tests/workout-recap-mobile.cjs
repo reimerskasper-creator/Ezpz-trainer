@@ -43,7 +43,7 @@ const server=http.createServer((req,res)=>{
     window.testSpeech=[];
     const voice={name:'Test English',voiceURI:'test-en',lang:'en-US',localService:true};
     Object.defineProperty(window,'speechSynthesis',{configurable:true,value:{
-     getVoices:()=>[voice],speak:message=>window.testSpeech.push([message.text,message.voice?.voiceURI]),cancel:()=>{}
+     getVoices:()=>[voice],speak:message=>window.testSpeech.push([message.text,message.voice?.voiceURI??null]),cancel:()=>{}
     }});
     window.SpeechSynthesisUtterance=class{constructor(text){this.text=text}};
    });
