@@ -3,7 +3,7 @@
 - Android 1.0.144 places Trainer progress in the left rail and the media actions in the right rail. Exercise photos use the center of the frame.
 - Date fields open the themed app calendar. Android system Back dismisses the active app overlay, steps back through the app, and stays on Home at the root.
 - Create your own uses a distinct workout notebook photo. Home’s scanner, upcoming workout plus icons, and Edit action have simpler styling. More opens with Save my progress collapsed.
-- Branch: android-health-connect. Android and phone-width verification runs on the canonical branch.
+- On android-health-connect, Android run 43936755249 built signed 1.0.144 with the existing certificate. Packaged-screen checks passed at 320, 390 and 430 px for Trainer, calendar selection, app Back handling, Home controls and the workout notebook tile. The compact Trainer also passed at 358 px. Physical Android system Back still needs handset verification. The separate Sleep sync-label regression check also failed on 1.0.143.
 
 ## 2026-11-16 — Trainer layout and saved workout repair
 
