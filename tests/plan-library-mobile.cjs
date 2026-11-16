@@ -83,4 +83,34 @@ await d().getByRole('button',{name:'Activate plan'}).click();
 assert.equal(await page.evaluate(()=>state.activeSavedPlanId),draftId);
 assert(await page.evaluate(date=>!!state.workoutSchedule[date],start));
 assert.equal(await page.evaluate(date=>plannedMeals()[date].breakfastPortion,start),2);
+
+if(width===390){
+ await page.locator('.plan-library-open').click();
+ await d().getByRole('button',{name:'Preview plan',exact:true}).click();
+ await d().getByRole('button',{name:'Week 2'}).click();
+ await d().getByRole('button',{name:'View full day'}).click();
+ assert((await d().locator('.coach-nutrition').textContent()).includes('2,400 kcal'));
+ assert.equal(await d().locator('.coach-tile img').count(),5);
+ await d().getByRole('button',{name:/Full-body strength B/}).click();
+ assert((await d().locator('.coach-video').getAttribute('href')).includes('youtube.com/watch'));
+ await d().getByRole('button',{name:'Back to plan'}).click();
+ await d().getByRole('button',{name:'Copy & edit'}).click();
+ await d().getByLabel('Calories (kcal)').fill('2350');
+ await d().getByRole('button',{name:'Edit days'}).click();
+ await d().getByRole('button',{name:'Edit exercises'}).click();
+ await d().getByLabel('Dumbbell bench press',{exact:true}).fill('Dumbbell floor press');
+ await d().getByRole('button',{name:'Save exercises'}).click();
+ await d().locator('[data-draft-save]').click();
+ const copied=await page.evaluate(()=>state.savedPlans.find(plan=>plan.name==='Coach Sample Plan copy'));
+ assert.equal(copied.nutritionTargets[0],2350);
+ assert(copied.workouts.some(workout=>workout.exercises.some(exercise=>exercise.name==='Dumbbell floor press')));
+ assert.equal(await page.evaluate(()=>coachSamplePackage().workouts[0].exercises[0].name),'Dumbbell bench press');
+ await d().getByRole('button',{name:'Preview plan',exact:true}).click();
+ await d().getByRole('button',{name:'Activate plan'}).click();
+ await d().locator('#plan-import-start').fill(start);
+ assert(await d().locator('#plan-import-replace').isVisible());
+ await d().locator('#plan-import-replace').check();
+ await d().getByRole('button',{name:'Activate plan'}).click();
+ assert.equal(await page.evaluate(()=>state.planNutritionTargets[0]),2400);
+}
 assert.deepEqual(errors,[]);await context.close();console.log('PASS plan library '+width+': covers/crop/reload, real counts/contents, rename, conflict review, atomic archive/activation/quota rollback, no duplicates, received save-only, delete, themes and retained history')}}finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});

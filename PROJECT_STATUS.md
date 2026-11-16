@@ -1,3 +1,7 @@
+## 2026-11-16 — Coach Sample Plan
+
+- Android 1.0.135 adds a built-in 14-day Plan Library example with a weekly preview, exercise photos and demo links, recipe portions, and daily plan macros.
+- The existing activation and plan-file workflows carry plan targets and exercise media. Local plan library and package tests pass, including a serialized transfer into a clean profile. Mobile interaction and APK validation are tracked in Android CI.
 ## 2026-11-14 — Edit exercises in Today’s Workout
 
 - Android 1.0.134 adds a Home workout exercise editor with the existing picker styles, catalog search, custom names, set counts, removal, and today-only or plan-scoped future changes.
