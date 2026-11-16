@@ -3,7 +3,7 @@
 - Android 1.0.145 puts a synchronized progress gauge on every exercise photo. The left rail shows the set fraction and the right rail keeps the media controls.
 - Short workout-start and rest-complete sounds use Android’s media audio route. Workout sounds can be muted in Rest timer options.
 - Barcode scanning from Day opens a dedicated camera dialog with typed barcode fallback, then returns to the planned meal amount and save flow.
-- Branch: android-health-connect. Signed build and phone-width regression coverage run on the canonical branch.
+- On android-health-connect, Android build 43940035365 signed 1.0.145 with the existing certificate. Trainer and planned-meal scanner passed at 320, 390 and 430 px. An audio-bridge smoke test passed for workout start, rest scheduling, pause, resume, mute and canceling at workout completion. Physical camera and Bluetooth playback remain to be verified.
 
 ## 2026-11-16 — Phone layout, calendar and Android Back
 
