@@ -1,3 +1,8 @@
+## 2026-11-16 — Home and Gym workout collection
+
+- Android 1.0.137 presents 20 guided sessions across Full Body, Push, Pull, Legs and Core, with separate Home/Gym A/B choices and exact equipment lists.
+- Every featured movement has original still photography and a linked demo. Suggested substitutions use covered movements, matching units and compatible equipment. The earlier workout definitions remain available to scheduled sessions, workout history and drafts.
+- Added coverage for the collection and migration, plus mobile picker and demonstration preview checks. Android signing and APK delivery are tracked in CI.
 ## 2026-11-16 — Shared exercise photos and demos
 
 - Android 1.0.136 bundles references for 30 exact movements, including the four Coach Sample Plan movements, with original photos and external video links.

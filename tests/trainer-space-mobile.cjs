@@ -19,6 +19,24 @@ await page.reload();await page.waitForFunction(()=>window.EZPZTrainerSpace);awai
 for(const mode of ['dark','light']){await page.evaluate(mode=>applyAppAppearance({mode,accent:'emerald'}),mode);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));const text=await page.locator('[data-trainer-video="0"]').evaluate(el=>getComputedStyle(el).color);assert.equal(text,'rgb(241, 255, 245)');if(width===390){await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(out,'trainer-space-'+mode+'.jpg')})}}
 if(width===390){
  await page.evaluate(()=>{tab='home';render()});
+ await page.locator('.home-change-workout').click();
+ const chooser=page.locator('#workout-chooser');
+ assert.equal(await chooser.locator('[data-workout-category]:not([data-workout-category="mine"])').count(),5);
+ await chooser.locator('[data-workout-category="Leg"]').click();
+ for(const setting of ['gym','home']){
+  await chooser.locator('[data-chooser-workout-setting="'+setting+'"]').click();
+  assert.equal(await chooser.locator('[data-workout-pick]').count(),2);
+  assert((await chooser.locator('[data-workout-pick]').first().getAttribute('data-workout-pick')).includes(setting));
+  const b=chooser.locator('.program-card').nth(1);
+  assert((await b.innerText()).includes(setting==='gym'?'lying leg curl machine':'sliders'));
+  await b.locator('summary').click();
+  assert.equal(await b.locator('.workout-preview-exercise img').count(),4);
+  assert.equal(await b.getByRole('link',{name:'Watch demo'}).count(),4);
+  await b.locator('.workout-preview-exercise img').first().evaluate(img=>img.decode());
+ }
+ await chooser.locator('[data-action="close-workouts"]').click();
+ assert.equal(await page.evaluate(()=>workoutSetting()),'home');
+
  await page.locator('[data-edit-workout-exercises]').click();
  const editor=page.locator('#workout-edit-dialog');
  await editor.locator('[data-edit-index="1"]').click();

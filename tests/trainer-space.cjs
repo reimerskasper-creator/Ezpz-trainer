@@ -14,7 +14,7 @@ console.log('PASS trainer media URL/schema validation, photo references/backup r
 const guidesWindow={};
 new Function('window',fs.readFileSync('fitness-app/coach-sample-photos.js','utf8')+fs.readFileSync('fitness-app/exercise-media.js','utf8'))(guidesWindow);
 const guides=guidesWindow.EzpzExerciseMedia;
-assert.equal(guides.names.length,30);
+assert.equal(guides.names.length,33);
 assert.equal(guides.get('DB Romanian Deadlift'),guides.get('Dumbbell Romanian Deadlift'));
 assert.notEqual(guides.get('Dumbbell Bench Press'),guides.get('Incline Dumbbell Press'));
 assert.equal(guides.get('Incline Push-Up'),undefined);

@@ -177,3 +177,12 @@ body[data-view=train] .training-exercise.trainer-workout-photo .exercise-tools-b
 
 .exercise-media-label{display:block;color:var(--ui-muted,#c2ddcd);font-size:11px;font-weight:600;line-height:1.35}
 #workout-edit-dialog [data-edit-results] button:has(.exercise-media-label){display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:3px 8px}
+
+.workout-setting-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.workout-setting-tabs[hidden]{display:none}
+.workout-setting-tabs button{min-height:44px;border:1px solid var(--ui-border,#789b87);border-radius:10px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5)}
+.workout-setting-tabs button[aria-pressed=true]{border-color:var(--ui-accent,#8ee2b4);box-shadow:inset 0 0 0 1px var(--ui-accent,#8ee2b4);font-weight:700}
+.workout-preview-exercise{display:flex;align-items:center;gap:10px;margin:8px 0}
+.workout-preview-exercise img{width:74px;height:56px;object-fit:contain;border-radius:7px;background:#121613;flex:none}
+.workout-preview-exercise :is(strong,small,a){display:block}
+.workout-preview-exercise a{color:var(--ui-text,#f1fff5);font-size:12px;text-decoration:underline;padding:7px 0}

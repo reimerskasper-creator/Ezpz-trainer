@@ -136,8 +136,8 @@
   }
   function pick(kind,opener){
    const meal=kind==='meal',entry=pack.entries[day],mine=meal?savedMeals:savedWorkouts;
-   const builtIn=meal?recipes.map((r,i)=>[i,r.name]):[['full-body',planWorkout('full-body').programName],...workoutTemplates.filter(w=>w.id!=='full-body').map(w=>[w.id,workoutTitle(w)])];
-   const sources=[mine,builtIn];
+   const builtIn=()=>meal?recipes.map((r,i)=>[i,r.name]):featuredWorkoutChoices().map(w=>[w.id,workoutTitle(w),w.equipment]);
+   const choices=()=>source===0?mine:builtIn();
    let source=mine.length?0:1,selected=null;
    const picker=document.createElement('dialog');
    picker.className='plan-draft-picker';
@@ -148,13 +148,19 @@
    function browse(){
     selected=null;
     body.innerHTML='<div class="plan-picker-sources" role="group" aria-label="Source"><button type="button" data-picker-source="0">'+(meal?'My meals':'My workouts')+'</button><button type="button" data-picker-source="1">'+(meal?'EZPZ recipes':'EZPZ workouts')+'</button></div><label>Search '+(meal?'meals':'workouts')+'<input type="search" data-picker-search></label><div class="plan-picker-results" data-picker-results></div>'+(!meal&&!entry.workout&&!entry.extraWorkouts?.length?'<button type="button" data-picker-rest>Recovery day</button>':'');
+    if(!meal)body.querySelector('.plan-picker-sources').insertAdjacentHTML('afterend',workoutSettingMarkup('data-draft-workout-setting'));
     results();
    }
    function results(){
+    const tabs=body.querySelector('.workout-setting-tabs');
+    if(tabs){
+     tabs.hidden=source===0;
+     tabs.querySelectorAll('button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.draftWorkoutSetting===workoutSetting())));
+    }
     const query=body.querySelector('[data-picker-search]').value.trim().toLowerCase();
-    const items=sources[source].filter(([,name])=>name.toLowerCase().includes(query));
+    const items=choices().filter(([,name,equipment])=>(name+' '+(equipment||'')).toLowerCase().includes(query));
     body.querySelectorAll('[data-picker-source]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.pickerSource)===source)));
-    body.querySelector('[data-picker-results]').innerHTML=items.map(([id,name])=>'<button type="button" data-picker-item="'+safe(id)+'">'+safe(name)+'</button>').join('')||'<p>'+(query?'No matches.':meal?'No saved meals yet.':'No saved workouts yet.')+'</p>';
+    body.querySelector('[data-picker-results]').innerHTML=items.map(([id,name,equipment])=>'<button type="button" data-picker-item="'+safe(id)+'">'+safe(name)+(equipment?'<small>'+safe(equipment)+'</small>':'')+'</button>').join('')||'<p>'+(query?'No matches.':meal?'No saved meals yet.':'No saved workouts yet.')+'</p>';
    }
    function add(item,slot,portion){
     if(owner!==state){message.textContent='Your app data changed. Reopen the plan to continue.';return}
@@ -176,11 +182,12 @@
     const b=e.target.closest('button');if(!b)return;
     if(b.hasAttribute('data-picker-close'))picker.close();
     if(b.hasAttribute('data-picker-back')){browse();body.querySelector('[data-picker-search]').focus()}
+    if(b.hasAttribute('data-draft-workout-setting')&&setWorkoutSetting(b.dataset.draftWorkoutSetting))results();
     if(b.hasAttribute('data-picker-source')){source=Number(b.dataset.pickerSource);results()}
     if(b.hasAttribute('data-picker-rest'))add('rest');
     if(b.hasAttribute('data-portion-step'))changePortion(b);
     if(b.hasAttribute('data-picker-item')){
-     selected=sources[source].find(([id])=>String(id)===b.dataset.pickerItem);
+     selected=choices().find(([id])=>String(id)===b.dataset.pickerItem);
      if(!meal){add(selected[0]);return}
      const slots=['breakfast','lunch','dinner',...(Object.keys(entry.meals).filter(validExtraSlot).length<20?['extra']:[])];
      const initial=slots.find(slot=>!entry.meals[slot])||slots[0];

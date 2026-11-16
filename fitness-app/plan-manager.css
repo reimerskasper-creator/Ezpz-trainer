@@ -123,3 +123,4 @@ body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.pl
 .coach-exercise-photo{display:block;width:100%;border-radius:12px}
 .coach-video{box-sizing:border-box;display:grid;place-items:center;min-height:44px;color:inherit;border:1px solid var(--ui-accent,#8ee2b4);border-radius:10px}
 .plan-draft-item-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+[data-picker-results] button small{display:block}

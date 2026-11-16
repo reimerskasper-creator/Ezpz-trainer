@@ -10,18 +10,18 @@ api.setTab('planner');api.planner();
 assert(!screen.innerHTML.includes('<select id="planned-workout"')&&!screen.innerHTML.includes('data-schedule-meal='),'Long native selects removed');
 assert(screen.innerHTML.includes('data-open-plan-picker="workout"')&&screen.innerHTML.includes('data-open-meal-picker="breakfast"'),'Photo picker triggers');
 const before=JSON.stringify(api.state),writesBefore=writes;api.openPlannerPicker('workout');
-assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===12,'Eleven workout photo categories');
-assert(api.pickerWorkoutMatches().length===65,'All built-in sessions available');
+assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===5,'Five workout photo categories');
+assert(api.pickerWorkoutMatches().length===10,'Ten Home sessions available');
 api.picker.category='Full Body';api.picker.level='Beginner';api.filterPlannerPicker();
 assert(api.pickerWorkoutMatches().length===2&&body.innerHTML.includes('Beginner'),'Category and level combine');
-api.picker.category=null;api.picker.level='all';api.picker.query='full-body-home';api.filterPlannerPicker();
-assert(api.pickerWorkoutMatches().length===1&&body.innerHTML.includes('data-plan-pick-workout="full-body-home"'),'Search finds session');
+api.picker.category=null;api.picker.level='all';api.picker.query='guided-home-full-body-a';api.filterPlannerPicker();
+assert(api.pickerWorkoutMatches().length===1&&body.innerHTML.includes('data-plan-pick-workout="guided-home-full-body-a"'),'Search finds session');
 api.closePlannerPicker();assert(!dialog.open&&JSON.stringify(api.state)===before&&writes===writesBefore,'Cancel never changes saved plans');
 const date=api.planSettings().date,other=api.datePlus(date,1);api.state.workoutSchedule={[other]:'pull-a'};
-api.openPlannerPicker('workout');assert(api.commitPickerWorkout('full-body-home'),'Assign workout');
-assert(api.state.workoutSchedule[date]==='full-body-home'&&api.state.workoutSchedule[other]==='pull-a','Only selected date changes');
+api.openPlannerPicker('workout');assert(api.commitPickerWorkout('guided-home-full-body-a'),'Assign workout');
+assert(api.state.workoutSchedule[date]==='guided-home-full-body-a'&&api.state.workoutSchedule[other]==='pull-a','Only selected date changes');
 assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Planning preserves active workout and draft');
-api.openPlannerPicker('workout');api.picker.category='Kettlebell';assert(api.pickerWorkoutMatches().length===10,'Ten kettlebell planner choices');assert(api.commitPickerWorkout('kb-foundations'),'Plan kettlebell session');assert(api.state.workoutSchedule[date]==='kb-foundations','Kettlebell schedule saved');api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
+api.openPlannerPicker('workout');api.picker.category='Leg';assert(api.pickerWorkoutMatches().length===2,'Two Home leg sessions');assert(api.commitPickerWorkout('guided-home-legs-b'),'Plan Home Legs B');assert(api.state.workoutSchedule[date]==='guided-home-legs-b','Guided schedule saved');api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
 api.openPlannerPicker('workout');api.commitPickerWorkout('');assert(!api.state.workoutSchedule[date]&&api.state.workoutSchedule[other]==='pull-a','Remove only selected workout');
 api.state.foodLog=[{id:'old',date,servings:1,name:'Saved',macros:[400,30,45,10]}];
 api.openPlannerPicker('meal','breakfast');assert(api.pickerMealMatches().every(x=>api.recipeCategory(x.i)==='breakfast'),'Slot filter defaults to breakfast');
@@ -42,8 +42,8 @@ console.log('PASS: photo picker categories, combined search/level filters, all 1
 
 api.state.workoutSchedule={[date]:'push-a',[other]:'pull-a'};api.setPreview('push-a',date);api.previewWorkout();assert(screen.innerHTML.includes('data-preview-back')&&screen.innerHTML.includes('Change workout'),'Preview navigation and swap visible');
 const swapBefore=JSON.stringify(api.state);api.openPlannerPicker('workout');assert(api.picker.origin==='preview'&&api.picker.date===date,'Preview picker targets scheduled date');api.closePlannerPicker();assert(JSON.stringify(api.state)===swapBefore,'Cancelling swap preserves data');
-api.openPlannerPicker('workout');assert(api.commitPickerWorkout('full-body-home'),'Swap library workout');assert(api.state.workoutSchedule[date]==='full-body-home'&&api.state.workoutSchedule[other]==='pull-a','Swap changes one date');assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Swap preserves active session and draft');
-api.openPlannerPicker('workout');fail=true;assert(!api.commitPickerWorkout('leg-a')&&api.state.workoutSchedule[date]==='full-body-home','Failed swap rolls back');fail=false;api.closePlannerPicker();console.log('PASS: scheduled preview back/change controls, cancellation, library swap, date isolation and storage rollback');
+api.openPlannerPicker('workout');assert(api.commitPickerWorkout('guided-home-full-body-a'),'Swap library workout');assert(api.state.workoutSchedule[date]==='guided-home-full-body-a'&&api.state.workoutSchedule[other]==='pull-a','Swap changes one date');assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Swap preserves active session and draft');
+api.openPlannerPicker('workout');fail=true;assert(!api.commitPickerWorkout('leg-a')&&api.state.workoutSchedule[date]==='guided-home-full-body-a','Failed swap rolls back');fail=false;api.closePlannerPicker();console.log('PASS: scheduled preview back/change controls, cancellation, library swap, date isolation and storage rollback');
 
 api.state.customWorkouts=[{id:'custom-swap',title:'My saved session',category:'Full Body',level:'Beginner',equipment:'Dumbbells',minutes:'25',exercises:[{name:'Goblet Squat',sets:3,reps:'8–12',unit:'reps',rest:90,side:false}]}];api.openPlannerPicker('workout');api.picker.category='mine';assert(api.pickerWorkoutMatches().some(w=>w.id==='custom-swap'),'Saved workouts available');assert(api.commitPickerWorkout('custom-swap')&&api.state.workoutSchedule[date]==='custom-swap'&&api.state.workoutSchedule[other]==='pull-a','Swap saved workout on one date');console.log('PASS: saved custom workout swap');
 

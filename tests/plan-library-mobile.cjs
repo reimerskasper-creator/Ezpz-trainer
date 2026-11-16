@@ -36,7 +36,7 @@ await picker.getByRole('searchbox').fill('saved session');
 await picker.getByRole('button',{name:'My saved session'}).click();
 await chooseWorkout();
 await picker.getByRole('button',{name:'EZPZ workouts'}).click();
-await picker.locator('[data-picker-item=push-a]').click();
+await picker.locator('[data-picker-item=guided-home-push-a]').click();
 const chooseMeal=()=>d().locator('[data-draft-add=meal]').click();
 await chooseMeal();
 assert.equal(await picker.getByRole('button',{name:'My meals'}).getAttribute('aria-pressed'),'true');
