@@ -18,3 +18,6 @@ const stage=backupSource.slice(backupSource.indexOf('private fun stageExport'),b
 assert(stage.indexOf('call.data.remove("json")')>stage.indexOf('pendingExport = staged'));
 assert(stage.indexOf('call.data.remove("json")')<stage.indexOf('startActivityForResult'));
 console.log('PASS: large backup options are removed before Android persists file-picker activity state');
+
+const backActivity=fs.readFileSync(path.join(__dirname,'../native/android/app/src/main/java/com/ezpz/fitness/MainActivity.java'),'utf8');
+assert(backActivity.includes('getOnBackPressedDispatcher().addCallback')&&backActivity.includes('window.ezpzAndroidBack'),'Native system Back connects to the app navigation');

@@ -27,7 +27,7 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 function panel(){
  const box=document.getElementById('fitness-account-panel');if(!box)return;
  const previous=box.querySelector?.('.account-backup');
- const expanded=previous ? previous.open : !!user;
+ const expanded=previous?.open===true;
  const privacyOpen=box.querySelector?.('.account-disclosure')?.open===true;
  const action=(name,label,className='')=>'<button type="button" class="'+className+'" data-account="'+name+'" '+(busy?'disabled':'')+'>'+label+'</button>';
  const disclosure='<details class="account-disclosure" '+(privacyOpen?'open':'')+'><summary>How backup and sign-in work</summary><p>Google supplies your account identity and email when you use Google sign-in. For reviewer sign-in, Supabase verifies the reviewer credentials. Supabase holds your sign-in session and, after you choose Back up now, your fitness backup. Wearable connections require separate permission.</p><p>Fitness backups can include measurements, food, sleep, steps, workout records and photos. Cloud saves and restores happen only when you choose them.</p><p>During the private backup test, you can request account deletion at <a href="mailto:reimerskasper@gmail.com">reimerskasper@gmail.com</a>.</p></details>';

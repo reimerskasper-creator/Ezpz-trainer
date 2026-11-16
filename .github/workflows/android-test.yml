@@ -81,6 +81,7 @@ jobs:
         run: |
           node tests/saved-workout-planning-mobile.cjs
           node tests/trainer-space-mobile.cjs
+          node tests/eat-hybrid-mobile.cjs
       - name: Run broader mobile regression checks
         run: |
           node tests/planner-custom-meals-mobile.cjs

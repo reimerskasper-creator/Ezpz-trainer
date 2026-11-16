@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
 import androidx.activity.SystemBarStyle;
 import androidx.core.splashscreen.SplashScreen;
 import com.getcapacitor.BridgeActivity;
@@ -33,6 +34,11 @@ public class MainActivity extends BridgeActivity {
         if (getBridge() == null) return;
 
         startupWebView = getBridge().getWebView();
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override public void handleOnBackPressed() {
+                startupWebView.evaluateJavascript("window.ezpzAndroidBack?.()", null);
+            }
+        });
         startupWebView.setBackgroundColor(getColor(R.color.launch_background));
         previousAccessibility = startupWebView.getImportantForAccessibility();
         startupWebView.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO_HIDE_DESCENDANTS);

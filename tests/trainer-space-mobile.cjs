@@ -4,10 +4,16 @@ const server=http.createServer((req,res)=>{const f=path.resolve(web,'.'+new URL(
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch();try{for(const width of [320,390,430]){const context=await browser.newContext({viewport:{width,height:900},isMobile:true,hasTouch:true}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{if(!localStorage.getItem('ezpz-fitness-pilot-1'))localStorage.setItem('ezpz-fitness-pilot-1',JSON.stringify({profile:{goal:'maintain',level:'Advanced',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2,selectedWorkout:'guided-home-full-body-a'}));window.alert=()=>{}});
 await page.goto('http://127.0.0.1:'+server.address().port+'/'+(native?'index.html':'fitness.html'));await page.waitForFunction(()=>window.EZPZTrainerSpace&&window.EzpzAppearance);const before=await page.evaluate(()=>localStorage.getItem('ezpz-fitness-pilot-1'));await page.evaluate(()=>{tab='train';render()});assert.equal(await page.evaluate(()=>localStorage.getItem('ezpz-fitness-pilot-1')),before,'Opening trainer is read-only');assert.equal(await page.locator('.trainer-reference').count(),await page.evaluate(()=>workoutPlan().exercises.filter(x=>window.EzpzExerciseMedia.get(x.name)).length));assert(await page.locator('.trainer-scene').isVisible());assert(await page.locator('[data-trainer-video="0"]').isVisible());
 assert.equal(await page.locator('#training-exercise-select').innerText(),'Exercise 1 of 6');
-assert(await page.locator('[data-training-card="0"] .workout-progress-card + .trainer-media').isVisible());
+assert(await page.locator('[data-training-card="0"] .trainer-media > .workout-progress-card').isVisible());
 const photoFrame=await page.locator('[data-training-card="0"] .trainer-media').boundingBox();
 const exerciseCard=await page.locator('[data-training-card="0"]').boundingBox();
-assert(photoFrame.width>=exerciseCard.width-4,'Photo uses the card width');
+assert(photoFrame.width>=exerciseCard.width-4,'Media area uses the card width');
+const referenceFrame=await page.locator('[data-training-card="0"] .trainer-reference').boundingBox();
+const progressRail=await page.locator('#workout-progress-bar').boundingBox();
+const mediaRail=await page.locator('[data-training-card="0"] .trainer-media-actions').boundingBox();
+assert(progressRail.x+progressRail.width<=referenceFrame.x);
+assert(mediaRail.x>=referenceFrame.x+referenceFrame.width-1);
+assert(mediaRail.height>=132);
 
 const fixture=await page.evaluate(()=>{const c=document.createElement('canvas');c.width=300;c.height=600;const g=c.getContext('2d');g.fillStyle='#cedccf';g.fillRect(0,0,300,600);g.fillStyle='#2c6345';g.fillRect(0,0,300,70);g.fillRect(0,530,300,70);g.fillStyle='#123425';g.font='24px sans-serif';g.fillText('WHOLE PHOTO',45,290);return c.toDataURL('image/jpeg')});const buffer=Buffer.from(fixture.split(',')[1],'base64');
 await page.locator('[data-set-reps="0-0"]').fill('8');const weight=page.locator('[data-set-weight="0-0"]');if(await weight.count())await weight.fill('60');const draft=await page.evaluate(()=>JSON.stringify(workoutDraft(workoutPlan())));

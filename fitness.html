@@ -428,7 +428,7 @@ body[data-view=train] .session-footer{padding:10px 18px}
 </style>
 
 <style id="own-workout-builder">
-.category-photo{position:relative}.own-tile-plus{position:absolute;top:9px;right:9px;display:grid;place-items:center;width:27px;height:27px;background:#12b76a;color:white;border-radius:50%;font-size:20px;font-weight:500}
+.category-photo{position:relative}
 .own-category-tile{border-color:#9ccfaf!important}.own-category-tile strong{color:#24784a!important}
 .own-section-tabs{display:flex;gap:4px;background:#eaf2ed;padding:4px;border-radius:12px;margin:16px 0}
 .own-section-tabs>button{flex:1;min-width:0;border:0;background:transparent;padding:9px 6px;min-height:44px;font-size:12px;color:#779082}
@@ -7034,6 +7034,47 @@ function removeFoodEntry(id){return removeRecord('foodLog',foodEntries().findInd
 function undoRemoval(){if(!lastRemoval)return false;const {key,index,entry}=lastRemoval,values=[...(state[key]||[])];if(values.includes(entry)||key==='foodLog'&&values.some(x=>x.id===entry.id))return false;values.splice(Math.min(index,values.length),0,entry);if(!updateCollection(key,values))return false;lastRemoval=null;return true}
 function undoMarkup(){return lastRemoval?'<div class="undo-banner" role="status"><span>'+safe(lastRemoval.label)+'</span><button type="button" data-undo-removal>Undo</button></div>':''}
 function diaryCalendar(){const day=diaryDay(),label=(day===foodDate()?'Today · ':'')+new Date(day+'T12:00:00').toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});return '<div class="diary-calendar"><button type="button" data-diary-shift="-1" aria-label="Previous food diary day">‹</button><div class="diary-date-control"><label class="visually-hidden" for="diary-date">Food diary date</label><span class="diary-date-display" aria-hidden="true">'+safe(label)+'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v5m8-5v5M4 10h16"/></svg>'+'</span><input id="diary-date" type="date" value="'+day+'" max="'+foodDate()+'"></div><button type="button" data-diary-shift="1" aria-label="Next food diary day" '+(day===foodDate()?'disabled':'')+'>›</button></div>'+(day!==foodDate()?'<button type="button" class="diary-today" data-diary-today>Back to today</button>':'')}
+function openAppCalendar(input){
+ if(input.disabled||input.readOnly||document.getElementById('app-calendar'))return;
+ const selected=input.value,today=foodDate(),min=input.min||'1900-01-01',max=input.max||'2100-12-31';
+ const initial=validPlanDate(selected)?selected:today;
+ let month=(initial<min?min:initial>max?max:initial).slice(0,7)+'-01';
+ const dialog=document.createElement('dialog');
+ dialog.id='app-calendar';dialog.setAttribute('aria-labelledby','app-calendar-title');
+ dialog.innerHTML='<div class="app-calendar-heading"><h2 id="app-calendar-title">Choose date</h2><button type="button" data-calendar-close aria-label="Close calendar">×</button></div><div class="app-calendar-navigation"><button type="button" data-calendar-month="-1" aria-label="Previous month">‹</button><strong aria-live="polite"></strong><button type="button" data-calendar-month="1" aria-label="Next month">›</button></div><div class="app-calendar-grid"></div>';
+ const grid=dialog.querySelector('.app-calendar-grid'),navigation=dialog.querySelector('.app-calendar-navigation');
+ const shifted=step=>{const date=new Date(month+'T12:00:00');date.setMonth(date.getMonth()+step);return date.toLocaleDateString('en-CA')};
+ function paint(){
+  const start=new Date(month+'T12:00:00'),locale=document.documentElement.lang||undefined;
+  navigation.querySelector('strong').textContent=start.toLocaleDateString(locale,{month:'long',year:'numeric'});
+  navigation.firstElementChild.disabled=shifted(-1).slice(0,7)<min.slice(0,7);
+  navigation.lastElementChild.disabled=shifted(1).slice(0,7)>max.slice(0,7);
+  const days=[];
+  for(let i=0;i<7;i++)days.push('<span aria-hidden="true">'+safe(new Date(2024,0,7+i).toLocaleDateString(locale,{weekday:'short'}))+'</span>');
+  for(let i=0;i<start.getDay();i++)days.push('<span aria-hidden="true"></span>');
+  for(let day=month;day.slice(0,7)===month.slice(0,7);day=datePlus(day,1)){
+   const label=new Date(day+'T12:00:00').toLocaleDateString(locale,{weekday:'long',month:'long',day:'numeric',year:'numeric'});
+   days.push('<button type="button" data-calendar-date="'+day+'" aria-label="'+safe(label)+'" aria-pressed="'+(day===selected)+'" '+(day===today?'aria-current="date" ':'')+(day<min||day>max?'disabled':'')+'>'+Number(day.slice(-2))+'</button>');
+  }
+  grid.innerHTML=days.join('');
+ }
+ dialog.addEventListener('click',event=>{
+  const step=event.target.closest('[data-calendar-month]'),day=event.target.closest('[data-calendar-date]');
+  if(step&&!step.disabled){month=shifted(Number(step.dataset.calendarMonth));paint();if(step.disabled)navigation.querySelector('button:not(:disabled)')?.focus();return}
+  if(day&&!day.disabled){dialog.close();input.value=day.dataset.calendarDate;input.dispatchEvent(new Event('input',{bubbles:true}));input.dispatchEvent(new Event('change',{bubbles:true}));return}
+  if(event.target.closest('[data-calendar-close]'))dialog.close();
+ });
+ dialog.addEventListener('close',()=>{dialog.remove();(input.isConnected?input:(input.id&&document.getElementById(input.id)))?.focus({preventScroll:true})},{once:true});
+ paint();document.body.append(dialog);dialog.showModal();
+ (grid.querySelector('[aria-pressed="true"]:not(:disabled)')||grid.querySelector('button:not(:disabled)'))?.focus();
+}
+function interceptDatePicker(event){
+ const input=event.target.closest?.('input[type="date"]');
+ if(!input||event.type==='keydown'&&!['Enter',' ','ArrowDown'].includes(event.key))return;
+ event.preventDefault();openAppCalendar(input);
+}
+document.addEventListener('click',interceptDatePicker,true);
+document.addEventListener('keydown',interceptDatePicker,true);
 function foodEditForm(entry){return '<form class="food-edit-form" data-edit-food-form="'+safe(entry.id)+'"><div class="grid"><div><label>Portions<input name="servings" aria-label="Edit portions for '+safe(entry.name)+'" type="number" min=".1" max="20" step="any" value="'+entry.servings+'" required></label></div><div><label>Date<input name="date" aria-label="Edit date for '+safe(entry.name)+'" type="date" max="'+foodDate()+'" value="'+safe(entry.date)+'" required></label></div></div><div class="grid"><button class="primary">Save changes</button><button type="button" data-cancel-food-edit>Cancel</button></div><p class="note">Totals update to match your portion.</p></form>'}
 function recentFoodEntries(){const seen=new Set();return foodEntries().filter(e=>validDiaryDay(e.date)&&Array.isArray(e.macros)&&e.macros.length===4&&e.macros.every(Number.isFinite)&&Number.isFinite(e.servings)&&e.servings>0).slice().sort((a,b)=>b.date.localeCompare(a.date)||foodEntries().indexOf(b)-foodEntries().indexOf(a)).filter(e=>{const i=loggedRecipeIndex(e),key=i!==null?'r'+i:JSON.stringify([e.name,e.photoKey,foodUnitMacros(e)]);if(seen.has(key))return false;seen.add(key);return true}).slice(0,8)}
 function quickMealCards(){const fav=cleanFavouriteRecipes(state.favouriteRecipes),entries=mealQuickView==='favourites'?fav.map(i=>({recipeIndex:i,name:recipes[i].name,servings:1,macros:nutrition(recipes[i].ingredients)})):recentFoodEntries();return '<details class="quick-meals"><summary>Favourites & recent meals</summary><div class="quick-tabs"><button type="button" data-quick-view="recent" aria-pressed="'+(mealQuickView==='recent')+'">Recent</button><button type="button" data-quick-view="favourites" aria-pressed="'+(mealQuickView==='favourites')+'">Favourites ('+fav.length+')</button></div><p class="note">Log to '+safe(diaryDay())+'. Change the date in your food diary.</p>'+entries.map((e,k)=>{const i=loggedRecipeIndex(e),photo=i!==null?recipes[i].photo||(i<6?'./meal-images/meal-'+i+'.jpg':''):e.custom?customFoodImage(e):'';return '<article class="quick-meal"><button type="button" class="quick-meal-open" '+(i!==null?'data-quick-open="'+i+'"':'disabled')+'>'+(photo?'<img src="'+safe(photo)+'" alt="" loading="lazy">':'')+'<span><strong>'+safe(e.name)+'</strong><small>'+e.macros[0]+' kcal · '+e.servings+' portion(s)</small></span></button><label for="quick-portion-'+k+'">Portions</label><div class="quick-meal-log"><input id="quick-portion-'+k+'" data-quick-portions="'+k+'" type="number" min=".1" max="20" step="any" value="'+e.servings+'" aria-label="Portions for '+safe(e.name)+'"><button type="button" '+(mealQuickView==='favourites'?'data-quick-recipe="'+i+'"':'data-repeat-food="'+safe(e.id)+'"')+' data-quick-key="'+k+'">Log meal ＋</button></div></article>'}).join('')+(!entries.length?'<p class="note">'+(mealQuickView==='favourites'?'Open a recipe and tap Save favourite.':'Meals you log will appear here for quick reuse.')+'</p>':'')+'</details>'}
@@ -11774,6 +11815,31 @@ const pageNames={home:'Home',train:'Workout',eat:'Eat',sleep:'Sleep',zone:'Zone'
 let pageTrail=['home'];
 function rememberPageOrigin(){if(!state.profile)return;if(pageTrail.at(-1)===tab)return;const index=pageTrail.lastIndexOf(tab);if(index>=0)pageTrail=pageTrail.slice(0,index+1);else pageTrail=[...pageTrail.slice(-19),tab]}
 function pageReturnTarget(){return pageTrail.length>1?pageTrail.at(-2):'home'}
+window.ezpzAndroidBack=function(){
+ const dialogs=[...document.querySelectorAll('dialog:modal')],active=document.activeElement?.closest('dialog:modal'),dialog=active||dialogs.at(-1);
+ if(dialog){
+  if(typeof dialog.requestClose==='function')dialog.requestClose();
+  else if(dialog.dispatchEvent(new Event('cancel',{cancelable:true})))dialog.close();
+  return;
+ }
+ if(tab==='custom-food'){
+  const scanner=document.getElementById('barcode-panel');
+  if(scanner&&!scanner.hidden){closeBarcodeScanner();return}
+  if(ingredientSelected){closeIngredientAmount();return}
+  if(customMealPlanContext){returnPlannerCustomMeal();return}
+  const find=document.querySelector('#food-review-view:not([hidden]) [data-food-find]');
+  if(find){find.click();return}
+ }
+ if(tab==='planner'&&builderDraft||tab==='builder'){
+  screen.querySelector('[data-action="cancel-builder"]')?.click();return;
+ }
+ if(tab==='preview'&&screen.querySelector('[data-preview-back]')){
+  screen.querySelector('[data-preview-back]').click();return;
+ }
+ if(tab==='train'&&plannedMediaRepair){tab='planner';render();window.scrollTo(0,0);return}
+ if(!state.profile||tab==='home')return;
+ tab=pageReturnTarget();render();window.scrollTo(0,0);
+};
 function ensurePageReturn(){if(!screen.querySelector)return;document.querySelector('.header-return')?.remove();if(!state.profile||tab==='home')return;rememberPageOrigin();const existing=screen.querySelector('.planner-back,.back-link,.nutrition-back,[data-preview-back],.library-detail-back,[data-action="cancel-builder"]');if(existing){if(['shopping','connected-apps','movement'].includes(tab)&&existing.matches?.('[data-go]')){const target=pageReturnTarget();existing.dataset.go=target;existing.textContent='← Back to '+(pageNames[target]||'Home')}return}if(screen.querySelector('[data-app-return]'))return;const target=pageReturnTarget(),button=document.createElement('button');button.type='button';button.className='app-return header-return';button.dataset.appReturn=target;button.textContent='← Back to '+(pageNames[target]||'Home');const header=document.querySelector('body>header.row');if(header)header.insertBefore(button,header.querySelector('.header-more'));else screen.prepend(button)}
 document.addEventListener('click',e=>{const back=e.target.closest('[data-app-return]');if(!back)return;tab=back.dataset.appReturn||'home';render();window.scrollTo(0,0)});
 
@@ -11856,7 +11922,7 @@ document.addEventListener('click',e=>{const view=e.target.closest('[data-home-me
 
 function homeNextWorkout(){const upcoming=upcomingWorkouts(3),week=Array.from({length:7},(_,i)=>datePlus(foodDate(),i));let rows='';
  if(homeScheduleView==='week'){rows=week.map(date=>{const id=state.workoutSchedule?.[date],w=knownWorkout(id)?planWorkout(id):null;return (w?upcomingWorkoutRow(w,date,scheduledSessionDone(date,id)):'<button class="upcoming-day" data-home-plan-date="'+date+'"><span aria-hidden="true">'+(id==='rest'?'○':'+')+'</span><span><small>'+safe(planDayLabel(date))+'</small><strong>'+(id==='rest'?'Rest / recovery':'No workout planned')+'</strong></span><b aria-hidden="true">›</b></button>')+dayExtraWorkouts(date).map(x=>upcomingWorkoutRow(planWorkout(x.workoutId),date,false,x.slot)).join('')}).join('')}
- else{rows=upcoming.map(x=>upcomingWorkoutRow(x.workout,x.date,false,x.slot)).join('');if(!upcoming.length)rows=upcomingWorkoutRow(planWorkout(activeWorkoutId()),null);const empty=3-(upcoming.length||1);rows+=Array.from({length:empty},(_,i)=>'<button class="upcoming-empty" data-go="planner"><span aria-hidden="true">＋</span><span>Add '+((upcoming.length||1)+i+1===2?'your second':'your third')+' workout</span><b aria-hidden="true">›</b></button>').join('')}
+ else{rows=upcoming.map(x=>upcomingWorkoutRow(x.workout,x.date,false,x.slot)).join('');if(!upcoming.length)rows=upcomingWorkoutRow(planWorkout(activeWorkoutId()),null);const empty=3-(upcoming.length||1);rows+=Array.from({length:empty},(_,i)=>'<button class="upcoming-empty" data-go="planner"><span aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span><span>Add '+((upcoming.length||1)+i+1===2?'your second':'your third')+' workout</span><b aria-hidden="true">›</b></button>').join('')}
  const open=cleanHomePanels(state.homePanels).workouts,first=upcoming[0],preview=first?planDayLabel(first.date)+' · '+(first.workout.programName||first.workout.title):'Choose your next workout';
  return '<section class="home-next home-collapsible">'+homePanelHeading('workouts','Your next workouts',preview)+'<div id="home-workouts-content" class="home-panel-content" '+(open?'':'hidden')+'><div class="upcoming-tabs"><button data-home-schedule="next" aria-pressed="'+(homeScheduleView==='next')+'">Next 3 workouts</button><button data-home-schedule="week" aria-pressed="'+(homeScheduleView==='week')+'">Next 7 days</button></div>'+'<div class="upcoming-list">'+rows+'</div>'+(!upcoming.length&&homeScheduleView==='next'?'<p class="note">Add dates in My plan to see your sessions in order.</p>':'')+'</div></section>';
 
@@ -12064,7 +12130,7 @@ document.addEventListener('cancel',e=>{if(e.target.id==='planner-picker'){const 
 
 let builderOrigin='planner',builderSection='build',builderPlanContext=null;
 function emptyOwnWorkout(){return {title:'',category:'Full Body',level:'Beginner',equipment:'',minutes:'30',exercises:[{name:'',sets:3,reps:'8–12',unit:'reps',rest:60,side:false}]}}
-function ownWorkoutTile(planner=false){const count=cleanCustomWorkouts(state.customWorkouts).length;return planner?'<button class="own-category-tile" data-plan-picker-action="build">'+workoutCoverImage('Full Body')+'<strong>My workouts</strong><small>'+ (count?count+' saved workouts':'Your exercises. Your workout.')+'</small></button>':'<button type="button" class="category-tile own-category-tile" data-action="create-my-workout" aria-label="Create your own workout"><span class="category-photo">'+workoutCoverImage('Full Body')+'<span class="own-tile-plus" aria-hidden="true">＋</span></span><span class="category-copy"><strong>Create your own</strong><small>Name your exercises · train your way</small><b>'+(count?count+' saved workouts':'Start building')+' <span aria-hidden="true">→</span></b></span></button>'}
+function ownWorkoutTile(planner=false){const count=cleanCustomWorkouts(state.customWorkouts).length,photo='<img src="./home-images/more-weekly-plan.jpg" alt="Open workout notebook" loading="lazy" decoding="async" width="960" height="640">';return planner?'<button class="own-category-tile" data-plan-picker-action="build">'+photo+'<strong>My workouts</strong><small>'+ (count?count+' saved workouts':'Your exercises. Your workout.')+'</small></button>':'<button type="button" class="category-tile own-category-tile" data-action="create-my-workout" aria-label="Create your own workout"><span class="category-photo">'+photo+'</span><span class="category-copy"><strong>Create your own</strong><small>Name your exercises · train your way</small><b>'+(count?count+' saved workouts':'Start building')+' <span aria-hidden="true">→</span></b></span></button>'}
 function startBuilder(id,context=null){builderPlanContext=context;document.getElementById('workout-chooser')?.close();builderOrigin=tab==='planner'?'planner':'train';builderSection=context&&cleanCustomWorkouts(state.customWorkouts).length?'saved':'build';const w=planWorkout(id);builderDraft=w?{...w,id:undefined,title:(w.title||w.programName)+' — my version',level:w.level||'Beginner',exercises:w.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).map(x=>({...x}))}:emptyOwnWorkout();tab=builderOrigin==='planner'?'planner':'builder';render();window.scrollTo(0,0)}
 function ownSavedWorkouts(){const saved=cleanCustomWorkouts(state.customWorkouts);return saved.length?'<div class="own-saved-list">'+saved.map(w=>'<article class="own-saved-workout"><div>'+workoutCoverImage(w)+'<span><strong>'+safe(w.title)+'</strong><small>'+w.exercises.length+' exercise'+(w.exercises.length===1?'':'s')+' · '+safe(w.minutes)+' min</small>'+workoutBadges(w)+'</span></div><button class="primary" data-own-start="'+safe(w.id)+'">'+(workoutMediaGaps(w).length?'Add exercise media':builderPlanContext?'Add to '+planDayLabel(builderPlanContext.date):Object.keys(state.workoutDrafts?.[w.id]||{}).length?'Resume workout':'Start workout')+' →</button><details class="personal-photo-settings"><summary>Change photo</summary>'+personalPhotoControls('saved-workout',w.id,w.photoId)+'</details></article>').join('')+'</div>':'<section class="card own-empty"><span aria-hidden="true">＋</span><h3>Your workouts live here</h3><p>Give a session a name, add your exercises, and save it for whenever you want to train.</p><button class="primary" data-own-section="build">Create my first workout →</button></section>'}
 function workoutBuilder(){if(screen.dataset)delete screen.dataset.plannerDisplay;if(!builderDraft)builderDraft=emptyOwnWorkout();const b=builderDraft,saved=cleanCustomWorkouts(state.customWorkouts);screen.innerHTML='<button type="button" class="planner-back own-back" data-action="cancel-builder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m14 6-6 6 6 6"/></svg><span>Back</span></button><div class="ez-section-heading own-heading"><span class="ez-eyebrow">YOUR TRAINING. YOUR WAY.</span><h2>Your workouts</h2><p>Use our ready-made sessions, or make your own.</p></div><div class="own-section-tabs" role="group" aria-label="Your workout options"><button data-own-section="build" aria-pressed="'+(builderSection==='build')+'">Create workout</button><button data-own-section="saved" aria-pressed="'+(builderSection==='saved')+'">Saved workouts <span>'+saved.length+'</span></button></div>'+(builderSection==='saved'?ownSavedWorkouts()+'<button class="subtle-action" data-action="cancel-builder">Back to '+(builderOrigin==='planner'?'my plan':'Train')+' →</button>':'<form id="workout-builder"><section class="card own-name-card"><div class="own-cover-preview">'+workoutCoverImage({...b,category:b.category})+'<span><small>MAKE IT YOURS</small><strong>A workout built by you</strong></span></div>'+personalPhotoControls('workout','',b.photoId)+'<label for="builder-title">Workout name</label><input id="builder-title" name="title" maxlength="80" required value="'+safe(b.title)+'" placeholder="e.g. My morning strength"><details class="own-workout-settings"><summary>Cover, equipment & other options</summary><div class="builder-two"><div><label for="builder-category">Cover & focus</label><select id="builder-category" name="category">'+workoutCategories.map(c=>'<option value="'+c.id+'" '+(b.category===c.id?'selected':'')+'>'+c.label+'</option>').join('')+'</select></div><div><label for="builder-level">Experience</label><select id="builder-level" name="level">'+['Beginner','Intermediate','Advanced'].map(x=>'<option '+(b.level===x?'selected':'')+'>'+x+'</option>').join('')+'</select></div></div><label for="builder-equipment">Equipment (optional)</label><input id="builder-equipment" name="equipment" maxlength="160" value="'+safe(b.equipment)+'" placeholder="e.g. Dumbbells, or no equipment"><label for="builder-minutes">Estimated minutes</label><input id="builder-minutes" name="minutes" type="number" min="5" max="180" value="'+safe(b.minutes?.match(/^\d+/)?.[0]||30)+'"></details></section><div class="own-exercise-list">'+b.exercises.map((x,i)=>'<section class="card builder-exercise own-exercise-card"><div class="row"><h3><span>'+(i+1)+'</span> Exercise '+(i+1)+'</h3><button type="button" data-remove-builder="'+i+'" aria-label="Remove exercise '+(i+1)+'" '+(b.exercises.length===1?'disabled':'')+'>Remove</button></div><label for="builder-name-'+i+'">Exercise name</label><input id="builder-name-'+i+'" name="name'+i+'" maxlength="100" required value="'+safe(x.name)+'" list="guided-builder-names" placeholder="Choose a guided movement or add your own"><div class="builder-two"><div><label for="builder-sets-'+i+'">Sets</label><input id="builder-sets-'+i+'" name="sets'+i+'" type="number" min="1" max="10" required value="'+x.sets+'"></div><div><label for="builder-reps-'+i+'">Reps / duration</label><input id="builder-reps-'+i+'" name="reps'+i+'" maxlength="30" required value="'+safe(x.reps)+'" placeholder="e.g. 10 or 8–12"></div></div><details class="own-exercise-options"><summary>Time, rest & per-side options</summary><div class="builder-two"><div><label for="builder-unit-'+i+'">Log as</label><select id="builder-unit-'+i+'" name="unit'+i+'">'+['reps','sec','min'].map(u=>'<option '+(u===x.unit?'selected':'')+'>'+u+'</option>').join('')+'</select></div><div><label for="builder-rest-'+i+'">Rest (seconds)</label><input id="builder-rest-'+i+'" name="rest'+i+'" type="number" min="0" max="600" required value="'+x.rest+'"></div></div><label class="builder-checkbox"><input name="side'+i+'" type="checkbox" '+(x.side?'checked':'')+'> Per side</label></details></section>').join('')+'</div><datalist id="guided-builder-names">'+(window.EzpzExerciseMedia?.names||[]).map(name=>'<option value="'+safe(name)+'"></option>').join('')+'</datalist><button type="button" class="own-add-exercise" data-action="add-builder-exercise" '+(b.exercises.length>=30?'disabled':'')+'>＋ Add another exercise</button><p class="note own-builder-note">Any exercise name works. Your saved workout uses the same set logging, rest timer and history as our ready-made sessions.</p><button class="primary own-save-button" type="submit" data-destination="'+(builderOrigin==='planner'?'plan':'train')+'">'+(builderOrigin==='planner'?'Save to this day':'Save & start workout')+' →</button><button class="own-save-later" type="submit" data-destination="saved">Save for later</button><button type="button" class="subtle-action" data-action="cancel-builder">Cancel</button></form>')}
@@ -13662,7 +13728,7 @@ body[data-view=home] .foundation-map{gap:16px!important;margin:18px 0 10px!impor
 <style id="trend-icon-and-goal-key">.trend-chart-heading>button{display:flex;align-items:center;gap:5px}.trend-chart-heading>button>svg{width:14px;height:14px;flex:none}.trend-chart-legend .trend-goal-swatch{width:16px;height:0;border-top:2px dashed #d2e7da;border-radius:0;background:none;vertical-align:middle}</style>
 
 <script>
-document.addEventListener('click',event=>{if(event.target.id==='diary-date'){try{event.target.showPicker?.()}catch(_){}}const menu=event.target.closest?.('.food-log-actions');document.querySelectorAll('.food-log-actions[open]').forEach(el=>{if(el!==menu)el.open=false})});
+document.addEventListener('click',event=>{const menu=event.target.closest?.('.food-log-actions');document.querySelectorAll('.food-log-actions[open]').forEach(el=>{if(el!==menu)el.open=false})});
 document.addEventListener('keydown',event=>{if(event.key!=='Escape')return;const menu=event.target.closest?.('.food-log-actions[open]');if(menu){menu.open=false;menu.querySelector('summary')?.focus()}});
 </script>
 <style id="approved-eat-hybrid">
@@ -13934,4 +14000,23 @@ html body[data-view] :is(#planner-picker,#workout-chooser,#training-exercise-dia
 }
 html body[data-view] :is(#planner-picker,#workout-chooser,#training-exercise-dialog,#workout-edit-dialog,#flex-day-dialog,#tracker-picker,#nutrition-picker,#plan-manager-dialog .plan-draft-picker) :is(button[aria-pressed=true],button[aria-selected=true],button[aria-checked=true],button.primary) :is(strong,small,b,span,em){color:inherit!important}
 html body[data-view] :is(#planner-picker,#workout-chooser) :is(.picker-choice,.program-card,.category-tile) :is(.program-badges span,.meal-macro-pills em){background:#234b38!important;color:#e5f6eb!important}
+</style>
+
+<style id="phone-polish">
+#app-calendar{box-sizing:border-box;width:min(94vw,380px);max-height:90dvh;padding:14px;border:1px solid #658670;border-radius:18px;background:#153d2d;color:#f1fff5;color-scheme:dark}
+#app-calendar::backdrop{background:#051b14b3;backdrop-filter:blur(3px)}
+#app-calendar :is(.app-calendar-heading,.app-calendar-navigation){display:flex;align-items:center;justify-content:space-between;gap:6px}
+#app-calendar h2{margin:0;font-size:19px;color:#f1fff5}
+#app-calendar .app-calendar-navigation{margin-block:8px}
+#app-calendar button{background:#234b38!important;border:1px solid #658670!important;color:#f1fff5!important;border-radius:9px;min-height:42px;margin:0;padding:4px}
+#app-calendar :is(.app-calendar-heading,.app-calendar-navigation)>button{min-width:44px}
+#app-calendar .app-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center;align-items:center}
+#app-calendar .app-calendar-grid>span{font-size:11px;color:#c2ddcd}
+#app-calendar .app-calendar-grid>button{width:100%;font-size:13px;border-color:transparent!important}
+#app-calendar button[aria-current="date"]{border-color:#8ee2b4!important}
+#app-calendar button[aria-pressed="true"]{background:#8ee2b4!important;color:#153d2d!important}
+#app-calendar button:disabled{opacity:.45}
+body[data-view=home] #screen :is(.home-scan-food,[data-edit-workout-exercises]){background:transparent!important;border-color:transparent!important;box-shadow:none!important}
+body[data-view=home] #screen .upcoming-empty>span:first-child{display:grid;place-items:center;background:transparent!important;color:#a8dfc1!important}
+body[data-view=home] #screen .upcoming-empty>span:first-child svg{display:block;width:20px;height:20px}
 </style>

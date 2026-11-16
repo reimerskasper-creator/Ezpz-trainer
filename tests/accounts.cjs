@@ -14,6 +14,7 @@ async function harness({state=guest,enabled=false,remote=null,failStore=false,wh
 }
 (async()=>{
  const pilot=await harness();assert.equal(pilot.writes,0);assert.equal(pilot.uploads,0);await pilot.click('save');assert.equal(pilot.uploads,0);assert.match(pilot.html,/not activated/);await pilot.click('signin');assert.equal(pilot.oauth,1);
+ assert.match(pilot.html,/<details class="account-backup"\s*>/);
  const wrong=await harness({state:a,who:'b',enabled:true});assert.equal(wrong.signedOut,1);await wrong.click('save');assert.equal(wrong.uploads,0);assert.equal(wrong.writes,0);
  const missing=await harness({enabled:true});assert.match(missing.html,/Backup status unknown/);await missing.click('review');assert.match(missing.html,/No cloud backup found/);assert.equal(missing.writes,0);
  const present=await harness({enabled:true,remote:{payload:guest,revision:2,updated_at:'2026-11-14T12:00:00Z'}});await present.click('review');assert.match(present.html,/Last cloud backup/);assert.match(present.html,/2026/);assert.equal(present.writes,0);

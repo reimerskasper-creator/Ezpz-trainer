@@ -1,3 +1,10 @@
+## 2026-11-16 — Phone layout, calendar and Android Back
+
+- Android 1.0.144 places Trainer progress in the left rail and the media actions in the right rail. Exercise photos use the center of the frame.
+- Date fields open the themed app calendar. Android system Back dismisses the active app overlay, steps back through the app, and stays on Home at the root.
+- Create your own uses a distinct workout notebook photo. Home’s scanner, upcoming workout plus icons, and Edit action have simpler styling. More opens with Save my progress collapsed.
+- Branch: android-health-connect. Android and phone-width verification runs on the canonical branch.
+
 ## 2026-11-16 — Trainer layout and saved workout repair
 
 - Android 1.0.143 combines the exercise position and chooser, moves completed sets above the active exercise photo, and puts compact translucent media controls on the wider photo.

@@ -60,7 +60,9 @@ body[data-view=train] #workout-progress-label{font-size:11px;white-space:nowrap}
 body[data-view=train] .workout-progress-card progress{width:auto;min-width:30px;flex:1;margin:0;height:5px}
 body[data-view=train] .compact-exercise-picker{display:flex;justify-content:flex-end;margin:4px 0}
 body[data-view=train] .compact-picker-label{display:flex;align-items:center;justify-content:center;font-size:12px;padding:0 12px;min-height:44px;margin:0}
-body[data-view=train] .session-exercise .workout-progress-card{border:0!important;background:transparent!important;margin:0;padding:0 2px;min-height:24px;box-shadow:none}
+body[data-view=train] .trainer-media>.workout-progress-card{grid-column:1;grid-row:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:0!important;background:transparent!important;margin:0;padding:2px;box-shadow:none;text-align:center}
+body[data-view=train] .trainer-media #workout-progress-label{font-size:9px;line-height:1.2;white-space:normal}
+body[data-view=train] .trainer-media #workout-progress-bar{writing-mode:vertical-lr;direction:rtl;flex:none;width:4px;min-width:4px;height:52px;margin:0}
 body[data-view=train] .training-exercise{margin:0 0 8px;border-radius:16px}
 body[data-view=train] .training-exercise>summary{min-height:0;padding:10px 10px 7px!important}
 body[data-view=train] .session-exercise-head{gap:8px;margin:0}
@@ -70,12 +72,13 @@ body[data-view=train] .session-exercise-head p{font-size:11px!important;line-hei
 body[data-view=train] .exercise-tools-button{width:44px;min-width:44px;height:44px;min-height:44px;padding:0;font-size:23px!important;border-radius:12px}
 body[data-view=train] .session-exercise{padding:0 10px 8px!important}
 body[data-view=train] .trainer-media{margin:0 0 6px}
-body[data-view=train] .trainer-media.has-reference{position:relative;gap:0!important;margin-inline:-10px;padding:0!important;border-inline:0;border-radius:0;overflow:hidden}
+body[data-view=train] .trainer-media.has-reference{grid-template-columns:46px minmax(0,1fr) 46px;min-height:148px;position:relative;gap:0!important;margin-inline:-10px;padding:0!important;border-inline:0;border-radius:0;overflow:hidden}
 body[data-view=train] .trainer-reference .trainer-expanded-photo,body[data-view=train] .trainer-reference[open] .trainer-expanded-photo{height:var(--trainer-photo-height,160px)!important;min-height:0}
 body[data-view=train] .trainer-reference img,body[data-view=train] .trainer-reference[open] img{width:100%;height:100%;max-height:none;object-fit:contain!important}
 body[data-view=train] .trainer-media-actions{gap:5px;margin:3px 0 0}
-body[data-view=train] .has-reference>.trainer-media-actions{position:absolute;right:5px;bottom:5px;margin:0;padding:0;border:0}
-body[data-view=train] .has-reference>.trainer-media-actions>button{border:1px solid #ffffff54!important;border-radius:50%;background:#071f18b8!important;color:#f1fff5!important;backdrop-filter:blur(6px)}
+body[data-view=train] .has-reference>.trainer-reference{grid-column:2;grid-row:1;border-radius:0}
+body[data-view=train] .has-reference>.trainer-media-actions{grid-column:3;grid-row:1;flex-direction:column;justify-content:center;margin:0;padding:0;border:0}
+body[data-view=train] .has-reference>.trainer-media-actions>button{border:1px solid #ffffff54!important;border-radius:50%;background:#071f1854!important;color:#f1fff5!important;backdrop-filter:blur(6px)}
 body[data-view=train] .has-reference>.trainer-media-actions svg{width:18px;height:18px;flex-basis:18px}
 body[data-view=train] .set-head{margin:5px 0 1px;font-size:11px}
 body[data-view=train] .set-row{margin:0;padding:2px 0;min-height:48px;gap:8px}
