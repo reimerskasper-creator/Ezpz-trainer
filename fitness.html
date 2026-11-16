@@ -10959,7 +10959,7 @@ function resetWorkoutSetup(){
   state.planItemDrafts={};
   state.trainerMedia={};
   state.trainerBackgrounds={};
-  for(const key of ['activePlanDate','activePlanItem','activeSavedPlanId','draft','restTimer','trainerSettings','workoutExerciseEdits','workoutEditPlanId','customExerciseNames','workoutFilters','workoutSetting'])delete state[key];
+  for(const key of ['activePlanDate','activePlanItem','activeSavedPlanId','draft','restTimer','trainerSettings','workoutExerciseEdits','workoutEditPlanId','workoutDraftArchives','customExerciseNames','workoutFilters','workoutSetting'])delete state[key];
   state.selectedWorkout=defaultGuidedWorkout();
  });
 }
@@ -11294,7 +11294,7 @@ function exerciseLibrary(){
  const available=(library?.names||[]).map(name=>({
   name,category:exerciseCategory(name),equipment:featuredMovementSpecs[name]?.slice(1).join(', ')||'Bodyweight',demo:library.get(name),
  }));
- const chosen=available.find(item=>item.name===librarySelected);
+ const chosen=available.find(item=>item.name===librarySelected||item.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')===librarySelected);
  if(chosen){
   screen.innerHTML='<button class="library-detail-back" data-action="library-back">← All exercises</button><div class="guide-heading"><span><h2>'+safe(chosen.name)+'</h2><p>'+safe(chosen.equipment)+'</p></span></div><section class="card strict-demo"><img src="'+safe(chosen.demo.photo)+'" alt="'+safe(chosen.name)+' form reference"><a href="'+safe(chosen.demo.videoUrl)+'" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Watch demo</a></section>';
   return;
