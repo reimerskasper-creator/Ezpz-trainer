@@ -30,7 +30,7 @@ for(const setting of ['home','gym']){
   api.setCategory(category);
   for(const plan of plans){
    ids.add(plan.id);
-   assert(plan.exercises.length>=3&&plan.equipment&&plan.guide,'Complete program '+plan.id);
+   assert(plan.exercises.length>=6&&new Set(plan.exercises.map(x=>x.name)).size===plan.exercises.length&&plan.equipment&&plan.guide,'Complete program '+plan.id);
    const before=JSON.stringify(api.state);
    for(const exercise of api.baseWorkoutPlan(plan.id).exercises){
     const demo=api.guides.get(exercise.name);

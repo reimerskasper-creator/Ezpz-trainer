@@ -1,3 +1,7 @@
+## 2026-11-16 — Six-movement workouts and clear plan
+
+- Android 1.0.139 expands all 20 featured workouts and Coach Sample sessions to six distinct movements with bundled photos and demo links. Existing movement order and draft positions are preserved.
+- My Plan shows Clear current plan at the top when it contains an active schedule. Clear removes the scheduled entries and detaches the plan name, cover and targets while preserving completed logs, separate saved plans and dates outside the current plan.
 ## 2026-11-16 — Require exercise photos and demos
 
 - Android 1.0.138 limits exercise browsing and suggestions to available photo and video pairs. Incomplete personal workouts open a media-repair screen before the logger. Incomplete saved plans stay editable and require covered workouts before activation.

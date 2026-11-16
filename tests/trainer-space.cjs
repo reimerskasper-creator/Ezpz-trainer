@@ -14,14 +14,14 @@ console.log('PASS trainer media URL/schema validation, photo references/backup r
 const guidesWindow={};
 new Function('window',fs.readFileSync('fitness-app/coach-sample-photos.js','utf8')+fs.readFileSync('fitness-app/exercise-media.js','utf8'))(guidesWindow);
 const guides=guidesWindow.EzpzExerciseMedia;
-assert.equal(guides.names.length,33);
+assert.equal(guides.names.length,41);
 assert.equal(guides.get('DB Romanian Deadlift'),guides.get('Dumbbell Romanian Deadlift'));
 assert.notEqual(guides.get('Dumbbell Bench Press'),guides.get('Incline Dumbbell Press'));
 assert.equal(guides.get('Incline Push-Up'),undefined);
 for(const name of guides.names){
  const {photo,videoUrl}=guides.get(name);
  assert(photo.startsWith('data:image/jpeg')||fs.existsSync(photo),name+' photo exists');
- assert.match(videoUrl,/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]{11}$/);
+ assert.match(videoUrl,/^https:\/\/(www\.youtube\.com\/watch\?v=[\w-]{11}|www\.the-fit-edit\.com\/library\/bear-plank)$/);
 }
 assert.deepEqual(guides.choices(['Custom Row','Floor Press','Dumbbell Floor Press','DB Floor Press','Goblet Squat'],'Goblet Squat'),['Dumbbell Floor Press','Custom Row','Floor Press']);
 console.log('PASS shared exercise references use explicit aliases, include bundled photos and sort covered swaps first');

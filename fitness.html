@@ -7122,67 +7122,95 @@ const featuredMovementSpecs={
  'Dumbbell Bench Press':['press','dumbbells','flat bench'],
  'Lying Machine Leg Curl':['knee-flexion','lying leg curl machine'],
  'Pallof Press':['side-brace','cable station','single handle'],
+ 'Reverse Crunch':['core-flexion'],
+ 'Bear Plank':['brace'],
+ 'Tuck Hollow Hold':['brace'],
+ 'Dead Bug Heel Taps':['brace'],
+ 'Standing Dumbbell Shoulder Press':['overhead','dumbbells'],
+ 'Standing Overhead Dumbbell Triceps Extension':['triceps','dumbbells'],
+ 'Close-Grip Push-Up':['press'],
+ 'Dumbbell Pullover':['vertical-pull','dumbbells','flat bench'],
 };
 const featuredWorkoutRows=[
- ['home','full-body','A','Squat & Press', 'Full Body', 35, [
+ ['home','full-body','A','Squat & Press', 'Full Body',45,[
   ['Goblet Squat',3,'8–12',90],['Dumbbell Floor Press',3,'8–12',90],['Single-Arm Dumbbell Bench Row',3,'8–12',90,'reps',true],['Dead Bug',2,'6–10',45,'reps',true],
+  ['Bodyweight Reverse Lunge',2,'8–12',75,'reps',true],['Glute Bridge',2,'10–15',60],
  ]],
- ['home','full-body','B','Hinge & Row','Full Body',35,[
+ ['home','full-body','B','Hinge & Row','Full Body',45,[
   ['Dumbbell Romanian Deadlift',3,'8–12',120],['Chest-Supported Dumbbell Row',3,'8–12',90],['Push-Up',2,'6–12',90],['Bodyweight Reverse Lunge',2,'8–12',60,'reps',true],
+  ['Standing Dumbbell Shoulder Press',2,'8–12',90],['Side Plank',2,'15–30',45,'sec',true],
  ]],
- ['home','push','A','Chest','Push',25,[
+ ['home','push','A','Chest','Push',40,[
   ['Dumbbell Floor Press',3,'8–12',120],['Push-Up',2,'6–12',90],['Dumbbell Lateral Raise',2,'10–15',60],
+  ['Standing Dumbbell Shoulder Press',2,'8–12',90],['Close-Grip Push-Up',2,'6–10',75],['Standing Overhead Dumbbell Triceps Extension',2,'10–15',60],
  ]],
- ['home','push','B','Shoulders & Pressing','Push',25,[
+ ['home','push','B','Shoulders & Pressing','Push',40,[
   ['Seated Dumbbell Shoulder Press',3,'8–12',120],['Dumbbell Floor Press',2,'8–12',90],['Dumbbell Lateral Raise',2,'12–15',60],
+  ['Push-Up',2,'6–12',75],['Close-Grip Push-Up',2,'6–10',75],['Standing Overhead Dumbbell Triceps Extension',2,'10–15',60],
  ]],
- ['home','pull','A','Back & Biceps','Pull',30,[
+ ['home','pull','A','Back & Biceps','Pull',40,[
   ['Single-Arm Dumbbell Bench Row',3,'8–12',90,'reps',true],['Chest-Supported Dumbbell Row',2,'10–12',90],['Standing Dumbbell Curl',2,'10–15',60],
+  ['Dumbbell Pullover',2,'10–12',75],['Chest-Supported Dumbbell Reverse Fly',2,'12–15',60],['Dumbbell Hammer Curl',2,'10–15',60],
  ]],
- ['home','pull','B','Upper Back & Rear Delts','Pull',25,[
+ ['home','pull','B','Upper Back & Rear Delts','Pull',45,[
   ['Chest-Supported Dumbbell Row',3,'8–12',90],['Chest-Supported Dumbbell Reverse Fly',2,'12–15',60],['Dumbbell Hammer Curl',2,'10–15',60],
+  ['Single-Arm Dumbbell Bench Row',2,'8–12',90,'reps',true],['Dumbbell Pullover',2,'10–12',75],['Standing Dumbbell Curl',2,'10–15',60],
  ]],
- ['home','legs','A','Quads & Calves','Leg',30,[
+ ['home','legs','A','Quads & Calves','Leg',45,[
   ['Goblet Squat',3,'8–12',120],['Bodyweight Split Squat',2,'8–12',75,'reps',true],['Bodyweight Step-Up',2,'8–12',75,'reps',true],['Bodyweight Standing Calf Raise',2,'12–20',45],
+  ['Dumbbell Romanian Deadlift',2,'8–12',90],['Glute Bridge',2,'10–15',60],
  ]],
- ['home','legs','B','Glutes & Hamstrings','Leg',30,[
+ ['home','legs','B','Glutes & Hamstrings','Leg',45,[
   ['Dumbbell Romanian Deadlift',3,'8–12',120],['Slider Hamstring Curl',2,'6–10',75],['Bodyweight Reverse Lunge',2,'8–12',75,'reps',true],['Glute Bridge',2,'10–15',60],
+  ['Bodyweight Split Squat',2,'8–12',75,'reps',true],['Bodyweight Standing Calf Raise',2,'12–20',45],
  ]],
- ['home','core','A','Bracing','Core',15,[
+ ['home','core','A','Bracing','Core',25,[
   ['Dead Bug',2,'6–10',45,'reps',true],['Forearm Plank',2,'20–40',45,'sec'],['Bird Dog',2,'6–10',45,'reps',true],
+  ['Reverse Crunch',2,'8–12',45],['Bear Plank',2,'15–25',45,'sec'],['Tuck Hollow Hold',2,'15–25',45,'sec'],
  ]],
- ['home','core','B','Side Stability','Core',20,[
+ ['home','core','B','Side Stability','Core',25,[
   ['Side Plank',2,'15–30',45,'sec',true],['Dumbbell Farmer Carry',3,'20–40',60,'sec'],['Bird Dog',2,'6–10',45,'reps',true],
+  ['Bear Plank',2,'15–25',45,'sec'],['Dead Bug Heel Taps',2,'6–10',45,'reps',true],['Glute Bridge',2,'10–15',45],
  ]],
- ['gym','full-body','A','Squat & Press','Full Body',40,[
+ ['gym','full-body','A','Squat & Press','Full Body',50,[
   ['45-Degree Leg Press',3,'8–12',120],['Barbell Bench Press',3,'6–10',120],['Seated Cable Row',3,'8–12',90],['Dead Bug',2,'6–10',45,'reps',true],
+  ['Dumbbell Romanian Deadlift',2,'8–12',90],['Dumbbell Lateral Raise',2,'12–15',60],
  ]],
- ['gym','full-body','B','Hinge & Pull','Full Body',40,[
+ ['gym','full-body','B','Hinge & Pull','Full Body',50,[
   ['Dumbbell Romanian Deadlift',3,'8–12',120],['Lat Pulldown',3,'8–12',90],['Incline Dumbbell Press',3,'8–12',90],['Bodyweight Split Squat',2,'8–12',75,'reps',true],
+  ['Seated Cable Row',2,'10–12',75],['Dumbbell Farmer Carry',2,'20–40',60,'sec'],
  ]],
- ['gym','push','A','Chest','Push',40,[
+ ['gym','push','A','Chest','Push',50,[
   ['Barbell Bench Press',3,'6–10',120],['Incline Dumbbell Press',3,'8–12',90],['Cable Chest Fly',2,'12–15',60],['Rope Triceps Pushdown',2,'10–15',60],
+  ['Standing Dumbbell Shoulder Press',2,'8–12',90],['Dumbbell Lateral Raise',2,'12–15',60],
  ]],
- ['gym','push','B','Shoulders & Triceps','Push',35,[
+ ['gym','push','B','Shoulders & Triceps','Push',45,[
   ['Seated Dumbbell Shoulder Press',3,'8–12',120],['Dumbbell Bench Press',2,'8–12',90],['Rope Triceps Pushdown',3,'10–15',60],['Dumbbell Lateral Raise',2,'12–15',60],
+  ['Close-Grip Push-Up',2,'6–10',75],['Standing Overhead Dumbbell Triceps Extension',2,'10–15',60],
  ]],
- ['gym','pull','A','Lats & Biceps','Pull',30,[
+ ['gym','pull','A','Lats & Biceps','Pull',45,[
   ['Lat Pulldown',3,'8–12',90],['Single-Arm Dumbbell Bench Row',3,'8–12',90,'reps',true],['Standing Dumbbell Curl',2,'10–15',60],
+  ['Dumbbell Pullover',2,'10–12',75],['Chest-Supported Dumbbell Reverse Fly',2,'12–15',60],['Dumbbell Hammer Curl',2,'10–15',60],
  ]],
- ['gym','pull','B','Upper Back & Rear Delts','Pull',35,[
+ ['gym','pull','B','Upper Back & Rear Delts','Pull',45,[
   ['Chest-Supported Dumbbell Row',3,'8–12',90],['Seated Cable Row',2,'10–12',90],['Chest-Supported Dumbbell Reverse Fly',2,'12–15',60],['Dumbbell Hammer Curl',2,'10–15',60],
+  ['Lat Pulldown',2,'10–12',75],['Dumbbell Farmer Carry',2,'20–40',60,'sec'],
  ]],
- ['gym','legs','A','Quads & Calves','Leg',35,[
+ ['gym','legs','A','Quads & Calves','Leg',45,[
   ['45-Degree Leg Press',3,'8–12',120],['Goblet Squat',2,'10–12',90],['Bodyweight Split Squat',2,'8–12',75,'reps',true],['Bodyweight Standing Calf Raise',2,'12–20',45],
+  ['Lying Machine Leg Curl',2,'10–15',75],['Glute Bridge',2,'10–15',60],
  ]],
- ['gym','legs','B','Glutes & Hamstrings','Leg',35,[
+ ['gym','legs','B','Glutes & Hamstrings','Leg',45,[
   ['Dumbbell Romanian Deadlift',3,'8–12',120],['Lying Machine Leg Curl',3,'10–15',75],['Bodyweight Reverse Lunge',2,'8–12',75,'reps',true],['Glute Bridge',2,'10–15',60],
+  ['45-Degree Leg Press',2,'10–15',90],['Bodyweight Standing Calf Raise',2,'12–20',45],
  ]],
- ['gym','core','A','Bracing & Carries','Core',20,[
+ ['gym','core','A','Bracing & Carries','Core',25,[
   ['Dead Bug',2,'6–10',45,'reps',true],['Forearm Plank',3,'20–40',45,'sec'],['Dumbbell Farmer Carry',3,'20–40',60,'sec'],
+  ['Reverse Crunch',2,'8–12',45],['Tuck Hollow Hold',2,'15–25',45,'sec'],['Bear Plank',2,'15–25',45,'sec'],
  ]],
- ['gym','core','B','Rotation Control','Core',20,[
+ ['gym','core','B','Rotation Control','Core',30,[
   ['Pallof Press',3,'8–12',60,'reps',true],['Side Plank',2,'15–30',45,'sec',true],['Bird Dog',2,'6–10',45,'reps',true],
+  ['Dumbbell Farmer Carry',2,'20–40',60,'sec'],['Bear Plank',2,'15–25',45,'sec'],['Dead Bug Heel Taps',2,'6–10',45,'reps',true],
  ]],
 ];
 const featuredWorkouts=featuredWorkoutRows.map(([setting,key,variant,focus,category,minutes,items])=>{
@@ -11679,7 +11707,7 @@ function saveLibraryPlanDraft(raw,id=''){
 function saveNamedPlan(name){const pack=capturePlanPackage(name),id='plan-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);commitPlanChange(()=>{const saved=cleanSavedPlans(state.savedPlans);if(saved.length>=20)throw Error('You have 20 saved plans. Export or delete one before saving another.');state.savedPlans=[...saved,{id,...pack}];state.planName=pack.name;state.activeSavedPlanId=id});return id}
 function startNewNamedPlan(name){const old=capturePlanPackage(state.planName||'My previous plan'),dates=scheduleDays(),id='plan-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);if(!String(name).trim()||String(name).trim().length>80)throw Error('Enter a plan name up to 80 characters.');commitPlanChange(()=>{if(state.workoutExerciseEdits)state.workoutEditPlanId=id;const saved=cleanSavedPlans(state.savedPlans);if(saved.length>=20)throw Error('You have 20 saved plans. Export or delete one first.');state.savedPlans=[...saved,{id,...old}];state.workoutSchedule={...state.workoutSchedule};state.mealPlan={...plannedMeals()};for(const date of dates){delete state.workoutSchedule[date];delete state.mealPlan[date];if(state.extraWorkouts)delete state.extraWorkouts[date]}state.planName=String(name).trim();delete state.planNutritionTargets;delete state.activeSavedPlanId;delete state.planCoverPhotoId;state.plannerOffset=0});}
 function clearUpcomingPlan(){const dates=scheduleDays().filter(date=>date>=foodDate());commitPlanChange(()=>{state.workoutSchedule={...state.workoutSchedule};state.mealPlan={...plannedMeals()};for(const date of dates){delete state.workoutSchedule[date];delete state.mealPlan[date];if(state.extraWorkouts)delete state.extraWorkouts[date]}})}
-function clearCurrentPlan(){const dates=scheduleDays();return commitPlanChange(()=>{delete state.planNutritionTargets;if(state.workoutExerciseEdits)state.workoutEditPlanId=newLibraryPlanId();state.workoutSchedule={...state.workoutSchedule};state.mealPlan={...plannedMeals()};if(state.extraWorkouts)state.extraWorkouts={...state.extraWorkouts};delete state.activeSavedPlanId;for(const date of dates){delete state.workoutSchedule[date];delete state.mealPlan[date];if(state.extraWorkouts)delete state.extraWorkouts[date]}})}
+function clearCurrentPlan(){const dates=scheduleDays();return commitPlanChange(()=>{delete state.planNutritionTargets;delete state.planName;delete state.planCoverPhotoId;if(state.workoutExerciseEdits)state.workoutEditPlanId=newLibraryPlanId();state.workoutSchedule={...state.workoutSchedule};state.mealPlan={...plannedMeals()};if(state.extraWorkouts)state.extraWorkouts={...state.extraWorkouts};delete state.activeSavedPlanId;for(const date of dates){delete state.workoutSchedule[date];delete state.mealPlan[date];if(state.extraWorkouts)delete state.extraWorkouts[date]}})}
 function deleteNamedPlan(id){commitPlanChange(()=>{state.savedPlans=cleanSavedPlans(state.savedPlans).filter(p=>p.id!==id);if(state.activeSavedPlanId===id)delete state.activeSavedPlanId})}
 function planPackageWithPhotos(saved){const pack=validatePlanPackage(saved);pack.photos={};for(const id of planPhotoRefs(pack)){const data=personalPhoto(id);if(!data)throw Error('A saved plan photo is missing.');pack.photos[id]=data}return pack}
 function planImportConflicts(pack,start){return Array.from({length:pack.days},(_,i)=>datePlus(start,i)).filter(d=>state.workoutSchedule?.[d]||dayExtraWorkouts(d).length||Object.keys(plannedMeals()[d]||{}).length).length}

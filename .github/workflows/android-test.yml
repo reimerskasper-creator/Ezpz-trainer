@@ -56,6 +56,8 @@ jobs:
           npx playwright install --only-shell chromium
           node tests/workout-photos.cjs
           node tests/workout-media-rule-mobile.cjs
+          node tests/plan-library.cjs
+          node tests/clear-plan-mobile.cjs
       - uses: actions/cache/restore@v4
         with:
           path: native/.test-signing/debug.keystore
@@ -81,10 +83,8 @@ jobs:
           node tests/day-card-polish-mobile.cjs
           node tests/flexible-day-mobile.cjs
           node tests/saved-workout-planning-mobile.cjs
-          node tests/plan-library.cjs
           node tests/plan-packages.cjs
           node tests/plan-packages-mobile.cjs
-          node tests/clear-plan-mobile.cjs
           node tests/plan-library-mobile.cjs
           node tests/review-polish-mobile.cjs
           node tests/compact-workout-screen-mobile.cjs

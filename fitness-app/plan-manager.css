@@ -124,3 +124,6 @@ body[data-view=planner] #screen[data-planner-display=day]>:is(.plan-settings,.pl
 .coach-video{box-sizing:border-box;display:grid;place-items:center;min-height:44px;color:inherit;border:1px solid var(--ui-accent,#8ee2b4);border-radius:10px}
 .plan-draft-item-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
 [data-picker-results] button small{display:block}
+
+.plan-clear-direct{margin-top:10px}
+.plan-clear-direct button{min-height:44px;padding:7px 12px;border:1px solid var(--ui-border,#789b87);border-radius:10px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5)}

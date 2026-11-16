@@ -30,6 +30,14 @@
   ['Chest-Supported Dumbbell Reverse Fly','reverse-fly','7pE90Lysxss',['Chest-Supported Reverse Fly']],
   ['Slider Hamstring Curl','slider-curl','RU-QhYKNftM',['Sliding Hamstring Curl']],
   ['Lying Machine Leg Curl','lying-curl','lUH80pneL5w',['Lying Leg Curl']],
+  ['Reverse Crunch','reverse-crunch','IM7xIocQTmg',[]],
+  ['Bear Plank','bear-plank','https://www.the-fit-edit.com/library/bear-plank',['Quadruped Hover']],
+  ['Tuck Hollow Hold','tuck-hollow','BZDI4Wrnw70',['Hollow Hold (Tuck)']],
+  ['Dead Bug Heel Taps','heel-taps','g6DNBvNEtwk',[]],
+  ['Standing Dumbbell Shoulder Press','standing-shoulder','AZdAqB7kuII',[]],
+  ['Standing Overhead Dumbbell Triceps Extension','overhead-triceps','7h3lG2WnLXg',['Single Dumbbell Overhead Triceps Extension']],
+  ['Close-Grip Push-Up','close-pushup','G2mlaEfpEIM',[]],
+  ['Dumbbell Pullover','pullover','sJO1L9HcGY4',['Flat Dumbbell Pullover']],
   ['Bird Dog','bird','ZdAHe9_HeEw',['Bird-Dog']],
   ['Bodyweight Squat','squat','P-yaD24bUE8',['Air Squat']],
   ['Bodyweight Reverse Lunge','reverse','0SHCQLa-gms',['Reverse Lunge (Bodyweight)']],
@@ -39,7 +47,7 @@
  const details=new Map();
  for(const [name,file,video,aliases] of entries){
   const photo=file.startsWith('coach:')?coachSamplePhotos['photo-coach-'+file.slice(6)]:'./fitness-app/exercise-media/'+file+'.jpg';
-  const reference=Object.freeze({name,photo,videoUrl:'https://www.youtube.com/watch?v='+video});
+  const reference=Object.freeze({name,photo,videoUrl:video.startsWith('https://')?video:'https://www.youtube.com/watch?v='+video});
   for(const key of [name,...aliases])details.set(normalize(key),reference);
  }
  function get(name){return details.get(normalize(name))}

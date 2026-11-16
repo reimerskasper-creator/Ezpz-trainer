@@ -30,8 +30,8 @@ if(width===390){
   const b=chooser.locator('.program-card').nth(1);
   assert((await b.innerText()).includes(setting==='gym'?'lying leg curl machine':'sliders'));
   await b.locator('summary').click();
-  assert.equal(await b.locator('.workout-preview-exercise img').count(),4);
-  assert.equal(await b.getByRole('link',{name:'Watch demo'}).count(),4);
+  assert.equal(await b.locator('.workout-preview-exercise img').count(),6);
+  assert.equal(await b.getByRole('link',{name:'Watch demo'}).count(),6);
   await b.locator('.workout-preview-exercise img').first().evaluate(img=>img.decode());
  }
  await chooser.locator('[data-action="close-workouts"]').click();

@@ -28,9 +28,10 @@ console.log('PASS standalone plan draft save, backup, export, edit and quota rol
 const sample=api.coachSamplePackage();
 assert.deepEqual(sample.nutritionTargets,[2400,190,230,80]);
 assert.equal(sample.entries.length,14);
+assert(sample.workouts.every(workout=>workout.exercises.length===6));
 assert.equal(sample.entries.filter(day=>day.workout!=='rest').length,6);
-assert.equal(Object.keys(sample.photos).length,5);
-assert.equal(Object.keys(sample.media).length,16);
+assert.equal(Object.keys(sample.photos).length,7);
+assert.equal(Object.keys(sample.media).length,24);
 for(const day of sample.entries){
  const total=[0,0,0,0];
  assert.equal(Object.keys(day.meals).length,4);
@@ -55,8 +56,8 @@ const clientPlan=api.storeReceivedPlan(exported);
 api.activateSavedPlan(clientPlan,today);
 assert.deepEqual(api.state.planNutritionTargets,[2300,180,215,80]);
 assert.equal(api.state.mealPlan[today].breakfastPortion,1);
-assert.equal(Object.keys(api.state.trainerMedia).length,16);
-assert.equal(Object.keys(api.state.personalPhotos).length,5);
+assert.equal(Object.keys(api.state.trainerMedia).length,24);
+assert.equal(Object.keys(api.state.personalPhotos).length,7);
 assert.deepEqual(api.target(),goalsBefore);
 assert.deepEqual(api.capturePlanPackage().nutritionTargets,exported.nutritionTargets);
 console.log('PASS coach sample targets, recipe portions, media, editable copy, and a plan-file round trip into a clean profile');

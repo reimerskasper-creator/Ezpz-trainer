@@ -5,17 +5,19 @@ function coachSamplePackage() {
   ['Goblet squat','squat','Elx2y-Qb1nM',false],
   ['Dumbbell Romanian deadlift','hinge','QFbZevA7dps',false],
   ['Single-arm dumbbell bench row','row','dFzUjzfih7k',true],
+  ['Dead Bug','deadbug','bxn9FBrt4-A',true],
+  ['Glute Bridge','bridge','SKOMwg1JLrU',false],
  ];
  const workouts=[],media={},backgrounds={};
  for(let week=0;week<2;week++){
-  for(const [letter,order] of [['A',[0,1,3,2]],['B',[2,3,1,0]]]){
+  for(const [letter,order] of [['A',[0,1,3,2,4,5]],['B',[2,3,1,0,5,4]]]){
    const id='custom-coach-'+letter.toLowerCase()+'-'+(week+1);
    const exercises=order.map(index=>{
     const [name,photo,video,side]=movements[index];
     media[id+'|'+name]={photoId:'photo-coach-'+photo,videoUrl:'https://www.youtube.com/watch?v='+video};
-    return {name,sets:3,reps:String((index===1?12:10)+week),unit:'reps',rest:90,side};
+    return {name,sets:index>=4?2:3,reps:String((index===1?12:index===4?8:10)+week),unit:'reps',rest:index>=4?45:90,side,...(index>=4?{load:false}:{})};
    });
-   workouts.push({id,title:'Full-body strength '+letter,category:'Full Body',level:'Beginner',equipment:'Dumbbells and a flat bench',minutes:'35',photoId:'photo-coach-cover',exercises});
+   workouts.push({id,title:'Full-body strength '+letter,category:'Full Body',level:'Beginner',equipment:'Dumbbells and a flat bench',minutes:'45',photoId:'photo-coach-cover',exercises});
    backgrounds[id]='photo-coach-cover';
   }
  }
