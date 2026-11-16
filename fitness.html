@@ -11822,6 +11822,8 @@ window.ezpzAndroidBack=function(){
   else if(dialog.dispatchEvent(new Event('cancel',{cancelable:true})))dialog.close();
   return;
  }
+ const mealMenu=screen.querySelector('.food-log-actions[open]');
+ if(mealMenu){mealMenu.open=false;mealMenu.querySelector('summary')?.focus();return}
  if(tab==='custom-food'){
   const scanner=document.getElementById('barcode-panel');
   if(scanner&&!scanner.hidden){closeBarcodeScanner();return}
@@ -14009,7 +14011,8 @@ html body[data-view] :is(#planner-picker,#workout-chooser) :is(.picker-choice,.p
 #app-calendar h2{margin:0;font-size:19px;color:#f1fff5}
 #app-calendar .app-calendar-navigation{margin-block:8px}
 #app-calendar button{background:#234b38!important;border:1px solid #658670!important;color:#f1fff5!important;border-radius:9px;min-height:42px;margin:0;padding:4px}
-#app-calendar :is(.app-calendar-heading,.app-calendar-navigation)>button{min-width:44px}
+#app-calendar :is(.app-calendar-heading,.app-calendar-navigation)>button{width:44px;min-width:44px;flex:0 0 44px}
+#app-calendar .app-calendar-navigation strong{text-align:center;color:#f1fff5}
 #app-calendar .app-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center;align-items:center}
 #app-calendar .app-calendar-grid>span{font-size:11px;color:#c2ddcd}
 #app-calendar .app-calendar-grid>button{width:100%;font-size:13px;border-color:transparent!important}
