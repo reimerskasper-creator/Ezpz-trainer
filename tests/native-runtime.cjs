@@ -21,3 +21,7 @@ console.log('PASS: large backup options are removed before Android persists file
 
 const backActivity=fs.readFileSync(path.join(__dirname,'../native/android/app/src/main/java/com/ezpz/fitness/MainActivity.java'),'utf8');
 assert(backActivity.includes('getOnBackPressedDispatcher().addCallback')&&backActivity.includes('window.ezpzAndroidBack'),'Native system Back connects to the app navigation');
+
+assert(backActivity.includes('registerPlugin(WorkoutAudioPlugin.class)'));
+const workoutAudioSource=fs.readFileSync(path.join(native,'android/app/src/main/java/com/ezpz/fitness/WorkoutAudioPlugin.java'),'utf8');
+assert(workoutAudioSource.includes('AudioManager.STREAM_MUSIC'),'Workout cues follow media audio routing');

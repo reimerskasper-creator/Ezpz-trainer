@@ -1,3 +1,10 @@
+## 2026-11-16 — Trainer gauges, workout sounds and plan scanner
+
+- Android 1.0.145 puts a synchronized progress gauge on every exercise photo. The left rail shows the set fraction and the right rail keeps the media controls.
+- Short workout-start and rest-complete sounds use Android’s media audio route. Workout sounds can be muted in Rest timer options.
+- Barcode scanning from Day opens a dedicated camera dialog with typed barcode fallback, then returns to the planned meal amount and save flow.
+- Branch: android-health-connect. Signed build and phone-width regression coverage run on the canonical branch.
+
 ## 2026-11-16 — Phone layout, calendar and Android Back
 
 - Android 1.0.144 places Trainer progress in the left rail and the media actions in the right rail. Exercise photos use the center of the frame.

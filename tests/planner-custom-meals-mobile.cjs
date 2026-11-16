@@ -8,6 +8,10 @@ await page.evaluate(()=>{ingredientRows=[{food:['diary-only','Diary draft',100,1
 await page.locator('#planner-dinner').click();
 await page.locator('[data-plan-picker-action=scan-meal]').click();
 await page.locator('#barcode-panel').waitFor();
+assert(await page.locator('#planned-barcode-dialog').evaluate(el=>el.open));
+assert(await page.locator('#planned-barcode-dialog .food-camera-stage').isVisible());
+assert(await page.locator('#planned-barcode-dialog').evaluate(el=>el.scrollWidth<=el.clientWidth+1));
+
 await page.locator('#barcode-number').fill('3017620422003');
 await page.locator('[data-barcode-lookup]').click();
 await page.locator('#ingredient-amount').fill('150');
@@ -23,6 +27,8 @@ await page.locator('#planner-dinner').click();
 await page.locator('[data-plan-picker-filter=mine]').first().click();
 await page.locator('#planner-picker-search').fill('yogurt');
 await page.locator('[data-plan-picker-action=scan-meal]').click();
+await page.keyboard.press('Escape');
+assert.equal(await page.locator('#planned-barcode-dialog').evaluate(el=>el.open),false);
 await page.locator('[data-return-custom-plan]').first().click();
 assert.equal(await page.locator('#planner-picker-search').inputValue(),'yogurt');
 assert.equal(await page.locator('[data-plan-picker-filter=mine]').first().getAttribute('aria-pressed'),'true');

@@ -28,6 +28,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(LabelReaderPlugin.class);
         registerPlugin(AccountPlugin.class);
         registerPlugin(StartupPlugin.class);
+        registerPlugin(WorkoutAudioPlugin.class);
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this, SystemBarStyle.dark(Color.rgb(8, 45, 34)),
                 SystemBarStyle.dark(Color.rgb(8, 45, 34)));
