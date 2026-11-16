@@ -47,15 +47,15 @@ if(width===390){
  const editor=page.locator('#workout-edit-dialog');
  await editor.locator('[data-edit-index="1"]').click();
  await editor.locator('[data-edit-swap]').click();
- await editor.locator('#workout-edit-search').fill('Dumbbell Floor Press');
- const choice=editor.locator('[data-edit-results] button').filter({hasText:'Dumbbell Floor Press'});
+ await editor.locator('#workout-edit-search').fill('Bodyweight Squat');
+ const choice=editor.locator('[data-edit-results] button').filter({hasText:'Bodyweight Squat'});
  assert.equal(await choice.locator('.exercise-media-label').textContent(),'Photo + video');
  await choice.click();
  await editor.locator('button[type=submit]').click();
  await page.locator('[data-home-start]').click();
  await page.evaluate(()=>focusTrainingExercise(1));
  const replacement=page.locator('[data-training-card="1"]');
- const reference=await page.evaluate(()=>window.EzpzExerciseMedia.get('Dumbbell Floor Press'));
+ const reference=await page.evaluate(()=>window.EzpzExerciseMedia.get('Bodyweight Squat'));
  assert.equal(await replacement.locator('.trainer-reference img').getAttribute('src'),reference.photo);
  await page.waitForFunction(()=>document.querySelector('[data-training-card="1"] .trainer-reference img')?.naturalWidth>0);
  await replacement.locator('[data-trainer-video="1"]').click();
