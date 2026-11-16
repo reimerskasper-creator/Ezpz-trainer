@@ -2,7 +2,7 @@
 
 - Android 1.0.143 combines the exercise position and chooser, moves completed sets above the active exercise photo, and puts compact translucent media controls on the wider photo.
 - Saved workouts that need references retain their picked day and workout slot through media repair. Adding a repaired workout returns to Day. Guided and custom exercise video link editing is covered by the Trainer checks.
-- Branch: android-health-connect. Local planner, custom workout and Trainer contract checks passed. Signed build and responsive checks run in Android CI.
+- On android-health-connect, Android run 43931948098 built and signed 1.0.143 with the existing certificate. Mobile run 43932684569 passed saved-workout scheduling and media repair, responsive plan packages, and Trainer layout and media editing at 320, 390 and 430 px. The APK was delivered to the user. Physical Android verification remains open.
 
 ## 2026-11-16 — Scan food into a planned meal
 
