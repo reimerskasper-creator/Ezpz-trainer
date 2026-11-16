@@ -2,7 +2,7 @@ const fs=require('node:fs'),path=require('node:path'),assert=require('node:asser
 const source=fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8'),scripts=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),screen={innerHTML:''};
 let stored=JSON.stringify({profile:{weight:80,height:180,age:35,sex:'male',days:3,goal:'maintain',level:'Beginner',equipment:'home'},logs:[],weights:[],foodLog:[{id:'kept',date:'2026-10-21',name:'Saved food',servings:1,macros:[300,20,40,7]}],workoutLayoutVersion:2}),fail=false;
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {target,cleanNutritionTargets,calculateNutritionTargets,normalizeNutritionAnswers,saveNutritionTargets,restoredState,nutritionActivities,nutritionTargetsPage,eat,foodDiary,home,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('Storage full');stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {target,adjustCalculatedProtein,cleanNutritionTargets,calculateNutritionTargets,normalizeNutritionAnswers,saveNutritionTargets,restoredState,nutritionActivities,nutritionTargetsPage,eat,foodDiary,home,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('Storage full');stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 const input={units:'metric',sex:'male',age:35,weight:80,height:180,context:'standard',goal:'maintain',pace:'gentle',activity:'moderate'};
 const result=api.calculateNutritionTargets(input);assert.equal(result.resting,1755);assert.equal(result.maintenance,2720);assert.equal(result.factor,1.55);assert.equal(result.targets.protein,128);assert.equal(result.targets.calories,result.targets.protein*4+result.targets.carbs*4+result.targets.fat*9);
 assert.equal(api.calculateNutritionTargets({...input,sex:'female'}).resting,1589);
@@ -23,3 +23,15 @@ assert(api.saveNutritionTargets(result.targets,result.answers));assert.deepEqual
 const before=JSON.stringify(api.state);api.nutritionTargetsPage();api.eat();assert.equal(JSON.stringify(api.state),before,'Rendering and cancellation preserve state');assert(!screen.innerHTML.includes('eat-custom-open'));assert(screen.innerHTML.indexOf('diary-log-next')<screen.innerHTML.indexOf('recipe-search'));assert(screen.innerHTML.indexOf('data-home-diary')<screen.innerHTML.indexOf('recipe-search'));assert(screen.innerHTML.includes('data-go="nutrition-targets"'));
 fail=true;assert.equal(api.saveNutritionTargets(manual),false);assert.equal(JSON.stringify(api.state),before,'Storage failure rolls back targets');
 console.log('PASS: target math, activity/sex/age/size effects, unit conversion, goal adjustments, consistent calories, calculator limits, manual overrides, Home/diary integration, backups, no data loss, top logging and rollback');
+
+const override=api.adjustCalculatedProtein(result.targets,280);
+assert.equal(override.protein,280);
+assert(override.protein*4/override.calories>.35);
+assert.equal(override.calories,result.targets.calories);
+assert.equal(override.fat,result.targets.fat);
+assert.equal(override.carbs,result.targets.carbs+result.targets.protein-280);
+assert.equal(api.adjustCalculatedProtein(result.targets,''),null);
+assert.equal(api.adjustCalculatedProtein(result.targets,600),null);
+fail=false;assert(api.saveNutritionTargets(override,result.answers));
+assert.equal(api.target().protein,280);
+console.log('PASS calculator protein override above 35%, carb balancing and saved targets');

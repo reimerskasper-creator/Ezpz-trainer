@@ -44,10 +44,15 @@
   ['Dumbbell Farmer Carry','carry','7mzKcADa46c',["Dumbbell Farmer’s Carry","Dumbbell Farmer's Carry"]],
  ];
  const normalize=name=>String(name??'').trim().toLowerCase().replace(/[’‘]/g,"'").replace(/[–—]/g,'-').replace(/\s+/g,' ');
+ const searchTags={
+  'Glute Bridge':'glute hip extension','Goblet Squat':'glute quads legs','Bodyweight Squat':'glute quads legs',
+  'Bodyweight Reverse Lunge':'glute quads legs','Bodyweight Split Squat':'glute quads legs',
+  'Bodyweight Step-Up':'glute quads legs','Dumbbell Romanian Deadlift':'glute hamstrings hinge',
+ };
  const details=new Map();
  for(const [name,file,video,aliases] of entries){
   const photo=file.startsWith('coach:')?coachSamplePhotos['photo-coach-'+file.slice(6)]:'./fitness-app/exercise-media/'+file+'.jpg';
-  const reference=Object.freeze({name,photo,videoUrl:video.startsWith('https://')?video:'https://www.youtube.com/watch?v='+video});
+  const reference=Object.freeze({name,photo,searchText:normalize([name,...aliases,searchTags[name]].filter(Boolean).join(' ')),videoUrl:video.startsWith('https://')?video:'https://www.youtube.com/watch?v='+video});
   for(const key of [name,...aliases])details.set(normalize(key),reference);
  }
  function get(name){return details.get(normalize(name))}
@@ -56,7 +61,7 @@
   for(const name of names){
    const reference=get(name),identity=reference?.name||normalize(name);
    if(identity===(currentMedia?.name||normalize(current)))continue;
-   const matches=normalize(name).includes(search)||normalize(reference?.name).includes(search);
+   const matches=normalize(name).includes(search)||(reference?.searchText||'').includes(search);
    if(prior.has(identity)||!matches)continue;
    prior.add(identity);
    (reference?supported:remaining).push(name);

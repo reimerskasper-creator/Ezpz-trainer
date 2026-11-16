@@ -11152,6 +11152,10 @@ function workoutPlan(id=activeWorkoutId(),context){
   if(edit?.name){
    const curated=plan.setting?featuredExerciseSwaps(plan,x).find(item=>item.name===edit.name):null;
    if(curated)return [{...curated,index:x.index,sets:edit.sets||x.sets,originalName:x.name}];
+   const guide=window.EzpzExerciseMedia?.get(edit.name);
+   const replacementSpec=guide&&featuredWorkouts.flatMap(workout=>workout.exercises).find(item=>item.name===guide.name);
+   if(replacementSpec)return [{...replacementSpec,index:x.index,sets:edit.sets||x.sets,originalName:x.name}];
+   if(guide?.name==='Bodyweight Squat')return [{name:guide.name,index:x.index,sets:edit.sets||x.sets,reps:'8–12',unit:'reps',rest:60,side:false,load:false,originalName:x.name}];
    const replacement=exerciseEntry(edit.name);
    const {cues,load,...base}=x;
    return [{...base,name:edit.name,sets:edit.sets||x.sets,side:replacement?replacement.unilateral===true:x.side,originalName:x.name}];
@@ -11167,6 +11171,10 @@ function saveWorkoutExerciseEdit(featured,index,name,sets,future){
  const plan=featured.plan,exercise=plan.exercises[index],base=baseWorkoutPlan(plan.id);
  const original=base.exercises[exercise?.index];
  if(!original||(!name&&plan.exercises.length<=1)||name&&(!Number.isInteger(sets)||sets<1||sets>12))return false;
+ if(name&&window.EzpzExerciseMedia){
+  const guide=window.EzpzExerciseMedia.get(name);
+  if(!guide||plan.exercises.some((item,i)=>i!==index&&window.EzpzExerciseMedia.get(item.name)?.name===guide.name))return false;
+ }
  const draft=workoutDraft(plan);
  if(workoutEditDraftKey(draft,index))return false;
  const context=workoutEditContext(plan,featured.date||foodDate(),featured.resume?state.activePlanItem?.slot||'main':'main');
@@ -11217,43 +11225,33 @@ function openWorkoutExerciseEditor(opener){
   body.querySelector('[data-edit-remove]').onclick=()=>scope(index,'',()=>actions(index));
   body.querySelector('[data-edit-back]').onclick=pickExercise;
  }
- async function picker(index){
-  show('Swap exercise','<label for="workout-edit-search">Search exercises</label><input id="workout-edit-search" type="search" placeholder="Search by name"><button type="button" data-edit-manual>Enter a guided exercise name</button><div data-edit-results></div><button type="button" data-edit-back>Back</button>');
+ function picker(index){
+  show('Swap exercise','<label for="workout-edit-search">Search exercises</label><input id="workout-edit-search" type="search" placeholder="Search guided exercises"><div data-edit-results></div><button type="button" data-edit-back>Back</button>');
   const list=body.querySelector('[data-edit-results]'),search=body.querySelector('input'),exercise=plan.exercises[index];
+  const guides=window.EzpzExerciseMedia;
   const suggested=swapOptions(exercise,plan).map(x=>x.name);
+  const used=new Set(plan.exercises.filter((_,i)=>i!==index).map(x=>guides?.get(x.name)?.name||x.name));
+  const available=[...new Set([...suggested,...(guides?.names||[])])];
   function results(){
-   const query=search.value.trim().toLowerCase();
-   const guides=window.EzpzExerciseMedia;
-   const available=plan.setting?suggested:(guides?.names||exercisePickerNames()).filter(name=>guides?.get(name));
-   const names=guides?guides.choices(available,exercise.name,query):[...new Set(available)].filter(name=>name!==exercise.name&&name.toLowerCase().includes(query));
+   const names=guides?.choices(available,exercise.name,search.value)||[];
    list.replaceChildren();
-   if(!names.length)list.textContent=plan.setting?'No matching guided swaps for this setup.':'No matching exercises.';
+   if(!names.length){list.textContent='No matching exercises with photos and videos.';return}
    for(const name of names){
-    const button=document.createElement('button');button.type='button';button.textContent=name;
-    if(guides?.get(name)){
-     const badge=document.createElement('small');badge.className='exercise-media-label';badge.textContent='Photo + video';button.append(badge);
-    }
-    button.onclick=()=>scope(index,name,()=>picker(index));list.append(button);
+    const button=document.createElement('button');
+    button.type='button';button.textContent=name;
+    button.disabled=used.has(guides.get(name).name);
+    const badge=document.createElement('small');
+    badge.className='exercise-media-label';
+    const equipment=featuredMovementSpecs[name]?.slice(1).join(', ');
+    badge.textContent=button.disabled?'Already in this workout':(suggested.includes(name)?'Suggested · ':'')+'Photo + video'+(equipment?' · '+equipment:'');
+    button.append(badge);
+    button.onclick=()=>scope(index,name,()=>picker(index));
+    list.append(button);
    }
   }
   search.oninput=results;
-  body.querySelector('[data-edit-manual]').onclick=()=>manual(index);
   body.querySelector('[data-edit-back]').onclick=()=>actions(index);
   results();
-  await ensureExerciseCatalog();
-  results();
- }
- function manual(index){
-  show('Enter a guided exercise name','<form><label for="workout-edit-name">Exercise name</label><input id="workout-edit-name" name="name" required maxlength="70"><button class="primary" type="submit">Use this exercise</button></form><button type="button" data-edit-back>Back</button>');
-  body.querySelector('form').onsubmit=event=>{
-   event.preventDefault();
-   const name=event.target.elements.name.value.trim();
-   if(name&&window.EzpzExerciseMedia?.get(name))scope(index,name,()=>manual(index));
-   else if(name){event.target.elements.name.setCustomValidity('Choose an exercise with a photo and demo. Add a personal exercise in your own workout.');event.target.reportValidity();event.target.elements.name.setCustomValidity('');}
-   else{event.target.elements.name.value='';event.target.reportValidity()}
-  };
-  body.querySelector('[data-edit-back]').onclick=()=>picker(index);
-  body.querySelector('input').focus();
  }
  function scope(index,name,back){
   const exercise=plan.exercises[index],label=plan.id==='full-body'?'All future '+plan.variant+' workouts':'All future sessions of this workout';
@@ -12266,6 +12264,13 @@ function calculateNutritionTargets(raw){
  if(!targets)return {blocked:'This estimate needs an individual review. Use Set my own with targets agreed with a qualified professional.',answers:a};
  return {targets,answers:a,resting:Math.round(resting),maintenance:Math.round(maintenance),factor:activity.factor,proteinRate,floored:requested<1500};
 }
+function adjustCalculatedProtein(targets,value){
+ if(!targets||String(value??'').trim()==='')return null;
+ const protein=Number(value);
+ if(!Number.isSafeInteger(protein)||protein<0)return null;
+ const fat=targets.fat,carbs=targets.carbs+targets.protein-protein;
+ return cleanNutritionTargets({protein,carbs,fat,calories:macroCalories(protein,carbs,fat),source:'calculator'});
+}
 function cleanNutritionAssessment(raw){const result=calculateNutritionTargets(raw);return result&&!result.blocked?result.answers:null}
 function saveNutritionTargets(targets,answers=null){
  const valid=cleanNutritionTargets(targets);if(!valid)return false;
@@ -12287,10 +12292,17 @@ function nutritionTargetsPage(){
  if(nutritionStep===1)body='<form id="nutrition-routine" class="card nutrition-photo-panel nutrition-routine"><span class="nutrition-eyebrow">STEP 2 OF 3</span><h3>What does your week look like?</h3><p>Choose your overall activity, including both daily life and exercise. Do not count exercise again separately.</p><fieldset class="nutrition-activity"><legend>Your overall activity</legend>'+nutritionActivities.map(x=>'<label><input type="radio" name="activity" value="'+x.id+'" '+(a.activity===x.id?'checked':'')+' required><span><strong>'+x.label+'</strong><small>'+x.detail+'</small></span></label>').join('')+'</fieldset><label for="nutrition-goal">Your goal</label><select id="nutrition-goal" name="goal">'+[['lose','Lose fat'],['maintain','Maintain weight'],['gain','Gain weight / muscle']].map(([v,label])=>'<option value="'+v+'" '+(a.goal===v?'selected':'')+'>'+label+'</option>').join('')+'</select><label for="nutrition-pace">Preferred pace</label><select id="nutrition-pace" name="pace"><option value="gentle" '+(a.pace==='gentle'?'selected':'')+'>Gentle adjustment</option><option value="steady" '+(a.pace==='steady'?'selected':'')+'>Steady adjustment</option></select><p class="nutrition-small">Pace only applies to weight loss or gain. Your result is a starting estimate, not a promised rate of change.</p><p id="nutrition-wizard-error" role="status"></p><button class="primary" type="submit">Review my estimate →</button><button type="button" class="nutrition-previous" data-nutrition-back="0">← About you</button></form>';
  if(nutritionStep===2){const result=calculateNutritionTargets(a);
   if(!result||result.blocked)body='<section class="card nutrition-photo-panel nutrition-result"><h3>Choose individual targets</h3><p>'+(result?safe(result.blocked):'Check your answers and try again.')+'</p><button type="button" class="primary" data-nutrition-mode="manual">Set my own targets →</button><button type="button" class="nutrition-previous" data-nutrition-back="1">← Change answers</button></section>';
-  else{const t=result.targets;body='<form id="nutrition-result" class="card nutrition-photo-panel nutrition-result"><span class="nutrition-eyebrow">YOUR STARTING ESTIMATE</span><h3>'+t.calories+' kcal / day</h3><div class="nutrition-result-macros">'+[['Protein',t.protein],['Carbs',t.carbs],['Fat',t.fat]].map(([label,n])=>'<div><strong>'+n+'g</strong><small>'+label+'</small></div>').join('')+'</div><p>Try these targets, then review your weight trend, energy and training over 2–3 weeks. Adjust as needed.</p>'+(result.floored?'<p class="nutrition-small">The calculation reached this app’s 1,500 kcal starting minimum. Get individual advice before using a lower intake.</p>':'')+'<details class="nutrition-method"><summary>How this estimate works</summary><p>Resting energy: about '+result.resting+' kcal. Overall activity factor: '+result.factor+'. Estimated maintenance: about '+result.maintenance+' kcal/day.</p><p>EZPZ uses Mifflin–St Jeor for resting energy. Activity factors are broad estimates, including exercise. Gentle loss/gain adjusts estimated maintenance by −10% / +5%; steady uses −15% / +10%.</p><p>Protein starts at '+result.proteinRate+' g/kg, capped at 35% of energy; fat is about 30%, with remaining energy from carbs. Grams are rounded and calories are calculated from those grams. These are app defaults, not uniquely correct macro needs.</p><p>This is a general adult estimate, not a measured metabolism or a clinical prescription. Training logs do not add calories again.</p><a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener">Energy equation research ↗</a><a href="https://link.springer.com/article/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">Protein guidance ↗</a></details><p id="nutrition-wizard-error" role="status"></p><button type="submit" class="primary">Save these targets →</button><button type="button" class="nutrition-previous" data-nutrition-back="1">← Change answers</button></form>'}
+  else{const t=result.targets;body='<form id="nutrition-result" class="card nutrition-photo-panel nutrition-result"><span class="nutrition-eyebrow">YOUR STARTING ESTIMATE</span><h3>'+t.calories+' kcal / day</h3><div class="nutrition-result-macros">'+[['Protein',t.protein],['Carbs',t.carbs],['Fat',t.fat]].map(([label,n])=>'<div><strong>'+n+'g</strong><small>'+label+'</small></div>').join('')+'</div><label for="nutrition-result-protein">Adjust protein (g)</label><input type="number" id="nutrition-result-protein" name="protein" inputmode="numeric" min="0" max="'+Math.min(600,t.protein+t.carbs)+'" step="1" required value="'+t.protein+'"><p class="nutrition-small">Carbs adjust to keep calories and fat the same.</p><p class="nutrition-small" data-adjusted-carbs aria-live="polite">Carbs with this choice: '+t.carbs+' g</p><p>Try these targets, then review your weight trend, energy and training over 2–3 weeks. Adjust as needed.</p>'+(result.floored?'<p class="nutrition-small">The calculation reached this app’s 1,500 kcal starting minimum. Get individual advice before using a lower intake.</p>':'')+'<details class="nutrition-method"><summary>How this estimate works</summary><p>Resting energy: about '+result.resting+' kcal. Overall activity factor: '+result.factor+'. Estimated maintenance: about '+result.maintenance+' kcal/day.</p><p>EZPZ uses Mifflin–St Jeor for resting energy. Activity factors are broad estimates, including exercise. Gentle loss/gain adjusts estimated maintenance by −10% / +5%; steady uses −15% / +10%.</p><p>Protein starts at '+result.proteinRate+' g/kg, capped at 35% of energy; fat is about 30%, with remaining energy from carbs. Grams are rounded and calories are calculated from those grams. These are app defaults, not uniquely correct macro needs.</p><p>This is a general adult estimate, not a measured metabolism or a clinical prescription. Training logs do not add calories again.</p><a href="https://pubmed.ncbi.nlm.nih.gov/2305711/" target="_blank" rel="noopener">Energy equation research ↗</a><a href="https://link.springer.com/article/10.1186/s12970-017-0177-8" target="_blank" rel="noopener">Protein guidance ↗</a></details><p id="nutrition-wizard-error" role="status"></p><button type="submit" class="primary">Save these targets →</button><button type="button" class="nutrition-previous" data-nutrition-back="1">← Change answers</button></form>'}
  }
  screen.innerHTML=header+steps+body;
 }
+document.addEventListener('input',e=>{
+ if(e.target.id!=='nutrition-result-protein')return;
+ const result=calculateNutritionTargets(nutritionDraft);
+ const adjusted=adjustCalculatedProtein(result?.targets,e.target.value);
+ const output=e.target.form.querySelector('[data-adjusted-carbs]');
+ output.textContent=adjusted?'Carbs with this choice: '+adjusted.carbs+' g':'Enter a protein amount within the available range.';
+});
 document.addEventListener('input',e=>{const form=e.target.closest?.('#nutrition-manual');if(!form)return;const numbers=['protein','carbs','fat'].map(k=>Number(form.elements.namedItem(k)?.value||0)),energy=macroCalories(...numbers),out=document.getElementById('nutrition-manual-energy');if(out)out.textContent=(Number.isFinite(energy)?energy:0)+' kcal';const error=document.getElementById('nutrition-manual-error');if(error)error.textContent=''});
 document.addEventListener('change',e=>{
  if(e.target.id!=='nutrition-units')return;const form=e.target.closest('#nutrition-body'),old=nutritionDraft.units,next=e.target.value,weight=form.elements.namedItem('weight'),height=form.elements.namedItem('height');
@@ -12308,7 +12320,7 @@ document.addEventListener('submit',e=>{
  if(id==='nutrition-manual'){const nums=['protein','carbs','fat'].map(k=>Number(values[k])),[protein,carbs,fat]=nums,valid=Object.values(values).every(v=>String(v).trim()!=='')&&cleanNutritionTargets({protein,carbs,fat,calories:macroCalories(...nums),source:'manual'});if(valid&&saveNutritionTargets(valid)){openFoodDiary();return}document.getElementById('nutrition-manual-error').textContent='Check the macros. Daily calories must total 1,000–10,000 kcal.';return}
  if(id==='nutrition-body'){const next={...nutritionDraft,...values};if(!normalizeNutritionAnswers(next)){document.getElementById('nutrition-wizard-error').textContent='Use an age of 18–100, weight of 30–350 kg (66–772 lb), and height of 120–230 cm (47–91 in).';return}nutritionDraft=next;nutritionStep=1}
  if(id==='nutrition-routine'){const next={...nutritionDraft,...values};if(!calculateNutritionTargets(next)){document.getElementById('nutrition-wizard-error').textContent='Choose your activity and check your answers.';return}nutritionDraft=next;nutritionStep=2}
- if(id==='nutrition-result'){const result=calculateNutritionTargets(nutritionDraft);if(result?.targets&&saveNutritionTargets(result.targets,result.answers)){openFoodDiary();return}document.getElementById('nutrition-wizard-error').textContent='Targets could not be saved. Check your answers and try again.';return}
+ if(id==='nutrition-result'){const result=calculateNutritionTargets(nutritionDraft),adjusted=adjustCalculatedProtein(result?.targets,values.protein);if(adjusted&&saveNutritionTargets(adjusted,result.answers)){openFoodDiary();return}document.getElementById('nutrition-wizard-error').textContent='Targets could not be saved. Check your answers and try again.';return}
  nutritionTargetsPage();window.scrollTo(0,0);
 });
 

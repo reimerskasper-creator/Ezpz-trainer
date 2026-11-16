@@ -1,3 +1,7 @@
+## 2026-11-16 — Guided swap search and calculator protein adjustment
+
+- Android 1.0.141 searches all guided exercises from the Home swap picker, with fitting suggestions first, equipment labels, and duplicate rows marked.
+- Calculate for me allows a user-chosen protein amount above the default recommendation. Carbs adjust against the same calories and fat.
 ## 2026-11-16 — Empty Home workout card
 
 - Android 1.0.140 shows Choose workout on Home without an eligible plan entry, an explicit same-day pick, or an unfinished session. The empty card and quick action open the workout picker.

@@ -94,6 +94,32 @@ async function verify(){
    render();
   });
   assert(await page.locator('.home-workout').getByRole('button',{name:'Resume workout'}).isVisible());
+  await page.evaluate(()=>{
+   state.workoutDrafts={};state.workoutSchedule={};
+   state.selectedWorkout='guided-home-full-body-a';
+   state.homeWorkoutChoice={id:state.selectedWorkout,date:foodDate()};
+   state.homePanels={...state.homePanels,todayWorkout:true};
+   tab='home';render();
+  });
+  await page.locator('[data-edit-workout-exercises]').click();
+  const editor=page.locator('#workout-edit-dialog');
+  await editor.locator('[data-edit-index="0"]').click();
+  await editor.locator('[data-edit-swap]').click();
+  await editor.locator('#workout-edit-search').fill('Glute');
+  const bridge=editor.getByRole('button',{name:/Glute Bridge/});
+  assert(await bridge.isDisabled());
+  assert((await bridge.innerText()).includes('Already in this workout'));
+  await editor.getByRole('button',{name:/Dumbbell Romanian Deadlift/}).click();
+  await editor.getByRole('button',{name:'Save change'}).click();
+  assert((await page.locator('.home-workout').innerText()).includes('Dumbbell Romanian Deadlift'));
+  await page.evaluate(()=>{
+   nutritionMode='calculator';nutritionStep=2;nutritionDraft={units:'metric',sex:'male',age:35,weight:80,height:180,context:'standard',goal:'maintain',pace:'gentle',activity:'moderate'};
+   tab='nutrition-targets';render();
+  });
+  await page.locator('#nutrition-result-protein').fill('280');
+  assert((await page.locator('[data-adjusted-carbs]').innerText()).includes('Carbs with this choice:'));
+  await page.locator('#nutrition-result button[type=submit]').click();
+  assert.equal(await page.evaluate(()=>state.nutritionTargets.protein),280);
   assert.deepEqual(failures,[]);
   console.log('PASS: covered library, personal workout blocked until photo and video, and persistent workout-only reset.');
  }finally{await browser.close();server.close()}
