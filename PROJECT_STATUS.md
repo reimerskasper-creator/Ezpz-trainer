@@ -1,3 +1,9 @@
+## 2026-11-17 — Final 40 guided exercises
+
+- Android 1.0.154 expands the guided library from 101 to 141 exercises. Each new entry includes a matched trainer photo, equipment, muscle map, and demonstration link.
+- Close-grip V-handle searches resolve to the existing seated cable row. The wide-grip straight-bar setup has its own entry.
+- Branch: android-health-connect. Preset programs are a separate follow-up.
+
 ## 2026-11-17 — 40 additional guided exercises
 
 - Android 1.0.153 expands the guided library from 61 to 101 exercises. The batch includes single-leg Roman chair back extensions, chin-ups, dead hangs, machine accessories, and home variations.

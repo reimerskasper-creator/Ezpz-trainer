@@ -11146,7 +11146,7 @@ function workoutPicker(compact=false,includeChooser=true){const plan=workoutPlan
 function workoutGuide(plan){return plan.guide?'<details class="session-guide"><summary>Session guide · '+plan.minutes+' min</summary><p>'+safe(unitAwareText(plan.guide))+'</p><p><b>Warm-up:</b> '+safe(plan.warmup)+'</p><p><b>Finish:</b> '+safe(plan.cooldown)+'</p><p>Choose one session for today. Repeat a program consistently to track progress, and allow at least 48 hours before training the same muscles hard again.</p></details>':''}
 function unitAwareText(text){return String(text).replace(/\blog kg per bell\b/gi,'log '+loadUnit()+' per bell')}
 function exerciseTips(x){return (x.cues||exerciseCues[x.name]||exerciseCatalog?.find(e=>e.name===x.name)?.instructions||['Set up in a stable position.','Move through a comfortable controlled range.','Stop if the movement causes pain.']).map(unitAwareText)}
-function exerciseHasLoad(x){return x.load===false?false:x.load===true||!x.unit||x.unit==='reps'||/Carry$|^Farmer March$/.test(x.name)}
+function exerciseHasLoad(x){return x.load===false?false:x.load===true||!x.unit||x.unit==='reps'||/Carry$|^Farmer March$/.test(x.name)||window.EzpzExerciseMedia?.get(x.name)?.prescription?.load===true}
 function performanceText(e){const unit=e.unit||(/\bsec/.test(e.prescription||'')?'sec':'reps');return (e.sets?.length?e.sets.filter(z=>z.reps).map(z=>z.reps+' '+unit+(unit==='reps'?' × '+(Number(z.kg)>0?loadText(z.kg)+' '+loadUnit():'BW'):Number(z.kg)>0?' × '+loadText(z.kg)+' '+loadUnit():'')).join(' / '):e.reps||e.prescription||'—')||'Not logged'}
 // Training preferences share canonical kg storage with existing workouts.
 function loadUnit(){return bodyWeightUnit()}
