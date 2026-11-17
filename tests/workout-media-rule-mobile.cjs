@@ -106,10 +106,10 @@ async function verify(){
   await editor.locator('[data-edit-index="0"]').click();
   await editor.locator('[data-edit-swap]').click();
   await editor.locator('#workout-edit-search').fill('Glute');
-  const bridge=editor.getByRole('button',{name:/Glute Bridge/});
+  const bridge=editor.getByRole('button',{name:/^Glute Bridge\b/});
   assert(await bridge.isDisabled());
   assert((await bridge.innerText()).includes('Already in this workout'));
-  await editor.getByRole('button',{name:/Dumbbell Romanian Deadlift/}).click();
+  await editor.getByRole('button',{name:/^Dumbbell Romanian Deadlift\b/}).click();
   await editor.getByRole('button',{name:'Save change'}).click();
   assert((await page.locator('.home-workout').innerText()).includes('Dumbbell Romanian Deadlift'));
   await page.evaluate(()=>{
