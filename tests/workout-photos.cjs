@@ -6,6 +6,21 @@ const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,q
 const api=new Function('document','window','localStorage','fetch','console',scripts+'\nreturn {home,train,featuredWorkouts,featuredExerciseSwaps,workoutSetting,plannerPickerItems,restoredState,baseWorkoutPlan,guides:window.EzpzExerciseMedia,workoutChooser,workoutCover,workoutProgramCovers,workoutCovers,workoutTemplates,categoryPrograms,workoutCategories,reviewedMuscleMap,hybridWorkoutCover,setCategory(v){chooserCategory=v},get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem(){writes++}},()=>new Promise(()=>{}),{error(){}});
 const assert=(v,m)=>{if(!v)throw Error(m)};
 
+const addedGuides=api.guides.names.map(name=>api.guides.get(name)).filter(guide=>guide.prescription);
+assert(addedGuides.length===20,'Twenty additional guided exercises');
+assert(new Set(addedGuides.map(guide=>guide.photo)).size===20,'One distinct photo per new exercise');
+for(const guide of addedGuides){
+ assert(fs.existsSync(path.join(__dirname,'..',guide.photo)),'Missing exercise photo for '+guide.name);
+ assert(guide.equipment&&guide.category&&new URL(guide.videoUrl).protocol==='https:','Complete references for '+guide.name);
+ const map=api.reviewedMuscleMap([guide]);
+ assert(map.primary.length>0&&map.unknown===0,'Reviewed muscle highlights for '+guide.name);
+ assert(!map.primary.some(key=>map.supporting.includes(key)),'Disjoint muscle roles for '+guide.name);
+}
+assert(api.guides.get('Barbell RDL').name==='Barbell Romanian Deadlift','Variant-specific alias');
+assert(api.guides.get('DB Step-Up').name==='Dumbbell Step-Up','Weighted step-up alias');
+assert(api.guides.get('Bodyweight Step-Up').photo!==api.guides.get('DB Step-Up').photo,'Unweighted and loaded step-up each have media');
+
+
 assert(api.workoutCategories.length===12,'Expected 12 categories');
 assert(api.workoutTemplates.length===64,'64 fixed programs plus the existing rotating plan');
 assert(new Set(api.workoutTemplates.map(w=>w.id)).size===64,'Duplicate program IDs');

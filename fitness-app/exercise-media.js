@@ -43,6 +43,28 @@
   ['Bodyweight Reverse Lunge','reverse','0SHCQLa-gms',['Reverse Lunge (Bodyweight)']],
   ['Dumbbell Farmer Carry','carry','7mzKcADa46c',["Dumbbell Farmer’s Carry","Dumbbell Farmer's Carry"]],
  ];
+ const additions=[
+  ["Dumbbell Step-Up","dumbbell-step-up","https://musclewiki.com/exercise/dumbbell-step-up",["DB Step-Up","Dumbbell Step Up"],"Dumbbells · step","Legs & Glutes",["quads glutes",""],{"reps":"8–12","unit":"reps","side":true}],
+  ["Dumbbell Z Press","dumbbell-z-press","https://musclewiki.com/exercise/dumbbell-z-press",["Z Press","Dumbbell Z-Press"],"Dumbbells","Shoulders",["frontDelts","triceps core"],{"reps":"8–12","unit":"reps","side":false}],
+  ["Kneeling Ab-Wheel Rollout","ab-wheel-rollout","9j3Lw5JP1S4",["Ab Wheel Rollout","Ab-Wheel Rollout","Ab Roller"],"Ab wheel","Core",["core","back"],{"reps":"6–10","unit":"reps","side":false}],
+  ["Trap-Bar Deadlift","trap-deadlift","gIURejjI_j8",["Hex Bar Deadlift","Trap Bar Deadlift"],"Trap bar · weight plates","Legs & Glutes",["quads glutes","hamstrings forearms"],{"reps":"5–8","unit":"reps","side":false}],
+  ["Dumbbell Bulgarian Split Squat","bulgarian-split","https://musclewiki.com/exercise/dumbbell-bulgarian-split-squat",["Dumbbell RFESS","Dumbbell Rear-Foot-Elevated Split Squat"],"Dumbbells · bench","Legs & Glutes",["quads glutes",""],{"reps":"8–12","unit":"reps","side":true}],
+  ["Dumbbell Thruster","thruster","https://musclewiki.com/exercise/dumbbell-thruster",["Dumbbell Squat to Press"],"Dumbbells","Shoulders",["quads glutes frontDelts","triceps core"],{"reps":"8–12","unit":"reps","side":false}],
+  ["Pull-Up","pull-up","https://seqd.app/exercises/pull-up/",["Pullup","Overhand Pull-Up","Pull Up"],"Pull-up bar","Back",["back","biceps forearms"],{"reps":"5–8","unit":"reps","side":false}],
+  ["Machine Leg Extension","leg-extension","https://musclewiki.com/exercise/machine-leg-extension",["Leg Extension","Seated Leg Extension"],"Leg extension machine","Legs & Glutes",["quads",""],{"reps":"10–15","unit":"reps","side":false}],
+  ["Seated Calf Raise","seated-calf","IQuMNPHHoZY",["Machine Seated Calf Raise","Seated Machine Calf Raise"],"Seated calf raise machine","Legs & Glutes",["calves",""],{"reps":"10–15","unit":"reps","side":false}],
+  ["Barbell Romanian Deadlift","barbell-rdl","https://musclewiki.com/exercise/barbell-romanian-deadlift",["Barbell RDL"],"Barbell · weight plates","Legs & Glutes",["hamstrings glutes","forearms"],{"reps":"8–12","unit":"reps","side":false}],
+  ["Incline Barbell Bench Press","incline-barbell","https://musclewiki.com/exercise/barbell-incline-bench-press",["Incline Barbell Press","Barbell Incline Bench Press"],"Barbell · incline bench · rack","Chest",["chest","frontDelts triceps"],{"reps":"8–12","unit":"reps","side":false}],
+  ["Pec Deck Fly","pec-deck","https://www.strengthlog.com/pec-deck/",["Pec Deck","Seated Machine Chest Fly"],"Pec deck machine","Chest",["chest","frontDelts"],{"reps":"10–15","unit":"reps","side":false}],
+  ["Cable Rope Face Pull","face-pull","C0XHJJ4dZQ4",["Face Pull","Cable Face Pull"],"Cable machine · rope","Shoulders",["rearDelts",""],{"reps":"10–15","unit":"reps","side":false}],
+  ["Incline Dumbbell Curl","incline-curl","https://musclewiki.com/exercise/dumbbell-incline-curl",["Incline Biceps Curl","Dumbbell Incline Curl"],"Dumbbells · incline bench","Arms",["biceps","forearms"],{"reps":"10–15","unit":"reps","side":false}],
+  ["Barbell Curl","barbell-curl","https://musclewiki.com/exercise/barbell-curl",["Barbell Biceps Curl","Straight-Bar Curl"],"Barbell · weight plates","Arms",["biceps","forearms"],{"reps":"8–12","unit":"reps","side":false}],
+  ["EZ-Bar Skull Crusher","skull-crusher","sSWIEHe08qM",["EZ Bar Skullcrusher","EZ-Bar Lying Triceps Extension"],"EZ bar · flat bench","Arms",["triceps",""],{"reps":"8–12","unit":"reps","side":false}],
+  ["Barbell Hip Thrust","barbell-hip-thrust","https://musclewiki.com/exercise/barbell-hip-thrust",["Barbell Hip Thrusts"],"Barbell · stable bench","Legs & Glutes",["glutes",""],{"reps":"8–12","unit":"reps","side":false}],
+  ["Kneeling Cable Crunch","cable-crunch","https://vimeo.com/857482512",["Kneeling Cable Rope Crunch"],"Cable machine · rope","Core",["core",""],{"reps":"10–15","unit":"reps","side":false}],
+  ["Dumbbell Suitcase Carry","suitcase-carry","vLKndwTVgzk",["One-Arm Dumbbell Carry"],"Dumbbell","Core",["core forearms",""],{"reps":"20–40","unit":"sec","side":true}],
+  ["Seated Dumbbell Wrist Curl","wrist-curl","https://musclewiki.com/exercise/dumbbell-wrist-curl",["Dumbbell Wrist Curl"],"Dumbbell · bench","Arms",["forearms",""],{"reps":"12–15","unit":"reps","side":true}],
+ ];
  const normalize=name=>String(name??'').trim().toLowerCase().replace(/[’‘]/g,"'").replace(/[–—]/g,'-').replace(/\s+/g,' ');
  const searchTags={
   'Glute Bridge':'glute hip extension','Goblet Squat':'glute quads legs','Bodyweight Squat':'glute quads legs',
@@ -50,9 +72,9 @@
   'Bodyweight Step-Up':'glute quads legs','Dumbbell Romanian Deadlift':'glute hamstrings hinge',
  };
  const details=new Map();
- for(const [name,file,video,aliases] of entries){
+ for(const [name,file,video,aliases,equipment,category,muscles,prescription] of [...entries,...additions]){
   const photo=file.startsWith('coach:')?coachSamplePhotos['photo-coach-'+file.slice(6)]:'./fitness-app/exercise-media/'+file+'.jpg';
-  const reference=Object.freeze({name,photo,searchText:normalize([name,...aliases,searchTags[name]].filter(Boolean).join(' ')),videoUrl:video.startsWith('https://')?video:'https://www.youtube.com/watch?v='+video});
+  const reference=Object.freeze({name,photo,equipment,category,muscles,prescription,searchText:normalize([name,...aliases,searchTags[name]].filter(Boolean).join(' ')),videoUrl:video.startsWith('https://')?video:'https://www.youtube.com/watch?v='+video});
   for(const key of [name,...aliases])details.set(normalize(key),reference);
  }
  function get(name){return details.get(normalize(name))}
@@ -68,5 +90,5 @@
   }
   return [...supported,...remaining];
  }
- window.EzpzExerciseMedia=Object.freeze({get,choices,names:Object.freeze(entries.map(([name])=>name))});
+ window.EzpzExerciseMedia=Object.freeze({get,choices,names:Object.freeze([...entries,...additions].map(([name])=>name))});
 })();

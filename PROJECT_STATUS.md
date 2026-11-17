@@ -1,3 +1,9 @@
+## 2026-11-17 — Guided exercise expansion
+
+- Android 1.0.152 increases the guided picker from 41 to 61 movements. Each addition has a trainer photo, exact exercise reference, searchable aliases, equipment, and primary or supporting muscle highlights.
+- Custom workouts can select and log the new exercises through the existing builder. Step-ups and split squats default to per-side reps. Suitcase carries default to per-side seconds.
+- Branch: android-health-connect. Packaged Android checks cover filtering, choosing a new exercise, and starting it in Trainer.
+
 ## 2026-11-17 — Workout builder and session clock
 
 - Android 1.0.151 replaces the native exercise autocomplete with an in-app muscle and exercise picker. Guided choices use existing exercise photos and reviewed anatomy. Manual entry is available in the same builder.

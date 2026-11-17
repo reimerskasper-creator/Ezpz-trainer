@@ -11425,8 +11425,8 @@ function reviewedMuscleMap(exercises){
  let unknown=0;
  for(const {name} of exercises){
   if(/^(?:warm[ -]?up|cool[ -]?down)\b/i.test(name))continue;
-  const canonical=window.EzpzExerciseMedia?.get(name)?.name||name;
-  const roles=Object.hasOwn(reviewedExerciseMuscles,canonical)?reviewedExerciseMuscles[canonical]:null;
+  const media=window.EzpzExerciseMedia?.get(name),canonical=media?.name||name;
+  const roles=media?.muscles||(Object.hasOwn(reviewedExerciseMuscles,canonical)?reviewedExerciseMuscles[canonical]:null);
   if(!roles){unknown++;continue}
   roles[0].split(' ').filter(Boolean).forEach(key=>primary.add(key));
   roles[1].split(' ').filter(Boolean).forEach(key=>supporting.add(key));
@@ -11558,9 +11558,11 @@ const libraryCategories=['All','Chest','Back','Shoulders','Arms','Legs & Glutes'
 async function ensureExerciseCatalog(){if(exerciseCatalog||libraryLoading)return;libraryLoading=true;try{const response=await fetch('./exercise-catalog.json',{cache:'no-cache'});if(!response.ok)throw Error('Catalogue unavailable');const data=await response.json();if(!Array.isArray(data.exercises)||data.exercises.length!==100||new Set(data.exercises.map(x=>x.id)).size!==100)throw Error('Catalogue validation failed');exerciseCatalog=data.exercises}catch(error){exerciseCatalog=[];console.error('Exercise catalogue:',error)}finally{libraryLoading=false;if(tab==='library')exerciseLibrary();else if(tab==='instructions')render()}}
 function exerciseLibrary(){
  const library=window.EzpzExerciseMedia;
- const available=(library?.names||[]).map(name=>({
-  name,category:exerciseCategory(name),equipment:featuredMovementSpecs[name]?.slice(1).join(', ')||'Bodyweight',demo:library.get(name),
- }));
+ const available=(library?.names||[]).map(name=>{
+  const demo=library.get(name);
+  const equipment=demo.equipment||featuredMovementSpecs[name]?.slice(1).join(', ')||'Bodyweight';
+  return {name,equipment,category:demo.category||exerciseCategory(name),demo};
+ });
  const chosen=available.find(item=>item.name===librarySelected||item.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')===librarySelected);
  if(chosen){
   screen.innerHTML='<button class="library-detail-back" data-action="library-back">← All exercises</button><div class="guide-heading"><span><h2>'+safe(chosen.name)+'</h2><p>'+safe(chosen.equipment)+'</p></span></div><section class="card strict-demo"><img src="'+safe(chosen.demo.photo)+'" alt="'+safe(chosen.name)+' form reference"><a href="'+safe(chosen.demo.videoUrl)+'" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Watch demo</a></section>';
@@ -12492,7 +12494,7 @@ function openBuilderExercisePicker(trigger){
    if(button.dataset.builderMovement){
     builderDraft=captureBuilder();
     const name=button.dataset.builderMovement;
-    const template=featuredWorkouts.flatMap(program=>program.exercises).find(exercise=>exercise.name===name);
+    const template=window.EzpzExerciseMedia.get(name)?.prescription||featuredWorkouts.flatMap(program=>program.exercises).find(exercise=>exercise.name===name);
     builderDraft.exercises[index]={...builderDraft.exercises[index],...(input.value.trim()?{}:template),name};
     dialog.close();
     workoutBuilder();

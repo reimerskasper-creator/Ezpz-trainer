@@ -34,8 +34,8 @@ async function verify(){
   await page.waitForFunction(()=>window.EZPZPlans&&window.EZPZTrainerSpace);
   assert(await page.locator('.home-workout-empty').isVisible());
   await page.evaluate(()=>{tab='library';render()});
-  assert.equal(await page.locator('.library-tile').count(),41);
-  assert.equal(await page.locator('.library-tile img').count(),41);
+  assert.equal(await page.locator('.library-tile').count(),61);
+  assert.equal(await page.locator('.library-tile img').count(),61);
   await page.locator('[data-library-id="Goblet Squat"]').click();
   await page.locator('.strict-demo img').evaluate(img=>img.decode());
   assert.match(await page.getByRole('link',{name:'Watch demo'}).getAttribute('href'),/^https:\/\/www.youtube.com\/watch/);

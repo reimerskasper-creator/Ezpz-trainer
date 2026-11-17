@@ -136,6 +136,23 @@ const server=http.createServer((req,res)=>{
    await builder.getByRole('button',{name:'Type my own exercise'}).click();
    await page.locator('#builder-name-0').fill('My own exercise');
    assert.equal(await page.locator('#builder-name-0').inputValue(),'My own exercise');
+   await page.locator('#builder-name-0').clear();
+   await page.locator('[data-builder-picker="0"]').click();
+   await builder.locator('[data-builder-muscle="forearms"]').click();
+   await builder.getByRole('searchbox').fill('suitcase carry');
+   const carry=builder.locator('[data-builder-movement="Dumbbell Suitcase Carry"]');
+   assert.equal(await carry.locator('[data-anatomy-region="forearms"]').count(),1);
+   assert(await carry.locator('img').isVisible());
+   await carry.click();
+   assert.equal(await page.locator('#builder-name-0').inputValue(),'Dumbbell Suitcase Carry');
+   assert.equal(await page.locator('[name="unit0"]').inputValue(),'sec');
+   assert(await page.locator('[name="side0"]').isChecked());
+   await page.locator('#builder-title').fill('Expansion smoke test');
+   await page.getByRole('button',{name:'Save & start workout'}).click();
+   assert.equal(await page.locator('body').getAttribute('data-view'),'train');
+   assert.equal(await page.locator('.workout-media-repair').count(),0);
+   assert(await page.locator('[data-training-card="0"] img').first().isVisible());
+
    await page.close();
    console.log('PASS workout recap, photo precedence and muscle selection at '+width);
   }
