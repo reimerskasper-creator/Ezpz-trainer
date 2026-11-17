@@ -59,6 +59,7 @@ jobs:
           node tests/workout-media-rule-mobile.cjs
           node tests/plan-library.cjs
           node tests/clear-plan-mobile.cjs
+          node tests/saved-workouts-mobile.cjs
       - uses: actions/cache/restore@v4
         with:
           path: native/.test-signing/debug.keystore

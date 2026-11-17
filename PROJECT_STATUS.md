@@ -1,3 +1,9 @@
+## 2026-11-17 — Full-height workout picker and saved workout management
+
+- Android 1.0.160 expands Find your workout to the safe area, compacts the shortcuts, and uses larger category and workout artwork.
+- Saved cards show a compact exercise preview. The options menu provides in-place editing with the current cover controls and confirmed deletion with upcoming schedule dates. Completed history and standalone saved plans survive deletion.
+- Branch: android-health-connect. Local builder, planner, cover and personal-photo checks passed. Signed build and mobile workflow checks pending.
+
 ## 2026-11-17 — Live anatomy covers for personal workouts
 
 - Android 1.0.159 draws the default cover from the personal workout’s exercise list. The builder updates as the user types, picks or removes exercises. Known movements show primary and supporting muscle highlights, and unmapped names leave the figure neutral unless other movements are mapped.
