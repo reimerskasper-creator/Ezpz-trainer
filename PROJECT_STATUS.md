@@ -2,7 +2,8 @@
 
 - Android 1.0.155 adds 20 six-exercise Intermediate and Advanced sessions across all five Home and Gym categories. The existing Beginner sessions retain their IDs.
 - The Day workout picker shows gym photography with primary and supporting anatomy highlights on category and session cards. The Trainer photo has a shortcut to session-only exercise swaps.
-- The rest timer uses the Android media volume stream for cues. The five-second warning falls back to a tone if spoken audio is unavailable. Run the signed Android build and check handset and Bluetooth playback.
+- The rest timer uses the Android media volume stream for cues. The five-second warning falls back to a tone if spoken audio is unavailable. Android run 44149974115 signed 1.0.155 with the existing key. The packaged picker and swap checks passed. A later Trainer check still expected two workouts per category and was updated to expect four. Handset and Bluetooth playback remain unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44149974115/artifacts/14359490387
 
 ## 2026-11-17 — Final 40 guided exercises
 

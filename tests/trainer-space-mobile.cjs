@@ -42,7 +42,7 @@ if(width===390){
  await chooser.locator('[data-workout-category="Leg"]').click();
  for(const setting of ['gym','home']){
   await chooser.locator('[data-chooser-workout-setting="'+setting+'"]').click();
-  assert.equal(await chooser.locator('[data-workout-pick]').count(),2);
+  assert.equal(await chooser.locator('[data-workout-pick]').count(),4);
   assert((await chooser.locator('[data-workout-pick]').first().getAttribute('data-workout-pick')).includes(setting));
   const b=chooser.locator('.program-card').nth(1);
   assert((await b.innerText()).includes(setting==='gym'?'lying leg curl machine':'sliders'));
