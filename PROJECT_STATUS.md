@@ -1,3 +1,9 @@
+## 2026-11-16 — Trainer and anatomy cover backgrounds
+
+- Android 1.0.150 uses a soft forest green default Trainer background. Custom workout and exercise backgrounds still take precedence.
+- Manage workouts uses charcoal-green studio backdrops behind the existing category anatomy figures and muscle layers. Program and custom workout photos retain their existing artwork.
+- Branch: android-health-connect. Android build and mobile checks pending.
+
 ## 2026-11-16 — Photo-first workout picker
 
 - Android 1.0.149 brings Push, Pull, Legs and Core to the first two rows, restores the muscle legend to the header, and gives the existing gym photos and mapped anatomy more space. Full Body, Create your own, Saved workouts and filters remain available below.

@@ -86,10 +86,16 @@ body[data-view] #workout-chooser .chooser-focus-head{padding:9px 24px 9px}
 #workout-chooser .chooser-focus-body .category-grid{gap:8px}
 #workout-chooser .chooser-focus-body .category-tile{display:flex;flex-direction:column;border-radius:12px}
 #workout-chooser .chooser-focus-body .category-photo{width:100%;height:auto;aspect-ratio:1.27}
-#workout-chooser .chooser-focus-body .hybrid-workout-cover::after{background:linear-gradient(90deg,transparent 38%,#0b241c55 66%,#071c15a6 100%)}
-#workout-chooser .chooser-focus-body .anatomy-cover-overlay{width:78%}
-#workout-chooser .chooser-focus-body .anatomy-crop-upper .recap-anatomy{right:0;width:100%;top:1%}
-#workout-chooser .chooser-focus-body .anatomy-crop-lower .recap-anatomy{right:0;width:100%;bottom:-3%}
+#workout-chooser .anatomy-studio-cover{
+ background:radial-gradient(ellipse 67% 75% at 50% 33%,#3c5046 0%,transparent 78%),
+ radial-gradient(ellipse 75% 23% at 50% 100%,#344c40 0%,transparent 100%),#101c18;
+}
+#workout-chooser .anatomy-studio-cover::after{content:none}
+#workout-chooser .anatomy-studio-cover .anatomy-cover-overlay{width:100%}
+#workout-chooser .anatomy-studio-cover .recap-anatomy{right:auto;left:50%;transform:translateX(-50%)}
+#workout-chooser .anatomy-studio-cover :is(.anatomy-crop-upper,.anatomy-crop-lower) .recap-anatomy{width:78%}
+#workout-chooser .anatomy-studio-cover .anatomy-crop-upper .recap-anatomy{top:1%}
+#workout-chooser .anatomy-studio-cover .anatomy-crop-lower .recap-anatomy{bottom:-3%}
 #workout-chooser .chooser-focus-body .category-copy{display:flex;flex:1;flex-direction:column;align-self:stretch;padding:5px 9px 7px}
 #workout-chooser .chooser-focus-body .category-copy strong{font-size:clamp(15px,4.5vw,19px);line-height:1.15}
 #workout-chooser .chooser-focus-body .category-copy small{min-height:0;margin:2px 0 4px;font-size:11px;line-height:1.25}

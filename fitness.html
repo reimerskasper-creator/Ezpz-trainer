@@ -11446,10 +11446,11 @@ function hybridWorkoutCover(workout,exercises){
  const category=typeof workout==='string'?workout:workout.coverCategory||workout.category;
  const roles=workoutCategoryMuscles[category];
  const map=exercises?reviewedMuscleMap(exercises):roles?{primary:roles[0].split(' '),supporting:roles[1].split(' ').filter(Boolean)}:null;
- const photo=workoutCoverImage(workout);
- if(!map?.primary.length)return photo;
+ if(!map?.primary.length)return workoutCoverImage(workout);
+ const categoryCover=typeof workout==='string';
+ const photo=categoryCover?'':workoutCoverImage(workout);
  const crop=category==='Leg'?'lower':['Push','Pull','Core','Arms'].includes(category)?'upper':'full';
- return '<span class="hybrid-workout-cover">'+photo+'<span class="anatomy-cover-overlay anatomy-crop-'+crop+'">'+workoutAnatomy(map)+'</span></span>';
+ return '<span class="hybrid-workout-cover'+(categoryCover?' anatomy-studio-cover':'')+'">'+photo+'<span class="anatomy-cover-overlay anatomy-crop-'+crop+'">'+workoutAnatomy(map)+'</span></span>';
 }
 function workoutMuscleLegend(){
  return '<p class="workout-muscle-legend"><span>Primary</span><span>Supporting</span></p>';
