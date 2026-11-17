@@ -2,7 +2,8 @@
 
 - Android 1.0.162 aligns Manage workouts and the arrow in one rounded Home button, adds a themed builder discard dialog, and assigns distinct artwork to all 133 built-in entries. See docs/workout-cover-audit-2026-11-17.json for the ID, equipment, previous cover, and release cover.
 - Generated people-free equipment photos for the guided catalog and legacy duplicates. Category artwork and personal photo controls retain their existing behavior.
-- Branch: android-health-connect. Local catalog, cover uniqueness, builder and planner tests passed. Signed build and mobile checks pending.
+- Branch: android-health-connect. Source commit `95a97b5`. Android run 44191237413 passed the packaged workout, Home button and draft-discard checks and native unit tests. The signed APK contains all 133 cover photos and matches the 1.0.161 certificate. Physical handset installation remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44191237413/artifacts/14377371271
 
 ## 2026-11-17 — Matching workout covers on Home
 
