@@ -66,6 +66,20 @@ async function verify(){
   assert.equal(await page.evaluate(()=>JSON.stringify([state.profile,state.logs,state.mealPlan,state.foodLog])),other);
   await page.reload();
   assert(await page.locator('.home-workout-empty').isVisible());
+  await page.evaluate(()=>{tab='planner';render()});
+  await page.locator('[data-open-plan-picker="workout"]').click();
+  const plannerPicker=page.locator('#planner-picker');
+  const pullCover=plannerPicker.locator('[data-plan-picker-category="Pull"]');
+  assert(await pullCover.locator('img').isVisible());
+  assert(await pullCover.locator('.recap-anatomy').isVisible());
+  await pullCover.click();
+  for(const level of ['Intermediate','Advanced']){
+   await plannerPicker.locator('[data-plan-picker-level="'+level+'"]').click();
+   assert.equal(await plannerPicker.locator('.picker-workout').count(),1);
+   assert(await plannerPicker.locator('.picker-choice .anatomy-primary').first().isVisible());
+  }
+  await plannerPicker.locator('[data-plan-picker-action="close"]').click();
+  await page.evaluate(()=>{tab='home';render()});
   await page.locator('[data-overview-workout]').click();
   const chooser=page.locator('#workout-chooser');
   assert(await chooser.isVisible());
@@ -74,6 +88,15 @@ async function verify(){
   await chooser.locator('[data-workout-pick="guided-home-core-a"]').click();
   assert((await page.locator('.home-workout').innerText()).includes('Core A'));
   assert.equal(await page.evaluate(()=>state.workoutSchedule[foodDate()]),undefined);
+  await page.locator('[data-home-start]').click();
+  const quickSwap=page.locator('.trainer-photo-swap[data-compact-swap="0"]');
+  await quickSwap.click();
+  const swapDialog=page.locator('#trainer-swap-0');
+  assert(await swapDialog.isVisible());
+  await swapDialog.locator('[data-exercise-name="Dead Bug Heel Taps"]').click();
+  assert((await page.locator('[data-training-card="0"] h3').innerText()).includes('Dead Bug Heel Taps'));
+  await page.evaluate(()=>{state.workoutDrafts={};tab='home';render()});
+
   await page.evaluate(()=>{
    state.homeWorkoutChoice.date=datePlus(foodDate(),-1);
    state.workoutSchedule={[foodDate()]:'guided-home-legs-a'};

@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),source=fs.readFileSync(pat
 const screen={innerHTML:''},body={innerHTML:'',scrollTop:0},search={value:''},dialog={innerHTML:'',open:false,showModal(){this.open=true},close(){this.open=false}},focuses=[],alerts=[];
 let stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],selectedWorkout:'push-a',workoutDrafts:{'push-a':{'sr0-0':'9'}},workoutLayoutVersion:2}),writes=0,fail=false;
 const document={body:{dataset:{}},querySelector:()=>null,querySelectorAll:()=>[],getElementById:id=>id==='screen'?screen:id==='planner-picker'?dialog:id==='planner-picker-body'?body:id==='planner-picker-search'?search:{focus(){focuses.push(id)}},addEventListener(){}};
-const script=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n');
+const script=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).concat(['coach-sample-photos','exercise-media'].map(name=>fs.readFileSync(path.join(__dirname,'../fitness-app/'+name+'.js'),'utf8'))).join('\n');
 const api=new Function('document','window','localStorage','fetch','console','alert','confirm',script+'\nreturn {planner,openPlannerPicker,closePlannerPicker,filterPlannerPicker,pickerWorkoutMatches,pickerMealMatches,commitPickerWorkout,commitPickerMeal,planSettings,datePlus,foodDate,setPlannedRecipe,restoredState,recipeCategory,get picker(){return planPicker},get state(){return state},navigatePlannerDate,removePlannerItem,removePlannerLogged,plannerLoggedDay,undoRemoval,activeImportedWorkouts,get mode(){return plannerMode},setMode(v){plannerMode=v},previewWorkout,setPreview(id,date){previewWorkoutId=id;previewWorkoutDate=date;tab="preview"},setTab(v){tab=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('Storage full');stored=v;writes++}},()=>new Promise(()=>{}),{error(){}},m=>alerts.push(m),()=>true);
 const assert=(v,m)=>{if(!v)throw Error(m)},equal=(a,b,m)=>assert(JSON.stringify(a)===JSON.stringify(b),m);
 api.setTab('planner');api.planner();
@@ -11,7 +11,17 @@ assert(!screen.innerHTML.includes('<select id="planned-workout"')&&!screen.inner
 assert(screen.innerHTML.includes('data-open-plan-picker="workout"')&&screen.innerHTML.includes('data-open-meal-picker="breakfast"'),'Photo picker triggers');
 const before=JSON.stringify(api.state),writesBefore=writes;api.openPlannerPicker('workout');
 assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===5,'Five workout photo categories');
-assert(api.pickerWorkoutMatches().length===10,'Ten Home sessions available');
+assert(api.pickerWorkoutMatches().length===20,'Twenty Home sessions available');
+assert((body.innerHTML.match(/hybrid-workout-cover/g)||[]).length===5,'Photo and anatomy on all workout categories');
+for(const setting of ['home','gym']){
+ api.state.workoutSetting=setting;
+ api.picker.category='Pull';
+ for(const level of ['Intermediate','Advanced']){
+  api.picker.level=level;api.filterPlannerPicker();
+  assert(api.pickerWorkoutMatches().length===1&&body.innerHTML.includes('anatomy-cover-overlay'),'Pull session and anatomy for '+setting+' '+level);
+ }
+}
+delete api.state.workoutSetting;
 api.picker.category='Full Body';api.picker.level='Beginner';api.filterPlannerPicker();
 assert(api.pickerWorkoutMatches().length===2&&body.innerHTML.includes('Beginner'),'Category and level combine');
 api.picker.category=null;api.picker.level='all';api.picker.query='guided-home-full-body-a';api.filterPlannerPicker();
@@ -21,7 +31,7 @@ const date=api.planSettings().date,other=api.datePlus(date,1);api.state.workoutS
 api.openPlannerPicker('workout');assert(api.commitPickerWorkout('guided-home-full-body-a'),'Assign workout');
 assert(api.state.workoutSchedule[date]==='guided-home-full-body-a'&&api.state.workoutSchedule[other]==='pull-a','Only selected date changes');
 assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Planning preserves active workout and draft');
-api.openPlannerPicker('workout');api.picker.category='Leg';assert(api.pickerWorkoutMatches().length===2,'Two Home leg sessions');assert(api.commitPickerWorkout('guided-home-legs-b'),'Plan Home Legs B');assert(api.state.workoutSchedule[date]==='guided-home-legs-b','Guided schedule saved');api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
+api.openPlannerPicker('workout');api.picker.category='Leg';assert(api.pickerWorkoutMatches().length===4,'Four Home leg sessions');assert(api.commitPickerWorkout('guided-home-legs-b'),'Plan Home Legs B');assert(api.state.workoutSchedule[date]==='guided-home-legs-b','Guided schedule saved');api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
 api.openPlannerPicker('workout');api.commitPickerWorkout('');assert(!api.state.workoutSchedule[date]&&api.state.workoutSchedule[other]==='pull-a','Remove only selected workout');
 api.state.foodLog=[{id:'old',date,servings:1,name:'Saved',macros:[400,30,45,10]}];
 api.openPlannerPicker('meal','breakfast');assert(api.pickerMealMatches().every(x=>api.recipeCategory(x.i)==='breakfast'),'Slot filter defaults to breakfast');

@@ -1,3 +1,9 @@
+## 2026-11-17 — Workout picker levels, anatomy, and Trainer controls
+
+- Android 1.0.155 adds 20 six-exercise Intermediate and Advanced sessions across all five Home and Gym categories. The existing Beginner sessions retain their IDs.
+- The Day workout picker shows gym photography with primary and supporting anatomy highlights on category and session cards. The Trainer photo has a shortcut to session-only exercise swaps.
+- The rest timer uses the Android media volume stream for cues. The five-second warning falls back to a tone if spoken audio is unavailable. Run the signed Android build and check handset and Bluetooth playback.
+
 ## 2026-11-17 — Final 40 guided exercises
 
 - Android 1.0.154 expands the guided library from 101 to 141 exercises. Each new entry includes a matched trainer photo, equipment, muscle map, and demonstration link.

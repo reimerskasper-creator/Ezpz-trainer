@@ -155,3 +155,9 @@ body[data-view] #builder-exercise-picker :focus-visible{outline:2px solid #9ce9b
 .builder-movements small{display:block;font-size:11px}
 .builder-movements .recap-anatomy{display:block;width:100%}
 body[data-view] .builder-browse{min-height:44px;width:100%;margin:6px 0 8px}
+
+#planner-picker .plan-picker-categories>button>.hybrid-workout-cover{height:104px}
+#planner-picker .plan-picker-categories>button>.hybrid-workout-cover>img{height:100%}
+#planner-picker .picker-choice>.hybrid-workout-cover{width:63px;height:78px;flex:none;border-radius:10px}
+#planner-picker .picker-choice>.hybrid-workout-cover .anatomy-cover-overlay{width:100%}
+#planner-picker .picker-exercises>summary{color:inherit}

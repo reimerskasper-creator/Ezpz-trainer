@@ -7187,6 +7187,58 @@ const featuredMovementSpecs={
  'Standing Overhead Dumbbell Triceps Extension':['triceps','dumbbells'],
  'Close-Grip Push-Up':['press'],
  'Dumbbell Pullover':['vertical-pull','dumbbells','flat bench'],
+ "Decline Push-Up":["press", "sturdy step"],
+ "Dumbbell Squeeze Press":["press", "dumbbells", "flat bench"],
+ "Dumbbell Arnold Press":["overhead", "dumbbells"],
+ "Dumbbell Triceps Kickback":["triceps", "dumbbells", "flat bench"],
+ "Dumbbell Front Raise":["front-raise", "dumbbells"],
+ "Single-Arm Kettlebell Row":["row", "kettlebell"],
+ "Dumbbell Renegade Row":["row", "dumbbells"],
+ "Dumbbell Concentration Curl":["curl", "dumbbells", "flat bench"],
+ "Incline Dumbbell Curl":["curl", "dumbbells", "adjustable bench"],
+ "Resistance Band Pull-Apart":["rear-delt", "resistance band"],
+ "Dumbbell Bulgarian Split Squat":["single-leg", "dumbbells", "flat bench"],
+ "Dumbbell Step-Up":["single-leg", "dumbbells", "sturdy step"],
+ "Single-Leg Dumbbell Romanian Deadlift":["hinge", "dumbbells"],
+ "Dumbbell Reverse Lunge":["single-leg", "dumbbells"],
+ "Single-Leg Glute Bridge":["hip-extension"],
+ "Dumbbell Lateral Lunge":["single-leg", "dumbbells"],
+ "Dumbbell Suitcase Carry":["carry", "dumbbells", "walking space"],
+ "Lying Leg Raise":["core-flexion"],
+ "Weighted Forearm Plank":["brace", "weight plate"],
+ "Side Plank with Hip Lift":["side-brace"],
+ "Kneeling Ab-Wheel Rollout":["brace", "ab wheel"],
+ "Bicycle Crunch":["core-flexion"],
+ "Mountain Climber":["brace"],
+ "Seated Machine Chest Press":["press", "chest press machine"],
+ "Standing Barbell Overhead Press":["overhead", "barbell", "squat rack"],
+ "High-to-Low Cable Chest Fly":["chest-fly", "dual cable station"],
+ "Straight-Bar Triceps Pushdown":["triceps", "cable station", "straight bar"],
+ "Single-Arm Cable Lateral Raise":["side-raise", "cable station", "single handle"],
+ "Parallel-Bar Dip":["press", "parallel bars"],
+ "Chest-Supported T-Bar Row":["row", "chest-supported T-bar row machine"],
+ "Machine-Assisted Pull-Up":["vertical-pull", "assisted pull-up machine"],
+ "Neutral-Grip Lat Pulldown":["vertical-pull", "lat pulldown station", "neutral handle"],
+ "Wide-Grip Seated Cable Row":["row", "seated cable row station", "wide bar"],
+ "EZ-Bar Preacher Curl":["curl", "EZ bar", "preacher bench"],
+ "Reverse Pec Deck":["rear-delt", "reverse pec deck"],
+ "Chin-Up":["vertical-pull", "pull-up bar"],
+ "Cable Rope Face Pull":["rear-delt", "cable station", "rope attachment"],
+ "Machine Hack Squat":["squat", "hack squat machine"],
+ "Barbell Front Squat":["squat", "barbell", "squat rack"],
+ "Single-Leg Leg Press":["single-leg", "45-degree leg press"],
+ "Seated Leg Curl":["knee-flexion", "seated leg curl machine"],
+ "Machine Standing Calf Raise":["calves", "standing calf raise machine"],
+ "Seated Hip Abduction Machine":["hip-abduction", "hip abduction machine"],
+ "Barbell Romanian Deadlift":["hinge", "barbell"],
+ "Single-Leg Machine Leg Extension":["knee-extension", "leg extension machine"],
+ "Standing Single-Leg Machine Leg Curl":["knee-flexion", "standing leg curl machine"],
+ "Seated Ab Crunch Machine":["core-flexion", "ab crunch machine"],
+ "High-to-Low Cable Woodchop":["rotation", "cable station", "single handle"],
+ "Hanging Knee Raise":["core-flexion", "pull-up bar"],
+ "Kneeling Cable Crunch":["core-flexion", "cable station", "rope attachment"],
+ "Single-Arm Kettlebell Rack Carry":["carry", "kettlebell", "walking space"],
+ "Trap-Bar Deadlift":["hinge", "trap bar"],
 };
 const featuredWorkoutRows=[
  ['home','full-body','A','Squat & Press', 'Full Body',45,[
@@ -7269,10 +7321,170 @@ const featuredWorkoutRows=[
   ['Pallof Press',3,'8–12',60,'reps',true],['Side Plank',2,'15–30',45,'sec',true],['Bird Dog',2,'6–10',45,'reps',true],
   ['Dumbbell Farmer Carry',2,'20–40',60,'sec'],['Bear Plank',2,'15–25',45,'sec'],['Dead Bug Heel Taps',2,'6–10',45,'reps',true],
  ]],
+ ["home", "full-body", "C", "Dumbbell Foundations Plus", "Full Body", 40,[
+  ["Goblet Squat", 3, "8–12", 120],
+  ["Dumbbell Floor Press", 3, "8–12", 120],
+  ["Chest-Supported Dumbbell Row", 3, "8–12", 120],
+  ["Dumbbell Reverse Lunge", 2, "10–15", 60, "reps", true],
+  ["Dumbbell Romanian Deadlift", 2, "10–15", 60],
+  ["Dead Bug", 2, "10–15", 60, "reps", true],
+ ]],
+ ["home", "full-body", "D", "Unilateral Strength", "Full Body", 48,[
+  ["Dumbbell Bulgarian Split Squat", 3, "6–10", 150, "reps", true],
+  ["Dumbbell Renegade Row", 3, "6–10", 150, "reps", true],
+  ["Decline Push-Up", 3, "6–10", 150],
+  ["Single-Leg Dumbbell Romanian Deadlift", 2, "10–15", 60, "reps", true],
+  ["Dumbbell Arnold Press", 2, "10–15", 60],
+  ["Dumbbell Suitcase Carry", 2, "20–40", 60, "sec", true],
+ ]],
+ ["home", "push", "C", "Dumbbell Pressing", "Push", 40,[
+  ["Incline Dumbbell Press", 3, "8–12", 120],
+  ["Standing Dumbbell Shoulder Press", 3, "8–12", 120],
+  ["Dumbbell Squeeze Press", 3, "8–12", 120],
+  ["Dumbbell Lateral Raise", 2, "10–15", 60],
+  ["Dumbbell Triceps Kickback", 2, "10–15", 60, "reps", true],
+  ["Push-Up", 2, "10–15", 60],
+ ]],
+ ["home", "push", "D", "Shoulders & Triceps", "Push", 46,[
+  ["Dumbbell Arnold Press", 3, "6–10", 150],
+  ["Decline Push-Up", 3, "6–10", 150],
+  ["Dumbbell Bench Press", 3, "6–10", 150],
+  ["Dumbbell Lateral Raise", 2, "10–15", 60],
+  ["Standing Overhead Dumbbell Triceps Extension", 2, "10–15", 60],
+  ["Close-Grip Push-Up", 2, "10–15", 60],
+ ]],
+ ["home", "pull", "C", "Rows & Curls", "Pull", 40,[
+  ["Chest-Supported Dumbbell Row", 3, "8–12", 120],
+  ["Single-Arm Kettlebell Row", 3, "8–12", 120, "reps", true],
+  ["Dumbbell Pullover", 3, "8–12", 120],
+  ["Chest-Supported Dumbbell Reverse Fly", 2, "10–15", 60],
+  ["Dumbbell Concentration Curl", 2, "10–15", 60, "reps", true],
+  ["Resistance Band Pull-Apart", 2, "10–15", 60],
+ ]],
+ ["home", "pull", "D", "Back Strength & Control", "Pull", 46,[
+  ["Single-Arm Dumbbell Bench Row", 3, "6–10", 150, "reps", true],
+  ["Dumbbell Renegade Row", 3, "6–10", 150, "reps", true],
+  ["Dumbbell Pullover", 3, "6–10", 150],
+  ["Chest-Supported Dumbbell Reverse Fly", 2, "10–15", 60],
+  ["Incline Dumbbell Curl", 2, "10–15", 60],
+  ["Dumbbell Hammer Curl", 2, "10–15", 60],
+ ]],
+ ["home", "legs", "C", "Single-Leg & Posterior Chain", "Leg", 42,[
+  ["Goblet Squat", 3, "8–12", 120],
+  ["Dumbbell Romanian Deadlift", 3, "8–12", 120],
+  ["Dumbbell Step-Up", 3, "8–12", 120, "reps", true],
+  ["Slider Hamstring Curl", 2, "10–15", 60],
+  ["Single-Leg Glute Bridge", 2, "10–15", 60, "reps", true],
+  ["Bodyweight Standing Calf Raise", 2, "10–15", 60],
+ ]],
+ ["home", "legs", "D", "Loaded Single-Leg Strength", "Leg", 48,[
+  ["Dumbbell Bulgarian Split Squat", 3, "6–10", 150, "reps", true],
+  ["Single-Leg Dumbbell Romanian Deadlift", 3, "6–10", 150, "reps", true],
+  ["Dumbbell Reverse Lunge", 3, "6–10", 150, "reps", true],
+  ["Dumbbell Lateral Lunge", 2, "10–15", 60, "reps", true],
+  ["Slider Hamstring Curl", 2, "10–15", 60],
+  ["Bodyweight Standing Calf Raise", 2, "10–15", 60],
+ ]],
+ ["home", "core", "C", "Anti-Rotation & Control", "Core", 28,[
+  ["Dead Bug", 2, "8–12", 60, "reps", true],
+  ["Dumbbell Suitcase Carry", 2, "20–40", 60, "sec", true],
+  ["Side Plank with Hip Lift", 2, "8–12", 60, "reps", true],
+  ["Reverse Crunch", 2, "8–12", 60],
+  ["Bear Plank", 2, "20–40", 60, "sec"],
+  ["Bird Dog", 2, "8–12", 60, "reps", true],
+ ]],
+ ["home", "core", "D", "Rollouts & Loaded Bracing", "Core", 32,[
+  ["Kneeling Ab-Wheel Rollout", 3, "5–8", 60],
+  ["Weighted Forearm Plank", 3, "15–30", 60, "sec"],
+  ["Dumbbell Suitcase Carry", 2, "20–40", 60, "sec", true],
+  ["Lying Leg Raise", 2, "8–12", 60],
+  ["Side Plank with Hip Lift", 2, "8–12", 60, "reps", true],
+  ["Mountain Climber", 2, "20–40", 60, "sec"],
+ ]],
+ ["gym", "full-body", "C", "Machine & Dumbbell Strength", "Full Body", 45,[
+  ["Machine Hack Squat", 3, "8–12", 120],
+  ["Seated Machine Chest Press", 3, "8–12", 120],
+  ["Neutral-Grip Lat Pulldown", 3, "8–12", 120],
+  ["Dumbbell Romanian Deadlift", 2, "10–15", 60],
+  ["Seated Cable Row", 2, "10–15", 60],
+  ["Pallof Press", 2, "10–15", 60, "reps", true],
+ ]],
+ ["gym", "full-body", "D", "Barbell & Cable Strength", "Full Body", 55,[
+  ["Trap-Bar Deadlift", 3, "5–8", 150],
+  ["Barbell Bench Press", 3, "6–10", 150],
+  ["Chest-Supported T-Bar Row", 3, "6–10", 150],
+  ["Dumbbell Bulgarian Split Squat", 2, "10–15", 60, "reps", true],
+  ["Standing Barbell Overhead Press", 2, "10–15", 60],
+  ["High-to-Low Cable Woodchop", 2, "10–15", 60, "reps", true],
+ ]],
+ ["gym", "push", "C", "Machine & Cable Pressing", "Push", 43,[
+  ["Seated Machine Chest Press", 3, "8–12", 120],
+  ["Incline Dumbbell Press", 3, "8–12", 120],
+  ["Seated Dumbbell Shoulder Press", 3, "8–12", 120],
+  ["High-to-Low Cable Chest Fly", 2, "10–15", 60],
+  ["Single-Arm Cable Lateral Raise", 2, "10–15", 60, "reps", true],
+  ["Straight-Bar Triceps Pushdown", 2, "10–15", 60],
+ ]],
+ ["gym", "push", "D", "Barbell Presses & Dips", "Push", 51,[
+  ["Barbell Bench Press", 3, "6–10", 150],
+  ["Standing Barbell Overhead Press", 3, "6–10", 150],
+  ["Parallel-Bar Dip", 3, "6–10", 150],
+  ["High-to-Low Cable Chest Fly", 2, "10–15", 60],
+  ["Dumbbell Lateral Raise", 2, "10–15", 60],
+  ["Rope Triceps Pushdown", 2, "10–15", 60],
+ ]],
+ ["gym", "pull", "C", "Assisted Pull-Ups & Rows", "Pull", 44,[
+  ["Machine-Assisted Pull-Up", 3, "8–12", 120],
+  ["Chest-Supported T-Bar Row", 3, "8–12", 120],
+  ["Neutral-Grip Lat Pulldown", 3, "8–12", 120],
+  ["Reverse Pec Deck", 2, "10–15", 60],
+  ["EZ-Bar Preacher Curl", 2, "10–15", 60],
+  ["Dumbbell Hammer Curl", 2, "10–15", 60],
+ ]],
+ ["gym", "pull", "D", "Chin-Ups & Upper Back", "Pull", 50,[
+  ["Chin-Up", 3, "5–8", 150],
+  ["Chest-Supported T-Bar Row", 3, "6–10", 150],
+  ["Wide-Grip Seated Cable Row", 3, "6–10", 150],
+  ["Cable Rope Face Pull", 2, "10–15", 60],
+  ["EZ-Bar Preacher Curl", 2, "10–15", 60],
+  ["Dumbbell Hammer Curl", 2, "10–15", 60],
+ ]],
+ ["gym", "legs", "C", "Machine Leg Strength", "Leg", 45,[
+  ["Machine Hack Squat", 3, "8–12", 120],
+  ["Single-Leg Leg Press", 3, "8–12", 120, "reps", true],
+  ["Seated Leg Curl", 3, "8–12", 120],
+  ["Single-Leg Machine Leg Extension", 2, "10–15", 60, "reps", true],
+  ["Seated Hip Abduction Machine", 2, "10–15", 60],
+  ["Machine Standing Calf Raise", 2, "10–15", 60],
+ ]],
+ ["gym", "legs", "D", "Front Squat & Hinge", "Leg", 54,[
+  ["Barbell Front Squat", 3, "5–8", 150],
+  ["Barbell Romanian Deadlift", 3, "6–10", 150],
+  ["Single-Leg Leg Press", 3, "6–10", 150, "reps", true],
+  ["Standing Single-Leg Machine Leg Curl", 2, "10–15", 60, "reps", true],
+  ["Single-Leg Machine Leg Extension", 2, "10–15", 60, "reps", true],
+  ["Machine Standing Calf Raise", 2, "10–15", 60],
+ ]],
+ ["gym", "core", "C", "Cable Core & Carries", "Core", 30,[
+  ["Pallof Press", 2, "8–12", 60, "reps", true],
+  ["High-to-Low Cable Woodchop", 2, "8–12", 60, "reps", true],
+  ["Seated Ab Crunch Machine", 2, "8–12", 60],
+  ["Dumbbell Suitcase Carry", 2, "20–40", 60, "sec", true],
+  ["Reverse Crunch", 2, "8–12", 60],
+  ["Side Plank", 2, "20–40", 60, "sec", true],
+ ]],
+ ["gym", "core", "D", "Hanging & Loaded Core", "Core", 36,[
+  ["Hanging Knee Raise", 3, "8–12", 60],
+  ["Kneeling Ab-Wheel Rollout", 3, "5–8", 60],
+  ["Kneeling Cable Crunch", 2, "8–12", 60],
+  ["Single-Arm Kettlebell Rack Carry", 2, "20–40", 60, "sec", true],
+  ["Weighted Forearm Plank", 2, "15–30", 60, "sec"],
+  ["High-to-Low Cable Woodchop", 2, "8–12", 60, "reps", true],
+ ]],
 ];
 const featuredWorkouts=featuredWorkoutRows.map(([setting,key,variant,focus,category,minutes,items])=>{
  const title=(category==='Leg'?'Legs':category)+' '+variant+' · '+focus;
- const exercises=items.map(([name,sets,reps,rest,unit='reps',side=false])=>({name,sets,reps,rest,unit,side,load:!['sturdy step','sliders','smooth floor','walking space'].includes(featuredMovementSpecs[name][1])&&featuredMovementSpecs[name].length>1}));
+ const exercises=items.map(([name,sets,reps,rest,unit='reps',side=false])=>({name,sets,reps,rest,unit,side,load:!['sturdy step','sliders','smooth floor','walking space','resistance band','ab wheel','parallel bars','pull-up bar'].includes(featuredMovementSpecs[name][1])&&featuredMovementSpecs[name].length>1}));
  const equipmentItems=[...new Set(exercises.flatMap(x=>featuredMovementSpecs[x.name].slice(1)))];
  if(equipmentItems.includes('adjustable bench')&&equipmentItems.includes('flat bench'))equipmentItems.splice(equipmentItems.indexOf('flat bench'),1);
  const equipment=equipmentItems.length?equipmentItems.join(', '):'No equipment · mat optional';
@@ -7281,8 +7493,8 @@ const featuredWorkouts=featuredWorkoutRows.map(([setting,key,variant,focus,categ
   :'Start with a load that leaves about two good reps in reserve. When every set reaches the top of its rep range with controlled form, increase the load by the smallest available amount. For bodyweight work, add reps within the range first.';
  return {
   id:'guided-'+setting+'-'+key+'-'+variant.toLowerCase(),setting,variant,category,focus,title,programName:title,minutes:String(minutes),equipment,equipmentItems,
-  cover:{src:'./workout-images/neutral-'+(key==='legs'?'leg':key)+'-'+(setting==='home'?(variant==='A'?1:2):(variant==='A'?3:4))+'.jpg',alt:category+' training equipment'},
-  level:'Beginner',summary:'Focus: '+focus+'.',setup:'Finish the sets for each exercise before moving on.',guide,
+  cover:{src:'./workout-images/neutral-'+(key==='legs'?'leg':key)+'-'+(setting==='home'?(['A','C'].includes(variant)?1:2):(['A','C'].includes(variant)?3:4))+'.jpg',alt:category+' training equipment'},
+  level:variant==='D'?'Advanced':variant==='C'?'Intermediate':'Beginner',summary:'Focus: '+focus+'.',setup:'Finish the sets for each exercise before moving on.',guide,
   warmup:'Start with easy movement and rehearse the first exercise.',cooldown:'Finish with easy movement and relaxed breathing.',exercises,
  };
 });
@@ -11331,7 +11543,7 @@ document.addEventListener('click',event=>{
  if(row||edit)openWorkoutExerciseEditor(row||edit,row?Number(row.dataset.editHomeExercise):undefined);
 });
 function applyExerciseSwap(index,name){const base=baseWorkoutPlan(),plan=workoutPlan(),current=plan.exercises[index],x=base.exercises[current?.index];if(!x||plan.exerciseEdits[current.index]||!Number.isInteger(index))return false;if(name!==x.name&&!swapOptions(x,base).some(y=>y.name===name))return false;if(current.name===name)return true;const d={...workoutDraft(base)};if(Array.from({length:x.sets},(_,j)=>['sr','sw'].some(k=>d[k+index+'-'+j]!==undefined&&d[k+index+'-'+j]!=='')||d['sd'+index+'-'+j]).some(Boolean))return false;if(name===x.name)delete d['swap'+current.index];else d['swap'+current.index]=name;return persistTrainingDraft(base,d)}
-function swapMarkup(exercise,index){const plan=workoutPlan();if(plan.exerciseEdits[exercise?.index])return '';const base=baseWorkoutPlan().exercises[exercise?.index];if(!base)return '';const options=swapOptions(base,plan).sort((a,b)=>Number(!!window.EzpzExerciseMedia?.get(b.name))-Number(!!window.EzpzExerciseMedia?.get(a.name)));if(!options.length)return '<p class="note">For another movement, use Create your own workout.</p>';const d=workoutDraft(),locked=Array.from({length:exercise.sets},(_,j)=>['sr','sw'].some(k=>d[k+index+'-'+j]!==undefined&&d[k+index+'-'+j]!=='')||d['sd'+index+'-'+j]).some(Boolean);return '<details class="exercise-swap"><summary>Swap exercise</summary><p class="note">For this session only. Choose equipment you have and a movement you know. Start light; weights do not transfer between exercises.</p><div class="exercise-swap-choices" role="group" aria-label="Alternative movement">'+[base,...options].map(x=>'<button type="button" class="exercise-thumb-row" data-exercise-swap-choice="'+index+'" data-exercise-name="'+safe(x.name)+'" aria-pressed="'+(x.name===exercise.name)+'" '+(locked?'disabled':'')+'>'+exerciseThumbnail(x.name,plan.id)+'<span>'+safe(x.name)+(x.name===base.name?' · original':'')+'</span></button>').join('')+'</div>'+(locked?'disabled':'')+'>'+[base,...options].map(x=>'<option value="'+safe(x.name)+'" '+(x.name===exercise.name?'selected':'')+'>'+safe(x.name)+(x.name===base.name?' · original':'')+(window.EzpzExerciseMedia?.get(x.name)?' · Photo + video':'')+'</option>').join('')+'</select>'+(locked?'<p class="note">This exercise has entries. Keep them, or clear this exercise below before swapping.</p><button type="button" data-clear-exercise="'+index+'">Clear this exercise’s entries</button>':'')+(exercise.originalName?'<p class="note">Replaces '+safe(exercise.originalName)+'.</p>':'')+'</details>'}
+function swapMarkup(exercise,index){const plan=workoutPlan();if(plan.exerciseEdits[exercise?.index])return '';const base=baseWorkoutPlan().exercises[exercise?.index];if(!base)return '';const options=swapOptions(base,plan).sort((a,b)=>Number(!!window.EzpzExerciseMedia?.get(b.name))-Number(!!window.EzpzExerciseMedia?.get(a.name)));if(!options.length)return '<p class="note">For another movement, use Create your own workout.</p>';const d=workoutDraft(),locked=Array.from({length:exercise.sets},(_,j)=>['sr','sw'].some(k=>d[k+index+'-'+j]!==undefined&&d[k+index+'-'+j]!=='')||d['sd'+index+'-'+j]).some(Boolean);return '<details class="exercise-swap"><summary>Swap exercise</summary><p class="note">For this session only. Choose equipment you have and a movement you know. Start light; weights do not transfer between exercises.</p><div class="exercise-swap-choices" role="group" aria-label="Alternative movement">'+[base,...options].map(x=>'<button type="button" class="exercise-thumb-row" data-exercise-swap-choice="'+index+'" data-exercise-name="'+safe(x.name)+'" aria-pressed="'+(x.name===exercise.name)+'" '+(locked?'disabled':'')+'>'+exerciseThumbnail(x.name,plan.id)+'<span>'+safe(x.name)+(x.name===base.name?' · original':'')+'</span></button>').join('')+'</div>'+(locked?'<p class="note">This exercise has entries. Keep them, or clear this exercise below before swapping.</p><button type="button" data-clear-exercise="'+index+'">Clear this exercise’s entries</button>':'')+(exercise.originalName?'<p class="note">Replaces '+safe(exercise.originalName)+'.</p>':'')+'</details>'}
 function progressionSuggestion(x){if((x.unit||'reps')!=='reps'||!exerciseHasLoad(x)||/Warm-up|Cooldown|Assisted/i.test(x.name))return null;const range=String(x.reps).match(/^(\d+)(?:\s*[–-]\s*(\d+))?$/);if(!range)return null;const high=Number(range[2]||range[1]),sessions=state.logs.filter(l=>Number.isFinite(new Date(l.date).getTime())&&new Date(l.date)<=new Date()).slice().sort((a,b)=>new Date(b.date)-new Date(a.date)).map(l=>(l.exercises||[]).find(e=>e.name===x.name&&JSON.parse(exerciseIdentity(e))[1]==='reps')).filter(Boolean).slice(0,2);if(!sessions.length)return {text:'Start at a comfortable effort. Your completed sets will guide the next session.'};const completed=e=>historicalSets(e).filter(z=>z.done!==false&&validSetValue(z.reps)&&Number.isFinite(Number(z.kg))&&Number(z.kg)>0),last=completed(sessions[0]);if(!last.length)return {text:'Repeat your current version. Bodyweight results do not imply a weight to add.'};const load=Math.max(...last.map(z=>Number(z.kg))),same=(a,b)=>Math.abs(a-b)<1e-6,ready=sessions.length===2&&sessions.every(e=>{const sets=historicalSets(e);return sets.length>=x.sets&&sets.every(z=>z.done!==false&&validSetValue(z.reps)&&Number(z.reps)>=high&&same(Number(z.kg),load))});return {kg:load,increase:ready,text:ready?'You reached '+high+' reps in every set at '+loadText(load)+' '+loadUnit()+' in your last two sessions. If form stayed controlled and it felt comfortable, try the smallest available increase; repeating is fine.':'Repeat around '+loadText(load)+' '+loadUnit()+'. Build toward '+high+' controlled reps in all '+x.sets+' sets before considering an increase.'}}
 function progressionMarkup(x){const suggestion=progressionSuggestion(x);return suggestion?'<aside class="progression-hint"><strong>Next weight</strong><p>'+safe(suggestion.text)+'</p><small>A suggestion, based on recorded sets. Adjust to how you feel today.</small></aside>':''}
 let lastSessionRecap=null;
@@ -11442,15 +11654,15 @@ function workoutAnatomy({primary,supporting},label){
  }).join('');
  return '<span class="recap-anatomy" '+(label?'role="img" aria-label="'+safe(label)+'"':'aria-hidden="true"')+'><span class="recap-anatomy-layer"></span>'+layers(supporting,'supporting')+layers(primary,'primary')+'</span>';
 }
-function hybridWorkoutCover(workout,exercises){
+function hybridWorkoutCover(workout,exercises,categoryPhoto=false){
  const category=typeof workout==='string'?workout:workout.coverCategory||workout.category;
  const roles=workoutCategoryMuscles[category];
  const map=exercises?reviewedMuscleMap(exercises):roles?{primary:roles[0].split(' '),supporting:roles[1].split(' ').filter(Boolean)}:null;
  if(!map?.primary.length)return workoutCoverImage(workout);
  const categoryCover=typeof workout==='string';
- const photo=categoryCover?'':workoutCoverImage(workout);
+ const photo=categoryCover&&!categoryPhoto?'':workoutCoverImage(workout);
  const crop=category==='Leg'?'lower':['Push','Pull','Core','Arms'].includes(category)?'upper':'full';
- return '<span class="hybrid-workout-cover'+(categoryCover?' anatomy-studio-cover':'')+'">'+photo+'<span class="anatomy-cover-overlay anatomy-crop-'+crop+'">'+workoutAnatomy(map)+'</span></span>';
+ return '<span class="hybrid-workout-cover'+(categoryCover&&!categoryPhoto?' anatomy-studio-cover':'')+'">'+photo+'<span class="anatomy-cover-overlay anatomy-crop-'+crop+'">'+workoutAnatomy(map)+'</span></span>';
 }
 function workoutMuscleLegend(){
  return '<p class="workout-muscle-legend"><span>Primary</span><span>Supporting</span></p>';
@@ -12258,7 +12470,7 @@ function nativeWorkoutAudio(){
  return workoutAudioPlugin||(workoutAudioPlugin=cap.registerPlugin('EzpzWorkoutAudio'));
 }
 function unlockWorkoutAudio(){
- if(state.workoutSounds===false||nativeWorkoutAudio())return;
+ if(state.workoutSounds===false)return;
  const Audio=window.AudioContext||window.webkitAudioContext;
  if(Audio){try{workoutAudioContext||=new Audio();workoutAudioContext.resume().catch(()=>{})}catch{}}
 }
@@ -12336,12 +12548,16 @@ function syncRestAudio(){
  if(workoutAudioTimeout!==null){clearTimeout(workoutAudioTimeout);workoutAudioTimeout=null}
  if(workoutWarningTimeout!==null){clearTimeout(workoutWarningTimeout);workoutWarningTimeout=null}
  const native=nativeWorkoutAudio();
- if(native){native.setRestDeadline({endsAt:deadline,voice:state.workoutVoice||''}).catch(()=>{});return}
+ if(native)native.setRestDeadline({endsAt:deadline,voice:state.workoutVoice||''}).catch(scheduleBrowserCues);
+ else scheduleBrowserCues();
+ function scheduleBrowserCues(){
+ if(workoutAudioDeadline!==deadline)return;
  const remaining=deadline-Date.now();
  const stillActive=()=>workoutAudioDeadline===deadline&&state.restTimer?.endsAt===deadline&&!state.restTimer.paused&&state.workoutSounds!==false;
  if(remaining>0){
-  if(remaining>=4800)workoutWarningTimeout=setTimeout(()=>{if(stillActive())speakWorkoutCue(restVoiceCue)},Math.max(0,remaining-5000));
+  if(remaining>=4800)workoutWarningTimeout=setTimeout(()=>{if(stillActive()){if(window.speechSynthesis&&window.SpeechSynthesisUtterance)speakWorkoutCue(restVoiceCue);else playBrowserWorkoutCue([550])}},Math.max(0,remaining-5000));
   workoutAudioTimeout=setTimeout(()=>{if(stillActive())playBrowserWorkoutCue([740,990])},remaining);
+ }
  }
 }
 function startRestTimer(seconds){seconds=Number(seconds);if(!Number.isFinite(seconds)||seconds<1||seconds>600)return;unlockWorkoutAudio();state.restTimer={workoutId:activeWorkoutId(),duration:seconds,endsAt:Date.now()+seconds*1000,remaining:seconds,paused:false};save();updateRestTimer()}
@@ -12386,7 +12602,7 @@ function plannerWorkoutTrigger(id){const w=knownWorkout(id)?planWorkout(id):null
 function plannerMealSlot(slot,day){const index=day[slot],r=plannedRecipe(index),n=r?plannedMealNutrition(index,planPortion(day,slot)):null;return '<div class="planner-meal day-plan-card"><button type="button" id="planner-'+slot+'" class="plan-photo-trigger meal-plan-trigger" style="--slot-photo:url(&quot;'+safe(r?(r.photo||(index<6?'./meal-images/meal-'+index+'.jpg':'./home-images/nutrition.jpg')):'./home-images/nutrition.jpg')+'&quot;)" data-open-meal-picker="'+slot+'" aria-haspopup="dialog" aria-controls="planner-picker">'+(r?mealPhoto(index):'<span class="plan-trigger-icon" aria-hidden="true">+</span>')+'<span><small class="day-item-label">'+safe(planSlotLabel(slot,day))+'</small><strong>'+(r?safe(r.name):'Add '+safe(planSlotLabel(slot,day)))+'</strong>'+(r?'<small class="day-item-calories">'+n[0]+' kcal · '+planPortion(day,slot)+' × serving</small>':'')+'</span><b>'+(r?'Change':'Add')+' <span aria-hidden="true">›</span></b></button></div>'}
 
 function plannerPickerItems(){return [...featuredWorkoutChoices(),...readySavedWorkouts()]}
-function openPlannerPicker(kind,slot){if((tab!=='planner'&&!(tab==='preview'&&kind==='workout'&&validPlanDate(previewWorkoutDate)))||kind!=='workout'&&kind!=='meal'||kind==='meal'&&!validMealSlot(slot))return;const dialog=document.getElementById('planner-picker');if(!dialog)return;planPicker={kind,slot:slot||null,date:tab==='preview'?previewWorkoutDate:planSettings().date,origin:tab,category:null,query:'',level:'all',mealFilter:validExtraSlot(slot)?'all':slot||'all',opener:tab==='preview'?'preview-change-workout':kind==='workout'?'planned-workout':'planner-'+slot};dialog.innerHTML='<div class="plan-picker-head" style="--picker-photo:url(&quot;'+(kind==='meal'?'./home-images/nutrition.jpg':'./home-images/planning.jpg')+'&quot;)"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><small>'+safe(planDayLabel(planPicker.date))+' · '+(kind==='workout'?'WORKOUT':safe(planSlotLabel(slot,plannedMeals()[planSettings().date])).toUpperCase())+'</small><h2 id="planner-picker-title">'+(kind==='workout'?'Find your workout':'Choose '+safe(planSlotLabel(slot,plannedMeals()[planSettings().date])))+'</h2></div><button type="button" data-plan-picker-action="close" aria-label="Close planner picker" autofocus>×</button></div><p>'+(kind==='workout'?'Explore a focus, check the level, then add a session.':'Nutrition is shown per serving. Adjust your portion after adding.')+'</p><label class="picker-search-label" for="planner-picker-search">'+(kind==='workout'?'Search workouts':'Search recipes or ingredients')+'</label><input id="planner-picker-search" type="search" placeholder="'+(kind==='workout'?'Search workouts or equipment…':'Search recipes or ingredients…')+'"><div class="plan-picker-filters" role="group" aria-label="'+(kind==='workout'?'Experience level':'Meal type')+'">'+(kind==='workout'?['all','Beginner','Intermediate','Advanced'].map(level=>'<button type="button" data-plan-picker-level="'+level+'" aria-pressed="'+(level==='all')+'">'+(level==='all'?'All levels':level)+'</button>').join(''):['all','breakfast','lunch','dinner','mine'].map(filter=>'<button type="button" data-plan-picker-filter="'+filter+'" aria-pressed="'+(filter===slot)+'">'+(filter==='mine'?'My meals':filter[0].toUpperCase()+filter.slice(1))+'</button>').join(''))+'</div>'+(kind==='meal'?'<button type="button" class="planner-scan-meal" data-plan-picker-action="scan-meal">Scan food barcode</button>':'')+'</div><div id="planner-picker-body" class="plan-picker-body"></div>';filterPlannerPicker();dialog.showModal()}
+function openPlannerPicker(kind,slot){if((tab!=='planner'&&!(tab==='preview'&&kind==='workout'&&validPlanDate(previewWorkoutDate)))||kind!=='workout'&&kind!=='meal'||kind==='meal'&&!validMealSlot(slot))return;const dialog=document.getElementById('planner-picker');if(!dialog)return;planPicker={kind,slot:slot||null,date:tab==='preview'?previewWorkoutDate:planSettings().date,origin:tab,category:null,query:'',level:'all',mealFilter:validExtraSlot(slot)?'all':slot||'all',opener:tab==='preview'?'preview-change-workout':kind==='workout'?'planned-workout':'planner-'+slot};dialog.innerHTML='<div class="plan-picker-head" style="--picker-photo:url(&quot;'+(kind==='meal'?'./home-images/nutrition.jpg':'./home-images/planning.jpg')+'&quot;)"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><small>'+safe(planDayLabel(planPicker.date))+' · '+(kind==='workout'?'WORKOUT':safe(planSlotLabel(slot,plannedMeals()[planSettings().date])).toUpperCase())+'</small><h2 id="planner-picker-title">'+(kind==='workout'?'Find your workout':'Choose '+safe(planSlotLabel(slot,plannedMeals()[planSettings().date])))+'</h2></div><button type="button" data-plan-picker-action="close" aria-label="Close planner picker" autofocus>×</button></div><p>'+(kind==='workout'?'Explore a focus, check the level, then add a session.':'Nutrition is shown per serving. Adjust your portion after adding.')+'</p><label class="picker-search-label" for="planner-picker-search">'+(kind==='workout'?'Search workouts':'Search recipes or ingredients')+'</label><input id="planner-picker-search" type="search" placeholder="'+(kind==='workout'?'Search workouts or equipment…':'Search recipes or ingredients…')+'"><div class="plan-picker-filters" role="group" aria-label="'+(kind==='workout'?'Experience level':'Meal type')+'">'+(kind==='workout'?['all','Beginner','Intermediate','Advanced'].map(level=>'<button type="button" data-plan-picker-level="'+level+'" aria-pressed="'+(level==='all')+'">'+(level==='all'?'All levels':level)+'</button>').join(''):['all','breakfast','lunch','dinner','mine'].map(filter=>'<button type="button" data-plan-picker-filter="'+filter+'" aria-pressed="'+(filter===slot)+'">'+(filter==='mine'?'My meals':filter[0].toUpperCase()+filter.slice(1))+'</button>').join(''))+'</div>'+(kind==='workout'?workoutMuscleLegend():'')+(kind==='meal'?'<button type="button" class="planner-scan-meal" data-plan-picker-action="scan-meal">Scan food barcode</button>':'')+'</div><div id="planner-picker-body" class="plan-picker-body"></div>';filterPlannerPicker();dialog.showModal()}
 function pickerWorkoutMatches(){if(!planPicker)return [];const q=planPicker.query.trim().toLowerCase();return plannerPickerItems().filter(w=>(!planPicker.category||(planPicker.category==='mine'?w.id.startsWith('custom-'):w.category===planPicker.category))&&(planPicker.level==='all'||(w.level||'Beginner')===planPicker.level)&&[w.id,w.title,w.programName,w.summary,w.equipment,w.level,...w.exercises.map(x=>x.name)].join(' ').toLowerCase().includes(q))}
 function plannerSavedMealsShortcut(){const saved=cleanCustomFoods(state.customFoods),photo=saved[0]?customFoodImage(saved[0]):'./home-images/nutrition.jpg';return '<button type="button" class="saved-meals-shortcut" data-plan-picker-filter="mine" aria-label="Choose from my saved meals"><img src="'+safe(photo)+'" alt=""><span><strong>My meals <b>'+saved.length+'</b></strong><small>Your custom meals &amp; photos</small></span><b aria-hidden="true">›</b></button>'}
 function startPlannerCustomMeal(scan=false){if(!planPicker||planPicker.kind!=='meal'||planPicker.date!==planSettings().date)return false;const placement={date:planPicker.date,slot:planPicker.slot,mealFilter:scan?planPicker.mealFilter:'mine',query:scan?planPicker.query:'',diaryIngredients:ingredientRows};closePlannerPicker(false);customMealPlanContext=placement;ingredientRows=[];tab='custom-food';render();window.scrollTo(0,0);
@@ -12399,7 +12615,7 @@ document.addEventListener('click',e=>{if(e.target.closest('[data-return-custom-p
 function pickerMealMatches(){if(!planPicker)return [];const q=planPicker.query.trim().toLowerCase();return [...cleanCustomFoods(state.customFoods).map(f=>({r:plannedRecipe(f.id),i:f.id})),...recipes.map((r,i)=>({r,i}))].filter(({r,i})=>(planPicker.mealFilter==='mine'?r.custom:(r.custom||planPicker.mealFilter==='all'||recipeCategory(i)===planPicker.mealFilter))&&[r.name,...r.ingredients.map(x=>x[0])].join(' ').toLowerCase().includes(q))}
 function filterPlannerPicker(){if(!planPicker)return;const body=document.getElementById('planner-picker-body');if(!body)return;const c=planPicker,selected=state.workoutSchedule?.[c.date]||'';
  document.querySelectorAll('[data-plan-picker-level]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.planPickerLevel===c.level)));document.querySelectorAll('[data-plan-picker-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.planPickerFilter===c.mealFilter)));
- if(c.kind==='workout'){const matches=pickerWorkoutMatches(),overview=!c.category&&!c.query.trim();body.innerHTML=workoutSettingMarkup('data-plan-workout-setting')+(c.origin==='preview'?'':'<div class="picker-day-actions"><button data-plan-picker-action="rest" aria-pressed="'+(selected==='rest')+'">○ Rest day</button>'+(selected?'<button data-plan-picker-action="clear">Remove workout</button>':'')+'</div>')+(overview?'<div class="picker-list-heading"><h3>Choose your focus</h3><small>'+matches.length+' sessions</small></div><div class="plan-picker-categories">'+(c.origin==='preview'?'':ownWorkoutTile(true))+visibleWorkoutCategories().map(cat=>{const count=matches.filter(w=>w.category===cat.id).length;return '<button data-plan-picker-category="'+cat.id+'">'+workoutCoverImage(cat.id)+'<strong>'+safe(cat.label)+'</strong><small>'+count+' '+(count===1?'session':'sessions')+'</small></button>'}).join('')+'</div>'+(cleanCustomWorkouts(state.customWorkouts).length?'<button class="picker-mine" data-plan-picker-category="mine">My workouts <span>'+cleanCustomWorkouts(state.customWorkouts).length+' saved →</span></button>':''):'<button class="picker-back" data-plan-picker-action="categories">← All workout categories</button><div class="picker-list-heading"><h3>'+safe(c.category==='mine'?'My workouts':workoutCategories.find(x=>x.id===c.category)?.label||'Search results')+'</h3><small>'+matches.length+' sessions</small></div><div class="picker-workout-list">'+matches.map(w=>'<article class="picker-workout"><button class="picker-choice" data-plan-pick-workout="'+safe(w.id)+'" aria-label="Plan '+safe(w.programName||w.title)+' for '+safe(planDayLabel(c.date))+'" aria-pressed="'+(selected===w.id)+'">'+workoutCoverImage(w)+'<span><strong>'+safe(w.programName||w.title)+'</strong>'+workoutBadges(w)+'<small>'+w.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length+' exercises · '+safe(w.minutes||'30–45')+' min</small><small>'+safe(w.equipment)+'</small></span><b aria-hidden="true">'+(selected===w.id?'✓':'+')+'</b></button><details class="picker-exercises"><summary>See exercises</summary><ol>'+w.exercises.map(exercise=>workoutPreviewExercise(exercise,w.id)).join('')+'</ol></details></article>').join('')+'</div>'+(!matches.length?'<div class="picker-empty"><h3>No matching workouts</h3><p>Try another level, focus or search.</p><button data-plan-picker-action="reset">Reset filters</button></div>':''))}
+ if(c.kind==='workout'){const matches=pickerWorkoutMatches(),overview=!c.category&&!c.query.trim();body.innerHTML=workoutSettingMarkup('data-plan-workout-setting')+(c.origin==='preview'?'':'<div class="picker-day-actions"><button data-plan-picker-action="rest" aria-pressed="'+(selected==='rest')+'">○ Rest day</button>'+(selected?'<button data-plan-picker-action="clear">Remove workout</button>':'')+'</div>')+(overview?'<div class="picker-list-heading"><h3>Choose your focus</h3><small>'+matches.length+' sessions</small></div><div class="plan-picker-categories">'+(c.origin==='preview'?'':ownWorkoutTile(true))+visibleWorkoutCategories().map(cat=>{const count=matches.filter(w=>w.category===cat.id).length;return '<button data-plan-picker-category="'+cat.id+'">'+hybridWorkoutCover(cat.id,null,true)+'<strong>'+safe(cat.label)+'</strong><small>'+count+' '+(count===1?'session':'sessions')+'</small></button>'}).join('')+'</div>'+(cleanCustomWorkouts(state.customWorkouts).length?'<button class="picker-mine" data-plan-picker-category="mine">My workouts <span>'+cleanCustomWorkouts(state.customWorkouts).length+' saved →</span></button>':''):'<button class="picker-back" data-plan-picker-action="categories">← All workout categories</button><div class="picker-list-heading"><h3>'+safe(c.category==='mine'?'My workouts':workoutCategories.find(x=>x.id===c.category)?.label||'Search results')+'</h3><small>'+matches.length+' sessions</small></div><div class="picker-workout-list">'+matches.map(w=>'<article class="picker-workout"><button class="picker-choice" data-plan-pick-workout="'+safe(w.id)+'" aria-label="Plan '+safe(w.programName||w.title)+' for '+safe(planDayLabel(c.date))+'" aria-pressed="'+(selected===w.id)+'">'+hybridWorkoutCover(w,w.exercises)+'<span><strong>'+safe(w.programName||w.title)+'</strong>'+workoutBadges(w)+'<small>'+w.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length+' exercises · '+safe(w.minutes||'30–45')+' min</small><small>'+safe(w.equipment)+'</small></span><b aria-hidden="true">'+(selected===w.id?'✓':'+')+'</b></button><details class="picker-exercises"><summary>See exercises</summary><ol>'+w.exercises.map(exercise=>workoutPreviewExercise(exercise,w.id)).join('')+'</ol></details></article>').join('')+'</div>'+(!matches.length?'<div class="picker-empty"><h3>No matching workouts</h3><p>Try another level, focus or search.</p><button data-plan-picker-action="reset">Reset filters</button></div>':''))}
  else{const matches=pickerMealMatches(),day=plannedMeals()[c.date]||{},mine=c.mealFilter==='mine';body.innerHTML=(mine?'<button type="button" class="picker-back" data-plan-picker-filter="all">← All recipes</button>':plannerSavedMealsShortcut())+'<div class="picker-list-heading"><h3>'+matches.length+(mine?' saved meals':' recipes')+'</h3>'+(plannedRecipe(day[c.slot])?'<button data-plan-picker-action="clear">Remove meal</button>':'')+'</div>'+(mine?'<button type="button" class="planner-create-meal" data-plan-picker-action="create-meal">＋ Create custom meal</button>':'')+'<div class="picker-meal-list">'+matches.map(({r,i})=>{const n=plannedMealNutrition(i);return '<button class="picker-choice picker-meal-choice" data-plan-pick-meal="'+i+'" aria-pressed="'+(day[c.slot]===i)+'">'+mealPhoto(i)+'<span><strong>'+safe(r.name)+'</strong><small>'+n[0]+' kcal / serving'+(r.minutes?' · '+r.minutes+' min':'')+'</small><span class="meal-macro-pills"><em>P '+n[1]+'g</em><em>C '+n[2]+'g</em><em>F '+n[3]+'g</em></span>'+(day[c.slot]===i?'<small class="picker-current">Planned · '+planPortion(day,c.slot)+' × serving</small>':'')+'</span><b aria-hidden="true">'+(day[c.slot]===i?'✓':'+')+'</b></button>'}).join('')+'</div>'+(!matches.length?(mine?'<div class="picker-empty"><h3>No saved meals yet</h3><p>Create your own meal with a photo and nutrition for one serving.</p></div>':'<div class="picker-empty"><h3>No recipes found</h3><p>Try a different ingredient or meal type.</p><button data-plan-picker-action="reset">Show all recipes</button></div>'):'')}
  body.scrollTop=0
 }

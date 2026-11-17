@@ -35,13 +35,13 @@ const ids=new Set();
 for(const setting of ['home','gym']){
  api.state.workoutSetting=setting;
  const choices=api.plannerPickerItems();
- assert(choices.length===10&&choices.every(w=>w.setting===setting),'Ten sessions for '+setting);
+ assert(choices.length===20&&choices.every(w=>w.setting===setting),'Twenty sessions for '+setting);
  api.setCategory(null);
  assert((api.workoutChooser().match(/data-workout-category="(?!mine")/g)||[]).length===5,'Five visible categories');
  for(const category of ['Full Body','Push','Pull','Leg','Core']){
   const plans=api.categoryPrograms(category);
-  assert(plans.map(w=>w.variant).join(',')==='A,B','One A and B per category');
-  assert(new Set(plans.map(w=>w.focus)).size===2,'Distinct A and B focus');
+  assert(plans.map(w=>w.variant).join(',')==='A,B,C,D','Four sessions per category');
+  assert(new Set(plans.map(w=>w.focus)).size===4,'Distinct workout focuses');
   api.setCategory(category);
   for(const plan of plans){
    ids.add(plan.id);
@@ -62,7 +62,7 @@ for(const setting of ['home','gym']){
   }
  }
 }
-assert(ids.size===20,'20 unique sessions');
+assert(ids.size===40,'40 unique sessions');
 const dates={'2026-11-16':'guided-home-full-body-a','2026-11-17':'pull-b'};
 const recovered=api.restoredState({...api.state,workoutSchedule:dates});
 assert(JSON.stringify(recovered.workoutSchedule)===JSON.stringify(dates),'New and retired schedule IDs resolve');
@@ -73,4 +73,4 @@ const changed=api.reviewedMuscleMap([{name:'Lat Pulldown'},{name:'Unreviewed cus
 assert(changed.primary.join(' ')==='back'&&changed.unknown===1&&!changed.supporting.includes('chest'),'Map must follow the current exercises');
 assert(!api.hybridWorkoutCover('Push',[{name:'Unreviewed custom movement'}]).includes('anatomy-cover-overlay'),'Unknown movements must not inherit category highlights');
 assert(writes===0,'Rendering wrote storage');
-console.log('PASS: 10 Home + 10 Gym workouts, equipment, demo links in picker, compatible swap media, and legacy schedule/draft retention');
+console.log('PASS: 20 Home + 20 Gym workouts, equipment, demo links in picker, compatible swap media, and legacy schedule/draft retention');

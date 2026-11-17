@@ -2,6 +2,7 @@ package com.ezpz.fitness;
 
 import android.animation.ValueAnimator;
 import android.graphics.Color;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(StartupPlugin.class);
         registerPlugin(WorkoutAudioPlugin.class);
         super.onCreate(savedInstanceState);
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
         EdgeToEdge.enable(this, SystemBarStyle.dark(Color.rgb(8, 45, 34)),
                 SystemBarStyle.dark(Color.rgb(8, 45, 34)));
         if (getBridge() == null) return;

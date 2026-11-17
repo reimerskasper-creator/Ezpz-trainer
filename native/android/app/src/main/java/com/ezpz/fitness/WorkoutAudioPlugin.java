@@ -21,7 +21,7 @@ import java.util.Locale;
 @CapacitorPlugin(name = "EzpzWorkoutAudio")
 public class WorkoutAudioPlugin extends Plugin {
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private final Runnable restComplete = this::play;
+    private final Runnable restComplete = () -> play(ToneGenerator.TONE_PROP_ACK, 350);
     private Runnable restWarning;
     private ToneGenerator tones;
     private TextToSpeech speech;
@@ -46,7 +46,8 @@ public class WorkoutAudioPlugin extends Plugin {
             for (Voice voice : speech.getVoices()) {
                 if ("en".equals(voice.getLocale().getLanguage())
                     && !voice.isNetworkConnectionRequired()
-                    && !voice.getFeatures().contains(TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED)) {
+                    && (voice.getFeatures() == null
+                        || !voice.getFeatures().contains(TextToSpeech.Engine.KEY_FEATURE_NOT_INSTALLED))) {
                     voices.add(voice);
                 }
             }
@@ -74,7 +75,7 @@ public class WorkoutAudioPlugin extends Plugin {
         String voice = call.getString("voice", "");
         handler.post(() -> {
             if (speechReady && "rest".equals(speakingCue) && speech.isSpeaking()) return;
-            speak("Five seconds left.", voice, "preview");
+            playWarning(voice, "preview");
         });
         call.resolve();
     }
@@ -89,7 +90,7 @@ public class WorkoutAudioPlugin extends Plugin {
             long delay = deadline - System.currentTimeMillis();
             if (delay <= 0 || delay > 600_000) return;
             if (delay >= 4800) {
-                restWarning = () -> speak("Five seconds left.", voice, "rest");
+                restWarning = () -> playWarning(voice, "rest");
                 handler.postDelayed(restWarning, Math.max(0, delay - 5000));
             }
             handler.postDelayed(restComplete, delay);
@@ -97,9 +98,15 @@ public class WorkoutAudioPlugin extends Plugin {
         call.resolve();
     }
 
-    private void speak(String message, String voiceId, String cue) {
+    private void playWarning(String voice, String cue) {
+        if (!speak("Five seconds left.", voice, cue)) {
+            play(ToneGenerator.TONE_PROP_BEEP, 180);
+        }
+    }
+
+    private boolean speak(String message, String voiceId, String cue) {
         List<Voice> voices = offlineEnglishVoices();
-        if (voices.isEmpty()) return;
+        if (voices.isEmpty()) return false;
         Voice selected = null;
         for (Voice voice : voices) {
             if (voice.getName().equals(voiceId)) {
@@ -111,9 +118,10 @@ public class WorkoutAudioPlugin extends Plugin {
             Voice defaultVoice = speech.getDefaultVoice();
             selected = voices.contains(defaultVoice) ? defaultVoice : voices.get(0);
         }
-        if (speech.setVoice(selected) != TextToSpeech.SUCCESS) return;
+        if (speech.setVoice(selected) != TextToSpeech.SUCCESS) return false;
+        if (speech.speak(message, TextToSpeech.QUEUE_FLUSH, null, cue) != TextToSpeech.SUCCESS) return false;
         speakingCue = cue;
-        speech.speak(message, TextToSpeech.QUEUE_FLUSH, null, cue);
+        return true;
     }
 
     private void stopSpeech(String cue) {
@@ -123,10 +131,10 @@ public class WorkoutAudioPlugin extends Plugin {
         }
     }
 
-    private void play() {
+    private void play(int tone, int durationMs) {
         try {
-            if (tones == null) tones = new ToneGenerator(AudioManager.STREAM_MUSIC, 65);
-            tones.startTone(ToneGenerator.TONE_PROP_ACK, -1);
+            if (tones == null) tones = new ToneGenerator(AudioManager.STREAM_MUSIC, 85);
+            tones.startTone(tone, durationMs);
         } catch (RuntimeException ignored) {
             // The visible timer keeps running if the device has no audio output.
         }
