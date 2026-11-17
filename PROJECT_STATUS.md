@@ -1,3 +1,10 @@
+## 2026-11-17 — Workout builder and session clock
+
+- Android 1.0.151 replaces the native exercise autocomplete with an in-app muscle and exercise picker. Guided choices use existing exercise photos and reviewed anatomy. Manual entry is available in the same builder.
+- Create your own uses the same anatomy artwork as the workout chooser. Trainer shows elapsed session time alongside the exercise selector and uses the saved timestamp in the recap.
+- Branch: android-health-connect. The focused workout builder and training unit checks passed locally. Android packaging and phone-width checks run in GitHub Actions.
+- Exercise video consistency remains open. The current guided links need a clip-by-clip review for exercise variation, first-rep timing and presenter consistency.
+
 ## 2026-11-16 — Trainer and anatomy cover backgrounds
 
 - Android 1.0.150 uses a soft forest green default Trainer background. Custom workout and exercise backgrounds still take precedence.

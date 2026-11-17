@@ -57,6 +57,12 @@ const server=http.createServer((req,res)=>{
    await page.getByRole('button',{name:'Start workout',exact:true}).click();
    assert.equal(await page.locator('body').getAttribute('data-view'),'train');
    assert.equal(await page.locator('.workout-countdown').count(),0);
+   const clock=page.locator('#workout-elapsed-clock');
+   const started=await clock.getAttribute('data-started-at');
+   assert.equal(Number(started),await page.evaluate(()=>workoutDraft().startedAt));
+   await page.waitForFunction(()=>document.getElementById('workout-elapsed-clock').textContent!=='0:00');
+   await page.evaluate(()=>render());
+   assert.equal(await clock.getAttribute('data-started-at'),started);
    assert.deepEqual(await page.evaluate(()=>window.testSpeech),[]);
    assert.deepEqual(await page.locator('.set-head').first().locator('span').allTextContents(),['Set','Last time','kg','Reps','Done']);
    const inputOrder=await page.locator('.set-row').first().locator('input').evaluateAll(inputs=>inputs.map(input=>Object.keys(input.dataset)[0]));
@@ -110,6 +116,26 @@ const server=http.createServer((req,res)=>{
    await page.locator('[data-edit-swap]').click();
    assert(await page.locator('#workout-edit-search').isVisible());
    await page.keyboard.press('Escape');
+   await page.getByRole('button',{name:'Manage workouts'}).click();
+   await page.getByRole('button',{name:'Create your own workout',exact:true}).click();
+   const builder=page.locator('#builder-exercise-picker');
+   assert(await builder.isVisible());
+   await builder.locator('[data-builder-muscle="chest"]').click();
+   const movement=builder.locator('[data-builder-movement="Dumbbell Bench Press"]');
+   for(const appearance of [{mode:'dark'},{mode:'light'},{mode:'dark',accent:'lavender'}]){
+    await page.evaluate(prefs=>applyAppAppearance(prefs),appearance);
+    const palette=await movement.evaluate(el=>[getComputedStyle(el).backgroundColor,getComputedStyle(el.querySelector('strong')).color]);
+    assert.deepEqual(palette,['rgb(35, 75, 56)','rgb(241, 255, 245)']);
+   }
+   await builder.getByRole('searchbox').fill('dumbbell bench press');
+   assert(await movement.locator('img').isVisible());
+   assert.equal(await movement.locator('[data-anatomy-region="chest"]').count(),1);
+   await movement.click();
+   assert.equal(await page.locator('#builder-name-0').inputValue(),'Dumbbell Bench Press');
+   await page.locator('[data-builder-picker="0"]').click();
+   await builder.getByRole('button',{name:'Type my own exercise'}).click();
+   await page.locator('#builder-name-0').fill('My own exercise');
+   assert.equal(await page.locator('#builder-name-0').inputValue(),'My own exercise');
    await page.close();
    console.log('PASS workout recap, photo precedence and muscle selection at '+width);
   }

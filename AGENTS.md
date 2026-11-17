@@ -10,3 +10,5 @@
 - User does not want to buy additional ChatGPT usage now. Do not imply that downloads themselves consume most model usage or promise a numeric saving.
 
 - On 3 November 2026, Kasper explicitly approved uploading this and future requested EZPZ source updates to this existing public repository. Routine source uploads within that scope do not require renewed approval; credentials and personal records remain excluded.
+
+- For new or changed pickers, test the open list in light, dark and personal themes. Pair the option and selected-state text with the actual popup surface. Use an app-rendered list for exercise autocomplete so Android WebView does not choose its own text colors.

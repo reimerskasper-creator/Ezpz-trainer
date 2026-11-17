@@ -6,12 +6,12 @@ const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,q
 const api=new Function('document','window','localStorage','fetch','console','alert','confirm',script+'\nreturn {showWorkoutCategory,startBuilder,emptyOwnWorkout,saveOwnWorkout,workoutChooser,ownWorkoutTile,workoutBuilder,workoutPlan,cleanCustomWorkouts,restoredState,planSettings,get state(){return state},get draft(){return builderDraft},get origin(){return builderOrigin},setTab(v){tab=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('Full');stored=v}},()=>new Promise(()=>{}),{error(){}},m=>alerts.push(m),()=>true);
 const assert=(v,m)=>{if(!v)throw Error(m)},equal=(a,b,m)=>assert(JSON.stringify(a)===JSON.stringify(b),m);
 assert(api.workoutChooser().includes('data-action="create-my-workout"'),'Own category beside ready-made workouts');
-assert(api.ownWorkoutTile().includes('more-weekly-plan.jpg')&&!api.ownWorkoutTile().includes('own-tile-plus'),'Distinct own category photo and clean tile');
+assert(api.ownWorkoutTile().includes('own-anatomy-cover')&&api.ownWorkoutTile().includes('own-anatomy-add'),'Create cover uses the anatomy artwork');
 const draft=api.emptyOwnWorkout();assert(draft.exercises.length===1&&draft.exercises[0].sets===3,'Simple starting defaults');
 api.setTab('train');api.startBuilder(null);
 assert(document.body.dataset.view==='builder'&&api.origin==='train','Direct builder uses Train route');
 assert(screen.innerHTML.includes('Save & start workout')&&screen.innerHTML.includes('Save for later'),'Clear save destinations');
-assert(!screen.innerHTML.includes('list="builder-exercises"'),'Exercise names remain free text');
+assert(!screen.innerHTML.includes('<datalist')&&screen.innerHTML.includes('data-builder-picker="0"'),'Themed list and free-text exercise input');
 assert(screen.innerHTML.includes('<details class="own-workout-settings">')&&screen.innerHTML.includes('<details class="own-exercise-options">'),'Optional controls collapsed');
 draft.title="Kasper's own session";draft.category='Arms';draft.exercises=[{name:'My custom sandbag move',sets:2,reps:'8–10',unit:'reps',rest:60,side:false},{name:'My standing balance hold',sets:2,reps:'30',unit:'sec',rest:30,side:true}];
 const scheduleBefore=JSON.stringify(api.state.workoutSchedule),id=api.saveOwnWorkout(draft,'saved');
