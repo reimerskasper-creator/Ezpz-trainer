@@ -1,3 +1,9 @@
+## 2026-11-17 — Muscle-based swaps and eight more goal workouts
+
+- Android 1.0.157 ranks exercise replacements by shared primary muscles in Trainer, the Home workout editor, and the workout builder. Search covers the guided library, while the session picker filters movements already in that workout.
+- Added eight ready-made sessions with six guided movements each, photos, demo links, and anatomy covers. This brings the goal categories to 18 sessions. Four new sessions work at home or in the gym, and four require gym equipment.
+- Branch: android-health-connect. Workout library, muscle ranking, and Day picker checks passed locally. Signed Android build and themed picker checks are tracked by CI.
+
 ## 2026-11-17 — Goal workouts, Trainer swaps and rest timer
 
 - Android 1.0.156 adds ten six-exercise sessions in five new categories, with matching anatomy covers and exercise media. The chooser opens with Create your own, Saved workouts, Home/Gym and filters above the category cards.

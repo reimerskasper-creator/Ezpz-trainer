@@ -7546,6 +7546,38 @@ const goalWorkoutRows=[
   ['Goblet Squat',2,'8–12',60],['Bodyweight Split Squat',2,'6–8',45,'reps',true],['Bodyweight Standing Calf Raise',2,'10–15',45],
   ['Single-Leg Dumbbell Romanian Deadlift',2,'6',60,'reps',true],['Bird Dog',2,'6–8',45,'reps',true],['Dumbbell Suitcase Carry',2,'20–30',45,'sec',true]
  ]],
+ ['kettlebell-strength-carries',0,'both','Kettlebell Strength & Carries','Intermediate',36,'Kettlebell · clear walking space',[
+  ['Kettlebell Turkish Get-Up',2,'2–3',90,'reps',true],['Kettlebell Deadlift',3,'8–10',90],['Single-Arm Kettlebell Row',3,'8–12',75,'reps',true],
+  ['Bodyweight Reverse Lunge',2,'8–10',60,'reps',true],['Push-Up',2,'8–12',60],['Single-Arm Kettlebell Rack Carry',2,'20–30',60,'sec',true]
+ ]],
+ ['sled-strength-intervals',0,'gym','Sled Strength Intervals','Advanced',43,'Push sled · clear lane · trap bar · plates · dumbbells · stable bench',[
+  ['Trap-Bar Deadlift',3,'5–6',150],['Dumbbell Bench Press',3,'8–10',90],['Single-Arm Dumbbell Bench Row',3,'8–10',90,'reps',true],
+  ['Sled Push',3,'20–25',90,'sec'],['Dumbbell Farmer Carry',2,'25–35',75,'sec'],['Forearm Plank',2,'25–35',45,'sec']
+ ]],
+ ['mat-trunk-hips',1,'both','Mat Core & Hip Control','Intermediate',26,'Mat',[
+  ['Bird Dog',2,'8',35,'reps',true],['Single-Leg Glute Bridge',2,'8–10',45,'reps',true],['Dead Bug Heel Taps',2,'8–10',35,'reps',true],
+  ['Side Plank with Hip Lift',2,'6–10',45,'reps',true],['Reverse Crunch',2,'8–12',35],['Bear Plank',2,'20–30',40,'sec']
+ ]],
+ ['runner-gym-strength',2,'gym','Runner Strength in the Gym','Intermediate',38,'Dumbbells · sturdy step · leg press · seated calf raise machine · cable machine · handle',[
+  ['Dumbbell Step-Up',3,'6–8',90,'reps',true],['Single-Leg Leg Press',3,'8–10',90,'reps',true],['Single-Leg Dumbbell Romanian Deadlift',2,'8–10',75,'reps',true],
+  ['Seated Calf Raise',3,'10–15',60],['Pallof Press',2,'8–12',45,'reps',true],['Dumbbell Suitcase Carry',2,'20–30',60,'sec',true]
+ ]],
+ ['home-glute-hamstrings',3,'both','Home Glutes & Hamstrings','Intermediate',35,'Dumbbells · sliders · smooth floor · mat · loop resistance band',[
+  ['Dumbbell Romanian Deadlift',3,'8–12',105],['Dumbbell Reverse Lunge',3,'8–10',90,'reps',true],['Slider Hamstring Curl',3,'8–12',75],
+  ['Single-Leg Glute Bridge',2,'10–12',60,'reps',true],['Dumbbell Lateral Lunge',2,'8–10',75,'reps',true],['Lateral Band Walk',2,'10–15',45,'reps',true]
+ ]],
+ ['back-delts',3,'gym','Back & Delts','Intermediate',39,'Cable machine · neutral-grip pulldown handle · rope · T-bar row · dumbbells · upright bench · reverse fly machine',[
+  ['Neutral-Grip Lat Pulldown',3,'8–12',105],['Chest-Supported T-Bar Row',3,'8–12',105],['Seated Dumbbell Shoulder Press',3,'8–12',90],
+  ['Dumbbell Lateral Raise',2,'12–15',60],['Reverse Pec Deck',2,'12–15',60],['Straight-Arm Cable Pulldown',2,'10–15',60]
+ ]],
+ ['beginner-machine-strength',4,'gym','Low-Impact Machine Strength','Beginner',33,'Leg press · chest press machine · cable row machine · seated leg curl machine · calf raise machine · mat',[
+  ['45-Degree Leg Press',2,'10–12',75],['Seated Machine Chest Press',2,'10–12',75],['Seated Cable Row',2,'10–12',75],
+  ['Seated Leg Curl',2,'10–15',60],['Machine Standing Calf Raise',2,'10–15',60],['Dead Bug Heel Taps',2,'6–8',45,'reps',true]
+ ]],
+ ['band-bench-no-jump',4,'both','Band & Bench Low-Impact','Beginner',26,'Resistance band · fixed anchor · stable low bench or step · mat',[
+  ['Bodyweight Step-Up',2,'8–10',60,'reps',true],['Incline Push-Up',2,'8–12',60],['Standing Resistance Band Row',2,'10–15',60],
+  ['Bodyweight Split Squat',2,'6–8',60,'reps',true],['Glute Bridge',2,'10–15',45],['Dead Bug',2,'6–8',45,'reps',true]
+ ]],
 ];
 const goalWorkoutGuides=[
  'Work in controlled intervals. Finish the sets at each station, then move on. Take the listed rest and keep enough in reserve to maintain technique.',
@@ -7557,7 +7589,7 @@ const goalWorkoutGuides=[
 featuredWorkouts.push(...goalWorkoutRows.map(([id,group,setting,title,level,minutes,equipment,items])=>{
  const category=goalWorkoutCategories[group];
  const exercises=items.map(([name,sets,reps,rest,unit='reps',side=false])=>({
-  name,sets,reps,rest,unit,side,load:!/^(?:Bodyweight|Incline Push-Up|Dead Bug|Glute Bridge|Single-Leg Glute Bridge|Side Plank|Bird Dog|Tuck Hollow Hold|Push-Up Plus|Resistance Band Pull-Apart|Lateral Band Walk|Mountain Climber|Bear Plank)/.test(name)
+  name,sets,reps,rest,unit,side,load:!/^(?:Bodyweight|Push-Up|Incline Push-Up|Forearm Plank|Reverse Crunch|Slider Hamstring Curl|Standing Resistance Band Row|Dead Bug|Glute Bridge|Single-Leg Glute Bridge|Side Plank|Bird Dog|Tuck Hollow Hold|Push-Up Plus|Resistance Band Pull-Apart|Lateral Band Walk|Mountain Climber|Bear Plank)/.test(name)
  }));
  return {id:'guided-goal-'+id,category:category.id,coverCategory:category.cover,setting,level,title,programName:title,minutes:String(minutes),equipment,
   equipmentItems:equipment.toLowerCase().split(' · '),summary:category.description,setup:goalWorkoutGuides[group],guide:goalWorkoutGuides[group],
@@ -11564,19 +11596,19 @@ function openWorkoutExerciseEditor(opener,index){
   const guides=window.EzpzExerciseMedia;
   const suggested=swapOptions(exercise,plan).map(x=>x.name);
   const used=new Set(plan.exercises.filter((_,i)=>i!==index).map(x=>guides?.get(x.name)?.name||x.name));
-  const available=[...new Set([...suggested,...(guides?.names||[])])];
   function results(){
-   const names=guides?.choices(available,exercise.name,search.value)||[];
+   const matches=rankedExerciseSwaps(exercise.name,search.value,suggested);
+   const names=matches.sort((a,b)=>Number(used.has(a.name))-Number(used.has(b.name)));
    list.replaceChildren();
    if(!names.length){list.textContent='No matching exercises with photos and videos.';return}
-   for(const name of names){
+   for(const {name,primaryMatch} of names){
     const button=document.createElement('button');
     button.type='button';button.innerHTML=exerciseThumbnail(name,plan.id)+'<span>'+safe(name)+'</span>';
     button.disabled=used.has(guides.get(name).name);
     const badge=document.createElement('small');
     badge.className='exercise-media-label';
     const equipment=featuredMovementSpecs[name]?.slice(1).join(', ');
-    badge.textContent=button.disabled?'Already in this workout':(suggested.includes(name)?'Suggested · ':'')+'Photo + video'+(equipment?' · '+equipment:'');
+    badge.textContent=button.disabled?'Already in this workout':(primaryMatch?'Shared primary muscle · ':'')+'Photo + video'+(equipment?' · '+equipment:'');
     button.append(badge);
     button.onclick=()=>scope(index,name,()=>picker(index));
     list.append(button);
@@ -11618,17 +11650,35 @@ function resolveTrainerSwap(plan,original,name){
  const spec=guide.prescription||featuredWorkouts.flatMap(workout=>workout.exercises).find(exercise=>exercise.name===name)||workoutTemplates.flatMap(workout=>workout.exercises).find(exercise=>exercise.name===name);
  return {name,sets:original.sets,reps:spec?.reps||'8–12',unit:spec?.unit||'reps',side:spec?.side===true,load:spec?.load??Boolean(spec&&exerciseHasLoad(spec)),rest:original.rest};
 }
+function rankedExerciseSwaps(current,query='',suggested=[]){
+ const media=window.EzpzExerciseMedia;
+ if(!media)return [];
+ const preferred=new Set(suggested.map(name=>media.get(name)?.name||name));
+ const target=reviewedMuscleMap([{name:current}]).primary;
+ return media.choices(media.names,current,query).map(name=>{
+  const {primary,supporting}=reviewedMuscleMap([{name}]);
+  const overlap=primary.filter(key=>target.includes(key)).length;
+  const primaryMatch=overlap>0;
+  const coverage=primaryMatch?overlap/(target.length+primary.length-overlap):0;
+  const supportingMatch=supporting.some(key=>target.includes(key));
+  return {name,primaryMatch,coverage,supportingMatch,preferred:preferred.has(name)};
+ }).sort((a,b)=>b.coverage-a.coverage||Number(b.supportingMatch)-Number(a.supportingMatch)||Number(b.preferred)-Number(a.preferred));
+}
 function trainerSwapSearch(plan,index,query){
  const exercise=plan.exercises[index],base=baseWorkoutPlan(plan.id),original=base.exercises[exercise?.index],guide=window.EzpzExerciseMedia;
  if(!original||!guide)return '';
  const canonical=name=>guide.get(name)?.name||name;
  const used=new Set(plan.exercises.filter((_,i)=>i!==index).map(item=>canonical(item.name)));
- const suggested=swapOptions(original,base).map(x=>x.name).filter(name=>guide.get(name));
- const names=query.trim()?guide.choices(guide.names,exercise.name,query):[...new Set([...suggested,...guide.names])];
+ const suggested=swapOptions(exercise,plan).map(x=>x.name);
  const locked=workoutEditDraftKey(workoutDraft(plan),index);
- const button=(name,label)=>'<button type="button" class="exercise-thumb-row" data-exercise-swap-choice="'+index+'" data-exercise-name="'+safe(name)+'" '+(locked?'disabled':'')+'>'+exerciseThumbnail(name,plan.id)+'<span>'+safe(label)+'</span></button>';
- const rows=names.filter(name=>canonical(name)!==canonical(exercise.name)&&canonical(name)!==canonical(original.name)&&!used.has(canonical(name))).slice(0,query.trim()?60:12).map(name=>button(name,name));
- if(canonical(exercise.name)!==canonical(original.name)&&!used.has(canonical(original.name))&&!query.trim())rows.unshift(button(original.name,original.name+' · original'));
+ const button=(name,label,badge='')=>'<button type="button" class="exercise-thumb-row" data-exercise-swap-choice="'+index+'" data-exercise-name="'+safe(name)+'" '+(locked?'disabled':'')+'>'+exerciseThumbnail(name,plan.id)+'<span>'+safe(label)+(badge?'<small class="exercise-media-label">'+badge+'</small>':'')+'</span></button>';
+ const originalName=canonical(original.name);
+ const matched=rankedExerciseSwaps(exercise.name,query,suggested).filter(({name})=>!used.has(name));
+ const canRestore=originalName!==canonical(exercise.name)&&!used.has(originalName);
+ const rows=matched.map(({name,primaryMatch})=>name===originalName
+  ?button(original.name,original.name+' · original')
+  :button(name,name,primaryMatch?'Shared primary muscle':''));
+ if(canRestore&&!query.trim()&&!matched.some(({name})=>name===originalName))rows.push(button(original.name,original.name+' · original'));
  return rows.join('')||'<p class="note">No matching exercises.</p>';
 }
 function applyExerciseSwap(index,name){
@@ -11655,7 +11705,9 @@ document.addEventListener('input',event=>{
  const input=event.target;
  if(input.dataset.trainerSwapSearch===undefined)return;
  const list=input.closest('.exercise-swap')?.querySelector('.exercise-swap-choices');
- if(list)list.innerHTML=trainerSwapSearch(workoutPlan(),Number(input.dataset.trainerSwapSearch),input.value);
+ if(!list)return;
+ list.innerHTML=trainerSwapSearch(workoutPlan(),Number(input.dataset.trainerSwapSearch),input.value);
+ list.scrollTop=0;
 });
 function progressionSuggestion(x){if((x.unit||'reps')!=='reps'||!exerciseHasLoad(x)||/Warm-up|Cooldown|Assisted/i.test(x.name))return null;const range=String(x.reps).match(/^(\d+)(?:\s*[–-]\s*(\d+))?$/);if(!range)return null;const high=Number(range[2]||range[1]),sessions=state.logs.filter(l=>Number.isFinite(new Date(l.date).getTime())&&new Date(l.date)<=new Date()).slice().sort((a,b)=>new Date(b.date)-new Date(a.date)).map(l=>(l.exercises||[]).find(e=>e.name===x.name&&JSON.parse(exerciseIdentity(e))[1]==='reps')).filter(Boolean).slice(0,2);if(!sessions.length)return {text:'Start at a comfortable effort. Your completed sets will guide the next session.'};const completed=e=>historicalSets(e).filter(z=>z.done!==false&&validSetValue(z.reps)&&Number.isFinite(Number(z.kg))&&Number(z.kg)>0),last=completed(sessions[0]);if(!last.length)return {text:'Repeat your current version. Bodyweight results do not imply a weight to add.'};const load=Math.max(...last.map(z=>Number(z.kg))),same=(a,b)=>Math.abs(a-b)<1e-6,ready=sessions.length===2&&sessions.every(e=>{const sets=historicalSets(e);return sets.length>=x.sets&&sets.every(z=>z.done!==false&&validSetValue(z.reps)&&Number(z.reps)>=high&&same(Number(z.kg),load))});return {kg:load,increase:ready,text:ready?'You reached '+high+' reps in every set at '+loadText(load)+' '+loadUnit()+' in your last two sessions. If form stayed controlled and it felt comfortable, try the smallest available increase; repeating is fine.':'Repeat around '+loadText(load)+' '+loadUnit()+'. Build toward '+high+' controlled reps in all '+x.sets+' sets before considering an increase.'}}
 function progressionMarkup(x){const suggestion=progressionSuggestion(x);return suggestion?'<aside class="progression-hint"><strong>Next weight</strong><p>'+safe(suggestion.text)+'</p><small>A suggestion, based on recorded sets. Adjust to how you feel today.</small></aside>':''}
@@ -12787,6 +12839,7 @@ function openBuilderExercisePicker(trigger){
  if(!trigger||!dialog||dialog.open)return;
  let group='';
  const names=window.EzpzExerciseMedia?.names||[];
+ const current=document.getElementById('builder-name-'+trigger.dataset.builderPicker)?.value.trim();
  const groupRegions=key=>key==='shoulders'?['shoulders','frontDelts','rearDelts']:[key];
  dialog.innerHTML='<div class="builder-picker-header"><h3 id="builder-picker-title"></h3><button type="button" data-builder-picker-close aria-label="Close exercise picker">×</button></div><div class="builder-picker-body"></div>';
  const title=dialog.querySelector('h3'),body=dialog.querySelector('.builder-picker-body');
@@ -12797,24 +12850,25 @@ function openBuilderExercisePicker(trigger){
   body.scrollTop=0;
  }
  function showExercises(){
-  title.textContent=builderMuscleGroups.find(([key])=>key===group)?.[1]||'All guided exercises';
-  body.innerHTML='<button type="button" data-builder-muscles-back>← Muscle groups</button><input type="search" aria-label="Search guided exercises" placeholder="Search exercises"><div class="builder-movements"></div>';
+  title.textContent=group==='swap'?'Replace exercise':builderMuscleGroups.find(([key])=>key===group)?.[1]||'All guided exercises';
+  body.innerHTML='<button type="button" data-builder-muscles-back>← Muscle groups</button><input type="search" aria-label="Search guided exercises" placeholder="Search exercises"><div class="builder-movements"></div>'+(group==='swap'?'<button type="button" data-builder-picker-manual>Type my own exercise</button>':'');
   body.scrollTop=0;
   updateResults('');
  }
  function updateResults(query){
-  let matches=window.EzpzExerciseMedia.choices(names,'',query).map(name=>({name,map:reviewedMuscleMap([{name}])}));
-  if(group!=='all'){
+  const ranked=group==='swap'?rankedExerciseSwaps(current,query):window.EzpzExerciseMedia.choices(names,'',query).map(name=>({name}));
+  let matches=ranked.map(entry=>({...entry,map:reviewedMuscleMap([entry])}));
+  if(group!=='all'&&group!=='swap'){
    const regions=groupRegions(group);
    const targets=entry=>entry.map.primary.some(key=>regions.includes(key));
    matches=matches.filter(entry=>targets(entry)||entry.map.supporting.some(key=>regions.includes(key))).sort((a,b)=>Number(targets(b))-Number(targets(a)));
   }
-  body.querySelector('.builder-movements').innerHTML=matches.map(({name,map})=>{
-   const role=group==='all'?'':map.primary.some(key=>groupRegions(group).includes(key))?'Primary':'Supporting';
+  body.querySelector('.builder-movements').innerHTML=matches.map(({name,map,primaryMatch})=>{
+   const role=group==='swap'?(primaryMatch?'Shared primary muscle':''):group==='all'?'':map.primary.some(key=>groupRegions(group).includes(key))?'Primary':'Supporting';
    return '<button type="button" data-builder-movement="'+safe(name)+'">'+exerciseThumbnail(name)+'<span><strong>'+safe(name)+'</strong>'+(role?'<small>'+role+'</small>':'')+'</span>'+(map.primary.length?workoutAnatomy(map):'')+'</button>';
   }).join('')||'<p>No guided exercises match.</p>';
  }
- showMuscles();
+ if(current){group='swap';showExercises()}else showMuscles();
  const controller=new AbortController(),options={signal:controller.signal};
  dialog.addEventListener('close',()=>controller.abort(),{once:true});
  dialog.addEventListener('input',event=>{if(event.target.type==='search')updateResults(event.target.value)},options);

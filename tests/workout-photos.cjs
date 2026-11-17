@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),source=fs.readFileSync(pat
 const scripts=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).concat(['coach-sample-photos','exercise-media'].map(name=>fs.readFileSync(path.join(__dirname,'../fitness-app/'+name+'.js'),'utf8'))).join('\n'),screen={innerHTML:''};
 let writes=0;const initial={profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2,workoutDrafts:{'pull-b':{'sr0-0':'8','sw0-0':'20','sd0-0':true}}},stored=JSON.stringify(initial);
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelectorAll:()=>[],querySelector:()=>null,addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console',scripts+'\nreturn {home,train,featuredWorkouts,featuredExerciseSwaps,workoutSetting,plannerPickerItems,restoredState,baseWorkoutPlan,guides:window.EzpzExerciseMedia,workoutChooser,workoutCover,workoutProgramCovers,workoutCovers,workoutTemplates,categoryPrograms,workoutCategories,reviewedMuscleMap,hybridWorkoutCover,setCategory(v){chooserCategory=v},get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem(){writes++}},()=>new Promise(()=>{}),{error(){}});
+const api=new Function('document','window','localStorage','fetch','console',scripts+'\nreturn {home,train,featuredWorkouts,featuredExerciseSwaps,workoutSetting,plannerPickerItems,restoredState,baseWorkoutPlan,guides:window.EzpzExerciseMedia,workoutChooser,workoutCover,workoutProgramCovers,workoutCovers,workoutTemplates,categoryPrograms,workoutCategories,rankedExerciseSwaps,reviewedMuscleMap,hybridWorkoutCover,setCategory(v){chooserCategory=v},get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem(){writes++}},()=>new Promise(()=>{}),{error(){}});
 const assert=(v,m)=>{if(!v)throw Error(m)};
 
 const addedGuides=api.guides.names.map(name=>api.guides.get(name)).filter(guide=>guide.prescription);
@@ -35,7 +35,7 @@ const ids=new Set();
 for(const setting of ['home','gym']){
  api.state.workoutSetting=setting;
  const choices=api.plannerPickerItems();
- assert(choices.length===(setting==='home'?28:30)&&choices.every(w=>w.setting===setting||w.setting==='both'),'Expected sessions for '+setting);
+ assert(choices.length===(setting==='home'?32:38)&&choices.every(w=>w.setting===setting||w.setting==='both'),'Expected sessions for '+setting);
  api.setCategory(null);
  assert((api.workoutChooser().match(/data-workout-category="(?!mine")/g)||[]).length===10,'Ten visible categories');
  for(const category of ['Full Body','Push','Pull','Leg','Core']){
@@ -64,7 +64,7 @@ for(const setting of ['home','gym']){
 }
 assert(ids.size===40,'40 unique original sessions');
 const goal=api.featuredWorkouts.filter(w=>w.id.startsWith('guided-goal-'));
-assert(goal.length===10&&new Set(goal.map(w=>w.id)).size===10,'Ten distinct goal sessions');
+assert(goal.length===18&&new Set(goal.map(w=>w.id)).size===18,'Eighteen distinct goal sessions');
 for(const plan of goal){
  assert(plan.exercises.length===6&&new Set(plan.exercises.map(x=>x.name)).size===6,'Six distinct exercises in '+plan.title);
  assert(plan.exercises.every(x=>api.guides.get(x.name)?.videoUrl&&api.guides.get(x.name)?.photo&&api.reviewedMuscleMap([x]).primary.length),'All goal exercises have media and muscle roles');
@@ -72,6 +72,13 @@ for(const plan of goal){
  assert(api.hybridWorkoutCover(plan.category).includes('anatomy-cover-overlay'),'Goal category anatomy');
 }
 assert(api.reviewedMuscleMap([{name:'Dumbbell Upright Row'}]).primary.includes('traps'),'Upright row targets traps');
+
+const curlSwaps=api.rankedExerciseSwaps('Lying Leg Curl');
+const closeCurls=['Slider Hamstring Curl','Seated Leg Curl','Standing Single-Leg Machine Leg Curl'];
+assert(curlSwaps.slice(0,3).every(x=>x.primaryMatch&&closeCurls.includes(x.name)),'Hamstring curls lead ranked swap suggestions');
+assert(!curlSwaps.some(x=>x.name==='Lying Machine Leg Curl'),'Current exercise is excluded even when named by an alias');
+assert(api.rankedExerciseSwaps('Lying Machine Leg Curl','bench press').some(x=>x.name==='Dumbbell Bench Press'&&!x.primaryMatch),'Search still finds exercises for other muscle groups');
+assert(api.rankedExerciseSwaps('Unknown personal exercise','hamstring curl').some(x=>x.name==='Slider Hamstring Curl'),'Unmapped exercises can still search the full catalog');
 
 const dates={'2026-11-16':'guided-home-full-body-a','2026-11-17':'pull-b'};
 const recovered=api.restoredState({...api.state,workoutSchedule:dates});
