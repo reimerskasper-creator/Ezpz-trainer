@@ -1,7 +1,8 @@
 ## 2026-11-16 — Photo-first workout picker
 
 - Android 1.0.149 brings Push, Pull, Legs and Core to the first two rows, restores the muscle legend to the header, and gives the existing gym photos and mapped anatomy more space. Full Body, Create your own, Saved workouts and filters remain available below.
-- Branch: android-health-connect. Android build and layout checks pending.
+- Branch: android-health-connect. Source commit `44cb88d`. Android run 43989867766 produced the signed APK and passed the saved workout, Trainer and recap checks. The broader regression suite was still running when the APK was uploaded.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/43989867766/artifacts/14287676302
 
 ## 2026-11-16 — Workout cover anatomy and rest controls
 
