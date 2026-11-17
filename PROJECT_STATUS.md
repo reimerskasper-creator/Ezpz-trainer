@@ -2,7 +2,8 @@
 
 - Android 1.0.161 shows the picker’s exact selected workout artwork and muscle layers on the Home Trainer card, open or closed. Expanded exercises sit beneath the cover with photos, sets, reps and completion.
 - Home banner overrides affect the cover area. Recovery and empty states retain their own photos.
-- Branch: android-health-connect. Local workout and photo checks passed. Android signing and mobile checks pending.
+- Branch: android-health-connect. Source commit `f2deb80`. Android run 44175251871 passed Home picker cover parity and disclosure at 320, 390 and 430 px, native unit tests, and saved-workout and Trainer checks. Verified extracted APK artwork and matching 1.0.160 signing certificate. Physical handset installation remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44175251871/artifacts/14369866840
 
 ## 2026-11-17 — Full-height workout picker and saved workout management
 
