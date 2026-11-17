@@ -91,21 +91,28 @@ const server=http.createServer((req,res)=>{
       {name:'Single-Arm Dumbbell Row',prescription:'8 reps / side',sets:[{reps:8,kg:20,done:true}]},
       {name:'Dead Bug',sets:[{reps:8,kg:'',done:true}]},
       {name:'Forearm Plank',unit:'sec',sets:[{reps:45,kg:10,done:true}]},
+      {name:'Dumbbell Shrug',sets:[{reps:10,kg:10,done:true}]},
       {name:'My custom lift',sets:[{reps:7,kg:0,done:true}]},
       {name:'Lying Machine Leg Curl',sets:[{reps:0,kg:25,done:true}]},
      ]
     };state.logs.push(lastSessionRecap);tab='progress';render();
    });
    const metrics=await page.locator('.workout-recap .recap-numbers strong').allTextContents();
-   assert.deepEqual(metrics,['5','39 min','512 kg']);
-   assert.equal(await page.locator('[data-muscle-region="hamstrings"]').count(),0);
+   assert.deepEqual(metrics,['6','39 min','612 kg']);
+   assert.equal(await page.locator('.recap-muscles [data-anatomy-region="hamstrings"]').count(),0);
    assert((await page.locator('.recap-muscle-note').first().textContent()).includes('1 completed exercise'));
    await page.locator('[data-recap-muscle="glutes"]').click();
-   assert.equal(await page.locator('[data-muscle-region]:not([hidden])').count(),1);
+   assert.equal(await page.locator('.recap-muscles [data-anatomy-region]:not([hidden])').count(),1);
    await page.locator('[data-recap-muscle="glutes"]').click();
-   assert(await page.locator('[data-muscle-region]:not([hidden])').count()>1);
+   assert(await page.locator('.recap-muscles [data-anatomy-region]:not([hidden])').count()>1);
+   await page.locator('[data-recap-muscle="traps"]').click();
+   const trapLayer=page.locator('.recap-muscles [data-anatomy-region="traps"].anatomy-primary');
+   assert(await trapLayer.isVisible());
+   assert((await trapLayer.evaluate(layer=>getComputedStyle(layer).clipPath)).startsWith('polygon('));
+   assert.equal(await page.locator('.recap-muscles [data-anatomy-region]:not([hidden])').count(),1);
+   await page.locator('[data-recap-muscle="traps"]').click();
    await page.locator('.recap-completed summary').click();
-   assert.equal(await page.locator('.recap-completed li').count(),5);
+   assert.equal(await page.locator('.recap-completed li').count(),6);
    assert.equal(await page.locator('.recap-completed img').first().getAttribute('src'),custom);
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
    if(width===390)await page.locator('.workout-recap').screenshot({path:'/tmp/ezpz-recap-mobile-test.jpg'});

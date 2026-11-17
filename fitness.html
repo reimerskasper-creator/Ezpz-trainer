@@ -7505,6 +7505,7 @@ const goalWorkoutCategories=[
  {id:'Build Muscle',label:'Build Muscle',description:'Glutes and hamstrings · shoulders and arms',cover:'Glutes'},
  {id:'Low-Impact Fitness',label:'Low-Impact Fitness',description:'Steady movement · strength · balance',cover:'Stability'}
 ];
+const compoundWorkoutGuide='Complete straight sets in order. Take the listed rest. Start each lift with a load or variation that leaves two controlled reps in reserve.';
 const goalWorkoutRows=[
  ['dumbbell-conditioning',0,'both','Dumbbell Conditioning','Intermediate',32,'Dumbbells · clear space',[
   ['Dumbbell Thruster',3,'8–10',75],['Dumbbell Renegade Row',3,'6–8',75,'reps',true],['Dumbbell Romanian Deadlift',3,'10–12',75],
@@ -7578,6 +7579,49 @@ const goalWorkoutRows=[
   ['Bodyweight Step-Up',2,'8–10',60,'reps',true],['Incline Push-Up',2,'8–12',60],['Standing Resistance Band Row',2,'10–15',60],
   ['Bodyweight Split Squat',2,'6–8',60,'reps',true],['Glute Bridge',2,'10–15',45],['Dead Bug',2,'6–8',45,'reps',true]
  ]],
+ ['dumbbell-compound-strength',0,'both','Dumbbell Compound Strength','Intermediate',40,'Dumbbells · stable bench · clear walking space',[
+  ['Goblet Squat',3,'8–12',105],['Dumbbell Floor Press',3,'8–12',90],['Dumbbell Romanian Deadlift',3,'8–12',105],
+  ['Single-Arm Dumbbell Bench Row',3,'8–12',90,'reps',true],['Dumbbell Reverse Lunge',2,'8–10',75,'reps',true],['Dumbbell Farmer Carry',2,'25–35',60,'sec']
+ ],
+  compoundWorkoutGuide],
+ ['bodyweight-band-compounds',0,'both','Bodyweight & Band Compound Strength','Beginner',29,'Resistance band · fixed anchor · stable step · mat',[
+  ['Bodyweight Split Squat',3,'8–10',60,'reps',true],['Push-Up',2,'6–10',75],['Standing Resistance Band Row',3,'10–15',60],
+  ['Bodyweight Step-Up',2,'8–10',60,'reps',true],['Single-Leg Glute Bridge',2,'8–10',45,'reps',true],['Bear Plank',2,'15–25',45,'sec']
+ ],
+  compoundWorkoutGuide],
+ ['barbell-compound-strength',0,'gym','Barbell Compound Strength','Advanced',57,'Barbell · plates · rack · bench · chest-supported T-bar row machine · pull-up bar',[
+  ['Barbell Back Squat',3,'5–8',150],['Barbell Bench Press',3,'5–8',150],['Barbell Romanian Deadlift',2,'8–10',120],
+  ['Chest-Supported T-Bar Row',3,'8–12',105],['Standing Barbell Overhead Press',2,'6–10',105],['Chin-Up',2,'5–8',105]
+ ],
+  compoundWorkoutGuide],
+ ['shoulder-trunk-control',1,'both','Shoulder & Trunk Control','Beginner',22,'Mat · light resistance band',[
+  ['Resistance Band Pull-Apart',2,'10–12',40],['Push-Up Plus',2,'6–8',40],['Bird Dog',2,'6–8',35,'reps',true],
+  ['Dead Bug Heel Taps',2,'6–8',35,'reps',true],['Forearm Plank',2,'15–25',40,'sec'],['Side Plank',2,'15–20',35,'sec',true]
+ ]],
+ ['runner-lateral-strength',2,'both','Runner Lateral Strength','Intermediate',31,'Dumbbells · loop resistance band · mat',[
+  ['Dumbbell Lateral Lunge',3,'6–8',75,'reps',true],['Dumbbell Reverse Lunge',2,'8–10',75,'reps',true],['Single-Leg Glute Bridge',2,'8–12',50,'reps',true],
+  ['Lateral Band Walk',2,'8–12',40,'reps',true],['Bodyweight Standing Calf Raise',3,'12–18',45],['Side Plank',2,'20–25',40,'sec',true]
+ ]],
+ ['runner-strength-primer',2,'both','Short Runner Strength Session','Beginner',19,'Stable low step · mat',[
+  ['Bodyweight Squat',2,'8–10',40],['Bodyweight Step-Up',2,'6–8',45,'reps',true],['Bodyweight Standing Calf Raise',2,'10–12',40],
+  ['Glute Bridge',2,'8–10',35],['Bird Dog',2,'6',35,'reps',true],['Dead Bug',2,'6',35,'reps',true]
+ ]],
+ ['dumbbell-back-traps',3,'both','Dumbbell Back & Traps','Intermediate',39,'Dumbbells · adjustable bench · clear walking space',[
+  ['Chest-Supported Dumbbell Row',3,'8–12',90],['Single-Arm Dumbbell Bench Row',2,'8–12',90,'reps',true],['Dumbbell Shrug',3,'10–15',75],
+  ['Chest-Supported Dumbbell Reverse Fly',2,'12–15',60],['Dumbbell Hammer Curl',2,'10–12',60],['Dumbbell Farmer Carry',2,'25–35',60,'sec']
+ ]],
+ ['gym-upper-back-traps',3,'gym','Upper Back & Traps','Intermediate',40,'Barbell · plates · cable machine · wide bar · rope · dual cable handles · chest-supported T-bar row machine',[
+  ['Chest-Supported T-Bar Row',3,'8–12',105],['Wide-Grip Seated Cable Row',2,'10–12',90],['Barbell Shrug',3,'10–15',75],
+  ['Cable Rope Face Pull',2,'12–15',60],['Cable Y Raise',2,'12–15',60],['Standing Straight-Bar Cable Curl',2,'10–15',60]
+ ]],
+ ['dumbbell-chest-triceps',3,'both','Dumbbell Chest & Triceps','Intermediate',37,'Dumbbells · adjustable bench',[
+  ['Dumbbell Bench Press',3,'8–12',105],['Incline Dumbbell Press',3,'8–12',90],['Flat Dumbbell Chest Fly',2,'10–15',60],
+  ['Close-Grip Push-Up',2,'6–12',75],['Standing Overhead Dumbbell Triceps Extension',2,'10–15',60],['Dumbbell Triceps Kickback',2,'12–15',60,'reps',true]
+ ]],
+ ['low-impact-upper-body',4,'both','Low-Impact Upper Body','Beginner',27,'Light dumbbells · adjustable bench · resistance band · fixed anchor · mat',[
+  ['Dumbbell Floor Press',2,'8–12',75],['Standing Resistance Band Row',2,'10–12',60],['Seated Dumbbell Shoulder Press',2,'8–12',75],
+  ['Dumbbell Shrug',2,'10–12',60],['Standing Dumbbell Curl',2,'10–12',60],['Dead Bug',2,'6–8',45,'reps',true]
+ ]],
 ];
 const goalWorkoutGuides=[
  'Work in controlled intervals. Finish the sets at each station, then move on. Take the listed rest and keep enough in reserve to maintain technique.',
@@ -7586,13 +7630,13 @@ const goalWorkoutGuides=[
  'Use controlled reps and finish each set with about two good reps in reserve. Add load once all sets reach the top of the range.',
  'Keep at least one foot grounded during standing movements. Use a stable support where helpful and choose a pace you can control.'
 ];
-featuredWorkouts.push(...goalWorkoutRows.map(([id,group,setting,title,level,minutes,equipment,items])=>{
+featuredWorkouts.push(...goalWorkoutRows.map(([id,group,setting,title,level,minutes,equipment,items,guide=goalWorkoutGuides[group]])=>{
  const category=goalWorkoutCategories[group];
  const exercises=items.map(([name,sets,reps,rest,unit='reps',side=false])=>({
-  name,sets,reps,rest,unit,side,load:!/^(?:Bodyweight|Push-Up|Incline Push-Up|Forearm Plank|Reverse Crunch|Slider Hamstring Curl|Standing Resistance Band Row|Dead Bug|Glute Bridge|Single-Leg Glute Bridge|Side Plank|Bird Dog|Tuck Hollow Hold|Push-Up Plus|Resistance Band Pull-Apart|Lateral Band Walk|Mountain Climber|Bear Plank)/.test(name)
+  name,sets,reps,rest,unit,side,load:!/^(?:Bodyweight|Push-Up|Close-Grip Push-Up|Chin-Up|Incline Push-Up|Forearm Plank|Reverse Crunch|Slider Hamstring Curl|Standing Resistance Band Row|Dead Bug|Glute Bridge|Single-Leg Glute Bridge|Side Plank|Bird Dog|Tuck Hollow Hold|Push-Up Plus|Resistance Band Pull-Apart|Lateral Band Walk|Mountain Climber|Bear Plank)/.test(name)
  }));
  return {id:'guided-goal-'+id,category:category.id,coverCategory:category.cover,setting,level,title,programName:title,minutes:String(minutes),equipment,
-  equipmentItems:equipment.toLowerCase().split(' · '),summary:category.description,setup:goalWorkoutGuides[group],guide:goalWorkoutGuides[group],
+  equipmentItems:equipment.toLowerCase().split(' · '),summary:category.description,setup:guide,guide,
   warmup:'Start with easy movement and practice the first exercise.',cooldown:'Finish with relaxed movement and breathing.',exercises};
 }));
 const featuredCategories=['Push','Pull','Leg','Core','Full Body',...goalWorkoutCategories.map(category=>category.id)];
@@ -11714,30 +11758,8 @@ function progressionMarkup(x){const suggestion=progressionSuggestion(x);return s
 let lastSessionRecap=null;
 function comparableSets(e){return historicalSets(e).filter(z=>z.done!==false&&validSetValue(z.reps)&&Number.isFinite(Number(z.kg||0))&&Number(z.kg||0)>=0)}
 function sessionImprovements(log){const before=state.logs.slice(0,state.logs.indexOf(log));return (log.exercises||[]).flatMap(e=>{const prev=before.slice().reverse().flatMap(l=>l.exercises||[]).find(x=>exerciseIdentity(x)===exerciseIdentity(e));if(!prev)return [];const old=comparableSets(prev),now=comparableSets(e),unit=JSON.parse(exerciseIdentity(e))[1];if(!old.length||!now.length)return [];const bestNow=now.find(z=>old.some(p=>Math.abs(Number(p.kg||0)-Number(z.kg||0))<1e-6)&&Number(z.reps)>Math.max(...old.filter(p=>Math.abs(Number(p.kg||0)-Number(z.kg||0))<1e-6).map(p=>Number(p.reps))));if(bestNow)return [e.name+': '+bestNow.reps+' '+unit+' at '+(Number(bestNow.kg)>0?loadText(bestNow.kg)+' '+loadUnit():'bodyweight')+' — more than last time at this load.'];const heavier=unit==='reps'?now.find(z=>Number(z.kg)>Math.max(...old.map(p=>Number(p.kg||0)))&&Number(z.reps)>=Math.max(...old.map(p=>Number(p.reps)))):null;return heavier?[e.name+': '+loadText(heavier.kg)+' '+loadUnit()+' × '+heavier.reps+' reps — more weight with at least as many reps as last time.']:[]})}
-const muscleMapGroups=[
- ['chest','Chest'],['biceps','Biceps'],['core','Core'],['quads','Quads'],['back','Back'],
- ['triceps','Triceps'],['glutes','Glutes'],['hamstrings','Hamstrings'],['shoulders','Shoulders'],
- ['forearms','Forearms'],['calves','Calves']
-];
-const exerciseMuscleGroups={
- 'Dumbbell Bench Press':'chest shoulders triceps','Goblet Squat':'quads glutes',
- 'Dumbbell Romanian Deadlift':'hamstrings glutes back','Single-Arm Dumbbell Bench Row':'back biceps',
- 'Push-Up':'chest triceps shoulders','Forearm Plank':'core','Glute Bridge':'glutes hamstrings',
- 'Dead Bug':'core','Bodyweight Split Squat':'quads glutes','Bodyweight Step-Up':'quads glutes',
- 'Bodyweight Standing Calf Raise':'calves','Side Plank':'core','Standing Dumbbell Curl':'biceps',
- 'Dumbbell Hammer Curl':'biceps forearms','Dumbbell Lateral Raise':'shoulders',
- 'Seated Dumbbell Shoulder Press':'shoulders triceps','Dumbbell Floor Press':'chest triceps shoulders',
- 'Incline Dumbbell Press':'chest shoulders triceps','Chest-Supported Dumbbell Row':'back biceps',
- 'Rope Triceps Pushdown':'triceps','Lat Pulldown':'back biceps','Seated Cable Row':'back biceps',
- '45-Degree Leg Press':'quads glutes','Pallof Press':'core','Barbell Bench Press':'chest shoulders triceps',
- 'Cable Chest Fly':'chest','Chest-Supported Dumbbell Reverse Fly':'shoulders back',
- 'Slider Hamstring Curl':'hamstrings','Lying Machine Leg Curl':'hamstrings',
- 'Reverse Crunch':'core','Bear Plank':'core shoulders','Tuck Hollow Hold':'core','Dead Bug Heel Taps':'core',
- 'Standing Dumbbell Shoulder Press':'shoulders triceps','Standing Overhead Dumbbell Triceps Extension':'triceps',
- 'Close-Grip Push-Up':'triceps chest shoulders','Dumbbell Pullover':'back chest','Bird Dog':'core glutes back',
- 'Bodyweight Squat':'quads glutes','Bodyweight Reverse Lunge':'quads glutes',
- 'Dumbbell Farmer Carry':'forearms core back'
-};
+// The sprite has a base panel followed by eleven painted muscle panels.
+const workoutAtlasPanelGaps=11;
 /* Atlas masks depict broad muscle regions. Keep movement assignments explicit
    and omit muscles the artwork cannot distinguish. See ACE Exercise Library
    and StrengthLog's exercise guides for the standard variations. */
@@ -11769,14 +11791,14 @@ const reviewedExerciseMuscles={
  'Lying Machine Leg Curl':['hamstrings','calves'],
  'Bodyweight Standing Calf Raise':['calves',''],
  'Single-Arm Dumbbell Bench Row':['back','biceps rearDelts forearms'],
- 'Chest-Supported Dumbbell Row':['back','biceps rearDelts forearms'],
- 'Seated Cable Row':['back','biceps rearDelts forearms'],
+ 'Chest-Supported Dumbbell Row':['back rearDelts traps','biceps forearms'],
+ 'Seated Cable Row':['back','biceps rearDelts forearms traps'],
  'Lat Pulldown':['back','biceps rearDelts forearms'],
  'Dumbbell Pullover':['chest','back'],
  'Chest-Supported Dumbbell Reverse Fly':['rearDelts',''],
  'Standing Dumbbell Curl':['biceps','forearms'],
  'Dumbbell Hammer Curl':['forearms biceps',''],
- 'Dumbbell Farmer Carry':['forearms','core'],
+ 'Dumbbell Farmer Carry':['forearms','core traps'],
  'Dumbbell Lateral Raise':['shoulders',''],
  'Standing Dumbbell Shoulder Press':['frontDelts','triceps'],
  'Seated Dumbbell Shoulder Press':['frontDelts','triceps'],
@@ -11794,12 +11816,12 @@ const reviewedExerciseMuscles={
 };
 const workoutCategoryMuscles={
  'Full Body':['chest back core quads glutes hamstrings','frontDelts rearDelts biceps triceps'],
- Push:['chest frontDelts triceps',''],Pull:['back rearDelts biceps','forearms'],
+ Push:['chest frontDelts triceps',''],Pull:['back rearDelts biceps','forearms traps'],
  Leg:['quads glutes hamstrings','calves'],Core:['core',''],
  'Strength & Conditioning':['quads glutes back core','shoulders traps forearms'],
  'Pilates & Mobility':['core glutes','shoulders back'],
  'Strength for Runners':['quads glutes hamstrings calves','core'],
- 'Build Muscle':['glutes hamstrings shoulders biceps triceps','quads forearms'],
+ 'Build Muscle':['glutes hamstrings shoulders biceps triceps traps','quads forearms'],
  'Low-Impact Fitness':['quads glutes core','calves shoulders']
 };
 function reviewedMuscleMap(exercises){
@@ -11821,7 +11843,7 @@ function workoutAnatomy({primary,supporting},label){
  const layers=(regions,role)=>regions.map(key=>{
   const [,index,side]=workoutAtlasRegions[key];
   if(key==='traps')return '<span class="recap-anatomy-layer anatomy-traps anatomy-'+role+'" data-anatomy-region="traps"></span>';
-  return '<span class="recap-anatomy-layer anatomy-'+role+(side?' anatomy-'+side:'')+'" data-anatomy-region="'+key+'" style="--atlas-y:'+(100*(index+1)/muscleMapGroups.length)+'%"></span>';
+  return '<span class="recap-anatomy-layer anatomy-'+role+(side?' anatomy-'+side:'')+'" data-anatomy-region="'+key+'" style="--atlas-y:'+(100*(index+1)/workoutAtlasPanelGaps)+'%"></span>';
  }).join('');
  return '<span class="recap-anatomy" '+(label?'role="img" aria-label="'+safe(label)+'"':'aria-hidden="true"')+'><span class="recap-anatomy-layer"></span>'+layers(supporting,'supporting')+layers(primary,'primary')+'</span>';
 }
@@ -11851,12 +11873,9 @@ function workoutRecapData(log){
   if(!sets.length)return [];
   return [{exercise,sets,unit:JSON.parse(exerciseIdentity(exercise))[1]}];
  });
- const worked=new Set();
- let volume=0, unknown=0;
+ const muscleMap=reviewedMuscleMap(completed.map(row=>row.exercise));
+ let volume=0;
  for(const {exercise,sets,unit} of completed){
-  const name=window.EzpzExerciseMedia?.get(exercise.name)?.name||exercise.name;
-  const groups=Object.hasOwn(exerciseMuscleGroups,name)?exerciseMuscleGroups[name]:null;
-  if(groups)groups.split(' ').forEach(group=>worked.add(group));else unknown++;
   if(unit!=='reps')continue;
   const sides=exercise.side===true||/\/\s*side\b/i.test(exercise.prescription||'')?2:1;
   for(const set of sets){
@@ -11864,12 +11883,14 @@ function workoutRecapData(log){
    if(Number.isFinite(weight)&&weight>0)volume+=weight*Number(set.reps)*sides;
   }
  }
- return {completed,worked,unknown,volume,sets:completed.reduce((total,row)=>total+row.sets.length,0)};
+ return {completed,muscleMap,volume,sets:completed.reduce((total,row)=>total+row.sets.length,0)};
 }
-function workoutMuscleMap({worked,unknown}){
- if(!worked.size)return '<p class="recap-muscle-note">Muscle mapping is unavailable for the exercises in this session.</p>';
- const active=muscleMapGroups.filter(([key])=>worked.has(key));
- return '<section class="recap-muscles" aria-label="Muscles worked"><h3>Muscles worked</h3><div class="recap-anatomy" role="img" aria-label="Front and back muscle map. '+safe(active.map(([,label])=>label).join(', '))+'"><span class="recap-anatomy-layer"></span>'+active.map(([key])=>'<span class="recap-anatomy-layer recap-anatomy-highlight" data-muscle-region="'+key+'" style="--atlas-y:'+(100*(muscleMapGroups.findIndex(([k])=>k===key)+1)/muscleMapGroups.length)+'%"></span>').join('')+'</div><div class="recap-anatomy-labels" aria-hidden="true"><span>Front</span><span>Back</span></div><div class="recap-muscle-choices" role="group" aria-label="Highlight one muscle">'+active.map(([key,label])=>'<button type="button" data-recap-muscle="'+key+'" aria-pressed="false">'+label+'</button>').join('')+'</div>'+(unknown?'<p class="recap-muscle-note">Muscle mapping unavailable for '+unknown+' completed exercise'+(unknown===1?'':'s')+'.</p>':'')+'</section>';
+function workoutMuscleMap({muscleMap}){
+ const {primary,supporting,unknown}=muscleMap;
+ const active=[...primary,...supporting];
+ if(!active.length)return '<p class="recap-muscle-note">Muscle mapping is unavailable for the exercises in this session.</p>';
+ const names=active.map(key=>workoutAtlasRegions[key][0]);
+ return '<section class="recap-muscles" aria-label="Muscles worked"><h3>Muscles worked</h3>'+workoutMuscleLegend()+workoutAnatomy(muscleMap,'Front and back muscle map. '+names.join(', '))+'<div class="recap-anatomy-labels" aria-hidden="true"><span>Front</span><span>Back</span></div><div class="recap-muscle-choices" role="group" aria-label="Highlight one muscle">'+active.map((key,i)=>'<button type="button" data-recap-muscle="'+key+'" aria-pressed="false">'+names[i]+'</button>').join('')+'</div>'+(unknown?'<p class="recap-muscle-note">Muscle mapping unavailable for '+unknown+' completed exercise'+(unknown===1?'':'s')+'.</p>':'')+'</section>';
 }
 function sessionRecapMarkup(){
  const log=lastSessionRecap;if(!log||!state.logs.includes(log))return '';
@@ -11883,7 +11904,7 @@ document.addEventListener('click',event=>{
  const button=event.target.closest('[data-recap-muscle]');if(!button)return;
  const group=button.closest('.recap-muscles'),selected=button.getAttribute('aria-pressed')==='true'?'':button.dataset.recapMuscle;
  group.querySelectorAll('[data-recap-muscle]').forEach(control=>control.setAttribute('aria-pressed',String(control.dataset.recapMuscle===selected)));
- group.querySelectorAll('[data-muscle-region]').forEach(layer=>{layer.hidden=!!selected&&layer.dataset.muscleRegion!==selected});
+ group.querySelectorAll('[data-anatomy-region]').forEach(layer=>{layer.hidden=!!selected&&layer.dataset.anatomyRegion!==selected});
 });
 document.addEventListener('click',e=>{
  const choice=e.target.closest('[data-exercise-swap-choice]');if(!choice||choice.disabled)return;

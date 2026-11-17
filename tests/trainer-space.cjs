@@ -14,8 +14,8 @@ console.log('PASS trainer media URL/schema validation, photo references/backup r
 const guidesWindow={};
 new Function('window',fs.readFileSync('fitness-app/coach-sample-photos.js','utf8')+fs.readFileSync('fitness-app/exercise-media.js','utf8'))(guidesWindow);
 const guides=guidesWindow.EzpzExerciseMedia,cleanVideo=api.cleanTrainerVideoUrl;
-assert.equal(guides.names.length,141);
-assert.equal(new Set(guides.names).size,141);
+assert.equal(guides.names.length,143);
+assert.equal(new Set(guides.names).size,143);
 for(const name of guides.names)assert.equal(guides.get(name).name,name);
 assert.equal(guides.get('Close-Grip Seated Cable Row'),guides.get('Seated Cable Row'));
 assert.notEqual(guides.get('Wide-Grip Seated Cable Row').photo,guides.get('Seated Cable Row').photo);

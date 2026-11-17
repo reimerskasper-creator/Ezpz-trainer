@@ -1,3 +1,9 @@
+## 2026-11-17 — Compound strength, trap exercises and recap anatomy
+
+- Android 1.0.158 adds ten guided six-exercise sessions, including three compound-strength sessions and two back-and-trap sessions. Every visible category has at least four workouts in both Home and Gym (40 Home and 48 Gym choices, including shared sessions).
+- The library adds Dumbbell Shrug and Barbell Shrug with distinct bundled training photos, demo references and primary trapezius maps. Trap roles were reviewed for selected rows, raises, carries and deadlifts. The recap now uses the same primary and supporting muscle artwork as workout covers and exercise details.
+- Branch: android-health-connect. Catalog, workout counts, trap highlights, swaps, planner and custom-workout checks passed locally. Signed Android build and packaged browser tests pending.
+
 ## 2026-11-17 — Muscle-based swaps and eight more goal workouts
 
 - Android 1.0.157 ranks exercise replacements by shared primary muscles in Trainer, the Home workout editor, and the workout builder. Search covers the guided library, while the session picker filters movements already in that workout.

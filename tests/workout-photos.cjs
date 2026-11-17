@@ -7,8 +7,8 @@ const api=new Function('document','window','localStorage','fetch','console',scri
 const assert=(v,m)=>{if(!v)throw Error(m)};
 
 const addedGuides=api.guides.names.map(name=>api.guides.get(name)).filter(guide=>guide.prescription);
-assert(addedGuides.length===100,'One hundred additional guided exercises');
-assert(new Set(addedGuides.map(guide=>guide.photo)).size===100,'One distinct photo per new exercise');
+assert(addedGuides.length===102,'102 additional guided exercises');
+assert(new Set(addedGuides.map(guide=>guide.photo)).size===102,'One distinct photo per new exercise');
 for(const guide of addedGuides){
  assert(fs.existsSync(path.join(__dirname,'..',guide.photo)),'Missing exercise photo for '+guide.name);
  assert(guide.equipment&&guide.category&&new URL(guide.videoUrl).protocol==='https:','Complete references for '+guide.name);
@@ -35,7 +35,11 @@ const ids=new Set();
 for(const setting of ['home','gym']){
  api.state.workoutSetting=setting;
  const choices=api.plannerPickerItems();
- assert(choices.length===(setting==='home'?32:38)&&choices.every(w=>w.setting===setting||w.setting==='both'),'Expected sessions for '+setting);
+ assert(choices.length===(setting==='home'?40:48)&&choices.every(w=>w.setting===setting||w.setting==='both'),'Expected sessions for '+setting);
+ for(const category of new Set(choices.map(w=>w.category))){
+  const count=choices.filter(w=>w.category===category).length;
+  assert(count>=4&&count<=10,setting+' '+category+' must offer four to ten sessions');
+ }
  api.setCategory(null);
  assert((api.workoutChooser().match(/data-workout-category="(?!mine")/g)||[]).length===10,'Ten visible categories');
  for(const category of ['Full Body','Push','Pull','Leg','Core']){
@@ -64,7 +68,7 @@ for(const setting of ['home','gym']){
 }
 assert(ids.size===40,'40 unique original sessions');
 const goal=api.featuredWorkouts.filter(w=>w.id.startsWith('guided-goal-'));
-assert(goal.length===18&&new Set(goal.map(w=>w.id)).size===18,'Eighteen distinct goal sessions');
+assert(goal.length===28&&new Set(goal.map(w=>w.id)).size===28,'Twenty-eight distinct goal sessions');
 for(const plan of goal){
  assert(plan.exercises.length===6&&new Set(plan.exercises.map(x=>x.name)).size===6,'Six distinct exercises in '+plan.title);
  assert(plan.exercises.every(x=>api.guides.get(x.name)?.videoUrl&&api.guides.get(x.name)?.photo&&api.reviewedMuscleMap([x]).primary.length),'All goal exercises have media and muscle roles');
@@ -72,6 +76,12 @@ for(const plan of goal){
  assert(api.hybridWorkoutCover(plan.category).includes('anatomy-cover-overlay'),'Goal category anatomy');
 }
 assert(api.reviewedMuscleMap([{name:'Dumbbell Upright Row'}]).primary.includes('traps'),'Upright row targets traps');
+for(const name of ['Dumbbell Shrug','Barbell Shrug']){
+ assert(api.reviewedMuscleMap([{name}]).primary.join(' ')==='traps','Shrug targets traps');
+ assert(api.hybridWorkoutCover('Build Muscle',[{name}]).includes('anatomy-traps anatomy-primary'),'Primary trap artwork');
+}
+assert(api.hybridWorkoutCover('Build Muscle',[{name:'Cable Rope Face Pull'}]).includes('anatomy-traps anatomy-supporting'),'Supporting trap artwork');
+assert(api.rankedExerciseSwaps('DB Shrug','traps')[0].name==='Barbell Shrug','Trap swaps and search use the new guides');
 
 const curlSwaps=api.rankedExerciseSwaps('Lying Leg Curl');
 const closeCurls=['Slider Hamstring Curl','Seated Leg Curl','Standing Single-Leg Machine Leg Curl'];

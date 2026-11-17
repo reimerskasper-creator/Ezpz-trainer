@@ -11,7 +11,7 @@ assert(!screen.innerHTML.includes('<select id="planned-workout"')&&!screen.inner
 assert(screen.innerHTML.includes('data-open-plan-picker="workout"')&&screen.innerHTML.includes('data-open-meal-picker="breakfast"'),'Photo picker triggers');
 const before=JSON.stringify(api.state),writesBefore=writes;api.openPlannerPicker('workout');
 assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===10,'Ten workout photo categories');
-assert(api.pickerWorkoutMatches().length===32,'Thirty-two Home sessions available');
+assert(api.pickerWorkoutMatches().length===40,'Forty Home sessions available');
 assert((body.innerHTML.match(/hybrid-workout-cover/g)||[]).length===10,'Photo and anatomy on all workout categories');
 for(const setting of ['home','gym']){
  api.state.workoutSetting=setting;
