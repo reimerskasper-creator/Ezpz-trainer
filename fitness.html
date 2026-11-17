@@ -7498,7 +7498,72 @@ const featuredWorkouts=featuredWorkoutRows.map(([setting,key,variant,focus,categ
   warmup:'Start with easy movement and rehearse the first exercise.',cooldown:'Finish with easy movement and relaxed breathing.',exercises,
  };
 });
-const featuredCategories=['Full Body','Push','Pull','Leg','Core'];
+const goalWorkoutCategories=[
+ {id:'Strength & Conditioning',label:'Strength & Conditioning',description:'Lift, carry and build work capacity',cover:'HIIT'},
+ {id:'Pilates & Mobility',label:'Pilates & Mobility',description:'Controlled movement · balance · range',cover:'Mobility'},
+ {id:'Strength for Runners',label:'Strength for Runners',description:'Single-leg strength · calves · core',cover:'Cardio'},
+ {id:'Build Muscle',label:'Build Muscle',description:'Glutes and hamstrings · shoulders and arms',cover:'Glutes'},
+ {id:'Low-Impact Fitness',label:'Low-Impact Fitness',description:'Steady movement · strength · balance',cover:'Stability'}
+];
+const goalWorkoutRows=[
+ ['dumbbell-conditioning',0,'both','Dumbbell Conditioning','Intermediate',32,'Dumbbells · clear space',[
+  ['Dumbbell Thruster',3,'8–10',75],['Dumbbell Renegade Row',3,'6–8',75,'reps',true],['Dumbbell Romanian Deadlift',3,'10–12',75],
+  ['Dumbbell Farmer Carry',3,'30',60,'sec'],['Bodyweight Reverse Lunge',2,'8–10',60,'reps',true],['Mountain Climber',2,'25',45,'sec']
+ ]],
+ ['sled-row-carry',0,'gym','Sled, Row & Carry','Advanced',40,'Sled lane · dumbbells · kettlebell · T-bar row · low step',[
+  ['Sled Push',3,'20–30',90,'sec'],['Chest-Supported T-Bar Row',3,'8–10',90],['Kettlebell Deadlift',3,'10',75],
+  ['Dumbbell Farmer Carry',3,'30',60,'sec'],['Dumbbell Step-Up',2,'8',60,'reps',true],['Single-Arm Kettlebell Rack Carry',2,'25',60,'sec',true]
+ ]],
+ ['mat-pilates',1,'both','Pilates-Inspired Mat Foundations','Beginner',22,'Mat',[
+  ['Dead Bug Heel Taps',2,'6–8',30,'reps',true],['Glute Bridge',2,'8–12',30],['Dead Bug',2,'6–8',30,'reps',true],
+  ['Side Plank',2,'15–20',30,'sec',true],['Bird Dog',2,'6',30,'reps',true],['Tuck Hollow Hold',2,'10–15',30,'sec']
+ ]],
+ ['mobility-control',1,'both','Hips, Spine & Shoulders','Beginner',20,'Mat · light resistance band',[
+  ['Bodyweight Squat',2,'8',30],['Bodyweight Reverse Lunge',2,'6',30,'reps',true],['Glute Bridge',2,'8',30],
+  ['Bird Dog',2,'6',30,'reps',true],['Push-Up Plus',2,'6–8',30],['Resistance Band Pull-Apart',2,'10',30]
+ ]],
+ ['runner-single-leg',2,'both','Runner Single-Leg Strength','Intermediate',35,'Dumbbells · sturdy low step',[
+  ['Dumbbell Step-Up',3,'6–8',90,'reps',true],['Single-Leg Dumbbell Romanian Deadlift',3,'6–8',90,'reps',true],['Bodyweight Split Squat',2,'8',60,'reps',true],
+  ['Bodyweight Standing Calf Raise',3,'12–15',45],['Dumbbell Suitcase Carry',2,'25',45,'sec',true],['Side Plank',2,'20–30',45,'sec',true]
+ ]],
+ ['runner-calves-core',2,'both','Runner Calves, Hips & Core','Beginner',24,'Mat · low step · loop band',[
+  ['Bodyweight Step-Up',2,'8',45,'reps',true],['Bodyweight Standing Calf Raise',3,'12–15',45],['Lateral Band Walk',2,'8–10',45,'reps',true],
+  ['Single-Leg Glute Bridge',2,'8',45,'reps',true],['Dead Bug',2,'6–8',30,'reps',true],['Side Plank',2,'15–25',30,'sec',true]
+ ]],
+ ['glute-hamstrings',3,'gym','Glutes & Hamstrings','Intermediate',42,'Barbell · dumbbells · seated curl · cable · hip abduction machine',[
+  ['Barbell Hip Thrust',3,'8–12',120],['Dumbbell Romanian Deadlift',3,'8–12',120],['Seated Leg Curl',3,'10–15',75],
+  ['Dumbbell Reverse Lunge',2,'8–10',75,'reps',true],['Cable Glute Kickback',2,'12–15',60,'reps',true],['Seated Hip Abduction Machine',2,'12–20',60]
+ ]],
+ ['shoulders-arms',3,'both','Shoulders & Arms','Intermediate',34,'Dumbbells · adjustable bench',[
+  ['Seated Dumbbell Shoulder Press',3,'8–12',90],['Dumbbell Lateral Raise',3,'10–15',60],['Chest-Supported Dumbbell Reverse Fly',2,'12–15',60],
+  ['Incline Dumbbell Curl',3,'8–12',60],['Dumbbell Hammer Curl',2,'10–12',60],['Standing Overhead Dumbbell Triceps Extension',3,'10–12',60]
+ ]],
+ ['no-jump',4,'both','No-Jump Conditioning','Beginner',24,'Sturdy low step · stable counter · mat',[
+  ['Bodyweight Step-Up',2,'25',45,'sec',true],['Incline Push-Up',2,'8–12',45],['Bodyweight Squat',2,'10–15',45],
+  ['Bodyweight Reverse Lunge',2,'6–8',45,'reps',true],['Mountain Climber',2,'20',45,'sec'],['Bear Plank',2,'15–25',45,'sec']
+ ]],
+ ['strength-balance',4,'both','Strength & Balance','Beginner',25,'Mat · light dumbbells · stable support',[
+  ['Goblet Squat',2,'8–12',60],['Bodyweight Split Squat',2,'6–8',45,'reps',true],['Bodyweight Standing Calf Raise',2,'10–15',45],
+  ['Single-Leg Dumbbell Romanian Deadlift',2,'6',60,'reps',true],['Bird Dog',2,'6–8',45,'reps',true],['Dumbbell Suitcase Carry',2,'20–30',45,'sec',true]
+ ]],
+];
+const goalWorkoutGuides=[
+ 'Work in controlled intervals. Finish the sets at each station, then move on. Take the listed rest and keep enough in reserve to maintain technique.',
+ 'Move slowly, breathe steadily and stay within a comfortable range. Pause between movements to reset your position.',
+ 'Use a controlled lowering phase and keep the foot, knee and hip steady. Allow recovery before a hard run.',
+ 'Use controlled reps and finish each set with about two good reps in reserve. Add load once all sets reach the top of the range.',
+ 'Keep at least one foot grounded during standing movements. Use a stable support where helpful and choose a pace you can control.'
+];
+featuredWorkouts.push(...goalWorkoutRows.map(([id,group,setting,title,level,minutes,equipment,items])=>{
+ const category=goalWorkoutCategories[group];
+ const exercises=items.map(([name,sets,reps,rest,unit='reps',side=false])=>({
+  name,sets,reps,rest,unit,side,load:!/^(?:Bodyweight|Incline Push-Up|Dead Bug|Glute Bridge|Single-Leg Glute Bridge|Side Plank|Bird Dog|Tuck Hollow Hold|Push-Up Plus|Resistance Band Pull-Apart|Lateral Band Walk|Mountain Climber|Bear Plank)/.test(name)
+ }));
+ return {id:'guided-goal-'+id,category:category.id,coverCategory:category.cover,setting,level,title,programName:title,minutes:String(minutes),equipment,
+  equipmentItems:equipment.toLowerCase().split(' · '),summary:category.description,setup:goalWorkoutGuides[group],guide:goalWorkoutGuides[group],
+  warmup:'Start with easy movement and practice the first exercise.',cooldown:'Finish with relaxed movement and breathing.',exercises};
+}));
+const featuredCategories=['Push','Pull','Leg','Core','Full Body',...goalWorkoutCategories.map(category=>category.id)];
 function workoutSetting(){return ['home','gym'].includes(state.workoutSetting)?state.workoutSetting:state.profile?.equipment==='gym'?'gym':'home'}
 function setWorkoutSetting(setting){
  if(!['home','gym'].includes(setting))return false;
@@ -7514,7 +7579,7 @@ function workoutSettingMarkup(attribute){
  return '<div class="workout-setting-tabs" role="group" aria-label="Training setting">'+['home','gym'].map(key=>'<button type="button" '+attribute+'="'+key+'" aria-pressed="'+(key===setting)+'">'+(key==='home'?'Home':'Gym')+'</button>').join('')+'</div>';
 }
 function visibleWorkoutCategories(){return featuredCategories.map(id=>workoutCategories.find(category=>category.id===id))}
-function featuredWorkoutChoices(){return featuredWorkouts.filter(workout=>workout.setting===workoutSetting())}
+function featuredWorkoutChoices(){return featuredWorkouts.filter(workout=>workout.setting==='both'||workout.setting===workoutSetting())}
 function featuredExerciseSwaps(plan,exercise){
  const pattern=featuredMovementSpecs[exercise.name]?.[0];
  if(!pattern)return [];
@@ -7523,7 +7588,7 @@ function featuredExerciseSwaps(plan,exercise){
  const choices=new Map();
  for(const workout of featuredWorkouts){
   for(const candidate of workout.exercises){
-   const [group,...required]=featuredMovementSpecs[candidate.name];
+   const [group,...required]=featuredMovementSpecs[candidate.name]||[];
    if(group!==pattern||candidate.name===exercise.name||plan.exercises.some(item=>item.index!==exercise.index&&item.name===candidate.name)||candidate.unit!==exercise.unit||!required.every(item=>equipment.has(item))||!window.EzpzExerciseMedia?.get(candidate.name))continue;
    choices.set(candidate.name,{...candidate,sets:exercise.sets,reps:exercise.reps,rest:exercise.rest});
   }
@@ -11278,7 +11343,7 @@ HIIT:['#fff0df','#c78b40','M13 2 5 14h6l-1 8 9-13h-6z']
 function workoutIcon(category){const [bg,ink,path]=workoutCategoryArt[category]||workoutCategoryArt['Full Body'];return '<span class="workout-category-icon" style="--tile-bg:'+bg+';--tile-ink:'+ink+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+path+'"/></svg></span>'}
 const workoutCovers={"Full Body":{"src":"./workout-images/neutral-full-body-1.jpg","alt":"Two dark green kettlebells beside a rolled exercise mat on oak flooring, wide inviting gym view"},"Push":{"src":"./workout-images/neutral-push-1.jpg","alt":"Pair of dumbbells resting on rubber flooring beside an adjustable bench with deep green upholstery"},"Pull":{"src":"./workout-images/neutral-pull-1.jpg","alt":"Wooden gymnastic rings hanging from secure black straps in front of a tall gym window"},"Leg":{"src":"./workout-images/neutral-leg-1.jpg","alt":"A sturdy low wooden step and neatly stored weight plates in a warm daylight gym"},"Arms":{"src":"./workout-images/neutral-arms-1.jpg","alt":"An EZ curl bar safely resting on a low rack beside a pair of dumbbells"},"Glutes":{"src":"./workout-images/neutral-glutes-1.jpg","alt":"A wide green resistance loop band beside a low sturdy wooden exercise step"},"Core":{"src":"./workout-images/neutral-core-1.jpg","alt":"A dark green stability ball and ab wheel beside an unrolled green exercise mat"},"Mobility":{"src":"./workout-images/neutral-mobility-1.jpg","alt":"Cork yoga blocks, a textured foam roller and folded towel beside a stretching mat on a wood deck"},"Stability":{"src":"./workout-images/neutral-stability-1.jpg","alt":"A wooden wobble balance board on flat rubber flooring beside a sturdy support rail"},"Cardio":{"src":"./workout-images/neutral-cardio-1.jpg","alt":"An empty winding forest trail in soft early morning sunlight, inviting fern-lined path"},"HIIT":{"src":"./workout-images/neutral-hiit-1.jpg","alt":"Battle ropes neatly laid out on rubber flooring with a sturdy anchor visible"},"Kettlebell":{"src":"./workout-images/neutral-kettlebell-1.jpg","alt":"Three cast iron kettlebells of different sizes arranged on an oak gym floor"}};
 const workoutProgramCovers={"push-a":{"src":"./workout-images/neutral-push-1.jpg","alt":"Pair of dumbbells resting on rubber flooring beside an adjustable bench with deep green upholstery"},"push-b":{"src":"./workout-images/neutral-push-2.jpg","alt":"An empty seated chest press machine with its grips clearly visible against forest green walls"},"pull-a":{"src":"./workout-images/neutral-pull-2.jpg","alt":"An empty seated cable row station showing its handle and foot plates, realistic cable routing"},"pull-b":{"src":"./workout-images/neutral-pull-3.jpg","alt":"A supported one-arm row bench beside a single dumbbell, diagonal natural composition"},"leg-a":{"src":"./workout-images/neutral-leg-1.jpg","alt":"A sturdy low wooden step and neatly stored weight plates in a warm daylight gym"},"leg-b":{"src":"./workout-images/neutral-leg-2.jpg","alt":"An empty 45 degree leg press sled, correct practical structure, green upholstery"},"core-a":{"src":"./workout-images/neutral-core-1.jpg","alt":"A dark green stability ball and ab wheel beside an unrolled green exercise mat"},"core-b":{"src":"./train-images/core.jpg","alt":"A green mat and ab wheel in a quiet training space"},"mobility-a":{"src":"./workout-images/neutral-mobility-1.jpg","alt":"Cork yoga blocks, a textured foam roller and folded towel beside a stretching mat on a wood deck"},"mobility-b":{"src":"./workout-images/neutral-mobility-2.jpg","alt":"A long dark green stretching strap neatly folded beside cork blocks and mat, top down angle"},"stability-a":{"src":"./workout-images/neutral-stability-1.jpg","alt":"A wooden wobble balance board on flat rubber flooring beside a sturdy support rail"},"stability-b":{"src":"./workout-images/neutral-stability-2.jpg","alt":"A low wide sturdy step beside a secure handrail, warm natural gym light"},"cardio-a":{"src":"./workout-images/neutral-cardio-1.jpg","alt":"An empty winding forest trail in soft early morning sunlight, inviting fern-lined path"},"cardio-b":{"src":"./workout-images/neutral-cardio-2.jpg","alt":"An unoccupied stationary exercise bike beside a tall window overlooking green trees"},"hiit-a":{"src":"./workout-images/neutral-hiit-2.jpg","alt":"A clear exercise mat with an interval timer resting on a low shelf in an empty studio"},"hiit-b":{"src":"./workout-images/neutral-hiit-3.jpg","alt":"A low wide exercise step on rubber flooring with a towel and water bottle nearby"},"full-body-balanced":{"src":"./workout-images/neutral-full-body-3.jpg","alt":"An empty compact strength rack with neatly stored plates, mat and dumbbells, warm wood and pine walls"},"full-body-leg-focus":{"src":"./workout-images/neutral-full-body-2.jpg","alt":"Dumbbells and a sturdy wooden exercise box with a neatly folded towel in a daylight home training corner"},"full-body-home":{"src":"./workout-images/neutral-full-body-4.jpg","alt":"A simple unrolled green mat and solid chair in an uncluttered home exercise space"},"full-body-hiit":{"src":"./train-images/finish.jpg","alt":"An empty training space with a towel, water bottle and shoes"},"push-chest":{"src":"./workout-images/neutral-push-3.jpg","alt":"An incline bench and a neatly arranged pair of hex dumbbells, low three-quarter angle"},"push-shoulders":{"src":"./workout-images/neutral-push-4.jpg","alt":"A green padded upright shoulder press bench with two dumbbells placed safely on the floor"},"push-home":{"src":"./train-images/press.jpg","alt":"Empty flat bench and dumbbells in a forest green gym"},"pull-back":{"src":"./workout-images/neutral-pull-4.jpg","alt":"An empty lat pulldown station with securely hanging curved bar and green padded seat"},"pull-arms":{"src":"./train-images/arms.jpg","alt":"Dumbbells neatly arranged on a rack in a sunlit green gym"},"pull-home":{"src":"./workout-images/neutral-core-4.jpg","alt":"A securely anchored resistance band attached to a sturdy post at chest height in an empty studio"},"leg-quads":{"src":"./workout-images/neutral-leg-4.jpg","alt":"An empty squat rack with barbell securely racked on hooks, forest green walls, oak accents"},"leg-posterior":{"src":"./train-images/posterior.jpg","alt":"Empty padded leg curl station in a sunlit gym"},"leg-home":{"src":"./workout-images/neutral-leg-3.jpg","alt":"Dumbbells safely on the floor beside a sturdy box in a home exercise corner"},"core-brace":{"src":"./workout-images/neutral-core-4.jpg","alt":"A securely anchored resistance band attached to a sturdy post at chest height in an empty studio"},"core-loaded":{"src":"./workout-images/neutral-core-3.jpg","alt":"Two dumbbells resting safely at the edge of an empty rubber-floored training lane"},"core-no-kit":{"src":"./workout-images/neutral-core-2.jpg","alt":"A thick padded mat with a folded towel in an uncluttered studio, diagonal composition"},"mobility-hips":{"src":"./workout-images/neutral-mobility-3.jpg","alt":"An empty sunlit green-walled stretch corner with a padded mat and low wall support rail"},"mobility-upper":{"src":"./workout-images/neutral-mobility-4.jpg","alt":"A foam roller and small massage ball beside a neatly folded blanket in soft window light"},"mobility-gentle":{"src":"./workout-images/neutral-core-2.jpg","alt":"A thick padded mat with a folded towel in an uncluttered studio, diagonal composition"},"stability-single-leg":{"src":"./train-images/unilateral.jpg","alt":"A low stable step and kettlebells beside a green wall"},"stability-carries":{"src":"./workout-images/neutral-stability-3.jpg","alt":"A pair of kettlebells resting at one end of a clear rubber-floored carrying lane"},"stability-foundation":{"src":"./workout-images/neutral-stability-4.jpg","alt":"An empty balance practice corner with a fixed wood rail and green mat, broad view"},"cardio-walk":{"src":"./workout-images/neutral-cardio-4.jpg","alt":"A quiet coastal walking path through green vegetation, soft daylight, no people anywhere"},"cardio-home":{"src":"./workout-images/neutral-hiit-2.jpg","alt":"A clear exercise mat with an interval timer resting on a low shelf in an empty studio"},"cardio-machines":{"src":"./workout-images/neutral-cardio-3.jpg","alt":"An empty rowing machine framed diagonally in a forest green gym with warm wooden accents"},"hiit-bodyweight":{"src":"./workout-images/neutral-full-body-4.jpg","alt":"A simple unrolled green mat and solid chair in an uncluttered home exercise space"},"hiit-low-impact":{"src":"./train-images/finish.jpg","alt":"An empty training space with a towel, water bottle and shoes"},"hiit-gym":{"src":"./workout-images/neutral-hiit-4.jpg","alt":"Two dumbbells and a kettlebell resting beside an empty conditioning lane"},"arms-balanced":{"src":"./workout-images/neutral-arms-1.jpg","alt":"An EZ curl bar safely resting on a low rack beside a pair of dumbbells"},"arms-biceps":{"src":"./train-images/arms.jpg","alt":"Dumbbells neatly arranged on a rack in a sunlit green gym"},"arms-triceps":{"src":"./workout-images/neutral-arms-2.jpg","alt":"Close view of an empty cable station with a rope triceps attachment, realistic cables"},"arms-dumbbells":{"src":"./workout-images/neutral-arms-3.jpg","alt":"An upright green padded bench with a pair of hex dumbbells resting on the floor"},"arms-cables":{"src":"./workout-images/neutral-arms-4.jpg","alt":"A low cable pulley with a straight curl bar safely resting near the base, quiet gym corner"},"glutes-builder":{"src":"./workout-images/neutral-glutes-1.jpg","alt":"A wide green resistance loop band beside a low sturdy wooden exercise step"},"glutes-home":{"src":"./workout-images/neutral-glutes-4.jpg","alt":"A solid wooden chair and loop bands in a sunlit home exercise corner"},"glutes-hinge":{"src":"./workout-images/neutral-glutes-3.jpg","alt":"A pair of kettlebells and a folded green exercise mat near a wooden gym wall"},"glutes-single-leg":{"src":"./train-images/unilateral.jpg","alt":"A low stable step and kettlebells beside a green wall"},"glutes-foundation":{"src":"./workout-images/neutral-glutes-2.jpg","alt":"An empty hip thrust bench with a padded barbell resting safely on the ground in front"},"kb-foundations":{"src":"./train-images/kettlebell.jpg","alt":"Kettlebells and a folded mat in a sunlit gym"},"kb-full-body":{"src":"./workout-images/neutral-kettlebell-1.jpg","alt":"Three cast iron kettlebells of different sizes arranged on an oak gym floor"},"kb-lower-body":{"src":"./workout-images/neutral-kettlebell-3.jpg","alt":"One kettlebell beside a sturdy low wooden exercise box in a sunlit gym"},"kb-upper-body":{"src":"./workout-images/neutral-kettlebell-5.jpg","alt":"A close three-quarter view of two kettlebell handles against soft green gym background"},"kb-core-carries":{"src":"./workout-images/neutral-kettlebell-4.jpg","alt":"A single dark green kettlebell on rubber flooring in an empty training lane, moody side light"},"kb-hinge-swing":{"src":"./train-images/hinge.jpg","alt":"Kettlebells and dumbbells on rubber gym flooring"},"kb-unilateral":{"src":"./train-images/unilateral.jpg","alt":"A low stable step and kettlebells beside a green wall"},"kb-low-impact":{"src":"./workout-images/neutral-kettlebell-6.jpg","alt":"A green mat, one black kettlebell and folded towel in a bright uncluttered home corner"},"kb-conditioning":{"src":"./train-images/squat.jpg","alt":"A kettlebell beside a sturdy wooden exercise box"},"kb-double-strength":{"src":"./workout-images/neutral-kettlebell-2.jpg","alt":"A matching pair of black cast iron kettlebells beside a green padded exercise mat"},"full-body":{"src":"./workout-images/neutral-full-body-1.jpg","alt":"Two dark green kettlebells beside a rolled exercise mat on oak flooring, wide inviting gym view"}};
-function workoutCover(value){const object=value&&typeof value==='object',id=object?value.id:value,category=object?(value.coverCategory||value.category):value;const own=object?value:(typeof id==='string'&&id.startsWith('custom-')?cleanCustomWorkouts(state.customWorkouts).find(w=>w.id===id):null),photo=personalPhoto(own?.photoId);if(photo)return {src:photo,alt:'Your photo for '+(own.title||'your workout')};return own?.cover||featuredWorkouts.find(workout=>workout.id===id)?.cover||workoutProgramCovers[id]||workoutCovers[category]||workoutCovers['Full Body']}
+function workoutCover(value){const object=value&&typeof value==='object',id=object?value.id:value,category=object?(value.coverCategory||value.category):value;const own=object?value:(typeof id==='string'&&id.startsWith('custom-')?cleanCustomWorkouts(state.customWorkouts).find(w=>w.id===id):null),photo=personalPhoto(own?.photoId);if(photo)return {src:photo,alt:'Your photo for '+(own.title||'your workout')};return own?.cover||featuredWorkouts.find(workout=>workout.id===id)?.cover||workoutProgramCovers[id]||workoutCovers[category]||workoutCovers[goalWorkoutCategories.find(item=>item.id===category)?.cover]||workoutCovers['Full Body']}
 function workoutCoverImage(category,hero=false){const p=workoutCover(category);return '<img src="'+safe(p.src)+'" alt="'+safe(p.alt)+'" '+(hero?'fetchpriority="high"':'loading="lazy"')+' decoding="async" width="960" height="640" onerror="this.hidden=true">'}
 
 const workoutCategories=[
@@ -11292,7 +11357,8 @@ const workoutCategories=[
  {id:'Mobility',label:'Mobility',description:'Move freely · feel better'},
  {id:'Stability',label:'Stability',description:'Balance · coordination'},
  {id:'Cardio',label:'Cardio',description:'Steady pace · endurance'},
- {id:'HIIT',label:'HIIT',description:'Short efforts · full recovery'}
+ {id:'HIIT',label:'HIIT',description:'Short efforts · full recovery'},
+ ...goalWorkoutCategories
 ];
 let chooserCategory=null;
 function categoryPrograms(category){return featuredWorkoutChoices().filter(workout=>workout.category===category)}
@@ -11340,11 +11406,11 @@ function chooserContents(){
  const exercises=workoutPlan(w.id).exercises;
  return '<article class="program-card '+(selected?'is-selected':'')+'"><div class="program-photo">'+hybridWorkoutCover(w,exercises)+(selected?'<span class="workout-cover-check">Selected ✓</span>':'')+'</div><div class="program-copy"><h3>'+safe(w.programName||w.title)+'</h3>'+workoutBadges(w)+exerciseMuscleDetails(exercises)+(exercises.length&&w.exercises.every(x=>window.EzpzExerciseMedia?.get(x.name))?'<small class="exercise-media-label">Photo + video for every exercise</small>':'')+'<p>'+safe(w.summary)+'</p><span class="program-meta">'+w.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length+' exercises · '+safe(w.minutes)+' min</span><small>'+safe(w.equipment)+'</small><small class="program-setup">'+safe(w.setup||'Straight sets · change stations after all sets')+'</small>'+(w.id==='full-body'?'':'<details class="program-preview"><summary>See exercises</summary><ol>'+exercises.map(exercise=>workoutPreviewExercise(exercise,w.id)).join('')+'</ol></details>')+'<button type="button" data-workout-pick="'+w.id+'" aria-label="Choose '+safe(w.title||w.programName)+'" aria-pressed="'+selected+'">'+(selected?'Selected workout ✓':mine?'Use this workout →':'Choose program →')+'</button></div></article>'
  }).join('')+(!plans.length?(mine?'<div class="chooser-empty"><h3>No saved workouts yet</h3><p>Create a workout with your own exercises and photo.</p><button type="button" data-action="create-my-workout">Create workout →</button></div>':'<div class="chooser-empty"><h3>No matching sessions</h3><p>Try another duration, level or equipment choice.</p><button type="button" data-clear-workout-filters>Show all workouts</button></div>'):'')+'</div>':
- '<div class="category-grid">'+visibleWorkoutCategories().sort((a,b)=>Number(a.id==='Full Body')-Number(b.id==='Full Body')).map(c=>{
+ '<div class="chooser-focus-tools"><button type="button" data-action="create-my-workout" class="chooser-create"><span class="chooser-create-anatomy">'+workoutAnatomy({primary:[],supporting:[]})+'</span><span><strong>Create your own</strong><small>Choose muscles and add exercises</small></span><b aria-hidden="true">+</b></button>'+savedWorkoutShortcut(saved,id)+workoutSettingMarkup('data-chooser-workout-setting')+workoutFilterMarkup()+'</div><div class="category-grid">'+visibleWorkoutCategories().map(c=>{
  const selected=(id==='full-body'?'Full Body':planWorkout(id)?.category)===c.id;
  const count=filterWorkoutPrograms(categoryPrograms(c.id)).length;
  return '<button type="button" class="category-tile '+(selected?'is-selected':'')+'" data-workout-category="'+c.id+'" aria-label="Explore '+c.label+' programs"><span class="category-photo">'+hybridWorkoutCover(c.id)+(selected?'<span class="workout-cover-check" aria-hidden="true">✓</span>':'')+'</span><span class="category-copy"><strong>'+c.label+'</strong><small>'+c.description+'</small><b>'+count+' program'+(count===1?'':'s')+' <span aria-hidden="true">→</span></b></span></button>'
- }).join('')+ownWorkoutTile()+'</div><div class="chooser-focus-tools">'+savedWorkoutShortcut(saved,id)+workoutSettingMarkup('data-chooser-workout-setting')+workoutFilterMarkup()+'</div>')+'<p class="chooser-footnote">Your unfinished sets stay saved for each workout.</p></div>'
+ }).join('')+'</div>')+'<p class="chooser-footnote">Your unfinished sets stay saved for each workout.</p></div>'
 }
 function workoutChooser(){return '<dialog id="workout-chooser" aria-labelledby="workout-chooser-title">'+chooserContents()+'</dialog>'}
 function showWorkoutCategory(category){
@@ -11413,8 +11479,10 @@ function workoutPlan(id=activeWorkoutId(),context){
  const exercises=plan.exercises.flatMap((x,i)=>{
   const edit=edits[i]?.original===x.name?edits[i]:null;
   if(edit?.remove&&(!preserveOne||i!==0))return [];
-  const legacy=draft['swap'+i]?swapOptions(x,plan).find(y=>y.name===draft['swap'+i]):null;
+  const swapName=draft['swap'+i];
+  const legacy=swapName===x.name?x:swapName?resolveTrainerSwap(plan,x,swapName):null;
   if(edit?.name){
+   if(legacy)return [{...legacy,index:i,originalName:edit.name}];
    const curated=plan.setting?featuredExerciseSwaps(plan,x).find(item=>item.name===edit.name):null;
    if(curated)return [{...curated,index:x.index,sets:edit.sets||x.sets,originalName:x.name}];
    const guide=window.EzpzExerciseMedia?.get(edit.name);
@@ -11542,8 +11610,53 @@ document.addEventListener('click',event=>{
  const edit=event.target.closest('[data-edit-workout-exercises]');
  if(row||edit)openWorkoutExerciseEditor(row||edit,row?Number(row.dataset.editHomeExercise):undefined);
 });
-function applyExerciseSwap(index,name){const base=baseWorkoutPlan(),plan=workoutPlan(),current=plan.exercises[index],x=base.exercises[current?.index];if(!x||plan.exerciseEdits[current.index]||!Number.isInteger(index))return false;if(name!==x.name&&!swapOptions(x,base).some(y=>y.name===name))return false;if(current.name===name)return true;const d={...workoutDraft(base)};if(Array.from({length:x.sets},(_,j)=>['sr','sw'].some(k=>d[k+index+'-'+j]!==undefined&&d[k+index+'-'+j]!=='')||d['sd'+index+'-'+j]).some(Boolean))return false;if(name===x.name)delete d['swap'+current.index];else d['swap'+current.index]=name;return persistTrainingDraft(base,d)}
-function swapMarkup(exercise,index){const plan=workoutPlan();if(plan.exerciseEdits[exercise?.index])return '';const base=baseWorkoutPlan().exercises[exercise?.index];if(!base)return '';const options=swapOptions(base,plan).sort((a,b)=>Number(!!window.EzpzExerciseMedia?.get(b.name))-Number(!!window.EzpzExerciseMedia?.get(a.name)));if(!options.length)return '<p class="note">For another movement, use Create your own workout.</p>';const d=workoutDraft(),locked=Array.from({length:exercise.sets},(_,j)=>['sr','sw'].some(k=>d[k+index+'-'+j]!==undefined&&d[k+index+'-'+j]!=='')||d['sd'+index+'-'+j]).some(Boolean);return '<details class="exercise-swap"><summary>Swap exercise</summary><p class="note">For this session only. Choose equipment you have and a movement you know. Start light; weights do not transfer between exercises.</p><div class="exercise-swap-choices" role="group" aria-label="Alternative movement">'+[base,...options].map(x=>'<button type="button" class="exercise-thumb-row" data-exercise-swap-choice="'+index+'" data-exercise-name="'+safe(x.name)+'" aria-pressed="'+(x.name===exercise.name)+'" '+(locked?'disabled':'')+'>'+exerciseThumbnail(x.name,plan.id)+'<span>'+safe(x.name)+(x.name===base.name?' · original':'')+'</span></button>').join('')+'</div>'+(locked?'<p class="note">This exercise has entries. Keep them, or clear this exercise below before swapping.</p><button type="button" data-clear-exercise="'+index+'">Clear this exercise’s entries</button>':'')+(exercise.originalName?'<p class="note">Replaces '+safe(exercise.originalName)+'.</p>':'')+'</details>'}
+function resolveTrainerSwap(plan,original,name){
+ const suggested=swapOptions(original,plan).find(candidate=>candidate.name===name);
+ if(suggested)return suggested;
+ const guide=window.EzpzExerciseMedia?.get(name);
+ if(!guide||guide.name!==name)return null;
+ const spec=guide.prescription||featuredWorkouts.flatMap(workout=>workout.exercises).find(exercise=>exercise.name===name)||workoutTemplates.flatMap(workout=>workout.exercises).find(exercise=>exercise.name===name);
+ return {name,sets:original.sets,reps:spec?.reps||'8–12',unit:spec?.unit||'reps',side:spec?.side===true,load:spec?.load??Boolean(spec&&exerciseHasLoad(spec)),rest:original.rest};
+}
+function trainerSwapSearch(plan,index,query){
+ const exercise=plan.exercises[index],base=baseWorkoutPlan(plan.id),original=base.exercises[exercise?.index],guide=window.EzpzExerciseMedia;
+ if(!original||!guide)return '';
+ const canonical=name=>guide.get(name)?.name||name;
+ const used=new Set(plan.exercises.filter((_,i)=>i!==index).map(item=>canonical(item.name)));
+ const suggested=swapOptions(original,base).map(x=>x.name).filter(name=>guide.get(name));
+ const names=query.trim()?guide.choices(guide.names,exercise.name,query):[...new Set([...suggested,...guide.names])];
+ const locked=workoutEditDraftKey(workoutDraft(plan),index);
+ const button=(name,label)=>'<button type="button" class="exercise-thumb-row" data-exercise-swap-choice="'+index+'" data-exercise-name="'+safe(name)+'" '+(locked?'disabled':'')+'>'+exerciseThumbnail(name,plan.id)+'<span>'+safe(label)+'</span></button>';
+ const rows=names.filter(name=>canonical(name)!==canonical(exercise.name)&&canonical(name)!==canonical(original.name)&&!used.has(canonical(name))).slice(0,query.trim()?60:12).map(name=>button(name,name));
+ if(canonical(exercise.name)!==canonical(original.name)&&!used.has(canonical(original.name))&&!query.trim())rows.unshift(button(original.name,original.name+' · original'));
+ return rows.join('')||'<p class="note">No matching exercises.</p>';
+}
+function applyExerciseSwap(index,name){
+ if(!Number.isInteger(index))return false;
+ const base=baseWorkoutPlan(),plan=workoutPlan(),current=plan.exercises[index],original=base.exercises[current?.index];
+ const canonical=value=>window.EzpzExerciseMedia?.get(value)?.name||value;
+ if(!original||workoutEditDraftKey(workoutDraft(plan),index))return false;
+ if(name===current.name)return true;
+ if(plan.exercises.some((item,i)=>i!==index&&canonical(item.name)===canonical(name)))return false;
+ if(name!==original.name&&!resolveTrainerSwap(base,original,name))return false;
+ const draft={...workoutDraft(plan)},key='swap'+current.index;
+ if(name===original.name&&!plan.exerciseEdits[current.index])delete draft[key];
+ else draft[key]=name;
+ return persistTrainingDraft(base,draft);
+}
+function swapMarkup(exercise,index){
+ const plan=workoutPlan(),locked=workoutEditDraftKey(workoutDraft(plan),index);
+ return '<details class="exercise-swap"><summary>Swap exercise</summary><p class="note">For this session only. Your plan and exercise history stay intact.</p>'+
+ '<input type="search" data-trainer-swap-search="'+index+'" placeholder="Search guided exercises" aria-label="Search guided exercises">'+
+ '<div class="exercise-swap-choices" role="group" aria-label="Alternative movement">'+trainerSwapSearch(plan,index,'')+'</div>'+
+ (locked?'<p class="note">Clear this exercise’s entries before swapping.</p><button type="button" data-clear-exercise="'+index+'">Clear this exercise’s entries</button>':'')+'</details>';
+}
+document.addEventListener('input',event=>{
+ const input=event.target;
+ if(input.dataset.trainerSwapSearch===undefined)return;
+ const list=input.closest('.exercise-swap')?.querySelector('.exercise-swap-choices');
+ if(list)list.innerHTML=trainerSwapSearch(workoutPlan(),Number(input.dataset.trainerSwapSearch),input.value);
+});
 function progressionSuggestion(x){if((x.unit||'reps')!=='reps'||!exerciseHasLoad(x)||/Warm-up|Cooldown|Assisted/i.test(x.name))return null;const range=String(x.reps).match(/^(\d+)(?:\s*[–-]\s*(\d+))?$/);if(!range)return null;const high=Number(range[2]||range[1]),sessions=state.logs.filter(l=>Number.isFinite(new Date(l.date).getTime())&&new Date(l.date)<=new Date()).slice().sort((a,b)=>new Date(b.date)-new Date(a.date)).map(l=>(l.exercises||[]).find(e=>e.name===x.name&&JSON.parse(exerciseIdentity(e))[1]==='reps')).filter(Boolean).slice(0,2);if(!sessions.length)return {text:'Start at a comfortable effort. Your completed sets will guide the next session.'};const completed=e=>historicalSets(e).filter(z=>z.done!==false&&validSetValue(z.reps)&&Number.isFinite(Number(z.kg))&&Number(z.kg)>0),last=completed(sessions[0]);if(!last.length)return {text:'Repeat your current version. Bodyweight results do not imply a weight to add.'};const load=Math.max(...last.map(z=>Number(z.kg))),same=(a,b)=>Math.abs(a-b)<1e-6,ready=sessions.length===2&&sessions.every(e=>{const sets=historicalSets(e);return sets.length>=x.sets&&sets.every(z=>z.done!==false&&validSetValue(z.reps)&&Number(z.reps)>=high&&same(Number(z.kg),load))});return {kg:load,increase:ready,text:ready?'You reached '+high+' reps in every set at '+loadText(load)+' '+loadUnit()+' in your last two sessions. If form stayed controlled and it felt comfortable, try the smallest available increase; repeating is fine.':'Repeat around '+loadText(load)+' '+loadUnit()+'. Build toward '+high+' controlled reps in all '+x.sets+' sets before considering an increase.'}}
 function progressionMarkup(x){const suggestion=progressionSuggestion(x);return suggestion?'<aside class="progression-hint"><strong>Next weight</strong><p>'+safe(suggestion.text)+'</p><small>A suggestion, based on recorded sets. Adjust to how you feel today.</small></aside>':''}
 let lastSessionRecap=null;
@@ -11580,7 +11693,7 @@ const workoutAtlasRegions={
  chest:['Chest',0],biceps:['Biceps',1],core:['Abdominals',2],quads:['Quads',3],
  back:['Lats',4],triceps:['Triceps',5],glutes:['Glutes',6],hamstrings:['Hamstrings',7],
  shoulders:['Shoulders',8],frontDelts:['Front shoulder region',8,'front'],rearDelts:['Rear shoulder region',8,'rear'],
- forearms:['Forearms',9],calves:['Calves',10]
+ forearms:['Forearms',9],calves:['Calves',10],traps:['Trapezius',null]
 };
 const reviewedExerciseMuscles={
  'Dumbbell Bench Press':['chest','frontDelts triceps'],
@@ -11630,7 +11743,12 @@ const reviewedExerciseMuscles={
 const workoutCategoryMuscles={
  'Full Body':['chest back core quads glutes hamstrings','frontDelts rearDelts biceps triceps'],
  Push:['chest frontDelts triceps',''],Pull:['back rearDelts biceps','forearms'],
- Leg:['quads glutes hamstrings','calves'],Core:['core','']
+ Leg:['quads glutes hamstrings','calves'],Core:['core',''],
+ 'Strength & Conditioning':['quads glutes back core','shoulders traps forearms'],
+ 'Pilates & Mobility':['core glutes','shoulders back'],
+ 'Strength for Runners':['quads glutes hamstrings calves','core'],
+ 'Build Muscle':['glutes hamstrings shoulders biceps triceps','quads forearms'],
+ 'Low-Impact Fitness':['quads glutes core','calves shoulders']
 };
 function reviewedMuscleMap(exercises){
  const primary=new Set(),supporting=new Set();
@@ -11650,12 +11768,13 @@ function reviewedMuscleMap(exercises){
 function workoutAnatomy({primary,supporting},label){
  const layers=(regions,role)=>regions.map(key=>{
   const [,index,side]=workoutAtlasRegions[key];
+  if(key==='traps')return '<span class="recap-anatomy-layer anatomy-traps anatomy-'+role+'" data-anatomy-region="traps"></span>';
   return '<span class="recap-anatomy-layer anatomy-'+role+(side?' anatomy-'+side:'')+'" data-anatomy-region="'+key+'" style="--atlas-y:'+(100*(index+1)/muscleMapGroups.length)+'%"></span>';
  }).join('');
  return '<span class="recap-anatomy" '+(label?'role="img" aria-label="'+safe(label)+'"':'aria-hidden="true"')+'><span class="recap-anatomy-layer"></span>'+layers(supporting,'supporting')+layers(primary,'primary')+'</span>';
 }
 function hybridWorkoutCover(workout,exercises,categoryPhoto=false){
- const category=typeof workout==='string'?workout:workout.coverCategory||workout.category;
+ const category=typeof workout==='string'?workout:workout.category;
  const roles=workoutCategoryMuscles[category];
  const map=exercises?reviewedMuscleMap(exercises):roles?{primary:roles[0].split(' '),supporting:roles[1].split(' ').filter(Boolean)}:null;
  if(!map?.primary.length)return workoutCoverImage(workout);
@@ -12284,7 +12403,7 @@ function customWorkoutChoices(){const custom=cleanCustomWorkouts(state.customWor
 let plannerWeek=0,plannerNotice='',builderDraft=null,previewWorkoutId=null,previewWorkoutDate=null,previewReturnTo='home',plannerMode='day';
 function validPlanDate(v){if(typeof v!=='string'||!/^\d{4}-\d{2}-\d{2}$/.test(v))return false;const d=new Date(v+'T12:00:00');return Number.isFinite(+d)&&d.toLocaleDateString('en-CA')===v}
 function datePlus(date,n){const d=new Date(date+'T12:00:00');d.setDate(d.getDate()+n);return d.toLocaleDateString('en-CA')}
-function cleanCustomWorkouts(items){return (Array.isArray(items)?items:[]).slice(0,100).filter(w=>w&&/^custom-[a-z0-9-]{1,70}$/.test(w.id)&&typeof w.title==='string'&&w.title.trim()&&['Beginner','Intermediate','Advanced'].includes(w.level)&&['Full Body','Push','Pull','Leg','Arms','Glutes','Core','Mobility','Stability','Cardio','HIIT','Kettlebell'].includes(w.category)&&Array.isArray(w.exercises)&&w.exercises.length>0&&w.exercises.length<=30&&w.exercises.every(x=>x&&typeof x.name==='string'&&x.name.trim()&&Number.isInteger(x.sets)&&x.sets>=1&&x.sets<=10&&typeof x.reps==='string'&&x.reps.trim()&&['reps','sec','min'].includes(x.unit)&&Number.isFinite(x.rest)&&x.rest>=0&&x.rest<=600)).map(w=>({...w,photoId:cleanPhotoId(w.photoId),title:w.title.slice(0,80),equipment:String(w.equipment||'Your setup').slice(0,160),minutes:String(w.minutes||'Custom').slice(0,20),coverCategory:w.category,programName:w.title.slice(0,80),summary:'Your custom session',guide:'Complete each exercise with controlled technique. Use the listed rest and adjust the load to your ability.',warmup:'5–10 min easy movement and lighter practice sets.',cooldown:'3–5 min easy movement.',exercises:w.exercises.map(x=>({...x,name:x.name.slice(0,100),reps:x.reps.slice(0,30),side:!!x.side}))})).filter((w,i,all)=>all.findIndex(x=>x.id===w.id)===i)}
+function cleanCustomWorkouts(items){return (Array.isArray(items)?items:[]).slice(0,100).filter(w=>w&&/^custom-[a-z0-9-]{1,70}$/.test(w.id)&&typeof w.title==='string'&&w.title.trim()&&['Beginner','Intermediate','Advanced'].includes(w.level)&&workoutCategories.some(category=>category.id===w.category)&&Array.isArray(w.exercises)&&w.exercises.length>0&&w.exercises.length<=30&&w.exercises.every(x=>x&&typeof x.name==='string'&&x.name.trim()&&Number.isInteger(x.sets)&&x.sets>=1&&x.sets<=10&&typeof x.reps==='string'&&x.reps.trim()&&['reps','sec','min'].includes(x.unit)&&Number.isFinite(x.rest)&&x.rest>=0&&x.rest<=600)).map(w=>({...w,photoId:cleanPhotoId(w.photoId),title:w.title.slice(0,80),equipment:String(w.equipment||'Your setup').slice(0,160),minutes:String(w.minutes||'Custom').slice(0,20),coverCategory:w.category,programName:w.title.slice(0,80),summary:'Your custom session',guide:'Complete each exercise with controlled technique. Use the listed rest and adjust the load to your ability.',warmup:'5–10 min easy movement and lighter practice sets.',cooldown:'3–5 min easy movement.',exercises:w.exercises.map(x=>({...x,name:x.name.slice(0,100),reps:x.reps.slice(0,30),side:!!x.side}))})).filter((w,i,all)=>all.findIndex(x=>x.id===w.id)===i)}
 function allWorkouts(){return [...featuredWorkouts,...workoutTemplates,...cleanCustomWorkouts(state.customWorkouts)]}
 function knownWorkout(id,custom=state.customWorkouts){return id==='full-body'||featuredWorkouts.some(w=>w.id===id)||workoutTemplates.some(w=>w.id===id)||cleanCustomWorkouts(custom).some(w=>w.id===id)}
 function planWorkout(id,date){const scheduled=date&&knownWorkout(id)?workoutPlan(id,workoutEditContext(baseWorkoutPlan(id),date,'main')):null;if(id==='full-body')return {...(scheduled||workoutPlan('full-body')),exercises:(scheduled||workoutPlan('full-body')).exercises.map(x=>({...x,rest:x.rest??60})),category:'Full Body',programName:workoutTitle(workoutPlan('full-body')),minutes:'30–45',equipment:state.profile.equipment==='home'?'Chair, counter, backpack, band, mat':'Gym · dumbbells, machines, cable',summary:state.profile.equipment==='home'?'Beginner foundations, including chair squats. Sets scale with your profile.':'Foundational gym strength. Sets scale with your profile.'};return scheduled||allWorkouts().find(w=>w.id===id)||null}
@@ -12661,7 +12780,7 @@ function workoutBuilder(){if(screen.dataset)delete screen.dataset.plannerDisplay
 const builderMuscleGroups=[
  ['chest','Chest'],['back','Back / lats'],['shoulders','Shoulders'],['biceps','Biceps'],
  ['triceps','Triceps'],['forearms','Forearms'],['core','Core'],['quads','Quads'],
- ['glutes','Glutes'],['hamstrings','Hamstrings'],['calves','Calves']
+ ['glutes','Glutes'],['hamstrings','Hamstrings'],['calves','Calves'],['traps','Traps']
 ];
 function openBuilderExercisePicker(trigger){
  const dialog=document.getElementById('builder-exercise-picker');

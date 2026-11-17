@@ -93,8 +93,15 @@ async function verify(){
   await quickSwap.click();
   const swapDialog=page.locator('#trainer-swap-0');
   assert(await swapDialog.isVisible());
+  await swapDialog.getByRole('searchbox').fill('Dead Bug Heel Taps');
   await swapDialog.locator('[data-exercise-name="Dead Bug Heel Taps"]').click();
   assert((await page.getByRole('heading',{name:'Dead Bug Heel Taps',exact:true}).innerText()).includes('Dead Bug Heel Taps'));
+  await page.evaluate(()=>{state.selectedWorkout='guided-home-legs-a';tab='train';render();focusTrainingExercise(3)});
+  await page.locator('.trainer-photo-swap[data-compact-swap="3"]').click();
+  const calfSwap=page.locator('#trainer-swap-3');
+  await calfSwap.getByRole('searchbox').fill('Seated Calf Raise');
+  await calfSwap.locator('[data-exercise-name="Seated Calf Raise"]').click();
+  assert(await page.getByRole('heading',{name:'Seated Calf Raise',exact:true}).isVisible());
   await page.evaluate(()=>{state.workoutDrafts={};tab='home';render()});
 
   await page.evaluate(()=>{

@@ -38,7 +38,7 @@ if(width===390){
  await page.evaluate(()=>{tab='home';render()});
  await page.locator('.home-change-workout').click();
  const chooser=page.locator('#workout-chooser');
- assert.equal(await chooser.locator('[data-workout-category]:not([data-workout-category="mine"])').count(),5);
+ assert.equal(await chooser.locator('[data-workout-category]:not([data-workout-category="mine"])').count(),10);
  await chooser.locator('[data-workout-category="Leg"]').click();
  for(const setting of ['gym','home']){
   await chooser.locator('[data-chooser-workout-setting="'+setting+'"]').click();

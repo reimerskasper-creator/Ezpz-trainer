@@ -1,3 +1,9 @@
+## 2026-11-17 — Goal workouts, Trainer swaps and rest timer
+
+- Android 1.0.156 adds ten six-exercise sessions in five new categories, with matching anatomy covers and exercise media. The chooser opens with Create your own, Saved workouts, Home/Gym and filters above the category cards.
+- Trainer exposes searchable session-only swaps on every exercise card. The builder uses a larger muscle picker with Traps. Home and workout previews use larger exercise thumbnails.
+- Android now reads rest timer deadlines as 64-bit milliseconds. Handset and Bluetooth audio playback need verification.
+
 ## 2026-11-17 — Workout picker levels, anatomy, and Trainer controls
 
 - Android 1.0.155 adds 20 six-exercise Intermediate and Advanced sessions across all five Home and Gym categories. The existing Beginner sessions retain their IDs.

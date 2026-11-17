@@ -21,7 +21,7 @@ assert(api.guides.get('DB Step-Up').name==='Dumbbell Step-Up','Weighted step-up 
 assert(api.guides.get('Bodyweight Step-Up').photo!==api.guides.get('DB Step-Up').photo,'Unweighted and loaded step-up each have media');
 
 
-assert(api.workoutCategories.length===12,'Expected 12 categories');
+assert(api.workoutCategories.length===17,'Expected 17 categories');
 assert(api.workoutTemplates.length===64,'64 fixed programs plus the existing rotating plan');
 assert(new Set(api.workoutTemplates.map(w=>w.id)).size===64,'Duplicate program IDs');
 const baseline=JSON.parse(fs.readFileSync(path.join(__dirname,'fixtures/approved-workouts.json'),'utf8'));
@@ -35,9 +35,9 @@ const ids=new Set();
 for(const setting of ['home','gym']){
  api.state.workoutSetting=setting;
  const choices=api.plannerPickerItems();
- assert(choices.length===20&&choices.every(w=>w.setting===setting),'Twenty sessions for '+setting);
+ assert(choices.length===(setting==='home'?28:30)&&choices.every(w=>w.setting===setting||w.setting==='both'),'Expected sessions for '+setting);
  api.setCategory(null);
- assert((api.workoutChooser().match(/data-workout-category="(?!mine")/g)||[]).length===5,'Five visible categories');
+ assert((api.workoutChooser().match(/data-workout-category="(?!mine")/g)||[]).length===10,'Ten visible categories');
  for(const category of ['Full Body','Push','Pull','Leg','Core']){
   const plans=api.categoryPrograms(category);
   assert(plans.map(w=>w.variant).join(',')==='A,B,C,D','Four sessions per category');
@@ -62,7 +62,17 @@ for(const setting of ['home','gym']){
   }
  }
 }
-assert(ids.size===40,'40 unique sessions');
+assert(ids.size===40,'40 unique original sessions');
+const goal=api.featuredWorkouts.filter(w=>w.id.startsWith('guided-goal-'));
+assert(goal.length===10&&new Set(goal.map(w=>w.id)).size===10,'Ten distinct goal sessions');
+for(const plan of goal){
+ assert(plan.exercises.length===6&&new Set(plan.exercises.map(x=>x.name)).size===6,'Six distinct exercises in '+plan.title);
+ assert(plan.exercises.every(x=>api.guides.get(x.name)?.videoUrl&&api.guides.get(x.name)?.photo&&api.reviewedMuscleMap([x]).primary.length),'All goal exercises have media and muscle roles');
+ assert(api.hybridWorkoutCover(plan,plan.exercises).includes('anatomy-cover-overlay'),'Goal workout anatomy');
+ assert(api.hybridWorkoutCover(plan.category).includes('anatomy-cover-overlay'),'Goal category anatomy');
+}
+assert(api.reviewedMuscleMap([{name:'Dumbbell Upright Row'}]).primary.includes('traps'),'Upright row targets traps');
+
 const dates={'2026-11-16':'guided-home-full-body-a','2026-11-17':'pull-b'};
 const recovered=api.restoredState({...api.state,workoutSchedule:dates});
 assert(JSON.stringify(recovered.workoutSchedule)===JSON.stringify(dates),'New and retired schedule IDs resolve');

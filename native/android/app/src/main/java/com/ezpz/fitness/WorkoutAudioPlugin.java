@@ -81,7 +81,8 @@ public class WorkoutAudioPlugin extends Plugin {
     }
 
     @PluginMethod public void setRestDeadline(PluginCall call) {
-        long deadline = call.getDouble("endsAt", 0.0).longValue();
+        // Epoch milliseconds are represented as a Long in the Android bridge.
+        long deadline = call.getData().optLong("endsAt", 0L);
         String voice = call.getString("voice", "");
         handler.post(() -> {
             handler.removeCallbacks(restComplete);
@@ -89,7 +90,7 @@ public class WorkoutAudioPlugin extends Plugin {
             stopSpeech("rest");
             long delay = deadline - System.currentTimeMillis();
             if (delay <= 0 || delay > 600_000) return;
-            if (delay >= 4800) {
+            if (delay >= 4500) {
                 restWarning = () -> playWarning(voice, "rest");
                 handler.postDelayed(restWarning, Math.max(0, delay - 5000));
             }

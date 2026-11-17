@@ -193,7 +193,7 @@ body[data-view=train] .training-exercise.trainer-workout-photo .exercise-tools-b
 .workout-setting-tabs button{min-height:44px;border:1px solid var(--ui-border,#789b87);border-radius:10px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5)}
 .workout-setting-tabs button[aria-pressed=true]{border-color:var(--ui-accent,#8ee2b4);box-shadow:inset 0 0 0 1px var(--ui-accent,#8ee2b4);font-weight:700}
 .workout-preview-exercise{display:flex;align-items:center;gap:10px;margin:8px 0}
-.workout-preview-exercise img{width:74px;height:56px;object-fit:contain;border-radius:7px;background:#121613;flex:none}
+.workout-preview-exercise img{width:clamp(84px,27vw,132px);height:auto;aspect-ratio:4/3;object-fit:contain;border-radius:7px;background:#121613;flex:none}
 .workout-preview-exercise :is(strong,small,a){display:block}
 .workout-preview-exercise a{color:var(--ui-text,#f1fff5);font-size:12px;text-decoration:underline;padding:7px 0}
 
@@ -207,3 +207,5 @@ body[data-view=train] .training-exercise.trainer-workout-photo .exercise-tools-b
 body[data-view=train] .trainer-media{position:relative}
 body[data-view=train] .trainer-photo-swap{position:absolute;top:8px;right:54px;z-index:2;display:grid;place-items:center;width:44px;height:44px;min-height:44px;padding:0;border:1px solid #9acbb5;border-radius:12px;background:#092e23e8;color:#effff7}
 .trainer-photo-swap svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.exercise-swap-choices{max-height:min(53dvh,420px);overflow:auto}
