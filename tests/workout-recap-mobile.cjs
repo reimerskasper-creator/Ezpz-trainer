@@ -117,9 +117,10 @@ const server=http.createServer((req,res)=>{
    assert(await page.locator('#workout-edit-search').isVisible());
    await page.keyboard.press('Escape');
    await page.getByRole('button',{name:'Manage workouts'}).click();
-   await page.getByRole('button',{name:'Create your own workout',exact:true}).click();
+   await page.getByRole('button',{name:/^Create your own/}).click();
    const builder=page.locator('#builder-exercise-picker');
    assert(await builder.isVisible());
+   assert(await builder.locator('[data-builder-muscle="traps"] [data-anatomy-region="traps"]').isVisible());
    await builder.locator('[data-builder-muscle="chest"]').click();
    const movement=builder.locator('[data-builder-movement="Dumbbell Bench Press"]');
    for(const appearance of [{mode:'dark'},{mode:'light'},{mode:'dark',accent:'lavender'}]){

@@ -2,7 +2,8 @@
 
 - Android 1.0.156 adds ten six-exercise sessions in five new categories, with matching anatomy covers and exercise media. The chooser opens with Create your own, Saved workouts, Home/Gym and filters above the category cards.
 - Trainer exposes searchable session-only swaps on every exercise card. The builder uses a larger muscle picker with Traps. Home and workout previews use larger exercise thumbnails.
-- Android now reads rest timer deadlines as 64-bit milliseconds. Handset and Bluetooth audio playback need verification.
+- Android now reads rest timer deadlines as 64-bit milliseconds. Android run 44156039441 signed 1.0.156 with the existing key. Packaged picker, calf-raise swap, saved workout planning and Trainer checks passed. The recap smoke test had a stale selector for the moved Create your own button and was updated. Handset and Bluetooth audio playback remain unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44156039441/artifacts/14360648549
 
 ## 2026-11-17 — Workout picker levels, anatomy, and Trainer controls
 
