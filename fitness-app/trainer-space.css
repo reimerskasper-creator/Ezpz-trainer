@@ -205,5 +205,5 @@ body[data-view=train] .training-exercise.trainer-workout-photo .exercise-tools-b
 .workout-media-repair>button{margin-top:8px}
 
 body[data-view=train] .trainer-media{position:relative}
-body[data-view=train] .trainer-photo-swap{position:absolute;top:8px;right:calc(var(--trainer-side-rail, 48px) + 8px);z-index:2;display:grid;place-items:center;width:44px;height:44px;min-height:44px;padding:0;border:1px solid #9acbb5;border-radius:12px;background:#092e23e8;color:#effff7}
+body[data-view=train] .trainer-photo-swap{position:absolute;top:8px;right:54px;z-index:2;display:grid;place-items:center;width:44px;height:44px;min-height:44px;padding:0;border:1px solid #9acbb5;border-radius:12px;background:#092e23e8;color:#effff7}
 .trainer-photo-swap svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}

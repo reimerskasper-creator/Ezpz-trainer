@@ -94,7 +94,7 @@ async function verify(){
   const swapDialog=page.locator('#trainer-swap-0');
   assert(await swapDialog.isVisible());
   await swapDialog.locator('[data-exercise-name="Dead Bug Heel Taps"]').click();
-  assert((await page.locator('[data-training-card="0"] h3').innerText()).includes('Dead Bug Heel Taps'));
+  assert((await page.getByRole('heading',{name:'Dead Bug Heel Taps',exact:true}).innerText()).includes('Dead Bug Heel Taps'));
   await page.evaluate(()=>{state.workoutDrafts={};tab='home';render()});
 
   await page.evaluate(()=>{
