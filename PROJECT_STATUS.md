@@ -1,3 +1,9 @@
+## 2026-11-17 — 40 additional guided exercises
+
+- Android 1.0.153 expands the guided library from 61 to 101 exercises. The batch includes single-leg Roman chair back extensions, chin-ups, dead hangs, machine accessories, and home variations.
+- Every addition supplies a trainer photo, a variant-matched demonstration link, equipment, search aliases, muscle highlights, and editable set defaults.
+- Branch: android-health-connect. The mobile workflow verifies 101 library entries and checks that a timed dead hang can be selected by muscle and started in Trainer.
+
 ## 2026-11-17 — Guided exercise expansion
 
 - Android 1.0.152 increases the guided picker from 41 to 61 movements. Each addition has a trainer photo, exact exercise reference, searchable aliases, equipment, and primary or supporting muscle highlights.
