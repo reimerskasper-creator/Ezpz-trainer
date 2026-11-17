@@ -1,3 +1,9 @@
+## 2026-11-17 — Matching workout covers on Home
+
+- Android 1.0.161 shows the picker’s exact selected workout artwork and muscle layers on the Home Trainer card, open or closed. Expanded exercises sit beneath the cover with photos, sets, reps and completion.
+- Home banner overrides affect the cover area. Recovery and empty states retain their own photos.
+- Branch: android-health-connect. Local workout and photo checks passed. Android signing and mobile checks pending.
+
 ## 2026-11-17 — Full-height workout picker and saved workout management
 
 - Android 1.0.160 expands Find your workout to the safe area, compacts the shortcuts, and uses larger category and workout artwork.

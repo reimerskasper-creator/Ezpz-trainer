@@ -60,6 +60,7 @@ jobs:
           node tests/plan-library.cjs
           node tests/clear-plan-mobile.cjs
           node tests/saved-workouts-mobile.cjs
+          node tests/home-workout-banner-mobile.cjs
       - uses: actions/cache/restore@v4
         with:
           path: native/.test-signing/debug.keystore
@@ -100,7 +101,6 @@ jobs:
           node tests/app-appearance.cjs
           node tests/app-appearance-mobile.cjs
           node tests/progress-card-photos-mobile.cjs
-          node tests/home-workout-banner-mobile.cjs
           node tests/home-simplified-mobile.cjs
           node tests/home-appearance-mobile.cjs
           node tests/home-banner-mobile.cjs
