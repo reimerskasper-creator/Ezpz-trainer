@@ -192,6 +192,19 @@ async function verify(){
    await checkSwapRow(builderPicker.locator('[data-builder-movement]').first());
    await builderPicker.getByRole('button',{name:'Close exercise picker'}).click();
   }
+  await page.evaluate(()=>startBuilder(null));
+  const cover=page.locator('.own-cover-preview .personal-workout-anatomy');
+  const chest=cover.locator('.anatomy-primary[data-anatomy-region="chest"]');
+  await page.locator('#builder-name-0').fill('Dumbbell Bench Press');
+  assert(await chest.isVisible());
+  await page.locator('#builder-name-0').fill('Unknown exercise');
+  assert.equal(await cover.locator('[data-anatomy-region]').count(),0);
+  await page.locator('#builder-name-0').fill('Dead Bug');
+  assert(await cover.locator('.anatomy-primary[data-anatomy-region="core"]').isVisible());
+  await page.locator('#builder-title').fill('My anatomy workout');
+  await page.locator('[data-destination="saved"]').click();
+  const savedCover=page.locator('.own-saved-workout').filter({hasText:'My anatomy workout'});
+  assert(await savedCover.locator('.personal-workout-anatomy .anatomy-primary[data-anatomy-region="core"]').isVisible());
   assert.deepEqual(failures,[]);
   console.log('PASS: covered library, personal workout blocked until photo and video, and persistent workout-only reset.');
  }finally{await browser.close();server.close()}

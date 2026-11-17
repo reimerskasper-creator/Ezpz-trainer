@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),source=fs.readFileSync(pat
 const untouchedDay=new Date(Date.now()+14*86400000).toLocaleDateString('en-CA');
 let stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2,selectedWorkout:'push-a',workoutSchedule:{[untouchedDay]:'pull-a'},workoutDrafts:{'push-a':{'sr0-0':'9'}}}),fail=false;
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}},script=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),alerts=[];
-const api=new Function('document','window','localStorage','fetch','console','alert','confirm',script+'\nreturn {showWorkoutCategory,startBuilder,emptyOwnWorkout,saveOwnWorkout,workoutChooser,ownWorkoutTile,workoutBuilder,workoutPlan,cleanCustomWorkouts,restoredState,planSettings,get state(){return state},get draft(){return builderDraft},get origin(){return builderOrigin},setTab(v){tab=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('Full');stored=v}},()=>new Promise(()=>{}),{error(){}},m=>alerts.push(m),()=>true);
+const api=new Function('document','window','localStorage','fetch','console','alert','confirm',script+'\nreturn {showWorkoutCategory,startBuilder,emptyOwnWorkout,saveOwnWorkout,workoutChooser,ownWorkoutTile,workoutBuilder,workoutCoverImage,workoutPlan,cleanCustomWorkouts,restoredState,planSettings,get state(){return state},get draft(){return builderDraft},get origin(){return builderOrigin},setTab(v){tab=v}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('Full');stored=v}},()=>new Promise(()=>{}),{error(){}},m=>alerts.push(m),()=>true);
 const assert=(v,m)=>{if(!v)throw Error(m)},equal=(a,b,m)=>assert(JSON.stringify(a)===JSON.stringify(b),m);
 assert(api.workoutChooser().includes('data-action="create-my-workout"'),'Own category beside ready-made workouts');
 assert(api.ownWorkoutTile().includes('own-anatomy-cover')&&api.ownWorkoutTile().includes('own-anatomy-add'),'Create cover uses the anatomy artwork');
@@ -17,7 +17,10 @@ draft.title="Kasper's own session";draft.category='Arms';draft.exercises=[{name:
 const scheduleBefore=JSON.stringify(api.state.workoutSchedule),id=api.saveOwnWorkout(draft,'saved');
 assert(id&&api.state.customWorkouts.length===1,'Save own session');
 assert(JSON.stringify(api.state.workoutSchedule)===scheduleBefore&&api.state.selectedWorkout==='push-a','Save later never schedules or changes active session');
-assert(screen.innerHTML.includes('data-own-start="'+id+'"')&&screen.innerHTML.includes('workout-images/neutral-arms-1.jpg'),'Saved session has cover and start action');
+assert(screen.innerHTML.includes('data-own-start="'+id+'"')&&screen.innerHTML.includes('class="personal-workout-anatomy"'),'Saved session has cover and start action');
+const savedCover=api.workoutCoverImage({...draft,id,exercises:[{name:'Dumbbell Bench Press'},{name:'Dead Bug'},{name:'My custom drill'}]});
+assert(savedCover.includes('anatomy-primary" data-anatomy-region="chest"')&&savedCover.includes('anatomy-primary" data-anatomy-region="core"'),'Cover uses all mapped exercises');
+assert(!api.workoutCoverImage({...draft,id}).includes('data-anatomy-region'),'Unmapped names leave the anatomy figure neutral');
 equal(api.state.workoutDrafts['push-a'],{'sr0-0':'9'},'Existing draft preserved');
 api.setTab('train');api.startBuilder(null);const runId=api.saveOwnWorkout({...draft,title:'Start now'},'train');
 assert(document.body.dataset.view==='train'&&api.state.selectedWorkout===runId,'Save and start runs in normal Train');

@@ -17,7 +17,7 @@
   if(kind==='home'){return window.EZPZHomeBackground?.select(id)===true}
   if(kind==='workout'){
    builderDraft={...captureBuilder(),photoId:id};refresh(box,id);
-   const cover=box.closest('form')?.querySelector('.own-cover-preview>img'),photo=workoutCover(builderDraft);if(cover){cover.src=photo.src;cover.alt=photo.alt}return true;
+   updateBuilderWorkoutCover(builderDraft);return true;
   }
   if(kind==='food'){box.closest('form').elements.namedItem('photoId').value=id;refresh(box,id);return true}
   const key=kind==='saved-food'?'customFoods':'customWorkouts',before=state[key],items=kind==='saved-food'?cleanCustomFoods(before):cleanCustomWorkouts(before);

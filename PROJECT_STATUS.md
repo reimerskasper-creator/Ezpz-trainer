@@ -1,3 +1,9 @@
+## 2026-11-17 — Live anatomy covers for personal workouts
+
+- Android 1.0.159 draws the default cover from the personal workout’s exercise list. The builder updates as the user types, picks or removes exercises. Known movements show primary and supporting muscle highlights, and unmapped names leave the figure neutral unless other movements are mapped.
+- A chosen photo takes priority. Use default restores the anatomy cover. Saved workouts and workout cards use the same derived cover with no new storage or backup fields.
+- Branch: android-health-connect. Targeted workout builder, planner and photo checks run before delivery.
+
 ## 2026-11-17 — Compound strength, trap exercises and recap anatomy
 
 - Android 1.0.158 adds ten guided six-exercise sessions, including three compound-strength sessions and two back-and-trap sessions. Every visible category has at least four workouts in both Home and Gym (40 Home and 48 Gym choices, including shared sessions).

@@ -176,3 +176,16 @@ body[data-view] .builder-browse{min-height:44px;width:100%;margin:6px 0 8px}
 #workout-chooser .chooser-create{display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:10px;align-items:center}
 .chooser-create-anatomy .recap-anatomy{display:block;width:50px}
 #workout-chooser .chooser-create small{display:block;font-weight:400}
+
+.personal-workout-anatomy{
+ display:block;position:relative;container-type:size;overflow:hidden;
+ width:100%;height:100%;min-width:0;flex:none;
+ background:radial-gradient(ellipse at 50% 35%,#385147,#14251e 80%);
+}
+.personal-workout-anatomy>.recap-anatomy{
+ display:block;position:absolute;inset:50% auto auto 50%;transform:translate(-50%,-50%);
+ width:min(94cqw,85cqh);height:auto;
+}
+.own-cover-preview>.personal-workout-anatomy>.recap-anatomy{width:94cqw}
+.workout-feature>.personal-workout-anatomy{position:absolute;inset:0}
+.workout-feature>.personal-workout-anatomy>.recap-anatomy{left:74%;width:min(49cqw,85cqh)}
