@@ -2,7 +2,8 @@
 
 - Android 1.0.153 expands the guided library from 61 to 101 exercises. The batch includes single-leg Roman chair back extensions, chin-ups, dead hangs, machine accessories, and home variations.
 - Every addition supplies a trainer photo, a variant-matched demonstration link, equipment, search aliases, muscle highlights, and editable set defaults.
-- Branch: android-health-connect. The mobile workflow verifies 101 library entries and checks that a timed dead hang can be selected by muscle and started in Trainer.
+- Branch: android-health-connect. Source commit `802ef4f`. Android run 44096355793 signed the APK and passed the guided library, picker, and timed exercise checks at 320, 390 and 430 px. Physical-phone installation remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44096355793/artifacts/14334107479
 
 ## 2026-11-17 — Guided exercise expansion
 
