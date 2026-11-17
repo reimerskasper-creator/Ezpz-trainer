@@ -21,8 +21,7 @@ import java.util.Locale;
 @CapacitorPlugin(name = "EzpzWorkoutAudio")
 public class WorkoutAudioPlugin extends Plugin {
     private final Handler handler = new Handler(Looper.getMainLooper());
-    private final Runnable workoutReady = () -> play(false);
-    private final Runnable restComplete = () -> play(true);
+    private final Runnable restComplete = this::play;
     private Runnable restWarning;
     private ToneGenerator tones;
     private TextToSpeech speech;
@@ -62,7 +61,7 @@ public class WorkoutAudioPlugin extends Plugin {
             for (Voice voice : offlineEnglishVoices()) {
                 JSObject choice = new JSObject();
                 choice.put("id", voice.getName());
-                choice.put("label", voice.getLocale().getDisplayName(Locale.ENGLISH) + " · " + voice.getName());
+                choice.put("locale", voice.getLocale().toLanguageTag());
                 choices.put(choice);
             }
             JSObject result = new JSObject();
@@ -71,22 +70,9 @@ public class WorkoutAudioPlugin extends Plugin {
         });
     }
 
-    @PluginMethod public void workoutStarted(PluginCall call) {
-        handler.post(workoutReady);
-        call.resolve();
-    }
-
-    @PluginMethod public void setStartDeadline(PluginCall call) {
-        long deadline = call.getDouble("endsAt", 0.0).longValue();
+    @PluginMethod public void previewRestVoice(PluginCall call) {
         String voice = call.getString("voice", "");
-        handler.post(() -> {
-            handler.removeCallbacks(workoutReady);
-            stopSpeech("start");
-            long delay = deadline - System.currentTimeMillis();
-            if (delay <= 0 || delay > 5000) return;
-            speak("Workout starts in five seconds.", voice, "start");
-            handler.postDelayed(workoutReady, delay);
-        });
+        handler.post(() -> speak("Five seconds left.", voice, "preview"));
         call.resolve();
     }
 
@@ -100,7 +86,7 @@ public class WorkoutAudioPlugin extends Plugin {
             long delay = deadline - System.currentTimeMillis();
             if (delay <= 0 || delay > 600_000) return;
             if (delay >= 4800) {
-                restWarning = () -> speak("Rest ends in five seconds.", voice, "rest");
+                restWarning = () -> speak("Five seconds left.", voice, "rest");
                 handler.postDelayed(restWarning, Math.max(0, delay - 5000));
             }
             handler.postDelayed(restComplete, delay);
@@ -134,10 +120,10 @@ public class WorkoutAudioPlugin extends Plugin {
         }
     }
 
-    private void play(boolean restFinished) {
+    private void play() {
         try {
             if (tones == null) tones = new ToneGenerator(AudioManager.STREAM_MUSIC, 65);
-            tones.startTone(restFinished ? ToneGenerator.TONE_PROP_ACK : ToneGenerator.TONE_PROP_BEEP, -1);
+            tones.startTone(ToneGenerator.TONE_PROP_ACK, -1);
         } catch (RuntimeException ignored) {
             // The visible timer keeps running if the device has no audio output.
         }

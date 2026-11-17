@@ -43,8 +43,35 @@ body[data-view=home] #screen .home-workout [data-edit-home-exercise]{
 }
 body[data-view=home] #screen .home-workout .home-change-workout svg{background:transparent!important;box-shadow:none!important}
 .workout-recap .recap-done{width:100%;min-height:44px;margin-top:9px}
-.training-exercise-dialog.workout-countdown{max-width:300px;padding:20px;text-align:center}
-.workout-countdown h2{margin:0;font-size:19px;color:#f0fff5}
-.workout-countdown output{display:block;margin:10px auto;color:#a3ebc4;font-size:48px;font-weight:750;font-variant-numeric:tabular-nums}
-.workout-countdown button{width:100%;min-height:44px}
-.workout-voice-option select{max-width:100%}
+
+.hybrid-workout-cover{display:block;position:relative;width:100%;height:100%;isolation:isolate;overflow:hidden}
+.hybrid-workout-cover::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 22%,#0b241c66 48%,#071c15e6 100%);pointer-events:none}
+.anatomy-cover-overlay{position:absolute;inset:0 0 0 auto;width:66%;z-index:1;overflow:hidden;container-type:size;pointer-events:none}
+.anatomy-cover-overlay .recap-anatomy{position:absolute;right:3%;height:94cqh;width:min(94%,85.3cqh);top:3%;filter:drop-shadow(0 2px 3px #0008)}
+.anatomy-cover-overlay.anatomy-crop-upper .recap-anatomy{height:auto;width:100%;top:2%}
+.anatomy-cover-overlay.anatomy-crop-lower .recap-anatomy{height:auto;width:100%;top:auto;bottom:0}
+.hybrid-workout-cover>img{display:block;width:100%;height:100%;object-fit:cover}
+.preview-cover>.hybrid-workout-cover{height:clamp(134px,48vw,240px)}
+.anatomy-front{clip-path:inset(0 50% 0 0)}
+.anatomy-rear{clip-path:inset(0 0 0 50%)}
+.anatomy-supporting{opacity:.55;filter:saturate(.64)}
+.workout-muscle-legend{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 10px;font-size:12px;color:#c2ddcd}
+.workout-muscle-legend span{display:inline-flex;align-items:center;gap:5px}
+.workout-muscle-legend span::before{content:"";width:9px;height:9px;border-radius:50%;background:#75eab1}
+.workout-muscle-legend span+span::before{background:#609785}
+.workout-muscle-labels{display:grid;gap:4px;font-size:11px;line-height:1.35;margin:7px 0 10px;overflow-wrap:anywhere}
+.workout-muscle-labels>span:not(.recap-anatomy){display:block}
+.workout-muscle-labels b{margin-right:3px}
+.workout-muscle-labels>.recap-anatomy{width:min(64%,180px);margin:0 auto 4px}
+#workout-chooser .workout-cover-check{z-index:2}
+
+#rest-voice-picker{position:fixed;inset:auto 0 0;margin:0 auto;width:min(100%,430px);max-height:78dvh;padding:0;border-radius:23px 23px 0 0;overflow:auto}
+#rest-voice-picker::backdrop{background:#081b1499}
+#rest-voice-picker .chooser-head{padding:12px 15px}
+#rest-voice-picker [data-close-rest-voices]{width:44px;min-height:44px;margin:0}
+.rest-voice-list{padding:10px 14px max(20px,env(safe-area-inset-bottom))}
+.rest-voice-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin:0 0 7px}
+#rest-voice-picker .rest-voice-row button{margin:0;min-height:44px;padding:6px 9px;text-align:left;overflow-wrap:anywhere}
+#rest-options-dialog .rest-voice-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;min-height:44px;text-align:left}
+.rest-voice-trigger strong{font-size:11px}
+body[data-view=train] .footer-rest.is-final-countdown #footer-rest-clock{color:#a3ebc4!important}

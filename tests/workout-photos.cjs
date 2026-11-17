@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),source=fs.readFileSync(pat
 const scripts=[...source.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).concat(['coach-sample-photos','exercise-media'].map(name=>fs.readFileSync(path.join(__dirname,'../fitness-app/'+name+'.js'),'utf8'))).join('\n'),screen={innerHTML:''};
 let writes=0;const initial={profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],workoutLayoutVersion:2,workoutDrafts:{'pull-b':{'sr0-0':'8','sw0-0':'20','sd0-0':true}}},stored=JSON.stringify(initial);
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelectorAll:()=>[],querySelector:()=>null,addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console',scripts+'\nreturn {home,train,featuredWorkouts,featuredExerciseSwaps,workoutSetting,plannerPickerItems,restoredState,baseWorkoutPlan,guides:window.EzpzExerciseMedia,workoutChooser,workoutCover,workoutProgramCovers,workoutCovers,workoutTemplates,categoryPrograms,workoutCategories,setCategory(v){chooserCategory=v},get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem(){writes++}},()=>new Promise(()=>{}),{error(){}});
+const api=new Function('document','window','localStorage','fetch','console',scripts+'\nreturn {home,train,featuredWorkouts,featuredExerciseSwaps,workoutSetting,plannerPickerItems,restoredState,baseWorkoutPlan,guides:window.EzpzExerciseMedia,workoutChooser,workoutCover,workoutProgramCovers,workoutCovers,workoutTemplates,categoryPrograms,workoutCategories,reviewedMuscleMap,hybridWorkoutCover,setCategory(v){chooserCategory=v},get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem(){writes++}},()=>new Promise(()=>{}),{error(){}});
 const assert=(v,m)=>{if(!v)throw Error(m)};
 
 assert(api.workoutCategories.length===12,'Expected 12 categories');
@@ -35,6 +35,7 @@ for(const setting of ['home','gym']){
    for(const exercise of api.baseWorkoutPlan(plan.id).exercises){
     const demo=api.guides.get(exercise.name);
     assert(demo?.photo&&demo?.videoUrl,'Complete media for '+exercise.name);
+    assert(api.reviewedMuscleMap([exercise]).primary.length,'Missing guided muscle map for '+exercise.name);
     assert(exercise.sets>=2&&exercise.reps&&exercise.rest>0,'Exercise prescription');
     for(const swap of api.featuredExerciseSwaps(plan,exercise)){
      assert(api.guides.get(swap.name)?.videoUrl&&swap.unit===exercise.unit,'Swap media and unit');
@@ -51,5 +52,10 @@ const dates={'2026-11-16':'guided-home-full-body-a','2026-11-17':'pull-b'};
 const recovered=api.restoredState({...api.state,workoutSchedule:dates});
 assert(JSON.stringify(recovered.workoutSchedule)===JSON.stringify(dates),'New and retired schedule IDs resolve');
 assert(api.state.workoutDrafts['pull-b']['sr0-0']==='8','Saved draft lost');
+const press=api.reviewedMuscleMap([{name:'Dumbbell Bench Press'}]);
+assert(press.primary.join(' ')==='chest'&&press.supporting.join(' ')==='frontDelts triceps','Chest press must distinguish pecs and support');
+const changed=api.reviewedMuscleMap([{name:'Lat Pulldown'},{name:'Unreviewed custom movement'}]);
+assert(changed.primary.join(' ')==='back'&&changed.unknown===1&&!changed.supporting.includes('chest'),'Map must follow the current exercises');
+assert(!api.hybridWorkoutCover('Push',[{name:'Unreviewed custom movement'}]).includes('anatomy-cover-overlay'),'Unknown movements must not inherit category highlights');
 assert(writes===0,'Rendering wrote storage');
 console.log('PASS: 10 Home + 10 Gym workouts, equipment, demo links in picker, compatible swap media, and legacy schedule/draft retention');
