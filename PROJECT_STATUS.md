@@ -1,3 +1,8 @@
+## 2026-11-16 — Photo-first workout picker
+
+- Android 1.0.149 brings Push, Pull, Legs and Core to the first two rows, restores the muscle legend to the header, and gives the existing gym photos and mapped anatomy more space. Full Body, Create your own, Saved workouts and filters remain available below.
+- Branch: android-health-connect. Android build and layout checks pending.
+
 ## 2026-11-16 — Workout cover anatomy and rest controls
 
 - Android 1.0.148 separates the Home Start/Resume action from Manage workouts, which opens the existing chooser.
