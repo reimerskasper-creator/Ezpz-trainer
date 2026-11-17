@@ -2,7 +2,8 @@
 
 - Android 1.0.151 replaces the native exercise autocomplete with an in-app muscle and exercise picker. Guided choices use existing exercise photos and reviewed anatomy. Manual entry is available in the same builder.
 - Create your own uses the same anatomy artwork as the workout chooser. Trainer shows elapsed session time alongside the exercise selector and uses the saved timestamp in the recap.
-- Branch: android-health-connect. The focused workout builder and training unit checks passed locally. Android packaging and phone-width checks run in GitHub Actions.
+- Branch: android-health-connect. Source commit `a8a5e13`. Android run 44077756299 signed the APK and passed the focused mobile checks at 320, 390 and 430 px. Physical Android installation remains to be verified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44077756299/artifacts/14324529983
 - Exercise video consistency remains open. The current guided links need a clip-by-clip review for exercise variation, first-rep timing and presenter consistency.
 
 ## 2026-11-16 — Trainer and anatomy cover backgrounds
