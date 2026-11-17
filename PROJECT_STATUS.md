@@ -2,7 +2,8 @@
 
 - Android 1.0.158 adds ten guided six-exercise sessions, including three compound-strength sessions and two back-and-trap sessions. Every visible category has at least four workouts in both Home and Gym (40 Home and 48 Gym choices, including shared sessions).
 - The library adds Dumbbell Shrug and Barbell Shrug with distinct bundled training photos, demo references and primary trapezius maps. Trap roles were reviewed for selected rows, raises, carries and deadlifts. The recap now uses the same primary and supporting muscle artwork as workout covers and exercise details.
-- Branch: android-health-connect. Catalog, workout counts, trap highlights, swaps, planner and custom-workout checks passed locally. Signed Android build and packaged browser tests pending.
+- Branch: android-health-connect. Source commit `12140be`. Android run 44162659153 passed packaged workout media and swap checks, native unit tests, saved-workout planning, Trainer, and the recap trap highlight interaction. Verified that the downloaded 1.0.158 APK contains all ten workouts and both shrug photos and matches the 1.0.157 signing certificate. Physical handset installation remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44162659153/artifacts/14364381366
 
 ## 2026-11-17 — Muscle-based swaps and eight more goal workouts
 
