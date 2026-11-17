@@ -16,6 +16,17 @@ for(const theme of [{mode:'light',accent:'emerald'},{mode:'dark',accent:'emerald
 await savedCard.getByRole('button',{name:'View exercises'}).click();
 await page.locator('#own-workout-dialog').getByRole('button',{name:'Edit workout'}).click();
 await page.locator('#builder-title').fill('Updated custom workout');
+const discard=page.locator('#discard-workout-dialog');
+for(const theme of [{mode:'light',accent:'emerald'},{mode:'dark',accent:'emerald'},{mode:'dark',accent:'lavender'}]){
+ await page.evaluate(theme=>applyAppAppearance(theme),theme);
+ await page.locator('#workout-builder [data-action="cancel-builder"]').click();
+ await discard.getByRole('heading',{name:'Discard unsaved workout changes?'}).waitFor();
+ assert.equal(await discard.getByRole('button',{name:'Keep editing'}).evaluate(button=>document.activeElement===button),true);
+ await page.evaluate(()=>window.ezpzAndroidBack());
+ await discard.waitFor({state:'detached'});
+ assert.equal(await page.locator('#builder-title').inputValue(),'Updated custom workout');
+}
+
 await page.locator('[data-action="add-builder-exercise"]').click();
 await page.locator('#workout-builder input[id^="builder-name-"]').last().fill('Dead Bug');
 await page.getByRole('button',{name:'Save changes',exact:true}).click();
@@ -41,4 +52,13 @@ assert.equal(await page.evaluate(()=>state.customWorkouts.length),2);
 assert(await page.evaluate(()=>!Object.values(state.workoutSchedule).includes('custom-saved-1')&&
  !Object.values(state.extraWorkouts).flat().some(x=>x.workoutId==='custom-saved-1')&&
  state.logs.some(x=>x.workoutId==='custom-saved-1')));
-await page.evaluate(()=>{state.customWorkouts=[];state.selectedWorkout='push-a';state.workoutSchedule={};save();tab='home';render()});await page.locator('[data-overview-workout]').click();await page.locator('.saved-workouts-shortcut').click();assert((await page.locator('.chooser-empty').innerText()).includes('No saved workouts yet'));await page.locator('.chooser-empty [data-action="create-my-workout"]').click();assert(await page.locator('#workout-builder').isVisible());assert.deepEqual(errors,[]);await context.close();console.log('PASS Home Change → saved workout selection/reload/photos, filter isolation, cancel/read-only records, matching saved card contrast/wrapping and empty-state creation '+width)}}finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});
+await page.evaluate(()=>{state.customWorkouts=[];state.selectedWorkout='push-a';state.workoutSchedule={};save();tab='home';render()});await page.locator('[data-overview-workout]').click();await page.locator('.saved-workouts-shortcut').click();assert((await page.locator('.chooser-empty').innerText()).includes('No saved workouts yet'));await page.locator('.chooser-empty [data-action="create-my-workout"]').click();assert(await page.locator('#workout-builder').isVisible());
+await page.locator('#builder-title').fill('Unsaved draft');
+await page.locator('#workout-builder [data-action="cancel-builder"]').click();
+await discard.getByRole('heading',{name:'Discard this unsaved workout?'}).waitFor();
+await discard.getByRole('button',{name:'Keep editing'}).click();
+assert.equal(await page.locator('#builder-title').inputValue(),'Unsaved draft');
+await page.locator('#workout-builder [data-action="cancel-builder"]').click();
+await discard.getByRole('button',{name:'Discard workout'}).click();
+assert.equal(await page.locator('#workout-builder').count(),0);
+assert.deepEqual(errors,[]);await context.close();console.log('PASS Home Change → saved workout selection/reload/photos, filter isolation, cancel/read-only records, matching saved card contrast/wrapping and empty-state creation '+width)}}finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});

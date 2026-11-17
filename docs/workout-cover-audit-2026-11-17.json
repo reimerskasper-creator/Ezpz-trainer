@@ -1,0 +1,933 @@
+[
+  {
+    "id": "guided-home-full-body-a",
+    "title": "Full Body A · Squat & Press",
+    "equipment": "dumbbells, flat bench",
+    "old": "./workout-images/neutral-full-body-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-full-body-a.jpg"
+  },
+  {
+    "id": "guided-home-full-body-b",
+    "title": "Full Body B · Hinge & Row",
+    "equipment": "dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-full-body-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-full-body-b.jpg"
+  },
+  {
+    "id": "guided-home-push-a",
+    "title": "Push A · Chest",
+    "equipment": "dumbbells",
+    "old": "./workout-images/neutral-push-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-push-a.jpg"
+  },
+  {
+    "id": "guided-home-push-b",
+    "title": "Push B · Shoulders & Pressing",
+    "equipment": "dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-push-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-push-b.jpg"
+  },
+  {
+    "id": "guided-home-pull-a",
+    "title": "Pull A · Back & Biceps",
+    "equipment": "dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-pull-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-pull-a.jpg"
+  },
+  {
+    "id": "guided-home-pull-b",
+    "title": "Pull B · Upper Back & Rear Delts",
+    "equipment": "dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-pull-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-pull-b.jpg"
+  },
+  {
+    "id": "guided-home-legs-a",
+    "title": "Legs A · Quads & Calves",
+    "equipment": "dumbbells, sturdy step",
+    "old": "./workout-images/neutral-leg-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-legs-a.jpg"
+  },
+  {
+    "id": "guided-home-legs-b",
+    "title": "Legs B · Glutes & Hamstrings",
+    "equipment": "dumbbells, sliders, smooth floor",
+    "old": "./workout-images/neutral-leg-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-legs-b.jpg"
+  },
+  {
+    "id": "guided-home-core-a",
+    "title": "Core A · Bracing",
+    "equipment": "No equipment · mat optional",
+    "old": "./workout-images/neutral-core-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-core-a.jpg"
+  },
+  {
+    "id": "guided-home-core-b",
+    "title": "Core B · Side Stability",
+    "equipment": "dumbbells, walking space",
+    "old": "./workout-images/neutral-core-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-core-b.jpg"
+  },
+  {
+    "id": "guided-gym-full-body-a",
+    "title": "Full Body A · Squat & Press",
+    "equipment": "45-degree leg press, barbell, flat bench rack, seated cable row station, dumbbells",
+    "old": "./workout-images/neutral-full-body-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-full-body-a.jpg"
+  },
+  {
+    "id": "guided-gym-full-body-b",
+    "title": "Full Body B · Hinge & Pull",
+    "equipment": "dumbbells, lat pulldown station, adjustable bench, seated cable row station, walking space",
+    "old": "./workout-images/neutral-full-body-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-full-body-b.jpg"
+  },
+  {
+    "id": "guided-gym-push-a",
+    "title": "Push A · Chest",
+    "equipment": "barbell, flat bench rack, dumbbells, adjustable bench, dual cable station, cable station, rope attachment",
+    "old": "./workout-images/neutral-push-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-push-a.jpg"
+  },
+  {
+    "id": "guided-gym-push-b",
+    "title": "Push B · Shoulders & Triceps",
+    "equipment": "dumbbells, adjustable bench, cable station, rope attachment",
+    "old": "./workout-images/neutral-push-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-push-b.jpg"
+  },
+  {
+    "id": "guided-gym-pull-a",
+    "title": "Pull A · Lats & Biceps",
+    "equipment": "lat pulldown station, dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-pull-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-pull-a.jpg"
+  },
+  {
+    "id": "guided-gym-pull-b",
+    "title": "Pull B · Upper Back & Rear Delts",
+    "equipment": "dumbbells, adjustable bench, seated cable row station, lat pulldown station, walking space",
+    "old": "./workout-images/neutral-pull-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-pull-b.jpg"
+  },
+  {
+    "id": "guided-gym-legs-a",
+    "title": "Legs A · Quads & Calves",
+    "equipment": "45-degree leg press, dumbbells, lying leg curl machine",
+    "old": "./workout-images/neutral-leg-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-legs-a.jpg"
+  },
+  {
+    "id": "guided-gym-legs-b",
+    "title": "Legs B · Glutes & Hamstrings",
+    "equipment": "dumbbells, lying leg curl machine, 45-degree leg press",
+    "old": "./workout-images/neutral-leg-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-legs-b.jpg"
+  },
+  {
+    "id": "guided-gym-core-a",
+    "title": "Core A · Bracing & Carries",
+    "equipment": "dumbbells, walking space",
+    "old": "./workout-images/neutral-core-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-core-a.jpg"
+  },
+  {
+    "id": "guided-gym-core-b",
+    "title": "Core B · Rotation Control",
+    "equipment": "cable station, single handle, dumbbells, walking space",
+    "old": "./workout-images/neutral-core-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-core-b.jpg"
+  },
+  {
+    "id": "guided-home-full-body-c",
+    "title": "Full Body C · Dumbbell Foundations Plus",
+    "equipment": "dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-full-body-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-full-body-c.jpg"
+  },
+  {
+    "id": "guided-home-full-body-d",
+    "title": "Full Body D · Unilateral Strength",
+    "equipment": "dumbbells, flat bench, sturdy step, walking space",
+    "old": "./workout-images/neutral-full-body-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-full-body-d.jpg"
+  },
+  {
+    "id": "guided-home-push-c",
+    "title": "Push C · Dumbbell Pressing",
+    "equipment": "dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-push-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-push-c.jpg"
+  },
+  {
+    "id": "guided-home-push-d",
+    "title": "Push D · Shoulders & Triceps",
+    "equipment": "dumbbells, sturdy step, flat bench",
+    "old": "./workout-images/neutral-push-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-push-d.jpg"
+  },
+  {
+    "id": "guided-home-pull-c",
+    "title": "Pull C · Rows & Curls",
+    "equipment": "dumbbells, adjustable bench, kettlebell, resistance band",
+    "old": "./workout-images/neutral-pull-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-pull-c.jpg"
+  },
+  {
+    "id": "guided-home-pull-d",
+    "title": "Pull D · Back Strength & Control",
+    "equipment": "dumbbells, adjustable bench",
+    "old": "./workout-images/neutral-pull-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-pull-d.jpg"
+  },
+  {
+    "id": "guided-home-legs-c",
+    "title": "Legs C · Single-Leg & Posterior Chain",
+    "equipment": "dumbbells, sturdy step, sliders, smooth floor",
+    "old": "./workout-images/neutral-leg-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-legs-c.jpg"
+  },
+  {
+    "id": "guided-home-legs-d",
+    "title": "Legs D · Loaded Single-Leg Strength",
+    "equipment": "dumbbells, flat bench, sliders, smooth floor",
+    "old": "./workout-images/neutral-leg-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-legs-d.jpg"
+  },
+  {
+    "id": "guided-home-core-c",
+    "title": "Core C · Anti-Rotation & Control",
+    "equipment": "dumbbells, walking space",
+    "old": "./workout-images/neutral-core-1.jpg",
+    "cover": "./workout-images/neutral-guided-home-core-c.jpg"
+  },
+  {
+    "id": "guided-home-core-d",
+    "title": "Core D · Rollouts & Loaded Bracing",
+    "equipment": "ab wheel, weight plate, dumbbells, walking space",
+    "old": "./workout-images/neutral-core-2.jpg",
+    "cover": "./workout-images/neutral-guided-home-core-d.jpg"
+  },
+  {
+    "id": "guided-gym-full-body-c",
+    "title": "Full Body C · Machine & Dumbbell Strength",
+    "equipment": "hack squat machine, chest press machine, lat pulldown station, neutral handle, dumbbells, seated cable row station, cable station, single handle",
+    "old": "./workout-images/neutral-full-body-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-full-body-c.jpg"
+  },
+  {
+    "id": "guided-gym-full-body-d",
+    "title": "Full Body D · Barbell & Cable Strength",
+    "equipment": "trap bar, barbell, flat bench rack, chest-supported T-bar row machine, dumbbells, flat bench, squat rack, cable station, single handle",
+    "old": "./workout-images/neutral-full-body-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-full-body-d.jpg"
+  },
+  {
+    "id": "guided-gym-push-c",
+    "title": "Push C · Machine & Cable Pressing",
+    "equipment": "chest press machine, dumbbells, adjustable bench, dual cable station, cable station, single handle, straight bar",
+    "old": "./workout-images/neutral-push-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-push-c.jpg"
+  },
+  {
+    "id": "guided-gym-push-d",
+    "title": "Push D · Barbell Presses & Dips",
+    "equipment": "barbell, flat bench rack, squat rack, parallel bars, dual cable station, dumbbells, cable station, rope attachment",
+    "old": "./workout-images/neutral-push-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-push-d.jpg"
+  },
+  {
+    "id": "guided-gym-pull-c",
+    "title": "Pull C · Assisted Pull-Ups & Rows",
+    "equipment": "assisted pull-up machine, chest-supported T-bar row machine, lat pulldown station, neutral handle, reverse pec deck, EZ bar, preacher bench, dumbbells",
+    "old": "./workout-images/neutral-pull-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-pull-c.jpg"
+  },
+  {
+    "id": "guided-gym-pull-d",
+    "title": "Pull D · Chin-Ups & Upper Back",
+    "equipment": "pull-up bar, chest-supported T-bar row machine, seated cable row station, wide bar, cable station, rope attachment, EZ bar, preacher bench, dumbbells",
+    "old": "./workout-images/neutral-pull-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-pull-d.jpg"
+  },
+  {
+    "id": "guided-gym-legs-c",
+    "title": "Legs C · Machine Leg Strength",
+    "equipment": "hack squat machine, 45-degree leg press, seated leg curl machine, leg extension machine, hip abduction machine, standing calf raise machine",
+    "old": "./workout-images/neutral-leg-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-legs-c.jpg"
+  },
+  {
+    "id": "guided-gym-legs-d",
+    "title": "Legs D · Front Squat & Hinge",
+    "equipment": "barbell, squat rack, 45-degree leg press, standing leg curl machine, leg extension machine, standing calf raise machine",
+    "old": "./workout-images/neutral-leg-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-legs-d.jpg"
+  },
+  {
+    "id": "guided-gym-core-c",
+    "title": "Core C · Cable Core & Carries",
+    "equipment": "cable station, single handle, ab crunch machine, dumbbells, walking space",
+    "old": "./workout-images/neutral-core-3.jpg",
+    "cover": "./workout-images/neutral-guided-gym-core-c.jpg"
+  },
+  {
+    "id": "guided-gym-core-d",
+    "title": "Core D · Hanging & Loaded Core",
+    "equipment": "pull-up bar, ab wheel, cable station, rope attachment, kettlebell, walking space, weight plate, single handle",
+    "old": "./workout-images/neutral-core-4.jpg",
+    "cover": "./workout-images/neutral-guided-gym-core-d.jpg"
+  },
+  {
+    "id": "guided-goal-dumbbell-conditioning",
+    "title": "Dumbbell Conditioning",
+    "equipment": "Dumbbells · clear space",
+    "old": "./workout-images/neutral-hiit-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-dumbbell-conditioning.jpg"
+  },
+  {
+    "id": "guided-goal-sled-row-carry",
+    "title": "Sled, Row & Carry",
+    "equipment": "Sled lane · dumbbells · kettlebell · T-bar row · low step",
+    "old": "./workout-images/neutral-hiit-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-sled-row-carry.jpg"
+  },
+  {
+    "id": "guided-goal-mat-pilates",
+    "title": "Pilates-Inspired Mat Foundations",
+    "equipment": "Mat",
+    "old": "./workout-images/neutral-mobility-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-mat-pilates.jpg"
+  },
+  {
+    "id": "guided-goal-mobility-control",
+    "title": "Hips, Spine & Shoulders",
+    "equipment": "Mat · light resistance band",
+    "old": "./workout-images/neutral-mobility-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-mobility-control.jpg"
+  },
+  {
+    "id": "guided-goal-runner-single-leg",
+    "title": "Runner Single-Leg Strength",
+    "equipment": "Dumbbells · sturdy low step",
+    "old": "./workout-images/neutral-cardio-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-runner-single-leg.jpg"
+  },
+  {
+    "id": "guided-goal-runner-calves-core",
+    "title": "Runner Calves, Hips & Core",
+    "equipment": "Mat · low step · loop band",
+    "old": "./workout-images/neutral-cardio-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-runner-calves-core.jpg"
+  },
+  {
+    "id": "guided-goal-glute-hamstrings",
+    "title": "Glutes & Hamstrings",
+    "equipment": "Barbell · dumbbells · seated curl · cable · hip abduction machine",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-glute-hamstrings.jpg"
+  },
+  {
+    "id": "guided-goal-shoulders-arms",
+    "title": "Shoulders & Arms",
+    "equipment": "Dumbbells · adjustable bench",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-shoulders-arms.jpg"
+  },
+  {
+    "id": "guided-goal-no-jump",
+    "title": "No-Jump Conditioning",
+    "equipment": "Sturdy low step · stable counter · mat",
+    "old": "./workout-images/neutral-stability-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-no-jump.jpg"
+  },
+  {
+    "id": "guided-goal-strength-balance",
+    "title": "Strength & Balance",
+    "equipment": "Mat · light dumbbells · stable support",
+    "old": "./workout-images/neutral-stability-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-strength-balance.jpg"
+  },
+  {
+    "id": "guided-goal-kettlebell-strength-carries",
+    "title": "Kettlebell Strength & Carries",
+    "equipment": "Kettlebell · clear walking space",
+    "old": "./workout-images/neutral-hiit-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-kettlebell-strength-carries.jpg"
+  },
+  {
+    "id": "guided-goal-sled-strength-intervals",
+    "title": "Sled Strength Intervals",
+    "equipment": "Push sled · clear lane · trap bar · plates · dumbbells · stable bench",
+    "old": "./workout-images/neutral-hiit-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-sled-strength-intervals.jpg"
+  },
+  {
+    "id": "guided-goal-mat-trunk-hips",
+    "title": "Mat Core & Hip Control",
+    "equipment": "Mat",
+    "old": "./workout-images/neutral-mobility-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-mat-trunk-hips.jpg"
+  },
+  {
+    "id": "guided-goal-runner-gym-strength",
+    "title": "Runner Strength in the Gym",
+    "equipment": "Dumbbells · sturdy step · leg press · seated calf raise machine · cable machine · handle",
+    "old": "./workout-images/neutral-cardio-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-runner-gym-strength.jpg"
+  },
+  {
+    "id": "guided-goal-home-glute-hamstrings",
+    "title": "Home Glutes & Hamstrings",
+    "equipment": "Dumbbells · sliders · smooth floor · mat · loop resistance band",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-home-glute-hamstrings.jpg"
+  },
+  {
+    "id": "guided-goal-back-delts",
+    "title": "Back & Delts",
+    "equipment": "Cable machine · neutral-grip pulldown handle · rope · T-bar row · dumbbells · upright bench · reverse fly machine",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-back-delts.jpg"
+  },
+  {
+    "id": "guided-goal-beginner-machine-strength",
+    "title": "Low-Impact Machine Strength",
+    "equipment": "Leg press · chest press machine · cable row machine · seated leg curl machine · calf raise machine · mat",
+    "old": "./workout-images/neutral-stability-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-beginner-machine-strength.jpg"
+  },
+  {
+    "id": "guided-goal-band-bench-no-jump",
+    "title": "Band & Bench Low-Impact",
+    "equipment": "Resistance band · fixed anchor · stable low bench or step · mat",
+    "old": "./workout-images/neutral-stability-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-band-bench-no-jump.jpg"
+  },
+  {
+    "id": "guided-goal-dumbbell-compound-strength",
+    "title": "Dumbbell Compound Strength",
+    "equipment": "Dumbbells · stable bench · clear walking space",
+    "old": "./workout-images/neutral-hiit-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-dumbbell-compound-strength.jpg"
+  },
+  {
+    "id": "guided-goal-bodyweight-band-compounds",
+    "title": "Bodyweight & Band Compound Strength",
+    "equipment": "Resistance band · fixed anchor · stable step · mat",
+    "old": "./workout-images/neutral-hiit-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-bodyweight-band-compounds.jpg"
+  },
+  {
+    "id": "guided-goal-barbell-compound-strength",
+    "title": "Barbell Compound Strength",
+    "equipment": "Barbell · plates · rack · bench · chest-supported T-bar row machine · pull-up bar",
+    "old": "./workout-images/neutral-hiit-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-barbell-compound-strength.jpg"
+  },
+  {
+    "id": "guided-goal-shoulder-trunk-control",
+    "title": "Shoulder & Trunk Control",
+    "equipment": "Mat · light resistance band",
+    "old": "./workout-images/neutral-mobility-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-shoulder-trunk-control.jpg"
+  },
+  {
+    "id": "guided-goal-runner-lateral-strength",
+    "title": "Runner Lateral Strength",
+    "equipment": "Dumbbells · loop resistance band · mat",
+    "old": "./workout-images/neutral-cardio-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-runner-lateral-strength.jpg"
+  },
+  {
+    "id": "guided-goal-runner-strength-primer",
+    "title": "Short Runner Strength Session",
+    "equipment": "Stable low step · mat",
+    "old": "./workout-images/neutral-cardio-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-runner-strength-primer.jpg"
+  },
+  {
+    "id": "guided-goal-dumbbell-back-traps",
+    "title": "Dumbbell Back & Traps",
+    "equipment": "Dumbbells · adjustable bench · clear walking space",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-dumbbell-back-traps.jpg"
+  },
+  {
+    "id": "guided-goal-gym-upper-back-traps",
+    "title": "Upper Back & Traps",
+    "equipment": "Barbell · plates · cable machine · wide bar · rope · dual cable handles · chest-supported T-bar row machine",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-gym-upper-back-traps.jpg"
+  },
+  {
+    "id": "guided-goal-dumbbell-chest-triceps",
+    "title": "Dumbbell Chest & Triceps",
+    "equipment": "Dumbbells · adjustable bench",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-dumbbell-chest-triceps.jpg"
+  },
+  {
+    "id": "guided-goal-low-impact-upper-body",
+    "title": "Low-Impact Upper Body",
+    "equipment": "Light dumbbells · adjustable bench · resistance band · fixed anchor · mat",
+    "old": "./workout-images/neutral-stability-1.jpg",
+    "cover": "./workout-images/neutral-guided-goal-low-impact-upper-body.jpg"
+  },
+  {
+    "id": "push-a",
+    "title": "Push Day A",
+    "equipment": "Gym · bench, dumbbells, cable",
+    "old": "./workout-images/neutral-push-1.jpg",
+    "cover": "./workout-images/neutral-push-1.jpg"
+  },
+  {
+    "id": "push-b",
+    "title": "Push Day B",
+    "equipment": "Gym · dumbbells, machines, cable",
+    "old": "./workout-images/neutral-push-2.jpg",
+    "cover": "./workout-images/neutral-push-2.jpg"
+  },
+  {
+    "id": "pull-a",
+    "title": "Pull Day A",
+    "equipment": "Gym · cable, bench, dumbbells",
+    "old": "./workout-images/neutral-pull-2.jpg",
+    "cover": "./workout-images/neutral-pull-2.jpg"
+  },
+  {
+    "id": "pull-b",
+    "title": "Pull Day B",
+    "equipment": "Gym · assisted pull-up, cable, dumbbells",
+    "old": "./workout-images/neutral-pull-3.jpg",
+    "cover": "./workout-images/neutral-pull-3.jpg"
+  },
+  {
+    "id": "leg-a",
+    "title": "Leg Day A",
+    "equipment": "Gym · dumbbells, leg-curl machine",
+    "old": "./workout-images/neutral-leg-1.jpg",
+    "cover": "./workout-images/neutral-leg-1.jpg"
+  },
+  {
+    "id": "leg-b",
+    "title": "Leg Day B",
+    "equipment": "Gym · leg press, bench, machines",
+    "old": "./workout-images/neutral-leg-2.jpg",
+    "cover": "./workout-images/neutral-leg-2.jpg"
+  },
+  {
+    "id": "core-a",
+    "title": "Core Day A",
+    "equipment": "Mat + band or cable",
+    "old": "./workout-images/neutral-core-1.jpg",
+    "cover": "./workout-images/neutral-core-1.jpg"
+  },
+  {
+    "id": "core-b",
+    "title": "Core Day B",
+    "equipment": "Mat + pull-up station + dumbbell",
+    "old": "./train-images/core.jpg",
+    "cover": "./train-images/core.jpg"
+  },
+  {
+    "id": "mobility-a",
+    "title": "Mobility Day A",
+    "equipment": "Mat + wall",
+    "old": "./workout-images/neutral-mobility-1.jpg",
+    "cover": "./workout-images/neutral-mobility-1.jpg"
+  },
+  {
+    "id": "mobility-b",
+    "title": "Mobility Day B",
+    "equipment": "Mat + wall",
+    "old": "./workout-images/neutral-mobility-2.jpg",
+    "cover": "./workout-images/neutral-mobility-2.jpg"
+  },
+  {
+    "id": "stability-a",
+    "title": "Stability Day A",
+    "equipment": "Mat + wall or chair + band",
+    "old": "./workout-images/neutral-stability-1.jpg",
+    "cover": "./workout-images/neutral-stability-1.jpg"
+  },
+  {
+    "id": "stability-b",
+    "title": "Stability Day B",
+    "equipment": "Mat + low step + light dumbbell",
+    "old": "./workout-images/neutral-stability-2.jpg",
+    "cover": "./workout-images/neutral-stability-2.jpg"
+  },
+  {
+    "id": "cardio-a",
+    "title": "Cardio Day A",
+    "equipment": "Walking space + low stable step",
+    "old": "./workout-images/neutral-cardio-1.jpg",
+    "cover": "./workout-images/neutral-cardio-1.jpg"
+  },
+  {
+    "id": "cardio-b",
+    "title": "Cardio Day B",
+    "equipment": "Gym · bike, rower, elliptical, treadmill, stairs, ski erg",
+    "old": "./workout-images/neutral-cardio-2.jpg",
+    "cover": "./workout-images/neutral-cardio-2.jpg"
+  },
+  {
+    "id": "hiit-a",
+    "title": "HIIT Day A",
+    "equipment": "One space · bodyweight only",
+    "old": "./workout-images/neutral-hiit-2.jpg",
+    "cover": "./workout-images/neutral-hiit-2.jpg"
+  },
+  {
+    "id": "hiit-b",
+    "title": "HIIT Day B",
+    "equipment": "One space · low stable step, sturdy counter",
+    "old": "./workout-images/neutral-hiit-3.jpg",
+    "cover": "./workout-images/neutral-hiit-3.jpg"
+  },
+  {
+    "id": "full-body-balanced",
+    "title": "Balanced Strength",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "old": "./workout-images/neutral-full-body-3.jpg",
+    "cover": "./workout-images/neutral-full-body-3.jpg"
+  },
+  {
+    "id": "full-body-leg-focus",
+    "title": "Lower-Body Emphasis",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "old": "./workout-images/neutral-full-body-2.jpg",
+    "cover": "./workout-images/neutral-full-body-2.jpg"
+  },
+  {
+    "id": "full-body-home",
+    "title": "Home Essentials",
+    "equipment": "Home · backpack, sturdy counter, mat",
+    "old": "./workout-images/neutral-full-body-4.jpg",
+    "cover": "./workout-images/neutral-full-body-4.jpg"
+  },
+  {
+    "id": "full-body-hiit",
+    "title": "Full-Body HIIT",
+    "equipment": "Home · mat, sturdy counter",
+    "old": "./train-images/finish.jpg",
+    "cover": "./train-images/finish.jpg"
+  },
+  {
+    "id": "push-chest",
+    "title": "Chest Emphasis",
+    "equipment": "Gym · bench, dumbbells, cable",
+    "old": "./workout-images/neutral-push-3.jpg",
+    "cover": "./workout-images/neutral-push-3.jpg"
+  },
+  {
+    "id": "push-shoulders",
+    "title": "Shoulder Emphasis",
+    "equipment": "Gym · dumbbells, bench, cable",
+    "old": "./workout-images/neutral-push-4.jpg",
+    "cover": "./workout-images/neutral-push-4.jpg"
+  },
+  {
+    "id": "push-home",
+    "title": "Home Push",
+    "equipment": "Home · dumbbells, mat, sturdy counter",
+    "old": "./train-images/press.jpg",
+    "cover": "./train-images/press.jpg"
+  },
+  {
+    "id": "pull-back",
+    "title": "Back Emphasis",
+    "equipment": "Gym · cable, dumbbells, bench",
+    "old": "./workout-images/neutral-pull-4.jpg",
+    "cover": "./workout-images/neutral-pull-4.jpg"
+  },
+  {
+    "id": "pull-arms",
+    "title": "Back and Biceps",
+    "equipment": "Gym · cable, dumbbells, bench",
+    "old": "./train-images/arms.jpg",
+    "cover": "./train-images/arms.jpg"
+  },
+  {
+    "id": "pull-home",
+    "title": "Home Pull",
+    "equipment": "Home · dumbbells, resistance band, bench",
+    "old": "./workout-images/neutral-core-4.jpg",
+    "cover": "./workout-images/neutral-core-4.jpg"
+  },
+  {
+    "id": "leg-quads",
+    "title": "Quad Emphasis",
+    "equipment": "Gym · leg machines, dumbbells, low step",
+    "old": "./workout-images/neutral-leg-4.jpg",
+    "cover": "./workout-images/neutral-leg-4.jpg"
+  },
+  {
+    "id": "leg-posterior",
+    "title": "Glutes and Hamstrings",
+    "equipment": "Gym · bench, dumbbells, leg curl",
+    "old": "./train-images/posterior.jpg",
+    "cover": "./train-images/posterior.jpg"
+  },
+  {
+    "id": "leg-home",
+    "title": "Home Legs",
+    "equipment": "Home · dumbbells, mat, low step",
+    "old": "./workout-images/neutral-leg-3.jpg",
+    "cover": "./workout-images/neutral-leg-home.jpg"
+  },
+  {
+    "id": "core-brace",
+    "title": "Bracing Basics",
+    "equipment": "Home · mat, resistance band",
+    "old": "./workout-images/neutral-core-4.jpg",
+    "cover": "./workout-images/neutral-core-brace.jpg"
+  },
+  {
+    "id": "core-loaded",
+    "title": "Loaded Core",
+    "equipment": "Gym · cable, dumbbell, mat",
+    "old": "./workout-images/neutral-core-3.jpg",
+    "cover": "./workout-images/neutral-core-3.jpg"
+  },
+  {
+    "id": "core-no-kit",
+    "title": "No-Equipment Core",
+    "equipment": "Home · mat",
+    "old": "./workout-images/neutral-core-2.jpg",
+    "cover": "./workout-images/neutral-core-2.jpg"
+  },
+  {
+    "id": "mobility-hips",
+    "title": "Hips and Ankles",
+    "equipment": "Home · mat, wall",
+    "old": "./workout-images/neutral-mobility-3.jpg",
+    "cover": "./workout-images/neutral-mobility-3.jpg"
+  },
+  {
+    "id": "mobility-upper",
+    "title": "Upper-Body Reset",
+    "equipment": "Home · mat, wall",
+    "old": "./workout-images/neutral-mobility-4.jpg",
+    "cover": "./workout-images/neutral-mobility-4.jpg"
+  },
+  {
+    "id": "mobility-gentle",
+    "title": "Gentle Daily Flow",
+    "equipment": "Home · mat, wall",
+    "old": "./workout-images/neutral-core-2.jpg",
+    "cover": "./workout-images/neutral-mobility-gentle.jpg"
+  },
+  {
+    "id": "stability-single-leg",
+    "title": "Single-Leg Control",
+    "equipment": "Home · sturdy support, low step, mat",
+    "old": "./train-images/unilateral.jpg",
+    "cover": "./train-images/unilateral.jpg"
+  },
+  {
+    "id": "stability-carries",
+    "title": "Carries and Control",
+    "equipment": "Gym · dumbbells, band, low step, mat",
+    "old": "./workout-images/neutral-stability-3.jpg",
+    "cover": "./workout-images/neutral-stability-3.jpg"
+  },
+  {
+    "id": "stability-foundation",
+    "title": "Balance Foundations",
+    "equipment": "Home · sturdy support, mat",
+    "old": "./workout-images/neutral-stability-4.jpg",
+    "cover": "./workout-images/neutral-stability-4.jpg"
+  },
+  {
+    "id": "cardio-walk",
+    "title": "Outdoor Walk and Move",
+    "equipment": "Outdoors · safe flat route and gentle incline",
+    "old": "./workout-images/neutral-cardio-4.jpg",
+    "cover": "./workout-images/neutral-cardio-4.jpg"
+  },
+  {
+    "id": "cardio-home",
+    "title": "Home Low Impact",
+    "equipment": "Home · space to move, optional low step",
+    "old": "./workout-images/neutral-hiit-2.jpg",
+    "cover": "./workout-images/neutral-cardio-home.jpg"
+  },
+  {
+    "id": "cardio-machines",
+    "title": "Low-Impact Gym",
+    "equipment": "Gym · bike, rower, elliptical, treadmill, low step",
+    "old": "./workout-images/neutral-cardio-3.jpg",
+    "cover": "./workout-images/neutral-cardio-3.jpg"
+  },
+  {
+    "id": "hiit-bodyweight",
+    "title": "Bodyweight Intervals",
+    "equipment": "Home · mat, sturdy counter",
+    "old": "./workout-images/neutral-full-body-4.jpg",
+    "cover": "./workout-images/neutral-hiit-bodyweight.jpg"
+  },
+  {
+    "id": "hiit-low-impact",
+    "title": "Low-Impact Intervals",
+    "equipment": "Home · low step, space to move",
+    "old": "./train-images/finish.jpg",
+    "cover": "./workout-images/neutral-hiit-low-impact.jpg"
+  },
+  {
+    "id": "hiit-gym",
+    "title": "Gym Conditioning",
+    "equipment": "One space · light dumbbells, mat",
+    "old": "./workout-images/neutral-hiit-4.jpg",
+    "cover": "./workout-images/neutral-hiit-4.jpg"
+  },
+  {
+    "id": "arms-balanced",
+    "title": "Balanced Arms",
+    "equipment": "Gym · dumbbells, cable, bench",
+    "old": "./workout-images/neutral-arms-1.jpg",
+    "cover": "./workout-images/neutral-arms-1.jpg"
+  },
+  {
+    "id": "arms-biceps",
+    "title": "Biceps Emphasis",
+    "equipment": "Gym · barbell, dumbbells, cable, bench",
+    "old": "./train-images/arms.jpg",
+    "cover": "./workout-images/neutral-arms-biceps.jpg"
+  },
+  {
+    "id": "arms-triceps",
+    "title": "Triceps Emphasis",
+    "equipment": "Gym · bench, barbell, cable, dumbbells",
+    "old": "./workout-images/neutral-arms-2.jpg",
+    "cover": "./workout-images/neutral-arms-2.jpg"
+  },
+  {
+    "id": "arms-dumbbells",
+    "title": "Dumbbell Arms",
+    "equipment": "Home · dumbbells, mat",
+    "old": "./workout-images/neutral-arms-3.jpg",
+    "cover": "./workout-images/neutral-arms-3.jpg"
+  },
+  {
+    "id": "arms-cables",
+    "title": "Cable Arms",
+    "equipment": "Gym · cable, straight bar and rope attachments",
+    "old": "./workout-images/neutral-arms-4.jpg",
+    "cover": "./workout-images/neutral-arms-4.jpg"
+  },
+  {
+    "id": "glutes-builder",
+    "title": "Glute Builder",
+    "equipment": "Gym · bench, dumbbells, resistance band",
+    "old": "./workout-images/neutral-glutes-1.jpg",
+    "cover": "./workout-images/neutral-glutes-1.jpg"
+  },
+  {
+    "id": "glutes-home",
+    "title": "Home Glutes",
+    "equipment": "Home · band, mat, low step",
+    "old": "./workout-images/neutral-glutes-4.jpg",
+    "cover": "./workout-images/neutral-glutes-4.jpg"
+  },
+  {
+    "id": "glutes-hinge",
+    "title": "Hinge Emphasis",
+    "equipment": "Gym · dumbbells, bench, leg curl, band",
+    "old": "./workout-images/neutral-glutes-3.jpg",
+    "cover": "./workout-images/neutral-glutes-3.jpg"
+  },
+  {
+    "id": "glutes-single-leg",
+    "title": "Single-Leg Glutes",
+    "equipment": "Gym · dumbbells, low step, bench, mat",
+    "old": "./train-images/unilateral.jpg",
+    "cover": "./workout-images/neutral-glutes-single-leg.jpg"
+  },
+  {
+    "id": "glutes-foundation",
+    "title": "Glute Foundations",
+    "equipment": "Home · sturdy chair, mat, optional band",
+    "old": "./workout-images/neutral-glutes-2.jpg",
+    "cover": "./workout-images/neutral-glutes-2.jpg"
+  },
+  {
+    "id": "kb-foundations",
+    "title": "Kettlebell Foundations",
+    "equipment": "One kettlebell · sturdy bench or chair",
+    "old": "./train-images/kettlebell.jpg",
+    "cover": "./train-images/kettlebell.jpg"
+  },
+  {
+    "id": "kb-full-body",
+    "title": "Kettlebell Full Body Strength",
+    "equipment": "One kettlebell · sturdy bench or chair",
+    "old": "./workout-images/neutral-kettlebell-1.jpg",
+    "cover": "./workout-images/neutral-kettlebell-1.jpg"
+  },
+  {
+    "id": "kb-lower-body",
+    "title": "Kettlebell Lower Body",
+    "equipment": "One kettlebell",
+    "old": "./workout-images/neutral-kettlebell-3.jpg",
+    "cover": "./workout-images/neutral-kettlebell-3.jpg"
+  },
+  {
+    "id": "kb-upper-body",
+    "title": "Kettlebell Upper Body",
+    "equipment": "One kettlebell · sturdy bench or chair",
+    "old": "./workout-images/neutral-kettlebell-5.jpg",
+    "cover": "./workout-images/neutral-kettlebell-5.jpg"
+  },
+  {
+    "id": "kb-core-carries",
+    "title": "Kettlebell Core & Carries",
+    "equipment": "One or two kettlebells · mat",
+    "old": "./workout-images/neutral-kettlebell-4.jpg",
+    "cover": "./workout-images/neutral-kettlebell-4.jpg"
+  },
+  {
+    "id": "kb-hinge-swing",
+    "title": "Kettlebell Hinge & Swing",
+    "equipment": "One or two kettlebells · sturdy bench or chair",
+    "old": "./train-images/hinge.jpg",
+    "cover": "./train-images/hinge.jpg"
+  },
+  {
+    "id": "kb-unilateral",
+    "title": "Kettlebell Single-side Strength",
+    "equipment": "One kettlebell · sturdy bench or chair",
+    "old": "./train-images/unilateral.jpg",
+    "cover": "./workout-images/neutral-kb-unilateral.jpg"
+  },
+  {
+    "id": "kb-low-impact",
+    "title": "Kettlebell Low-impact Basics",
+    "equipment": "One kettlebell · sturdy box and bench or chair",
+    "old": "./workout-images/neutral-kettlebell-6.jpg",
+    "cover": "./workout-images/neutral-kettlebell-6.jpg"
+  },
+  {
+    "id": "kb-conditioning",
+    "title": "Kettlebell Controlled Conditioning",
+    "equipment": "One kettlebell",
+    "old": "./train-images/squat.jpg",
+    "cover": "./train-images/squat.jpg"
+  },
+  {
+    "id": "kb-double-strength",
+    "title": "Kettlebell Double Bell Strength",
+    "equipment": "Two matched kettlebells",
+    "old": "./workout-images/neutral-kettlebell-2.jpg",
+    "cover": "./workout-images/neutral-kettlebell-2.jpg"
+  },
+  {
+    "id": "full-body",
+    "title": "Rotating full body",
+    "equipment": "Home or gym",
+    "old": "./workout-images/neutral-full-body-1.jpg",
+    "cover": "./workout-images/neutral-full-body-1.jpg"
+  }
+]

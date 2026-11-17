@@ -47,6 +47,11 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    assert.equal(await cover.locator('img').getAttribute('src'),photo);
    assert.deepEqual(await cover.locator('[data-anatomy-region]').evaluateAll(layers=>layers.map(layer=>layer.outerHTML)),anatomy);
    assert(await card.locator('.home-change-workout').isVisible());
+   assert(await card.locator('.home-change-workout').evaluate(button=>{
+    const icon=button.querySelector('svg').getBoundingClientRect();
+    const label=button.querySelector('span').getBoundingClientRect();
+    return icon.left>=label.right&&Math.abs((icon.top+icon.height/2)-(label.top+label.height/2))<2;
+   }));
    assert((await card.boundingBox()).height<Math.min(260,height/1.5));
    assert.equal(await page.evaluate(()=>JSON.stringify(state.workoutDrafts)),before);
    if(width===390)await card.screenshot({path:path.join(out,'home-workout-banner-minimized.jpg')});

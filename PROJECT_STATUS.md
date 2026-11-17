@@ -1,3 +1,9 @@
+## 2026-11-17 — Workout cover and builder polish
+
+- Android 1.0.162 aligns Manage workouts and the arrow in one rounded Home button, adds a themed builder discard dialog, and assigns distinct artwork to all 133 built-in entries. See docs/workout-cover-audit-2026-11-17.json for the ID, equipment, previous cover, and release cover.
+- Generated people-free equipment photos for the guided catalog and legacy duplicates. Category artwork and personal photo controls retain their existing behavior.
+- Branch: android-health-connect. Local catalog, cover uniqueness, builder and planner tests passed. Signed build and mobile checks pending.
+
 ## 2026-11-17 — Matching workout covers on Home
 
 - Android 1.0.161 shows the picker’s exact selected workout artwork and muscle layers on the Home Trainer card, open or closed. Expanded exercises sit beneath the cover with photos, sets, reps and completion.

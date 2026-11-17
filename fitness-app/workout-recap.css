@@ -36,7 +36,7 @@ body[data-view=progress] .recap-muscle-choices button[aria-pressed=true]{backgro
 .recap-completed small{display:block;margin-top:4px}
 .workout-recap .recap-muscle-note{font-size:12px;color:#c7e1d3!important}
 
-body[data-view=home] #screen .home-workout :is(.home-change-workout,[data-edit-home-exercise]){
+body[data-view=home] #screen .home-workout [data-edit-home-exercise]{
  background:transparent!important;border:0!important;box-shadow:none!important;color:#f0fff5!important
 }
 body[data-view=home] #screen .home-workout [data-edit-home-exercise]{
@@ -289,7 +289,13 @@ body[data-view=home] #screen .home-workout-covered .home-exercise-prescription{d
 body[data-view=home] #screen .home-workout-covered .home-workout-actions{position:relative;z-index:2;padding:0 13px 8px}
 body[data-view=home] #screen .home-workout-covered[data-folded=true] .home-workout-actions{position:absolute;bottom:0;left:0}
 body[data-view=home] #screen .home-workout-covered .home-workout-actions>.home-change-workout{
- width:auto;flex:none;justify-content:start;gap:6px;min-height:44px;padding:6px 4px;
- background:transparent!important;color:#f1fff5!important;text-align:left;
+ display:inline-flex;flex:none;flex-direction:row;align-items:center;justify-content:space-between;
+ width:auto;max-width:100%;min-height:44px;gap:10px;padding:8px 12px;
+ border:1px solid #8cc7a582!important;border-radius:12px;
+ background:#22543e!important;color:#f1fff5!important;white-space:nowrap;
 }
 body[data-view=home] #screen .home-workout-covered.home-banner-custom .home-workout-hero :is(.hybrid-workout-cover>img,.home-workout-hero>img){visibility:hidden}
+
+body[data-view=home] #screen .home-workout-covered .home-change-workout span{font-size:12px;letter-spacing:0}
+body[data-view=home] #screen .home-workout-covered .home-change-workout svg{flex:none;width:17px;height:17px}
+body[data-view] #discard-workout-dialog{inset:0;margin:auto;width:min(calc(100% - 28px),380px);height:max-content}

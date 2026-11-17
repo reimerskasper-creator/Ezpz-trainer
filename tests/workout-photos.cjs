@@ -83,6 +83,20 @@ for(const name of ['Dumbbell Shrug','Barbell Shrug']){
 assert(api.hybridWorkoutCover('Build Muscle',[{name:'Cable Rope Face Pull'}]).includes('anatomy-traps anatomy-supporting'),'Supporting trap artwork');
 assert(api.rankedExerciseSwaps('DB Shrug','traps')[0].name==='Barbell Shrug','Trap swaps and search use the new guides');
 
+const coverAudit=JSON.parse(fs.readFileSync(path.join(__dirname,'../docs/workout-cover-audit-2026-11-17.json'),'utf8'));
+const artwork=new Set(),paths=new Set();
+const workoutEntries=[...api.featuredWorkouts,...api.workoutTemplates,{id:'full-body'}];
+assert(coverAudit.length===workoutEntries.length,'Every built-in workout is audited');
+for(const workout of workoutEntries){
+ const cover=api.workoutCover(workout),expected=coverAudit.find(row=>row.id===workout.id);
+ assert(expected?.cover===cover.src,'Cover audit matches '+workout.id);
+ assert(api.workoutCover(workout.id).src===cover.src,'ID and workout object use the same artwork for '+workout.id);
+ const bytes=fs.readFileSync(path.join(__dirname,'..',cover.src));
+ const digest=require('node:crypto').createHash('sha256').update(bytes).digest('hex');
+ assert(!paths.has(cover.src)&&!artwork.has(digest),'Unique cover photo for '+workout.id);
+ paths.add(cover.src);artwork.add(digest);
+}
+
 const curlSwaps=api.rankedExerciseSwaps('Lying Leg Curl');
 const closeCurls=['Slider Hamstring Curl','Seated Leg Curl','Standing Single-Leg Machine Leg Curl'];
 assert(curlSwaps.slice(0,3).every(x=>x.primaryMatch&&closeCurls.includes(x.name)),'Hamstring curls lead ranked swap suggestions');
