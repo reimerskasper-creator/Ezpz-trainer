@@ -2,7 +2,8 @@
 
 - Android 1.0.160 expands Find your workout to the safe area, compacts the shortcuts, and uses larger category and workout artwork.
 - Saved cards show a compact exercise preview. The options menu provides in-place editing with the current cover controls and confirmed deletion with upcoming schedule dates. Completed history and standalone saved plans survive deletion.
-- Branch: android-health-connect. Local builder, planner, cover and personal-photo checks passed. Signed build and mobile workflow checks pending.
+- Branch: android-health-connect. Source commit `26274c3`. Android run 44172344670 passed saved-workout management at 320, 390 and 430 px, native unit tests, and saved-workout planning and Trainer smoke checks. The downloaded APK contains the approved picker and saved workout assets and matches the 1.0.159 signing certificate. Physical handset installation remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44172344670/artifacts/14367124492
 
 ## 2026-11-17 — Live anatomy covers for personal workouts
 
