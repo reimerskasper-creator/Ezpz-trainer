@@ -72,7 +72,10 @@ public class WorkoutAudioPlugin extends Plugin {
 
     @PluginMethod public void previewRestVoice(PluginCall call) {
         String voice = call.getString("voice", "");
-        handler.post(() -> speak("Five seconds left.", voice, "preview"));
+        handler.post(() -> {
+            if (speechReady && "rest".equals(speakingCue) && speech.isSpeaking()) return;
+            speak("Five seconds left.", voice, "preview");
+        });
         call.resolve();
     }
 

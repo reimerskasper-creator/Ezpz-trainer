@@ -93,7 +93,7 @@ async function verify(){
    state.workoutDrafts={'guided-home-legs-a':{'sr0-0':'8'}};
    render();
   });
-  assert(await page.locator('.home-workout').getByRole('button',{name:'Resume workout'}).isVisible());
+  assert(await page.locator('.overview-actions').getByRole('button',{name:'Resume workout'}).isVisible());
   await page.evaluate(()=>{
    state.workoutDrafts={};state.workoutSchedule={};
    state.selectedWorkout='guided-home-full-body-a';
