@@ -2,7 +2,8 @@
 
 - Android 1.0.152 increases the guided picker from 41 to 61 movements. Each addition has a trainer photo, exact exercise reference, searchable aliases, equipment, and primary or supporting muscle highlights.
 - Custom workouts can select and log the new exercises through the existing builder. Step-ups and split squats default to per-side reps. Suitcase carries default to per-side seconds.
-- Branch: android-health-connect. Packaged Android checks cover filtering, choosing a new exercise, and starting it in Trainer.
+- Branch: android-health-connect. Source commit `15a3c29`. Android run 44082888744 produced the signed APK and passed picker and Trainer checks at 320, 390 and 430 px. Physical handset installation remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44082888744/artifacts/14328217228
 
 ## 2026-11-17 — Workout builder and session clock
 
