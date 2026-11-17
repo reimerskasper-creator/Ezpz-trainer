@@ -1,3 +1,11 @@
+## 2026-11-16 — Workout cover anatomy and rest controls
+
+- Android 1.0.148 separates the Home Start/Resume action from Manage workouts, which opens the existing chooser.
+- The rest timer says “Five seconds left” and plays a tone at zero. Countdown voice opens a themed picker with voice previews.
+- Category covers pair existing gym photos with the recap artwork. Guided workout covers use their current exercise lists. Primary and supporting muscles use separate shades. Unmapped exercises have no inferred highlights.
+- Branch: android-health-connect. Build 43985393309 at `e4818aa` produced a signed APK and passed the saved-workout and Trainer checks, including phone widths of 320, 390 and 430 px. Bluetooth playback on a physical Android phone remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/43985393309/artifacts/14283979712
+
 ## 2026-11-16 — Workout completion and spoken countdowns
 
 - Android 1.0.147 adds Done from recap to Home, blends the artwork into the recap and thickens muscle-button outlines.
