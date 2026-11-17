@@ -102,48 +102,6 @@ async function verify(){
   await calfSwap.getByRole('searchbox').fill('Seated Calf Raise');
   await calfSwap.locator('[data-exercise-name="Seated Calf Raise"]').click();
   assert(await page.getByRole('heading',{name:'Seated Calf Raise',exact:true}).isVisible());
-  const sameMuscle=/Seated Leg Curl|Slider Hamstring Curl|Standing Single-Leg Machine Leg Curl/;
-  async function checkSwapRow(row){
-   assert.match(await row.innerText(),sameMuscle);
-   assert.match(await row.innerText(),/Shared primary muscle/);
-   const contrast=await row.evaluate(button=>{
-    const rgb=text=>text.match(/[\d.]+/g).slice(0,3).map(Number);
-    const luminance=text=>rgb(text).map(x=>x/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4)
-     .reduce((total,x,i)=>total+x*[.2126,.7152,.0722][i],0);
-    const style=getComputedStyle(button),foreground=luminance(style.color),background=luminance(style.backgroundColor);
-    return (Math.max(foreground,background)+.05)/(Math.min(foreground,background)+.05);
-   });
-   assert(contrast>=4.5,'Swap option contrast: '+contrast);
-  }
-  for(const appearance of [{mode:'dark',accent:'emerald'},{mode:'light',accent:'emerald'},{mode:'dark',accent:'lavender'}]){
-   await page.evaluate(theme=>{
-    state.appAppearance=theme;
-    state.selectedWorkout='guided-gym-legs-a';tab='train';render();focusTrainingExercise(4);
-   },appearance);
-   await page.locator('.trainer-photo-swap[data-compact-swap="4"]').click();
-   const trainerPicker=page.locator('#trainer-swap-4');
-   await checkSwapRow(trainerPicker.locator('[data-exercise-name]').first());
-   await trainerPicker.getByRole('searchbox').fill('hamstring curl');
-   assert(await trainerPicker.locator('[data-exercise-name="Slider Hamstring Curl"]').isVisible());
-   await trainerPicker.getByRole('button',{name:'Close',exact:true}).click();
-
-   await page.evaluate(()=>{
-    state.homeWorkoutChoice={id:state.selectedWorkout,date:foodDate()};tab='home';render();
-   });
-   await page.locator('[data-edit-workout-exercises]').click();
-   const planEditor=page.locator('#workout-edit-dialog');
-   await planEditor.locator('[data-edit-index="4"]').click();
-   await planEditor.locator('[data-edit-swap]').click();
-   await checkSwapRow(planEditor.locator('[data-edit-results] button').first());
-   await planEditor.getByRole('button',{name:'Close exercise editor'}).click();
-
-   await page.evaluate(()=>startBuilder('guided-gym-legs-a'));
-   await page.locator('[data-builder-picker="4"]').click();
-   const builderPicker=page.locator('#builder-exercise-picker');
-   await checkSwapRow(builderPicker.locator('[data-builder-movement]').first());
-   await builderPicker.getByRole('button',{name:'Close exercise picker'}).click();
-  }
-  await page.evaluate(()=>{delete state.appAppearance;state.homeWorkoutChoice={id:'guided-home-legs-a',date:foodDate()}});
   await page.evaluate(()=>{state.workoutDrafts={};tab='home';render()});
 
   await page.evaluate(()=>{
@@ -192,6 +150,48 @@ async function verify(){
   assert((await page.locator('[data-adjusted-carbs]').innerText()).includes('Carbs with this choice:'));
   await page.locator('#nutrition-result button[type=submit]').click();
   assert.equal(await page.evaluate(()=>state.nutritionTargets.protein),280);
+  await page.evaluate(()=>{state.workoutSchedule={};state.workoutDrafts={}});
+  const sameMuscle=/Seated Leg Curl|Slider Hamstring Curl|Standing Single-Leg Machine Leg Curl/;
+  async function checkSwapRow(row){
+   assert.match(await row.innerText(),sameMuscle);
+   assert.match(await row.innerText(),/Shared primary muscle/);
+   const contrast=await row.evaluate(button=>{
+    const rgb=text=>text.match(/[\d.]+/g).slice(0,3).map(Number);
+    const luminance=text=>rgb(text).map(x=>x/255).map(x=>x<=.04045?x/12.92:((x+.055)/1.055)**2.4)
+     .reduce((total,x,i)=>total+x*[.2126,.7152,.0722][i],0);
+    const style=getComputedStyle(button),foreground=luminance(style.color),background=luminance(style.backgroundColor);
+    return (Math.max(foreground,background)+.05)/(Math.min(foreground,background)+.05);
+   });
+   assert(contrast>=4.5,'Swap option contrast: '+contrast);
+  }
+  for(const appearance of [{mode:'dark',accent:'emerald'},{mode:'light',accent:'emerald'},{mode:'dark',accent:'lavender'}]){
+   await page.evaluate(theme=>{
+    state.appAppearance=theme;
+    state.selectedWorkout='guided-gym-legs-a';tab='train';render();focusTrainingExercise(4);
+   },appearance);
+   await page.locator('.trainer-photo-swap[data-compact-swap="4"]').click();
+   const trainerPicker=page.locator('#trainer-swap-4');
+   await checkSwapRow(trainerPicker.locator('[data-exercise-name]').first());
+   await trainerPicker.getByRole('searchbox').fill('hamstring curl');
+   assert(await trainerPicker.locator('[data-exercise-name="Slider Hamstring Curl"]').isVisible());
+   await trainerPicker.getByRole('button',{name:'Close',exact:true}).click();
+
+   await page.evaluate(()=>{
+    state.homeWorkoutChoice={id:state.selectedWorkout,date:foodDate()};tab='home';render();
+   });
+   await page.locator('[data-edit-workout-exercises]').click();
+   const planEditor=page.locator('#workout-edit-dialog');
+   await planEditor.locator('[data-edit-index="4"]').click();
+   await planEditor.locator('[data-edit-swap]').click();
+   await checkSwapRow(planEditor.locator('[data-edit-results] button').first());
+   await planEditor.getByRole('button',{name:'Close exercise editor'}).click();
+
+   await page.evaluate(()=>startBuilder('guided-gym-legs-a'));
+   await page.locator('[data-builder-picker="4"]').click();
+   const builderPicker=page.locator('#builder-exercise-picker');
+   await checkSwapRow(builderPicker.locator('[data-builder-movement]').first());
+   await builderPicker.getByRole('button',{name:'Close exercise picker'}).click();
+  }
   assert.deepEqual(failures,[]);
   console.log('PASS: covered library, personal workout blocked until photo and video, and persistent workout-only reset.');
  }finally{await browser.close();server.close()}
