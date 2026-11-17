@@ -2,7 +2,8 @@
 
 - Android 1.0.159 draws the default cover from the personal workout’s exercise list. The builder updates as the user types, picks or removes exercises. Known movements show primary and supporting muscle highlights, and unmapped names leave the figure neutral unless other movements are mapped.
 - A chosen photo takes priority. Use default restores the anatomy cover. Saved workouts and workout cards use the same derived cover with no new storage or backup fields.
-- Branch: android-health-connect. Targeted workout builder, planner and photo checks run before delivery.
+- Branch: android-health-connect. Source commit `4c7fe14`. Android run 44167454318 passed packaged workout media and live cover checks and native unit tests. The downloaded APK contains the builder and photo assets and matches the 1.0.158 signing certificate. Physical handset installation remains unverified.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44167454318/artifacts/14367155409
 
 ## 2026-11-17 — Compound strength, trap exercises and recap anatomy
 
