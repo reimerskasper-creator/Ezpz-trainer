@@ -2,7 +2,8 @@
 
 - Android 1.0.150 uses a soft forest green default Trainer background. Custom workout and exercise backgrounds still take precedence.
 - Manage workouts uses charcoal-green studio backdrops behind the existing category anatomy figures and muscle layers. Program and custom workout photos retain their existing artwork.
-- Branch: android-health-connect. Android build and mobile checks pending.
+- Branch: android-health-connect. Source commit `8412a05`. Android run 43997253011 built the signed APK and passed the saved workout, Trainer and recap checks. Broader regression checks were in progress at upload.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/43997253011/artifacts/14289919875
 
 ## 2026-11-16 — Photo-first workout picker
 
