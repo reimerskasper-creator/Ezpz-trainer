@@ -2,7 +2,9 @@
 
 - Android 1.0.154 expands the guided library from 101 to 141 exercises. Each new entry includes a matched trainer photo, equipment, muscle map, and demonstration link.
 - Close-grip V-handle searches resolve to the existing seated cable row. The wide-grip straight-bar setup has its own entry.
-- Branch: android-health-connect. Preset programs are a separate follow-up.
+- Branch: android-health-connect. Source commit `63833de`. Android run 44138615131 verified the existing signing key, built 1.0.154, and passed packaged workout media, saved workouts, Trainer, and recap checks. The downloaded APK contains all 40 new trainer photos and the updated catalog.
+- Download: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44138615131/artifacts/14353102849
+- Broader checks failed in the Home workout banner and in the separate Sleep overview/Progress workflow. Physical handset installation remains unverified. Preset programs are a separate follow-up.
 
 ## 2026-11-17 — 40 additional guided exercises
 
