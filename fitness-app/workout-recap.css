@@ -299,3 +299,4 @@ body[data-view=home] #screen .home-workout-covered.home-banner-custom .home-work
 body[data-view=home] #screen .home-workout-covered .home-change-workout span{font-size:12px;letter-spacing:0}
 body[data-view=home] #screen .home-workout-covered .home-change-workout svg{flex:none;width:17px;height:17px}
 body[data-view] #discard-workout-dialog{inset:0;margin:auto;width:min(calc(100% - 28px),380px);height:max-content}
+body[data-view] #discard-workout-dialog button:focus-visible{outline:2px solid var(--ui-text,#f1fff5);outline-offset:-3px}

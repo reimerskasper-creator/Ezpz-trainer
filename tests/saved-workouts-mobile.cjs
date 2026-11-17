@@ -53,6 +53,7 @@ assert(await page.evaluate(()=>!Object.values(state.workoutSchedule).includes('c
  !Object.values(state.extraWorkouts).flat().some(x=>x.workoutId==='custom-saved-1')&&
  state.logs.some(x=>x.workoutId==='custom-saved-1')));
 await page.evaluate(()=>{state.customWorkouts=[];state.selectedWorkout='push-a';state.workoutSchedule={};save();tab='home';render()});await page.locator('[data-overview-workout]').click();await page.locator('.saved-workouts-shortcut').click();assert((await page.locator('.chooser-empty').innerText()).includes('No saved workouts yet'));await page.locator('.chooser-empty [data-action="create-my-workout"]').click();assert(await page.locator('#workout-builder').isVisible());
+await page.locator("[data-builder-picker-close]").click();
 await page.locator('#builder-title').fill('Unsaved draft');
 await page.locator('#workout-builder [data-action="cancel-builder"]').click();
 await discard.getByRole('heading',{name:'Discard this unsaved workout?'}).waitFor();
