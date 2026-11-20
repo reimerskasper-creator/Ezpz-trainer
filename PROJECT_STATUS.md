@@ -1,7 +1,8 @@
 ## 2026-11-20 — Home and Day polish
 
 - Android 1.0.164 candidate adds matching anatomy artwork to upcoming workout rows, a clearer Manage workouts action, named workout filters, shared Home and Day macro cards, a Scan label, and clearer steps and weigh-in labels.
-- Branch: android-health-connect. Home, flexible-day, Home panel, native health and nutrition import suites passed locally. Android signing and artifact delivery require the Android Health Connect test workflow. Physical phone installation is pending.
+- Branch: android-health-connect. Home, flexible-day, Home panel, native health and nutrition import suites passed locally. Source commit `7e31b72`. Android run 44780444665 passed packaged startup, required workout media, saved workout planning and native unit tests. Extracted APK verified as com.ezpz.fitness 1.0.164 (165), with the same signing certificate as 1.0.162. The post-build recap test searched for the previous picker label; its locator was updated. Physical phone installation is pending.
+- Android artifact: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44780444665/artifacts/14650847006
 
 ## 2026-11-17 — Workout cover and builder polish
 

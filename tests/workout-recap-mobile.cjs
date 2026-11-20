@@ -51,7 +51,7 @@ const server=http.createServer((req,res)=>{
    const chooser=page.locator('#workout-chooser');
    assert(await chooser.isVisible());
    assert.equal(await chooser.locator('[data-workout-category="Leg"] [data-anatomy-region="hamstrings"]').count(),1);
-   await chooser.getByRole('button',{name:'Explore Push programs'}).click();
+   await chooser.getByRole('button',{name:'Explore Push workouts'}).click();
    assert(await chooser.locator('.program-photo .hybrid-workout-cover').count()>0);
    await chooser.getByRole('button',{name:'Close workout chooser'}).click();
    await page.getByRole('button',{name:'Start workout',exact:true}).click();
