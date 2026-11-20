@@ -1,7 +1,8 @@
 ## 2026-11-20 — Focused active workout
 
-- Android 1.0.165 candidate simplifies the active Trainer to one exercise card by default, full-width media with right-hand controls, scrollable set rows, and a pinned elapsed, exercise picker, rest and finish bar. Native identity and signing workflow carry forward.
-- Branch: android-health-connect. Trainer media, training usability, flexible-day and Home suites passed locally. Android build and physical-device installation are pending.
+- Android 1.0.165 simplifies the active Trainer to one exercise card by default, full-width media with right-hand controls, scrollable set rows, and a pinned elapsed, exercise picker, rest and finish bar. Native identity and signing workflow carry forward.
+- Branch: android-health-connect. Source commit `195ddd1`. Four viewport tests covered set entry, next/previous, exercise picker, rest, Finish and keyboard-sized views. Trainer media and plan package views passed at three widths. Android run 44784346614 built the APK, and the package identity, version, signed integrity and certificate match against 1.0.164 were verified. Physical-device installation remains unverified.
+- Android artifact: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44784346614/artifacts/14653088901
 
 ## 2026-11-20 — Home and Day polish
 
