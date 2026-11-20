@@ -289,3 +289,8 @@ body[data-view=custom-food] #food-flow .has-macro-ring>div{grid-column:1 / -1;gr
  #food-flow .food-review-top .personal-photo-actions>*{flex-basis:40px;width:40px;min-width:40px}
  .food-review-energy{font-size:23px}
 }
+#food-flow #food-quick-feedback[hidden]{display:none}
+body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>div{margin-top:6px}
+body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>.food-nutrition-basis,
+body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>strong{padding-right:0}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>svg.food-macro-ring{width:46px!important;height:46px!important}
