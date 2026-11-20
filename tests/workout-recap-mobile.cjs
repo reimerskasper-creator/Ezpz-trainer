@@ -129,6 +129,13 @@ const server=http.createServer((req,res)=>{
    const builder=page.locator('#builder-exercise-picker');
    assert(await builder.isVisible());
    assert(await builder.locator('[data-builder-muscle="traps"] [data-anatomy-region="traps"]').isVisible());
+   for(const appearance of [{mode:'dark'},{mode:'light'},{mode:'dark',accent:'lavender'}]){
+    await page.evaluate(prefs=>applyAppAppearance(prefs),appearance);
+    const tile=builder.locator('[data-builder-muscle="chest"]');
+    assert.equal(await tile.locator('strong').evaluate(el=>getComputedStyle(el).color),'rgb(243, 255, 247)');
+    assert.match(await tile.evaluate(el=>getComputedStyle(el).backgroundImage),/linear-gradient/);
+    assert(await tile.locator('.recap-anatomy').evaluate(el=>el.offsetWidth>=el.parentElement.clientWidth-6));
+   }
    await builder.locator('[data-builder-muscle="chest"]').click();
    const movement=builder.locator('[data-builder-movement="Dumbbell Bench Press"]');
    for(const appearance of [{mode:'dark'},{mode:'light'},{mode:'dark',accent:'lavender'}]){
@@ -141,6 +148,11 @@ const server=http.createServer((req,res)=>{
    assert.equal(await movement.locator('[data-anatomy-region="chest"]').count(),1);
    await movement.click();
    assert.equal(await page.locator('#builder-name-0').inputValue(),'Dumbbell Bench Press');
+   const selectedRow=page.locator('.builder-exercise').first();
+   assert.equal(await selectedRow.evaluate(el=>el.open),false);
+   assert(await selectedRow.locator('summary img').isVisible());
+   await selectedRow.locator('.builder-exercise-summary').click();
+   assert(await selectedRow.locator('.builder-exercise-fields>img').isVisible());
    await page.locator('[data-builder-picker="0"]').click();
    await builder.getByRole('button',{name:'Type my own exercise'}).click();
    await page.locator('#builder-name-0').fill('My own exercise');

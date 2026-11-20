@@ -187,6 +187,13 @@ async function verify(){
    await planEditor.getByRole('button',{name:'Close exercise editor'}).click();
 
    await page.evaluate(()=>startBuilder('guided-gym-legs-a'));
+   const exerciseRows=page.locator('.builder-exercise');
+   assert(await exerciseRows.count()>=5);
+   for(let i=0;i<4;i++){
+    assert.equal(await exerciseRows.nth(i).evaluate(row=>row.open),false);
+    assert(await exerciseRows.nth(i).locator('.builder-exercise-summary img').isVisible());
+   }
+   await exerciseRows.nth(4).locator('.builder-exercise-summary').click();
    await page.locator('[data-builder-picker="4"]').click();
    const builderPicker=page.locator('#builder-exercise-picker');
    await checkSwapRow(builderPicker.locator('[data-builder-movement]').first());

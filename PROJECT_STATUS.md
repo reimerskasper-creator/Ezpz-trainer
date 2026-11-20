@@ -1,3 +1,10 @@
+## 2026-11-20 — Workout builder, muscle picker and Zone breathing
+
+- Android 1.0.169 candidate based on canonical Android branch commit `d09407e`. The local `workout-zone-1.0.169` branch includes expandable exercise photo rows, compact workout cover controls, and larger existing anatomy artwork in the muscle picker.
+- Zone keeps the orchid dialog and adds four guided breathing methods, saved custom timings, a one-cycle preview, and explanations with research links where available.
+- Mobile checks passed for the workout builder, muscle picker, saved workouts and Zone at 320, 390 and 430 px. The muscle tiles were tested in dark, light and personal themes. Workout media rules, wellness, native health and packaged startup checks passed. A separate Home workout cover photo assertion also fails on the 1.0.168 base.
+- Android web assets synced successfully. GitHub upload was blocked by automatic review, so the signed CI build and physical installation are pending.
+
 Warning: truncated output (original token count: 111701)
 Total output lines: 2058
 

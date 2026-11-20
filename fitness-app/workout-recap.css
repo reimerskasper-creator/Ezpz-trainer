@@ -300,3 +300,34 @@ body[data-view=home] #screen .home-workout-covered .home-change-workout span{fon
 body[data-view=home] #screen .home-workout-covered .home-change-workout svg{flex:none;width:17px;height:17px}
 body[data-view] #discard-workout-dialog{inset:0;margin:auto;width:min(calc(100% - 28px),380px);height:max-content}
 body[data-view] #discard-workout-dialog button:focus-visible{outline:2px solid var(--ui-text,#f1fff5);outline-offset:-3px}
+
+/* Workout builder overview */
+#workout-builder .builder-cover-row{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;align-items:center}
+#workout-builder .builder-cover-row .own-cover-preview{margin:0;padding:0;min-height:0;background:none}
+#workout-builder .builder-cover-row .own-cover-preview>*{width:76px;height:82px;object-fit:cover}
+#workout-builder .builder-cover-row .personal-photo-controls{margin:0;padding:0;background:none;border:0}
+#workout-builder .builder-cover-row .personal-photo-controls>:is(strong,.personal-photo-preview){display:none}
+#workout-builder .builder-cover-row .personal-photo-actions{gap:6px;margin:6px 0 0}
+#workout-builder .builder-cover-row .personal-photo-actions>*{flex:0 0 44px;min-height:44px}
+#workout-builder .builder-cover-row .personal-photo-actions svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+#workout-builder .builder-cover-row input[type=file]{inset:0;width:100%;height:100%;cursor:pointer}
+#workout-builder .own-exercise-list{border:1px solid var(--ui-border,#658670);border-radius:18px;padding:0 9px;margin-block:12px}
+#workout-builder .own-exercise-list .builder-exercise{margin:0;border:0;border-radius:0;padding:0;background:none}
+#workout-builder .builder-exercise+.builder-exercise{border-top:1px solid var(--ui-border,#658670)}
+#workout-builder .builder-exercise-summary{display:grid;grid-template-columns:39% minmax(0,1fr) 12px;align-items:center;gap:9px;min-height:66px;padding:6px 0;cursor:pointer;list-style:none}
+#workout-builder .builder-exercise-summary::-webkit-details-marker{display:none}
+#workout-builder .builder-exercise-summary::after{content:'';width:8px;height:8px;border:solid currentColor;border-width:0 2px 2px 0;transform:rotate(45deg)}
+#workout-builder .builder-exercise[open]>.builder-exercise-summary::after{transform:rotate(225deg)}
+#workout-builder .builder-exercise-summary :is(strong,small){display:block;overflow-wrap:anywhere}
+#workout-builder .builder-exercise-summary strong{font-size:14px;line-height:1.2}
+#workout-builder .builder-exercise-summary small{font-size:12px;margin-top:4px}
+#workout-builder .builder-exercise-summary .exercise-thumbnail{width:100%;height:53px;object-fit:cover;border-radius:9px}
+#workout-builder .builder-exercise-fields{padding-bottom:10px}
+#workout-builder .builder-exercise-fields>.exercise-thumbnail{width:100%;height:auto;aspect-ratio:2/1;object-fit:contain;border-radius:12px}
+#workout-builder .builder-exercise-fields>.exercise-thumbnail-empty{display:none}
+#workout-builder .builder-exercise[open] .builder-exercise-summary{min-height:44px;grid-template-columns:minmax(0,1fr) 12px}
+#workout-builder .builder-exercise[open] .builder-exercise-summary .exercise-thumbnail{display:none}
+body[data-view] #builder-exercise-picker .builder-muscles button{padding:3px 2px 6px;background:linear-gradient(155deg,#285b45,#143a2e)!important;color:#f3fff7!important}
+body[data-view] #builder-exercise-picker .builder-muscles strong{color:#f3fff7!important}
+#builder-exercise-picker .builder-muscles .recap-anatomy{width:100%;filter:contrast(1.11) saturate(1.18)}
+body[data-view] #builder-exercise-picker [data-builder-muscle="all"]{margin-top:8px;background:#9ce2bc!important;color:#103727!important}

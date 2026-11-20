@@ -183,3 +183,21 @@ body[data-view=zone] .zone-space .zone-pause-ideas :is(.rest-story,.rest-tip){ba
 body[data-view=zone] .zone-space .zone-pause-ideas .rest-story{margin:14px;border-radius:16px;overflow:hidden}
 body[data-view=zone] .zone-space .zone-pause-ideas>.rest-guide-link{margin:10px 14px 16px}
 @media(max-width:360px){body[data-view=zone] .zone-space .zone-moments h3{font-size:16px}body[data-view=zone] .zone-space .rest-collapse>summary{font-size:13px}body[data-view=zone] .zone-space .zone-history-row{gap:7px}}
+
+#zone-activity-dialog[data-zone-kind=breathe] .zone-breath-circle::before,
+#zone-activity-dialog[data-zone-kind=breathe] .zone-breath-circle::after{transform:scale(var(--zone-breath-scale,.82));transition:transform 80ms linear}
+#zone-activity-dialog .zone-breath-method-row{display:flex;justify-content:space-between;gap:6px;border:1px solid #9ebca778;border-radius:22px;background:#0b3028df;margin:8px 0}
+#zone-activity-dialog .zone-breath-method-row button{min-height:44px;padding:4px 10px;background:none;border:0;color:#f2fff7;font:inherit}
+#zone-activity-dialog .zone-breath-method-row [data-breath-why]{color:#e5cdff;text-decoration:underline;flex-shrink:0}
+#zone-activity-dialog .zone-method-panel{background:#102f28f5;color:#f2fff7;border:1px solid #9ebca778;border-radius:12px;padding:8px;margin-bottom:8px;text-align:left}
+#zone-activity-dialog .zone-method-panel[hidden]{display:none}
+#zone-activity-dialog #zone-method-list button{display:block;width:100%;text-align:left;min-height:44px;background:#163c33;color:#f2fff7;border:0;border-radius:8px;padding:7px 10px}
+#zone-activity-dialog #zone-method-list button[aria-pressed=true]{background:#d2b4f3;color:#261537}
+#zone-activity-dialog .zone-method-panel a{color:#e5cdff;text-decoration:underline}
+#zone-activity-dialog .zone-custom-timing{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#zone-activity-dialog .zone-custom-timing input{width:100%;background:#204339;color:#fff}
+#zone-activity-dialog .zone-custom-timing button{grid-column:1/-1;min-height:44px;color:#f2fff7;background:#204339}
+@media(prefers-reduced-motion:reduce){
+ #zone-activity-dialog[data-zone-kind=breathe] .zone-breath-circle::before,
+ #zone-activity-dialog[data-zone-kind=breathe] .zone-breath-circle::after{transition:none!important;transform:none!important}
+}
