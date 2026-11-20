@@ -237,3 +237,38 @@ function renderFoodDayProjection(){
   renderFoodDayProjection();
  };
 })();
+
+function decorateMealReview(form,status,rows){
+ const review=form.parentElement,add=review.querySelector(':scope>[data-food-find]');
+ const photos=form.querySelector('.personal-photo-controls');
+ const photoActions=photos.querySelector('.personal-photo-actions');
+ const icons=[
+  ['Choose photo','<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m4 17 5-5 4 4 3-3 4 4"/><circle cx="15" cy="9" r="1"/>'],
+  ['Take photo','<path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/>'],
+  ['Use default photo','<path d="M4 10a8 8 0 1 1 1 7M4 5v5h5"/>']
+ ];
+ [...photoActions.children].forEach((control,i)=>{
+  const [label,shape]=icons[i],input=control.querySelector('input');
+  control.title=label;
+  (input||control).setAttribute('aria-label',label);
+  control.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+shape+'</svg>';
+  if(input)control.append(input);
+ });
+ photos.querySelector('strong').innerHTML='Meal photo <small>Optional</small>';
+ form.insertAdjacentHTML('afterbegin','<section class="food-review-summary food-glass"><div class="food-review-top"><div><small data-review-caption></small><strong class="food-review-energy"><span data-review-total>—</span> <small>kcal</small></strong></div></div><div class="food-review-macros">'+['Protein','Carbs','Fat'].map(name=>'<div>'+name+'<strong><span data-review-total>—</span> g</strong></div>').join('')+'</div></section><section class="food-review-items food-glass"><div class="food-review-items-heading"><h3>Foods</h3></div></section>');
+ form.querySelector('.food-review-top').append(photos);
+ const items=form.querySelector('.food-review-items');
+ items.querySelector('div').append(add);
+ items.append(rows,status);
+ const name=form.elements.namedItem('name');
+ const nameCard=document.createElement('div');
+ nameCard.className='food-review-name food-glass';
+ const nameLabel=form.querySelector('label[for="custom-food-name"]');
+ nameLabel.before(nameCard);nameCard.append(nameLabel,name);
+ const advanced=document.createElement('details');
+ advanced.className='food-review-advanced';
+ advanced.innerHTML='<summary>Nutrition overrides &amp; photo reminder</summary>';
+ nameCard.after(advanced);
+ for(const selector of ['.custom-food-macro-fields','.custom-food-calorie-total','.custom-food-calorie-option','.custom-food-photo-choice'])advanced.append(form.querySelector(selector));
+ form.querySelector('.custom-food-submit').textContent='Log meal ✓';
+}

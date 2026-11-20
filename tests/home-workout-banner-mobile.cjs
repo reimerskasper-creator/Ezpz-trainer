@@ -83,11 +83,9 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
    await page.evaluate(()=>{state.homePanels={...state.homePanels,nutrition:false};home()});
    const food=page.locator('.home-nutrition[data-folded=true]');
-   const actions=await food.locator('.home-nutrition-bottom').boundingBox();
-   const ring=await food.locator('.home-energy-ring').boundingBox();
-   const last=await food.locator('[data-home-focus="diary"]').boundingBox();
-   assert(ring.y>=actions.y+1,'Collapsed food ring stays below the divider');
-   assert(last.x+last.width<=ring.x,'Food links clear the ring');
+   assert(await food.locator('.home-energy-ring').isHidden(),'Collapsed nutrition has no ring');
+   await food.locator('[data-home-panel="nutrition"]').click();
+   assert(await page.locator('.home-nutrition .home-energy-ring').isVisible(),'Expanded nutrition retains its ring');
    assert.deepEqual(errors,[]);
    await context.close();
    console.log('PASS Home cover '+width+': picker artwork parity, open and closed anatomy, exercise rows, banner photo override and recovery');

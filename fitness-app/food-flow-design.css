@@ -234,3 +234,58 @@ body[data-view=custom-food] #food-flow .food-day-projection {
 #food-flow .food-day-track span {background:var(--food-day-fill)}
 #food-flow .food-day-track span:first-child {opacity:.55}
 #food-flow .food-day-value {text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+
+body[data-view=custom-food] #food-flow .food-amount-actions:has([data-ingredient-quick-log]){display:grid;grid-template-columns:1fr 1fr;gap:8px}
+body[data-view=custom-food] #food-flow .food-amount-actions:has([data-ingredient-quick-log]) button{margin:0;min-width:0;min-height:48px;font-size:14px;border-radius:12px}
+#food-flow #food-quick-feedback{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;margin:8px 0;font-size:12px}
+#food-flow #food-quick-feedback button{margin:0;width:auto;flex:none}
+body[data-view=custom-food] #food-flow .food-macro-preview.has-macro-ring{display:grid;grid-template-columns:minmax(0,1fr) 58px;grid-template-rows:auto 1fr auto;column-gap:10px;row-gap:3px;align-items:center}
+body[data-view=custom-food] #food-flow .has-macro-ring>.food-nutrition-basis{grid-column:1;grid-row:1;padding:0}
+body[data-view=custom-food] #food-flow .has-macro-ring>strong{grid-column:1;grid-row:2;padding:0;min-height:0;margin:0;align-self:start}
+body[data-view=custom-food] #food-flow .food-macro-preview>svg.food-macro-ring{position:static;grid-column:2;grid-row:1 / span 2;width:58px!important;height:58px!important;justify-self:end;align-self:start}
+body[data-view=custom-food] #food-flow .has-macro-ring>div{grid-column:1 / -1;grid-row:3;margin-top:16px}
+#food-flow #custom-food-form:has(.food-review-summary){display:grid;gap:10px;margin:0;padding:0;border:0;background:transparent!important;box-shadow:none}
+#food-flow[data-manual=false] #custom-food-form>h3,
+#food-flow[data-manual=false] #custom-food-form>p.note,
+#food-flow[data-manual=true] .food-review-items,
+#food-flow[data-manual=true] .food-review-top>div:first-child,
+#food-flow[data-manual=true] .food-review-macros{display:none}
+#food-flow .food-review-summary,#food-flow .food-review-items,#food-flow .food-review-name{padding:13px;border:1px solid #5b8a74;border-radius:14px}
+#food-flow .food-review-summary{background:linear-gradient(130deg,#194d3b,#103b30)}
+.food-review-top,.food-review-items-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.food-review-energy{display:block;font-size:29px;line-height:1.15;color:#d5ffea}
+.food-review-energy small{font-size:12px}
+.food-review-top [data-review-caption]{font-size:11px;color:#bfdecf}
+#food-flow .food-review-top .personal-photo-controls{padding:0;margin:0;border:0;background:transparent!important;min-width:0}
+#food-flow .food-review-top .personal-photo-preview:empty{display:none}
+#food-flow .food-review-top .personal-photo-controls>strong{display:block;text-align:right;font-size:11px;margin:0 0 5px}
+#food-flow .food-review-top .personal-photo-actions{display:flex;gap:5px;flex-wrap:nowrap;margin:0}
+#food-flow .food-review-top .personal-photo-actions>*,
+#food-flow .ingredient-row [data-ingredient-remove]{position:relative;display:grid;place-items:center;flex:0 0 44px;width:44px;min-width:44px;height:44px;min-height:44px;margin:0;padding:0;color:#c2f6dd!important;border:1px solid #78aa93;border-radius:10px;background:#184b3b!important}
+#food-flow .food-review-top .personal-photo-actions input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+#food-flow .food-review-top .personal-photo-actions label:focus-within{outline:2px solid #98f3c9}
+#food-flow .food-review-top .personal-photo-actions svg,#food-flow .ingredient-row [data-ingredient-remove] svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round}
+.food-review-macros{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:11px}
+.food-review-macros>div{display:grid;gap:4px;padding:8px;border-radius:8px;background:#245466;color:#d0f5ff;font-size:11px}
+.food-review-macros>div:nth-child(2){background:#654c2b;color:#ffe0a7}
+.food-review-macros>div:nth-child(3){background:#145b47;color:#c5ffe4}
+.food-review-macros strong{font-size:17px}
+#food-flow .food-review-items-heading h3{font-size:15px;margin:0}
+#food-flow .food-review-items-heading button{width:auto;margin:0;padding:8px;font-size:12px}
+#food-flow .food-review-items #ingredient-rows{margin:0}
+#food-flow .food-review-items .ingredient-row{display:grid;grid-template-columns:minmax(0,1fr) 72px 44px;align-items:center;gap:6px;padding:8px 0;border-bottom:1px solid #70978455}
+#food-flow .food-review-items .ingredient-row:last-child{border-bottom:0}
+#food-flow .ingredient-row-copy small{display:block;font-size:10px;line-height:1.35;color:#c7e4d5;margin-top:4px}
+#food-flow .ingredient-row .ingredient-portion{display:flex;align-items:center;justify-content:center;gap:5px;min-height:44px;padding:0 5px;border:1px solid #6a9d86;border-radius:10px;background:#1a4839;color:#b6dbc8;font-size:11px;margin:0}
+#food-flow .ingredient-row .ingredient-portion:focus-within{border-color:#98f3c9;box-shadow:0 0 0 1px #98f3c9;background:#205240}
+#food-flow .ingredient-row .ingredient-portion input{appearance:textfield;background:transparent!important;border:0!important;outline:none!important;box-shadow:none!important;border-radius:0;width:48px;min-width:0;min-height:0;padding:0!important;margin:0;text-align:right;color:#effff5;font-size:14px;font-weight:700}
+#food-flow .ingredient-portion input::-webkit-inner-spin-button{appearance:none}
+#food-flow .ingredient-row [data-ingredient-remove]{border:0;background:transparent!important}
+#food-flow .food-review-advanced{padding:8px 0;font-size:12px}
+#food-flow .food-review-name input{margin:4px 0 0}
+#food-flow #food-review-view .custom-food-submit{margin:0}
+@media(max-width:360px){
+ #food-flow .food-review-top .personal-photo-actions{gap:2px}
+ #food-flow .food-review-top .personal-photo-actions>*{flex-basis:40px;width:40px;min-width:40px}
+ .food-review-energy{font-size:23px}
+}

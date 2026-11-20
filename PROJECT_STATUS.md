@@ -1,3 +1,8 @@
+## 2026-11-20 — Quick food logging and meal review
+
+- Android 1.0.168 on android-health-connect adds individual food logging, live ingredient portion and macro editing, compact photo controls, a refreshed collapsed Bodyweight card and a simpler collapsed nutrition card.
+- Ingredient, custom food, Home, flexible-day and macro projection tests passed locally. The Android test workflow packages and signs the update.
+
 ## 2026-11-20 — Approved Home and My Plan layouts
 
 - Android 1.0.167 applies the full-photo Home workout card with the top-right toggle and lowered anatomy, the compact My Plan macros, the Bodyweight redesign, and the collapsed food ring below the divider.
