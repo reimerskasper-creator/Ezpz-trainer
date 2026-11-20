@@ -1,3 +1,8 @@
+## 2026-11-20 — Home and Day polish
+
+- Android 1.0.164 candidate adds matching anatomy artwork to upcoming workout rows, a clearer Manage workouts action, named workout filters, shared Home and Day macro cards, a Scan label, and clearer steps and weigh-in labels.
+- Branch: android-health-connect. Home, flexible-day, Home panel, native health and nutrition import suites passed locally. Android signing and artifact delivery require the Android Health Connect test workflow. Physical phone installation is pending.
+
 ## 2026-11-17 — Workout cover and builder polish
 
 - Android 1.0.162 aligns Manage workouts and the arrow in one rounded Home button, adds a themed builder discard dialog, and assigns distinct artwork to all 133 built-in entries. See docs/workout-cover-audit-2026-11-17.json for the ID, equipment, previous cover, and release cover.
