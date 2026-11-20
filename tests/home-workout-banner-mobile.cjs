@@ -23,7 +23,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    const toggle=card.locator('[data-home-panel=todayWorkout]'),details=card.locator('.home-workout-details');
    const cover=hero.locator('.hybrid-workout-cover');
    const headerPhoto=await hero.boundingBox(),expand=await toggle.boundingBox();
-   assert(expand.y>=headerPhoto.y+headerPhoto.height,'Expansion control stays below the cover');
+   assert(expand.y>=headerPhoto.y&&expand.y+expand.height<headerPhoto.y+70,'Expansion control stays at the top of the cover');
    const primaryPaint=el=>getComputedStyle(el).backgroundImage;
    assert.equal(await card.locator('.home-change-workout').evaluate(primaryPaint),await page.locator('.overview-actions>.primary').evaluate(primaryPaint));
    const photo=await cover.locator('img').getAttribute('src');
@@ -46,7 +46,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    if(width===390){fs.mkdirSync(out,{recursive:true});await card.screenshot({path:path.join(out,'home-workout-banner-expanded.jpg')})}
    await toggle.click();
    assert.equal(await toggle.getAttribute('aria-expanded'),'false');
-   assert((await toggle.boundingBox()).y>=(await hero.boundingBox()).y+(await hero.boundingBox()).height,'Collapsed cover remains clear');
+   assert((await toggle.boundingBox()).y<(await hero.boundingBox()).y+40,'Collapsed cover keeps the top-right control');
    assert(!await details.isVisible());
    assert(await cover.locator('.recap-anatomy').isVisible());
    assert.equal(await cover.locator('img').getAttribute('src'),photo);
@@ -57,12 +57,12 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
     const label=button.querySelector('span').getBoundingClientRect();
     return icon.left>=label.right&&Math.abs((icon.top+icon.height/2)-(label.top+label.height/2))<2;
    }));
-   assert((await card.boundingBox()).height<Math.min(260,height/1.5));
+   assert((await card.boundingBox()).height<Math.min(320,height/1.5));
    assert.equal(await page.evaluate(()=>JSON.stringify(state.workoutDrafts)),before);
    if(width===390)await card.screenshot({path:path.join(out,'home-workout-banner-minimized.jpg')});
    await page.reload();
    assert.equal(await toggle.getAttribute('aria-expanded'),'false');
-   assert((await toggle.boundingBox()).y>=(await hero.boundingBox()).y+(await hero.boundingBox()).height,'Collapsed cover remains clear');
+   assert((await toggle.boundingBox()).y<(await hero.boundingBox()).y+40,'Collapsed cover keeps the top-right control');
    await toggle.focus();
    await page.keyboard.press('Enter');
    assert(await details.isVisible());
@@ -81,6 +81,13 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    assert(await card.locator('.home-recovery-details').isVisible());
    assert.equal(await card.locator('.home-workout-hero').count(),0);
    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+   await page.evaluate(()=>{state.homePanels={...state.homePanels,nutrition:false};home()});
+   const food=page.locator('.home-nutrition[data-folded=true]');
+   const actions=await food.locator('.home-nutrition-bottom').boundingBox();
+   const ring=await food.locator('.home-energy-ring').boundingBox();
+   const last=await food.locator('[data-home-focus="diary"]').boundingBox();
+   assert(ring.y>=actions.y+1,'Collapsed food ring stays below the divider');
+   assert(last.x+last.width<=ring.x,'Food links clear the ring');
    assert.deepEqual(errors,[]);
    await context.close();
    console.log('PASS Home cover '+width+': picker artwork parity, open and closed anatomy, exercise rows, banner photo override and recovery');

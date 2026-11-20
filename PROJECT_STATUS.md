@@ -1,3 +1,8 @@
+## 2026-11-20 — Approved Home and My Plan layouts
+
+- Android 1.0.167 applies the full-photo Home workout card with the top-right toggle and lowered anatomy, the compact My Plan macros, the Bodyweight redesign, and the collapsed food ring below the divider.
+- Home and flexible-day mobile tests passed at widths from 320 to 430. Android build verification is pending.
+
 ## 2026-11-20 — Trainer photo, timer and Home controls
 
 - Android 1.0.166 shows the full exercise photo, keeps video access in the side controls, moves exercise selection to Workout options, and places the Home expand button beside Manage workouts.

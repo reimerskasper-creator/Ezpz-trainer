@@ -48,3 +48,20 @@ body[data-view=progress] .exercise-progress-card .flex-length-trigger{display:fl
 body[data-view=progress] .exercise-progress-card select[hidden],#flex-day-dialog .progress-picker-list button[hidden]{display:none!important}
 #flex-day-dialog .progress-picker-list{max-height:50dvh;overflow:auto}
 #flex-day-dialog .progress-picker-list>button[aria-pressed=true]{background:#234b38!important;border-radius:9px;color:#8ee2b4!important}
+
+body[data-view=home] #screen .home-weight-card:not(.home-banner-custom){background:linear-gradient(180deg,#092c2370,#062c21 35%,#062c21),url('../home-images/weight.jpg') center top/100% auto no-repeat!important}
+body[data-view=home] #screen .home-weight-card[data-folded=false] .home-weight-row{border:0!important;background:transparent!important;box-shadow:none!important;gap:9px;padding:8px 14px 13px;min-height:76px}
+body[data-view=home] #screen .home-weight-card[data-folded=false] .home-weight-row strong{font-size:31px;line-height:1.1}
+body[data-view=home] #screen .home-weight-card[data-folded=false] .home-weight-row>svg:last-child{display:none}
+body[data-view=home] .home-weight-details{padding-top:0}
+body[data-view=home] .weight-average-grid>div{background:#114837bb}
+body[data-view=home] .weight-average-grid>div:first-child{border-color:#62d7ac;background:#135841bb}
+body[data-view=home] .weight-average-grid .weight-average-change{font-size:10px;margin:2px 0 0;padding:4px 6px;border:0;border-radius:20px;background:#117655;text-align:left}
+body[data-view=home] .weight-mini-trend{margin-top:12px;border:none;background:transparent;padding:2px 0}
+body[data-view=home] .home-weight-details h4{display:flex;justify-content:space-between;align-items:center}
+body[data-view=home] .home-weight-details h4 .weight-history-link{min-height:44px;padding:0;color:#8ee2b4!important;font-size:11px;border:0;background:transparent!important;white-space:nowrap}
+body[data-view=home] .weight-recent>button{border:1px solid #71917e;border-radius:10px;padding-inline:10px;background:#15423490!important}
+body[data-view=home] .weight-detail-actions{grid-template-columns:1fr 1fr}
+
+body[data-view=home] .home-weight-card[data-folded=false] .weight-collapsed-average{display:none}
+body[data-view=home] .weight-compare-empty{border:0;background:transparent}
