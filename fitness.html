@@ -7114,7 +7114,7 @@ function homeIcon(name){const paths={cloud:'M7 17H6a4 4 0 1 1 1-7.9 5 5 0 0 1 9.
 function homeSession(){
  const date=foodDate(),id=state.workoutSchedule?.[date];
  const selected=knownWorkout(state.selectedWorkout)?workoutPlan(state.selectedWorkout):null;
- if(selected&&!workoutMediaGaps(selected).length&&(savedWorkoutElapsed(workoutDraft(selected))>0||workoutDraftHasEntries(workoutDraft(selected)))){
+ if(selected&&!workoutMediaGaps(selected).length&&workoutDraftHasEntries(workoutDraft(selected))){
   return {plan:selected,resume:true,date:state.activePlanItem?.date||(state.activePlanDate===date&&id===selected.id?date:null)};
  }
  if(id==='rest')return {plan:null,rest:true,date};
