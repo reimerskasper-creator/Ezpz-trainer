@@ -235,3 +235,8 @@ body[data-view=train] .session-footer>button.primary{font-size:11px;margin:0}
  body[data-view=train]:has(.workout-exercises) #screen:focus-within{padding-bottom:calc(120px + env(safe-area-inset-bottom))}
  body[data-view=train]:has(.workout-exercises) #screen:has(.set-row input:focus) .session-footer{position:static;width:100%;transform:none}
 }
+body[data-view=train] .workout-exercises.is-focus .session-exercise-number{display:grid;border-radius:50%}
+body[data-view=train] .workout-exercises.is-focus .exercise-summary-count{display:block}
+body[data-view=train] .session-footer>.compact-picker-label:after{content:none}
+body[data-view=train] .session-footer .footer-rest:not(.is-running):before,
+body[data-view=train] .session-footer .footer-rest.is-paused:before{content:'▶︎';margin-inline:2px}
