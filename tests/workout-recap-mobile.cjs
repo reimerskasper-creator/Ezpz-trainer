@@ -58,11 +58,11 @@ const server=http.createServer((req,res)=>{
    assert.equal(await page.locator('body').getAttribute('data-view'),'train');
    assert.equal(await page.locator('.workout-countdown').count(),0);
    const clock=page.locator('#workout-elapsed-clock');
-   const started=await clock.getAttribute('data-started-at');
-   assert.equal(Number(started),await page.evaluate(()=>workoutDraft().startedAt));
    await page.waitForFunction(()=>document.getElementById('workout-elapsed-clock').textContent!=='0:00');
+   const elapsedBeforeRender=await page.evaluate(()=>activeWorkoutElapsed());
    await page.evaluate(()=>render());
-   assert.equal(await clock.getAttribute('data-started-at'),started);
+   assert(await clock.isVisible());
+   assert(await page.evaluate(()=>activeWorkoutElapsed())>=elapsedBeforeRender);
    assert.deepEqual(await page.evaluate(()=>window.testSpeech),[]);
    assert.deepEqual(await page.locator('.set-head').first().locator('span').allTextContents(),['Set','Last time','kg','Reps','Done']);
    const inputOrder=await page.locator('.set-row').first().locator('input').evaluateAll(inputs=>inputs.map(input=>Object.keys(input.dataset)[0]));
@@ -78,6 +78,7 @@ const server=http.createServer((req,res)=>{
    await page.evaluate(()=>startRestTimer(6));
    await page.waitForFunction(()=>window.testSpeech.some(([text,voice])=>text==='Five seconds left.'&&voice==='test-en'));
    await page.evaluate(()=>{state.restTimer=null;syncRestAudio()});
+   await page.locator('.training-options>summary').click();
    await page.locator('[data-open-exercises]').click();
    assert.equal(await page.locator('[data-exercise-pick] img').count(),6);
    assert.equal(await page.locator('[data-exercise-pick] img').first().getAttribute('src'),custom);

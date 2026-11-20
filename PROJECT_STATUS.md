@@ -1,3 +1,8 @@
+## 2026-11-20 — Trainer photo, timer and Home controls
+
+- Android 1.0.166 shows the full exercise photo, keeps video access in the side controls, moves exercise selection to Workout options, and places the Home expand button beside Manage workouts.
+- The saved workout duration counts visible Trainer time across multiple visits. Open drafts from older versions start counting from the first visit in this version because earlier drafts only stored a wall-clock start. Completed records are retained. Timer navigation, visibility, backup and recap tests passed locally. Android verification is pending.
+
 ## 2026-11-20 — Focused active workout
 
 - Android 1.0.165 simplifies the active Trainer to one exercise card by default, full-width media with right-hand controls, scrollable set rows, and a pinned elapsed, exercise picker, rest and finish bar. Native identity and signing workflow carry forward.
