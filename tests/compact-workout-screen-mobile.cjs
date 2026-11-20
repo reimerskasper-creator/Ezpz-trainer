@@ -12,6 +12,11 @@ assert(await page.locator('#exercise-count-0').isVisible());
 const footer=await page.locator('.session-footer').boundingBox();assert(footer.y+footer.height<=height+1);
 const reference=await page.locator('.trainer-reference').first().boundingBox(),media=await page.locator('.trainer-media').first().boundingBox();assert.equal(reference.width,media.width);
 assert.equal(await page.locator('.trainer-reference img').first().evaluate(el=>getComputedStyle(el).objectFit),'contain');
+await page.evaluate(()=>{state.trainingCompactAll=true;render()});
+const allMedia=page.locator('[data-training-card="0"] .trainer-media');
+assert(Math.abs((await allMedia.locator('img').boundingBox()).height-(await allMedia.boundingBox()).height)<=2,'All exercises keeps the entire media frame');
+await page.evaluate(()=>{state.trainingCompactAll=false;render()});
+
 assert(await page.locator('[data-set-reps="0-0"]').isVisible());assert(await page.locator('[data-next-exercise="1"]').isVisible());for(const field of await page.locator('[data-training-card="0"] .set-row:not([hidden]) input').all()){const r=await field.boundingBox();assert(r.height>=44)}
 if(width===390)await page.screenshot({path:path.join(out,'compact-workout-screen.jpg')});
 await page.locator('[data-exercise-tools="0"]').click();assert(await page.locator('#trainer-details-0').isVisible());assert.equal(await page.locator('#trainer-details-0 .exercise-swap,#trainer-details-0 [data-trainer-background],#trainer-details-0 [data-rest-seconds]').count(),0,'No duplicate settings in Exercise details');assert(await page.locator('#trainer-details-0 .previous-results').isVisible());assert(await page.locator('#trainer-details-0 .quick-guide').isVisible());if(width===390)await page.screenshot({path:path.join(out,'compact-workout-details.jpg')});await page.keyboard.press('Escape');assert(await page.locator('[data-exercise-tools="0"]').evaluate(el=>document.activeElement===el));
