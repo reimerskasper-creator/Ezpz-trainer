@@ -1,7 +1,8 @@
 ## 2026-11-20 — Trainer photo, timer and Home controls
 
 - Android 1.0.166 shows the full exercise photo, keeps video access in the side controls, moves exercise selection to Workout options, and places the Home expand button beside Manage workouts.
-- The saved workout duration counts visible Trainer time across multiple visits. Open drafts from older versions start counting from the first visit in this version because earlier drafts only stored a wall-clock start. Completed records are retained. Timer navigation, visibility, backup and recap tests passed locally. Android verification is pending.
+- The saved workout duration counts visible Trainer time across multiple visits. Open drafts from older versions start counting from the first visit in this version because earlier drafts only stored a wall-clock start. Completed records are retained. Timer navigation, visibility, backup and recap tests passed locally. The signed APK from source `92afb38` was verified against the 1.0.165 certificate. Mobile browser checks covered the Trainer at four widths and the Home cover in both states. Physical installation remains unverified.
+- Android artifact: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44790853281/artifacts/14657685276
 
 ## 2026-11-20 — Focused active workout
 
