@@ -46,7 +46,8 @@ body[data-view=home] #screen .home-workout .workout-feature-shade{background:tra
 body[data-view=home] #screen .home-workout .home-session-status{background:#102a20a6!important;border:1px solid #9ab7a780!important;box-shadow:inset 0 1px 0 #e0fff31f;backdrop-filter:blur(5px)}
 body[data-view=home] #screen .home-collapse-control{border-color:#9ab7a7!important;background:#173c2e70!important;box-shadow:inset 0 1px 0 #c5ffdf1a!important}
 body[data-view=home] #screen .overview-actions>button{border:1px solid #799f8b!important;background:linear-gradient(120deg,#28524299,#102c23b3)!important;box-shadow:inset 0 1px 0 #cdffe226!important;color:#eafff2!important;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
-body[data-view=home] #screen .overview-actions>button.primary{background:linear-gradient(120deg,#a7edc8,#80dfb1)!important;color:#123d2b!important;border-color:#a0d8bb!important;box-shadow:inset 0 1px 0 #effff452!important}
+body[data-view=home] #screen .overview-actions>button.primary,
+body[data-view=home] #screen .home-workout .home-change-workout{background:linear-gradient(120deg,#a7edc8,#80dfb1)!important;color:#123d2b!important;border-color:#a0d8bb!important;box-shadow:inset 0 1px 0 #effff452!important}
 /* Inner glass surfaces reveal their card's full background photograph. */
 body[data-view=home] #screen .home-collapsible :is(.upcoming-list,.meal-upcoming-list,.upcoming-tabs,.meal-upcoming-tabs){background:#0a231955!important;border-color:#a0b9ab66!important;box-shadow:inset 0 1px 0 #d9ffea10;backdrop-filter:blur(2px)}
 body[data-view=home] #screen .home-collapsible :is(.upcoming-row,.meal-upcoming-row,.home-log-row){background:transparent!important;box-shadow:none!important}

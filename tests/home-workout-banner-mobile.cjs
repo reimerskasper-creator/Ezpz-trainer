@@ -22,6 +22,10 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    const card=page.locator('.home-workout'),hero=card.locator('.home-workout-hero');
    const toggle=card.locator('[data-home-panel=todayWorkout]'),details=card.locator('.home-workout-details');
    const cover=hero.locator('.hybrid-workout-cover');
+   const headerPhoto=await hero.boundingBox(),expand=await toggle.boundingBox();
+   assert(expand.y>=headerPhoto.y+headerPhoto.height,'Expansion control stays below the cover');
+   const primaryPaint=el=>getComputedStyle(el).backgroundImage;
+   assert.equal(await card.locator('.home-change-workout').evaluate(primaryPaint),await page.locator('.overview-actions>.primary').evaluate(primaryPaint));
    const photo=await cover.locator('img').getAttribute('src');
    const anatomy=await cover.locator('[data-anatomy-region]').evaluateAll(layers=>layers.map(layer=>layer.outerHTML));
    assert(anatomy.length>0);
