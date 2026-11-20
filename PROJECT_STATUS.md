@@ -1,3 +1,8 @@
+## 2026-11-20 — Focused active workout
+
+- Android 1.0.165 candidate simplifies the active Trainer to one exercise card by default, full-width media with right-hand controls, scrollable set rows, and a pinned elapsed, exercise picker, rest and finish bar. Native identity and signing workflow carry forward.
+- Branch: android-health-connect. Trainer media, training usability, flexible-day and Home suites passed locally. Android build and physical-device installation are pending.
+
 ## 2026-11-20 — Home and Day polish
 
 - Android 1.0.164 candidate adds matching anatomy artwork to upcoming workout rows, a clearer Manage workouts action, named workout filters, shared Home and Day macro cards, a Scan label, and clearer steps and weigh-in labels.
