@@ -1,9 +1,15 @@
+## 2026-11-20 — Zone method picker and audible cues
+
+- Android 1.0.170 builds on `0fbc276` and replaces the inline Zone method menu with a closable sheet. It shows a reason and technique name for each choice, with optional study links. Cyclic sighing starts with a five-minute timer.
+- A bundled audio cue plays on enabling sound and on guided phase changes. Custom timing and the orchid layout carry forward.
+- Android web assets synchronized and native runtime checks passed. Signed Android delivery uses the canonical GitHub Actions workflow; physical-device sound and installation still require verification.
+
 ## 2026-11-20 — Workout builder, muscle picker and Zone breathing
 
 - Android 1.0.169 candidate based on canonical Android branch commit `d09407e`. The local `workout-zone-1.0.169` branch includes expandable exercise photo rows, compact workout cover controls, and larger existing anatomy artwork in the muscle picker.
 - Zone keeps the orchid dialog and adds four guided breathing methods, saved custom timings, a one-cycle preview, and explanations with research links where available.
 - Mobile checks passed for the workout builder, muscle picker, saved workouts and Zone at 320, 390 and 430 px. The muscle tiles were tested in dark, light and personal themes. Workout media rules, wellness, native health and packaged startup checks passed. A separate Home workout cover photo assertion also fails on the 1.0.168 base.
-- Android web assets synced successfully. GitHub upload was blocked by automatic review, so the signed CI build and physical installation are pending.
+- Android web assets synced successfully. GitHub published signed APK 1.0.169 from `0fbc276` in run `44836774884`. Package identity, version, source assets and signing certificate were verified.
 
 Warning: truncated output (original token count: 111701)
 Total output lines: 2058
