@@ -1,7 +1,8 @@
 ## 2026-11-20 — Approved Home and My Plan layouts
 
 - Android 1.0.167 applies the full-photo Home workout card with the top-right toggle and lowered anatomy, the compact My Plan macros, the Bodyweight redesign, and the collapsed food ring below the divider.
-- Home and flexible-day mobile tests passed at widths from 320 to 430. Android build verification is pending.
+- Home and flexible-day mobile tests passed at widths from 320 to 430. The signed APK from source `21908dc` was verified against the 1.0.166 certificate. Physical installation remains unverified.
+- Android artifact: https://github.com/reimerskasper-creator/Ezpz-trainer/actions/runs/44797577382/artifacts/14658954114
 
 ## 2026-11-20 — Trainer photo, timer and Home controls
 
