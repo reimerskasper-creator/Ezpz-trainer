@@ -46,6 +46,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    if(width===390){fs.mkdirSync(out,{recursive:true});await card.screenshot({path:path.join(out,'home-workout-banner-expanded.jpg')})}
    await toggle.click();
    assert.equal(await toggle.getAttribute('aria-expanded'),'false');
+   assert((await toggle.boundingBox()).y>=(await hero.boundingBox()).y+(await hero.boundingBox()).height,'Collapsed cover remains clear');
    assert(!await details.isVisible());
    assert(await cover.locator('.recap-anatomy').isVisible());
    assert.equal(await cover.locator('img').getAttribute('src'),photo);
@@ -61,6 +62,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    if(width===390)await card.screenshot({path:path.join(out,'home-workout-banner-minimized.jpg')});
    await page.reload();
    assert.equal(await toggle.getAttribute('aria-expanded'),'false');
+   assert((await toggle.boundingBox()).y>=(await hero.boundingBox()).y+(await hero.boundingBox()).height,'Collapsed cover remains clear');
    await toggle.focus();
    await page.keyboard.press('Enter');
    assert(await details.isVisible());
