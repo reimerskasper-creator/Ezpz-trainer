@@ -2,7 +2,7 @@
 
 - Android 1.0.173 records the first Done checkmark and measures wall-clock time through Finish. The elapsed clock appears only in the workout recap. The independent rest timer stays in the workout footer.
 - The collapsed Home food card reuses the expanded Protein, Carbs and Fat boxes. Food details shows a larger macro split ring and keeps a compact layout while the keyboard is open.
-- Branch: android-health-connect. Workout timing, food macro calculations and Home state checks passed locally. The Android workflow runs mobile layout checks and signs the update with the existing certificate.
+- Branch: android-health-connect. Source commit `78d77fa`. Workout timing, macro calculations, Home state and Android packaging passed locally. Android run `44854558092` built and signed 1.0.173 and passed Trainer and recap checks. The broader mobile suite stopped in the flexible-day test before the food layout checks. The APK matches the 1.0.172 signing certificate and launcher icon. Physical installation remains unverified.
 
 ## 2026-11-20 — Custom workout exercise photos and controls
 
