@@ -65,6 +65,15 @@ const server=http.createServer((req,res)=>{
    assert.equal(await chooser.locator('[data-workout-category="Leg"] .category-anatomy-front [data-anatomy-region="calves"].anatomy-primary').count(),1);
    await chooser.getByRole('button',{name:'Explore Push workouts'}).click();
    assert(await chooser.locator('.program-photo .hybrid-workout-cover').count()>0);
+   const program=chooser.locator('.program-card').first();
+   const grid=program.locator('.program-photo + .program-exercise-grid');
+   assert(await grid.locator('li').count()>0);
+   assert.equal(await grid.evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
+   assert(await grid.locator('img').count()>0);
+   assert(await grid.getByRole('link',{name:/Watch .* demo/}).count()>0);
+   assert.equal(await program.getByText('See exercises',{exact:true}).count(),0);
+   await program.locator('.program-details>summary').click();
+   assert(await program.getByText('Training notes',{exact:true}).isVisible());
    await chooser.getByRole('button',{name:'Close workout chooser'}).click();
    await page.getByRole('button',{name:'Start workout',exact:true}).click();
    assert.equal(await page.locator('body').getAttribute('data-view'),'train');

@@ -366,3 +366,36 @@ body[data-view] #builder-exercise-picker [data-builder-muscle="all"]{margin-top:
 }
 #workout-builder .builder-exercise-footer>.own-exercise-options[open]{grid-column:1/-1}
 #workout-builder .builder-exercise-footer:has(>.own-exercise-options[open])>[data-remove-builder]{grid-column:2}
+
+#workout-chooser .program-exercise-grid{
+ list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:7px;margin:8px 8px 0;padding:0;
+}
+#workout-chooser .program-exercise-grid li{
+ min-width:0;overflow:hidden;border:1px solid #739781;border-radius:9px;
+ background:#143b2e;color:#f1fff5;
+}
+#workout-chooser .program-exercise-grid a{display:block;color:inherit;text-decoration:none}
+#workout-chooser .program-exercise-grid a:focus-visible{outline:2px solid #9ae4bb;outline-offset:-2px}
+#workout-chooser .program-exercise-photo{
+ display:grid;place-items:center;position:relative;aspect-ratio:4/3;background:#091b14;
+}
+#workout-chooser .program-exercise-photo .exercise-thumbnail{
+ display:block;width:100%;height:100%;max-height:none;object-fit:contain;border-radius:0;
+}
+#workout-chooser .program-exercise-photo .exercise-thumbnail-empty{display:grid;place-items:center}
+#workout-chooser .program-exercise-photo .exercise-thumbnail-empty svg{width:22px;height:22px}
+#workout-chooser .program-exercise-play{
+ position:absolute;right:4px;bottom:4px;padding:2px 5px;border:1px solid #ffffffa0;
+ border-radius:20px;background:#092319e8;color:#f1fff5;font-size:10px;
+}
+#workout-chooser .program-exercise-grid :is(strong,small){
+ display:block;padding-inline:6px;color:#f1fff5;font-size:11px;line-height:1.25;overflow-wrap:anywhere;
+}
+#workout-chooser .program-exercise-grid strong{padding-top:5px}
+#workout-chooser .program-exercise-grid small{padding-block:3px 6px;color:#c8e4d3}
+#workout-chooser .program-overview{display:flex;flex-wrap:wrap;align-items:center;gap:5px 10px;margin-top:7px}
+#workout-chooser .program-overview :is(.program-badges,.program-meta){margin:0}
+#workout-chooser .program-details>summary{font-weight:700}
+#workout-chooser .program-detail-copy{padding-bottom:5px}
+#workout-chooser .program-detail-copy p{margin:6px 0;font-size:13px}

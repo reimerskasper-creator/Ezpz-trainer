@@ -1,3 +1,8 @@
+## 2026-11-21 — Program exercise photo grid
+
+- Android 1.0.177 displays exercise photos under each program cover in the workout chooser. Tiles show the exercise name and prescription and open available demos. Program details holds the muscle groups, equipment, and training notes.
+- Branch: android-health-connect. Native web packaging and runtime checks passed locally. The Android workflow builds the signed update and checks the program layout at mobile widths.
+
 ## 2026-11-21 — Barcode recovery screen
 
 - Android 1.0.176 replaces the stopped scanner preview after a failed lookup with a nutrition-label action, a review-and-save reminder, food search, and a barcode rescan.

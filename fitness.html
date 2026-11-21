@@ -11513,14 +11513,32 @@ function workoutPreviewExercise(exercise,workoutId){
  const prescription=exercise.sets+' × '+exercise.reps+(exercise.unit&&exercise.unit!=='reps'?' '+exercise.unit:'')+(exercise.side?' / side':'');
  return '<li class="workout-preview-exercise">'+exerciseThumbnail(exercise.name,workoutId)+'<span><strong>'+safe(exercise.name)+'</strong><small>'+safe(prescription)+'</small>'+exerciseMuscleDetails([exercise])+(video?'<a href="'+safe(video)+'" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Watch demo</a>':'')+'</span></li>';
 }
+function programExerciseTile(exercise,workoutId){
+ const {name,sets,reps,unit,side}=exercise;
+ const video=workoutMediaReference(workoutId,name).videoUrl;
+ const prescription=sets+' × '+reps+(unit&&unit!=='reps'?' '+unit:'')+(side?' / side':'');
+ const content='<span class="program-exercise-photo">'+exerciseThumbnail(name,workoutId)+(video?'<span class="program-exercise-play" aria-hidden="true">▶</span>':'')+'</span><strong>'+safe(name)+'</strong><small>'+safe(prescription)+'</small>';
+ return '<li>'+(video?'<a href="'+safe(video)+'" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Watch '+safe(name)+' demo, '+safe(prescription)+'">'+content+'</a>':content)+'</li>';
+}
+function workoutProgramCard(workout,selected){
+ const exercises=workoutPlan(workout.id).exercises;
+ const count=exercises.filter(exercise=>!/Warm-up|Cooldown/i.test(exercise.name)).length;
+ const title=safe(workout.programName||workout.title);
+ return '<article class="program-card '+(selected?'is-selected':'')+'">'+
+  '<div class="program-photo">'+hybridWorkoutCover(workout,exercises)+(selected?'<span class="workout-cover-check">Selected ✓</span>':'')+'</div>'+
+  '<ul class="program-exercise-grid" aria-label="Included exercises">'+exercises.map(exercise=>programExerciseTile(exercise,workout.id)).join('')+'</ul>'+
+  '<div class="program-copy"><h3>'+title+'</h3><div class="program-overview">'+workoutBadges(workout)+
+  '<span class="program-meta">'+count+' exercise'+(count===1?'':'s')+' · '+safe(workout.minutes)+' min</span></div>'+
+  '<p>'+safe(workout.summary)+'</p><details class="program-preview program-details"><summary>Program details</summary>'+
+  '<div class="program-detail-copy">'+exerciseMuscleDetails(exercises)+'<p><b>Equipment</b> '+safe(workout.equipment)+'</p>'+
+  '<p><b>Training notes</b> '+safe(workout.setup||'Straight sets · change stations after all sets')+'</p></div></details>'+
+  '<button type="button" data-workout-pick="'+safe(workout.id)+'" aria-label="Choose '+safe(workout.title||workout.programName)+'" aria-pressed="'+selected+'">'+
+  (selected?'Selected workout ✓':'Choose program →')+'</button></div></article>';
+}
 function chooserContents(){
  const id=tab==='home'?homeSession().plan?.id:activeWorkoutId(),mine=chooserCategory==='mine',saved=cleanCustomWorkouts(state.customWorkouts),cat=mine?{id:'mine',label:'Saved workouts'}:visibleWorkoutCategories().find(c=>c.id===chooserCategory),plans=mine?saved:cat?filterWorkoutPrograms(categoryPrograms(cat.id)):[];
  return '<div class="chooser-head'+(cat?'':' chooser-focus-head')+'"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><span class="chooser-eyebrow">'+(cat?'CHOOSE YOUR SESSION':'MAKE YOUR NEXT MOVE')+'</span><h2 id="workout-chooser-title">'+(cat?safe(cat.label):'Find your workout')+'</h2></div><button type="button" data-action="close-workouts" aria-label="Close workout chooser" autofocus>×</button></div><p>'+(mine?'':cat?(plans.length?plans.length+' matching session'+(plans.length===1?'':'s')+'. Find the one that fits today.':'Adjust your filters to find a session.'):'Choose a focus')+'</p>'+(!cat?workoutMuscleLegend():'')+'</div><div class="chooser-body '+(mine?'chooser-saved-view':cat?'':'chooser-focus-body')+'">'+(cat&&!mine?workoutSettingMarkup('data-chooser-workout-setting')+workoutFilterMarkup():'')+
- (mine?'<button class="chooser-back" type="button" data-action="workout-categories">← All categories</button>'+ownSavedWorkouts(true):cat?'<button class="chooser-back" type="button" data-action="workout-categories">← All categories</button><div class="program-list">'+plans.map(w=>{
- const selected=id===w.id;
- const exercises=workoutPlan(w.id).exercises;
- return '<article class="program-card '+(selected?'is-selected':'')+'"><div class="program-photo">'+hybridWorkoutCover(w,exercises)+(selected?'<span class="workout-cover-check">Selected ✓</span>':'')+'</div><div class="program-copy"><h3>'+safe(w.programName||w.title)+'</h3>'+workoutBadges(w)+exerciseMuscleDetails(exercises)+(exercises.length&&w.exercises.every(x=>window.EzpzExerciseMedia?.get(x.name))?'<small class="exercise-media-label">Photo + video for every exercise</small>':'')+'<p>'+safe(w.summary)+'</p><span class="program-meta">'+w.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length+' exercises · '+safe(w.minutes)+' min</span><small>'+safe(w.equipment)+'</small><small class="program-setup">'+safe(w.setup||'Straight sets · change stations after all sets')+'</small>'+(w.id==='full-body'?'':'<details class="program-preview"><summary>See exercises</summary><ol>'+exercises.map(exercise=>workoutPreviewExercise(exercise,w.id)).join('')+'</ol></details>')+'<button type="button" data-workout-pick="'+w.id+'" aria-label="Choose '+safe(w.title||w.programName)+'" aria-pressed="'+selected+'">'+(selected?'Selected workout ✓':'Choose program →')+'</button></div></article>'
- }).join('')+(!plans.length?'<div class="chooser-empty"><h3>No matching sessions</h3><p>Try another duration, level or equipment choice.</p><button type="button" data-clear-workout-filters>Show all workouts</button></div>':'')+'</div>':
+ (mine?'<button class="chooser-back" type="button" data-action="workout-categories">← All categories</button>'+ownSavedWorkouts(true):cat?'<button class="chooser-back" type="button" data-action="workout-categories">← All categories</button><div class="program-list">'+plans.map(w=>workoutProgramCard(w,id===w.id)).join('')+(!plans.length?'<div class="chooser-empty"><h3>No matching sessions</h3><p>Try another duration, level or equipment choice.</p><button type="button" data-clear-workout-filters>Show all workouts</button></div>':'')+'</div>':
  '<div class="chooser-focus-tools"><div class="chooser-shortcuts"><button type="button" data-action="create-my-workout" class="chooser-create"><span class="chooser-create-anatomy">'+workoutAnatomy({primary:[],supporting:[]})+'</span><span><strong>Create your own</strong></span><b aria-hidden="true">+</b></button>'+savedWorkoutShortcut(saved,id)+'</div>'+workoutSettingMarkup('data-chooser-workout-setting')+workoutFilterMarkup()+'</div><div class="category-grid">'+visibleWorkoutCategories().map(c=>{
  const selected=(id==='full-body'?'Full Body':planWorkout(id)?.category)===c.id;
  const count=filterWorkoutPrograms(categoryPrograms(c.id)).length;
