@@ -1,3 +1,7 @@
+## 2026-11-21 — Setup pickers and swap confirmation
+
+- Android 1.0.184 uses high-contrast in-app setup choices and a themed confirmation for clearing one exercise’s entries. Setup shows cloud backup in a compact row.
+
 ## 2026-11-21 — Simplify My Plan
 
 - Android 1.0.183 removes both Edit day buttons, Workout details & options, and Copy plan & shopping list from My Plan.

@@ -1217,6 +1217,12 @@ body[data-view=setup] .setup-body .setup-panel-title p{color:#466278}
 body[data-view=setup] label{font-size:11px;font-weight:650;color:#36523f;margin-top:15px}
 body[data-view=setup] label small{font-weight:400;font-size:10px;color:#536c5c;margin-left:4px}
 body[data-view=setup] input,body[data-view=setup] select{background:#f6faf7;color:#244431;border-color:#b0cbb9;min-height:48px;font-size:13px;padding:11px 10px;border-radius:10px}
+body[data-view=setup] #setup select[hidden]{display:none}
+body[data-view=setup] #setup .setup-picker-trigger{display:flex;align-items:center;justify-content:space-between;gap:6px;width:100%;min-height:48px;padding:10px;text-align:left;background:#234b38!important;color:#f1fff5!important;border:1px solid #789b87!important;border-radius:10px}
+.setup-picker-trigger::after{content:'';width:6px;height:6px;border:solid currentColor;border-width:0 1px 1px 0;transform:rotate(45deg);flex:none}
+.ez-choice-dialog form{display:grid;gap:8px;margin-top:14px}
+.ez-choice-dialog form>button{text-align:left}
+.ez-choice-dialog .trainer-dialog-actions{margin-top:0}
 body[data-view=setup] .setup-body input,body[data-view=setup] .setup-body select{border-color:#b0c7d6;color:#294a61}
 body[data-view=setup] .setup-training select{border-color:#c9ba91}
 body[data-view=setup] .setup-personal .card{padding:0;margin:19px 0 0;border:0;background:transparent;box-shadow:none}
@@ -6476,7 +6482,47 @@ function personalGreeting(){const name=cleanFirstName(state.firstName);return na
 function saveFirstName(value){const previous=state.firstName;state.firstName=cleanFirstName(value);if(!save()){if(previous===undefined)delete state.firstName;else state.firstName=previous;return false}return true}
 function namePreferences(){return '<section class="card name-preferences"><span class="section-kicker">MAKE IT PERSONAL</span><h3>What should we call you?</h3><form id="name-preferences-form"><label for="preferred-name">First name <small>optional</small></label><div class="name-entry"><input id="preferred-name" name="firstName" type="text" autocomplete="given-name" maxlength="40" placeholder="Your first name" value="'+safe(cleanFirstName(state.firstName))+'"><button class="primary">Save name</button></div><p class="note" id="name-save-status" role="status">Your greeting uses this name. You can leave it blank.</p></form></section>'}
 document.addEventListener('submit',e=>{if(e.target.id!=='name-preferences-form')return;e.preventDefault();if(saveFirstName(new FormData(e.target).get('firstName'))){const input=document.getElementById('preferred-name');if(input)input.value=cleanFirstName(state.firstName);const status=document.getElementById('name-save-status');if(status)status.textContent=state.firstName?'Name saved. Your Home greeting is ready.':'Name removed. Your greeting will say “You’ve got this!”'}});
-function onboarding(){screen.innerHTML='<section class="setup-hero"><span class="setup-eyebrow">WELCOME TO EZPZ</span><h2>Make it yours.</h2><p>A routine that fits your life.<br>One small step at a time.</p><div class="setup-pillars"><span>Eat well</span><span>Train your way</span><span>Build the habit</span></div></section><form id="setup"><section class="setup-panel setup-personal"><div class="setup-panel-title"><b>01</b><div><h3>A little more you</h3><p>Your name. Your preferred units.</p></div></div><label for="setup-first-name">What should we call you? <small>optional</small></label><input id="setup-first-name" name="firstName" type="text" autocomplete="given-name" maxlength="40" placeholder="Your first name" value="'+safe(cleanFirstName(state.firstName))+'">'+unitPreferences()+'</section><section class="setup-panel setup-training"><div class="setup-panel-title"><b>02</b><div><h3>Find your rhythm</h3><p>Choose where to start. You can adjust later.</p></div></div><label for="setup-goal">Primary goal</label><select id="setup-goal" name="goal"><option value="lose">Lose fat</option><option value="maintain">Get fitter / maintain</option><option value="gain">Build muscle</option></select><label for="setup-level">Training experience</label><select id="setup-level" name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><div class="grid"><div><label for="setup-equipment">Where do you train?</label><select id="setup-equipment" name="equipment"><option value="home">At home</option><option value="gym">At a gym</option></select></div><div><label for="setup-days">Days per week</label><select id="setup-days" name="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div></div></section><section class="setup-panel setup-body"><div class="setup-panel-title"><b>03</b><div><h3>Your starting point</h3><p>Body details for an initial calorie estimate.</p></div></div><div class="grid"><div><label for="setup-age">Age (years)</label><input id="setup-age" name="age" type="number" min="18" max="100" required placeholder="35"></div><div><label for="setup-weight">Weight ('+bodyWeightUnit()+')</label><input id="setup-weight" name="weight" type="number" min="'+displayBodyWeight(30)+'" max="'+displayBodyWeight(350)+'" step="any" required placeholder="'+displayBodyWeight(80)+'"></div><div><label for="setup-height">Height ('+(preferredUnits()==='imperial'?'inches':'cm')+')</label><input id="setup-height" name="height" type="number" step="any" min="'+(preferredUnits()==='imperial'?120/2.54:120)+'" max="'+(preferredUnits()==='imperial'?230/2.54:230)+'" required placeholder="'+(preferredUnits()==='imperial'?71:180)+'"></div><div><label for="setup-sex">For calorie estimate</label><select id="setup-sex" name="sex"><option value="male">Male formula</option><option value="female">Female formula</option></select></div></div><p class="note">General starting estimates for adults. Your nutrition targets can be adjusted in the app.</p></section><div class="setup-finish"><button class="primary">Create my plan →</button><p>Your pace. Your progress.</p><small>Saved in this browser. No account needed to get started.</small></div></form><section class="readiness-panel" id="fitness-account-panel"></section>'}
+function showChoiceDialog(title,content,opener,choose){
+ const dialog=document.createElement('dialog');
+ dialog.className='trainer-dialog ez-choice-dialog';
+ dialog.setAttribute('aria-label',title);
+ dialog.innerHTML='<h2>'+safe(title)+'</h2><form method="dialog">'+content+'</form>';
+ dialog.addEventListener('close',()=>{
+  const value=dialog.returnValue;
+  dialog.remove();
+  if(opener.isConnected)opener.focus({preventScroll:true});
+  if(value!=='')choose(value);
+ },{once:true});
+ document.body.append(dialog);
+ dialog.showModal();
+}
+function setupPickers(){
+ for(const select of document.querySelectorAll('#setup select')){
+  const label=select.labels[0];
+  const trigger=document.createElement('button');
+  trigger.type='button';
+  trigger.id=select.id+'-picker';
+  trigger.className='setup-picker-trigger';
+  trigger.setAttribute('aria-haspopup','dialog');
+  const update=()=>{
+   trigger.textContent=select.selectedOptions[0]?.textContent||'Choose';
+   trigger.setAttribute('aria-label',label.textContent+' · '+trigger.textContent);
+  };
+  trigger.onclick=()=>{
+   const options=Array.from(select.options,(option,index)=>'<button value="'+index+'"'+(option.selected?' class="primary" aria-current="true" autofocus':'')+'>'+safe(option.textContent)+'</button>').join('');
+   showChoiceDialog(label.textContent,options+'<button value="">Cancel</button>',trigger,value=>{
+    select.selectedIndex=Number(value);
+    select.dispatchEvent(new Event('change',{bubbles:true}));
+   });
+  };
+  select.hidden=true;
+  select.insertAdjacentElement('afterend',trigger);
+  label.htmlFor=trigger.id;
+  select.addEventListener('change',update);
+  update();
+ }
+}
+function onboarding(){screen.innerHTML='<section class="setup-hero"><span class="setup-eyebrow">WELCOME TO EZPZ</span><h2>Make it yours.</h2><p>A routine that fits your life.<br>One small step at a time.</p><div class="setup-pillars"><span>Eat well</span><span>Train your way</span><span>Build the habit</span></div></section><form id="setup"><section class="setup-panel setup-personal"><div class="setup-panel-title"><b>01</b><div><h3>A little more you</h3><p>Your name. Your preferred units.</p></div></div><label for="setup-first-name">What should we call you? <small>optional</small></label><input id="setup-first-name" name="firstName" type="text" autocomplete="given-name" maxlength="40" placeholder="Your first name" value="'+safe(cleanFirstName(state.firstName))+'">'+unitPreferences()+'</section><section class="setup-panel setup-training"><div class="setup-panel-title"><b>02</b><div><h3>Find your rhythm</h3><p>Choose where to start. You can adjust later.</p></div></div><label for="setup-goal">Primary goal</label><select id="setup-goal" name="goal"><option value="lose">Lose fat</option><option value="maintain">Get fitter / maintain</option><option value="gain">Build muscle</option></select><label for="setup-level">Training experience</label><select id="setup-level" name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><div class="grid"><div><label for="setup-equipment">Where do you train?</label><select id="setup-equipment" name="equipment"><option value="home">At home</option><option value="gym">At a gym</option></select></div><div><label for="setup-days">Days per week</label><select id="setup-days" name="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div></div></section><section class="setup-panel setup-body"><div class="setup-panel-title"><b>03</b><div><h3>Your starting point</h3><p>Body details for an initial calorie estimate.</p></div></div><div class="grid"><div><label for="setup-age">Age (years)</label><input id="setup-age" name="age" type="number" min="18" max="100" required placeholder="35"></div><div><label for="setup-weight">Weight ('+bodyWeightUnit()+')</label><input id="setup-weight" name="weight" type="number" min="'+displayBodyWeight(30)+'" max="'+displayBodyWeight(350)+'" step="any" required placeholder="'+displayBodyWeight(80)+'"></div><div><label for="setup-height">Height ('+(preferredUnits()==='imperial'?'inches':'cm')+')</label><input id="setup-height" name="height" type="number" step="any" min="'+(preferredUnits()==='imperial'?120/2.54:120)+'" max="'+(preferredUnits()==='imperial'?230/2.54:230)+'" required placeholder="'+(preferredUnits()==='imperial'?71:180)+'"></div><div><label for="setup-sex">For calorie estimate</label><select id="setup-sex" name="sex"><option value="male">Male formula</option><option value="female">Female formula</option></select></div></div><p class="note">General starting estimates for adults. Your nutrition targets can be adjusted in the app.</p></section><div class="setup-finish"><button class="primary">Create my plan →</button><p>Your pace. Your progress.</p><small>Saved in this browser. No account needed to get started.</small></div></form><section class="readiness-panel" id="fitness-account-panel"></section>';setupPickers()}
 
 function cleanSleepGoal(value){return Number.isInteger(value)&&value>=60&&value<=1440?value:480}
 function cleanSleepLog(value){if(!value||typeof value!=='object'||Array.isArray(value))return {};return Object.fromEntries(Object.entries(value).filter(([date,minutes])=>validPlanDate(date)&&Number.isInteger(minutes)&&minutes>=0&&minutes<=1440).slice(-10000))}
@@ -11990,7 +12036,20 @@ document.addEventListener('click',e=>{
  if(applyExerciseSwap(i,choice.dataset.exerciseName)){rememberExercise(i);train();window.scrollTo(0,y)}
  else{train();const message=document.getElementById('training-action-message');if(message)message.textContent='Swap not saved. Keep or clear existing exercise entries first.'}
 });
-document.addEventListener('click',e=>{const clear=e.target.closest('[data-clear-exercise]'),dismiss=e.target.closest('[data-dismiss-recap]');if(clear){const i=Number(clear.dataset.clearExercise),plan=workoutPlan();if(!Number.isInteger(i)||!plan.exercises[i]||!confirm('Clear only this exercise’s entries?'))return;const d={...workoutDraft(plan)};for(let j=0;j<plan.exercises[i].sets;j++)for(const prefix of ['sr','sw','sd'])delete d[prefix+i+'-'+j];if(persistTrainingDraft(plan,d))train()}if(dismiss){lastSessionRecap=null;progressArchiveOpen=true;trendCategory='';progress();document.querySelector('.history-heading')?.scrollIntoView({block:'start'})}});
+document.addEventListener('click',e=>{
+ const clear=e.target.closest('[data-clear-exercise]'),dismiss=e.target.closest('[data-dismiss-recap]');
+ if(clear){
+  const i=Number(clear.dataset.clearExercise),plan=workoutPlan();
+  if(!Number.isInteger(i)||!plan.exercises[i])return;
+  showChoiceDialog('Clear only this exercise’s entries?',
+   '<div class="trainer-dialog-actions"><button value="" autofocus>Cancel</button><button class="primary" value="clear">Clear entries</button></div>',clear,()=>{
+    const draft={...workoutDraft(plan)};
+    for(let j=0;j<plan.exercises[i].sets;j++)for(const prefix of ['sr','sw','sd'])delete draft[prefix+i+'-'+j];
+    if(persistTrainingDraft(plan,draft))train();
+   });
+ }
+ if(dismiss){lastSessionRecap=null;progressArchiveOpen=true;trendCategory='';progress();document.querySelector('.history-heading')?.scrollIntoView({block:'start'})}
+});
 
 function baseWorkoutPlan(id=activeWorkoutId()){const p=state.profile,done=state.logs.filter(x=>x.type===p.equipment&&(!x.workoutId||x.workoutId==='full-body')).length,variant=id==='full-body'&&state.activePlanItem&&['A','B'].includes(state.planItemDrafts?.[state.activePlanItem.date+'|'+state.activePlanItem.slot+'|full-body']?.variant)?state.planItemDrafts[state.activePlanItem.date+'|'+state.activePlanItem.slot+'|full-body'].variant:done%2===0?'A':'B',week=Math.floor(done/Math.max(1,p.days))%12+1,recovery=week%4===0,selected=allWorkouts().find(w=>w.id===id);if(selected)return {...selected,week,recovery:false,exercises:selected.exercises.map((x,i)=>({...x,index:i}))};const base=variant==='A'?programs[p.equipment]:alternate[p.equipment];return {id:'full-body',title:'Full Body '+variant,week,variant,recovery,exercises:base.map((x,i)=>{const spec=x[1].split('×')[1]?.trim()||'10';return {name:x[0],sets:Math.max(1,(p.level==='Beginner'?2:p.level==='Advanced'?4:3)-(recovery?1:0)),reps:spec.replace(/\s*sec/g,'').replace(/\s*\/\s*side/g,'').trim(),unit:/sec/.test(spec)?'sec':'reps',side:/\/\s*side/.test(spec),index:i}})}}
 
@@ -14311,6 +14370,9 @@ body[data-view] #fitness-account-panel{padding:0!important;margin:12px 0!importa
 body[data-view] .account-backup>summary{min-height:66px;padding:14px 15px;list-style:none;cursor:pointer;position:relative}
 body[data-view] .account-backup>summary::-webkit-details-marker{display:none}
 body[data-view] .account-backup>summary:after{content:'›';position:absolute;right:16px;top:18px;font-size:25px;color:#8ee2b4}
+body[data-view=setup] #fitness-account-panel .account-backup>summary{display:flex;align-items:center;gap:12px;padding:12px 35px 12px 14px}
+body[data-view=setup] #fitness-account-panel .account-backup>summary>svg{width:24px;height:24px;flex:0 0 24px;color:#adeace}
+body[data-view=setup] #fitness-account-panel .account-backup>summary h3{padding:0}
 body[data-view] .account-backup[open]>summary:after{transform:rotate(90deg)}
 body[data-view] .account-backup>summary h3{font-size:15px;line-height:1.3;margin:0;padding-right:24px}
 body[data-view] .account-backup>summary small{display:block;margin-top:5px;font-size:10px}

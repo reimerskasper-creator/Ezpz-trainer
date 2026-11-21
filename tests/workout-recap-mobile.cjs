@@ -48,6 +48,32 @@ const server=http.createServer((req,res)=>{
     window.SpeechSynthesisUtterance=class{constructor(text){this.text=text}};
    });
    await page.evaluate(width=>applyAppAppearance({mode:width===390?'light':'dark',accent:width===430?'ocean':'emerald'}),width);
+   await page.evaluate(()=>{window.testProfile=state.profile;state.profile=null;render()});
+   const backupIcon=page.locator('#fitness-account-panel .account-backup>summary>svg');
+   assert.equal(await backupIcon.evaluate(icon=>icon.getBoundingClientRect().width),24);
+   for(const [name,option,value] of [['goal','Build muscle','gain'],['level','Advanced','Advanced'],['equipment','At a gym','gym'],['days','5','5'],['sex','Female formula','female']]){
+    await page.locator('#setup-'+name+'-picker').click();
+    const picker=page.locator('.ez-choice-dialog[open]');
+    const choice=picker.getByRole('button',{name:option,exact:true});
+    assert(await choice.isVisible());
+    assert(await choice.evaluate(button=>{
+     const style=getComputedStyle(button);
+     const light=color=>color.match(/\d+/g).slice(0,3).map(channel=>{
+      const v=Number(channel)/255;
+      return v<=.04045?v/12.92:((v+.055)/1.055)**2.4;
+     }).reduce((sum,v,i)=>sum+v*[.2126,.7152,.0722][i],.05);
+     const foreground=light(style.color),background=light(style.backgroundColor);
+     return Math.max(foreground,background)/Math.min(foreground,background)>=4.5;
+    }));
+    await choice.click();
+    await picker.waitFor({state:'hidden'});
+    assert.equal(await page.locator('#setup-'+name).inputValue(),value);
+   }
+   await page.locator('#setup-days-picker').click();
+   await page.keyboard.press('Escape');
+   await page.locator('.ez-choice-dialog').waitFor({state:'detached'});
+   assert.equal(await page.locator('#setup-days').inputValue(),'5');
+   await page.evaluate(()=>{state.profile=window.testProfile;render()});
    await page.getByRole('button',{name:'Manage workouts'}).click();
    const chooser=page.locator('#workout-chooser');
    assert(await chooser.isVisible());
