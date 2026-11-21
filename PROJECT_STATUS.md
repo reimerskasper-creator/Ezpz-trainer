@@ -1,3 +1,7 @@
+## 2026-11-21 — My Plan order and clean setup
+
+- Android 1.0.185 places Plan library below the daily log and above day tools, omits the default workout from an empty Home schedule, and keeps cloud backup in More.
+
 ## 2026-11-21 — Setup pickers and swap confirmation
 
 - Android 1.0.184 uses high-contrast in-app setup choices and a themed confirmation for clearing one exercise’s entries. Setup shows cloud backup in a compact row.

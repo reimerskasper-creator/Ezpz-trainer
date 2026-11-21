@@ -49,8 +49,7 @@ const server=http.createServer((req,res)=>{
    });
    await page.evaluate(width=>applyAppAppearance({mode:width===390?'light':'dark',accent:width===430?'ocean':'emerald'}),width);
    await page.evaluate(()=>{window.testProfile=state.profile;state.profile=null;render()});
-   const backupIcon=page.locator('#fitness-account-panel .account-backup>summary>svg');
-   assert.equal(await backupIcon.evaluate(icon=>icon.getBoundingClientRect().width),24);
+   assert.equal(await page.locator('#fitness-account-panel').count(),0);
    for(const [name,option,value] of [['goal','Build muscle','gain'],['level','Advanced','Advanced'],['equipment','At a gym','gym'],['days','5','5'],['sex','Female formula','female']]){
     await page.locator('#setup-'+name+'-picker').click();
     const picker=page.locator('.ez-choice-dialog[open]');
