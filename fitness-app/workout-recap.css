@@ -103,9 +103,6 @@ body[data-view] #workout-chooser .chooser-focus-head{padding:9px 24px 9px}
 body[data-view] #workout-chooser .chooser-focus-body .category-copy b{margin-top:auto;gap:4px;font-size:12px;line-height:1.25}
 #workout-chooser .chooser-focus-tools{margin-top:12px}
 
-body[data-view=train] .compact-exercise-picker:has(.workout-elapsed){align-items:center;justify-content:space-between;gap:6px}
-body[data-view=train] .workout-elapsed{display:flex;align-items:baseline;gap:6px;padding:0 8px;color:#c7e1d3;font-size:12px}
-body[data-view=train] .workout-elapsed time{color:#f1fff5;font-size:15px;font-weight:750;font-variant-numeric:tabular-nums}
 
 .own-anatomy-cover{
  background:radial-gradient(ellipse at 55% 40%,#40564c,transparent 74%),#101c18;

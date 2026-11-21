@@ -239,10 +239,10 @@ body[data-view=custom-food] #food-flow .food-amount-actions:has([data-ingredient
 body[data-view=custom-food] #food-flow .food-amount-actions:has([data-ingredient-quick-log]) button{margin:0;min-width:0;min-height:48px;font-size:14px;border-radius:12px}
 #food-flow #food-quick-feedback{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;margin:8px 0;font-size:12px}
 #food-flow #food-quick-feedback button{margin:0;width:auto;flex:none}
-body[data-view=custom-food] #food-flow .food-macro-preview.has-macro-ring{display:grid;grid-template-columns:minmax(0,1fr) 58px;grid-template-rows:auto 1fr auto;column-gap:10px;row-gap:3px;align-items:center}
+body[data-view=custom-food] #food-flow .food-macro-preview.has-macro-ring{--macro-ring-size:clamp(76px,23vw,94px);display:grid;grid-template-columns:minmax(0,1fr) var(--macro-ring-size);grid-template-rows:auto 1fr auto;column-gap:10px;row-gap:3px;align-items:center}
 body[data-view=custom-food] #food-flow .has-macro-ring>.food-nutrition-basis{grid-column:1;grid-row:1;padding:0}
 body[data-view=custom-food] #food-flow .has-macro-ring>strong{grid-column:1;grid-row:2;padding:0;min-height:0;margin:0;align-self:start}
-body[data-view=custom-food] #food-flow .food-macro-preview>svg.food-macro-ring{position:static;grid-column:2;grid-row:1 / span 2;width:58px!important;height:58px!important;justify-self:end;align-self:start}
+body[data-view=custom-food] #food-flow .food-macro-preview>svg.food-macro-ring{position:static;grid-column:2;grid-row:1 / span 2;width:var(--macro-ring-size)!important;height:var(--macro-ring-size)!important;justify-self:end;align-self:start}
 body[data-view=custom-food] #food-flow .has-macro-ring>div{grid-column:1 / -1;grid-row:3;margin-top:16px}
 #food-flow #custom-food-form:has(.food-review-summary){display:grid;gap:10px;margin:0;padding:0;border:0;background:transparent!important;box-shadow:none}
 #food-flow[data-manual=false] #custom-food-form>h3,
@@ -293,4 +293,4 @@ body[data-view=custom-food] #food-flow .has-macro-ring>div{grid-column:1 / -1;gr
 body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>div{margin-top:6px}
 body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>.food-nutrition-basis,
 body[data-view=custom-food].food-keyboard #food-flow .has-macro-ring>strong{padding-right:0}
-body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview>svg.food-macro-ring{width:46px!important;height:46px!important}
+body[data-view=custom-food].food-keyboard #food-flow .food-macro-preview.has-macro-ring{--macro-ring-size:60px}

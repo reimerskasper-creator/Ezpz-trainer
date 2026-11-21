@@ -1,3 +1,9 @@
+## 2026-11-20 — Workout recap timing and nutrition readability
+
+- Android 1.0.173 records the first Done checkmark and measures wall-clock time through Finish. The elapsed clock appears only in the workout recap. The independent rest timer stays in the workout footer.
+- The collapsed Home food card reuses the expanded Protein, Carbs and Fat boxes. Food details shows a larger macro split ring and keeps a compact layout while the keyboard is open.
+- Branch: android-health-connect. Workout timing, food macro calculations and Home state checks passed locally. The Android workflow runs mobile layout checks and signs the update with the existing certificate.
+
 ## 2026-11-20 — Custom workout exercise photos and controls
 
 - Android 1.0.171 enlarges exercise picker photos and fits the full source image in the picker and both builder states. The expanded editor puts Browse exercises before manual entry, keeps sets and reps together, and moves Remove to the timing options row.

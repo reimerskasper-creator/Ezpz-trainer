@@ -56,7 +56,16 @@ body[data-view=home] #screen .home-nutrition .home-macro-row>div{--macro-fill:#8
 body[data-view=home] #screen .home-nutrition .home-macro-row>div:nth-child(2){--macro-fill:#efd17b;background:#7a613dbd!important;border-color:#b8a36f80!important}
 body[data-view=home] #screen .home-nutrition .home-macro-row>div:nth-child(3){--macro-fill:#9dcbef;background:#365f7bc4!important;border-color:#8cb6d680!important}
 body[data-view=home] #screen .home-nutrition .home-macro-row>div :is(strong,small,span){color:#e5f2e9!important}
-body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row>div{background:transparent!important;border:0!important;box-shadow:none}
+body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row{flex:1 1 52%;min-width:0;gap:4px;margin:0}
+body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row>div{min-width:0;padding:5px 3px;text-align:center}
+body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row>div>span{margin:0 0 2px}
+body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row strong{font-size:13px}
+body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row strong small{display:block;font-size:9px}
+body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row progress{margin-top:4px}
+@media(max-width:380px){
+ body[data-view=home] #screen .home-nutrition[data-folded=true] .home-energy-layout{flex-wrap:wrap}
+ body[data-view=home] #screen .home-nutrition[data-folded=true] .home-macro-row{flex-basis:100%}
+}
 body[data-view=home] #screen :is(.home-nutrition-bottom,.home-nutrition>.row,.home-next>.row,.home-weight-row,.steps-expanded){background:transparent!important}
 body[data-view=home] #screen :is(.home-week-card,.home-workout,.home-nutrition,.home-steps-panel,.home-next,.home-meals,.foundation-week,.home-weight-card) :is(p,small,.note){color:#e4f3e9!important}
 

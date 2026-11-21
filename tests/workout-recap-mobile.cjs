@@ -57,12 +57,11 @@ const server=http.createServer((req,res)=>{
    await page.getByRole('button',{name:'Start workout',exact:true}).click();
    assert.equal(await page.locator('body').getAttribute('data-view'),'train');
    assert.equal(await page.locator('.workout-countdown').count(),0);
-   const clock=page.locator('#workout-elapsed-clock');
-   await page.waitForFunction(()=>document.getElementById('workout-elapsed-clock').textContent!=='0:00');
-   const elapsedBeforeRender=await page.evaluate(()=>activeWorkoutElapsed());
+   assert.equal(await page.locator('#workout-elapsed-clock').count(),0);
+   assert(await page.locator('.session-footer .footer-rest').isVisible());
+   assert(await page.locator('.session-footer [data-action="finish"]').isVisible());
    await page.evaluate(()=>render());
-   assert(await clock.isVisible());
-   assert(await page.evaluate(()=>activeWorkoutElapsed())>=elapsedBeforeRender);
+   assert.equal(await page.locator('#workout-elapsed-clock').count(),0);
    assert.deepEqual(await page.evaluate(()=>window.testSpeech),[]);
    assert.deepEqual(await page.locator('.set-head').first().locator('span').allTextContents(),['Set','Last time','kg','Reps','Done']);
    const inputOrder=await page.locator('.set-row').first().locator('input').evaluateAll(inputs=>inputs.map(input=>Object.keys(input.dataset)[0]));
@@ -99,7 +98,7 @@ const server=http.createServer((req,res)=>{
     };state.logs.push(lastSessionRecap);tab='progress';render();
    });
    const metrics=await page.locator('.workout-recap .recap-numbers strong').allTextContents();
-   assert.deepEqual(metrics,['6','39 min','612 kg']);
+   assert.deepEqual(metrics,['6','39:00','612 kg']);
    assert.equal(await page.locator('.recap-muscles [data-anatomy-region="hamstrings"]').count(),0);
    assert((await page.locator('.recap-muscle-note').first().textContent()).includes('1 completed exercise'));
    await page.locator('[data-recap-muscle="glutes"]').click();
