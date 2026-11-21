@@ -117,7 +117,7 @@
   d.classList.add('plan-draft-dialog');
   d._discard=()=>{if(!confirm('Discard changes to this plan?'))return;library(document.querySelector('[data-plan-manage=library]')||trigger)};
   const daySelect=d.querySelector('[data-draft-day]'),content=d.querySelector('[data-draft-content]');
-  const savedWorkouts=readySavedWorkouts().map(w=>[w.id,workoutTitle(w)]);
+  const savedWorkouts=readySavedWorkouts().map(w=>[w.id,workoutTitle(w),w.equipment]);
   const savedMeals=cleanCustomFoods(state.customFoods).map(f=>[f.id,f.name]);
   const portionControl=(value,slot='')=>'<div class="plan-portion" role="group" aria-label="Portions" data-portion-slot="'+safe(slot)+'"><button type="button" data-portion-step="-0.5" aria-label="Decrease portions" '+(value<=.5?'disabled':'')+'>−</button><output aria-live="polite">'+value+'</output><button type="button" data-portion-step="0.5" aria-label="Increase portions" '+(value>=3?'disabled':'')+'>+</button></div>';
   function changePortion(button){
@@ -129,18 +129,41 @@
    return value;
   }
   const slotId=()=> 'extra-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,9);
-  const remove=(kind,slot)=>'<button type="button" data-draft-remove="'+kind+':'+safe(slot)+'">Remove</button>';
+  const remove=(kind,slot)=>'<button type="button" class="plan-item-remove" aria-label="Remove '+kind+'" data-draft-remove="'+kind+':'+safe(slot)+'">×</button>';
+  const photo=id=>pack.photos?.[id]||personalPhoto(id);
+  const image=(src,icon)=>src?'<img src="'+safe(src)+'" alt="" loading="lazy" decoding="async">':homeIcon(icon);
+  function workoutVisual(workout,packaged=false){
+   const cover=workout&&photo(workout.photoId);
+   const previews=(workout?.exercises||[]).filter(x=>!/Warm-up|Cooldown/i.test(x.name)).slice(0,3).map(x=>{
+    const saved=packaged&&pack.media[workout.id+'|'+x.name];
+    return '<span>'+image(photo(saved?.photoId)||workoutExercisePhoto(x.name,packaged?null:workout.id),'workout')+'</span>';
+   }).join('');
+   return {
+    cover:'<span class="plan-item-photo">'+(cover?image(cover,'workout'):workout?hybridWorkoutCover(workout,workout.exercises,true):homeIcon('workout'))+'</span>',
+    previews:previews?'<span class="plan-item-previews">'+previews+'</span>':''
+   };
+  }
   function showDay(){
    const entry=pack.entries[day],extras=entry.extraWorkouts||[];
-   const title=wid=>wid==='rest'?'Recovery day':pack.workouts.find(w=>w.id===wid)?.title;
-   const mealName=id=>{const meal=pack.meals.find(item=>item.id===id);return meal.kind==='recipe'?recipes[meal.index].name:meal.food.name};
    daySelect.value=day;
    d.querySelector('[data-draft-shift="-1"]').disabled=day===0;
    d.querySelector('[data-draft-shift="1"]').disabled=day===pack.days-1;
    const workouts=[...(entry.workout?[['main',entry.workout,'']]:[]),...extras.map(x=>[x.slot,x.workout,x.label])];
-   content.innerHTML=nutritionComparison(pack,day)+'<section class="plan-draft-section"><h3>Workouts</h3>'+workouts.map(([slot,wid,label])=>'<div class="plan-draft-item"><strong>'+safe((label?label+' · ':'')+title(wid))+'</strong><div class="plan-draft-item-actions">'+(pack.nutritionTargets&&wid!=='rest'?'<button type="button" data-draft-exercise="'+safe(slot)+'">Edit exercises</button>':'')+remove('workout',slot)+'</div>'+'</div>').join('')+
+   content.innerHTML=nutritionComparison(pack,day)+'<section class="plan-draft-section"><h3>Workouts</h3>'+workouts.map(([slot,wid,label])=>{
+    const workout=pack.workouts.find(w=>w.id===wid);
+    const visual=workoutVisual(workout,true);
+    return '<div class="plan-draft-item">'+visual.cover+'<div><strong>'+safe(workout?.title||'Recovery day')+'</strong>'+
+     (label?'<small>'+safe(label)+'</small>':'')+visual.previews+'</div><div class="plan-draft-item-actions">'+
+     (pack.nutritionTargets&&wid!=='rest'?'<button type="button" data-draft-exercise="'+safe(slot)+'">Edit exercises</button>':'')+remove('workout',slot)+'</div></div>';
+   }).join('')+
     (extras.length>=10?'':'<button type="button" data-draft-add="workout">+ Add workout</button>')+
-    '</section><section class="plan-draft-section"><h3>Meals</h3>'+planMealSlots(entry.meals).filter(slot=>entry.meals[slot]).map(slot=>{const meal=entry.meals[slot];return '<div class="plan-draft-item"><div><strong>'+safe(planSlotLabel(slot,{[slot+'Label']:meal.label})+' · '+mealName(meal.id))+'</strong>'+portionControl(meal.portion,slot)+'</div>'+remove('meal',slot)+'</div>'}).join('')+
+    '</section><section class="plan-draft-section"><h3>Meals</h3>'+planMealSlots(entry.meals).filter(slot=>entry.meals[slot]).map(slot=>{
+     const meal=entry.meals[slot],definition=pack.meals.find(item=>item.id===meal.id);
+     const recipe=definition.kind==='recipe'?recipes[definition.index]:null;
+     const src=recipe?(recipe.photo||(definition.index<6?'./meal-images/meal-'+definition.index+'.jpg':'')):photo(definition.food.photoId)||customFoodImage(definition.food);
+     return '<div class="plan-draft-item"><span class="plan-item-photo">'+image(src,'food')+'</span><div><strong>'+safe((recipe||definition.food).name)+'</strong><small>'+
+      safe(planSlotLabel(slot,{[slot+'Label']:meal.label}))+'</small>'+portionControl(meal.portion,slot)+'</div>'+remove('meal',slot)+'</div>';
+    }).join('')+
     (Object.keys(entry.meals).length>=23?'':'<button type="button" data-draft-add="meal">+ Add meal</button>')+'</section>';
   }
   function pick(kind,opener){
@@ -169,13 +192,34 @@
     const query=body.querySelector('[data-picker-search]').value.trim().toLowerCase();
     const items=choices().filter(([,name,equipment])=>(name+' '+(equipment||'')).toLowerCase().includes(query));
     body.querySelectorAll('[data-picker-source]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.pickerSource)===source)));
-    body.querySelector('[data-picker-results]').innerHTML=items.map(([id,name,equipment])=>'<button type="button" data-picker-item="'+safe(id)+'">'+safe(name)+(equipment?'<small>'+safe(equipment)+'</small>':'')+'</button>').join('')||'<p>'+(query?'No matches.':meal?'No saved meals yet.':'No saved workouts yet.')+'</p>';
+    body.querySelector('[data-picker-results]').innerHTML=items.map(([id,name,equipment])=>{
+     if(meal)return '<button type="button" data-picker-item="'+safe(id)+'">'+safe(name)+'</button>';
+     const visual=workoutVisual(planWorkout(id));
+     return '<button type="button" class="plan-picker-workout" data-picker-item="'+safe(id)+'">'+visual.cover+'<span><strong>'+safe(name)+'</strong>'+
+      (equipment?'<small>'+safe(equipment)+'</small>':'')+visual.previews+'</span></button>';
+    }).join('')||'<p>'+(query?'No matches.':meal?'No saved meals yet.':'No saved workouts yet.')+'</p>';
    }
-   function add(item,slot,portion){
+   function confirmMeal(slot,name,accept){
+    const label=planSlotLabel(slot);
+    const confirmation=document.createElement('dialog');
+    confirmation.className='plan-draft-picker plan-meal-confirmation';
+    confirmation.setAttribute('aria-labelledby','plan-meal-confirm-title');
+    confirmation.setAttribute('aria-describedby','plan-meal-confirm-message');
+    confirmation.innerHTML='<h3 id="plan-meal-confirm-title">Replace '+safe(label.toLowerCase())+'?</h3>'+
+     '<p id="plan-meal-confirm-message">Replace the planned '+safe(label.toLowerCase())+' on Day '+(day+1)+' with '+safe(name)+'?</p>'+
+     '<form method="dialog" class="plan-dialog-actions"><button value="cancel" autofocus>Cancel</button><button class="primary" value="replace">Replace '+safe(label.toLowerCase())+'</button></form>';
+    picker.append(confirmation);
+    confirmation.addEventListener('close',()=>{
+     confirmation.remove();
+     if(confirmation.returnValue==='replace')accept();
+    },{once:true});
+    confirmation.showModal();
+   }
+   function add(item,slot,portion,confirmed=false){
     if(owner!==state){message.textContent='Your app data changed. Reopen the plan to continue.';return}
     try{
      if(meal){
-      if(entry.meals[slot]&&!confirm('Replace the planned '+slot+' on Day '+(day+1)+'?'))return;
+      if(entry.meals[slot]&&!confirmed){confirmMeal(slot,selected[1],()=>add(item,slot,portion,true));return}
       entry.meals[slot==='extra'?slotId():slot]={id:addMeal(item),portion,...(slot==='extra'?{label:'Extra meal'}:{})};
      }else{
       const workout=addWorkout(item);

@@ -1,3 +1,8 @@
+## 2026-11-21 — Visual plan builder
+
+- Android 1.0.186 updates the Plan Library day builder with a themed meal replacement confirmation, workout covers and exercise previews in the picker, and photo rows for scheduled workouts and meals.
+- Android branch: android-health-connect. Plan Library data and package checks passed locally.
+
 ## 2026-11-21 — My Plan order and clean setup
 
 - Android 1.0.185 places Plan library below the daily log and above day tools, omits the default workout from an empty Home schedule, and keeps cloud backup in More.
