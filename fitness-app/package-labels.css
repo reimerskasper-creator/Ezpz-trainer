@@ -17,3 +17,29 @@ body[data-view] #food-flow .package-label-open{min-height:32px;margin:0;padding:
 #package-label-dialog .package-label-confirm{display:flex;align-items:center;gap:10px;padding:10px 0}
 #package-label-dialog input[type=checkbox]{flex:0 0 24px;width:24px;height:24px;accent-color:#9ae4bb}
 #package-label-dialog [hidden]{display:none!important}
+
+#barcode-panel:has(>.barcode-recovery)>:is(.food-camera-stage,[data-barcode-camera],#barcode-status,.barcode-type-panel){display:none}
+#barcode-panel>.barcode-recovery{display:grid;gap:12px}
+#barcode-panel .barcode-recovery-card{
+ display:grid;justify-items:center;gap:9px;padding:20px 13px 14px;
+ border:1px solid #739e86;border-radius:17px;background:#0c3327;text-align:center;
+}
+#barcode-panel .barcode-recovery-icon{color:#9ae4bb}
+#barcode-panel .barcode-recovery svg{
+ width:22px;height:22px;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;
+ stroke-linecap:round;stroke-linejoin:round;
+}
+#barcode-panel .barcode-recovery-icon svg{width:32px;height:32px}
+#barcode-panel .barcode-recovery h5{margin:0;color:#f1fff5;font-size:clamp(20px,5.6vw,25px);line-height:1.2}
+#barcode-panel .barcode-recovery p{margin:0;color:#d6ebdf;font-size:14px;line-height:1.4}
+body[data-view] #barcode-panel .barcode-recovery button{
+ min-height:48px;margin:0;border:1px solid #739e86;border-radius:12px;background:#123b2d!important;color:#f1fff5!important;
+}
+body[data-view] #barcode-panel .barcode-recovery [data-label-unknown]{
+ margin-top:5px;background:#9ae4bb!important;color:#123b29!important;font-weight:750;
+}
+#barcode-panel .barcode-recovery .barcode-recovery-note{
+ display:flex;gap:8px;justify-self:stretch;align-items:baseline;padding:4px 3px;text-align:left;font-size:13px;
+}
+#barcode-panel .barcode-recovery-note span{color:#9ae4bb}
+body[data-view] #barcode-panel .barcode-recovery [data-barcode-rescan]{border-color:transparent;background:transparent!important}

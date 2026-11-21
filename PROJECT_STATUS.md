@@ -1,3 +1,8 @@
+## 2026-11-21 — Barcode recovery screen
+
+- Android 1.0.176 replaces the stopped scanner preview after a failed lookup with a nutrition-label action, a review-and-save reminder, food search, and a barcode rescan.
+- Branch: android-health-connect. Barcode, package label, native packaging, and runtime checks passed locally. Android CI builds the signed update and runs the mobile recovery checks.
+
 ## 2026-11-21 — Full-width workout focus banners
 
 - Android 1.0.175 uses one scrollable banner per workout focus, the original picker controls, and a full-body anatomy figure with stronger primary highlights over an emerald gradient.

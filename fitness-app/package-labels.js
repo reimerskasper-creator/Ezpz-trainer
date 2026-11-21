@@ -55,10 +55,50 @@ function parseFatSecret(data, code) {
   return null;
 }
 
+ function clearBarcodeResult(){
+  const panel=document.getElementById('barcode-panel');
+  panel?.querySelector('.barcode-recovery, [data-label-unknown]')?.remove();
+ }
+ const openScanner=openBarcodeScanner;
+ openBarcodeScanner=function(){
+  clearBarcodeResult();
+  openScanner();
+ };
+ function showBarcodeRecovery(panel,code,heading){
+  const result=document.createElement('section');
+  result.className='barcode-recovery';
+  result.innerHTML='<div class="barcode-recovery-card"><span class="barcode-recovery-icon">'+foodScanIcon()+'</span>'+
+   '<h5 tabindex="-1"></h5><p>Scan the nutrition label to fill in calories and macros.</p>'+
+   '<button type="button" class="primary" data-label-unknown><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></svg> Scan nutrition label</button>'+
+   '<p class="barcode-recovery-note"><span aria-hidden="true">✓</span> Review and save to use this barcode next time.</p></div>'+
+   '<button type="button" data-barcode-search>Search food instead</button>'+
+   '<button type="button" data-barcode-rescan>Scan another barcode</button>';
+  result.querySelector('h5').textContent=heading;
+  const label=result.querySelector('[data-label-unknown]');
+  label.onclick=()=>openEditor(['off-'+code,'',0,0,0,0,'g','off'],label,true,true);
+  result.querySelector('[data-barcode-search]').onclick=()=>{
+   closeBarcodeScanner();
+   foodFlowView('find');
+   foodFlowTab('foods');
+   const input=document.getElementById('ingredient-search');
+   const builder=input?.closest('details');
+   if(builder)builder.open=true;
+   input?.focus();
+  };
+  result.querySelector('[data-barcode-rescan]').onclick=()=>{
+   clearBarcodeResult();
+   const number=panel.querySelector('#barcode-number');
+   if(number)number.value='';
+   panel.querySelector('[data-barcode-camera]')?.focus();
+   startBarcodeCamera();
+  };
+  panel.querySelector('#barcode-status').after(result);
+  result.querySelector('h5').focus();
+ }
  const lookup=lookupFoodBarcode;
  lookupFoodBarcode=async function(raw){
   if(barcodeBusy)return;
-  document.querySelector('[data-label-unknown]')?.remove();
+  clearBarcodeResult();
   const food=foodForBarcode(raw);
   if(food){stopBarcodeCamera();showIngredientAmount(food);return}
   const pending=lookup(raw),session=barcodeSession;
@@ -69,6 +109,7 @@ function parseFatSecret(data, code) {
   const status=document.getElementById('barcode-status');
   const rawCode=normalizeFoodBarcode(raw);
   const missed=/^(Product not found|This product has incomplete)/.test(status?.textContent||'');
+  let matchedBackup=false;
   if(missed&&rawCode&&!(rawCode.length===14&&!rawCode.startsWith('0'))&&window.Capacitor?.isNativePlatform?.()&&window.EzpzFatSecretLookup){
    const abort=new AbortController();
    barcodeAbort=abort;
@@ -78,6 +119,7 @@ function parseFatSecret(data, code) {
     const result=parseFatSecret(await window.EzpzFatSecretLookup(code,abort.signal),code);
     if(!current())return;
     if(result){
+     matchedBackup=true;
      status.textContent=result[1]+' · '+result[2]+' kcal · Protein '+result[3]+' g · Carbs '+result[4]+' g · Fat '+result[5]+' g per 100 '+(result[6]==='ml'?'mL':'g')+'. Compare with the package and scan the nutrition label to log it. ';
      const credit=document.createElement('a');
      credit.href='https://www.fatsecret.com/';
@@ -93,6 +135,14 @@ function parseFatSecret(data, code) {
    }
   }
   if(!current())return;
+  if(!matchedBackup){
+   const message=status?.textContent||'';
+   if(!/^(Product not found|This product has incomplete|Product lookup is unavailable|Backup lookup unavailable)/.test(message))return;
+   const heading=message.startsWith('Product not found')?'Food not found':
+    message.startsWith('This product has incomplete')?'Nutrition details unavailable':'Couldn’t look up this barcode';
+   showBarcodeRecovery(panel,code,heading);
+   return;
+  }
   const button=document.createElement('button');
   button.type='button';
   button.dataset.labelUnknown='';

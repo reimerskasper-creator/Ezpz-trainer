@@ -85,6 +85,7 @@ jobs:
           node tests/trainer-space-mobile.cjs
           node tests/workout-recap-mobile.cjs
           node tests/eat-hybrid-mobile.cjs
+          node tests/package-labels-mobile.cjs
       - name: Run broader mobile regression checks
         run: |
           node tests/planner-custom-meals-mobile.cjs
@@ -110,7 +111,6 @@ jobs:
           node tests/food-macro-ring-mobile.cjs
           node tests/photo-food-flow-mobile.cjs
           node tests/barcode-mobile.cjs
-          node tests/package-labels-mobile.cjs
           node tests/ingredients-mobile.cjs
           node tests/method-guide-mobile.cjs
           node tests/foundation-week-mobile.cjs
