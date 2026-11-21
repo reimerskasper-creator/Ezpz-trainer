@@ -1,5 +1,7 @@
 ## 2026-11-21 — Program exercise photo grid
 
+- Android 1.0.178 bundles 48 approved exercise demonstrations. The existing Trainer video button starts the matching clip in a loop. Personal video links and existing links for exercises awaiting a bundled demo are supported.
+
 - Android 1.0.177 displays exercise photos under each program cover in the workout chooser. Tiles show the exercise name and prescription and open available demos. Program details holds the muscle groups, equipment, and training notes.
 - Branch: android-health-connect. Native web packaging and runtime checks passed locally. The Android workflow builds the signed update and checks the program layout at mobile widths.
 

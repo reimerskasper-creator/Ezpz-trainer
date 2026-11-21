@@ -38,7 +38,12 @@ async function verify(){
   assert.equal(await page.locator('.library-tile img').count(),143);
   await page.locator('[data-library-id="Goblet Squat"]').click();
   await page.locator('.strict-demo img').evaluate(img=>img.decode());
-  assert.match(await page.getByRole('link',{name:'Watch demo'}).getAttribute('href'),/^https:\/\/www.youtube.com\/watch/);
+  const demo=page.getByRole('link',{name:'Watch demo'});
+  const gobletVideo='./fitness-app/exercise-videos/goblet-squat.mp4';
+  assert.equal(await demo.getAttribute('href'),gobletVideo);
+  await demo.click();
+  assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),gobletVideo);
+  await page.getByRole('button',{name:'Close',exact:true}).last().click();
   await page.evaluate(()=>{tab='train';render()});
   assert.equal(await page.locator('.workout-media-repair').count(),1);
   assert.equal(await page.locator('[data-set-reps]').count(),0);

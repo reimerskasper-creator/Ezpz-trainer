@@ -154,10 +154,62 @@
   'Bodyweight Reverse Lunge':'glute quads legs','Bodyweight Split Squat':'glute quads legs',
   'Bodyweight Step-Up':'glute quads legs','Dumbbell Romanian Deadlift':'glute hamstrings hinge',
  };
+ const bundledVideos=new Map([
+  ['Machine Leg Extension','machine-leg-extension.mp4'],
+  ['Seated Calf Raise','seated-calf-raise.mp4'],
+  ['Barbell Romanian Deadlift','barbell-romanian-deadlift.mp4'],
+  ['Incline Barbell Bench Press','incline-barbell-bench-press.mp4'],
+  ['Cable Rope Face Pull','cable-rope-face-pull.mp4'],
+  ['Incline Dumbbell Curl','incline-dumbbell-curl.mp4'],
+  ['Barbell Curl','barbell-curl.mp4'],
+  ['Barbell Hip Thrust','barbell-hip-thrust.mp4'],
+  ['Dead Hang','dead-hang.mp4'],
+  ['Chin-Up','chin-up.mp4'],
+  ['Dumbbell Bench Press','dumbbell-bench-press.mp4'],
+  ['Push-Up','push-up.mp4'],
+  ['Bodyweight Step-Up','bodyweight-step-up.mp4'],
+  ['Dumbbell Floor Press','dumbbell-floor-press.mp4'],
+  ['Bodyweight Squat','bodyweight-squat.mp4'],
+  ['Dumbbell Z Press','dumbbell-z-press.mp4'],
+  ['Kneeling Ab-Wheel Rollout','kneeling-ab-wheel-rollout.mp4'],
+  ['Trap-Bar Deadlift','trap-bar-deadlift.mp4'],
+  ['Dumbbell Bulgarian Split Squat','dumbbell-bulgarian-split-squat.mp4'],
+  ['Pull-Up','pull-up.mp4'],
+  ['Barbell Bench Press','barbell-bench-press.mp4'],
+  ['Pec Deck Fly','pec-deck-fly.mp4'],
+  ['Incline Dumbbell Press','incline-dumbbell-press.mp4'],
+  ['Standing Dumbbell Shoulder Press','standing-dumbbell-shoulder-press.mp4'],
+  ['Dumbbell Lateral Raise','dumbbell-lateral-raise.mp4'],
+  ['Chest-Supported Dumbbell Row','chest-supported-dumbbell-row.mp4'],
+  ['Seated Cable Row','seated-cable-row.mp4'],
+  ['Chest-Supported Dumbbell Reverse Fly','chest-supported-dumbbell-reverse-fly.mp4'],
+  ['Dumbbell Hammer Curl','dumbbell-hammer-curl.mp4'],
+  ['Side Plank','side-plank.mp4'],
+  ['Dead Bug Heel Taps','dead-bug-heel-taps.mp4'],
+  ['Dead Bug','dead-bug.mp4'],
+  ['Forearm Plank','forearm-plank.mp4'],
+  ['Reverse Crunch','reverse-crunch.mp4'],
+  ['Tuck Hollow Hold','tuck-hollow-hold.mp4'],
+  ['Bear Plank','bear-plank.mp4'],
+  ['Dumbbell Romanian Deadlift','dumbbell-romanian-deadlift.mp4'],
+  ['Bodyweight Reverse Lunge','bodyweight-reverse-lunge.mp4'],
+  ['Bodyweight Split Squat','bodyweight-split-squat.mp4'],
+  ['45-Degree Leg Press','45-degree-leg-press.mp4'],
+  ['Goblet Squat','goblet-squat.mp4'],
+  ['Bodyweight Standing Calf Raise','bodyweight-standing-calf-raise.mp4'],
+  ['Lying Machine Leg Curl','lying-machine-leg-curl.mp4'],
+  ['Glute Bridge','glute-bridge.mp4'],
+  ['Single-Arm Dumbbell Bench Row','single-arm-dumbbell-bench-row.mp4'],
+  ['Lat Pulldown','lat-pulldown.mp4'],
+  ['Standing Dumbbell Curl','standing-dumbbell-curl.mp4'],
+  ['Dumbbell Pullover','dumbbell-pullover.mp4'],
+ ]);
  const details=new Map();
  for(const [name,file,video,aliases,equipment,category,muscles,prescription] of [...entries,...additions]){
   const photo=file.startsWith('coach:')?coachSamplePhotos['photo-coach-'+file.slice(6)]:'./fitness-app/exercise-media/'+file+'.jpg';
-  const reference=Object.freeze({name,photo,equipment,category,muscles,prescription,searchText:normalize([name,...aliases,searchTags[name]].filter(Boolean).join(' ')),videoUrl:video.startsWith('https://')?video:'https://www.youtube.com/watch?v='+video});
+  const bundledVideo=bundledVideos.get(name);
+  const localVideoUrl=bundledVideo?'./fitness-app/exercise-videos/'+bundledVideo:null;
+  const reference=Object.freeze({name,photo,equipment,category,muscles,prescription,searchText:normalize([name,...aliases,searchTags[name]].filter(Boolean).join(' ')),localVideoUrl,videoUrl:localVideoUrl||(video.startsWith('https://')?video:'https://www.youtube.com/watch?v='+video)});
   for(const key of [name,...aliases])details.set(normalize(key),reference);
  }
  function get(name){return details.get(normalize(name))}

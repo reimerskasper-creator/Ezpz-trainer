@@ -65,7 +65,7 @@ if(width===390){
  assert.equal(await replacement.locator('.trainer-reference img').getAttribute('src'),reference.photo);
  await page.waitForFunction(()=>document.querySelector('[data-training-card="1"] .trainer-reference img')?.naturalWidth>0);
  await replacement.locator('[data-trainer-video="1"]').click();
- assert.equal(await page.locator('.trainer-open-video').getAttribute('href'),reference.videoUrl);
+ assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),reference.localVideoUrl);
  await page.getByRole('button',{name:'Use my own link'}).click();
  await page.locator('#trainer-video-url').fill('https://youtu.be/personal');
  await page.locator('#trainer-video-form button[type=submit]').click();
@@ -74,7 +74,7 @@ if(width===390){
  await page.getByRole('button',{name:'Edit link'}).click();
  await page.getByRole('button',{name:'Remove link'}).click();
  await replacement.locator('[data-trainer-video="1"]').click();
- assert.equal(await page.locator('.trainer-open-video').getAttribute('href'),reference.videoUrl);
+ assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),reference.localVideoUrl);
  await page.keyboard.press('Escape');
  console.log('PASS swapped exercise automatically shows its bundled photo and demo; personal video takes priority and removal restores reference');
 }

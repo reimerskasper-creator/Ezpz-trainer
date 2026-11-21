@@ -25,9 +25,10 @@ assert.equal(guides.get('Incline Push-Up').name,'Incline Push-Up');
 assert.notEqual(guides.get('Incline Push-Up').photo,guides.get('Decline Push-Up').photo);
 assert.equal(guides.get('Weighted Ring Push-Up'),undefined);
 for(const name of guides.names){
- const {photo,videoUrl,prescription}=guides.get(name);
+ const {photo,videoUrl,localVideoUrl,prescription}=guides.get(name);
  assert(photo.startsWith('data:image/jpeg')||fs.existsSync(photo),name+' photo exists');
- if(prescription)assert.equal(cleanVideo(videoUrl),videoUrl);
+ if(localVideoUrl){assert.equal(videoUrl,localVideoUrl);assert(fs.existsSync(localVideoUrl),name+' video exists')}
+ else if(prescription)assert.equal(cleanVideo(videoUrl),videoUrl);
  else assert.match(videoUrl,/^https:\/\/(www\.youtube\.com\/watch\?v=[\w-]{11}|www\.the-fit-edit\.com\/library\/bear-plank)$/);
 }
 assert.deepEqual(guides.choices(['Custom Row','Floor Press','Dumbbell Floor Press','DB Floor Press','Goblet Squat'],'Goblet Squat'),['Dumbbell Floor Press','Custom Row','Floor Press']);
