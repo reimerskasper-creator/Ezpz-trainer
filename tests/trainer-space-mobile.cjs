@@ -1,6 +1,6 @@
 const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict');const root=path.resolve(__dirname,'..'),out=path.join(root,'test-results');fs.mkdirSync(out,{recursive:true});
 const native=fs.existsSync(path.join(root,'native/www/index.html')),web=native?path.join(root,'native/www'):root;
-const server=http.createServer((req,res)=>{const f=path.resolve(web,'.'+new URL(req.url,'http://localhost').pathname);if(!f.startsWith(web+path.sep)){res.writeHead(403);return res.end()}fs.readFile(f,(e,b)=>{res.writeHead(e?404:200,{'Content-Type':f.endsWith('.html')?'text/html':f.endsWith('.js')?'text/javascript':f.endsWith('.css')?'text/css':f.endsWith('.json')?'application/json':'image/jpeg'});res.end(e?'Missing':b)})});
+const server=http.createServer((req,res)=>{const f=path.resolve(web,'.'+new URL(req.url,'http://localhost').pathname);if(!f.startsWith(web+path.sep)){res.writeHead(403);return res.end()}fs.readFile(f,(e,b)=>{res.writeHead(e?404:200,{'Content-Type':f.endsWith('.html')?'text/html':f.endsWith('.js')?'text/javascript':f.endsWith('.css')?'text/css':f.endsWith('.json')?'application/json':f.endsWith('.mp4')?'video/mp4':'image/jpeg'});res.end(e?'Missing':b)})});
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch();try{for(const width of [320,390,430]){const context=await browser.newContext({viewport:{width,height:900},isMobile:true,hasTouch:true}),page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));await page.addInitScript(()=>{if(!localStorage.getItem('ezpz-fitness-pilot-1'))localStorage.setItem('ezpz-fitness-pilot-1',JSON.stringify({profile:{goal:'maintain',level:'Advanced',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2,selectedWorkout:'guided-home-full-body-a'}));window.alert=()=>{}});
 await page.goto('http://127.0.0.1:'+server.address().port+'/'+(native?'index.html':'fitness.html'));await page.waitForFunction(()=>window.EZPZTrainerSpace&&window.EzpzAppearance);const before=await page.evaluate(()=>localStorage.getItem('ezpz-fitness-pilot-1'));await page.evaluate(()=>{tab='train';render()});assert.equal(await page.evaluate(()=>localStorage.getItem('ezpz-fitness-pilot-1')),before,'Opening trainer is read-only');assert.equal(await page.locator('.trainer-reference').count(),await page.evaluate(()=>workoutPlan().exercises.filter(x=>window.EzpzExerciseMedia.get(x.name)).length));assert(await page.locator('.trainer-scene').isVisible());assert(await page.locator('[data-trainer-video="0"]').isVisible());
 assert.equal(await page.locator('#compact-exercise-position').count(),0);
@@ -74,6 +74,15 @@ if(width===390){
  await page.waitForFunction(()=>document.querySelector('[data-training-card="1"] .trainer-reference img')?.naturalWidth>0);
  await replacement.locator('[data-trainer-video="1"]').click();
  assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),reference.localVideoUrl);
+ const demo=page.locator('.trainer-bundled-video');
+ const toggle=page.locator('.trainer-video-toggle');
+ assert(await demo.evaluate(video=>video.muted&&!video.controls));
+ assert.equal(await page.locator('.trainer-demo-mark').getAttribute('src'),'./brand/ezpz-c1-swirl.png');
+ await page.waitForFunction(()=>!document.querySelector('.trainer-bundled-video').paused);
+ await toggle.click();
+ await page.getByRole('button',{name:'Play exercise demonstration'}).press('Enter');
+ await page.waitForFunction(()=>!document.querySelector('.trainer-bundled-video').paused);
+
  await page.getByRole('button',{name:'Use my own link'}).click();
  await page.locator('#trainer-video-url').fill('https://youtu.be/personal');
  await page.locator('#trainer-video-form button[type=submit]').click();

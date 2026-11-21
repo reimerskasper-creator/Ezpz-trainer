@@ -41,12 +41,25 @@
  function photoViewer(c,trigger){const {photo,ownPhoto}=reference(c);if(!photo)return;const d=dialog(c.name,'<div class="trainer-photo-viewport"><div class="trainer-photo-stage"><img src="'+safe(photo)+'" alt="Exercise reference for '+safe(c.name)+'" draggable="false"></div></div><label class="trainer-zoom-label">Zoom <input type="range" min="1" max="3" step="0.1" value="1" aria-label="Photo zoom"></label><p class="trainer-viewer-hint">Pinch to zoom · drag to move</p><div class="trainer-dialog-actions">'+(ownPhoto?'<button type="button" data-trainer-remove-photo>Remove photo</button>':'')+'<button type="button" class="primary" data-trainer-close>Back to workout</button></div>',trigger);d.classList.add('trainer-photo-viewer');const viewport=d.querySelector('.trainer-photo-viewport'),stage=d.querySelector('.trainer-photo-stage'),slider=d.querySelector('input');let zoom=1,gesture=null;const pointers=new Map();function setZoom(v){const old=zoom;zoom=Math.max(1,Math.min(3,v));stage.style.width=zoom*100+'%';stage.style.height=zoom*100+'%';slider.value=zoom;viewport.scrollLeft=(viewport.scrollLeft+viewport.clientWidth/2)*zoom/old-viewport.clientWidth/2;viewport.scrollTop=(viewport.scrollTop+viewport.clientHeight/2)*zoom/old-viewport.clientHeight/2}slider.addEventListener('input',()=>setZoom(Number(slider.value)));const distance=()=>{const [a,b]=[...pointers.values()];return Math.hypot(a.x-b.x,a.y-b.y)};viewport.addEventListener('pointerdown',e=>{pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});viewport.setPointerCapture(e.pointerId);gesture=pointers.size===2?{distance:distance(),zoom}:null});viewport.addEventListener('pointermove',e=>{const prev=pointers.get(e.pointerId);if(!prev)return;pointers.set(e.pointerId,{x:e.clientX,y:e.clientY});if(pointers.size===2&&gesture?.distance)setZoom(gesture.zoom*distance()/gesture.distance);else if(pointers.size===1){viewport.scrollLeft-=e.clientX-prev.x;viewport.scrollTop-=e.clientY-prev.y}});for(const name of ['pointerup','pointercancel','lostpointercapture'])viewport.addEventListener(name,e=>{pointers.delete(e.pointerId);gesture=null});d.querySelector('[data-trainer-remove-photo]')?.addEventListener('click',()=>{if(changeMedia(c,{photoId:''}))closeDialog();else error(d,'Photo could not be removed. Your previous photo is kept.')});}
  function bundledVideoDialog(name,url,trigger,context){
   const actions='<div class="trainer-dialog-actions">'+(context?'<button type="button" data-trainer-edit-video>Use my own link</button>':'')+'<button type="button" class="primary" data-trainer-close>Close</button></div>';
-  const d=dialog(name,'<video class="trainer-bundled-video" controls autoplay muted loop playsinline preload="auto" aria-label="'+safe(name)+' demonstration"></video>'+actions,trigger);
+  const player='<button type="button" class="trainer-video-toggle" aria-label="Pause exercise demonstration"><video class="trainer-bundled-video" autoplay muted loop playsinline preload="auto"></video></button>';
+  const d=dialog(name,player+actions,trigger);
+  d.classList.add('trainer-demo-dialog');
+  d.classList.toggle('trainer-demo-motion',settings().motion);
+  d.querySelector('h2').insertAdjacentHTML('afterbegin','<img class="trainer-demo-mark" src="./brand/ezpz-c1-swirl.png" alt="">');
   const video=d.querySelector('video');
-  video.addEventListener('error',()=>error(d,'Could not load the exercise demonstration.'));
+  const toggle=d.querySelector('.trainer-video-toggle');
+  const syncLabel=()=>toggle.setAttribute('aria-label',video.paused?'Play exercise demonstration':'Pause exercise demonstration');
+  const play=()=>video.play()?.catch(syncLabel);
+  video.addEventListener('play',syncLabel);
+  video.addEventListener('pause',syncLabel);
+  video.addEventListener('error',()=>{
+   toggle.disabled=true;
+   error(d,'Could not load the exercise demonstration.');
+  });
+  toggle.addEventListener('click',()=>{if(video.paused)play();else video.pause()});
   video.muted=true;
   video.src=url;
-  video.play()?.catch(()=>{});
+  play();
   if(context)d.querySelector('[data-trainer-edit-video]').onclick=()=>videoDialog(context,trigger,true);
  }
  function videoDialog(c,trigger,edit=false){

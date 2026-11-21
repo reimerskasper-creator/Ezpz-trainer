@@ -1,3 +1,8 @@
+## 2026-11-21 — Trainer demo player
+
+- Android 1.0.180 opens bundled demos inline with muted autoplay, continuous looping and tap-to-pause. The opening emerald sweep respects the Trainer motion setting and reduced motion. Personal video links remain supported.
+- Android branch: android-health-connect. Signed build uses the existing update certificate.
+
 ## 2026-11-21 — Complete exercise video library
 
 - Android 1.0.179 bundles 143 approved Trainer exercise loops, including the final corrected Cable Y Raise, Reverse Pec Deck, Bird Dog, Mountain Climber, Dumbbell Squeeze Press, Lateral Band Walk, and Sled Push. The built-in video button plays the bundled clip offline. Personal video links still take precedence.
