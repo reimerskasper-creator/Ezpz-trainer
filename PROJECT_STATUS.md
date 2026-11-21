@@ -1,3 +1,8 @@
+## 2026-11-20 — Split-view workout category artwork
+
+- Android 1.0.174 applies a full anatomy view and a category-specific detail crop to every workout focus card. Both panels render the existing category muscle masks, including primary traps and supporting triceps for Pull and front-view calves for Legs.
+- Branch: android-health-connect. The Android workflow verifies the picker and signs the update.
+
 ## 2026-11-20 — Workout recap timing and nutrition readability
 
 - Android 1.0.173 records the first Done checkmark and measures wall-clock time through Finish. The elapsed clock appears only in the workout recap. The independent rest timer stays in the workout footer.

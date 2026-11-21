@@ -11524,7 +11524,7 @@ function chooserContents(){
  '<div class="chooser-focus-tools"><div class="chooser-shortcuts"><button type="button" data-action="create-my-workout" class="chooser-create"><span class="chooser-create-anatomy">'+workoutAnatomy({primary:[],supporting:[]})+'</span><span><strong>Create your own</strong></span><b aria-hidden="true">+</b></button>'+savedWorkoutShortcut(saved,id)+'</div>'+workoutSettingMarkup('data-chooser-workout-setting')+workoutFilterMarkup()+'</div><div class="category-grid">'+visibleWorkoutCategories().map(c=>{
  const selected=(id==='full-body'?'Full Body':planWorkout(id)?.category)===c.id;
  const count=filterWorkoutPrograms(categoryPrograms(c.id)).length;
- return '<button type="button" class="category-tile '+(selected?'is-selected':'')+'" data-workout-category="'+c.id+'" aria-label="Explore '+c.label+' workouts"><span class="category-photo">'+hybridWorkoutCover(c.id)+(selected?'<span class="workout-cover-check" aria-hidden="true">✓</span>':'')+'</span><span class="category-copy"><strong>'+c.label+'</strong><small>'+c.description+'</small><b>'+count+' program'+(count===1?'':'s')+' <span aria-hidden="true">→</span></b></span></button>'
+ return '<button type="button" class="category-tile '+(selected?'is-selected':'')+'" data-workout-category="'+c.id+'" aria-label="Explore '+c.label+' workouts"><span class="category-photo">'+workoutCategoryCover(c.id)+(selected?'<span class="workout-cover-check" aria-hidden="true">✓</span>':'')+'</span><span class="category-copy"><strong>'+c.label+'</strong><small>'+c.description+'</small><b>'+count+' program'+(count===1?'':'s')+' <span aria-hidden="true">→</span></b></span></button>'
  }).join('')+'</div>')+'</div>'
 }
 function workoutChooser(){return '<dialog id="workout-chooser" aria-labelledby="workout-chooser-title">'+chooserContents()+'</dialog>'}
@@ -11855,8 +11855,8 @@ const reviewedExerciseMuscles={
 };
 const workoutCategoryMuscles={
  'Full Body':['chest back core quads glutes hamstrings','frontDelts rearDelts biceps triceps'],
- Push:['chest frontDelts triceps',''],Pull:['back rearDelts biceps','forearms traps'],
- Leg:['quads glutes hamstrings','calves'],Core:['core',''],
+ Push:['chest frontDelts triceps',''],Pull:['back rearDelts biceps traps','forearms triceps'],
+ Leg:['quads glutes hamstrings calves',''],Core:['core',''],
  'Strength & Conditioning':['quads glutes back core','shoulders traps forearms'],
  'Pilates & Mobility':['core glutes','shoulders back'],
  'Strength for Runners':['quads glutes hamstrings calves','core'],
@@ -11885,6 +11885,32 @@ function workoutAnatomy({primary,supporting},label){
   return '<span class="recap-anatomy-layer anatomy-'+role+(side?' anatomy-'+side:'')+'" data-anatomy-region="'+key+'" style="--atlas-y:'+(100*(index+1)/workoutAtlasPanelGaps)+'%"></span>';
  }).join('');
  return '<span class="recap-anatomy" '+(label?'role="img" aria-label="'+safe(label)+'"':'aria-hidden="true"')+'><span class="recap-anatomy-layer"></span>'+layers(supporting,'supporting')+layers(primary,'primary')+'</span>';
+}
+const workoutCategoryViews={
+ Push:['front','front',-30],
+ Pull:['rear','rear',-27],
+ Leg:['front','rear',-84],
+ Core:['front','front',-58],
+ 'Full Body':['front','front',-44],
+ 'Strength & Conditioning':['rear','rear',-36],
+ 'Pilates & Mobility':['front','front',-61],
+ 'Strength for Runners':['front','rear',-97],
+ 'Build Muscle':['rear','rear',-78],
+ 'Low-Impact Fitness':['front','front',-81]
+};
+function workoutCategoryCover(category){
+ const roles=workoutCategoryMuscles[category];
+ if(!roles)return workoutCoverImage(category);
+ const [figure,detail,offset]=workoutCategoryViews[category]||['front','front',-44];
+ const [primary,supporting]=roles.map(role=>role.split(' ').filter(Boolean));
+ const rearOnly=new Set(['back','rearDelts','triceps','glutes','hamstrings','traps']);
+ const frontOnly=new Set(['chest','frontDelts','biceps','core','quads']);
+ const panel=(side,zoom)=>{
+  const hidden=side==='front'?rearOnly:frontOnly;
+  const map={primary:primary.filter(key=>!hidden.has(key)),supporting:supporting.filter(key=>!hidden.has(key))};
+  return '<span class="category-anatomy-panel category-anatomy-'+side+(zoom?' category-anatomy-detail':'')+'">'+workoutAnatomy(map)+'</span>';
+ };
+ return '<span class="category-anatomy-cover" aria-hidden="true" style="--detail-offset:'+offset+'cqh">'+panel(figure,false)+panel(detail,true)+'</span>';
 }
 function hybridWorkoutCover(workout,exercises,categoryPhoto=false){
  if(workout?.id?.startsWith('custom-'))return '<span class="hybrid-workout-cover">'+workoutCoverImage({...workout,exercises:exercises||workout.exercises})+'</span>';

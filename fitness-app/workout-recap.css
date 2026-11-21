@@ -213,6 +213,25 @@ body[data-view] #workout-chooser .chooser-shortcuts :is(.chooser-create,.saved-w
 #workout-chooser .chooser-focus-tools .workout-filter-panel{margin:0}
 body[data-view] #workout-chooser .chooser-focus-body{padding-inline:7px}
 #workout-chooser .chooser-focus-body .category-photo{aspect-ratio:1.04}
+#workout-chooser .category-anatomy-cover{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;height:100%;
+ background:radial-gradient(ellipse at 50% 90%,#23533e,#101f1a 74%)
+}
+#workout-chooser .category-anatomy-panel{
+ position:relative;overflow:hidden;container-type:size;min-width:0;
+ --atlas-height:96cqh;--atlas-width:calc(var(--atlas-height)*500/551);--atlas-center:.25
+}
+#workout-chooser .category-anatomy-panel.category-anatomy-rear{--atlas-center:.75}
+#workout-chooser .category-anatomy-panel .recap-anatomy{
+ position:absolute;display:block;top:2cqh;left:calc(50% - var(--atlas-width)*var(--atlas-center));
+ width:var(--atlas-width);height:var(--atlas-height)
+}
+#workout-chooser .category-anatomy-front>.recap-anatomy{clip-path:inset(0 50% 0 0)}
+#workout-chooser .category-anatomy-rear>.recap-anatomy{clip-path:inset(0 0 0 50%)}
+#workout-chooser .category-anatomy-detail{--atlas-height:210cqh;border-left:1px solid #a0e6bd35}
+#workout-chooser .category-anatomy-detail .recap-anatomy{top:var(--detail-offset)}
+#workout-chooser .category-anatomy-detail.category-anatomy-front>.recap-anatomy{margin-left:8cqw}
+
 #workout-chooser .anatomy-studio-cover :is(.anatomy-crop-upper,.anatomy-crop-lower) .recap-anatomy{width:96%}
 #workout-chooser .program-photo{height:clamp(156px,50vw,250px)}
 
