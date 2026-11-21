@@ -153,6 +153,16 @@ const server=http.createServer((req,res)=>{
    assert(await selectedRow.locator('summary img').isVisible());
    await selectedRow.locator('.builder-exercise-summary').click();
    assert(await selectedRow.locator('.builder-exercise-fields>img').isVisible());
+   const timing = selectedRow.locator('.own-exercise-options');
+   const remove = selectedRow.getByRole('button',{name:'Remove exercise 1'});
+   const timingBox = await timing.boundingBox(), removeBox = await remove.boundingBox();
+   assert(timingBox.width >= 120 && timingBox.height <= 72,'Timing label has room for a compact footer');
+   assert(timingBox.x + timingBox.width <= removeBox.x,'Remove stays alongside timing options');
+   await timing.locator('summary').click();
+   assert(await timing.evaluate(el=>el.open));
+   assert((await timing.boundingBox()).width > timingBox.width,'Expanded timing uses the full footer width');
+   await timing.locator('summary').click();
+
    await page.locator('[data-builder-picker="0"]').click();
    await builder.getByRole('button',{name:'Type my own exercise'}).click();
    await page.locator('#builder-name-0').fill('My own exercise');
