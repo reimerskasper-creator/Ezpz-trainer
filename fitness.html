@@ -6487,11 +6487,15 @@ function showChoiceDialog(title,content,opener,choose){
  dialog.className='trainer-dialog ez-choice-dialog';
  dialog.setAttribute('aria-label',title);
  dialog.innerHTML='<h2>'+safe(title)+'</h2><form method="dialog">'+content+'</form>';
+ dialog.querySelector('form').addEventListener('submit',event=>{
+  event.preventDefault();
+  const value=event.submitter?.value||'';
+  dialog.close();
+  if(value!=='')choose(value);
+ });
  dialog.addEventListener('close',()=>{
-  const value=dialog.returnValue;
   dialog.remove();
   if(opener.isConnected)opener.focus({preventScroll:true});
-  if(value!=='')choose(value);
  },{once:true});
  document.body.append(dialog);
  dialog.showModal();
