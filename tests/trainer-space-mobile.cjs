@@ -39,12 +39,20 @@ if(width===390){
   await chooser.locator('[data-chooser-workout-setting="'+setting+'"]').click();
   assert.equal(await chooser.locator('[data-workout-pick]').count(),4);
   assert((await chooser.locator('[data-workout-pick]').first().getAttribute('data-workout-pick')).includes(setting));
-  const b=chooser.locator('.program-card').nth(1);
-  assert((await b.innerText()).includes(setting==='gym'?'lying leg curl machine':'sliders'));
+  const exercise=setting==='gym'?'Lying Machine Leg Curl':'Slider Hamstring Curl';
+  const b=chooser.locator('.program-card').filter({has:page.getByRole('link',{name:new RegExp('^Watch '+exercise+' demo')})}).first();
+  const grid=b.locator('.program-exercise-grid');
+  assert.equal(await grid.locator('img').count(),6);
+  assert.equal(await grid.getByRole('link').count(),6);
+  await grid.locator('img').first().evaluate(img=>img.decode());
+  const tile=grid.getByRole('link',{name:new RegExp('^Watch '+exercise+' demo')});
+  const src=await tile.getAttribute('href');
+  assert.match(src,/^\.\/fitness-app\/exercise-videos\/[^/]+\.mp4$/);
+  await tile.click();
+  assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),src);
+  await page.keyboard.press('Escape');
   await b.locator('summary').click();
-  assert.equal(await b.locator('.workout-preview-exercise img').count(),6);
-  assert.equal(await b.getByRole('link',{name:'Watch demo'}).count(),6);
-  await b.locator('.workout-preview-exercise img').first().evaluate(img=>img.decode());
+  assert.equal(await b.locator('.program-details').getAttribute('open'),'');
  }
  await chooser.locator('[data-action="close-workouts"]').click();
  assert.equal(await page.evaluate(()=>workoutSetting()),'home');

@@ -1,3 +1,8 @@
+## 2026-11-21 — Complete exercise video library
+
+- Android 1.0.179 bundles 143 approved Trainer exercise loops, including the final corrected Cable Y Raise, Reverse Pec Deck, Bird Dog, Mountain Climber, Dumbbell Squeeze Press, Lateral Band Walk, and Sled Push. The built-in video button plays the bundled clip offline. Personal video links still take precedence.
+- Branch: android-health-connect. Android install testing uses the existing update signing certificate.
+
 ## 2026-11-21 — Program exercise photo grid
 
 - Android 1.0.178 bundles 48 approved exercise demonstrations. The existing Trainer video button starts the matching clip in a loop. Personal video links and existing links for exercises awaiting a bundled demo are supported.

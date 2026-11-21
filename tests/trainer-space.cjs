@@ -24,6 +24,10 @@ assert.notEqual(guides.get('Dumbbell Bench Press'),guides.get('Incline Dumbbell 
 assert.equal(guides.get('Incline Push-Up').name,'Incline Push-Up');
 assert.notEqual(guides.get('Incline Push-Up').photo,guides.get('Decline Push-Up').photo);
 assert.equal(guides.get('Weighted Ring Push-Up'),undefined);
+const catalogClips=guides.names.map(name=>guides.get(name).localVideoUrl);
+assert.equal(catalogClips.length,143);
+assert(catalogClips.every(Boolean),'Each catalog exercise has an offline video');
+assert.equal(new Set(catalogClips).size,catalogClips.length,'Every exercise has its own clip');
 for(const name of guides.names){
  const {photo,videoUrl,localVideoUrl,prescription}=guides.get(name);
  assert(photo.startsWith('data:image/jpeg')||fs.existsSync(photo),name+' photo exists');
