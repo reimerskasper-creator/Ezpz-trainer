@@ -47,7 +47,7 @@ jobs:
         run: |
           npm ci --no-audit --no-fund
           npm run sync
-      - name: Verify packaged startup and required workout media
+      - name: Verify packaged startup, workout covers, and required exercise media
         run: |
           node tests/native-runtime.cjs
           node tests/barcode.cjs

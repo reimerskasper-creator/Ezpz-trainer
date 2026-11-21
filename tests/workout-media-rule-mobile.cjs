@@ -77,7 +77,8 @@ async function verify(){
   await page.locator('[data-open-plan-picker="workout"]').click();
   const plannerPicker=page.locator('#planner-picker');
   const pullCover=plannerPicker.locator('[data-plan-picker-category="Pull"]');
-  assert(await pullCover.locator('img').isVisible());
+  assert(await pullCover.locator('.anatomy-studio-cover').isVisible());
+  assert.equal(await pullCover.locator('img').count(),0);
   assert(await pullCover.locator('.recap-anatomy').isVisible());
   await pullCover.click();
   for(const level of ['Intermediate','Advanced']){
