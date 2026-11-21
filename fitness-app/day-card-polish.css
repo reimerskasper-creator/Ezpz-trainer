@@ -1,7 +1,11 @@
-/* Larger original photos fade into the right-side details. */
+/* Workout covers and meal photos fade into the right-side details. */
 body[data-view=planner] #screen .planner-day-view .plan-photo-trigger{display:flex;min-height:104px;padding:12px 12px 32px 47%;background:#003e2d!important;isolation:isolate;overflow:hidden}
 body[data-view=planner] #screen .planner-day-view .planned-workout-preview{display:contents}
-body[data-view=planner] #screen .planner-day-view .plan-photo-trigger>img,body[data-view=planner] #screen .planner-day-view .planned-workout-preview>:is(img,.personal-workout-anatomy){position:absolute;inset:0 auto 0 0;width:48%;height:100%;max-height:none;border:0;border-radius:0;object-fit:cover;mask-image:linear-gradient(to right,#000 65%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 65%,transparent 100%);z-index:-1}
+body[data-view=planner] #screen .planner-day-view .plan-photo-trigger>:is(img,.hybrid-workout-cover),body[data-view=planner] #screen .planner-day-view .planned-workout-preview>:is(img,.hybrid-workout-cover){position:absolute;inset:0 auto 0 0;width:48%;height:100%;max-height:none;border:0;border-radius:0;object-fit:cover;mask-image:linear-gradient(to right,#000 65%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 65%,transparent 100%);z-index:-1}
+body[data-view=planner] .day-plan-card .hybrid-workout-cover .anatomy-cover-overlay{width:100%}
+body[data-view=planner] .day-plan-card .hybrid-workout-cover .recap-anatomy{right:16%}
+body[data-view=planner] .day-plan-card .hybrid-workout-cover :is(.anatomy-crop-upper,.anatomy-crop-lower) .recap-anatomy{width:78%}
+body[data-view=planner] .day-plan-card .hybrid-workout-cover>.personal-workout-anatomy{width:100%;height:100%}
 body[data-view=planner] #screen .planner-day-view .plan-trigger-icon{position:absolute;left:8px;top:8px;bottom:8px;width:39%;height:auto;min-height:0;border-radius:10px;background:#ffffff0c;border:1px solid #71917e66;font-size:30px}
 body[data-view=planner] #screen .planner-day-view .plan-photo-trigger>b{right:12px;bottom:10px}
 body[data-view=planner] #screen .planner-day-view .plan-photo-trigger strong{font-size:13px;line-height:1.35}

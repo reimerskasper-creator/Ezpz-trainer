@@ -1,3 +1,8 @@
+## 2026-11-21 — Anatomy covers in My Plan
+
+- Android 1.0.182 uses the same exercise-based anatomy cover in the workout picker and on the main and extra workout cards in My Plan. Saved workouts retain their uploaded cover or generated anatomy. My workouts uses the existing custom-workout anatomy artwork.
+- Android branch: android-health-connect. Signed build uses the existing update certificate.
+
 ## 2026-11-21 — Hide the Android demo startup placeholder
 
 - Android 1.0.181 reveals the bundled video after its first frame, avoiding the Android WebView's default play graphic during the opening swoosh.
