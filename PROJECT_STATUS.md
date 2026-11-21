@@ -1,5 +1,10 @@
 ## 2026-11-21 — Visual plan builder
 
+## Android 1.0.187 — workout cover studio backgrounds
+
+- Built-in anatomy covers share an emerald studio backdrop across the workout picker and previews, Home, Day and the plan builder. The existing muscle atlas and role mapping supply the highlights. Home retains the banner photo override.
+- Based on Android branch commit `c0bb790`. Local source checks passed. Android packaging and mobile visual checks are pending.
+
 - Android 1.0.186 updates the Plan Library day builder with a themed meal replacement confirmation, workout covers and exercise previews in the picker, and photo rows for scheduled workouts and meals.
 - Android branch: android-health-connect. Plan Library data and package checks passed locally.
 

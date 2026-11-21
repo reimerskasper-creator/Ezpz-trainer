@@ -26,7 +26,8 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    assert(expand.y>=headerPhoto.y&&expand.y+expand.height<headerPhoto.y+70,'Expansion control stays at the top of the cover');
    const primaryPaint=el=>getComputedStyle(el).backgroundImage;
    assert.equal(await card.locator('.home-change-workout').evaluate(primaryPaint),await page.locator('.overview-actions>.primary').evaluate(primaryPaint));
-   const photo=await cover.locator('img').getAttribute('src');
+   assert(await cover.evaluate(el=>getComputedStyle(el).backgroundImage.includes('radial-gradient')));
+   assert.equal(await cover.locator('img').count(),0);
    const anatomy=await cover.locator('[data-anatomy-region]').evaluateAll(layers=>layers.map(layer=>layer.outerHTML));
    assert(anatomy.length>0);
    const live=await page.evaluate(()=>homeOverview().plan.exercises.map(x=>x.name));
@@ -40,7 +41,8 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    await card.locator('.home-change-workout').click();
    await page.locator('[data-workout-category="Pull"]').click();
    const pickerCover=page.locator('.program-card').filter({has:page.locator('[data-workout-pick="guided-gym-pull-a"]')}).locator('.program-photo');
-   assert.equal(await pickerCover.locator('img').getAttribute('src'),photo);
+   assert.equal(await pickerCover.locator('.anatomy-studio-cover').count(),1);
+   assert.equal(await pickerCover.locator('img').count(),0);
    assert.deepEqual(await pickerCover.locator('[data-anatomy-region]').evaluateAll(layers=>layers.map(layer=>layer.outerHTML)),anatomy);
    await page.keyboard.press('Escape');
    if(width===390){fs.mkdirSync(out,{recursive:true});await card.screenshot({path:path.join(out,'home-workout-banner-expanded.jpg')})}
@@ -49,7 +51,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    assert((await toggle.boundingBox()).y<(await hero.boundingBox()).y+40,'Collapsed cover keeps the top-right control');
    assert(!await details.isVisible());
    assert(await cover.locator('.recap-anatomy').isVisible());
-   assert.equal(await cover.locator('img').getAttribute('src'),photo);
+   assert.equal(await cover.locator('img').count(),0);
    assert.deepEqual(await cover.locator('[data-anatomy-region]').evaluateAll(layers=>layers.map(layer=>layer.outerHTML)),anatomy);
    assert(await card.locator('.home-change-workout').isVisible());
    assert(await card.locator('.home-change-workout').evaluate(button=>{
@@ -75,7 +77,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
     home();
    });
    assert.match(await hero.getAttribute('style'),/data:image\/jpeg/);
-   assert.equal(await cover.locator('img').evaluate(el=>getComputedStyle(el).visibility),'hidden');
+   assert.equal(await cover.evaluate(el=>getComputedStyle(el).backgroundImage),'none');
    assert(await cover.locator('.recap-anatomy').isVisible());
    await page.evaluate(()=>{delete state.homeBannerBackgrounds;state.workoutDrafts={};state.workoutSchedule={[foodDate()]:'rest'};home()});
    assert(await card.locator('.home-recovery-details').isVisible());

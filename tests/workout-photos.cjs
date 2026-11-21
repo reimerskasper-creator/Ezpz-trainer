@@ -72,7 +72,10 @@ assert(goal.length===28&&new Set(goal.map(w=>w.id)).size===28,'Twenty-eight dist
 for(const plan of goal){
  assert(plan.exercises.length===6&&new Set(plan.exercises.map(x=>x.name)).size===6,'Six distinct exercises in '+plan.title);
  assert(plan.exercises.every(x=>api.guides.get(x.name)?.videoUrl&&api.guides.get(x.name)?.photo&&api.reviewedMuscleMap([x]).primary.length),'All goal exercises have media and muscle roles');
- assert(api.hybridWorkoutCover(plan,plan.exercises).includes('anatomy-cover-overlay'),'Goal workout anatomy');
+ const studio=api.hybridWorkoutCover(plan,plan.exercises);
+ assert(studio.includes('anatomy-cover-overlay'),'Goal workout anatomy');
+ assert(studio.includes('anatomy-studio-cover')&&!studio.includes('<img'),'Mapped workouts use the studio backdrop');
+ assert(api.hybridWorkoutCover(plan.category).includes('anatomy-studio-cover'),'Mapped categories use the studio backdrop');
  assert(api.hybridWorkoutCover(plan.category).includes('anatomy-cover-overlay'),'Goal category anatomy');
 }
 assert(api.reviewedMuscleMap([{name:'Dumbbell Upright Row'}]).primary.includes('traps'),'Upright row targets traps');

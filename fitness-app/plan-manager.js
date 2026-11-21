@@ -139,7 +139,7 @@
     return '<span>'+image(photo(saved?.photoId)||workoutExercisePhoto(x.name,packaged?null:workout.id),'workout')+'</span>';
    }).join('');
    return {
-    cover:'<span class="plan-item-photo">'+(cover?image(cover,'workout'):workout?hybridWorkoutCover(workout,workout.exercises,true):homeIcon('workout'))+'</span>',
+    cover:'<span class="plan-item-photo">'+(cover?image(cover,'workout'):workout?hybridWorkoutCover(workout,workout.exercises):homeIcon('workout'))+'</span>',
     previews:previews?'<span class="plan-item-previews">'+previews+'</span>':''
    };
   }
