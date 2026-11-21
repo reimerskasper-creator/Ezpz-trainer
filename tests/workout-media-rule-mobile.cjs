@@ -33,6 +33,7 @@ async function verify(){
   await page.goto('http://127.0.0.1:'+server.address().port+'/'+(web===root?'fitness.html':'index.html'));
   await page.waitForFunction(()=>window.EZPZPlans&&window.EZPZTrainerSpace);
   assert(await page.locator('.home-workout-empty').isVisible());
+  assert.equal(await page.locator('#home-workouts-content .upcoming-row').count(),0);
   await page.evaluate(()=>{tab='library';render()});
   assert.equal(await page.locator('.library-tile').count(),143);
   assert.equal(await page.locator('.library-tile img').count(),143);
@@ -67,10 +68,11 @@ async function verify(){
   await page.getByRole('button',{name:'Start fresh with workouts'}).click();
   await page.getByRole('button',{name:'Reset workouts',exact:true}).click();
   const result=await page.evaluate(()=>({id:state.selectedWorkout,workouts:state.customWorkouts,schedule:state.workoutSchedule,drafts:state.workoutDrafts,media:state.trainerMedia}));
-  assert.deepEqual(result,{id:'guided-home-full-body-a',workouts:[],schedule:{},drafts:{},media:{}});
+  assert.deepEqual(result,{id:undefined,workouts:[],schedule:{},drafts:{},media:{}});
   assert.equal(await page.evaluate(()=>JSON.stringify([state.profile,state.logs,state.mealPlan,state.foodLog])),other);
   await page.reload();
   assert(await page.locator('.home-workout-empty').isVisible());
+  assert.equal(await page.locator('#home-workouts-content .upcoming-row').count(),0);
   await page.evaluate(()=>{tab='planner';render()});
   await page.locator('[data-open-plan-picker="workout"]').click();
   const plannerPicker=page.locator('#planner-picker');
@@ -120,6 +122,7 @@ async function verify(){
   await page.locator('[data-confirm-plan]').click();
   await page.evaluate(()=>{tab='home';render()});
   assert(await page.locator('.home-workout-empty').isVisible());
+  assert.equal(await page.locator('#home-workouts-content .upcoming-row').count(),0);
   await page.evaluate(()=>{state.workoutSchedule={[foodDate()]:'rest'};render()});
   assert((await page.locator('.home-workout').innerText()).includes('Make room for recovery'));
   await page.evaluate(()=>{
