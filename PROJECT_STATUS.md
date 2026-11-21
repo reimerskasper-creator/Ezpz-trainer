@@ -1,3 +1,7 @@
+## 2026-11-21 — Simplify My Plan
+
+- Android 1.0.183 removes both Edit day buttons, Workout details & options, and Copy plan & shopping list from My Plan.
+
 ## 2026-11-21 — Anatomy covers in My Plan
 
 - Android 1.0.182 uses the same exercise-based anatomy cover in the workout picker and on the main and extra workout cards in My Plan. Saved workouts retain their uploaded cover or generated anatomy. My workouts uses the existing custom-workout anatomy artwork.

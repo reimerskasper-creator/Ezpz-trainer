@@ -2,6 +2,11 @@ const {chromium}=require('playwright'),fs=require('node:fs'),path=require('node:
 const root=path.resolve(__dirname,'..'),web=fs.existsSync(path.join(root,'native/www/index.html'))?path.join(root,'native/www'):root;
 const server=http.createServer((req,res)=>{const f=path.resolve(web,'.'+new URL(req.url,'http://localhost').pathname);if(!f.startsWith(web+path.sep)){res.writeHead(403);return res.end()}fs.readFile(f,(e,b)=>{res.writeHead(e?404:200,{'Content-Type':f.endsWith('.html')?'text/html':f.endsWith('.js')?'text/javascript':f.endsWith('.css')?'text/css':'image/jpeg'});res.end(e?'Missing':b)})});
 (async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch();try{for(const width of [320,390,430]){const page=await browser.newPage({viewport:{width,height:900}});await page.addInitScript(()=>{localStorage.setItem('ezpz-fitness-pilot-1',JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'gym',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2}))});await page.goto('http://127.0.0.1:'+server.address().port+'/'+(web===root?'fitness.html':'index.html'));await page.waitForFunction(()=>window.EZPZFlexibleDay);await page.evaluate(()=>{tab='planner';render()});
+assert.equal(await page.locator('#screen [data-plan-settings], #screen .plan-workout-options, #screen .plan-repeat').count(),0);
+for(const selector of ['.day-return','.plan-nutrition-details>summary','.day-date-options>summary','.plan-settings>summary','[data-flex-add]']){
+ assert(await page.locator('#screen '+selector).isVisible(),selector);
+}
+
 await page.locator('#planned-workout').click();
 assert(await page.locator('#planner-picker .own-category-tile .own-anatomy-cover .recap-anatomy').isVisible());
 await page.locator('[data-plan-picker-category="Leg"]').click();
