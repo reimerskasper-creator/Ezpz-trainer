@@ -1,3 +1,8 @@
+## Android 1.0.188 — per-workout reminders
+
+- Android branch `android-health-connect`, based on `acb397a`. Reminders are scheduled on-device from Day workout cards and use Android notification permission. A reminder opens its workout preview, including extra workout slots. Device setup, timing, notification delivery and signed build are tracked in the Android workflow.
+- Source checks cover the workout catalog, Flexible Day and Plan Library.
+
 ## 2026-11-21 — Visual plan builder
 
 ## Android 1.0.187 — workout cover studio backgrounds

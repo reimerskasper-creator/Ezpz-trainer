@@ -30,6 +30,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(AccountPlugin.class);
         registerPlugin(StartupPlugin.class);
         registerPlugin(WorkoutAudioPlugin.class);
+        registerPlugin(WorkoutReminderPlugin.class);
         super.onCreate(savedInstanceState);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
         EdgeToEdge.enable(this, SystemBarStyle.dark(Color.rgb(8, 45, 34)),
