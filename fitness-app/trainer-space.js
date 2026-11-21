@@ -50,6 +50,17 @@
   const toggle=d.querySelector('.trainer-video-toggle');
   const syncLabel=()=>toggle.setAttribute('aria-label',video.paused?'Play exercise demonstration':'Pause exercise demonstration');
   const play=()=>video.play()?.catch(syncLabel);
+  // Android WebView may paint its default play poster before the first frame.
+  const revealFrame=()=>toggle.classList.add('trainer-video-ready');
+  if(typeof video.requestVideoFrameCallback==='function'){
+   const frame=video.requestVideoFrameCallback(revealFrame);
+   video.addEventListener('timeupdate',()=>{
+    video.cancelVideoFrameCallback(frame);
+    revealFrame();
+   },{once:true});
+  }else{
+   video.addEventListener('playing',revealFrame,{once:true});
+  }
   video.addEventListener('play',syncLabel);
   video.addEventListener('pause',syncLabel);
   video.addEventListener('error',()=>{

@@ -72,11 +72,20 @@ if(width===390){
  const reference=await page.evaluate(()=>window.EzpzExerciseMedia.get('Bodyweight Squat'));
  assert.equal(await replacement.locator('.trainer-reference img').getAttribute('src'),reference.photo);
  await page.waitForFunction(()=>document.querySelector('[data-training-card="1"] .trainer-reference img')?.naturalWidth>0);
+ let releaseVideo;
+ const videoGate=new Promise(resolve=>{releaseVideo=resolve});
+ await page.route('**/exercise-videos/bodyweight-squat.mp4',async route=>{
+  await videoGate;
+  await route.continue();
+ });
  await replacement.locator('[data-trainer-video="1"]').click();
  assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),reference.localVideoUrl);
  const demo=page.locator('.trainer-bundled-video');
  const toggle=page.locator('.trainer-video-toggle');
  assert(await demo.evaluate(video=>video.muted&&!video.controls));
+ assert.equal(await demo.evaluate(video=>getComputedStyle(video).opacity),'0');
+ releaseVideo();
+ await page.waitForFunction(()=>getComputedStyle(document.querySelector('.trainer-bundled-video')).opacity==='1');
  assert.equal(await page.locator('.trainer-demo-mark').getAttribute('src'),'./brand/ezpz-c1-swirl.png');
  await page.waitForFunction(()=>!document.querySelector('.trainer-bundled-video').paused);
  await toggle.click();

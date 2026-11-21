@@ -255,6 +255,13 @@ body[data-view=train] .session-footer .footer-rest.is-paused:before{content:'▶
  overflow: hidden;
  isolation: isolate;
 }
+.trainer-video-toggle .trainer-bundled-video {
+ opacity: 0;
+ aspect-ratio: auto 3 / 2;
+}
+.trainer-video-ready .trainer-bundled-video {
+ opacity: 1;
+}
 .trainer-video-toggle:focus-visible {
  outline: 2px solid #a6ffd4;
  outline-offset: 3px;

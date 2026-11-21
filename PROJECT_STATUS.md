@@ -1,3 +1,8 @@
+## 2026-11-21 — Hide the Android demo startup placeholder
+
+- Android 1.0.181 reveals the bundled video after its first frame, avoiding the Android WebView's default play graphic during the opening swoosh.
+- Android branch: android-health-connect. Signed build uses the existing update certificate.
+
 ## 2026-11-21 — Trainer demo player
 
 - Android 1.0.180 opens bundled demos inline with muted autoplay, continuous looping and tap-to-pause. The opening emerald sweep respects the Trainer motion setting and reduced motion. Personal video links remain supported.
