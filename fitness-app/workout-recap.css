@@ -150,8 +150,11 @@ body[data-view] #builder-exercise-picker :focus-visible{outline:2px solid #9ce9b
 .builder-picker-body>button,.builder-picker-body>input{width:100%}
 .builder-movements{display:grid;gap:6px}
 #builder-exercise-picker .builder-movements button{
- display:grid;grid-template-columns:54px minmax(0,1fr) 48px;align-items:center;gap:8px;
+ display:grid;grid-template-columns:40% minmax(0,1fr) clamp(30px,11%,48px);align-items:center;gap:8px;
  width:100%;min-height:64px;margin:0;text-align:left;overflow-wrap:anywhere;
+}
+#builder-exercise-picker .builder-movements .exercise-thumbnail{
+ width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;border-radius:9px;
 }
 .builder-movements small{display:block;font-size:11px}
 .builder-movements .recap-anatomy{display:block;width:100%}
@@ -321,9 +324,9 @@ body[data-view] #discard-workout-dialog button:focus-visible{outline:2px solid v
 #workout-builder .builder-exercise-summary :is(strong,small){display:block;overflow-wrap:anywhere}
 #workout-builder .builder-exercise-summary strong{font-size:14px;line-height:1.2}
 #workout-builder .builder-exercise-summary small{font-size:12px;margin-top:4px}
-#workout-builder .builder-exercise-summary .exercise-thumbnail{width:100%;height:53px;object-fit:cover;border-radius:9px}
+#workout-builder .builder-exercise-summary .exercise-thumbnail{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;border-radius:9px}
 #workout-builder .builder-exercise-fields{padding-bottom:10px}
-#workout-builder .builder-exercise-fields>.exercise-thumbnail{width:100%;height:auto;aspect-ratio:2/1;object-fit:contain;border-radius:12px}
+#workout-builder .builder-exercise-fields>.exercise-thumbnail{width:100%;height:auto;aspect-ratio:4/3;object-fit:contain;border-radius:12px}
 #workout-builder .builder-exercise-fields>.exercise-thumbnail-empty{display:none}
 #workout-builder .builder-exercise[open] .builder-exercise-summary{min-height:44px;grid-template-columns:minmax(0,1fr) 12px}
 #workout-builder .builder-exercise[open] .builder-exercise-summary .exercise-thumbnail{display:none}
@@ -331,3 +334,7 @@ body[data-view] #builder-exercise-picker .builder-muscles button{padding:3px 2px
 body[data-view] #builder-exercise-picker .builder-muscles strong{color:#f3fff7!important}
 #builder-exercise-picker .builder-muscles .recap-anatomy{width:100%;filter:contrast(1.11) saturate(1.18)}
 body[data-view] #builder-exercise-picker [data-builder-muscle="all"]{margin-top:8px;background:#9ce2bc!important;color:#103727!important}
+
+#workout-builder .builder-exercise-footer{display:flex;align-items:flex-start;gap:8px}
+#workout-builder .builder-exercise-footer>.own-exercise-options{flex:1;min-width:0}
+#workout-builder .builder-exercise-footer>button{flex:none;min-height:44px}

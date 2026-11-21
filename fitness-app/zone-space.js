@@ -76,25 +76,59 @@ function startBreathTimer(preview=false){
  activity.preview=preview;
  activity.started=performance.now();
  activity.running=true;
+ if(sound&&audio?.state!=='running')enableBreathAudio(document.getElementById('zone-activity-dialog'));
  activity.phase='';
  updateBreathing();
  tick=setInterval(updateBreathing,75);
 }
-let activity=null,tick=null,audio=null,sound=false,opener=null;
-function stopTick(){if(tick)clearInterval(tick);tick=null;audio?.pause()}
+let activity=null,tick=null,audio=null,breathSource=null,sound=false,opener=null;
+const breathBuffers=new Map();
+function stopBreathAudio(){
+ if(!breathSource)return;
+ breathSource.stop();
+ breathSource.disconnect();
+ breathSource=null;
+}
+function stopTick(){if(tick)clearInterval(tick);tick=null;stopBreathAudio()}
 function pauseBreathing(){if(!activity||activity.kind!=='breathe'||!activity.running)return;activity.elapsed+=Math.max(0,performance.now()-activity.started);activity.running=false;if(activity.preview){activity.preview=false;activity.elapsed=0}stopTick();updateBreathing()}
-function tone(){
- if(!sound)return;
- const current=audio||new Audio('./fitness-app/zone-cue.wav');
- audio=current;
- current.currentTime=0;
- current.play().catch(error=>{
-  if(audio!==current||!sound||error.name==='AbortError')return;
+function breathBuffer(seconds,inhale){
+ const key=seconds+'-'+inhale;
+ if(breathBuffers.has(key))return breathBuffers.get(key);
+ const rate=16000,buffer=audio.createBuffer(1,seconds*rate,rate),samples=buffer.getChannelData(0);
+ let fast=0,slow=0;
+ for(let frame=0;frame<samples.length;frame++){
+  const noise=Math.random()*2-1,progress=frame/(samples.length-1);
+  fast+=(noise-fast)*(inhale?.38:.23);
+  slow+=(fast-slow)*.08;
+  const envelope=Math.pow(Math.sin(Math.PI*progress),1.5)*(inhale?.65+.35*progress:1-.5*progress);
+  samples[frame]=(fast-slow*.85)*envelope*(inhale?.38:.46);
+ }
+ breathBuffers.set(key,buffer);
+ return buffer;
+}
+async function enableBreathAudio(dialog){
+ try{
+  audio ||= new AudioContext();
+  const context=audio;
+  await context.resume();
+  if(audio===context&&sound&&activity?.running){activity.phase='';updateBreathing()}
+ }catch{
+  if(!dialog.isConnected||!sound)return;
   sound=false;
-  const dialog=document.getElementById('zone-activity-dialog');
-  dialog?.querySelector('[data-breath-sound]').setAttribute('aria-checked','false');
-  if(dialog)dialog.querySelector('[data-breath-audio-status]').textContent='Could not play sound cues. Try turning them on again.';
- });
+  dialog.querySelector('[data-breath-sound]').setAttribute('aria-checked','false');
+  dialog.querySelector('[data-breath-audio-status]').textContent='Could not play breathing sounds. Try turning them on again.';
+ }
+}
+function playBreathAudio(label,seconds,offset,remaining){
+ stopBreathAudio();
+ if(!sound||audio?.state!=='running'||label==='Hold')return;
+ const length=Math.min(seconds-offset,remaining);
+ if(length<=0)return;
+ const source=audio.createBufferSource();
+ source.buffer=breathBuffer(seconds,label!=='Breathe out');
+ source.connect(audio.destination);
+ source.start(0,offset,length);
+ breathSource=source;
 }
 function breathLimit(){return activity.preview?breathPattern().reduce((total,step)=>total+step[1]*1000,0):activity.duration*60000}
 function elapsed(){return Math.min(breathLimit(),activity.elapsed+(activity.running?Math.max(0,performance.now()-activity.started):0))}
@@ -110,7 +144,10 @@ function updateBreathing(){
   index++;
  }
  const phaseKey=Math.floor(ms/cycleLength)+'-'+index;
- if(activity.running&&activity.phase!==phaseKey){activity.phase=phaseKey;if(!preview)tone()}
+ if(activity.running&&activity.phase!==phaseKey){
+  activity.phase=phaseKey;
+  playBreathAudio(phase,pattern[index][1],offset/1000,(limit-ms)/1000);
+ }
  dialog.querySelector('.zone-breath-circle').style.setProperty('--zone-breath-scale',activity.running?scale:.82);
  const phaseEl=dialog.querySelector('[data-breath-phase]'),label=activity.running?phase:complete&&!preview?'A moment for you':activity.elapsed?'Paused':'Find your rhythm';if(phaseEl.textContent!==label)phaseEl.textContent=label;
  const remaining=Math.max(0,Math.ceil((preview&&complete?activity.duration*60000:limit-ms)/1000));dialog.querySelector('[data-breath-time]').textContent=Math.floor(remaining/60)+':'+String(remaining%60).padStart(2,'0');
@@ -121,13 +158,13 @@ function updateBreathing(){
  dialog.querySelector('.zone-breath-help').textContent=complete&&!preview?'You made a little space. You can record this moment below.':'Breathe comfortably. Stop whenever you need.';
  dialog.querySelectorAll('[data-breath-duration]').forEach(b=>b.setAttribute('aria-pressed',String(Number(b.dataset.breathDuration)===activity.duration)));
 }
-function closeActivity(force=false){const dialog=document.getElementById('zone-activity-dialog');if(!dialog)return;const text=dialog.querySelector('textarea');if(!force&&text&&text.value!==activity.original&&!confirm('Discard this unsaved thought?'))return;stopTick();audio=null;sound=false;dialog.close();dialog.remove();activity=null;opener?.focus({preventScroll:true})}
+function closeActivity(force=false){const dialog=document.getElementById('zone-activity-dialog');if(!dialog)return;const text=dialog.querySelector('textarea');if(!force&&text&&text.value!==activity.original&&!confirm('Discard this unsaved thought?'))return;stopTick();audio?.close().catch(()=>{});audio=null;breathBuffers.clear();sound=false;dialog.close();dialog.remove();activity=null;opener?.focus({preventScroll:true})}
 function openActivity(kind,id=''){
  if(!['breathe','clear','reflect'].includes(kind))return;const entry=cleanZoneSpace(state.zoneSpace).entries.find(e=>e.id===id);if(id&&!entry)return;
  opener=document.activeElement;const dialog=document.createElement('dialog');dialog.id='zone-activity-dialog';dialog.className='zone-activity-dialog';dialog.dataset.zoneKind=kind;dialog.setAttribute('aria-labelledby','zone-activity-title');
  activity={kind,id,date:entry?.date||foodDate(),original:entry?.text||'',duration:1,method:'slow',preview:false,elapsed:0,running:false,started:0,phase:''};sound=false;
  const title=kind==='breathe'?'Take a quiet minute':kind==='clear'?'Clear your head':'A thought for yourself';
- dialog.innerHTML='<div class="zone-dialog-heading"><span>ZONE · A MOMENT FOR YOU</span><button type="button" data-zone-activity-close aria-label="Close activity">×</button></div><h2 id="zone-activity-title">'+title+'</h2>'+(kind==='reflect'?'<div class="zone-dialog-sprout" aria-hidden="true">'+icon('leaf')+'</div>':'')+(kind==='breathe'?'<div class="zone-breath-circle"><span data-breath-phase role="status" aria-live="polite">Find your rhythm</span></div><p class="zone-breath-clock" data-breath-time>1:00</p>'+breathControls()+'<div class="zone-duration-choices" aria-label="Duration">'+[1,3,5].map(n=>'<button type="button" data-breath-duration="'+n+'" aria-pressed="'+(n===1)+'">'+n+' min</button>').join('')+'</div><button type="button" class="zone-sound" data-breath-sound role="switch" aria-checked="false">Play sound cues<span aria-hidden="true"></span></button><p class="zone-audio-status" data-breath-audio-status role="status"></p><p class="zone-breath-help">Breathe comfortably. Follow your own rhythm; stop whenever you need.</p><button class="primary" data-breath-start>Start breathing</button><button class="primary" data-breath-finish hidden>I made time today →</button>':'<form id="zone-reflection-form"><label for="zone-thought-input">'+(kind==='clear'?'What’s on your mind?':prompts[zoneAffirmationIndex%prompts.length])+'</label><textarea id="zone-thought-input" name="thought" maxlength="2000" rows="7" placeholder="Write whatever’s on your mind…" required>'+safe(entry?.text||'')+'</textarea><p class="zone-writing-count">'+(entry?.text.length||0)+' / 2,000</p><p class="note zone-writing-notice">Saved with your app data. Write & discard saves nothing.</p><details class="zone-saving-details"><summary>How saving works</summary><p>Your saved reflections are included in backups and account sync when enabled. Writing and discarding saves nothing.</p></details><div class="zone-writing-actions"><button class="primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg>Save privately</button><button type="button" data-zone-discard><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></svg>Write & discard</button></div></form>')+'<p class="zone-activity-status" role="status"></p>';
+ dialog.innerHTML='<div class="zone-dialog-heading"><span>ZONE · A MOMENT FOR YOU</span><button type="button" data-zone-activity-close aria-label="Close activity">×</button></div><h2 id="zone-activity-title">'+title+'</h2>'+(kind==='reflect'?'<div class="zone-dialog-sprout" aria-hidden="true">'+icon('leaf')+'</div>':'')+(kind==='breathe'?'<div class="zone-breath-circle"><span data-breath-phase role="status" aria-live="polite">Find your rhythm</span></div><p class="zone-breath-clock" data-breath-time>1:00</p>'+breathControls()+'<div class="zone-duration-choices" aria-label="Duration">'+[1,3,5].map(n=>'<button type="button" data-breath-duration="'+n+'" aria-pressed="'+(n===1)+'">'+n+' min</button>').join('')+'</div><button type="button" class="zone-sound" data-breath-sound role="switch" aria-checked="false">Play breathing sounds<span aria-hidden="true"></span></button><p class="zone-audio-status" data-breath-audio-status role="status"></p><p class="zone-breath-help">Breathe comfortably. Follow your own rhythm; stop whenever you need.</p><button class="primary" data-breath-start>Start breathing</button><button class="primary" data-breath-finish hidden>I made time today →</button>':'<form id="zone-reflection-form"><label for="zone-thought-input">'+(kind==='clear'?'What’s on your mind?':prompts[zoneAffirmationIndex%prompts.length])+'</label><textarea id="zone-thought-input" name="thought" maxlength="2000" rows="7" placeholder="Write whatever’s on your mind…" required>'+safe(entry?.text||'')+'</textarea><p class="zone-writing-count">'+(entry?.text.length||0)+' / 2,000</p><p class="note zone-writing-notice">Saved with your app data. Write & discard saves nothing.</p><details class="zone-saving-details"><summary>How saving works</summary><p>Your saved reflections are included in backups and account sync when enabled. Writing and discarding saves nothing.</p></details><div class="zone-writing-actions"><button class="primary" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3m-4 4v3"/></svg>Save privately</button><button type="button" data-zone-discard><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 6h18M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7m4-7v7"/></svg>Write & discard</button></div></form>')+'<p class="zone-activity-status" role="status"></p>';
  document.body.append(dialog);dialog.addEventListener('cancel',e=>{e.preventDefault();closeActivity()});dialog.showModal();dialog.querySelector('[data-zone-activity-close]').focus();
 }
 document.addEventListener('visibilitychange',()=>{if(document.hidden)pauseBreathing()});window.addEventListener('pagehide',pauseBreathing);
@@ -176,7 +213,7 @@ document.addEventListener('click',e=>{
   sound=!sound;
   button.setAttribute('aria-checked',String(sound));
   button.closest('dialog').querySelector('[data-breath-audio-status]').textContent='';
-  if(sound)tone();else audio?.pause();
+  if(sound)enableBreathAudio(button.closest('dialog'));else stopBreathAudio();
   return;
  }
  if(button.hasAttribute('data-breath-start')){if(activity.running)pauseBreathing();else startBreathTimer();return}

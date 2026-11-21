@@ -1,3 +1,9 @@
+## 2026-11-20 — Custom workout exercise photos and controls
+
+- Android 1.0.171 enlarges exercise picker photos and fits the full source image in the picker and both builder states. The expanded editor puts Browse exercises before manual entry, keeps sets and reps together, and moves Remove to the timing options row.
+- Zone replaces the beep with inhale and exhale audio synced to the animated phase, including custom previews, with silent holds and immediate mute.
+- Android web packaging, Zone state, and native runtime checks passed. Local mobile browser checks were blocked by the runtime's socket restrictions. The Android workflow builds and signs the installable update.
+
 ## 2026-11-20 — Zone method picker and audible cues
 
 - Android 1.0.170 builds on `0fbc276` and replaces the inline Zone method menu with a closable sheet. It shows a reason and technique name for each choice, with optional study links. Cyclic sighing starts with a five-minute timer.
