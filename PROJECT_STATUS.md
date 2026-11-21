@@ -1,3 +1,8 @@
+## 2026-11-21 — Full-width workout focus banners
+
+- Android 1.0.175 uses one scrollable banner per workout focus, the original picker controls, and a full-body anatomy figure with stronger primary highlights over an emerald gradient.
+- Branch: android-health-connect. Native web packaging and runtime checks passed. The Android workflow runs the mobile picker checks in dark, light, and personal palettes and builds the signed update.
+
 ## 2026-11-20 — Split-view workout category artwork
 
 - Android 1.0.174 applies a full anatomy view and a category-specific detail crop to every workout focus card. Both panels render the existing category muscle masks, including primary traps and supporting triceps for Pull and front-view calves for Legs.

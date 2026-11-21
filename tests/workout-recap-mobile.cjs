@@ -47,22 +47,21 @@ const server=http.createServer((req,res)=>{
     }});
     window.SpeechSynthesisUtterance=class{constructor(text){this.text=text}};
    });
+   await page.evaluate(width=>applyAppAppearance({mode:width===390?'light':'dark',accent:width===430?'ocean':'emerald'}),width);
    await page.getByRole('button',{name:'Manage workouts'}).click();
    const chooser=page.locator('#workout-chooser');
    assert(await chooser.isVisible());
-   assert.equal(await chooser.locator('[data-workout-category="Leg"] [data-anatomy-region="hamstrings"]').count(),1);
-   const categoryCards=chooser.locator('[data-workout-category] .category-anatomy-cover');
+   const categoryCards=chooser.locator('.category-tile');
    assert.equal(await categoryCards.count(),10);
-   for(const art of await categoryCards.all()){
-    const panels=art.locator('.category-anatomy-panel');
-    assert.equal(await panels.count(),2);
-    const figure=await panels.first().locator('.recap-anatomy').boundingBox();
-    const detail=await panels.last().locator('.recap-anatomy').boundingBox();
-    assert(figure.height>0&&detail.height>figure.height*1.9);
+   const first=await categoryCards.first().boundingBox(),second=await categoryCards.nth(1).boundingBox();
+   assert(first&&second&&first.x===second.x&&first.width===second.width&&second.y>=first.y+first.height);
+   for(const card of await categoryCards.all()){
+    assert.equal(await card.locator('.category-anatomy-panel .recap-anatomy').count(),1);
+    assert.match(await card.evaluate(el=>getComputedStyle(el).backgroundImage),/radial-gradient/);
    }
    const pull=chooser.locator('[data-workout-category="Pull"]');
-   assert.equal(await pull.locator('[data-anatomy-region="traps"].anatomy-primary').count(),2);
-   assert.equal(await pull.locator('[data-anatomy-region="triceps"].anatomy-supporting').count(),2);
+   assert.equal(await pull.locator('[data-anatomy-region="traps"].anatomy-primary').count(),1);
+   assert.equal(await pull.locator('[data-anatomy-region="triceps"].anatomy-supporting').count(),1);
    assert.equal(await chooser.locator('[data-workout-category="Leg"] .category-anatomy-front [data-anatomy-region="calves"].anatomy-primary').count(),1);
    await chooser.getByRole('button',{name:'Explore Push workouts'}).click();
    assert(await chooser.locator('.program-photo .hybrid-workout-cover').count()>0);
@@ -136,6 +135,7 @@ const server=http.createServer((req,res)=>{
    await page.locator('[data-edit-swap]').click();
    assert(await page.locator('#workout-edit-search').isVisible());
    await page.keyboard.press('Escape');
+   await page.evaluate(width=>applyAppAppearance({mode:width===390?'light':'dark',accent:width===430?'ocean':'emerald'}),width);
    await page.getByRole('button',{name:'Manage workouts'}).click();
    await page.getByRole('button',{name:/^Create your own/}).click();
    const builder=page.locator('#builder-exercise-picker');

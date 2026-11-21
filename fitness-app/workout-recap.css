@@ -77,16 +77,24 @@ body[data-view=home] #screen .home-workout .home-change-workout svg{background:t
 .rest-voice-trigger strong{font-size:11px}
 body[data-view=train] .footer-rest.is-final-countdown #footer-rest-clock{color:#a3ebc4!important}
 
-/* Photo-first layout for the workout chooser's category view. */
+/* Full-width banners for the workout chooser’s category view. */
 body[data-view] #workout-chooser .chooser-focus-head{padding:9px 24px 9px}
 #workout-chooser .chooser-focus-head .chooser-grip{margin-bottom:10px}
 #workout-chooser .chooser-focus-head h2{font-size:clamp(22px,6vw,29px);line-height:1.1}
 #workout-chooser .chooser-focus-head p:not(.workout-muscle-legend){margin:4px 0;font-size:13px;line-height:1.3}
 #workout-chooser .chooser-focus-head .workout-muscle-legend{margin:5px 0 0;font-size:11px;line-height:1.4}
 #workout-chooser .chooser-focus-body{padding:8px 11px max(16px,env(safe-area-inset-bottom))}
-#workout-chooser .chooser-focus-body .category-grid{gap:8px}
-#workout-chooser .chooser-focus-body .category-tile{display:flex;flex-direction:column;border-radius:12px}
-#workout-chooser .chooser-focus-body .category-photo{width:100%;height:auto;aspect-ratio:1.27}
+#workout-chooser .chooser-focus-body .category-grid{grid-template-columns:minmax(0,1fr);gap:9px}
+body[data-view] #workout-chooser .chooser-focus-body .category-tile{
+ display:grid;grid-template-columns:minmax(0,1fr) 86px 14px;align-items:center;gap:6px;
+ min-height:126px;padding:0 13px 0 0;border-radius:13px;
+ background:radial-gradient(ellipse at 83% 96%,#245844,#163c30 48%,#10251e 94%)!important;
+ color:#f0faf5!important;border-color:#477560;
+}
+body[data-view] #workout-chooser .chooser-focus-body .category-tile.is-selected{border-color:#8ce2b5}
+#workout-chooser .chooser-focus-body .category-photo{width:100%;height:124px;aspect-ratio:auto;background:none;border-radius:0}
+#workout-chooser .chooser-focus-body .category-photo .workout-cover-check{top:5px;right:0}
+#workout-chooser .category-arrow{font-size:25px;line-height:1;color:#bbdfcc}
 #workout-chooser .anatomy-studio-cover{
  background:radial-gradient(ellipse 67% 75% at 50% 33%,#3c5046 0%,transparent 78%),
  radial-gradient(ellipse 75% 23% at 50% 100%,#344c40 0%,transparent 100%),#101c18;
@@ -97,10 +105,10 @@ body[data-view] #workout-chooser .chooser-focus-head{padding:9px 24px 9px}
 #workout-chooser .anatomy-studio-cover :is(.anatomy-crop-upper,.anatomy-crop-lower) .recap-anatomy{width:78%}
 #workout-chooser .anatomy-studio-cover .anatomy-crop-upper .recap-anatomy{top:1%}
 #workout-chooser .anatomy-studio-cover .anatomy-crop-lower .recap-anatomy{bottom:-3%}
-#workout-chooser .chooser-focus-body .category-copy{display:flex;flex:1;flex-direction:column;align-self:stretch;padding:5px 9px 7px}
-#workout-chooser .chooser-focus-body .category-copy strong{font-size:clamp(15px,4.5vw,19px);line-height:1.15}
-#workout-chooser .chooser-focus-body .category-copy small{min-height:0;margin:2px 0 4px;font-size:11px;line-height:1.25}
-body[data-view] #workout-chooser .chooser-focus-body .category-copy b{margin-top:auto;gap:4px;font-size:12px;line-height:1.25}
+#workout-chooser .chooser-focus-body .category-copy{display:grid;align-content:center;gap:4px;padding:11px 0 11px 15px;min-width:0}
+#workout-chooser .chooser-focus-body .category-copy strong{color:#f0faf5;font-size:clamp(18px,5.65vw,23px);line-height:1.1;overflow-wrap:anywhere}
+#workout-chooser .chooser-focus-body .category-copy small{color:#d6ecdf;min-height:0;margin:0;font-size:13px;line-height:1.3}
+body[data-view] #workout-chooser .chooser-focus-body .category-copy b{color:#b3d6c4;margin-top:3px;font-size:12px;line-height:1.25}
 #workout-chooser .chooser-focus-tools{margin-top:12px}
 
 
@@ -212,13 +220,8 @@ body[data-view] #workout-chooser .chooser-shortcuts :is(.chooser-create,.saved-w
 #workout-chooser .chooser-focus-tools .workout-setting-tabs{margin:0}
 #workout-chooser .chooser-focus-tools .workout-filter-panel{margin:0}
 body[data-view] #workout-chooser .chooser-focus-body{padding-inline:7px}
-#workout-chooser .chooser-focus-body .category-photo{aspect-ratio:1.04}
-#workout-chooser .category-anatomy-cover{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;height:100%;
- background:radial-gradient(ellipse at 50% 90%,#23533e,#101f1a 74%)
-}
 #workout-chooser .category-anatomy-panel{
- position:relative;overflow:hidden;container-type:size;min-width:0;
+ display:block;position:relative;overflow:hidden;container-type:size;min-width:0;width:100%;height:100%;
  --atlas-height:96cqh;--atlas-width:calc(var(--atlas-height)*500/551);--atlas-center:.25
 }
 #workout-chooser .category-anatomy-panel.category-anatomy-rear{--atlas-center:.75}
@@ -228,9 +231,8 @@ body[data-view] #workout-chooser .chooser-focus-body{padding-inline:7px}
 }
 #workout-chooser .category-anatomy-front>.recap-anatomy{clip-path:inset(0 50% 0 0)}
 #workout-chooser .category-anatomy-rear>.recap-anatomy{clip-path:inset(0 0 0 50%)}
-#workout-chooser .category-anatomy-detail{--atlas-height:210cqh;border-left:1px solid #a0e6bd35}
-#workout-chooser .category-anatomy-detail .recap-anatomy{top:var(--detail-offset)}
-#workout-chooser .category-anatomy-detail.category-anatomy-front>.recap-anatomy{margin-left:8cqw}
+#workout-chooser .category-anatomy-panel .anatomy-primary{filter:brightness(1.13) saturate(1.22)}
+#workout-chooser .category-anatomy-panel .anatomy-traps.anatomy-primary{filter:brightness(1.44) saturate(1.36)}
 
 #workout-chooser .anatomy-studio-cover :is(.anatomy-crop-upper,.anatomy-crop-lower) .recap-anatomy{width:96%}
 #workout-chooser .program-photo{height:clamp(156px,50vw,250px)}
