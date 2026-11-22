@@ -54,6 +54,9 @@ async function check(width, mode, accent) {
   assert.deepEqual(await page.evaluate(() => state.mealPlan), fixture.mealPlan);
   assert.equal(await page.evaluate(id => availableCustomFoods().some(f => f.id === id), mealId), false);
   assert.equal(await page.evaluate(id => plannedRecipe(id).name, mealId), 'Breakfast bowl');
+  await library.getByRole('button', { name: 'Recent', exact: true }).click();
+  assert(await library.getByRole('button', { name: 'Add to Favorites: Breakfast bowl' }).isVisible());
+  await library.getByRole('button', { name: 'Saved', exact: true }).click();
   await library.getByRole('button', { name: 'Archived (1)' }).click();
   await library.getByRole('button', { name: 'Options for Breakfast bowl' }).click();
   await library.getByRole('button', { name: 'Restore', exact: true }).click();
@@ -61,7 +64,7 @@ async function check(width, mode, accent) {
 
   await library.getByRole('button', { name: 'Saved', exact: true }).click();
   await library.getByRole('button', { name: 'Options for Breakfast bowl' }).click();
-  await library.getByRole('button', { name: 'Archive', exact: true }).click();
+  await library.getByRole('button', { name: 'Delete permanently', exact: true }).click();
   await dialog.getByRole('button', { name: 'View planned days' }).click();
   await dialog.getByRole('checkbox').first().check();
   await dialog.getByRole('button', { name: 'Remove selected' }).click();
@@ -77,8 +80,6 @@ async function check(width, mode, accent) {
   await dialog.getByRole('button', { name: 'View planned days' }).click();
   await dialog.getByRole('checkbox').check();
   await dialog.getByRole('button', { name: 'Remove selected' }).click();
-  await dialog.getByRole('button', { name: 'Cancel' }).click();
-  await library.getByRole('button', { name: 'Delete permanently', exact: true }).click();
   await dialog.getByRole('button', { name: 'Delete permanently', exact: true }).click();
   assert.equal(await page.evaluate(() => state.customFoods.length), 0);
   assert.deepEqual(await page.evaluate(() => state.foodLog), diary);
@@ -93,7 +94,22 @@ async function check(width, mode, accent) {
   await page.getByRole('button', { name: /Apple.*52 kcal/ }).click();
   await page.getByRole('button', { name: 'Choose amount' }).click();
   assert(await page.getByRole('button', { name: 'Remove from Favorites: Apple' }).isVisible());
-  assert.deepEqual(await page.evaluate(() => restoredState(state).favoriteFoods.map(f => f.name)), ['Apple']);
+  await page.evaluate(() => showIngredientAmount(['off-012345678905','Scanned yogurt',62,5,7,2,'g','off']));
+  await page.getByRole('button', { name: 'Add to Favorites: Scanned yogurt' }).click();
+  assert.equal(await page.evaluate(() => state.favoriteFoods.find(f=>f.name==='Scanned yogurt').barcode), '0012345678905');
+  await page.locator('[data-ingredient-cancel]').click();
+  await page.locator('[data-food-manual]').click();
+  const form = page.locator('#custom-food-form');
+  await form.locator('[name=name]').fill('Manual test food');
+  for (const field of ['protein', 'carbs', 'fat']) await form.locator('[name='+field+']').fill('10');
+  await form.getByRole('button', { name: /Save to Favorites/ }).click();
+  assert.deepEqual(await page.evaluate(() => restoredState(state).favoriteFoods.map(f => f.name)), ['Apple', 'Scanned yogurt', 'Manual test food']);
+  await page.getByRole('button', { name: 'Back to foods' }).click();
+  await page.getByRole('tab', { name: 'Foods' }).click();
+  await page.locator('#ingredient-search').fill('blueberries');
+  const resultStar = page.locator('[data-favorite-search]').first();
+  await resultStar.click();
+  assert.equal(await resultStar.getAttribute('aria-pressed'), 'true');
   assert.deepEqual(errors, []);
   await page.close();
   console.log('PASS food library, favorites, archive, restore, selected plan dates and diary retention at ' + width + 'px · ' + mode + ' ' + accent);

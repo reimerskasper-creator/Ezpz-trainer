@@ -1,3 +1,8 @@
+## Android 1.0.191 — Direct food deletion and visible Favorites
+
+- Android branch `android-health-connect`, based on `ed4d153`. Saved foods offer permanent deletion directly while preserving diary history and requiring explicit removal of any scheduled servings. Archived is reachable above the Saved list.
+- Favorites are available on search results, food details including barcode results, manual nutrition entry, and Recent entries linked to archived foods. Focused mobile and food-library checks cover these paths. Delivery uses the existing signed Android workflow.
+
 ## Android 1.0.190 — Saved foods and meals
 
 - Android branch `android-health-connect`, based on `5003590`. Eat and Add Food share Saved, Favorites, and Recent. Foods, meals, and recipes can be starred. Archive preserves existing schedules and history. Planned days lets users remove selected servings. Permanent removal is available from Archived once the active schedule no longer uses the item.
