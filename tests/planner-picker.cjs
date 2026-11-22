@@ -12,7 +12,7 @@ assert(screen.innerHTML.includes('data-open-plan-picker="workout"')&&screen.inne
 const before=JSON.stringify(api.state),writesBefore=writes;api.openPlannerPicker('workout');
 assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===10,'Ten workout photo categories');
 assert(api.pickerWorkoutMatches().length===40,'Forty Home sessions available');
-assert((body.innerHTML.match(/hybrid-workout-cover/g)||[]).length===10,'Photo and anatomy on all workout categories');
+assert((body.innerHTML.match(/class="category-anatomy-panel /g)||[]).length===10,'Photo and anatomy on all workout categories');
 for(const setting of ['home','gym']){
  api.state.workoutSetting=setting;
  api.picker.category='Pull';
@@ -26,6 +26,7 @@ api.picker.category='Full Body';api.picker.level='Beginner';api.filterPlannerPic
 assert(api.pickerWorkoutMatches().length===2&&body.innerHTML.includes('Beginner'),'Category and level combine');
 api.picker.category=null;api.picker.level='all';api.picker.query='guided-home-full-body-a';api.filterPlannerPicker();
 assert(api.pickerWorkoutMatches().length===1&&body.innerHTML.includes('data-plan-pick-workout="guided-home-full-body-a"'),'Search finds session');
+assert(body.innerHTML.indexOf('program-heading')<body.innerHTML.indexOf('program-photo')&&body.innerHTML.includes('program-exercise-grid'),'Program details precede cover and exercise thumbnails');
 api.closePlannerPicker();assert(!dialog.open&&JSON.stringify(api.state)===before&&writes===writesBefore,'Cancel never changes saved plans');
 const date=api.planSettings().date,other=api.datePlus(date,1);api.state.workoutSchedule={[other]:'pull-a'};
 api.openPlannerPicker('workout');assert(api.commitPickerWorkout('guided-home-full-body-a'),'Assign workout');

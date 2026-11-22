@@ -200,49 +200,49 @@ body[data-view=home] .home-workout>img{object-position:center 45%}
 
 /* Workout library: categories first, then five clear program choices. */
 #workout-chooser .category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-#workout-chooser .category-tile{padding:0;overflow:hidden;background:white;border:1px solid #e1e9e3;border-radius:17px;text-align:left;min-width:0}
-#workout-chooser .category-tile.is-selected{border-color:#65c592;box-shadow:0 0 0 1px #65c59233}
-#workout-chooser .category-photo{display:block;position:relative;height:106px;overflow:hidden;background:#233b30}
-#workout-chooser .category-photo img{width:100%;height:100%;object-fit:cover;display:block}
-#workout-chooser .category-copy{display:block;padding:12px}
-#workout-chooser .category-copy strong{display:block;font-size:16px;letter-spacing:-.4px}
-#workout-chooser .category-copy small{display:block;font-size:10px;line-height:1.5;margin:5px 0 10px;min-height:30px;color:#718679}
-#workout-chooser .category-copy b{display:flex;justify-content:space-between;color:#248a54;font-size:10px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-tile{padding:0;overflow:hidden;background:white;border:1px solid #e1e9e3;border-radius:17px;text-align:left;min-width:0}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-tile.is-selected{border-color:#65c592;box-shadow:0 0 0 1px #65c59233}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-photo{display:block;position:relative;height:106px;overflow:hidden;background:#233b30}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-photo img{width:100%;height:100%;object-fit:cover;display:block}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-copy{display:block;padding:12px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-copy strong{display:block;font-size:16px;letter-spacing:-.4px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-copy small{display:block;font-size:10px;line-height:1.5;margin:5px 0 10px;min-height:30px;color:#718679}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-copy b{display:flex;justify-content:space-between;color:#248a54;font-size:10px}
 #workout-chooser .chooser-back{width:auto;background:none;border:0;padding:0 4px;color:#278755;font-size:12px;margin:0 0 12px}
-#workout-chooser .program-list{display:grid;gap:16px}
-#workout-chooser .program-card{border:1px solid #e0e9e2;border-radius:18px;overflow:hidden;background:white}
-#workout-chooser .program-card.is-selected{border-color:#55be86;box-shadow:0 0 0 1px #55be8622}
-#workout-chooser .program-photo{position:relative;height:156px;background:#20382c;overflow:hidden}
-#workout-chooser .program-photo img{display:block;width:100%;height:100%;object-fit:cover}
-#workout-chooser .program-copy{padding:16px}
-#workout-chooser .program-copy h3{font-size:19px;letter-spacing:-.5px;color:#213c2b}
-#workout-chooser .program-copy p{font-size:12px;line-height:1.5;margin:7px 0 12px;color:#728679}
-#workout-chooser .program-meta{display:block;font-size:11px;font-weight:650;color:#3b7653;margin-bottom:6px}
-#workout-chooser .program-copy>small{display:block;font-size:10px;color:#839388;line-height:1.5}
-#workout-chooser .program-copy>button{margin-top:14px;border:0;background:#13ae64;color:white;font-size:12px;min-height:46px}
-#workout-chooser .program-copy>button[aria-pressed=true]{background:#e3f5e9;color:#278452}
-#workout-chooser .program-preview{border-top:1px solid #edf2ee;margin-top:12px;padding-top:2px}
-#workout-chooser .program-preview summary{font-size:11px;color:#487759;min-height:44px;display:flex;align-items:center;cursor:pointer}
-#workout-chooser .program-preview summary:after{content:'＋';margin-left:auto}
-#workout-chooser .program-preview[open] summary:after{content:'−'}
-#workout-chooser .program-preview ol{padding-left:18px;margin:0 0 4px}
-#workout-chooser .program-preview li{font-size:11px;line-height:1.6;margin:7px 0;color:#3b5845}
-#workout-chooser .program-preview li small{font-size:10px;color:#8c9c90}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-list{display:grid;gap:16px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-card{border:1px solid #e0e9e2;border-radius:18px;overflow:hidden;background:white}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-card.is-selected{border-color:#55be86;box-shadow:0 0 0 1px #55be8622}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-photo{position:relative;height:156px;background:#20382c;overflow:hidden}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-photo img{display:block;width:100%;height:100%;object-fit:cover}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy{padding:16px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy h3{font-size:19px;letter-spacing:-.5px;color:#213c2b}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy p{font-size:12px;line-height:1.5;margin:7px 0 12px;color:#728679}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-meta{display:block;font-size:11px;font-weight:650;color:#3b7653;margin-bottom:6px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy>small{display:block;font-size:10px;color:#839388;line-height:1.5}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy>button{margin-top:14px;border:0;background:#13ae64;color:white;font-size:12px;min-height:46px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy>button[aria-pressed=true]{background:#e3f5e9;color:#278452}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview{border-top:1px solid #edf2ee;margin-top:12px;padding-top:2px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview summary{font-size:11px;color:#487759;min-height:44px;display:flex;align-items:center;cursor:pointer}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview summary:after{content:'＋';margin-left:auto}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview[open] summary:after{content:'−'}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview ol{padding-left:18px;margin:0 0 4px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview li{font-size:11px;line-height:1.6;margin:7px 0;color:#3b5845}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview li small{font-size:10px;color:#8c9c90}
 @media(max-width:360px){#workout-chooser .category-photo{height:90px}#workout-chooser .category-copy{padding:10px}#workout-chooser .category-copy strong{font-size:14px}}
 
 /* Keep the sheet inside the phone viewport and targets below its sticky heading. */
 #workout-chooser{width:min(100vw,430px);max-width:100vw;scroll-padding-top:170px}
 #workout-chooser .chooser-head{z-index:5}
-#workout-chooser .category-photo,#workout-chooser .program-photo{isolation:isolate}
-#workout-chooser .category-tile{scroll-margin-top:170px}
-#workout-chooser .program-copy>button{scroll-margin-top:170px}
-#workout-chooser .program-photo .workout-cover-check{width:auto;min-width:25px;padding:4px 9px;border-radius:20px;font-size:10px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-photo,:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-photo{isolation:isolate}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-tile{scroll-margin-top:170px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy>button{scroll-margin-top:170px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-photo .workout-cover-check{width:auto;min-width:25px;padding:4px 9px;border-radius:20px;font-size:10px}
 
 #workout-chooser{height:88vh;height:88dvh;overflow:hidden}
 #workout-chooser[open]{display:flex;flex-direction:column}
 #workout-chooser .chooser-head{position:relative;flex:0 0 auto}
 #workout-chooser .chooser-body{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scroll-padding:16px 0}
-#workout-chooser .category-tile,#workout-chooser .program-copy>button{scroll-margin-top:16px}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-tile,:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy>button{scroll-margin-top:16px}
 
 body[data-view=train] .week-track{grid-template-columns:repeat(12,minmax(0,1fr));min-width:0}
 body[data-view=train] .week-track span{min-width:0;min-height:0;width:100%;max-width:24px;height:20px;aspect-ratio:auto;justify-self:center}
@@ -1512,16 +1512,16 @@ button:focus-visible,summary:focus-visible{outline:3px solid #4b926b;outline-off
 #workout-chooser .chooser-eyebrow{color:#a6dbb8}
 #workout-chooser .chooser-grip{background:#91ad98}
 #workout-chooser .chooser-head button{background:#ffffff14;color:#eef4e7;border:1px solid #a6c2aa66}
-#workout-chooser :is(.category-tile,.program-card,.fullbody-choice,.workout-choice-card){background:var(--ez-cream);border-color:var(--ez-line);box-shadow:0 3px 12px #183e2d08}
-#workout-chooser :is(.category-copy strong,.program-copy h3){color:var(--ez-ink)}
-#workout-chooser :is(.category-copy small,.program-copy p,.program-copy>small,.workout-choice-meta,.chooser-footnote){color:var(--ez-muted)}
-#workout-chooser :is(.category-copy b,.program-meta,.chooser-back,.program-preview summary){color:#2c6947}
-#workout-chooser .program-preview{border-color:#c4d0bf}
-#workout-chooser .program-preview li{color:#294b37}
-#workout-chooser .program-preview li small{color:var(--ez-muted)}
-#workout-chooser .program-copy>button{background:var(--ez-mint);color:var(--ez-forest)}
-#workout-chooser .program-copy>button[aria-pressed=true]{background:#d4e6d3;color:#214d34}
-#workout-chooser :is(.category-tile,.program-card).is-selected{border-color:#397654;box-shadow:0 0 0 2px #75b98d55}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) :is(.category-tile,.program-card,.fullbody-choice,.workout-choice-card){background:var(--ez-cream);border-color:var(--ez-line);box-shadow:0 3px 12px #183e2d08}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) :is(.category-copy strong,.program-copy h3){color:var(--ez-ink)}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) :is(.category-copy small,.program-copy p,.program-copy>small,.workout-choice-meta,.chooser-footnote){color:var(--ez-muted)}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) :is(.category-copy b,.program-meta,.chooser-back,.program-preview summary){color:#2c6947}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview{border-color:#c4d0bf}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview li{color:#294b37}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-preview li small{color:var(--ez-muted)}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy>button{background:var(--ez-mint);color:var(--ez-forest)}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-copy>button[aria-pressed=true]{background:#d4e6d3;color:#214d34}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) :is(.category-tile,.program-card).is-selected{border-color:#397654;box-shadow:0 0 0 2px #75b98d55}
 #workout-chooser .workout-filters{background:var(--ez-sage);border:1px solid #bdcfb8;gap:10px;align-items:start}
 .workout-filter-field{min-width:0;color:#294b37;font-size:12px}
 .workout-filter-menu{margin-top:5px}
@@ -1534,8 +1534,8 @@ button:focus-visible,summary:focus-visible{outline:3px solid #4b926b;outline-off
 .workout-filter-options>button{display:flex;justify-content:space-between;gap:6px;align-items:center;text-align:left;font-size:12px;line-height:1.4;min-height:44px;padding:9px 8px;background:transparent;color:#f0f4e7;border:1px solid transparent;border-radius:8px}
 .workout-filter-options>button[aria-pressed=true]{background:#375e43;color:#c7f3d6;border-color:#91bd94}
 #workout-chooser .workout-filters>button{align-self:start;margin-top:22px;background:#c3d4bf;border:1px solid #9eb899;color:#294c34;min-height:44px}
-#workout-chooser .program-badges span{background:#d9e8d4;color:#28573b}
-#workout-chooser .program-badges span+span{background:#e1e4d8;color:#4b6251}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-badges span{background:#d9e8d4;color:#28573b}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .program-badges span+span{background:#e1e4d8;color:#4b6251}
 #workout-chooser .chooser-body{scrollbar-color:#8aa78e var(--ez-page)}
 body :is(.planner-back,.compact-picker-label){background:#d7e2d3;color:#214732;border-color:#b0c6ab}
 body :is(.set-row input[type=number],.exercise-progress-card select){background-color:var(--ez-cream);color:var(--ez-ink);border-color:#b7cdb4}
@@ -11694,8 +11694,8 @@ function programExerciseTile(exercise,workoutId){
  const content='<span class="program-exercise-photo">'+exerciseThumbnail(name,workoutId)+(video?'<span class="program-exercise-play" aria-hidden="true">▶</span>':'')+'</span><strong>'+safe(name)+'</strong><small>'+safe(prescription)+'</small>';
  return '<li>'+(video?'<a href="'+safe(video)+'" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer" aria-label="Watch '+safe(name)+' demo, '+safe(prescription)+'">'+content+'</a>':content)+'</li>';
 }
-function workoutProgramCard(workout,selected){
- const exercises=workoutPlan(workout.id).exercises;
+function workoutProgramCard(workout,selected,plannerDate=null){
+ const exercises=plannerDate?workout.exercises:workoutPlan(workout.id).exercises;
  const count=exercises.filter(exercise=>!/Warm-up|Cooldown/i.test(exercise.name)).length;
  const title=safe(workout.programName||workout.title);
  return '<article class="program-card '+(selected?'is-selected':'')+'">'+
@@ -11707,8 +11707,11 @@ function workoutProgramCard(workout,selected){
   '<div class="program-copy"><details class="program-preview program-details"><summary>Program details</summary>'+
   '<div class="program-detail-copy">'+exerciseMuscleDetails(exercises)+'<p><b>Equipment</b> '+safe(workout.equipment)+'</p>'+
   '<p><b>Training notes</b> '+safe(workout.setup||'Straight sets · change stations after all sets')+'</p></div></details>'+
-  '<button type="button" data-workout-pick="'+safe(workout.id)+'" aria-label="Choose '+safe(workout.title||workout.programName)+'" aria-pressed="'+selected+'">'+
-  (selected?'Selected workout ✓':'Choose program →')+'</button></div></article>';
+  '<button type="button" '+(plannerDate?'data-plan-pick-workout':'data-workout-pick')+'="'+safe(workout.id)+'" aria-label="'+(plannerDate?'Plan '+title+' for '+safe(planDayLabel(plannerDate)):'Choose '+safe(workout.title||workout.programName))+'" aria-pressed="'+selected+'">'+
+  (selected?'Selected workout ✓':plannerDate?'Add to day →':'Choose program →')+'</button></div></article>';
+}
+function workoutCategoryTile(c,count,selected,inPlanner=false){
+ return '<button type="button" class="category-tile '+(selected?'is-selected':'')+'" '+(inPlanner?'data-plan-picker-category':'data-workout-category')+'="'+safe(c.id)+'" aria-label="Explore '+safe(c.label)+' workouts"><span class="category-copy"><strong>'+safe(c.label)+'</strong><small>'+safe(c.description)+'</small><b>'+count+' program'+(count===1?'':'s')+'</b></span><span class="category-photo">'+workoutCategoryCover(c.id)+(selected?'<span class="workout-cover-check" aria-hidden="true">✓</span>':'')+'</span><span class="category-arrow" aria-hidden="true">›</span></button>'
 }
 function chooserContents(){
  const id=tab==='home'?homeSession().plan?.id:activeWorkoutId(),mine=chooserCategory==='mine',saved=cleanCustomWorkouts(state.customWorkouts),cat=mine?{id:'mine',label:'Saved workouts'}:visibleWorkoutCategories().find(c=>c.id===chooserCategory),plans=mine?saved:cat?filterWorkoutPrograms(categoryPrograms(cat.id)):[];
@@ -11717,7 +11720,7 @@ function chooserContents(){
  '<div class="chooser-focus-tools"><div class="chooser-shortcuts"><button type="button" data-action="create-my-workout" class="chooser-create"><span class="chooser-create-anatomy">'+workoutAnatomy({primary:[],supporting:[]})+'</span><span><strong>Create your own</strong></span><b aria-hidden="true">+</b></button>'+savedWorkoutShortcut(saved,id)+'</div>'+workoutSettingMarkup('data-chooser-workout-setting')+workoutFilterMarkup()+'</div><div class="category-grid">'+visibleWorkoutCategories().map(c=>{
  const selected=(id==='full-body'?'Full Body':planWorkout(id)?.category)===c.id;
  const count=filterWorkoutPrograms(categoryPrograms(c.id)).length;
- return '<button type="button" class="category-tile '+(selected?'is-selected':'')+'" data-workout-category="'+c.id+'" aria-label="Explore '+c.label+' workouts"><span class="category-copy"><strong>'+c.label+'</strong><small>'+c.description+'</small><b>'+count+' program'+(count===1?'':'s')+'</b></span><span class="category-photo">'+workoutCategoryCover(c.id)+(selected?'<span class="workout-cover-check" aria-hidden="true">✓</span>':'')+'</span><span class="category-arrow" aria-hidden="true">›</span></button>'
+ return workoutCategoryTile(c,count,selected)
  }).join('')+'</div>')+'</div>'
 }
 function workoutChooser(){return '<dialog id="workout-chooser" aria-labelledby="workout-chooser-title">'+chooserContents()+'</dialog>'}
@@ -13048,7 +13051,7 @@ function plannerWorkoutTrigger(id,w){return '<button type="button" id="planned-w
 function plannerMealSlot(slot,day){const index=day[slot],r=plannedRecipe(index),n=r?plannedMealNutrition(index,planPortion(day,slot)):null;return '<div class="planner-meal day-plan-card"><button type="button" id="planner-'+slot+'" class="plan-photo-trigger meal-plan-trigger" style="--slot-photo:url(&quot;'+safe(r?(r.photo||(index<6?'./meal-images/meal-'+index+'.jpg':'./home-images/nutrition.jpg')):'./home-images/nutrition.jpg')+'&quot;)" data-open-meal-picker="'+slot+'" aria-haspopup="dialog" aria-controls="planner-picker">'+(r?mealPhoto(index):'<span class="plan-trigger-icon" aria-hidden="true">+</span>')+'<span><small class="day-item-label">'+safe(planSlotLabel(slot,day))+'</small><strong>'+(r?safe(r.name):'Add '+safe(planSlotLabel(slot,day)))+'</strong>'+(r?'<small class="day-item-calories">'+n[0]+' kcal total · '+planPortion(day,slot)+(planPortion(day,slot)===1?' serving':' servings')+'</small>':'')+'</span><b>'+(r?'Change':'Add')+' <span aria-hidden="true">›</span></b></button></div>'}
 
 function plannerPickerItems(){return [...featuredWorkoutChoices(),...readySavedWorkouts()]}
-function openPlannerPicker(kind,slot){if((tab!=='planner'&&!(tab==='preview'&&kind==='workout'&&validPlanDate(previewWorkoutDate)))||kind!=='workout'&&kind!=='meal'||kind==='meal'&&!validMealSlot(slot))return;const dialog=document.getElementById('planner-picker');if(!dialog)return;planPicker={kind,slot:slot||null,date:tab==='preview'?previewWorkoutDate:planSettings().date,origin:tab,category:null,query:'',level:'all',mealFilter:validExtraSlot(slot)?'all':slot||'all',opener:tab==='preview'?'preview-change-workout':kind==='workout'?'planned-workout':'planner-'+slot};dialog.innerHTML='<div class="plan-picker-head" style="--picker-photo:url(&quot;'+(kind==='meal'?'./home-images/nutrition.jpg':'./home-images/planning.jpg')+'&quot;)"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><small>'+safe(planDayLabel(planPicker.date))+' · '+(kind==='workout'?'WORKOUT':safe(planSlotLabel(slot,plannedMeals()[planSettings().date])).toUpperCase())+'</small><h2 id="planner-picker-title">'+(kind==='workout'?'Find your workout':'Choose '+safe(planSlotLabel(slot,plannedMeals()[planSettings().date])))+'</h2></div><button type="button" data-plan-picker-action="close" aria-label="Close planner picker" autofocus>×</button></div><p>'+(kind==='workout'?'Explore a focus, check the level, then add a session.':'Nutrition is shown per serving. Adjust your portion after adding.')+'</p><label class="picker-search-label" for="planner-picker-search">'+(kind==='workout'?'Search workouts':'Search recipes or ingredients')+'</label><input id="planner-picker-search" type="search" placeholder="'+(kind==='workout'?'Search workouts or equipment…':'Search recipes or ingredients…')+'"><div class="plan-picker-filters" role="group" aria-label="'+(kind==='workout'?'Experience level':'Meal type')+'">'+(kind==='workout'?['all','Beginner','Intermediate','Advanced'].map(level=>'<button type="button" data-plan-picker-level="'+level+'" aria-pressed="'+(level==='all')+'">'+(level==='all'?'All levels':level)+'</button>').join(''):['all','breakfast','lunch','dinner','mine'].map(filter=>'<button type="button" data-plan-picker-filter="'+filter+'" aria-pressed="'+(filter===slot)+'">'+(filter==='mine'?'My meals':filter[0].toUpperCase()+filter.slice(1))+'</button>').join(''))+'</div>'+(kind==='workout'?workoutMuscleLegend():'')+(kind==='meal'?'<button type="button" class="planner-scan-meal" data-plan-picker-action="scan-meal">Scan food barcode</button>':'')+'</div><div id="planner-picker-body" class="plan-picker-body"></div>';filterPlannerPicker();dialog.showModal()}
+function openPlannerPicker(kind,slot){if((tab!=='planner'&&!(tab==='preview'&&kind==='workout'&&validPlanDate(previewWorkoutDate)))||kind!=='workout'&&kind!=='meal'||kind==='meal'&&!validMealSlot(slot))return;const dialog=document.getElementById('planner-picker');if(!dialog)return;dialog.classList?.toggle('plan-workout-chooser',kind==='workout');planPicker={kind,slot:slot||null,date:tab==='preview'?previewWorkoutDate:planSettings().date,origin:tab,category:null,query:'',level:'all',mealFilter:validExtraSlot(slot)?'all':slot||'all',opener:tab==='preview'?'preview-change-workout':kind==='workout'?'planned-workout':'planner-'+slot};dialog.innerHTML='<div class="plan-picker-head" style="--picker-photo:url(&quot;'+(kind==='meal'?'./home-images/nutrition.jpg':'./home-images/planning.jpg')+'&quot;)"><span class="chooser-grip" aria-hidden="true"></span><div class="row"><div><small>'+safe(planDayLabel(planPicker.date))+' · '+(kind==='workout'?'WORKOUT':safe(planSlotLabel(slot,plannedMeals()[planSettings().date])).toUpperCase())+'</small><h2 id="planner-picker-title">'+(kind==='workout'?'Find your workout':'Choose '+safe(planSlotLabel(slot,plannedMeals()[planSettings().date])))+'</h2></div><button type="button" data-plan-picker-action="close" aria-label="Close planner picker" autofocus>×</button></div><p>'+(kind==='workout'?'Explore a focus, check the level, then add a session.':'Nutrition is shown per serving. Adjust your portion after adding.')+'</p><label class="picker-search-label" for="planner-picker-search">'+(kind==='workout'?'Search workouts':'Search recipes or ingredients')+'</label><input id="planner-picker-search" type="search" placeholder="'+(kind==='workout'?'Search workouts or equipment…':'Search recipes or ingredients…')+'"><div class="plan-picker-filters" role="group" aria-label="'+(kind==='workout'?'Experience level':'Meal type')+'">'+(kind==='workout'?['all','Beginner','Intermediate','Advanced'].map(level=>'<button type="button" data-plan-picker-level="'+level+'" aria-pressed="'+(level==='all')+'">'+(level==='all'?'All levels':level)+'</button>').join(''):['all','breakfast','lunch','dinner','mine'].map(filter=>'<button type="button" data-plan-picker-filter="'+filter+'" aria-pressed="'+(filter===slot)+'">'+(filter==='mine'?'My meals':filter[0].toUpperCase()+filter.slice(1))+'</button>').join(''))+'</div>'+(kind==='workout'?workoutMuscleLegend():'')+(kind==='meal'?'<button type="button" class="planner-scan-meal" data-plan-picker-action="scan-meal">Scan food barcode</button>':'')+'</div><div id="planner-picker-body" class="plan-picker-body"></div>';filterPlannerPicker();dialog.showModal()}
 function pickerWorkoutMatches(){if(!planPicker)return [];const q=planPicker.query.trim().toLowerCase();return plannerPickerItems().filter(w=>(!planPicker.category||(planPicker.category==='mine'?w.id.startsWith('custom-'):w.category===planPicker.category))&&(planPicker.level==='all'||(w.level||'Beginner')===planPicker.level)&&[w.id,w.title,w.programName,w.summary,w.equipment,w.level,...w.exercises.map(x=>x.name)].join(' ').toLowerCase().includes(q))}
 function plannerSavedMealsShortcut(){const saved=availableCustomFoods(),photo=saved[0]?customFoodImage(saved[0]):'./home-images/nutrition.jpg';return '<button type="button" class="saved-meals-shortcut" data-plan-picker-filter="mine" aria-label="Choose from my saved meals"><img src="'+safe(photo)+'" alt=""><span><strong>My meals <b>'+saved.length+'</b></strong><small>Your custom meals &amp; photos</small></span><b aria-hidden="true">›</b></button>'}
 function startPlannerCustomMeal(scan=false){if(!planPicker||planPicker.kind!=='meal'||planPicker.date!==planSettings().date)return false;const placement={date:planPicker.date,slot:planPicker.slot,mealFilter:scan?planPicker.mealFilter:'mine',query:scan?planPicker.query:'',diaryIngredients:ingredientRows};closePlannerPicker(false);customMealPlanContext=placement;ingredientRows=[];tab='custom-food';render();window.scrollTo(0,0);
@@ -13059,9 +13062,9 @@ function returnPlannerCustomMeal(){const placement=customMealPlanContext;if(!pla
 function decoratePlannerCustomMeal(){const c=customMealPlanContext;if(!c||!screen.querySelector)return;for(const selector of ['.recipe-log-picker','.custom-food-saved']){const e=screen.querySelector(selector);if(e)e.hidden=true}const hero=screen.querySelector('.custom-food-hero');if(hero){hero.querySelector('h2').textContent='Create your meal';hero.querySelector('p').textContent='Add a photo and your nutrition per serving.'}const manual=screen.querySelector('.manual-food-entry');if(manual){manual.open=true;manual.querySelector('summary').hidden=true}const form=screen.querySelector('#custom-food-form');if(!form)return;form.querySelector('h3').textContent='Your custom meal';const notes=form.querySelectorAll('p.note');if(notes[0])notes[0].textContent='Planning '+c.slot+' · '+planDayLabel(c.date)+'. Saving does not log food as eaten.';if(notes[1])notes[1].textContent='Enter nutrition for one serving.';form.querySelector('[data-save-custom-only]').hidden=true;const primary=form.querySelector('.custom-food-submit');primary.textContent='Save to '+c.slot+' →';primary.setAttribute('data-save-custom-only','');form.querySelector('.custom-food-remember').hidden=true;for(const b of screen.querySelectorAll('[data-go="eat"]')){b.removeAttribute('data-go');b.setAttribute('data-return-custom-plan','');if(b.classList.contains('back-link'))b.textContent='← Back to meal selection'}}
 document.addEventListener('click',e=>{if(e.target.closest('[data-return-custom-plan]'))returnPlannerCustomMeal()});
 function pickerMealMatches(){if(!planPicker)return [];const q=planPicker.query.trim().toLowerCase();return [...availableCustomFoods().map(f=>({r:plannedRecipe(f.id),i:f.id})),...recipes.map((r,i)=>({r,i}))].filter(({r,i})=>(planPicker.mealFilter==='mine'?r.custom:(r.custom||planPicker.mealFilter==='all'||recipeCategory(i)===planPicker.mealFilter))&&[r.name,...r.ingredients.map(x=>x[0])].join(' ').toLowerCase().includes(q))}
-function filterPlannerPicker(){if(!planPicker)return;const body=document.getElementById('planner-picker-body');if(!body)return;const c=planPicker,selected=state.workoutSchedule?.[c.date]||'';
+function filterPlannerPicker(){if(!planPicker)return;const body=document.getElementById('planner-picker-body');if(!body)return;const c=planPicker,selected=c.extraSlot?dayExtraWorkouts(c.date).find(x=>x.slot===c.extraSlot)?.workoutId||'':state.workoutSchedule?.[c.date]||'';
  document.querySelectorAll('[data-plan-picker-level]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.planPickerLevel===c.level)));document.querySelectorAll('[data-plan-picker-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.planPickerFilter===c.mealFilter)));
- if(c.kind==='workout'){const matches=pickerWorkoutMatches(),overview=!c.category&&!c.query.trim();body.innerHTML=workoutSettingMarkup('data-plan-workout-setting')+(c.origin==='preview'?'':'<div class="picker-day-actions"><button data-plan-picker-action="rest" aria-pressed="'+(selected==='rest')+'">○ Rest day</button>'+(selected?'<button data-plan-picker-action="clear">Remove workout</button>':'')+'</div>')+(overview?'<div class="picker-list-heading"><h3>Choose your focus</h3><small>'+matches.length+' sessions</small></div><div class="plan-picker-categories">'+(c.origin==='preview'?'':ownWorkoutTile(true))+visibleWorkoutCategories().map(cat=>{const count=matches.filter(w=>w.category===cat.id).length;return '<button data-plan-picker-category="'+cat.id+'">'+hybridWorkoutCover(cat.id)+'<strong>'+safe(cat.label)+'</strong><small>'+count+' '+(count===1?'session':'sessions')+'</small></button>'}).join('')+'</div>'+(cleanCustomWorkouts(state.customWorkouts).length?'<button class="picker-mine" data-plan-picker-category="mine">My workouts <span>'+cleanCustomWorkouts(state.customWorkouts).length+' saved →</span></button>':''):'<button class="picker-back" data-plan-picker-action="categories">← All workout categories</button><div class="picker-list-heading"><h3>'+safe(c.category==='mine'?'My workouts':workoutCategories.find(x=>x.id===c.category)?.label||'Search results')+'</h3><small>'+matches.length+' sessions</small></div><div class="picker-workout-list">'+matches.map(w=>'<article class="picker-workout"><button class="picker-choice" data-plan-pick-workout="'+safe(w.id)+'" aria-label="Plan '+safe(w.programName||w.title)+' for '+safe(planDayLabel(c.date))+'" aria-pressed="'+(selected===w.id)+'">'+hybridWorkoutCover(w,w.exercises)+'<span><strong>'+safe(w.programName||w.title)+'</strong>'+workoutBadges(w)+'<small>'+w.exercises.filter(x=>!/Warm-up|Cooldown/.test(x.name)).length+' exercises · '+safe(w.minutes||'30–45')+' min</small><small>'+safe(w.equipment)+'</small></span><b aria-hidden="true">'+(selected===w.id?'✓':'+')+'</b></button><details class="picker-exercises"><summary>See exercises</summary><ol>'+w.exercises.map(exercise=>workoutPreviewExercise(exercise,w.id)).join('')+'</ol></details></article>').join('')+'</div>'+(!matches.length?'<div class="picker-empty"><h3>No matching workouts</h3><p>Try another level, focus or search.</p><button data-plan-picker-action="reset">Reset filters</button></div>':''))}
+ if(c.kind==='workout'){const matches=pickerWorkoutMatches(),overview=!c.category&&!c.query.trim();body.innerHTML=workoutSettingMarkup('data-plan-workout-setting')+(c.origin==='preview'?'':'<div class="picker-day-actions"><button data-plan-picker-action="rest" aria-pressed="'+(selected==='rest')+'">○ Rest day</button>'+(selected?'<button data-plan-picker-action="clear">Remove workout</button>':'')+'</div>')+(overview?'<div class="picker-list-heading"><h3>Choose your focus</h3><small>'+matches.length+' sessions</small></div>'+(c.origin==='preview'?'':ownWorkoutTile(true))+'<div class="chooser-focus-body"><div class="category-grid">'+visibleWorkoutCategories().map(cat=>workoutCategoryTile(cat,matches.filter(w=>w.category===cat.id).length,planWorkout(selected)?.category===cat.id,true)).join('')+'</div></div>'+(cleanCustomWorkouts(state.customWorkouts).length?'<button class="picker-mine" data-plan-picker-category="mine">My workouts <span>'+cleanCustomWorkouts(state.customWorkouts).length+' saved →</span></button>':''):'<button class="picker-back" data-plan-picker-action="categories">← All workout categories</button><div class="picker-list-heading"><h3>'+safe(c.category==='mine'?'My workouts':workoutCategories.find(x=>x.id===c.category)?.label||'Search results')+'</h3><small>'+matches.length+' sessions</small></div><div class="program-list">'+matches.map(w=>workoutProgramCard(w,selected===w.id,c.date)).join('')+'</div>'+(!matches.length?'<div class="picker-empty"><h3>No matching workouts</h3><p>Try another level, focus or search.</p><button data-plan-picker-action="reset">Reset filters</button></div>':''))}
  else{const matches=pickerMealMatches(),day=plannedMeals()[c.date]||{},mine=c.mealFilter==='mine';body.innerHTML=(mine?'<button type="button" class="picker-back" data-plan-picker-filter="all">← All recipes</button>':plannerSavedMealsShortcut())+'<div class="picker-list-heading"><h3>'+matches.length+(mine?' saved meals':' recipes')+'</h3>'+(plannedRecipe(day[c.slot])?'<button data-plan-picker-action="clear">Remove meal</button>':'')+'</div>'+(mine?'<button type="button" class="planner-create-meal" data-plan-picker-action="create-meal">＋ Create custom meal</button>':'')+'<div class="picker-meal-list">'+matches.map(({r,i})=>{const n=plannedMealNutrition(i);return '<button class="picker-choice picker-meal-choice" data-plan-pick-meal="'+i+'" aria-pressed="'+(day[c.slot]===i)+'">'+mealPhoto(i)+'<span><strong>'+safe(r.name)+'</strong><small>'+n[0]+' kcal / serving'+(r.minutes?' · '+r.minutes+' min':'')+'</small><span class="meal-macro-pills"><em>P '+n[1]+'g</em><em>C '+n[2]+'g</em><em>F '+n[3]+'g</em></span>'+(day[c.slot]===i?'<small class="picker-current">Planned · '+planPortion(day,c.slot)+' × serving</small>':'')+'</span><b aria-hidden="true">'+(day[c.slot]===i?'✓':'+')+'</b></button>'}).join('')+'</div>'+(!matches.length?(mine?'<div class="picker-empty"><h3>No saved meals yet</h3><p>Create your own meal with a photo and nutrition for one serving.</p></div>':'<div class="picker-empty"><h3>No recipes found</h3><p>Try a different ingredient or meal type.</p><button data-plan-picker-action="reset">Show all recipes</button></div>'):'')}
  body.scrollTop=0
 }
@@ -15000,8 +15003,8 @@ body[data-view] .own-saved-workout .personal-photo-preview img{width:100%;height
 
 <style id="saved-chooser-readability">
 #workout-chooser .chooser-saved-view .chooser-back{color:#a7e8bf!important;background:transparent!important;border:0}
-#workout-chooser .chooser-saved-view :is(.program-meta,.program-copy>small,.program-copy>p,.program-preview>summary){color:#c6ddce!important}
-#workout-chooser .chooser-saved-view .program-preview{border-color:#6c927755}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .chooser-saved-view :is(.program-meta,.program-copy>small,.program-copy>p,.program-preview>summary){color:#c6ddce!important}
+:is(#workout-chooser,#planner-picker.plan-workout-chooser) .chooser-saved-view .program-preview{border-color:#6c927755}
 </style>
 
 <style id="my-meals-picker-harmony">
@@ -15271,8 +15274,8 @@ html[data-app-custom] body[data-view] #screen :is(.primary,button.primary) :is(s
 
 </style>
 <style id="review-clarity-polish">
-body[data-view] #workout-chooser :is(.category-copy b,.program-meta,.chooser-back,.program-preview summary){color:var(--ui-muted,#c2ddcd)!important}
-body[data-view] #workout-chooser .category-copy b{font-size:12px;line-height:1.45}
+body[data-view] :is(#workout-chooser,#planner-picker.plan-workout-chooser) :is(.category-copy b,.program-meta,.chooser-back,.program-preview summary){color:var(--ui-muted,#c2ddcd)!important}
+body[data-view] :is(#workout-chooser,#planner-picker.plan-workout-chooser) .category-copy b{font-size:12px;line-height:1.45}
 body[data-view] #workout-chooser :is(.chooser-section-title,.chooser-section-title span){color:var(--ui-muted,#c2ddcd)!important}
 body[data-view] .trend-period-context{margin:8px 0 14px;padding:9px 12px;border-radius:12px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5)!important;font-size:12px;line-height:1.5;text-align:center}
 body[data-view=eat] #recipe-show-more{display:block;width:100%;min-height:44px;margin:14px 0 18px;background:var(--ui-field,#234b38);color:var(--ui-text,#f1fff5)!important;border:1px solid var(--ui-border,#658670)}

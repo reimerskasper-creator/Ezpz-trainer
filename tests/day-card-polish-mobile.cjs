@@ -14,7 +14,7 @@ await page.locator('#planned-workout').click();
 assert(await page.locator('#planner-picker .own-category-tile .own-anatomy-cover .recap-anatomy').isVisible());
 await page.locator('[data-plan-picker-category="Leg"]').click();
 const legs=page.locator('[data-plan-pick-workout="guided-gym-legs-a"]');
-const pickerCover=await legs.locator('.hybrid-workout-cover').innerHTML();
+const pickerCover=await page.locator('.program-card').filter({has:legs}).locator('.program-photo .hybrid-workout-cover').innerHTML();
 await legs.click();
 assert.equal(await page.locator('#planned-workout .hybrid-workout-cover').innerHTML(),pickerCover);
 await page.locator('[data-flex-add]').click();

@@ -77,14 +77,15 @@ async function verify(){
   await page.locator('[data-open-plan-picker="workout"]').click();
   const plannerPicker=page.locator('#planner-picker');
   const pullCover=plannerPicker.locator('[data-plan-picker-category="Pull"]');
-  assert(await pullCover.locator('.anatomy-studio-cover').isVisible());
+  assert(await pullCover.locator('.category-anatomy-panel').isVisible());
   assert.equal(await pullCover.locator('img').count(),0);
   assert(await pullCover.locator('.recap-anatomy').isVisible());
   await pullCover.click();
   for(const level of ['Intermediate','Advanced']){
    await plannerPicker.locator('[data-plan-picker-level="'+level+'"]').click();
-   assert.equal(await plannerPicker.locator('.picker-workout').count(),1);
-   assert(await plannerPicker.locator('.picker-choice .anatomy-primary').first().isVisible());
+   assert.equal(await plannerPicker.locator('.program-card').count(),1);
+   assert(await plannerPicker.locator('.program-heading + .program-photo + .program-exercise-grid').isVisible());
+   assert(await plannerPicker.locator('.program-photo .anatomy-primary').first().isVisible());
   }
   await plannerPicker.locator('[data-plan-picker-action="close"]').click();
   await page.evaluate(()=>{tab='home';render()});
