@@ -118,7 +118,7 @@
   d._discard=()=>{if(!confirm('Discard changes to this plan?'))return;library(document.querySelector('[data-plan-manage=library]')||trigger)};
   const daySelect=d.querySelector('[data-draft-day]'),content=d.querySelector('[data-draft-content]');
   const savedWorkouts=readySavedWorkouts().map(w=>[w.id,workoutTitle(w),w.equipment]);
-  const savedMeals=cleanCustomFoods(state.customFoods).map(f=>[f.id,f.name]);
+  const savedMeals=cleanCustomFoods(state.customFoods).filter(f=>!f.archived).map(f=>[f.id,f.name]);
   const portionControl=(value,slot='')=>'<div class="plan-portion" role="group" aria-label="Portions" data-portion-slot="'+safe(slot)+'"><button type="button" data-portion-step="-0.5" aria-label="Decrease portions" '+(value<=.5?'disabled':'')+'>−</button><output aria-live="polite">'+value+'</output><button type="button" data-portion-step="0.5" aria-label="Increase portions" '+(value>=3?'disabled':'')+'>+</button></div>';
   function changePortion(button){
    const control=button.closest('.plan-portion'),output=control.querySelector('output');

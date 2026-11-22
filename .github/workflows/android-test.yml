@@ -57,6 +57,7 @@ jobs:
           node tests/workout-photos.cjs
           diff -qr fitness-app/exercise-videos native/www/fitness-app/exercise-videos
           node tests/nutrition-targets.cjs
+          node tests/saved-food-library-mobile.cjs
           node tests/workout-media-rule-mobile.cjs
           node tests/plan-library.cjs
           node tests/clear-plan-mobile.cjs

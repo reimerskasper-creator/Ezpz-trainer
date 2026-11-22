@@ -24,7 +24,7 @@
   if(!items.some(x=>x.id===item)){notice(box,'This item is no longer available.');return false}
   state[key]=items.map(x=>x.id===item?{...x,photoId:id}:x);
   if(!save()){state[key]=before;notice(box,'Photo was not saved. Your previous photo is kept.');return false}
-  if(kind==='saved-food'){customFoodPage();document.querySelector('.custom-food-saved').open=true;if(typeof foodFlowTab==='function')foodFlowTab('saved')}else{
+  if(kind==='saved-food'){refreshQuickMeals()}else{
    box.closest('#own-workout-dialog')?.close();
    refreshOwnWorkoutList(!!document.getElementById('workout-chooser')?.open);
   }return true;

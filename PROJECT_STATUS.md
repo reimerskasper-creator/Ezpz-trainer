@@ -1,3 +1,8 @@
+## Android 1.0.190 — Saved foods and meals
+
+- Android branch `android-health-connect`, based on `5003590`. Eat and Add Food share Saved, Favorites, and Recent. Foods, meals, and recipes can be starred. Archive preserves existing schedules and history. Planned days lets users remove selected servings. Permanent removal is available from Archived once the active schedule no longer uses the item.
+- Focused coverage exercises small layouts and theme accents, favorites, archive and restore, plan protection, selected servings, permanent deletion and retained diary history. Delivery uses the existing Android signing workflow.
+
 ## Android 1.0.189 — EZPZ branding
 
 - Android branch `android-health-connect`, based on `7d28080` and its signed 1.0.188 APK. The existing setup banner shows the brand statement and all four pillar symbols. Today's Overview opens the revised Method guide with a static connected ring and three habits principles.
