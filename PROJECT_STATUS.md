@@ -1,3 +1,8 @@
+## Android 1.0.195 — custom exercise photos
+
+- Custom workout builder explains manual exercise names and offers a camera icon with camera and gallery choices. Cropped exercise photos use the existing Trainer media and backup path when the workout is saved.
+- Trainer and workout source checks cover photo persistence and removal. Signed Android delivery uses the existing workflow.
+
 ## Android 1.0.193 — workout picker presentation
 
 - Android branch `android-health-connect`, based on `32d1bb6`. The workout category anatomy blends into the banner, and each program shows its identifying details before the cover and exercise grid. Existing workout selection actions remain intact.

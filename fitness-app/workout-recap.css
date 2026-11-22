@@ -420,3 +420,31 @@ body[data-view] #builder-exercise-picker [data-builder-muscle="all"]{margin-top:
 #planner-picker.plan-workout-chooser .own-category-tile>strong{align-self:end;color:inherit!important}
 #planner-picker.plan-workout-chooser .own-category-tile>small{grid-column:2;align-self:start;color:inherit}
 #planner-picker.plan-workout-chooser .own-category-tile>b{grid-column:3;grid-row:1/3}
+
+#workout-builder .builder-custom-label{font-size:12px;margin:10px 0;color:inherit}
+#workout-builder .builder-exercise-photo{
+ display:grid;grid-template-columns:68px minmax(0,1fr);gap:8px;align-items:center;
+ border:0;background:none;margin:10px 0;padding:0;font-size:12px;
+}
+#workout-builder .builder-exercise-photo[hidden],.exercise-photo-sheet [hidden]{display:none!important}
+#workout-builder .builder-exercise-camera{
+ display:grid;place-items:center;position:relative;width:68px;aspect-ratio:1;
+ min-height:44px;padding:0;overflow:hidden;border:1px solid #87a993;border-radius:12px;color:inherit;
+}
+.builder-exercise-camera .personal-photo-preview{position:absolute;inset:0}
+.builder-exercise-camera .personal-photo-preview img{height:100%;width:100%;object-fit:cover;margin:0;border-radius:0}
+.builder-camera-icon{
+ z-index:1;display:grid;place-items:center;width:34px;height:34px;
+ border:1px solid #a6d9bf;border-radius:50%;background:#123d30;color:#eafff0;
+}
+.builder-camera-icon svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round}
+.builder-exercise-camera:has(img) .builder-camera-icon{position:absolute;right:3px;bottom:3px;width:26px;height:26px}
+.builder-exercise-camera:has(img) svg{width:16px;height:16px}
+.builder-exercise-photo .personal-photo-status{grid-column:1/-1}
+.exercise-photo-sheet{
+ position:fixed;inset:auto 0 0;margin:0 auto;width:min(100%,450px);max-width:100%;
+ padding:16px 16px max(16px,env(safe-area-inset-bottom));border:1px solid #749b83;
+ border-radius:22px 22px 0 0;background:#173e30;color:#effaf2;
+}
+.exercise-photo-sheet::backdrop{background:#061d16bd}
+.exercise-photo-sheet .personal-photo-actions{display:grid;grid-template-columns:minmax(0,1fr)}

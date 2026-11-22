@@ -19,6 +19,16 @@
    builderDraft={...captureBuilder(),photoId:id};refresh(box,id);
    updateBuilderWorkoutCover(builderDraft);return true;
   }
+  if(kind==='builder-exercise'){
+   const draft=captureBuilder(),index=Number(item),exercise=draft?.exercises[index];
+   if(!exercise)return false;
+   exercise.builderPhotoId=id;
+   builderDraft=draft;
+   refresh(box,id);
+   box.querySelector('[data-remove-personal-photo]').hidden=!id;
+   refreshBuilderExerciseThumbnail(box.closest('.builder-exercise'),exercise);
+   return true;
+  }
   if(kind==='food'){box.closest('form').elements.namedItem('photoId').value=id;refresh(box,id);return true}
   const key=kind==='saved-food'?'customFoods':'customWorkouts',before=state[key],items=kind==='saved-food'?cleanCustomFoods(before):cleanCustomWorkouts(before);
   if(!items.some(x=>x.id===item)){notice(box,'This item is no longer available.');return false}
@@ -32,12 +42,13 @@
  async function choose(input){
   const box=input.closest('.personal-photo-controls'),file=input.files?.[0];input.value='';if(!file)return;
   if(!file.type.startsWith('image/')||file.type==='image/svg+xml'||file.size>20*1024*1024){notice(box,'Choose a photo up to 20 MB (JPEG, PNG or WebP).');return}
+  box.querySelector('.exercise-photo-sheet')?.close();
   close();const token=++request,url=URL.createObjectURL(file),img=new Image();notice(box,'Opening your photo…');
   try{await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=reject;img.src=url});if(token!==request||!box.isConnected){URL.revokeObjectURL(url);return}if(img.naturalWidth*img.naturalHeight>50000000)throw Error('large');
    const dialog=document.createElement('dialog');dialog.className='personal-photo-dialog';dialog.setAttribute('aria-labelledby','personal-photo-title');
    dialog.innerHTML='<div class="personal-photo-heading"><h2 id="personal-photo-title">Make it yours</h2><button type="button" data-photo-cancel aria-label="Cancel photo">×</button></div><p>Move and zoom to fit your card.</p><canvas width="720" height="480" aria-label="Preview of your cropped photo"></canvas><label for="photo-zoom">Zoom<input id="photo-zoom" type="range" min="1" max="3" step="0.05" value="1"></label><label for="photo-x">Move left / right<input id="photo-x" type="range" min="0" max="100" value="50"></label><label for="photo-y">Move up / down<input id="photo-y" type="range" min="0" max="100" value="50"></label><p class="personal-crop-status" role="status"></p><div class="personal-photo-actions"><button type="button" data-photo-cancel>Cancel</button><button type="button" class="primary" data-photo-apply>Use photo</button></div>';
    if(box.dataset.photoKind==='home'){dialog.querySelector('canvas').width=640;dialog.querySelector('canvas').height=800}
-   document.body.append(dialog);active={dialog,url,opener:input};const canvas=dialog.querySelector('canvas'),ctx=canvas.getContext('2d');
+   document.body.append(dialog);active={dialog,url,opener:box.querySelector('[data-exercise-photo-open]')||input};const canvas=dialog.querySelector('canvas'),ctx=canvas.getContext('2d');
    function draw(){const zoom=Number(dialog.querySelector('#photo-zoom').value),x=Number(dialog.querySelector('#photo-x').value)/100,y=Number(dialog.querySelector('#photo-y').value)/100,scale=Math.max(canvas.width/img.naturalWidth,canvas.height/img.naturalHeight)*zoom,w=canvas.width/scale,h=canvas.height/scale;ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,(img.naturalWidth-w)*x,(img.naturalHeight-h)*y,w,h,0,0,canvas.width,canvas.height)}
    draw();dialog.addEventListener('input',draw);dialog.addEventListener('cancel',e=>{e.preventDefault();close()});dialog.addEventListener('click',e=>{
     if(e.target.closest('[data-photo-cancel]')){close();return}
@@ -54,5 +65,17 @@
   }catch{URL.revokeObjectURL(url);notice(box,'This photo could not be opened. Try a JPEG, PNG or WebP photo.');}
  }
  document.addEventListener('change',e=>{if(e.target.matches('[data-personal-photo-input]'))choose(e.target)});
- document.addEventListener('click',e=>{const button=e.target.closest('[data-remove-personal-photo]');if(button){const box=button.closest('.personal-photo-controls');if(apply(box,''))notice(box,box.dataset.photoKind==='scanned-food'?'':'Default photo selected.')}});
+ document.addEventListener('click',e=>{
+  const open=e.target.closest('[data-exercise-photo-open]'),closeSheet=e.target.closest('[data-exercise-photo-close]');
+  if(open){open.closest('.personal-photo-controls').querySelector('.exercise-photo-sheet').showModal();return}
+  if(closeSheet){closeSheet.closest('dialog').close();return}
+  const button=e.target.closest('[data-remove-personal-photo]');
+  if(button){
+   const box=button.closest('.personal-photo-controls');
+   if(apply(box,'')){
+    box.querySelector('.exercise-photo-sheet')?.close();
+    notice(box,box.dataset.photoKind==='builder-exercise'?'Photo removed.':box.dataset.photoKind==='scanned-food'?'':'Default photo selected.');
+   }
+  }
+ });
 })();
