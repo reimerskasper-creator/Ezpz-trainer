@@ -81,8 +81,24 @@ async function verify(){
   const result=await page.evaluate(()=>({id:state.selectedWorkout,workouts:state.customWorkouts,schedule:state.workoutSchedule,drafts:state.workoutDrafts,media:state.trainerMedia}));
   assert.deepEqual(result,{id:undefined,workouts:[],schedule:{},drafts:{},media:{}});
   assert.equal(await page.evaluate(()=>JSON.stringify([state.profile,state.logs,state.mealPlan,state.foodLog])),other);
+  await page.evaluate(()=>{
+   const id='guided-gym-push-d';
+   state.selectedWorkout=id;
+   state.homeWorkoutChoice={id,date:foodDate()};
+   state.workoutDrafts={[id]:{'sr0-0':'8'}};
+   save();
+  });
   await page.reload();
   assert(await page.locator('.home-workout-empty').isVisible());
+  assert.equal(await page.evaluate(()=>activeWorkoutId()),'ezpz-workout');
+  assert.equal(await page.evaluate(()=>state.workoutDrafts['guided-gym-push-d']['sr0-0']),'8');
+  await page.evaluate(()=>{
+   const date=foodDate(),id='guided-gym-push-d';
+   state.workoutSchedule={[date]:id};
+   state.activePlanDate=date;
+   if(homeSession().plan?.id!==id||activeWorkoutId()!==id)throw Error('Scheduled legacy workout lost');
+   state.workoutSchedule={};delete state.activePlanDate;
+  });
   assert.equal(await page.locator('#home-workouts-content .upcoming-row').count(),0);
   await page.evaluate(()=>{tab='planner';render()});
   await page.locator('[data-open-plan-picker="workout"]').click();
@@ -108,7 +124,7 @@ async function verify(){
   await swapDialog.getByRole('searchbox').fill('Dead Bug Heel Taps');
   await swapDialog.locator('[data-exercise-name="Dead Bug Heel Taps"]').click();
   assert((await page.getByRole('heading',{name:'Dead Bug Heel Taps',exact:true}).innerText()).includes('Dead Bug Heel Taps'));
-  await page.evaluate(()=>{state.selectedWorkout='guided-home-legs-a';tab='train';render();focusTrainingExercise(3)});
+  await page.evaluate(()=>{state.selectedWorkout='guided-home-legs-a';state.activePlanDate=foodDate();state.workoutSchedule={[foodDate()]:state.selectedWorkout};tab='train';render();focusTrainingExercise(3)});
   await page.locator('.trainer-photo-swap[data-compact-swap="3"]').click();
   const calfSwap=page.locator('#trainer-swap-3');
   await calfSwap.getByRole('searchbox').fill('Seated Calf Raise');
@@ -132,14 +148,14 @@ async function verify(){
   assert((await page.locator('.home-workout').innerText()).includes('Make room for recovery'));
   await page.evaluate(()=>{
    state.workoutSchedule={};
-   state.selectedWorkout='guided-home-legs-a';
-   state.workoutDrafts={'guided-home-legs-a':{'sr0-0':'8'}};
+   state.selectedWorkout='ezpz-workout';
+   state.workoutDrafts={'ezpz-workout':{'sr0-0':'8'}};
    render();
   });
   assert(await page.locator('.overview-actions').getByRole('button',{name:'Resume workout'}).isVisible());
   await page.evaluate(()=>{
    state.workoutDrafts={};state.workoutSchedule={};
-   state.selectedWorkout='guided-home-full-body-a';
+   state.selectedWorkout='ezpz-workout';
    state.homeWorkoutChoice={id:state.selectedWorkout,date:foodDate()};
    state.homePanels={...state.homePanels,todayWorkout:true};
    tab='home';render();
@@ -180,7 +196,7 @@ async function verify(){
   for(const appearance of [{mode:'dark',accent:'emerald'},{mode:'light',accent:'emerald'},{mode:'dark',accent:'lavender'}]){
    await page.evaluate(theme=>{
     state.appAppearance=theme;
-    state.selectedWorkout='guided-gym-legs-a';tab='train';render();focusTrainingExercise(4);
+    state.selectedWorkout='guided-gym-legs-a';state.activePlanDate=foodDate();state.workoutSchedule={[foodDate()]:state.selectedWorkout};tab='train';render();focusTrainingExercise(4);
    },appearance);
    await page.locator('.trainer-photo-swap[data-compact-swap="4"]').click();
    const trainerPicker=page.locator('#trainer-swap-4');

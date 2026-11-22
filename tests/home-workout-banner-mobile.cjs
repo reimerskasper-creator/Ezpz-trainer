@@ -11,7 +11,7 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    page.on('pageerror',error=>errors.push(error.message));
    await context.addInitScript(key=>{
     if(localStorage.getItem(key))return;
-    const id='guided-gym-pull-a';
+    const id='ezpz-workout';
     localStorage.setItem(key,JSON.stringify({
      profile:{goal:'maintain',level:'Beginner',equipment:'gym',days:3,age:35,weight:80,height:180,sex:'male'},
      logs:[],weights:[],foodLog:[],workoutLayoutVersion:2,selectedWorkout:id,

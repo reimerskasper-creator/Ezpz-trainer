@@ -39,7 +39,7 @@ for(const setting of ['home','gym']){
  assert(plan.exercises.length===6&&plan.equipment==='No equipment','Six equipment-free exercises');
  for(const exercise of plan.exercises){
   const demo=api.guides.get(exercise.name);
-  assert(demo?.photo&&demo?.localVideoUrl,'Bundled demo for '+exercise.name);
+  assert(demo?.photo&&demo?.videoUrl,'Exercise media for '+exercise.name);
   assert(exercise.sets===2&&exercise.reps&&exercise.rest>0&&!exercise.load,'Bodyweight prescription');
  }
  const before=JSON.stringify(api.state);

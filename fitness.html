@@ -7287,7 +7287,7 @@ document.addEventListener('submit',e=>{const food=e.target.dataset?.editFoodForm
 function homeIcon(name){const paths={cloud:'M7 17H6a4 4 0 1 1 1-7.9 5 5 0 0 1 9.8-.1H18a4 4 0 0 1 0 8h-1m-5 3v-8m-3 3 3-3 3 3',device:'M5 6c0-4 14-4 14 0s-14 4-14 0Zm0 0v12c0 4 14 4 14 0V6M5 12c0 4 14 4 14 0',palette:'M12 3a9 9 0 1 0 0 18h1a2 2 0 0 0 1-4c-1-.5-1-2 1-2h2a4 4 0 0 0 4-4c0-5-4-8-9-8ZM7 9h.01M11 6h.01M16 7h.01M6 14h.01',layout:'M3 3h7v7H3ZM14 3h7v7h-7ZM3 14h7v7H3ZM14 14h7v7h-7Z',shield:'M12 3 3 7v5c0 5 9 9 9 9s9-4 9-9V7Z',person:'M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM4 21v-2a8 6 0 0 1 16 0v2Z',calendar:'M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2ZM7 2v5m10-5v5M3 10h18',workout:'M3 9v6m3-9v12m12-12v12m3-9v6M6 12h12',arrow:'M5 12h14m-6-6 6 6-6 6',food:'M5 3v7m3-7v7M3 7h7m-4 3v11M17 3v18m0-18c-4 4-4 8 0 8',scale:'M5 4h14a2 2 0 0 1 2 2v14H3V6a2 2 0 0 1 2-2m3 4a6 6 0 0 1 8 0m-4 4 2-4',cart:'M2 3h3l3 12h11l3-8H6m3 13h.01M18 20h.01',chart:'M4 18 10 12l4 3 6-9M15 6h5v5',change:'M4 7h16M4 17h16M8 4v6m8 4v6',check:'m5 12 4 4L19 6',settings:'M4 7h16M4 17h16M8 4v6m8 4v6'};return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+(paths[name]||paths.arrow)+'"/></svg>'}
 function homeSession(){
  const date=foodDate(),id=state.workoutSchedule?.[date];
- const selected=knownWorkout(state.selectedWorkout)?workoutPlan(state.selectedWorkout):null;
+ const selected=canResumeSelectedWorkout(state.selectedWorkout)?workoutPlan(state.selectedWorkout):null;
  if(selected&&!workoutMediaGaps(selected).length&&workoutDraftHasEntries(workoutDraft(selected))){
   return {plan:selected,resume:true,date:state.activePlanItem?.date||(state.activePlanDate===date&&id===selected.id?date:null)};
  }
@@ -7297,7 +7297,7 @@ function homeSession(){
   if(!workoutMediaGaps(scheduled).length)return {plan:scheduled,date};
  }
  const choice=state.homeWorkoutChoice;
- if(choice?.date===date&&knownWorkout(choice.id)){
+ if(choice?.date===date&&isAvailableWorkoutChoice(choice.id)){
   const base=baseWorkoutPlan(choice.id);
   const plan=workoutPlan(choice.id,workoutEditContext(base,date,'main'));
   if(!workoutMediaGaps(plan).length)return {plan,date:null};
@@ -11625,7 +11625,22 @@ function resetWorkoutSetup(){
  });
 }
 let plannedMediaRepair=null;
-function activeWorkoutId(){if(tab==='train'&&plannedMediaRepair)return plannedMediaRepair.id;return knownWorkout(state.selectedWorkout)?state.selectedWorkout:window.EzpzExerciseMedia?defaultGuidedWorkout():'full-body'}
+function isAvailableWorkoutChoice(id){
+ return id===ezpzWorkout.id||(typeof id==='string'&&id.startsWith('custom-')&&knownWorkout(id));
+}
+function canResumeSelectedWorkout(id){
+ if(isAvailableWorkoutChoice(id))return true;
+ if(!knownWorkout(id))return false;
+ const item=state.activePlanItem;
+ if(item?.workoutId===id&&validPlanDate(item.date)){
+  return item.slot==='main'?state.workoutSchedule?.[item.date]===id:dayExtraWorkouts(item.date).some(slot=>slot.slot===item.slot&&slot.workoutId===id);
+ }
+ return validPlanDate(state.activePlanDate)&&state.workoutSchedule?.[state.activePlanDate]===id;
+}
+function activeWorkoutId(){
+ if(tab==='train'&&plannedMediaRepair)return plannedMediaRepair.id;
+ return canResumeSelectedWorkout(state.selectedWorkout)?state.selectedWorkout:window.EzpzExerciseMedia?defaultGuidedWorkout():'full-body';
+}
 function workoutDraft(plan=workoutPlan()){const key=activePlanDraftKey(plan);if(key)return state.planItemDrafts?.[key]||{};if(plan.id==='full-body')return state.draft?.variant===plan.variant&&state.draft?.equipment===state.profile.equipment?state.draft:{};return state.workoutDrafts?.[plan.id]||{}}
 function workoutTitle(plan=workoutPlan()){return plan.id==='full-body'?'Your Rotating Plan · '+plan.variant:plan.programName||plan.title||'Full Body '+plan.variant}
 const workoutCategoryArt={
