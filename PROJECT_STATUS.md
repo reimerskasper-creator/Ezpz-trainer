@@ -1,3 +1,8 @@
+## Android 1.0.189 — EZPZ branding
+
+- Android branch `android-health-connect`, based on `7d28080` and its signed 1.0.188 APK. The existing setup banner shows the brand statement and all four pillar symbols. Today's Overview opens the revised Method guide with a static connected ring and three habits principles.
+- Mobile Chromium checks cover 320, 390 and 430 px, image loading, setup submission, nutrition targets, navigation, dialog dismissal and retained records. Android packaging and APK delivery use the existing signed workflow.
+
 ## Android 1.0.188 — per-workout reminders
 
 - Android branch `android-health-connect`, based on `acb397a`. Reminders are scheduled on-device from Day workout cards and use Android notification permission. A reminder opens its workout preview, including extra workout slots. Device setup, timing, notification delivery and signed build are tracked in the Android workflow.

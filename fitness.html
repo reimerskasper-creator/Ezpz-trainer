@@ -1196,10 +1196,16 @@ body[data-view=setup] .setup-hero{background-color:#123d29;background-image:line
 body[data-view=setup] .setup-eyebrow{color:#bbe3cb;font-size:9px;letter-spacing:1.6px;font-weight:750}
 body[data-view=setup] .setup-hero h2{color:#f3fff6;font-size:36px;letter-spacing:-1.2px;margin:14px 0 10px;line-height:1.12}
 body[data-view=setup] .setup-hero p{color:#d4ebde;font-size:14px;line-height:1.5;margin:0}
-body[data-view=setup] .setup-pillars{display:flex;gap:6px;flex-wrap:wrap;margin-top:23px}
-body[data-view=setup] .setup-pillars span{font-size:9px;font-weight:650;color:#e9fff1;background:#406951c9;border:1px solid #accdb745;border-radius:8px;padding:8px 9px}
-body[data-view=setup] .setup-pillars span:nth-child(2){background:#6b6041d9;color:#fff0c8;border-color:#cfbb7f55}
-body[data-view=setup] .setup-pillars span:nth-child(3){background:#3b5c72dc;color:#e1f1fd;border-color:#a9c8df55}
+.brand-pillar.eat{--pillar-accent:#efd17b}
+.brand-pillar.sleep{--pillar-accent:#9dcbef}
+.brand-pillar.progression{--pillar-accent:#75dfad}
+.brand-pillar.zone{--pillar-accent:#ccb5ed}
+.brand-statement span{display:block}
+.brand-statement::before{content:'';display:block;width:98px;height:4px;margin-bottom:9px;border-radius:4px;background:linear-gradient(to right,#75dfad 0 22%,transparent 22% 26%,#9dcbef 26% 48%,transparent 48% 52%,#efd17b 52% 74%,transparent 74% 78%,#ccb5ed 78%)}
+body[data-view=setup] .setup-hero h2.brand-statement{font-size:clamp(23px,6.7vw,36px);letter-spacing:-.035em}
+body[data-view=setup] .setup-pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;list-style:none;margin:18px 0 0;padding:0}
+body[data-view=setup] .setup-pillars li{display:grid;justify-items:center;gap:5px;padding:8px 2px;border:1px solid var(--pillar-accent);border-radius:12px;background:#071e1bd9;color:var(--pillar-accent);font-size:clamp(10px,2.9vw,14px);font-weight:750;line-height:1.2}
+body[data-view=setup] .setup-pillars img{display:block;object-fit:contain}
 body[data-view=setup] .setup-panel{padding:19px 17px;border:1px solid #b8cfbf;border-radius:19px;margin:14px 0;background-size:cover;background-position:center;box-shadow:0 4px 14px #22452e06}
 body[data-view=setup] .setup-personal{background-color:#d7e6dc;background-image:linear-gradient(105deg,#d8e8deef,#d8e8dedb),url('./home-images/consistency.jpg')}
 body[data-view=setup] .setup-training{background-color:#e8dfc3;background-image:linear-gradient(105deg,#ede4ccf2,#ede4ccdf),url('./train-images/guide.jpg');border-color:#d0c39f}
@@ -6526,7 +6532,7 @@ function setupPickers(){
   update();
  }
 }
-function onboarding(){screen.innerHTML='<section class="setup-hero"><span class="setup-eyebrow">WELCOME TO EZPZ</span><h2>Make it yours.</h2><p>A routine that fits your life.<br>One small step at a time.</p><div class="setup-pillars"><span>Eat well</span><span>Train your way</span><span>Build the habit</span></div></section><form id="setup"><section class="setup-panel setup-personal"><div class="setup-panel-title"><b>01</b><div><h3>A little more you</h3><p>Your name. Your preferred units.</p></div></div><label for="setup-first-name">What should we call you? <small>optional</small></label><input id="setup-first-name" name="firstName" type="text" autocomplete="given-name" maxlength="40" placeholder="Your first name" value="'+safe(cleanFirstName(state.firstName))+'">'+unitPreferences()+'</section><section class="setup-panel setup-training"><div class="setup-panel-title"><b>02</b><div><h3>Find your rhythm</h3><p>Choose where to start. You can adjust later.</p></div></div><label for="setup-goal">Primary goal</label><select id="setup-goal" name="goal"><option value="lose">Lose fat</option><option value="maintain">Get fitter / maintain</option><option value="gain">Build muscle</option></select><label for="setup-level">Training experience</label><select id="setup-level" name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><div class="grid"><div><label for="setup-equipment">Where do you train?</label><select id="setup-equipment" name="equipment"><option value="home">At home</option><option value="gym">At a gym</option></select></div><div><label for="setup-days">Days per week</label><select id="setup-days" name="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div></div></section><section class="setup-panel setup-body"><div class="setup-panel-title"><b>03</b><div><h3>Your starting point</h3><p>Body details for an initial calorie estimate.</p></div></div><div class="grid"><div><label for="setup-age">Age (years)</label><input id="setup-age" name="age" type="number" min="18" max="100" required placeholder="35"></div><div><label for="setup-weight">Weight ('+bodyWeightUnit()+')</label><input id="setup-weight" name="weight" type="number" min="'+displayBodyWeight(30)+'" max="'+displayBodyWeight(350)+'" step="any" required placeholder="'+displayBodyWeight(80)+'"></div><div><label for="setup-height">Height ('+(preferredUnits()==='imperial'?'inches':'cm')+')</label><input id="setup-height" name="height" type="number" step="any" min="'+(preferredUnits()==='imperial'?120/2.54:120)+'" max="'+(preferredUnits()==='imperial'?230/2.54:230)+'" required placeholder="'+(preferredUnits()==='imperial'?71:180)+'"></div><div><label for="setup-sex">For calorie estimate</label><select id="setup-sex" name="sex"><option value="male">Male formula</option><option value="female">Female formula</option></select></div></div><p class="note">General starting estimates for adults. Your nutrition targets can be adjusted in the app.</p></section><div class="setup-finish"><button class="primary">Create my plan →</button><p>Your pace. Your progress.</p><small>Saved in this browser. No account needed to get started.</small></div></form>';setupPickers()}
+function onboarding(){screen.innerHTML='<section class="setup-hero"><span class="setup-eyebrow">WELCOME TO EZPZ</span><h2 class="brand-statement"><span>The work is yours.</span><span>The simplicity is ours.</span></h2><p>Build lasting habits with food, sleep, training, and well-being—all in one place.</p><ul class="setup-pillars" aria-label="The four EZPZ pillars"><li class="brand-pillar eat"><img src="./brand/pillar-eat-clear.svg" alt="" width="27" height="27"><span>Eat</span></li><li class="brand-pillar sleep"><img src="./brand/pillar-sleep-clean.png" alt="" width="27" height="27"><span>Sleep</span></li><li class="brand-pillar progression"><img src="./brand/pillar-train-clean.png" alt="" width="27" height="27"><span>Progress</span></li><li class="brand-pillar zone"><img src="./brand/pillar-zone-wave.svg" alt="" width="27" height="27"><span>Zone</span></li></ul></section><form id="setup"><section class="setup-panel setup-personal"><div class="setup-panel-title"><b>01</b><div><h3>A little more you</h3><p>Your name. Your preferred units.</p></div></div><label for="setup-first-name">What should we call you? <small>optional</small></label><input id="setup-first-name" name="firstName" type="text" autocomplete="given-name" maxlength="40" placeholder="Your first name" value="'+safe(cleanFirstName(state.firstName))+'">'+unitPreferences()+'</section><section class="setup-panel setup-training"><div class="setup-panel-title"><b>02</b><div><h3>Find your rhythm</h3><p>Choose where to start. You can adjust later.</p></div></div><label for="setup-goal">Primary goal</label><select id="setup-goal" name="goal"><option value="lose">Lose fat</option><option value="maintain">Get fitter / maintain</option><option value="gain">Build muscle</option></select><label for="setup-level">Training experience</label><select id="setup-level" name="level"><option>Beginner</option><option>Intermediate</option><option>Advanced</option></select><div class="grid"><div><label for="setup-equipment">Where do you train?</label><select id="setup-equipment" name="equipment"><option value="home">At home</option><option value="gym">At a gym</option></select></div><div><label for="setup-days">Days per week</label><select id="setup-days" name="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div></div></section><section class="setup-panel setup-body"><div class="setup-panel-title"><b>03</b><div><h3>Your starting point</h3><p>Body details for an initial calorie estimate.</p></div></div><div class="grid"><div><label for="setup-age">Age (years)</label><input id="setup-age" name="age" type="number" min="18" max="100" required placeholder="35"></div><div><label for="setup-weight">Weight ('+bodyWeightUnit()+')</label><input id="setup-weight" name="weight" type="number" min="'+displayBodyWeight(30)+'" max="'+displayBodyWeight(350)+'" step="any" required placeholder="'+displayBodyWeight(80)+'"></div><div><label for="setup-height">Height ('+(preferredUnits()==='imperial'?'inches':'cm')+')</label><input id="setup-height" name="height" type="number" step="any" min="'+(preferredUnits()==='imperial'?120/2.54:120)+'" max="'+(preferredUnits()==='imperial'?230/2.54:230)+'" required placeholder="'+(preferredUnits()==='imperial'?71:180)+'"></div><div><label for="setup-sex">For calorie estimate</label><select id="setup-sex" name="sex"><option value="male">Male formula</option><option value="female">Female formula</option></select></div></div><p class="note">General starting estimates for adults. Your nutrition targets can be adjusted in the app.</p></section><div class="setup-finish"><button class="primary">Create my plan →</button><p>Your pace. Your progress.</p><small>Saved in this browser. No account needed to get started.</small></div></form>';setupPickers()}
 
 function cleanSleepGoal(value){return Number.isInteger(value)&&value>=60&&value<=1440?value:480}
 function cleanSleepLog(value){if(!value||typeof value!=='object'||Array.isArray(value))return {};return Object.fromEntries(Object.entries(value).filter(([date,minutes])=>validPlanDate(date)&&Number.isInteger(minutes)&&minutes>=0&&minutes<=1440).slice(-10000))}
@@ -13564,19 +13570,6 @@ body[data-view=home] button.method-trigger:active{background:#1e523a;transform:s
 @media(max-width:360px){body[data-view=home] button.method-trigger{gap:9px;padding:12px 10px}.method-logo-crop{width:76px;height:34px}.method-wordmark{width:88px}.method-banner-copy strong{font-size:12px}.method-banner-copy small{font-size:8px}}
 #ezpz-method{position:fixed;inset:auto 0 0;margin:0 auto;width:min(100%,430px);max-width:430px;max-height:90vh;max-height:90dvh;padding:0;border:0;border-radius:26px 26px 0 0;background:#e5eee7;color:#173d29;overflow-y:auto;overscroll-behavior:contain;box-shadow:0 -12px 70px #061b1644}
 #ezpz-method::backdrop{background:#081a14cc;backdrop-filter:blur(5px)}
-.method-head{position:sticky;top:0;z-index:2;background:#e5eee7f5;backdrop-filter:blur(12px);padding:12px 20px 15px;border-bottom:1px solid #bcd0c2}
-.method-head .chooser-grip{margin-bottom:14px}.method-head .row>div{min-width:0}.method-head h2{font-size:25px;margin:4px 0}.method-head small{font-size:9px;letter-spacing:1.5px;color:#33734c;font-weight:750}
-.method-head button{flex:none;width:44px;min-height:44px;border-radius:50%;font-size:26px;padding:0;color:#365f46;background:#d1e2d6;border:0}
-.method-body{padding:18px 17px 24px}.method-intro{font-size:13px;line-height:1.7;margin:0 3px 18px;color:#355a43}
-.method-pillar{position:relative;border:1px solid #6e957f;border-radius:19px;overflow:hidden;padding:24px 18px;margin:12px 0;background:linear-gradient(95deg,#113c2af5,#113c2ad6 58%,#113c2a85),var(--pillar-photo);background-size:cover;background-position:center;color:#f4fff7}
-.method-pillar.sleep{background-image:linear-gradient(95deg,#263f51f5,#263f51da 58%,#263f5190),var(--pillar-photo);border-color:#849ba8}
-.method-pillar.progression{background-image:linear-gradient(95deg,#4c4329f5,#4c4329d9 58%,#4c43298c),var(--pillar-photo);border-color:#a89a6f}
-.method-pillar h3{font-size:23px;color:#f4fff7;margin:10px 0 8px}.method-letter{display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:#d5f6e024;border:1px solid #e4f9eb44;font-size:20px;font-weight:800;color:#dcf6e6}
-.method-pillar p{font-size:13px;line-height:1.7;color:#e5efe9;margin:0}
-.method-explainer{padding:22px 18px;background:linear-gradient(100deg,#113b2af2,#113b2ad9),url('./home-images/method-together.jpg') center/cover;border:1px solid #729783;border-radius:19px;margin:18px 0}.method-explainer h3{font-size:21px;margin-bottom:12px;color:#f3fff7}.method-explainer p{font-size:13px;line-height:1.75;color:#e2efe7;margin:10px 0}.method-system{background-image:linear-gradient(100deg,#263f50f2,#263f50d9),url('./home-images/method-system.jpg');border-color:#849fae}
-.method-signoff{text-align:center;color:#355f45;font-size:13px;font-weight:700;margin:22px 0 15px}
-#ezpz-method .method-done{background:#19bd70;color:#093c25;border:0;font-weight:750;min-height:50px}
-@media(max-width:360px){.method-head{padding-left:16px;padding-right:16px}.method-head h2{font-size:22px}}
 @media(prefers-reduced-motion:no-preference){#ezpz-method[open]{animation:chooser-in .18s ease-out}}
 </style>
 <style id="zone-foundation-style">
@@ -13614,15 +13607,46 @@ document.addEventListener('click',event=>{if(event.target.id!=='overall-info')re
 </script>
 <dialog id="zone-checkin" aria-labelledby="zone-title"><div class="row"><span class="zone-kicker">Z · ZONE · TODAY</span><button type="button" class="zone-close" data-zone="close" aria-label="Close Zone check-in" autofocus>×</button></div><h2 id="zone-title">Did you make time for yourself today?</h2><p>A little space to pause, reset or find your focus. Choose what feels right for you.</p><ul><li>A quiet walk</li><li>Breathing or meditation</li><li>Journaling</li><li>Time without distractions</li></ul><p class="note">No timer. No required activity. This check-in records time you made for yourself, not how you feel.</p><p id="zone-status" role="status"></p><button type="button" class="zone-check" data-zone="save">I made time today</button><button type="button" class="zone-undo" data-zone="undo">Undo today’s check-in</button></dialog>
 <dialog id="ezpz-method" aria-labelledby="ezpz-method-title">
- <div class="method-head"><div class="row"><div><small>SIMPLE AND SLOW IS FAST</small><h2 id="ezpz-method-title">The EZPZ method</h2></div><button type="button" data-ezpz-method="close" aria-label="Close the EZPZ method" autofocus>×</button></div></div>
- <div class="method-body">
- <section class="method-hero"><small>1 · THE IDEA</small><h3>Small steps.<br>A stronger everyday.</h3><p>A routine you can repeat takes you further than a perfect plan you can’t keep.</p><div class="method-letters"><div><img src="./brand/pillar-eat-clear.svg" alt="" width="38" height="38"><span>Eat</span></div><div><img src="./brand/pillar-sleep-clean.png" alt="" width="38" height="38"><span>Sleep</span></div><div><img src="./brand/pillar-train-clean.png" alt="" width="38" height="38"><span>Progress</span></div><div><img src="./brand/pillar-zone-wave.svg" alt="" width="38" height="38"><span>Zone</span></div></div></section>
- <section class="method-note"><h3>Everything works together.</h3><p>Eat to fuel. Sleep to recover. Move to grow. Zone to stay connected.</p><h3>Start smaller than you think.</h3><p>Choose one thing you can finish today. Repeat it. Build when you’re ready.</p></section>
- <div class="method-section-heading"><small>2 · THE FOUR PILLARS</small><h3>Four pillars. Your pace.</h3></div><section class="method-pillar eat" style="--pillar-photo:url('./home-images/nutrition.jpg')"><h3><img src="./brand/pillar-eat-clear.svg" alt="" width="38" height="38"><span>Eat</span></h3><strong>Fuel the life you want to live.</strong><p>Choose meals you enjoy that support your energy and recovery. Small, repeatable choices add up.</p></section><section class="method-pillar sleep" style="--pillar-photo:url('./home-images/method-sleep.jpg')"><h3><img src="./brand/pillar-sleep-clean.png" alt="" width="38" height="38"><span>Sleep</span></h3><strong>Make room to recharge.</strong><p>Rest supports your focus, energy and recovery. Find a wind-down routine you can return to.</p></section><section class="method-pillar progression" style="--pillar-photo:url('./train-images/arms.jpg')"><h3><img src="./brand/pillar-train-clean.png" alt="" width="38" height="38"><span>Progress</span></h3><strong>Start where you are. Build from there.</strong><p>A few squats, a walk or a workout—choose what fits, follow through, and improve over time.</p></section><section class="method-pillar zone" style="--pillar-photo:url('./home-images/consistency.jpg')"><h3><img src="./brand/pillar-zone-wave.svg" alt="" width="38" height="38"><span>Zone</span></h3><strong>Keep your fire alive.</strong><p>Take time to think, prepare, learn or rest. Stay connected to your habits and why they matter.</p></section>
- <section class="method-explainer method-zone-glue"><small>3 · MAKE IT YOURS</small><h3><img src="./brand/pillar-zone-wave.svg" alt="" width="38" height="38"><span>Zone is the glue.</span></h3><p>It creates space to support the other pillars—and yourself. Plan your next meals, think through an exercise, read a book or pause and reflect. Keep your eyes and mind open to what helps you move forward.</p><div class="method-zone-ideas"><span>Plan a meal</span><span>Learn a movement</span><span>Read a little</span><span>Pause &amp; reflect</span></div></section>
- <section class="method-note method-start"><h3>One small step is enough to begin.</h3><ul><li><strong>Eat</strong><span>Plan tomorrow’s breakfast</span></li><li><strong>Sleep</strong><span>Begin winding down earlier</span></li><li><strong>Progress</strong><span>Take a short walk</span></li><li><strong>Zone</strong><span>Give yourself a quiet moment</span></li></ul><p>Pick one starting point. You don’t have to change everything at once.</p></section>
- <section class="method-note method-return"><h3>Keep coming back.</h3><p>Some days will be easier than others. Adjust your pace and take the next manageable step.</p><button type="button" class="method-done" data-ezpz-method="close">That’s EZPZ</button></section>
+ <div class="method-head">
+  <p id="ezpz-method-title">The EZPZ Method</p>
+  <button type="button" data-ezpz-method="close" aria-label="Close the EZPZ method" autofocus>×</button>
  </div>
+ <section class="method-hero">
+  <h2 class="brand-statement"><span>The work is yours.</span><span>The simplicity is ours.</span></h2>
+  <p>Real progress takes effort. EZPZ brings eating, sleep, training, and mental well-being together, making your daily habits easier to manage.</p>
+ </section>
+ <section class="method-diagram" aria-label="The four connected pillars">
+  <div class="method-visual" aria-hidden="true">
+   <svg class="method-links" viewBox="0 0 100 100" preserveAspectRatio="none">
+    <path class="brand-pillar eat" d="M24 35 L39 20 H65 L84 12.5 H100"/>
+    <path class="brand-pillar sleep" d="M62 41 L87 37.5 H100"/>
+    <path class="brand-pillar progression" d="M62 59 L87 62.5 H100"/>
+    <path class="brand-pillar zone" d="M24 65 L39 80 H65 L84 87.5 H100"/>
+   </svg>
+   <div class="method-wheel">
+    <svg viewBox="0 0 110 110">
+     <circle cx="55" cy="55" r="51" class="method-halo"/>
+     <path class="brand-pillar sleep" d="M62 16 A40 40 0 0 1 94 48"/>
+     <path class="brand-pillar progression" d="M94 62 A40 40 0 0 1 62 94"/>
+     <path class="brand-pillar zone" d="M48 94 A40 40 0 0 1 16 62"/>
+     <path class="brand-pillar eat" d="M16 48 A40 40 0 0 1 48 16"/>
+    </svg>
+    <img src="./brand/ezpz-c1-swirl.png" alt="" width="40" height="40">
+   </div>
+  </div>
+  <ul class="method-legend">
+   <li class="brand-pillar method-pillar eat"><img src="./brand/pillar-eat-clear.svg" alt="" width="21" height="21"><p><strong>Eat</strong> Fuel your body with the right nutrition.</p></li>
+   <li class="brand-pillar method-pillar sleep"><img src="./brand/pillar-sleep-clean.png" alt="" width="21" height="21"><p><strong>Sleep</strong> Rest, recover, and perform at your best.</p></li>
+   <li class="brand-pillar method-pillar progression"><img src="./brand/pillar-train-clean.png" alt="" width="21" height="21"><p><strong>Progress</strong> Train, get stronger, and track your development.</p></li>
+   <li class="brand-pillar method-pillar zone"><img src="./brand/pillar-zone-wave.svg" alt="" width="21" height="21"><p><strong>Zone</strong> Manage stress, improve focus, and stay balanced.</p></li>
+  </ul>
+ </section>
+ <section class="method-principles" aria-label="The principles of the EZPZ Method">
+  <div><h3>Consistency creates progress.</h3><p>It's not about being perfect. It's about repeating the right habits often enough for them to stick.</p></div>
+  <div><h3>Start smaller than you think.</h3><p>Choose one thing you can finish today. Repeat it. Build from there, at your pace.</p></div>
+  <div><h3>Everything works together.</h3><p>The four pillars support better energy, performance, and a healthier, more balanced life.</p></div>
+ </section>
+ <button type="button" class="method-done" data-ezpz-method="close">That’s EZPZ</button>
 </dialog>
 <script>
 document.addEventListener('click',event=>{
@@ -13906,41 +13930,34 @@ body[data-view]:is([data-view=home],[data-view=eat],[data-view=sleep],[data-view
 
 <style id="ezpz-method-guide">
 .method-brand{position:relative;display:block;width:64px;height:24px;flex:none}.method-brand>img{width:100%;height:100%;object-fit:contain}.overview-foundations>.method-brand{max-width:100%}@media(max-width:360px){.method-brand{width:48px;height:22px}}
-#ezpz-method{background:#092c23!important;color:#f3fff7!important;border:1px solid #79cbb08a;box-sizing:border-box}
-#ezpz-method .method-head{background:#0c3028f5!important;border-color:#86d8bd50;padding:16px}
-#ezpz-method .method-head h2{color:#f3fff7!important;font-size:22px}
-#ezpz-method small{color:#b6e5cd!important;font-size:10px;letter-spacing:1.2px;font-weight:700}
-#ezpz-method .method-head button{color:#f3fff7!important;background:#ffffff14!important}
-#ezpz-method .method-body{padding:14px 14px 24px}
-#ezpz-method h3{color:#f3fff7!important;line-height:1.2}
-#ezpz-method p{color:#e1eee7!important;line-height:1.6;font-size:14px}
-#ezpz-method .method-hero{padding:22px 16px 16px;border:1px solid #8cdec281;border-radius:20px;background:linear-gradient(100deg,#0a322be8,#0a322b88),url('./home-images/method-together.jpg') center/cover}
-#ezpz-method .method-hero h3{font-size:32px;margin:18px 0 12px;max-width:260px}
-#ezpz-method .method-letters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;padding:16px 4px 0;border-top:1px solid #8cdec25c;margin-top:22px}
-#ezpz-method .method-letters>div{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:11px;font-weight:700}
-#ezpz-method .method-letters img{width:auto;height:40px;object-fit:contain}
-#ezpz-method .method-note{padding:18px 4px}
-#ezpz-method .method-note h3{font-size:20px;margin:8px 0}
-#ezpz-method .method-note p{margin:8px 0 18px}
-#ezpz-method .method-section-heading{padding:12px 4px 0}
-#ezpz-method .method-section-heading h3{font-size:25px;margin:10px 0}
-#ezpz-method .method-pillar{padding:18px 16px;min-height:176px;box-sizing:border-box;background:linear-gradient(90deg,#0b3028f5,#0b3028db 54%,#0b302845),var(--pillar-photo);background-size:cover;background-position:center;border:1px solid #efd17b9c;box-shadow:inset 3px 0 #efd17b;margin:12px 0}
-#ezpz-method .method-pillar.sleep{border-color:#9dcbef9c;box-shadow:inset 3px 0 #9dcbef}
-#ezpz-method .method-pillar.progression{border-color:#75dfad9c;box-shadow:inset 3px 0 #75dfad}
-#ezpz-method .method-pillar.zone{border-color:#ccb5ed9c;box-shadow:inset 3px 0 #ccb5ed}
-#ezpz-method .method-pillar h3,#ezpz-method .method-zone-glue h3{display:flex;align-items:center;gap:10px;font-size:23px;margin:0 0 12px}
-#ezpz-method .method-pillar img,#ezpz-method .method-zone-glue img{width:auto;height:34px;object-fit:contain;flex:none}
-#ezpz-method .method-pillar strong{display:block;font-size:16px;max-width:240px;color:#f3fff7!important;line-height:1.4}
-#ezpz-method .method-pillar p{max-width:245px;font-size:13px;margin-top:8px}
-#ezpz-method .method-zone-glue{padding:20px 16px;background:linear-gradient(100deg,#20382fe8,#20382fd9),url('./home-images/consistency.jpg') center/cover;border-color:#ccb5ed80}
-#ezpz-method .method-zone-glue h3{margin-top:16px}
-#ezpz-method .method-zone-ideas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:16px}
-#ezpz-method .method-zone-ideas span{padding:12px 8px;border:1px solid #ccb5ed66;border-radius:12px;background:#b897dd15;color:#f0e7fa;font-size:12px;text-align:center}
-#ezpz-method .method-start ul{padding:0;list-style:none;display:grid;gap:7px}
-#ezpz-method .method-start li{display:grid;grid-template-columns:76px 1fr;gap:8px;padding:12px 10px;border:1px solid #75dfad45;border-radius:10px;background:#ffffff08;font-size:12px;color:#e1eee7}
-#ezpz-method .method-start li strong{color:#efd17b}#ezpz-method .method-start li:nth-child(2) strong{color:#9dcbef}#ezpz-method .method-start li:nth-child(3) strong{color:#75dfad}#ezpz-method .method-start li:nth-child(4) strong{color:#ccb5ed}
-#ezpz-method .method-return{padding:18px 16px;background:#ccb5ed18;border:1px solid #ccb5ed70;border-radius:18px}
-#ezpz-method .method-done{width:100%;background:#ccb5ed!important;color:#29193e!important;border-radius:24px;font-size:15px}
+#ezpz-method{width:min(calc(100% - 16px),430px);inset:0;margin:auto;border:1px solid #79cbb08a;border-radius:24px;box-sizing:border-box;background:radial-gradient(ellipse at 20% 56%,#154d3c,#092c23 65%)!important;color:#f3fff7!important}
+#ezpz-method .method-head{display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:2;padding:3px 9px 3px 15px;background:#092c23f5;border-bottom:1px solid #86d8bd38}
+#ezpz-method-title{margin:0;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#b6e5cd!important}
+#ezpz-method .method-head button{display:grid;place-items:center;width:44px;min-height:44px;padding:0;border:0;border-radius:50%;font-size:24px;color:#f3fff7!important;background:#ffffff14!important}
+#ezpz-method .method-hero{padding:14px 15px 18px;background:linear-gradient(90deg,#092c23f2,#092c2370),linear-gradient(0deg,#092c23,transparent 55%),url('./home-images/method-together.jpg') center/cover}
+#ezpz-method .method-hero h2{margin:0 0 8px;font-size:clamp(23px,6.7vw,33px);letter-spacing:-.035em;line-height:1.12;color:#f3fff7!important}
+#ezpz-method .method-hero p{margin:0;max-width:33ch;line-height:1.45;font-size:14px;color:#e1eee7!important}
+#ezpz-method .method-diagram{display:grid;grid-template-columns:34% minmax(0,1fr);padding:0 11px 13px}
+#ezpz-method .method-visual{position:relative;display:grid;align-items:center}
+#ezpz-method .method-links{position:absolute;inset:0;width:100%;height:100%;fill:none}
+#ezpz-method .method-links path{stroke:var(--pillar-accent);stroke-width:1.5;vector-effect:non-scaling-stroke}
+#ezpz-method .method-wheel{position:relative;width:83%;aspect-ratio:1;display:grid;place-items:center;border-radius:50%;background:#0b3028;box-shadow:0 0 22px #75dfad33}
+#ezpz-method .method-wheel svg{position:absolute;inset:0;width:100%;height:100%;fill:none}
+#ezpz-method .method-wheel path{stroke:var(--pillar-accent);stroke-width:12;stroke-linecap:round}
+#ezpz-method .method-wheel .method-halo{stroke:#86d8bd44;stroke-width:4}
+#ezpz-method .method-wheel img{width:39%;height:auto;object-fit:contain}
+#ezpz-method .method-legend{display:grid;grid-template-rows:repeat(4,1fr);gap:4px;list-style:none;margin:0;padding:0}
+#ezpz-method .method-pillar{display:grid;grid-template-columns:21px minmax(0,1fr);align-items:center;gap:6px;padding:5px 7px;border:1px solid var(--pillar-accent);border-radius:12px;background:#081f1bd9}
+#ezpz-method .method-pillar img{display:block;object-fit:contain}
+#ezpz-method .method-pillar p{margin:0;font-size:12px;line-height:1.3;color:#f3fff7!important}
+#ezpz-method .method-pillar strong{color:var(--pillar-accent)!important}
+#ezpz-method .method-principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));padding:12px 7px 25px;border-top:1px solid #86d8bd70;background:linear-gradient(180deg,#092c23 12%,#092c23d9 65%,#092c2366),url('./home-images/zone-sunlit-coast.jpg') center 65%/cover}
+#ezpz-method .method-principles>div{padding:0 7px}
+#ezpz-method .method-principles>div+div{border-left:1px solid #86d8bd55}
+#ezpz-method .method-principles h3{margin:0 0 5px;font-size:13px;line-height:1.2;color:#f3fff7!important}
+#ezpz-method .method-principles p{margin:0;font-size:12px;line-height:1.35;color:#e1eee7!important}
+#ezpz-method .method-done{display:block;width:calc(100% - 28px);margin:0 14px 12px;min-height:44px;border-radius:24px;border:1px solid #86d8bd70;background:#123c30!important;color:#f3fff7!important;font-weight:750}
+@media(max-width:350px){#ezpz-method .method-diagram{grid-template-columns:30% minmax(0,1fr)}}
 </style>
 
 <style id="home-workout-sketch-one">
