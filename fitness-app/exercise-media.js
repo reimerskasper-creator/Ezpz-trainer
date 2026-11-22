@@ -69,7 +69,7 @@
   ["Chin-Up","chin-up","VV-At-thilE",["Chinup","Underhand Pull-Up"],"Pull-up bar","Back",["back biceps","forearms"],{"reps":"5–8","unit":"reps","side":false}],
   ["Bent-Over Barbell Row","barbell-row","FWJR5Ve8bnQ",["Barbell Row","Bent Over Barbell Row"],"Barbell · plates","Back",["back","biceps rearDelts forearms traps"],{"reps":"8–12","unit":"reps","side":false}],
   ["Standing Resistance Band Row","band-row","3DzjYvsAU8Y",["Standing Band Row","Anchored Band Row"],"Resistance band · fixed anchor","Back",["back","biceps rearDelts"],{"reps":"10–15","unit":"reps","side":false}],
-  ["Prone W Raise","prone-w-raise","FP5wYb76rcM",[],"No equipment","Back",["traps","rearDelts"],{"reps":"8–12","unit":"reps","side":false,"load":false}],
+  ["Prone W Raise","prone-w-raise","",[],"No equipment","Back",["traps","rearDelts"],{"reps":"8–12","unit":"reps","side":false,"load":false}],
   ["Incline Push-Up","incline-push-up","E--Ls5QtFqI",["Hands-Elevated Push-Up"],"Stable bench","Chest",["chest","triceps frontDelts"],{"reps":"8–15","unit":"reps","side":false}],
   ["Close-Grip Barbell Bench Press","close-grip-bench","UYJsFzqdgK4",["Close-Grip Bench Press"],"Barbell · bench · rack","Chest",["triceps chest","frontDelts"],{"reps":"8–12","unit":"reps","side":false}],
   ["Single-Arm Cable Lateral Raise","single-arm-cable-lateral","https://vimeo.com/129884862",["Cable Lateral Raise","Single Arm Cable Lateral Raise"],"Cable machine · handle","Shoulders",["shoulders",""],{"reps":"10–15","unit":"reps","side":true}],
@@ -176,6 +176,7 @@
   'Bodyweight Step-Up':'glute quads legs','Dumbbell Romanian Deadlift':'glute hamstrings hinge',
  };
  const bundledVideos=new Map([
+  ["Prone W Raise","prone-w-raise.mp4"],
   ['Machine Leg Extension','machine-leg-extension.mp4'],
   ['Seated Calf Raise','seated-calf-raise.mp4'],
   ['Barbell Romanian Deadlift','barbell-romanian-deadlift.mp4'],
