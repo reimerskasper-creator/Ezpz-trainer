@@ -35,8 +35,8 @@ async function verify(){
   assert(await page.locator('.home-workout-empty').isVisible());
   assert.equal(await page.locator('#home-workouts-content .upcoming-row').count(),0);
   await page.evaluate(()=>{tab='library';render()});
-  assert.equal(await page.locator('.library-tile').count(),163);
-  assert.equal(await page.locator('.library-tile img').count(),163);
+  assert.equal(await page.locator('.library-tile').count(),164);
+  assert.equal(await page.locator('.library-tile img').count(),164);
   await page.locator('[data-library-id="Goblet Squat"]').click();
   await page.locator('.strict-demo img').evaluate(img=>img.decode());
   const demo=page.getByRole('link',{name:'Watch demo'});
