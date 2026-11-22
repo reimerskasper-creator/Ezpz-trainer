@@ -7,8 +7,8 @@ const api=new Function('document','window','localStorage','fetch','console',scri
 const assert=(v,m)=>{if(!v)throw Error(m)};
 
 const addedGuides=api.guides.names.map(name=>api.guides.get(name)).filter(guide=>guide.prescription);
-assert(addedGuides.length===102,'102 additional guided exercises');
-assert(new Set(addedGuides.map(guide=>guide.photo)).size===102,'One distinct photo per new exercise');
+assert(addedGuides.length===122,'122 additional guided exercises');
+assert(new Set(addedGuides.map(guide=>guide.photo)).size===122,'One distinct photo per new exercise');
 for(const guide of addedGuides){
  assert(fs.existsSync(path.join(__dirname,'..',guide.photo)),'Missing exercise photo for '+guide.name);
  assert(guide.equipment&&guide.category&&(guide.localVideoUrl ? guide.videoUrl===guide.localVideoUrl&&fs.existsSync(guide.localVideoUrl) : new URL(guide.videoUrl).protocol==='https:'),'Complete references for '+guide.name);

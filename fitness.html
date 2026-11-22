@@ -11998,7 +11998,9 @@ const workoutAtlasRegions={
  chest:['Chest',0],biceps:['Biceps',1],core:['Abdominals',2],quads:['Quads',3],
  back:['Lats',4],triceps:['Triceps',5],glutes:['Glutes',6],hamstrings:['Hamstrings',7],
  shoulders:['Shoulders',8],frontDelts:['Front shoulder region',8,'front'],rearDelts:['Rear shoulder region',8,'rear'],
- forearms:['Forearms',9],calves:['Calves',10],traps:['Trapezius',null]
+ forearms:['Forearms',9],calves:['Calves',10],traps:['Trapezius',null],
+ adductors:['Hip adductors',null],tibialis:['Tibialis anterior',null],serratus:['Serratus anterior',null],
+ spinalErectors:['Spinal erectors',null],obliques:['Obliques',null]
 };
 const reviewedExerciseMuscles={
  'Dumbbell Bench Press':['chest','frontDelts triceps'],
@@ -12074,6 +12076,7 @@ function workoutAnatomy({primary,supporting},label){
  const layers=(regions,role)=>regions.map(key=>{
   const [,index,side]=workoutAtlasRegions[key];
   if(key==='traps')return '<span class="recap-anatomy-layer anatomy-traps anatomy-'+role+'" data-anatomy-region="traps"></span>';
+  if(index===null)return '';
   return '<span class="recap-anatomy-layer anatomy-'+role+(side?' anatomy-'+side:'')+'" data-anatomy-region="'+key+'" style="--atlas-y:'+(100*(index+1)/workoutAtlasPanelGaps)+'%"></span>';
  }).join('');
  return '<span class="recap-anatomy" '+(label?'role="img" aria-label="'+safe(label)+'"':'aria-hidden="true"')+'><span class="recap-anatomy-layer"></span>'+layers(supporting,'supporting')+layers(primary,'primary')+'</span>';
