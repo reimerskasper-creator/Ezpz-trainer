@@ -11582,7 +11582,7 @@ function workoutMediaReference(id,name,media=state.trainerMedia,photos=state.per
  };
 }
 function workoutMediaGaps(workout){
- if(!workout||!window.EzpzExerciseMedia)return [];
+ if(!workout||workout.id?.startsWith('custom-')||!window.EzpzExerciseMedia)return [];
  return workout.exercises.flatMap((exercise,index)=>{
   const {photo,videoUrl}=workoutMediaReference(workout.id,exercise.name);
   return photo&&videoUrl?[]:[{name:exercise.name,index,photo:!!photo,video:!!videoUrl}];

@@ -45,13 +45,24 @@ async function verify(){
   await demo.click();
   assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),gobletVideo);
   await page.getByRole('button',{name:'Close',exact:true}).last().click();
+  await page.evaluate(()=>{tab='planner';render()});
+  await page.locator('[data-open-plan-picker="workout"]').click();
+  await page.locator('[data-plan-picker-category="mine"]').click();
+  await page.locator('[data-plan-pick-workout="custom-old"]').click();
+  assert.equal(await page.evaluate(()=>state.workoutSchedule[planSettings().date]),'custom-old');
+
+  await page.evaluate(()=>{tab='home';render()});
+  await page.getByRole('button',{name:'Manage workouts'}).click();
+  await page.locator('#workout-chooser [data-workout-category="mine"]').click();
+  await page.locator('#workout-chooser [data-workout-pick="custom-old"]').click();
+  assert.equal(await page.evaluate(()=>state.selectedWorkout),'custom-old');
   await page.evaluate(()=>{tab='train';render()});
-  assert.equal(await page.locator('.workout-media-repair').count(),1);
-  assert.equal(await page.locator('[data-set-reps]').count(),0);
+  assert.equal(await page.locator('.workout-media-repair').count(),0);
+  assert(await page.locator('[data-set-reps="0-0"]').isVisible());
   await page.locator('[data-trainer-video="0"]').click();
   await page.locator('#trainer-video-url').fill('https://www.youtube.com/watch?v=bxn9FBrt4-A');
   await page.locator('#trainer-video-form button[type=submit]').click();
-  assert.equal(await page.locator('[data-set-reps]').count(),0);
+  assert(await page.locator('[data-set-reps="0-0"]').isVisible());
   await page.locator('[data-trainer-photo="0"]').click();
   await page.locator('[data-trainer-file]').first().setInputFiles(path.join(root,'fitness-app/exercise-media/deadbug.jpg'));
   await page.waitForFunction(()=>!document.querySelector('.workout-media-repair')&&!document.querySelector('#trainer-dialog'));
