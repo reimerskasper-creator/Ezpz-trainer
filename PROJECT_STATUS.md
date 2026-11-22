@@ -1,3 +1,8 @@
+## Android 1.0.193 — workout picker presentation
+
+- Android branch `android-health-connect`, based on `32d1bb6`. The workout category anatomy blends into the banner, and each program shows its identifying details before the cover and exercise grid. Existing workout selection actions remain intact.
+- Catalog and Trainer source checks passed locally. Signed Android delivery and mobile checks use the existing workflow.
+
 ## Android 1.0.191 — Direct food deletion and visible Favorites
 
 - Android branch `android-health-connect`, based on `ed4d153`. Saved foods offer permanent deletion directly while preserving diary history and requiring explicit removal of any scheduled servings. Archived is reachable above the Saved list.

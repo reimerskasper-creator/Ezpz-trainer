@@ -11699,11 +11699,12 @@ function workoutProgramCard(workout,selected){
  const count=exercises.filter(exercise=>!/Warm-up|Cooldown/i.test(exercise.name)).length;
  const title=safe(workout.programName||workout.title);
  return '<article class="program-card '+(selected?'is-selected':'')+'">'+
+  '<header class="program-copy program-heading"><h3>'+title+'</h3><div class="program-overview">'+workoutBadges(workout)+
+  '<span class="program-meta">'+count+' exercise'+(count===1?'':'s')+' · '+safe(workout.minutes)+' min</span></div>'+
+  (workout.summary?'<p>'+safe(workout.summary)+'</p>':'')+'</header>'+
   '<div class="program-photo">'+hybridWorkoutCover(workout,exercises)+(selected?'<span class="workout-cover-check">Selected ✓</span>':'')+'</div>'+
   '<ul class="program-exercise-grid" aria-label="Included exercises">'+exercises.map(exercise=>programExerciseTile(exercise,workout.id)).join('')+'</ul>'+
-  '<div class="program-copy"><h3>'+title+'</h3><div class="program-overview">'+workoutBadges(workout)+
-  '<span class="program-meta">'+count+' exercise'+(count===1?'':'s')+' · '+safe(workout.minutes)+' min</span></div>'+
-  '<p>'+safe(workout.summary)+'</p><details class="program-preview program-details"><summary>Program details</summary>'+
+  '<div class="program-copy"><details class="program-preview program-details"><summary>Program details</summary>'+
   '<div class="program-detail-copy">'+exerciseMuscleDetails(exercises)+'<p><b>Equipment</b> '+safe(workout.equipment)+'</p>'+
   '<p><b>Training notes</b> '+safe(workout.setup||'Straight sets · change stations after all sets')+'</p></div></details>'+
   '<button type="button" data-workout-pick="'+safe(workout.id)+'" aria-label="Choose '+safe(workout.title||workout.programName)+'" aria-pressed="'+selected+'">'+

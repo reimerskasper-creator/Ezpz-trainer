@@ -83,6 +83,7 @@ const server=http.createServer((req,res)=>{
    for(const card of await categoryCards.all()){
     assert.equal(await card.locator('.category-anatomy-panel .recap-anatomy').count(),1);
     assert.match(await card.evaluate(el=>getComputedStyle(el).backgroundImage),/radial-gradient/);
+    assert.equal(await card.locator('.category-anatomy-panel').evaluate(el=>getComputedStyle(el).backgroundColor),'rgba(0, 0, 0, 0)');
    }
    const pull=chooser.locator('[data-workout-category="Pull"]');
    assert.equal(await pull.locator('[data-anatomy-region="traps"].anatomy-primary').count(),1);
@@ -91,6 +92,9 @@ const server=http.createServer((req,res)=>{
    await chooser.getByRole('button',{name:'Explore Push workouts'}).click();
    assert(await chooser.locator('.program-photo .hybrid-workout-cover').count()>0);
    const program=chooser.locator('.program-card').first();
+   assert(await program.locator('.program-heading + .program-photo').count());
+   assert(await program.locator('.program-heading h3').innerText());
+   assert.match(await program.locator('.program-heading .program-meta').innerText(),/exercises · .* min/);
    const grid=program.locator('.program-photo + .program-exercise-grid');
    assert(await grid.locator('li').count()>0);
    assert.equal(await grid.evaluate(el=>getComputedStyle(el).gridTemplateColumns.split(' ').length),3);
