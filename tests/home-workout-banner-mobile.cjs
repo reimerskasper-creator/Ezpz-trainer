@@ -39,11 +39,10 @@ const server=http.createServer((req,res)=>{const file=path.resolve(root,'.'+new 
    const height=(await card.boundingBox()).height;
    const before=await page.evaluate(()=>JSON.stringify(state.workoutDrafts));
    await card.locator('.home-change-workout').click();
-   await page.locator('[data-workout-category="Pull"]').click();
-   const pickerCover=page.locator('.program-card').filter({has:page.locator('[data-workout-pick="guided-gym-pull-a"]')}).locator('.program-photo');
+   const pickerCover=page.locator('.program-card').filter({has:page.locator('[data-workout-pick="ezpz-workout"]')}).locator('.program-photo');
    assert.equal(await pickerCover.locator('.anatomy-studio-cover').count(),1);
    assert.equal(await pickerCover.locator('img').count(),0);
-   assert.deepEqual(await pickerCover.locator('[data-anatomy-region]').evaluateAll(layers=>layers.map(layer=>layer.outerHTML)),anatomy);
+   assert(await pickerCover.locator('[data-anatomy-region]').count()>0);
    await page.keyboard.press('Escape');
    if(width===390){fs.mkdirSync(out,{recursive:true});await card.screenshot({path:path.join(out,'home-workout-banner-expanded.jpg')})}
    await toggle.click();

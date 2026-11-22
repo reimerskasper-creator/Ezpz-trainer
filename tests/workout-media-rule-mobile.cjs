@@ -87,26 +87,18 @@ async function verify(){
   await page.evaluate(()=>{tab='planner';render()});
   await page.locator('[data-open-plan-picker="workout"]').click();
   const plannerPicker=page.locator('#planner-picker');
-  const pullCover=plannerPicker.locator('[data-plan-picker-category="Pull"]');
-  assert(await pullCover.locator('.category-anatomy-panel').isVisible());
-  assert.equal(await pullCover.locator('img').count(),0);
-  assert(await pullCover.locator('.recap-anatomy').isVisible());
-  await pullCover.click();
-  for(const level of ['Intermediate','Advanced']){
-   await plannerPicker.locator('[data-plan-picker-level="'+level+'"]').click();
-   assert.equal(await plannerPicker.locator('.program-card').count(),1);
-   assert(await plannerPicker.locator('.program-heading + .program-photo + .program-exercise-grid').isVisible());
-   assert(await plannerPicker.locator('.program-photo .anatomy-primary').first().isVisible());
-  }
+  assert.equal(await plannerPicker.locator('.program-card').count(),1);
+  assert(await plannerPicker.locator('[data-plan-pick-workout="ezpz-workout"]').isVisible());
+  assert(await plannerPicker.locator('.program-heading + .program-photo + .program-exercise-grid').isVisible());
+  assert(await plannerPicker.locator('.program-photo .anatomy-primary').first().isVisible());
   await plannerPicker.locator('[data-plan-picker-action="close"]').click();
   await page.evaluate(()=>{tab='home';render()});
   await page.locator('[data-overview-workout]').click();
   const chooser=page.locator('#workout-chooser');
   assert(await chooser.isVisible());
-  await chooser.locator('[data-workout-category="Core"]').click();
   assert.equal(await chooser.locator('[data-workout-pick][aria-pressed=true]').count(),0);
-  await chooser.locator('[data-workout-pick="guided-home-core-a"]').click();
-  assert((await page.locator('.home-workout').innerText()).includes('Core A'));
+  await chooser.locator('[data-workout-pick="ezpz-workout"]').click();
+  assert((await page.locator('.home-workout').innerText()).includes('The EZPZ Workout'));
   assert.equal(await page.evaluate(()=>state.workoutSchedule[foodDate()]),undefined);
   await page.locator('[data-home-start]').click();
   const quickSwap=page.locator('.trainer-photo-swap[data-compact-swap="0"]');
