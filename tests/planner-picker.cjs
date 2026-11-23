@@ -10,29 +10,21 @@ api.setTab('planner');api.planner();
 assert(!screen.innerHTML.includes('<select id="planned-workout"')&&!screen.innerHTML.includes('data-schedule-meal='),'Long native selects removed');
 assert(screen.innerHTML.includes('data-open-plan-picker="workout"')&&screen.innerHTML.includes('data-open-meal-picker="breakfast"'),'Photo picker triggers');
 const before=JSON.stringify(api.state),writesBefore=writes;api.openPlannerPicker('workout');
-assert(dialog.open&&(body.innerHTML.match(/data-plan-picker-category=/g)||[]).length===10,'Ten workout photo categories');
-assert(api.pickerWorkoutMatches().length===40,'Forty Home sessions available');
-assert((body.innerHTML.match(/class="category-anatomy-panel /g)||[]).length===10,'Photo and anatomy on all workout categories');
-for(const setting of ['home','gym']){
- api.state.workoutSetting=setting;
- api.picker.category='Pull';
- for(const level of ['Intermediate','Advanced']){
-  api.picker.level=level;api.filterPlannerPicker();
-  assert(api.pickerWorkoutMatches().length===1&&body.innerHTML.includes('anatomy-cover-overlay'),'Pull session and anatomy for '+setting+' '+level);
- }
-}
-delete api.state.workoutSetting;
-api.picker.category='Full Body';api.picker.level='Beginner';api.filterPlannerPicker();
-assert(api.pickerWorkoutMatches().length===2&&body.innerHTML.includes('Beginner'),'Category and level combine');
-api.picker.category=null;api.picker.level='all';api.picker.query='guided-home-full-body-a';api.filterPlannerPicker();
-assert(api.pickerWorkoutMatches().length===1&&body.innerHTML.includes('data-plan-pick-workout="guided-home-full-body-a"'),'Search finds session');
+assert(dialog.open&&body.innerHTML.includes('data-plan-pick-workout="ezpz-workout"'),'The current EZPZ workout can be planned');
+assert(body.innerHTML.includes('data-plan-picker-action="rest"'),'A recovery day is available');
+assert(body.innerHTML.includes('anatomy-cover-overlay'),'The featured workout has an anatomy cover');
+assert(api.pickerWorkoutMatches().map(w=>w.id).join(',')==='ezpz-workout','The featured workout is the only built-in choice');
+api.picker.query='dead bug';api.filterPlannerPicker();
+assert(api.pickerWorkoutMatches().length===1&&body.innerHTML.includes('data-plan-pick-workout="ezpz-workout"'),'Search finds the workout by an exercise');
 assert(body.innerHTML.indexOf('program-heading')<body.innerHTML.indexOf('program-photo')&&body.innerHTML.includes('program-exercise-grid'),'Program details precede cover and exercise thumbnails');
+api.picker.query='unmatched workout';api.filterPlannerPicker();
+assert(api.pickerWorkoutMatches().length===0&&body.innerHTML.includes('No matching workouts'),'Search reports an empty result');
 api.closePlannerPicker();assert(!dialog.open&&JSON.stringify(api.state)===before&&writes===writesBefore,'Cancel never changes saved plans');
 const date=api.planSettings().date,other=api.datePlus(date,1);api.state.workoutSchedule={[other]:'pull-a'};
-api.openPlannerPicker('workout');assert(api.commitPickerWorkout('guided-home-full-body-a'),'Assign workout');
-assert(api.state.workoutSchedule[date]==='guided-home-full-body-a'&&api.state.workoutSchedule[other]==='pull-a','Only selected date changes');
+api.openPlannerPicker('workout');assert(api.commitPickerWorkout('ezpz-workout'),'Assign workout');
+assert(api.state.workoutSchedule[date]==='ezpz-workout'&&api.state.workoutSchedule[other]==='pull-a','Only selected date changes');
 assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Planning preserves active workout and draft');
-api.openPlannerPicker('workout');api.picker.category='Leg';assert(api.pickerWorkoutMatches().length===4,'Four Home leg sessions');assert(api.commitPickerWorkout('guided-home-legs-b'),'Plan Home Legs B');assert(api.state.workoutSchedule[date]==='guided-home-legs-b','Guided schedule saved');api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
+api.openPlannerPicker('workout');api.commitPickerWorkout('rest');assert(api.state.workoutSchedule[date]==='rest','Rest action');
 api.openPlannerPicker('workout');api.commitPickerWorkout('');assert(!api.state.workoutSchedule[date]&&api.state.workoutSchedule[other]==='pull-a','Remove only selected workout');
 api.state.foodLog=[{id:'old',date,servings:1,name:'Saved',macros:[400,30,45,10]}];
 api.openPlannerPicker('meal','breakfast');assert(api.pickerMealMatches().every(x=>api.recipeCategory(x.i)==='breakfast'),'Slot filter defaults to breakfast');
@@ -48,17 +40,17 @@ api.openPlannerPicker('workout');fail=true;assert(!api.commitPickerWorkout('leg-
 assert(alerts.length===1&&alerts[0].includes('Unable to save'),'Storage error surfaced');
 const backup=JSON.parse(JSON.stringify(api.state)),restored=api.restoredState(backup);equal(restored.mealPlan,backup.mealPlan,'Meal backup unchanged');equal(restored.workoutSchedule,backup.workoutSchedule,'Workout backup unchanged');
 assert(focuses.includes('planned-workout'),'Focus returns to trigger');
-console.log('PASS: photo picker categories, combined search/level filters, all 157 recipes, cancellation, target date/slot assignment, rest/removal, portion preservation, active drafts, food log, backups and storage rollback');
+console.log('PASS: featured workout and exercise search, all 157 recipes, cancellation, target date/slot assignment, rest/removal, portion preservation, active drafts, food log, backups and storage rollback');
 
 
 api.state.workoutSchedule={[date]:'push-a',[other]:'pull-a'};api.setPreview('push-a',date);api.previewWorkout();assert(screen.innerHTML.includes('data-preview-back')&&screen.innerHTML.includes('Change workout'),'Preview navigation and swap visible');
 const swapBefore=JSON.stringify(api.state);api.openPlannerPicker('workout');assert(api.picker.origin==='preview'&&api.picker.date===date,'Preview picker targets scheduled date');api.closePlannerPicker();assert(JSON.stringify(api.state)===swapBefore,'Cancelling swap preserves data');
-api.openPlannerPicker('workout');assert(api.commitPickerWorkout('guided-home-full-body-a'),'Swap library workout');assert(api.state.workoutSchedule[date]==='guided-home-full-body-a'&&api.state.workoutSchedule[other]==='pull-a','Swap changes one date');assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Swap preserves active session and draft');
-api.openPlannerPicker('workout');fail=true;assert(!api.commitPickerWorkout('leg-a')&&api.state.workoutSchedule[date]==='guided-home-full-body-a','Failed swap rolls back');fail=false;api.closePlannerPicker();console.log('PASS: scheduled preview back/change controls, cancellation, library swap, date isolation and storage rollback');
+api.openPlannerPicker('workout');assert(api.commitPickerWorkout('ezpz-workout'),'Swap library workout');assert(api.state.workoutSchedule[date]==='ezpz-workout'&&api.state.workoutSchedule[other]==='pull-a','Swap changes one date');assert(api.state.selectedWorkout==='push-a'&&api.state.workoutDrafts['push-a']['sr0-0']==='9','Swap preserves active session and draft');
+api.openPlannerPicker('workout');fail=true;assert(!api.commitPickerWorkout('leg-a')&&api.state.workoutSchedule[date]==='ezpz-workout','Failed swap rolls back');fail=false;api.closePlannerPicker();console.log('PASS: scheduled preview back/change controls, cancellation, library swap, date isolation and storage rollback');
 
 api.state.customWorkouts=[{id:'custom-swap',title:'My saved session',category:'Full Body',level:'Beginner',equipment:'Dumbbells',minutes:'25',exercises:[{name:'Goblet Squat',sets:3,reps:'8–12',unit:'reps',rest:90,side:false}]}];api.openPlannerPicker('workout');api.picker.category='mine';assert(api.pickerWorkoutMatches().some(w=>w.id==='custom-swap'),'Saved workouts available');assert(api.commitPickerWorkout('custom-swap')&&api.state.workoutSchedule[date]==='custom-swap'&&api.state.workoutSchedule[other]==='pull-a','Swap saved workout on one date');console.log('PASS: saved custom workout swap');
 
-api.setTab("planner");api.planner();assert(screen.innerHTML.indexOf("plan-workout")<screen.innerHTML.indexOf('class="card plan-settings"'),"Actual workout before settings");assert(screen.innerHTML.indexOf("plan-meals")<screen.innerHTML.indexOf('class="card plan-settings"'),"Actual meals before settings");assert(screen.innerHTML.includes('<details class="plan-repeat">') || screen.innerHTML.includes('<details class="card plan-repeat">'),"Copy tools collapse");
+api.setTab("planner");api.planner();assert(screen.innerHTML.indexOf("plan-workout")<screen.innerHTML.indexOf('class="card plan-settings"'),"Actual workout before settings");assert(screen.innerHTML.indexOf("plan-meals")<screen.innerHTML.indexOf('class="card plan-settings"'),"Actual meals before settings");assert(!screen.innerHTML.includes('data-action="copy-plan-day"'),"Day view omits the retired repeat controls");
 
 
 api.setTab('planner');api.planner();assert(!screen.innerHTML.includes('plan-photo-calendar')&&!screen.innerHTML.includes('data-plan-mode='),'Only Day is rendered');
