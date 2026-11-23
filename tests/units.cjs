@@ -1,7 +1,7 @@
 const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
 const scripts=[...fs.readFileSync(path.join(__dirname,'../fitness.html'),'utf8').matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).join('\n'),screen={innerHTML:''};let fail=false,stored=JSON.stringify({profile:{goal:'maintain',level:'Beginner',equipment:'home',days:3,age:35,weight:80,height:180,sex:'male'},logs:[],weights:[],foodLog:[],workoutLayoutVersion:2});
 const document={body:{dataset:{}},getElementById:id=>id==='screen'?screen:null,querySelector:()=>null,querySelectorAll:()=>[],addEventListener(){}};
-const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {preferredUnits,displayBodyWeight,inputBodyWeight,initialNutritionDraft,onboarding,weightRecords,setWeightHidden,progress,more,habitWeekData,buildHabitPanel,progressData,saveSleep,cleanSleepGoal,cleanSleepLog,macroCompletion,restoredState,foodDate,home,sleepPage,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
+const api=new Function('document','window','localStorage','fetch','console','alert',scripts+'\nreturn {preferredUnits,displayBodyWeight,inputBodyWeight,initialNutritionDraft,onboarding,weightRecords,setWeightHidden,progressArchive,more,habitWeekData,buildHabitPanel,progressData,saveSleep,cleanSleepGoal,cleanSleepLog,macroCompletion,restoredState,foodDate,home,sleepPage,get state(){return state}}')(document,{addEventListener(){},scrollTo(){}},{getItem:()=>stored,setItem:(k,v)=>{if(fail)throw Error('full');stored=v}},()=>new Promise(()=>{}),{error(){}},()=>{});
 
 assert.equal(api.preferredUnits(),'metric');
 api.state.weights=[{date:new Date().toISOString(),kg:80}];
@@ -9,7 +9,7 @@ const before=JSON.stringify(api.state.weights);api.state.units='imperial';
 assert.equal(api.displayBodyWeight(80),176.4);
 assert(Math.abs(api.inputBodyWeight(176.36980974790205)-80)<1e-8);
 api.home();assert(screen.innerHTML.includes('176.4 lb'));
-api.progress();assert(screen.innerHTML.includes('Weight (lb)'));assert(screen.innerHTML.includes('176.4'));
+api.progressArchive();assert(screen.innerHTML.includes('Weight (lb)'));assert(screen.innerHTML.includes('176.4'));
 assert(api.weightRecords().includes('value="176.4"'));
 api.more();assert(screen.innerHTML.includes('Imperial · lb / inches'));
 assert.equal(api.initialNutritionDraft().units,'imperial');
