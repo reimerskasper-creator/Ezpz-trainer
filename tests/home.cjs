@@ -22,19 +22,22 @@ assert(screen.innerHTML.includes('Add weigh-in'),'Missing weight should invite e
 assert(screen.innerHTML.includes('Your next workout')&&screen.innerHTML.includes('data-go="planner"'),'Next workout and planner shortcut');
 assert(!screen.innerHTML.includes('undefined')&&!screen.innerHTML.includes('NaN'),'Broken home content');
 assert(screen.innerHTML.includes('id="workout-chooser"'),'Home must contain workout chooser');
+const today=api.foodDate();
+api.state.activePlanDate=today;
+api.state.workoutSchedule={[today]:'push-a'};
 api.state.selectedWorkout='push-a';
 api.state.workoutDrafts={'push-a':{'sr0-0':'8','sw0-0':'20','sd0-0':true}};
 api.home();let overview=api.homeOverview();
 assert(overview.hasDraft&&overview.doneSets===1,'Selected workout draft not counted');
 assert(screen.innerHTML.includes('Resume workout'),'Resume action missing');
 assert(screen.innerHTML.includes('Classic Push A'),'Selected workout name missing');
-api.state.selectedWorkout='core-b';api.home();
+api.state.selectedWorkout='core-b';api.state.workoutSchedule[today]='core-b';api.home();
 assert(!api.homeOverview().hasDraft,'Draft leaked across workouts');
-api.state.selectedWorkout='push-a';api.home();
+api.state.selectedWorkout='push-a';api.state.workoutSchedule[today]='push-a';api.home();
 assert(api.state.workoutDrafts['push-a']['sr0-0']==='8','Switching lost draft');
 const now=new Date(),earlier=new Date(now);earlier.setMinutes(earlier.getMinutes()-1);
 api.state.logs=[{date:earlier.toISOString(),workoutId:'push-a',type:'home'},{date:earlier.toISOString(),workoutId:'pull-a',type:'home'}];
-api.state.workoutDrafts['push-a']={};api.state.homeWorkoutChoice={id:'push-a',date:api.foodDate()};api.home();overview=api.homeOverview();
+api.state.workoutDrafts['push-a']={};api.home();overview=api.homeOverview();
 assert(overview.weekly.length===2&&overview.trainingDays.size===1,'Two same-day sessions must count as one training day');
 assert(screen.innerHTML.includes('LOGGED TODAY')&&screen.innerHTML.includes('Manage workouts')&&screen.innerHTML.includes('Start workout'),'Completed state missing');
 api.state.foodLog=[{date:api.foodDate(),macros:[450,35,45,12],name:'Test meal',servings:1},{date:'2001-01-01',macros:[999,90,90,90],name:'Old meal'}];
@@ -55,12 +58,12 @@ api.state.foodLog=[];api.home();assert(screen.innerHTML.includes('stroke-dashoff
 assert(!screen.innerHTML.includes('NaN')&&!screen.innerHTML.includes('undefined'),'Empty Home visual values');
 api.state.foodLog=savedFood;api.home();
 const before=JSON.stringify(api.state);api.home();assert(JSON.stringify(api.state)===before,'Rendering mutated history/drafts');
-for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.home();assert(!screen.innerHTML.includes('undefined')&&!screen.innerHTML.includes('NaN'),'Invalid home for '+w.id)}
+for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.state.workoutSchedule[today]=w.id;api.home();assert(!screen.innerHTML.includes('undefined')&&!screen.innerHTML.includes('NaN'),'Invalid home for '+w.id)}
 // Existing workout pages must still render the correct set counts.
-for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.setTab('train');api.render();assert((screen.innerHTML.match(/data-set-done=/g)||[]).length===w.exercises.reduce((sum,x)=>sum+x.sets,0),'Workout set count changed for '+w.id);api.setTab('instructions');api.render();assert(screen.innerHTML.includes((w.programName||w.title).replaceAll('&','&amp;')),'Instructions changed for '+w.id)}
+for(const w of api.workoutTemplates){api.state.selectedWorkout=w.id;api.state.workoutSchedule[today]=w.id;api.setTab('train');api.render();assert((screen.innerHTML.match(/data-set-done=/g)||[]).length===w.exercises.reduce((sum,x)=>sum+x.sets,0),'Workout set count changed for '+w.id);api.setTab('instructions');api.render();assert(screen.innerHTML.includes((w.programName||w.title).replaceAll('&','&amp;')),'Instructions changed for '+w.id)}
 api.setTab('home');
 // Test shortcut routing into existing food log and weigh-in form.
-let scrolled=false,focused=false;const section={open:false,scrollIntoView(){scrolled=true},querySelector(){return {focus(){focused=true}}}};
+let scrolled=false,focused=false;const section={open:false,closest(selector){return selector==="details"?this:null},scrollIntoView(){scrolled=true},querySelector(){return {focus(){focused=true}}}};
 document.querySelector=()=>section;
 function clickFocus(homeFocus){for(const fn of listeners.click)fn({target:{closest:selector=>selector==='[data-home-focus]'?{dataset:{homeFocus}}:null}})}
 clickFocus('diary');assert(section.open&&scrolled&&document.body.dataset.view==='eat','Food-log shortcut failed');
