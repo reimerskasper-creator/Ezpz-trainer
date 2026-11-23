@@ -10,7 +10,7 @@ assert(api.ownWorkoutTile().includes('own-anatomy-cover')&&api.ownWorkoutTile().
 const draft=api.emptyOwnWorkout();assert(draft.exercises.length===1&&draft.exercises[0].sets===3,'Simple starting defaults');
 api.setTab('train');api.startBuilder(null);
 assert(document.body.dataset.view==='builder'&&api.origin==='train','Direct builder uses Train route');
-assert(screen.innerHTML.includes('Save & start workout')&&screen.innerHTML.includes('Save for later'),'Clear save destinations');
+assert(screen.innerHTML.includes('Save & start workout')&&screen.innerHTML.includes('data-destination="saved">Save workout'),'Clear save destinations');
 assert(!screen.innerHTML.includes('<datalist')&&screen.innerHTML.includes('data-builder-picker="0"'),'Themed list and free-text exercise input');
 assert(screen.innerHTML.includes('<details class="own-workout-settings">')&&screen.innerHTML.includes('<details class="own-exercise-options">'),'Optional controls collapsed');
 draft.title="Kasper's own session";draft.category='Arms';draft.exercises=[{name:'My custom sandbag move',sets:2,reps:'8–10',unit:'reps',rest:60,side:false},{name:'My standing balance hold',sets:2,reps:'30',unit:'sec',rest:30,side:true}];
