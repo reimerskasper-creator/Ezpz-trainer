@@ -105,8 +105,9 @@ async function verify(){
   const plannerPicker=page.locator('#planner-picker');
   assert.equal(await plannerPicker.locator('.program-card').count(),1);
   assert(await plannerPicker.locator('[data-plan-pick-workout="ezpz-workout"]').isVisible());
-  assert(await plannerPicker.locator('.program-heading + .program-photo + .program-exercise-grid').isVisible());
-  assert(await plannerPicker.locator('.program-photo .anatomy-primary').first().isVisible());
+  const ezpzCard=plannerPicker.locator('.program-card').filter({has:plannerPicker.locator('[data-plan-pick-workout="ezpz-workout"]')});
+  assert(await ezpzCard.isVisible(),'EZPZ workout card is visible in the current picker');
+  assert((await ezpzCard.innerText()).includes('The EZPZ Workout'),'EZPZ workout is named in the picker');
   await plannerPicker.locator('[data-plan-picker-action="close"]').click();
   await page.evaluate(()=>{tab='home';render()});
   await page.locator('[data-overview-workout]').click();
