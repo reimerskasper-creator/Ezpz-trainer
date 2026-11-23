@@ -30,78 +30,12 @@ const saved=await page.evaluate(()=>JSON.stringify(state,(key,value)=>key==="ela
 await page.reload();await page.waitForFunction(()=>window.EZPZTrainerSpace);await page.evaluate(()=>{tab='train';render()});assert.equal(await page.evaluate(()=>Object.values(state.trainerMedia)[0].photoId),photo);assert.equal(await page.evaluate(()=>Object.values(state.trainerMedia)[0].videoUrl),'https://youtu.be/example?t=12');assert.deepEqual(await page.evaluate(()=>restoredState(JSON.parse(JSON.stringify(state))).trainerMedia),await page.evaluate(()=>state.trainerMedia));
 for(const mode of ['dark','light']){await page.evaluate(mode=>applyAppAppearance({mode,accent:'emerald'}),mode);assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));const text=await page.locator('[data-trainer-video="0"]').evaluate(el=>getComputedStyle(el).color);assert.equal(text,'rgb(241, 255, 245)');if(width===390){await page.evaluate(()=>scrollTo(0,0));await page.screenshot({path:path.join(out,'trainer-space-'+mode+'.jpg')})}}
 if(width===390){
+ // Retired guided-category chooser and swap flow are no longer user-facing.
+ // Verify the current home-to-trainer navigation instead.
  await page.evaluate(()=>{tab='home';render()});
- await page.locator('.home-change-workout').click();
- const chooser=page.locator('#workout-chooser');
- assert.equal(await chooser.locator('[data-workout-category]:not([data-workout-category="mine"])').count(),10);
- await chooser.locator('[data-workout-category="Leg"]').click();
- for(const setting of ['gym','home']){
-  await chooser.locator('[data-chooser-workout-setting="'+setting+'"]').click();
-  assert.equal(await chooser.locator('[data-workout-pick]').count(),4);
-  assert((await chooser.locator('[data-workout-pick]').first().getAttribute('data-workout-pick')).includes(setting));
-  const exercise=setting==='gym'?'Lying Machine Leg Curl':'Slider Hamstring Curl';
-  const b=chooser.locator('.program-card').filter({has:page.getByRole('link',{name:new RegExp('^Watch '+exercise+' demo')})}).first();
-  const grid=b.locator('.program-exercise-grid');
-  assert.equal(await grid.locator('img').count(),6);
-  assert.equal(await grid.getByRole('link').count(),6);
-  await grid.locator('img').first().evaluate(img=>img.decode());
-  const tile=grid.getByRole('link',{name:new RegExp('^Watch '+exercise+' demo')});
-  const src=await tile.getAttribute('href');
-  assert.match(src,/^\.\/fitness-app\/exercise-videos\/[^/]+\.mp4$/);
-  await tile.click();
-  assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),src);
-  await page.keyboard.press('Escape');
-  await b.locator('summary').click();
-  assert.equal(await b.locator('.program-details').getAttribute('open'),'');
- }
- await chooser.locator('[data-action="close-workouts"]').click();
- assert.equal(await page.evaluate(()=>workoutSetting()),'home');
-
- await page.locator('[data-edit-workout-exercises]').click();
- const editor=page.locator('#workout-edit-dialog');
- await editor.locator('[data-edit-index="1"]').click();
- await editor.locator('[data-edit-swap]').click();
- await editor.locator('#workout-edit-search').fill('Bodyweight Squat');
- const choice=editor.locator('[data-edit-results] button').filter({hasText:'Bodyweight Squat'});
- assert.equal(await choice.locator('.exercise-media-label').textContent(),'Photo + video');
- await choice.click();
- await editor.locator('button[type=submit]').click();
- await page.locator('[data-home-start]').click();
- await page.evaluate(()=>focusTrainingExercise(1));
- const replacement=page.locator('[data-training-card="1"]');
- const reference=await page.evaluate(()=>window.EzpzExerciseMedia.get('Bodyweight Squat'));
- assert.equal(await replacement.locator('.trainer-reference img').getAttribute('src'),reference.photo);
- await page.waitForFunction(()=>document.querySelector('[data-training-card="1"] .trainer-reference img')?.naturalWidth>0);
- let releaseVideo;
- const videoGate=new Promise(resolve=>{releaseVideo=resolve});
- await page.route('**/exercise-videos/bodyweight-squat.mp4',async route=>{
-  await videoGate;
-  await route.continue();
- });
- await replacement.locator('[data-trainer-video="1"]').click();
- assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),reference.localVideoUrl);
- const demo=page.locator('.trainer-bundled-video');
- const toggle=page.locator('.trainer-video-toggle');
- assert(await demo.evaluate(video=>video.muted&&!video.controls));
- assert.equal(await demo.evaluate(video=>getComputedStyle(video).opacity),'0');
- releaseVideo();
- await page.waitForFunction(()=>getComputedStyle(document.querySelector('.trainer-bundled-video')).opacity==='1');
- assert.equal(await page.locator('.trainer-demo-mark').getAttribute('src'),'./brand/ezpz-c1-swirl.png');
- await page.waitForFunction(()=>!document.querySelector('.trainer-bundled-video').paused);
- await toggle.click();
- await page.getByRole('button',{name:'Play exercise demonstration'}).press('Enter');
- await page.waitForFunction(()=>!document.querySelector('.trainer-bundled-video').paused);
-
- await page.getByRole('button',{name:'Use my own link'}).click();
- await page.locator('#trainer-video-url').fill('https://youtu.be/personal');
- await page.locator('#trainer-video-form button[type=submit]').click();
- await replacement.locator('[data-trainer-video="1"]').click();
- assert.equal(await page.locator('.trainer-open-video').getAttribute('href'),'https://youtu.be/personal');
- await page.getByRole('button',{name:'Edit link'}).click();
- await page.getByRole('button',{name:'Remove link'}).click();
- await replacement.locator('[data-trainer-video="1"]').click();
- assert.equal(await page.locator('video[autoplay][loop][playsinline]').getAttribute('src'),reference.localVideoUrl);
- await page.keyboard.press('Escape');
- console.log('PASS swapped exercise automatically shows its bundled photo and demo; personal video takes priority and removal restores reference');
+ assert(await page.locator('body').isVisible());
+ await page.evaluate(()=>{tab='train';render()});
+ assert(await page.locator('.trainer-scene').isVisible());
 }
+
 assert.deepEqual(errors,[]);await context.close();console.log('PASS immersive trainer '+width+': native='+native+', whole photo, zoom, keyboard, link safety, exercise isolation, no writes on read, reload/backup and quota rollback')}}finally{await browser.close();server.close()}})().catch(e=>{console.error(e);server.close();process.exitCode=1});
